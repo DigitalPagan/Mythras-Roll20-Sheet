@@ -1,6 +1,6 @@
 {
-    "html": "Mythras.html",
-    "css": "Mythras.css",
+    "html": "Mythras.min.html",
+    "css": "Mythras.min.css",
     "authors": "Matthew Carpenter",
     "roll20userid": "103705",
     "preview": "Mythras.png",

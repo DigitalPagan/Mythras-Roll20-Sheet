@@ -1,0 +1,117 @@
+<div class="sheet-section sheet-rpad">
+    <div class="sheet-flex">
+        <h2 data-i18n="abilities-u">Abilities</h2>
+        <div class="sheet-grow sheet-text-right">
+            <label class="sheet-checkbox sheet-rmargin"><input type="checkbox" title="@{ability_ids}" name="attr_ability_ids" value="1"><span data-i18n="ids-u">IDs</span></label>
+        </div>
+    </div>
+
+    <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="memorized-tooltip-u">S</label></div>
+            <div class="sheet-ability-name sheet-header"><label data-i18n="ability-u">Ability</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+            <div class="sheet-ability-type sheet-header"><label data-i18n="type-u">Type</label></div>
+            <div class="sheet-number-width sheet-header"><label data-i18n="rank-u">Rank</label></div>
+            <div class="sheet-ability-skill sheet-header"><label data-i18n="roll-skill-u">Roll Skill</label></div>
+            <div class="sheet-number-width-sm sheet-header sheet-cellpad"><label>%</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+            <div class="sheet-ability-skill sheet-header"><label data-i18n="other-skill-u">Other Skill</label></div>
+            <div class="sheet-number-width-sm sheet-header sheet-cellpad"><label>%</label></div>
+            <div class="sheet-grow sheet-header sheet-cellpad"><label data-i18n="page-u">Page</label></div>
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="ability-details-tooltip-u">E</label></div>
+        </div>
+        <fieldset class="repeating_ability">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-memorized" title="@{$ID_memorized}" name="attr_memorized" value="1"><span></span></div>
+                <div class="sheet-ability-name"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_ability}" name="roll_ability" value="@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{traits=@{traits}}} {{description=@{description}}} {{page=@{page}}}"></button></div>
+                <div class="sheet-ability-type">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
+                        <option value="ability" data-i18n-list-item="ability" data-i18n="ability-u" selected>Ability</option>
+                        <option value="animism_spirit" data-i18n-list-item="animism_spirit" data-i18n="animism-spirit-u">Animism Spirit</option>
+                        <option value="fae_mutation" data-i18n-list-item="fae_mutation" data-i18n="fae-mutation-u">Fae Mutation</option>
+                        <option value="fae_power" data-i18n-list-item="fae_power" data-i18n="fae-power-u">Fae Power</option>
+                        <option value="folk_spell" data-i18n-list-item="folk_spell" data-i18n="folk-spell-u">Folk Spell</option>
+                        <option value="gift" data-i18n-list-item="gift" data-i18n="gift-u">Gift</option>
+                        <option value="lycanthrope_power" data-i18n-list-item="lycanthrope_power" data-i18n="lycanthrope-power-u">Lycanthrope Power</option>
+                        <option value="mystic_talent" data-i18n-list-item="mystic_talent" data-i18n="mystic-talent-u">Mystic Talent</option>
+                        <option value="psionic_talent" data-i18n-list-item="psionic_talent" data-i18n="psionic-talent-u">Psionic Talent</option>
+                        <option value="shifter_power" data-i18n-list-item="shifter_power" data-i18n="shifter-power-u">Shifter Power</option>
+                        <option value="sorcery_spell" data-i18n-list-item="sorcery_spell" data-i18n="sorcery-spell-u">Sorcery Spell</option>
+                        <option value="super_power" data-i18n-list-item="super_power" data-i18n="super-power-u">Super Power</option>
+                        <option value="theism_miracle" data-i18n-list-item="theism_miracle" data-i18n="theism-miracle-u">Theism Miracle</option>
+                        <option value="trait" data-i18n-list-item="trait" data-i18n="trait-u">Trait</option>
+                        <option value="vampire_power" data-i18n-list-item="vampire_power" data-i18n="vampire-power-u">Vampire Power</option>
+                    </select>
+                </div>
+                <div class="sheet-number-width">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_rank}" name="attr_ability_rank">
+                        <option value="" selected>-</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_roll_skill_name}" name="attr_roll_skill_name_display" value="@{roll_skill_name}" disabled></div>
+                <div class="sheet-number-width-sm sheet-cellpad"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_roll_skill_value}" name="attr_roll_skill_total_display" value="@{roll_skill_value}" disabled> </div>
+                <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_skill}" name="roll_skill" value="@{roll_skill_roll}"></button></div>
+                <div class="sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_other_skill}" name="attr_other_skill_display" value="@{other_skill_name}" disabled></div>
+                <div class="sheet-number-width-sm sheet-cellpad"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_other_skill_value}" name="attr_other_skill_total_display" value="@{other_skill_value}" disabled> </div>
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_page"></div>
+                <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-ability-details" title="@{$ID_details}" name="attr_details" value="1" checked><span></span></div>
+            </div>
+            <div class="sheet-id sheet-flex">
+                <div><label class="sheet-left" data-i18n="ability-id-u">Ability ID</label>:&nbsp;</div>
+                <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_id}" name="attr_id" readonly></div>
+            </div>
+            <input type="checkbox" class="sheet-hidden sheet-ability-details" name="attr_details" value="1" checked>
+            <div class="sheet-details">
+                <div class="sheet-edit sheet-flex">
+                    <div class="sheet-flex sheet-rmargin sheet-grow">
+                        <div><label class="sheet-left" data-i18n="roll-skill-id-u">Roll Skill ID</label>:&nbsp;</div>
+                        <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_roll_skill_id}" name="attr_roll_skill_id" value=""></div>
+                    </div>
+                    <div class="sheet-flex sheet-grow">
+                        <div><label class="sheet-left" data-i18n="other-skill-id-u">Other Skill ID</label>:&nbsp;</div>
+                        <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_other_skill_id}" name="attr_other_skill_id" value=""></div>
+                    </div>
+                </div>
+                <div class="sheet-edit sheet-flex">
+                    <div class="sheet-third-col sheet-rmargin">
+                        <div><label class="sheet-left" data-i18n="traits-u">Traits</label>:</div>
+                        <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
+                    </div>
+                    <div class="sheet-grow">
+                        <div><label class="sheet-left" data-i18n="description-u">Description</label>:</div>
+                        <div><textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea></div>
+                    </div>
+                </div>
+                <input type="checkbox" class="sheet-hidden sheet-shaping-toggle" name="attr_show_shaping" value="1" checked>
+                <div class="sheet-shaping sheet-edit sheet-flex">
+                    <div><label class="sheet-left" data-i18n="shaping-traits-u">Shaping Traits</label>:</div>
+                    <div></div>
+                </div>
+                <div class="sheet-play sheet-flex">
+                    <div class="sheet-third-col sheet-rmargin">
+                        <span class="sheet-ability-traits" name="attr_traits"></span>
+                    </div>
+                    <div class="sheet-twothird-col">
+                        <span class="sheet-ability-description" name="attr_description"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-hidden">
+                <input type="text" name="attr_roll_skill_name" readonly>
+                <input type="text" name="attr_roll_skill_value" readonly>
+                <input type="text" name="attr_roll_skill_roll" readonly>
+                <input type="text" name="attr_other_skill_name" readonly>
+                <input type="text" name="attr_other_skill_value" readonly>
+            </div>
+        </fieldset>
+    </div>
+</div>

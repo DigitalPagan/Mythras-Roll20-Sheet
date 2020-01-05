@@ -1,0 +1,87 @@
+<div class="sheet-section sheet-rpad sheet-full-width">
+    <div class="sheet-flex">
+        <h2 data-i18n="passions-u">Passions</h2>
+        <div class="sheet-grow sheet-text-right">
+            <label class="sheet-checkbox sheet-rmargin"><input type="checkbox" title="@{passion_ids}" name="attr_passion_ids" value="1"><span data-i18n="ids-u">IDs</span></label>
+            <label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{passion_notes}" name="attr_passion_notes" value="1" checked><span data-i18n="notes-u">Notes</span></label>
+        </div>
+    </div>
+
+    <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_passion_ids" value="1">
+    <input type="checkbox" class="sheet-hidden sheet-skillnotes-toggle" name="attr_passion_notes" value="1" checked>
+    <!-- Passions -->
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-grow sheet-header sheet-cellpad"><label data-i18n="passion-u">Passion</label></div>
+            <div class="sheet-number-width sheet-header sheet-cellpad"><label>%</label></div>
+            <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="augment-u" data-i18n-title="augment-tooltip-u">Aug</label></div>
+            <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="vs101plus-u" data-i18n-title="vs101-tooltip-u">vs101+</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+        </div>
+        <fieldset class="repeating_passion">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-fullwidth sheet-impusrinput" title="@{$ID_total}" name="attr_total" value="0"></div>
+                <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_augment}" name="attr_augment" value="0"></div>
+                <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" max="0" class="sheet-full-width sheet-usrinput" title="@{$ID_penalty}" name="attr_penalty" value="0"></div>
+                <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_passion}" name="roll_roll" value="@{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{encumbrance_skills=[[0]]}}"></button></div>
+            </div>
+            <div class="sheet-id sheet-flex"><div><label class="sheet-left" data-i18n="id-u">ID</label>:&nbsp;</div><div class="sheet-grow"><input type="text" class="sheet-text-left sheet-full-width sheet-value" title="@{$ID_id}" name="attr_$ID_id" value="" readonly></div></div>
+            <div class="sheet-edit sheet-skillnotes"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+            <div class="sheet-play sheet-skillnotes"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+        </fieldset>
+    </div>
+
+    <!-- Peculiarities -->
+    <div class="sheet-peculiarity">
+        <div class="sheet-bmargin">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-grow sheet-header sheet-cellpad"><label data-i18n="peculiarity-u">Peculiarity</label></div>
+                <div class="sheet-number-width sheet-header sheet-cellpad"><label>%</label></div>
+                <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="augment-u" data-i18n-title="augment-tooltip-u">Aug</label></div>
+                <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="vs101plus-u" data-i18n-title="vs101-tooltip-u">vs101+</label></div>
+                <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+            </div>
+            <fieldset class="repeating_peculiarity">
+                <div class="sheet-flex sheet-full-width">
+                    <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name"></div>
+                    <div class="sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-fullwidth sheet-impusrinput" title="@{$ID_total}" name="attr_total" value="0"></div>
+                    <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_augment}" name="attr_augment" value="0"></div>
+                    <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" max="0" class="sheet-full-width sheet-usrinput" title="@{$ID_penalty}" name="attr_penalty" value="0"></div>
+                    <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_passion}" name="roll_roll" value="@{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{encumbrance_skills=[[0]]}}"></button></div>
+                </div>
+                <div class="sheet-id sheet-flex"><div><label class="sheet-left" data-i18n="id-u">ID</label>:&nbsp;</div><div class="sheet-grow"><input type="text" class="sheet-text-left sheet-full-width sheet-value" title="@{$ID_id}" name="attr_$ID_id" value="" readonly></div></div>
+                <div class="sheet-edit sheet-skillnotes"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+                <div class="sheet-play sheet-skillnotes"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+            </fieldset>
+        </div>
+    </div>
+
+    <!-- Dependencies -->
+    <div class="sheet-dependency">
+        <div class="sheet-bmargin">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-grow sheet-header sheet-cellpad"><label data-i18n="dependency-u">Dependency</label></div>
+                <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="dependency-bump-tooltip-u">3</label></div>
+                <div class="sheet-number-width sheet-header sheet-cellpad"><label>%</label></div>
+                <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="augment-u" data-i18n-title="augment-tooltip-u">Aug</label></div>
+                <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="vs101plus-u" data-i18n-title="vs101-tooltip-u">vs101+</label></div>
+                <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+            </div>
+            <fieldset class="repeating_dependency">
+                <div class="sheet-flex sheet-full-width">
+                    <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name"></div>
+                    <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-trained" title="@{$ID_trained}" name="attr_trained" value="1"><span></span></div>
+                    <div class="sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-fullwidth sheet-impusrinput" title="@{$ID_total}" name="attr_total" value="0"></div>
+                    <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_augment}" name="attr_augment" value="0"></div>
+                    <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" max="0" class="sheet-full-width sheet-usrinput" title="@{$ID_penalty}" name="attr_penalty" value="0"></div>
+                    <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_passion}" name="roll_roll" value="@{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{encumbrance_skills=[[0]]}}"></button></div>
+                </div>
+                <div class="sheet-id sheet-flex"><div><label class="sheet-left" data-i18n="id-u">ID</label>:&nbsp;</div><div class="sheet-grow"><input type="text" class="sheet-text-left sheet-full-width sheet-value" title="@{$ID_id}" name="attr_$ID_id" value="" readonly></div></div>
+                <div class="sheet-edit sheet-skillnotes"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+                <div class="sheet-play sheet-skillnotes"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+            </fieldset>
+            <div class="sheet-dependency sheet-tenacity sheet-text-right"><label class="sheet-left" data-i18n="tenacity-penalty-u">Tenacity Penalty</label>: <input type="number" class="sheet-number-width sheet-value" title="@{tenacity_dependencies}" name="attr_tenacity_dependencies" value="0"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+/* Magic Point Toggles */
+input.sheet-magic-points-toggle:not(:checked) ~ div .sheet-magic-points {
+    display: none;
+}
+input.sheet-power-points-toggle:not(:checked) ~ div .sheet-power-points {
+    display: none;
+}
+input.sheet-prana-points-toggle:not(:checked) ~ div .sheet-prana-points {
+    display: none;
+}
+
+/* Strangeness Toggle */
+input.sheet-strangeness-toggle:not(:checked) ~ div .sheet-strangeness {
+    display: none;
+}
+
+/* Tenacity Toggle */
+input.sheet-tenacity-toggle:not(:checked) ~ div .sheet-tenacity {
+    display: none;
+}

@@ -16,10 +16,10 @@ else:
     print("Error logging into Roll20!")
     exit(1)
 
-with open('Mythras.html', 'r') as html_file:
+with open('Mythras.min.html', 'r') as html_file:
     html_src = html_file.read()
 
-with open('Mythras.css', 'r') as css_file:
+with open('Mythras.min.css', 'r') as css_file:
     css_src = css_file.read()
 
 with open('translation.json', 'r') as translation_file:

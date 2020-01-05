@@ -1,0 +1,73 @@
+div.sheet-info {
+    display: inline-block;
+    width: 673px;
+    margin-right: 5px;
+}
+div.sheet-info-box {
+    display: inline-block;
+    flex: 1 1 auto;
+    padding: 0 5px 0 0;
+}
+div.sheet-info-type {
+    width: 100px;
+}
+div.sheet-info-homeland {
+    width: 100px;
+}
+div.sheet-info-name {
+    width: 125px;
+    flex-grow: 3;
+}
+div.sheet-info-form {
+    width: 50px;
+}
+div.sheet-info-species {
+    width: 100px;
+}
+div.sheet-info-culture {
+    width: 100px;
+}
+div.sheet-info-career {
+    width: 100px;
+}
+div.sheet-info-social-class {
+    width: 100px;
+}
+div.sheet-info-age{
+    width: 25px;
+}
+div.sheet-info-gender{
+    width: 50px;
+}
+div.sheet-info-frame{
+    width: 50px;
+}
+div.sheet-info-weight{
+    width: 50px;
+}
+div.sheet-info-height{
+    width: 50px;
+}
+div.sheet-info-rank {
+    width: 30px;
+}
+input.sheet-rank-toggle:not(:checked) ~ div.sheet-info-rank {
+    display: none;
+}
+input.sheet-the-soot-toggle:not(:checked) ~ div.sheet-info-the-soot {
+    display: none;
+}
+div.sheet-info-the-soot {
+    width: 40px;
+}
+div.sheet-info-xp {
+    width: 40px;
+}
+
+div.sheet-logo {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}

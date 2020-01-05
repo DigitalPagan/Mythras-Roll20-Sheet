@@ -1,148 +1,289 @@
+/* Sheet Defaults*/
+div.sheet-wrapper {
+    min-width: 850px;
+    max-width: 850px;
+    font-family: "Arial", sans-serif;
+    font-size: 1em;
+}
+h1 {
+    font-size: 2em;
+    font-family: OFL Sorts Mill Goudy, Palatino, serif;;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+h2 {
+    font-size: 1.5em;
+    font-family: OFL Sorts Mill Goudy, Palatino, serif;;
+    padding: 0;
+    margin: 0;
+    height: 1.25em;
+    line-height: 1.5em;
+    font-weight: normal;
+}
+h3 {
+    font-size: 1.25em;
+    font-family: OFL Sorts Mill Goudy, Palatino, serif;;
+    padding: 0;
+    margin: 0;
+    height: 1.25em;
+    line-height: 1.25em;
+    text-decoration: underline;
+    font-weight: normal;
+}
 hr {
-    margin: 5px;
+    margin: 0 0 5px;
 }
 
-.sheet-invisible {
+/* Tweak repeating section buttons so they have a bottom margin and dont overflow when in edit mode. */
+div[class^="repcontrol"] {
+    margin-bottom: 5px;
+}
+div[class="repcontainer editmode"] ~ div[class^="repcontrol"] button[class="btn repcontrol_add"] {
+    display: inline-block!important;
     visibility: hidden;
 }
-
-.sheet-text-align-center {
-    text-align: center;
+/* Make repeating section inline-block for display modes */
+fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
+    display: inline-block;
 }
 
-.sheet-text-align-left {
+/* Make the delete buttons appear above the detail toggles */
+.repcontainer .itemcontrol {
+    z-index: 9999;
+}
+
+/* Layout */
+div.sheet-float-left {
+    float: left;
+}
+div.sheet-float-right {
+    float: right;
+}
+div.sheet-clear-float {
+    clear: both;
+}
+
+div.sheet-flex {
+    display: flex;
+}
+div.sheet-space-between {
+    justify-content: space-between;
+}
+div.sheet-half-col {
+    width: 50%;
+}
+div.sheet-third-col {
+    width: 33.33%;
+}
+div.sheet-twothird-col {
+    width: 66.66%;
+}
+div.sheet-hcombo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+div.sheet-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+div.sheet-grow {
+    flex-grow: 1;
+}
+div.sheet-shrink {
+    flex-shrink: 1;
+}
+.sheet-text-center {
+    text-align: center;
+    text-align-last:center;
+}
+.sheet-text-left {
     text-align: left;
 }
-
-.sheet-background-red {
-    background:#F2DEDE;
+.sheet-text-right {
+    text-align: right !important
+}
+.sheet-bmargin {
+    margin-bottom: 5px;
+}
+.sheet-rmargin {
+    margin-right: 5px !important;
+}
+.sheet-lpad {
+    padding-left: 5px !important;
+}
+.sheet-rpad {
+    padding-right: 5px !important;
+}
+.sheet-bpad {
+    padding-bottom: 5px !important;
+}
+.sheet-cellpad {
+    padding: 1px 1px 0;
 }
 
-.sheet-background-orange {
-    background:#FFEBCC;
+.sheet-section {
+    border: 1px solid black;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    padding: 0 0 0 5px;
+    border-radius: 5px;
+}
+.sheet-header {
+    text-align: center;
+    background: dimgray;
+    color: lightgray;
+    white-space: nowrap;
+}
+.sheet-hidden {
+    display: none;
+}
+.sheet-number-width {
+    width: 47px !important;
+    flex-shrink: 0;
+}
+.sheet-number-width-sm {
+    width: 25px !important;
+    flex-shrink: 0;
+}
+.sheet-checkbox-width {
+    width: 21px !important;
+    flex-shrink: 0;
+}
+.sheet-button-width {
+    width: 27px !important;
+    flex-shrink: 0;
+}
+.sheet-full-width {
+    width: 100% !important;
+}
+.sheet-auto-width {
+    width: auto !important;
 }
 
-.sheet-background-yellow {
-    background:#FCF8E3;
+/* Font */
+.sheet-pictos {
+    font-family: 'Pictos';
+}
+.sheet-pictos-three {
+    font-family: 'Pictos Three';
 }
 
-.sheet-background-gray {
-    background:#D3D3D3;
+/* Fieldset */
+a.repcontrol_move {
+    padding: 0 5px 0 !important;
+    margin: 0!important;
+    height: 1.25em;!important;
+    font-size: 1em !important;
+    line-height: 1.25em;
 }
 
-.sheet-background-blue {
-    background:#D9EDF7;
-}
-
-.sheet-background-green {
-    background:#DFF0D8;
-}
-.sheet-fading-background {
-    background-image: linear-gradient(to right, rgba(220,220,220,1), rgba(220,221,222,.1));
-}
-
-/* Superscripts */
-span.sheet-sup {
-    vertical-align: super;
-    font-size: smaller;
-}
-
-/* Remove margin from selects in webkit browsers, same for textareas */
+/* Buttons */
 button {
-    margin: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 5px;
-    padding-right: 5px;
-    height: 1.5rem;
-    font-size: 1rem;
-    vertical-align: middle;
+    padding: 0 5px 0;
+    margin: 0!important;
+    height: 1.5em;!important;
+    font-size: 1em !important;
+    line-height: 1em;
+}
+button[type=roll] {
+    box-sizing: border-box;
+    padding: 0;
+}
+button[type=action] {
+    box-sizing: border-box;
+    padding: 0;
+}
+button[type=roll].sheet-nodie::before {
+    content: '';
+    box-sizing: border-box;
 }
 button[type=roll].sheet-d100::before {
     font-family: 'dicefontd10';
-    font-size: 175%;
     vertical-align: text-bottom;
+    font-size: 1.75em;
 }
-button[type=roll].sheet-d12::before {
-    font-family: 'dicefontd12';
-    content: "l";
-    font-size: 150%;
-    vertical-align: middle;
+button[type=roll].sheet-effect::before {
+    font-family: 'pictos';
+    vertical-align: text-bottom;
+    font-size: 1.25em;
+    content: "e";
 }
-span.sheet-d12-font {
-    font-family: 'dicefontd12';
-    font-size: 150%;
-    vertical-align: middle;
+button.sheet-link {
+    padding: 0!important;
+    background: none!important;
+    box-shadow: none!important;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    color: inherit;
+    text-shadow: none;
+    line-height: inherit;
+    height: inherit;
 }
-span.sheet-font-pictos {
-    font-family: 'Pictos';
+button.sheet-link-label {
+    font-weight: bold;
+    vertical-align: top;
 }
-button[type=roll].sheet-info-btn::before {
-    font-family: 'pictos custom';
-    content: 'q';
-    font-size: 125%;
+button.sheet-link-label-under {
+    font-size: .85em!important;
+    font-weight: bold;
+    vertical-align: top;
+    width: 100%;
 }
-button[type=roll].sheet-reduced-size {
-    margin-top: 0;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 0px;
-    height: 1.5em;
-    font-size: .92em;
-    vertical-align: middle;
+button.sheet-link:hover {
+    color: #069;
 }
-button[type=action].sheet-reduced-size {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 0px;
-    height: 1.5em;
-    font-size: .92em;
-    vertical-align: middle;
-}
-
-button[type=roll].sheet-no-dice {
-    padding-left: 2px;
-    padding-right: 2px;
-    height: 16px;
-    vertical-align: middle;
-}
-
-button[type=roll].sheet-memorized {
-    padding-left: 2px;
-    padding-right: 2px;
-    height: 16px;
-}
-
-input[type="checkbox"].sheet-display-memorized:checked + button.sheet-memorized::before {
-    font-family: 'Pictos';
-    content: 'S';
-}
-input[type="checkbox"].sheet-display-memorized:not(:checked) + button.sheet-memorized::before {
+button[type=roll].sheet-link::before {
+    font-family: "Arial", sans-serif;
     content: '';
 }
 
-button[type=roll].sheet-no-dice::before { content: ''; }
-
-select {
-    margin: 0px;
-    padding: 0px;
-    height: 1.5em;
+/* Inputs */
+.sheet-disabled {
+    background: #F5F5F5;
+    cursor: not-allowed;
 }
-
-textarea {
-    margin: 0px;
-    padding: 0px;
+.sheet-usrinput {
+    margin: 0 !important;
+    padding: 0;
+    height: 1.25em !important;
+    line-height: 1.25em !important;
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 1.1em !important;
+    background: none!important;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+}
+.sheet-impusrinput {
+    margin: 0;
+    padding: 0;
+    font-family: "Patrick Hand", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    border-color: black;
 }
 input {
-    margin: 0px;
-    padding: 0px;
-    height: 1.5em;
+    height: 1.25em;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
-
-
+/*input.sheet-value {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+}*/
+input.sheet-impvalue {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+    border-color: black;
+}
 input[type="number"]:disabled::-webkit-inner-spin-button,
 input[type="number"]:disabled::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -161,217 +302,8 @@ input[type='number'] {
     text-align: center;
 }
 
-/* Tweak repeating section buttons so they have a bottom margin and dont overflow when in edit mode. */
-div[class^="repcontrol"] {
-    margin-bottom: 5px;
-}
-div[class="repcontainer editmode"] ~ div[class^="repcontrol"] button[class="btn repcontrol_add"] {
-    display: inline-block!important;
-    visibility: hidden;
-}
-/* Make repeating section inline-block for display modes */
-fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
-    display: inline-block;
-}
-
-/* Make the delete buttons appear above the detail toggles */
-.repcontainer .itemcontrol {
-  z-index: 9999;
-}
-
-/* Layout CSS */
-div.sheet-wrapper {
-    min-width: 850px;
-}
-
-div.sheet-spacer {
-    margin-bottom: 5px;
-}
-
-div.sheet-bottom-border {
-    border-bottom: 1px solid black;
-}
-
-div.sheet-rep-row {
-    padding-bottom: 2px;
-}
-
-.sheet-full-width {
-    width: 100%;
-}
-
-.sheet-number-width {
-    width: 47px;
-}
-div.sheet-number-width {
-    display: inline-block;
-    width: 47px;
-}
-
-.sheet-hpad-5 {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-input[type="text"].sheet-number-width {
-    width: 47px;
-}
-input[type="number"].sheet-number-width {
-    width: 47px;
-}
-
-.sheet-number-width-sm {
-    width: 22px;
-}
-div.sheet-number-width-sm {
-    display: inline-block;
-    width: 22px;
-}
-input[type="text"].sheet-number-width-sm {
-    width: 22px;
-}
-input[type="number"].sheet-number-width-sm {
-    width: 25px;
-}
-
-.sheet-damage-width {
-    width: 94px;
-}
-.sheet-button-width {
-    width: 20px;
-}
-.sheet-enable-width {
-    width: 100px;
-}
-input.sheet-total {
-    font-weight: bold;
-    text-align: center;
-}
-input[type="number"].sheet-full-width {
-    width: 100%;
-}
-input[type='number'].sheet-total {
-    font-weight: bold;
-}
-
-.sheet-float-left {
-    float: left;
-}
-.sheet-float-right {
-    float: right;
-}
-.sheet-clear-float {
-    clear: both;
-}
-
-div.sheet-cell {
-    display: table-cell;
-}
-
-div.sheet-section {
-    border-radius: 10px;
-    border: 1px solid black;
-    padding-bottom: 4px;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin: 0px;
-}
-
-.sheet-section-title-partner {
-    float: right;
-    padding-top: 4px;
-}
-
-.sheet-header-bar {
-    background: #636466;
-    color: white;
-}
-
-.sheet-header {
-    font-weight: bold;
-    text-align: center;
-}
-
-.sheet-disabled {
-    background: #F5F5F5;
-    cursor: not-allowed;
-}
-input[type="number"].sheet-disabled {
-    background: #F5F5F5;
-    cursor: not-allowed;
-    -moz-appearance: textfield;
-}
-input[type="number"].sheet-disabled::-webkit-inner-spin-button,
-input[type="number"].sheet-disabled::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-}
-
-.sheet-bold {
-    font-weight: bold;
-}
-
-.sheet-underlined {
-    text-decoration: underline;;
-}
-
-.sheet-italic {
-    font-style: italic;
-}
-
-.sheet-hidden {
-    display: none;
-}
-
-input[type="checkbox"].sheet-in-header-toggle {
-    margin-top: 7px;
-    margin-right: 3px;
-}
-
-span.sheet-in-header-toggle {
-    margin-top: 5px;
-    margin-right: 3px;
-}
-
-/* Section Collapse */
-input[type="checkbox"].sheet-section-toggle
-{
-    opacity: 0;
-    width: 100%;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    margin: -10px;
-    cursor: pointer;
-    z-index: 1;
-}
-h3.sheet-section-toggle {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    margin-left: -100%;
-    padding-left: 16px;
-}
-
-input[type="checkbox"].sheet-section-toggle + h3::after {
-    margin-right: 4px;
-    line-height: 14px;
-    text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 4px;
-    content: "►";
-}
-
-input[type="checkbox"].sheet-section-toggle:checked + h3::after {
-    content: "▼";
-}
-
-input[type="checkbox"].sheet-section-toggle:not(:checked) ~ div.sheet-section-toggle {
-    display: none;
-}
-
-/* Details Collapse */
-input[type="checkbox"].sheet-details-toggle
+/* Hide checkbox */
+input[type="checkbox"]
 {
     opacity: 0;
     width: 16px;
@@ -382,27 +314,230 @@ input[type="checkbox"].sheet-details-toggle
     margin: -10px;
     cursor: pointer;
     z-index: 1;
-    font-family: Pictos;
 }
 
-input[type="checkbox"].sheet-details-toggle + span::before {
-    margin-right: 4px;
-    line-height: 14px;
+/* Fake checkbox */
+input[type="checkbox"] + span::before
+{
+    margin-right: 5px;
+    border: 1px solid #4c4c4c;;
+    line-height: 1em;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
-    content: "&";
-    width: 14px;
-    height: 14px;
-    font-size: 12px;
-    font-family: Pictos;
+
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background-color: rgba(255, 255, 255, 0.01);
+    content: "";
+    width: 1em;
+    height: 1em;
+    font-size: 1em;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+input[type="checkbox"]:checked + span::before
+{
+    content: "✔";
 }
 
-input[type="checkbox"].sheet-details-toggle:checked + span::before {
-    content: "_";
-    font-family: Pictos;
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 5px;
 }
 
-input[type="checkbox"].sheet-details-toggle:not(:checked) ~ div.sheet-details {
+label {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background: inherit;
+    text-align: center;
+}
+
+label.sheet-under {
+    font-size: .85em;
+}
+label.sheet-left {
+    display: inline;
+    text-align: left;
+}
+label.sheet-checkbox {
+    display: inline;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+select {
+    margin: 0 !important;
+    height: 1.25em !important;
+    line-height: 1.25em !important;
+    font-size: 1em !important;
+    padding: 0 0 1px!important;
+    box-sizing: content-box!important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+span.sheet-input-unit{
+    margin-left: -25px;
+}
+span.sheet-italic {
+    font-style: italic;
+}
+span.sheet-usrnotes {
+    font-family: "Patrick Hand", sans-serif;
+}
+
+/* Tables */
+div.sheet-table {
+    display: table;
+    margin-bottom: 5px;
+}
+div.sheet-tr {
+    display: table-row;
+}
+div.sheet-th {
+    display: table-cell;
+    text-align: center;
+    padding: 0 1px 0;
+    background: dimgray;
+    color: lightgray;
+    white-space: nowrap;
+}
+div.sheet-td {
+    display: table-cell;
+    text-align: center;
+    padding: 1px 1px 0;
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 5px;
+}
+th {
+    text-align: center;
+    padding: 0 1px 0;
+    background: dimgray;
+    color: lightgray;
+    white-space: nowrap;
+}
+td {
+    text-align: center;
+    padding: 1px 1px 0;
+    white-space: nowrap;
+}
+div.sheet-bottom-border {
+    border-bottom: 1px solid black;
+}
+
+/* Onsceen Tips */
+input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-safemsg,
+input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-infomsg,
+input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-noticemsg,
+input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-warnmsg {
+    display: none;
+}
+
+div.sheet-safemsg {
+    border: 1px solid darkgreen;
+    color: darkgreen;
+    padding: 0 5px 0;
+    background: #dff0d8;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+div.sheet-infomsg {
+    border: 1px solid darkblue;
+    color: darkblue;
+    padding: 0 5px 0;
+    background: #d9edf7;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+div.sheet-noticemsg {
+    border: 1px solid darkgoldenrod;
+    color: darkgoldenrod;
+    padding: 0 5px 0;
+    background: #fcf8e3;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+div.sheet-warnmsg {
+    border: 1px solid darkred;
+    color: darkred;
+    padding: 0 5px 0;
+    background: #f2dede;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+/* Sheet Styles */
+input.sheet-default-style-toggle:not(:checked) ~ div .sheet-default-style,
+input.sheet-classic-fantasy-style-toggle:not(:checked) ~ div .sheet-classic-fantasy-style,
+input.sheet-luther-arkwright-style-toggle:not(:checked) ~ div .sheet-luther-arkwright-style,
+input.sheet-m-space-style-toggle:not(:checked) ~ div .sheet-m-space-style,
+input.sheet-odd-soot-style-toggle:not(:checked) ~ div .sheet-odd-soot-style {
+    display: none;
+}
+
+input.sheet-default-style-toggle:checked ~ div .sheet-default-style,
+input.sheet-classic-fantasy-style-toggle:checked ~ div .sheet-classic-fantasy-style,
+input.sheet-luther-arkwright-style-toggle:checked ~ div .sheet-luther-arkwright-style,
+input.sheet-m-space-style-toggle:checked ~ div .sheet-m-space-style,
+input.sheet-odd-soot-style-toggle:checked ~ div .sheet-odd-soot-style {
+    display: initial;
+}
+
+/* Mode Toggles */
+input.sheet-config-toggle:not(:checked) ~ div .sheet-config,
+input.sheet-config-toggle:not(:checked) ~ div.sheet-config {
+    display: none;
+}
+input.sheet-config-toggle:checked ~ div .sheet-editplay,
+input.sheet-config-toggle:checked ~ div.sheet-editplay {
+    display: none;
+}
+
+input.sheet-play-toggle:not(:checked) ~ div .sheet-play,
+input.sheet-edit-toggle:not(:checked) ~ div .sheet-edit,
+input.sheet-play-toggle:not(:checked) ~ div.sheet-play,
+input.sheet-edit-toggle:not(:checked) ~ div.sheet-edit {
+    display: none;
+}
+
+input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
+    display: none;
+}
+
+/* Type Toggles */
+input.sheet-type-toggle-battle-unit:not(:checked) ~ div .sheet-battle-unit,
+input.sheet-type-toggle-character:not(:checked) ~ div .sheet-character,
+input.sheet-type-toggle-frostbyte-vehicle:not(:checked) ~ div .sheet-frostbyte-vehicle,
+input.sheet-type-toggle-mythras-vehicle:not(:checked) ~ div .sheet-mythras-vehicle,
+input.sheet-type-toggle-ship:not(:checked) ~ div .sheet-ship,
+input.sheet-type-toggle-solar-system:not(:checked) ~ div .sheet-solar-system {
+    display: none;
+}
+
+/* Form Toggles */
+input.sheet-spirit-toggle:checked ~ div .sheet-material,
+input.sheet-spirit-toggle:not(:checked) ~ div .sheet-spirit {
+    display: none;
+}
+
+/* Extended Conflict Toggle */
+input.sheet-extended-conflict-toggle:not(:checked) ~ div .sheet-extended-conflict {
+    display: none;
+}
+
+/* Simplified Combat Toggle*/
+input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
     display: none;
 }

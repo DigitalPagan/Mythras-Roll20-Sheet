@@ -1,378 +1,5 @@
 // ##### Versioning #####
 // Upgrade Functions
-function upgrade_1_0_to_1_1() {
-    console.log("converting strike_rank to initiative_bonus");
-    var newattrs = {};
-    getAttrs(["strike_rank_temp", "strike_rank_details", "strike_rank_armor", "strike_rank_fatigue", "strike_rank_other"], function(v) {
-        if(v["strike_rank_temp"]) {
-            newattrs["initiative_bonus_temp"] = v.strike_rank_temp;
-        }
-        if(v["strike_rank_details"]) {
-            newattrs["initiative_bonus_details"] = v.strike_rank_details;
-        }
-        if(v["strike_rank_armor"]) {
-            newattrs["initiative_bonus_armor"] = v.strike_rank_armor;
-        }
-        if(v["strike_rank_fatigue"]) {
-            newattrs["initiative_bonus_fatigue"] = v.strike_rank_fatigue;
-        }
-        if(v["strike_rank_other"]) {
-            newattrs["initiative_bonus_other"] = v.strike_rank_other;
-        }
-        console.log("Setting init bonus values copied from strike rank");
-        setAttrs(newattrs);
-    });
-}
-
-function upgrade_1_1_to_1_2_0() {
-    console.log("fixing misspelled missile attrs");
-    var newattrs = {};
-    getAttrs(["missle_weapons_enc"], function(v) {
-        if(v["missle_weapons_enc"]) {
-            newattrs["missile_weapons_enc"] = v.missle_weapons_enc;
-        }
-        console.log("Setting missile_weapons_enc value copied from missle_weapons_enc");
-        setAttrs(newattrs);
-    });
-}
-
-function upgrade_1_2_0_to_1_3_0() {
-    console.log("convert to configable hit locations");
-    var location1_newattrs = {};
-    getAttrs(["right_leg_armor_ap", "right_leg_armor_equipped", "right_leg_other_ap", "right_leg_hp", "right_leg_hp_max_base", "right_leg_hp_max_other", "right_leg_details", "right_leg_armor_type", "right_leg_armor_enc", "location1_armor_ap", "location1_armor_equipped", "location1_other_ap", "location1_hp", "location1_hp_max_base", "location1_hp_max_other", "location1_details", "location1_armor_type", "location1_armor_enc"], function(v) {
-        if((v["right_leg_armor_ap"]) && ((v["location1_armor_ap"] === undefined) || (v["location1_armor_ap"] === ""))) {
-            location1_newattrs["location1_armor_ap"] = v.right_leg_armor_ap;
-        }
-        if((v["right_leg_armor_equipped"]) && ((v["location1_armor_equipped"] === undefined) || (v["location1_armor_equipped"] === ""))) {
-            location1_newattrs["location1_armor_equipped"] = v.right_leg_armor_equipped;
-        }
-        if((v["right_leg_other_ap"]) && ((v["location1_other_ap"] === undefined) || (v["location1_other_ap"] === ""))) {
-            location1_newattrs["location1_other_ap"] = v.right_leg_other_ap;
-        }
-        if((v["right_leg_hp"]) && ((v["location1_hp"] === undefined) || (v["location1_hp"] === ""))) {
-            location1_newattrs["location1_hp"] = v.right_leg_hp;
-        }
-        if((v["right_leg_hp_max_base"]) && ((v["location1_hp_max_base"] === undefined) || (v["location1_hp_max_base"] === ""))) {
-            location1_newattrs["location1_hp_max_base"] = v.right_leg_hp_max_base;
-        }
-        if((v["right_leg_hp_max_other"]) && ((v["location1_hp_max_other"] === undefined) || (v["location1_hp_max_other"] === ""))) {
-            location1_newattrs["location1_hp_max_other"] = v.right_leg_hp_max_other;
-        }
-        if((v["right_leg_details"]) && ((v["location1_details"] === undefined) || (v["location1_details"] === ""))) {
-            location1_newattrs["location1_details"] = v.right_leg_details;
-        }
-        if((v["right_leg_armor_type"]) && ((v["location1_armor_type"] === undefined) || (v["location1_armor_type"] === ""))) {
-            location1_newattrs["location1_armor_type"] = v.right_leg_armor_type;
-        }
-        if((v["right_leg_armor_enc"]) && ((v["location1_armor_enc"] === undefined) || (v["location1_armor_enc"] === ""))) {
-            location1_newattrs["location1_armor_enc"] = v.right_leg_armor_enc;
-        }
-        console.log("Setting hit location1 values copied from right_leg");
-        setAttrs(location1_newattrs);
-    });
-
-    var location2_newattrs = {};
-    getAttrs(["left_leg_armor_ap", "left_leg_armor_equipped", "left_leg_other_ap", "left_leg_hp", "left_leg_hp_max_base", "left_leg_hp_max_other", "left_leg_details", "left_leg_armor_type", "left_leg_armor_enc", "location2_armor_ap", "location2_armor_equipped", "location2_other_ap", "location2_hp", "location2_hp_max_base", "location2_hp_max_other", "location2_details", "location2_armor_type", "location2_armor_enc"], function(v) {
-        if((v["left_leg_armor_ap"]) && ((v["location2_armor_ap"] === undefined) || (v["location2_armor_ap"] === ""))) {
-            location2_newattrs["location2_armor_ap"] = v.left_leg_armor_ap;
-        }
-        if((v["left_leg_armor_equipped"]) && ((v["location2_armor_equipped"] === undefined) || (v["location2_armor_equipped"] === ""))) {
-            location2_newattrs["location2_armor_equipped"] = v.left_leg_armor_equipped;
-        }
-        if((v["left_leg_other_ap"]) && ((v["location2_other_ap"] === undefined) || (v["location2_other_ap"] === ""))) {
-            location2_newattrs["location2_other_ap"] = v.left_leg_other_ap;
-        }
-        if((v["left_leg_hp"]) && ((v["location2_hp"] === undefined) || (v["location2_hp"] === ""))) {
-            location2_newattrs["location2_hp"] = v.left_leg_hp;
-        }
-        if((v["left_leg_hp_max_base"]) && ((v["location2_hp_max_base"] === undefined) || (v["location2_hp_max_base"] === ""))) {
-            location2_newattrs["location2_hp_max_base"] = v.left_leg_hp_max_base;
-        }
-        if((v["left_leg_hp_max_other"]) && ((v["location2_hp_max_other"] === undefined) || (v["location2_hp_max_other"] === ""))) {
-            location2_newattrs["location2_hp_max_other"] = v.left_leg_hp_max_other;
-        }
-        if((v["left_leg_details"]) && ((v["location2_details"] === undefined) || (v["location2_details"] === ""))) {
-            location2_newattrs["location2_details"] = v.left_leg_details;
-        }
-        if((v["left_leg_armor_type"]) && ((v["location2_armor_type"] === undefined) || (v["location2_armor_type"] === ""))) {
-            location2_newattrs["location2_armor_type"] = v.left_leg_armor_type;
-        }
-        if((v["left_leg_armor_enc"]) && ((v["location2_armor_enc"] === undefined) || (v["location2_armor_enc"] === ""))) {
-            location2_newattrs["location2_armor_enc"] = v.left_leg_armor_enc;
-        }
-        console.log("Setting hit location2 values copied from left_leg");
-        setAttrs(location2_newattrs);
-    });
-
-    var location3_newattrs = {};
-    getAttrs(["abdomen_armor_ap", "abdomen_armor_equipped", "abdomen_other_ap", "abdomen_hp", "abdomen_hp_max_base", "abdomen_hp_max_other", "abdomen_details", "abdomen_armor_type", "abdomen_armor_enc", "location3_armor_ap", "location3_armor_equipped", "location3_other_ap", "location3_hp", "location3_hp_max_base", "location3_hp_max_other", "location3_details", "location3_armor_type", "location3_armor_enc"], function(v) {
-        if((v["abdomen_armor_ap"]) && ((v["location3_armor_ap"] === undefined) || (v["location3_armor_ap"] === ""))) {
-            location3_newattrs["location3_armor_ap"] = v.abdomen_armor_ap;
-        }
-        if((v["abdomen_armor_equipped"]) && ((v["location3_armor_equipped"] === undefined) || (v["location3_armor_equipped"] === ""))) {
-            location3_newattrs["location3_armor_equipped"] = v.abdomen_armor_equipped;
-        }
-        if((v["abdomen_other_ap"]) && ((v["location3_other_ap"] === undefined) || (v["location3_other_ap"] === ""))) {
-            location3_newattrs["location3_other_ap"] = v.abdomen_other_ap;
-        }
-        if((v["abdomen_hp"]) && ((v["location3_hp"] === undefined) || (v["location3_hp"] === ""))) {
-            location3_newattrs["location3_hp"] = v.abdomen_hp;
-        }
-        if((v["abdomen_hp_max_base"]) && ((v["location3_hp_max_base"] === undefined) || (v["location3_hp_max_base"] === ""))) {
-            location3_newattrs["location3_hp_max_base"] = v.abdomen_hp_max_base;
-        }
-        if((v["abdomen_hp_max_other"]) && ((v["location3_hp_max_other"] === undefined) || (v["location3_hp_max_other"] === ""))) {
-            location3_newattrs["location3_hp_max_other"] = v.abdomen_hp_max_other;
-        }
-        if((v["abdomen_details"]) && ((v["location3_details"] === undefined) || (v["location3_details"] === ""))) {
-            location3_newattrs["location3_details"] = v.abdomen_details;
-        }
-        if((v["abdomen_armor_type"]) && ((v["location3_armor_type"] === undefined) || (v["location3_armor_type"] === ""))) {
-            location3_newattrs["location3_armor_type"] = v.abdomen_armor_type;
-        }
-        if((v["abdomen_armor_enc"]) && ((v["location3_armor_enc"] === undefined) || (v["location3_armor_enc"] === ""))) {
-            location3_newattrs["location3_armor_enc"] = v.abdomen_armor_enc;
-        }
-        console.log("Setting hit location3 values copied from abdomen");
-        setAttrs(location3_newattrs);
-    });
-
-    var location4_newattrs = {};
-    getAttrs(["chest_armor_ap", "chest_armor_equipped", "chest_other_ap", "chest_hp", "chest_hp_max_base", "chest_hp_max_other", "chest_details", "chest_armor_type", "chest_armor_enc", "location4_armor_ap", "location4_armor_equipped", "location4_other_ap", "location4_hp", "location4_hp_max_base", "location4_hp_max_other", "location4_details", "location4_armor_type", "location4_armor_enc"], function(v) {
-        if((v["chest_armor_ap"]) && ((v["location4_armor_ap"] === undefined) || (v["location4_armor_ap"] === ""))) {
-            location4_newattrs["location4_armor_ap"] = v.chest_armor_ap;
-        }
-        if((v["chest_armor_equipped"]) && ((v["location4_armor_equipped"] === undefined) || (v["location4_armor_equipped"] === ""))) {
-            location4_newattrs["location4_armor_equipped"] = v.chest_armor_equipped;
-        }
-        if((v["chest_other_ap"]) && ((v["location4_other_ap"] === undefined) || (v["location4_other_ap"] === ""))) {
-            location4_newattrs["location4_other_ap"] = v.chest_other_ap;
-        }
-        if((v["chest_hp"]) && ((v["location4_hp"] === undefined) || (v["location4_hp"] === ""))) {
-            location4_newattrs["location4_hp"] = v.chest_hp;
-        }
-        if((v["chest_hp_max_base"]) && ((v["location4_hp_max_base"] === undefined) || (v["location4_hp_max_base"] === ""))) {
-            location4_newattrs["location4_hp_max_base"] = v.chest_hp_max_base;
-        }
-        if((v["chest_hp_max_other"]) && ((v["location4_hp_max_other"] === undefined) || (v["location4_hp_max_other"] === ""))) {
-            location4_newattrs["location4_hp_max_other"] = v.chest_hp_max_other;
-        }
-        if((v["chest_details"]) && ((v["location4_details"] === undefined) || (v["location4_details"] === ""))) {
-            location4_newattrs["location4_details"] = v.chest_details;
-        }
-        if((v["chest_armor_type"]) && ((v["location4_armor_type"] === undefined) || (v["location4_armor_type"] === ""))) {
-            location4_newattrs["location4_armor_type"] = v.chest_armor_type;
-        }
-        if((v["chest_armor_enc"]) && ((v["location4_armor_enc"] === undefined) || (v["location4_armor_enc"] === ""))) {
-            location4_newattrs["location4_armor_enc"] = v.chest_armor_enc;
-        }
-        console.log("Setting hit location4 values copied from chest");
-        setAttrs(location4_newattrs);
-    });
-
-    var location5_newattrs = {};
-    getAttrs(["right_arm_armor_ap", "right_arm_armor_equipped", "right_arm_other_ap", "right_arm_hp", "right_arm_hp_max_base", "right_arm_hp_max_other", "right_arm_details", "right_arm_armor_type", "right_arm_armor_enc", "location5_armor_ap", "location5_armor_equipped", "location5_other_ap", "location5_hp", "location5_hp_max_base", "location5_hp_max_other", "location5_details", "location5_armor_type", "location5_armor_enc"], function(v) {
-        if((v["right_arm_armor_ap"]) && ((v["location5_armor_ap"] === undefined) || (v["location5_armor_ap"] === ""))) {
-            location5_newattrs["location5_armor_ap"] = v.right_arm_armor_ap;
-        }
-        if((v["right_arm_armor_equipped"]) && ((v["location5_armor_equipped"] === undefined) || (v["location5_armor_equipped"] === ""))) {
-            location5_newattrs["location5_armor_equipped"] = v.right_arm_armor_equipped;
-        }
-        if((v["right_arm_other_ap"]) && ((v["location5_other_ap"] === undefined) || (v["location5_other_ap"] === ""))) {
-            location5_newattrs["location5_other_ap"] = v.right_arm_other_ap;
-        }
-        if((v["right_arm_hp"]) && ((v["location5_hp"] === undefined) || (v["location5_hp"] === ""))) {
-            location5_newattrs["location5_hp"] = v.right_arm_hp;
-        }
-        if((v["right_arm_hp_max_base"]) && ((v["location5_hp_max_base"] === undefined) || (v["location5_hp_max_base"] === ""))) {
-            location5_newattrs["location5_hp_max_base"] = v.right_arm_hp_max_base;
-        }
-        if((v["right_arm_hp_max_other"]) && ((v["location5_hp_max_other"] === undefined) || (v["location5_hp_max_other"] === ""))) {
-            location5_newattrs["location5_hp_max_other"] = v.right_arm_hp_max_other;
-        }
-        if((v["right_arm_details"]) && ((v["location5_details"] === undefined) || (v["location5_details"] === ""))) {
-            location5_newattrs["location5_details"] = v.right_arm_details;
-        }
-        if((v["right_arm_armor_type"]) && ((v["location5_armor_type"] === undefined) || (v["location5_armor_type"] === ""))) {
-            location5_newattrs["location5_armor_type"] = v.right_arm_armor_type;
-        }
-        if((v["right_arm_armor_enc"]) && ((v["location5_armor_enc"] === undefined) || (v["location5_armor_enc"] === ""))) {
-            location5_newattrs["location5_armor_enc"] = v.right_arm_armor_enc;
-        }
-        console.log("Setting hit location5 values copied from right_arm");
-        setAttrs(location5_newattrs);
-    });
-
-    var location6_newattrs = {};
-    getAttrs(["left_arm_armor_ap", "left_arm_armor_equipped", "left_arm_other_ap", "left_arm_hp", "left_arm_hp_max_base", "left_arm_hp_max_other", "left_arm_details", "left_arm_armor_type", "left_arm_armor_enc", "location6_armor_ap", "location6_armor_equipped", "location6_other_ap", "location6_hp", "location6_hp_max_base", "location6_hp_max_other", "location6_details", "location6_armor_type", "location6_armor_enc"], function(v) {
-        if((v["left_arm_armor_ap"]) && ((v["location6_armor_ap"] === undefined) || (v["location6_armor_ap"] === ""))) {
-            location6_newattrs["location6_armor_ap"] = v.left_arm_armor_ap;
-        }
-        if((v["left_arm_armor_equipped"]) && ((v["location6_armor_equipped"] === undefined) || (v["location6_armor_equipped"] === ""))) {
-            location6_newattrs["location6_armor_equipped"] = v.left_arm_armor_equipped;
-        }
-        if((v["left_arm_other_ap"]) && ((v["location6_other_ap"] === undefined) || (v["location6_other_ap"] === ""))) {
-            location6_newattrs["location6_other_ap"] = v.left_arm_other_ap;
-        }
-        if((v["left_arm_hp"]) && ((v["location6_hp"] === undefined) || (v["location6_hp"] === ""))) {
-            location6_newattrs["location6_hp"] = v.left_arm_hp;
-        }
-        if((v["left_arm_hp_max_base"]) && ((v["location6_hp_max_base"] === undefined) || (v["location6_hp_max_base"] === ""))) {
-            location6_newattrs["location6_hp_max_base"] = v.left_arm_hp_max_base;
-        }
-        if((v["left_arm_hp_max_other"]) && ((v["location6_hp_max_other"] === undefined) || (v["location6_hp_max_other"] === ""))) {
-            location6_newattrs["location6_hp_max_other"] = v.left_arm_hp_max_other;
-        }
-        if((v["left_arm_details"]) && ((v["location6_details"] === undefined) || (v["location6_details"] === ""))) {
-            location6_newattrs["location6_details"] = v.left_arm_details;
-        }
-        if((v["left_arm_armor_type"]) && ((v["location6_armor_type"] === undefined) || (v["location6_armor_type"] === ""))) {
-            location6_newattrs["location6_armor_type"] = v.left_arm_armor_type;
-        }
-        if((v["left_arm_armor_enc"]) && ((v["location6_armor_enc"] === undefined) || (v["location6_armor_enc"] === ""))) {
-            location6_newattrs["location6_armor_enc"] = v.left_arm_armor_enc;
-        }
-        console.log("Setting hit location6 values copied from left_arm");
-        setAttrs(location6_newattrs);
-    });
-
-    var location7_newattrs = {};
-    getAttrs(["head_armor_ap", "head_armor_equipped", "head_other_ap", "head_hp", "head_hp_max_base", "head_hp_max_other", "head_details", "head_armor_type", "head_armor_enc", "location7_armor_ap", "location7_armor_equipped", "location7_other_ap", "location7_hp", "location7_hp_max_base", "location7_hp_max_other", "location7_details", "location7_armor_type", "location7_armor_enc"], function(v) {
-        if((v["head_armor_ap"]) && ((v["location7_armor_ap"] === undefined) || (v["location7_armor_ap"] === ""))) {
-            location7_newattrs["location7_armor_ap"] = v.head_armor_ap;
-        }
-        if((v["head_armor_equipped"]) && ((v["location7_armor_equipped"] === undefined) || (v["location7_armor_equipped"] === ""))) {
-            location7_newattrs["location7_armor_equipped"] = v.head_armor_equipped;
-        }
-        if((v["head_other_ap"]) && ((v["location7_other_ap"] === undefined) || (v["location7_other_ap"] === ""))) {
-            location7_newattrs["location7_other_ap"] = v.head_other_ap;
-        }
-        if((v["head_hp"]) && ((v["location7_hp"] === undefined) || (v["location7_hp"] === ""))) {
-            location7_newattrs["location7_hp"] = v.head_hp;
-        }
-        if((v["head_hp_max_base"]) && ((v["location7_hp_max_base"] === undefined) || (v["location7_hp_max_base"] === ""))) {
-            location7_newattrs["location7_hp_max_base"] = v.head_hp_max_base;
-        }
-        if((v["head_hp_max_other"]) && ((v["location7_hp_max_other"] === undefined) || (v["location7_hp_max_other"] === ""))) {
-            location7_newattrs["location7_hp_max_other"] = v.head_hp_max_other;
-        }
-        if((v["head_details"]) && ((v["location7_details"] === undefined) || (v["location7_details"] === ""))) {
-            location7_newattrs["location7_details"] = v.head_details;
-        }
-        if((v["head_armor_type"]) && ((v["location7_armor_type"] === undefined) || (v["location7_armor_type"] === ""))) {
-            location7_newattrs["location7_armor_type"] = v.head_armor_type;
-        }
-        if((v["head_armor_enc"]) && ((v["location7_armor_enc"] === undefined) || (v["location7_armor_enc"] === ""))) {
-            location7_newattrs["location7_armor_enc"] = v.head_armor_enc;
-        }
-        console.log("Setting hit location7 values copied from head");
-        setAttrs(location7_newattrs);
-    });
-}
-
-function upgrade_1_5_2_to_1_6_0() {
-    console.log("convert traits into repeating fieldset");
-    getAttrs(["traits", "npc_traits"], function(v) {
-        var traitid = generateRowID();
-        var npctraitattrs = {};
-        var traitattrs = {};
-        npctraitattrs["repeating_npctrait_" + traitid + "_trait"] = v["npc_traits"];
-        setAttrs(npctraitattrs);
-        traitattrs["repeating_trait_" + traitid + "_trait"] = v["traits"];
-        setAttrs(traitattrs);
-    });
-
-    console.log("merge weapon effects and traits");
-    getSectionIDs("shield", function(idarray) {
-        for(var i=0; i < idarray.length; i++) {
-            var id = idarray[i];
-            getAttrs(["repeating_shield_" + id + "_effects", "repeating_shield_" + id + "_traits"], function(v) {
-                var effects = v["repeating_shield_" + id + "_effects"];
-                var traits = v["repeating_shield_" + id + "_traits"];
-                shieldattrs = {};
-                if (effects == "") {
-                    shieldattrs["repeating_shield_" + id + "_notes"] =  traits;
-                } else if (traits == "") {
-                    shieldattrs["repeating_shield_" + id + "_notes"] = effects;
-                } else {
-                    shieldattrs["repeating_shield_" + id + "_notes"] = effects + "/" + traits;
-                }
-                setAttrs(shieldattrs);
-            });
-        }
-    });
-
-    getSectionIDs("meleeweapon", function(idarray) {
-        for(var i=0; i < idarray.length; i++) {
-            var id = idarray[i];
-            getAttrs(["repeating_meleeweapon_" + id + "_effects", "repeating_meleeweapon_" + id + "_traits"], function(v) {
-                var effects = v["repeating_meleeweapon_" + id + "_effects"];
-                var traits = v["repeating_meleeweapon_" + id + "_traits"];
-                meleeweaponattrs = {};
-                if (effects == "") {
-                    meleeweaponattrs["repeating_meleeweapon_" + id + "_notes"] =  traits;
-                } else if (traits == "") {
-                    meleeweaponattrs["repeating_meleeweapon_" + id + "_notes"] = effects;
-                } else {
-                    meleeweaponattrs["repeating_meleeweapon_" + id + "_notes"] = effects + "/" + traits;
-                }
-                setAttrs(meleeweaponattrs);
-            });
-        }
-    });
-
-    getSectionIDs("missileweapon", function(idarray) {
-        for(var i=0; i < idarray.length; i++) {
-            var id = idarray[i];
-            getAttrs(["repeating_missileweapon_" + id + "_effects", "repeating_missileweapon_" + id + "_traits"], function(v) {
-                var effects = v["repeating_missileweapon_" + id + "_effects"];
-                var traits = v["repeating_missileweapon_" + id + "_traits"];
-                missileweaponattrs = {};
-                if (effects == "") {
-                    missileweaponattrs["repeating_missileweapon_" + id + "_notes"] =  traits;
-                } else if (traits == "") {
-                    missileweaponattrs["repeating_missileweapon_" + id + "_notes"] = effects;
-                } else {
-                    missileweaponattrs["repeating_missileweapon_" + id + "_notes"] = effects + "/" + traits;
-                }
-                setAttrs(missileweaponattrs);
-            });
-        }
-    });
-
-    getSectionIDs("firearm", function(idarray) {
-        for(var i=0; i < idarray.length; i++) {
-            var id = idarray[i];
-            getAttrs(["repeating_firearm_" + id + "_traits"], function(v) {
-                var traits = v["repeating_firearm_" + id + "_traits"];
-                firearmattrs = {};
-                firearmattrs["repeating_firearm_" + id + "_notes"] =  traits;
-                setAttrs(firearmattrs);
-            });
-        }
-    });
-}
-
-function upgrade_1_7_0_to_1_8_0() {
-    console.log("copy gear_enc to loadout_enc");
-    var newattrs = {};
-    getAttrs(["gear_enc", "la_psionics_enabled_option", "display_la_psionics"], function(v) {
-        if(v["gear_enc"]) {
-            newattrs["loadout_enc"] = v.gear_enc;
-        }
-        console.log("Setting loadout_enc value copied from gear_enc");
-        if(v["la_psionics_enabled_option"]) {
-            newattrs["mythras_psionics_enabled_option"] = v.la_psionics_enabled_option;
-        }
-        console.log("Setting mythras_psionics_enabled_option value copied from la_psionics_enabled_option");
-        if(v["display_la_psionics"]) {
-            newattrs["display_mythras_psionics"] = v.display_la_psionics;
-        }
-        console.log("Setting display_mythras_psionics value copied from display_la_psionics");
-        setAttrs(newattrs);
-    });
-}
-
 function upgrade_1_9_1_to_2_0() {
     getAttrs(["fatigue", "action_points_swiftness", "damage_mod_mighty", "healing_rate_healthy", "hit_locations_robust", "cult_spirit_limit", "notes"], function(v) {
         var newattrs = {};
@@ -383,15 +10,15 @@ function upgrade_1_9_1_to_2_0() {
         }
 
         // Convert cult Spirit Limit to number base and rename
-        if (v.cult_spirit_limit == "ceil(@{cha}*.25)") {
+        if (v.cult_spirit_limit === "ceil(@{cha}*.25)") {
             newattrs["animism_cult_rank"] = 1;
-        } else if (v.cult_spirit_limit = "ceil(@{cha}*.5)") {
+        } else if (v.cult_spirit_limit === "ceil(@{cha}*.5)") {
             newattrs["animism_cult_rank"] = 2;
-        } else if (v.cult_spirit_limit = "ceil(@{cha}*.75)") {
+        } else if (v.cult_spirit_limit === "ceil(@{cha}*.75)") {
             newattrs["animism_cult_rank"] = 3;
-        } else if (v.cult_spirit_limit = "@{cha}") {
+        } else if (v.cult_spirit_limit === "@{cha}") {
             newattrs["animism_cult_rank"] = 4;
-        } else if (v.cult_spirit_limit = "@{cha}+0") {
+        } else if (v.cult_spirit_limit === "@{cha}+0") {
             newattrs["animism_cult_rank"] = 5;
         } else {
             newattrs["animism_cult_rank"] = 1;
@@ -519,17 +146,17 @@ function upgrade_1_9_1_to_2_0() {
         for(var i=0; i < idarray.length; i++) {
             var id = idarray[i];
 
-            var old_name = "repeating_latalent_" + id + "_name";
-            var old_description = "repeating_latalent_" + id + "_description";
-            var old_intensity = "repeating_latalent_" + id + "_intensity";
-            var old_range = "repeating_latalent_" + id + "_range";
-            var old_duration = "repeating_latalent_" + id + "_duration";
-            var old_area = "repeating_latalent_" + id + "_area";
-            var old_cost = "repeating_latalent_" + id + "_cost";
-            var old_resist = "repeating_latalent_" + id + "_resist";
-            var old_damage = "repeating_latalent_" + id + "_damage";
-            var old_macro = "repeating_latalent_" + id + "_macro";
-            var old_details = "repeating_latalent_" + id + "_details";
+            const old_name = "repeating_latalent_" + id + "_name";
+            const old_description = "repeating_latalent_" + id + "_description";
+            const old_intensity = "repeating_latalent_" + id + "_intensity";
+            const old_range = "repeating_latalent_" + id + "_range";
+            const old_duration = "repeating_latalent_" + id + "_duration";
+            const old_area = "repeating_latalent_" + id + "_area";
+            const old_cost = "repeating_latalent_" + id + "_cost";
+            const old_resist = "repeating_latalent_" + id + "_resist";
+            const old_damage = "repeating_latalent_" + id + "_damage";
+            const old_macro = "repeating_latalent_" + id + "_macro";
+            const old_details = "repeating_latalent_" + id + "_details";
             getAttrs([old_name, old_description, old_intensity, old_range, old_duration, old_area, old_cost, old_resist, old_damage, old_macro, old_details], function(v) {
                 var newrowid = generateRowID();
                 var newrowattrs = {};
@@ -803,107 +430,19 @@ function upgrade_2_1_to_2_2() {
     calc_initiative();
 }
 
+function upgrade_2_7_to_3_0() {
+    var newattrs = {};
+    /* Ensure Thennala Style is updated to Default */
+    getAttrs(["hp_use_pow", "damage_mod_add_pow"], function(v) {
+
+        setAttrs(newattrs);
+    });
+}
+
 var versioning = function() {
     getAttrs(["version"], function(v) {
         console.log("Current Sheet Version = " + v["version"]);
-        if(!v["version"] || v["version"] === "") {
-            console.log("setting initial version at 1.0");
-            setAttrs({version: "1.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.0") {
-            console.log("upgrading to v1.1");
-            upgrade_1_0_to_1_1();
-            setAttrs({version: "1.1"});
-            versioning();
-        }
-        else if(v["version"] === "1.1") {
-            console.log("upgrading to v1.2.0");
-            upgrade_1_1_to_1_2_0();
-            setAttrs({version: "1.2.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.2.0") {
-            console.log("upgrading to v1.3.2");
-            upgrade_1_2_0_to_1_3_0();
-            setAttrs({version: "1.3.2"});
-            versioning();
-        }
-        else if(v["version"] === "1.3.0") {
-            console.log("upgrading to v1.3.1");
-            // upgrade_1_2_0_to_1_3_0();
-            setAttrs({version: "1.3.1"});
-            versioning();
-        }
-        else if(v["version"] === "1.3.1") {
-            console.log("upgrading to v1.3.2");
-            upgrade_1_2_0_to_1_3_0();
-            setAttrs({version: "1.3.2"});
-            versioning();
-        }
-        else if(v["version"] === "1.3.2") {
-            console.log("upgrading to v1.3.3");
-            setAttrs({version: "1.3.3"});
-            versioning();
-        }
-        else if(v["version"] === "1.3.3") {
-            console.log("upgrading to v1.4.0");
-            setAttrs({version: "1.4.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.4.0") {
-            console.log("upgrading to v1.4.1");
-            setAttrs({version: "1.4.1"});
-            versioning();
-        }
-        else if(v["version"] === "1.4.1") {
-            console.log("upgrading to v1.5.0");
-            setAttrs({version: "1.5.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.5.0") {
-            console.log("upgrading to v1.5.1");
-            setAttrs({version: "1.5.1"});
-            versioning();
-        }
-        else if(v["version"] === "1.5.1") {
-            console.log("upgrading to v1.5.2");
-            setAttrs({version: "1.5.2"});
-            versioning();
-        }
-        else if(v["version"] === "1.5.2") {
-            console.log("upgrading to v1.6.0");
-            upgrade_1_5_2_to_1_6_0();
-            setAttrs({version: "1.6.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.6.0") {
-            console.log("upgrading to v1.7.0");
-            setAttrs({version: "1.7.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.7.0") {
-            console.log("upgrading to v1.8.0");
-            upgrade_1_7_0_to_1_8_0();
-            setAttrs({version: "1.8.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.8.0") {
-            console.log("upgrading to v1.8.1");
-            setAttrs({version: "1.8.1"});
-            versioning();
-        }
-        else if(v["version"] === "1.8.1") {
-            console.log("upgrading to v1.9.0");
-            setAttrs({version: "1.9.0"});
-            versioning();
-        }
-        else if(v["version"] === "1.9.0") {
-            console.log("upgrading to v1.9.1");
-            setAttrs({version: "1.9.1"});
-            versioning();
-        }
-        else if(v["version"] === "1.9.1") {
+        if(v["version"] === "1.9.1") {
             console.log("upgrading to v2.0");
             upgrade_1_9_1_to_2_0();
             setAttrs({version: "2.0"});
@@ -958,6 +497,11 @@ var versioning = function() {
             setAttrs({version: "2.7"});
             versioning();
         }
+        /*else if(v["version"] === "2.7") {
+            console.log("upgrading to v3.0");
+            setAttrs({version: "3.0"});
+            versioning();
+        }*/
         else {
             console.log("Sheet fully updated");
         }
@@ -968,6 +512,4 @@ var versioning = function() {
 on("sheet:opened", function() {
     console.log("Checking sheet versions")
     versioning();
-    console.log("Setting campaign options")
-    campaign_options();
 });

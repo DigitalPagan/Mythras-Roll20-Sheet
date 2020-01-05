@@ -1,51 +1,68 @@
 /* Default Roll Template Styles */
-.sheet-rolltemplate-default div.sheet-header {
-    width: 100%;
-    text-align: center;
-    color: lightgray;
-    background: black;
-    font-size: 120%;
-}
-.sheet-rolltemplate-default div.sheet-subheader {
-    width: 100%;
-    text-align: center;
-    color: lightgray;
-    background: black;
-    font-size: 75%;
-}
 .sheet-rolltemplate-default table {
     width: 100%;
-    border: 1px solid black;
-    color: black;
-    background: #FFFFFF;
+    border: 3px solid black;
+    line-height: 1em;
+    font-size: 1em;
+    font-weight: normal;
+    background: white;
+}
+.sheet-rolltemplate-default caption {
+    background: black;
+    color: lightgray;
+    padding: 3px 3px 0;
+}
+.sheet-rolltemplate-default div.sheet-character {
+    font-size: .75em;
+}
+.sheet-rolltemplate-default div.sheet-name {
+    font-family: OFL Sorts Mill Goudy, Palatino, serif;
+    font-size: 1.25em;
+    padding-top: 2px;
+}
+.sheet-rolltemplate-default tr {
+    margin: 0;
+    padding: 0;
+}
+.sheet-rolltemplate-default tr:nth-child(even) {
+    background: linear-gradient(to right, gainsboro, white);
 }
 .sheet-rolltemplate-default td {
-    padding: 1px;
-    border-bottom: 1px solid black;
+    padding: 3px 3px 0;
+    line-height: 1em;
+    vertical-align: middle;
 }
-.sheet-rolltemplate-default td.sheet-template_label {
+.sheet-rolltemplate-default td.sheet-label {
     font-weight: bold;
-    float: left;
     text-align: left;
 }
-.sheet-rolltemplate-default td.sheet-template_value {
-    text-align: center;
+.sheet-rolltemplate-default td.sheet-value {
+    text-align: right;
 }
-.sheet-rolltemplate-default .inlinerollresult  {
+.sheet-rolltemplate-default .inlinerollresult {
     display: inline-block;
     text-align: center;
-    border: 1px solid black;
-    background: #BEBEBE;
+    padding: 0px;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
 }
 .sheet-rolltemplate-default .inlinerollresult.fullcrit {
-    border: 1px solid black;
-    background: #BEBEBE;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
 }
 .sheet-rolltemplate-default .inlinerollresult.fullfail {
-    border: 1px solid black;
-    background: #BEBEBE;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
 }
 .sheet-rolltemplate-default .inlinerollresult.importantroll {
-    border: 1px solid black;
-    background: #BEBEBE;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
 }
