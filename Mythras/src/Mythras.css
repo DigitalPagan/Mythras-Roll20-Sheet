@@ -14,6 +14,11 @@ ${new File("src/sheet/types/character/detailed/skills.css").getText()}
 ${new File("src/sheet/types/character/detailed/passions.css").getText()}
 /* Abilities */
 ${new File("src/sheet/types/character/detailed/abilities.css").getText()}
+/* Equipment */
+${new File("src/sheet/types/character/detailed/armor.css").getText()}
+/* Notes */
+${new File("src/sheet/types/character/detailed/notes.css").getText()}
+
 
 /* Roll Templates */
 ${new File("src/roll_templates/default.css").getText()}

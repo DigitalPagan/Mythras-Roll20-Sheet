@@ -7,29 +7,31 @@ div.sheet-wrapper {
 }
 h1 {
     font-size: 2em;
-    font-family: OFL Sorts Mill Goudy, Palatino, serif;;
+    font-family: Palatino, serif;
+    font-weight: bold;
     border-bottom: 1px solid black;
     margin-bottom: 5px;
-    font-weight: normal;
+
 }
 h2 {
     font-size: 1.5em;
-    font-family: OFL Sorts Mill Goudy, Palatino, serif;;
+    font-family: Palatino, serif;
+    font-weight: bold;
     padding: 0;
     margin: 0;
     height: 1.25em;
     line-height: 1.5em;
-    font-weight: normal;
 }
 h3 {
     font-size: 1.25em;
-    font-family: OFL Sorts Mill Goudy, Palatino, serif;;
+    font-family: Palatino, serif;
+    font-weight: normal;
     padding: 0;
     margin: 0;
     height: 1.25em;
     line-height: 1.25em;
     text-decoration: underline;
-    font-weight: normal;
+
 }
 hr {
     margin: 0 0 5px;
@@ -349,7 +351,7 @@ textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    margin-bottom: 5px;
+    margin: 0px;
 }
 
 label {
@@ -394,6 +396,8 @@ span.sheet-italic {
 }
 span.sheet-usrnotes {
     font-family: "Patrick Hand", sans-serif;
+    font-size: 1.1em;
+    white-space: pre-line;
 }
 
 /* Tables */

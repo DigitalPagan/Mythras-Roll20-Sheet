@@ -16,7 +16,7 @@
     font-size: .75em;
 }
 .sheet-rolltemplate-skill div.sheet-name {
-    font-family: OFL Sorts Mill Goudy, Palatino, serif;
+    font-family: Palatino, serif;
     font-size: 1.25em;
     padding-top: 2px;
 }
@@ -30,11 +30,11 @@
 }
 .sheet-rolltemplate-skill tr.sheet-very-easy {
     background: #DFF0D8;
-    color: darkgreen;
+    color: black;
 }
 .sheet-rolltemplate-skill tr.sheet-easy {
     background: #D9EDF7;
-    color: darkblue;
+    color: black;
 }
 .sheet-rolltemplate-skill tr.sheet-standard {
     background: gainsboro;
@@ -43,15 +43,15 @@
 }
 .sheet-rolltemplate-skill .sheet-hard {
     background: #fcf8e3;
-    color: darkgoldenrod;
+    color: black;
 }
 .sheet-rolltemplate-skill .sheet-formidable {
     background: #FFEBCC;
-    color: darkorange;
+    color: black;
 }
 .sheet-rolltemplate-skill .sheet-herculean {
     background: #f2dede;
-    color: darkred;
+    color: black;
 }
 .sheet-rolltemplate-skill .sheet-hopeless {
     background: black;

@@ -50,16 +50,20 @@ input[type="checkbox"].sheet-location-display-toggle:not(:checked) + .sheet-loca
 textarea.sheet-hit-locations-note {
     height: 195px;
     width: 100%;
+    margin-bottom: 5px;
 }
 textarea.sheet-hit-locations-note-7 {
     height: 75px;
     width: 100%;
+    margin-bottom: 5px;
 }
 textarea.sheet-hit-locations-note-8 {
     height: 55px;
     width: 100%;
+    margin-bottom: 5px;
 }
 textarea.sheet-hit-locations-note-9 {
     height: 35px;
     width: 100%;
+    margin-bottom: 5px;
 }

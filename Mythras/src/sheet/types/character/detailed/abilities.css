@@ -75,11 +75,13 @@ span.sheet-ability-traits {
     font-family: "Patrick Hand", sans-serif;
     font-style: italic;
     line-height: 1em;
+    font-size: 1.1em;
 }
 span.sheet-ability-description {
     font-family: "Patrick Hand", sans-serif;
     white-space: pre-line;
     line-height: 1em;
+    font-size: 1.1em;
 }
 
 select.sheet-shaping-trait {
