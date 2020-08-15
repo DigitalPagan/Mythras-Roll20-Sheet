@@ -1,0 +1,50 @@
+<div class="sheet-section sheet-rpad sheet-full-width">
+    <div class="sheet-flex">
+        <h2 data-i18n="standard-skills-u">Standard Skills</h2>
+        <div class="sheet-grow sheet-text-right">
+            <label class="sheet-checkbox sheet-rmargin"><input type="checkbox" title="@{stdskill_ids}" name="attr_stdskill_ids" value="1"><span data-i18n="ids-u">IDs</span></label>
+            <label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{stdskill_notes}" name="attr_stdskill_notes" value="1" checked><span data-i18n="notes-u">Notes</span></label>
+        </div>
+    </div>
+
+    <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_stdskill_ids" value="1">
+    <input type="checkbox" class="sheet-hidden sheet-skillnotes-toggle" name="attr_stdskill_notes" value="1" checked>
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-grow sheet-header sheet-cellpad"><label data-i18n="skill-u">Skill</label></div>
+            <div class="sheet-play sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="encumbered-tooltip-u">a</label></div>
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="fumbled-tooltip-u">!</label></div>
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="trained-tooltip-u">3</label></div>
+            <div class="sheet-edit sheet-header sheet-skillbase-col"><label data-i18n="base-u">Base</label></div>
+            <div class="sheet-edit sheet-number-width sheet-header sheet-cellpad"><label data-i18n="xp-u">XP</label></div>
+            <div class="sheet-edit sheet-number-width sheet-header sheet-cellpad"><label data-i18n="other-u">Other</label></div>
+            <div class="sheet-number-width sheet-header sheet-cellpad"><label>%</label></div>
+            <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="augment-u" data-i18n-title="augment-tooltip-u">Aug</label></div>
+            <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="vs101plus-u" data-i18n-title="vs101-tooltip-u">vs101+</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+        </div>
+        <div class="sheet-flex sheet-full-width">
+            <input type="text" class="sheet-hidden" name="attr_athletics_name" value="^{athletics-u}">
+            <div class="sheet-grow sheet-bottom-border sheet-cellpad"><label class="sheet-left" data-i18n="athletics-u">Athletics</label></div>
+            <div class="sheet-play sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-enc" title="@{athletics_encumbered}" name="attr_athletics_encumbered" value="1" checked disabled><span></span></div>
+            <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-fumble" title="@{athletics_fumbled}" name="attr_athletics_fumbled" value="1"><span></span></div>
+            <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-trained" title="@{athletics_trained}" name="attr_athletics_trained" value="1"><span></span></div>
+            <div class="sheet-edit sheet-skillbase-col sheet-pcell">
+                <span data-i18n="str-u">STR</span>+<span data-i18n="dex-u">DEX</span>
+                <div class="sheet-hidden">
+                    <input type="text" name="attr_athletics_char1" value="@{str}"readonly>
+                    <input type="text" name="attr_athletics_char2" value="@{dex}"readonly>
+                </div>
+            </div>
+            <div class="sheet-edit sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{athletics_experience}" name="attr_athletics_experience" value="0"></div>
+            <div class="sheet-edit sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{athletics_other}" name="attr_athletics_other" value="0"></div>
+            <div class="sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-fullwidth sheet-impvalue" title="@{athletics_total}" name="attr_athletics_total" value="22" readonly></div>
+            <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{athletics_augment}" name="attr_athletics_augment" value="0"></div>
+            <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" max="0" class="sheet-full-width sheet-usrinput" title="@{athletics_penalty}" name="attr_athletics_penalty" value="0"></div>
+            <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{athletics_skill}" name="roll_athletics_roll" value="@{roll_display}&{template:skill} {{name=@{athletics_name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{athletics_total}+@{athletics_augment})*2)+@{athletics_penalty}]]}} {{very_easy_crit=[[ceil(((@{athletics_total}*2)+@{athletics_penalty})/10)]]}} {{easy=[[ceil((@{athletics_total}+@{athletics_augment})*1.5)+@{athletics_penalty}]]}} {{easy_crit=[[ceil(((@{athletics_total}*1.5)+@{athletics_penalty})/10)]]}} {{standard=[[@{athletics_total}+@{athletics_augment}+@{athletics_penalty}]]}} {{standard_crit=[[ceil((@{athletics_total}+@{athletics_penalty})/10)]]}} {{hard=[[ceil((@{athletics_total}+@{athletics_augment})*.67)+@{athletics_penalty}]]}} {{hard_crit=[[ceil(((@{athletics_total}*.67)+@{athletics_penalty})/10)]]}} {{formidable=[[ceil((@{athletics_total}+@{athletics_augment})*.5)+@{athletics_penalty}]]}} {{formidable_crit=[[ceil(((@{athletics_total}*.5)+@{athletics_penalty})/10)]]}} {{herculean=[[ceil((@{athletics_total}+@{athletics_augment})*@{herculean_mod})+@{athletics_penalty}]]}} {{herculean_crit=[[ceil(((@{athletics_total}*@{herculean_mod})+@{athletics_penalty})/10)]]}} {{notes=@{athletics_notes}}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{athletics_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}}"></button></div>
+        </div>
+        <div class="sheet-id sheet-flex"><div><label class="sheet-left" data-i18n="id-u">ID</label>:&nbsp;</div><div class="sheet-grow"><input type="text" class="sheet-text-left sheet-full-width sheet-value" title="@{athletics_id}" name="attr_athletics_id" value="athletics" readonly></div></div>
+        <div class="sheet-edit sheet-skillnotes"><textarea class="sheet-full-width sheet-skillnotes" title="@{athletics_notes}" name="attr_athletics_notes"></textarea></div>
+        <div class="sheet-play sheet-skillnotes"><span class="sheet-skillnotes" name="attr_athletics_notes"></span></div>
+    </div>
+</div>

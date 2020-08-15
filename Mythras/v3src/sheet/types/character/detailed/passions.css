@@ -1,0 +1,9 @@
+/* Dependency Toggle*/
+input.sheet-dependency-toggle:not(:checked) ~ div .sheet-dependency {
+    display: none;
+}
+
+/* Peculiarities Toggle*/
+input.sheet-peculiarity-toggle:not(:checked) ~ div .sheet-peculiarity {
+    display: none;
+}

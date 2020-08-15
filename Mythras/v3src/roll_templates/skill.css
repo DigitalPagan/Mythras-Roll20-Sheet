@@ -1,0 +1,97 @@
+/* Skill Roll Template Styles */
+.sheet-rolltemplate-skill table {
+    width: 100%;
+    border: 3px solid dimgray;
+    line-height: 1em;
+    font-size: 1em;
+    font-weight: normal;
+    background: white;
+}
+.sheet-rolltemplate-skill caption {
+    background: dimgray;
+    color: whitesmoke;
+    padding: 3px 3px 0;
+}
+.sheet-rolltemplate-skill div.sheet-character {
+    font-size: .75em;
+}
+.sheet-rolltemplate-skill div.sheet-name {
+    font-family: Palatino, serif;
+    font-size: 1.25em;
+    padding-top: 2px;
+}
+.sheet-rolltemplate-skill div.sheet-info {
+    padding: 2px 0 0;
+    text-align: center;
+}
+.sheet-rolltemplate-skill tr {
+    margin: 0;
+    padding: 0;
+}
+.sheet-rolltemplate-skill tr.sheet-very-easy {
+    background: #DFF0D8;
+    color: black;
+}
+.sheet-rolltemplate-skill tr.sheet-easy {
+    background: #D9EDF7;
+    color: black;
+}
+.sheet-rolltemplate-skill tr.sheet-standard {
+    background: gainsboro;
+    color: black;
+    font-weight: bold;
+}
+.sheet-rolltemplate-skill .sheet-hard {
+    background: #fcf8e3;
+    color: black;
+}
+.sheet-rolltemplate-skill .sheet-formidable {
+    background: #FFEBCC;
+    color: black;
+}
+.sheet-rolltemplate-skill .sheet-herculean {
+    background: #f2dede;
+    color: black;
+}
+.sheet-rolltemplate-skill .sheet-hopeless {
+    background: black;
+    color: lightgray;
+}
+.sheet-rolltemplate-skill td {
+    padding: 3px 3px 0;
+    line-height: 1em;
+    vertical-align: middle;
+}
+.sheet-rolltemplate-skill td.sheet-label {
+    text-align: left;
+}
+.sheet-rolltemplate-skill td.sheet-value {
+    text-align: right;
+}
+.sheet-rolltemplate-skill .inlinerollresult  {
+    display: inline-block;
+    text-align: center;
+    padding: 0px;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-skill .inlinerollresult.fullcrit {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-skill .inlinerollresult.fullfail {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-skill .inlinerollresult.importantroll {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}

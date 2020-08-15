@@ -1,0 +1,67 @@
+<div class="sheet-section sheet-rpad sheet-full-width">
+    <div class="sheet-flex">
+        <h2 data-i18n="professional-skills-u">Professional Skills</h2>
+        <div class="sheet-grow sheet-text-right">
+            <label class="sheet-checkbox sheet-rmargin"><input type="checkbox" title="@{proskill_ids}" name="attr_proskill_ids" value="1"><span data-i18n="ids-u">IDs</span></label>
+            <label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{proskill_notes}" name="attr_proskill_notes" value="1" checked><span data-i18n="notes-u">Notes</span></label>
+        </div>
+    </div>
+
+    <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_proskill_ids" value="1">
+    <input type="checkbox" class="sheet-hidden sheet-skillnotes-toggle" name="attr_proskill_notes" value="1" checked>
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-grow sheet-header sheet-cellpad"><label data-i18n="skill-u">Skill</label></div>
+            <div class="sheet-play sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="encumbered-tooltip-u">a</label></div>
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="fumbled-tooltip-u">!</label></div>
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="trained-tooltip-u">3</label></div>
+            <div class="sheet-edit sheet-header sheet-skillbase-col"><label data-i18n="base-u">Base</label></div>
+            <div class="sheet-edit sheet-number-width sheet-header sheet-cellpad"><label data-i18n="xp-u">XP</label></div>
+            <div class="sheet-edit sheet-number-width sheet-header sheet-cellpad"><label data-i18n="other-u">Other</label></div>
+            <div class="sheet-number-width sheet-header sheet-cellpad"><label>%</label></div>
+            <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="augment-u" data-i18n-title="augment-tooltip-u">Aug</label></div>
+            <div class="sheet-play sheet-number-width sheet-header sheet-cellpad"><label data-i18n="vs101plus-u" data-i18n-title="vs101-tooltip-u">vs101+</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+        </div>
+        <fieldset class="repeating_professionalskill">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-play sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-enc" title="@{$ID_encumbered}" name="attr_encumbered" value="1" readonly><span></span></div>
+                <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-fumble" title="@{$ID_fumbled}" name="attr_fumbled" value="1"><span></span></div>
+                <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-trained" title="@{$ID_trained}" name="attr_trained" value="1"><span></span></div>
+                <div class="sheet-edit sheet-skillbase-col sheet-pcell">
+                    <select class="sheet-char sheet-usrinput" title="@{$ID_char1}" name="attr_char1">
+                        <option value="0" selected>0</option>
+                        <option value="@{str}" data-i18n="str-u">STR</option>
+                        <option value="@{con}" data-i18n="con-u">CON</option>
+                        <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                        <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                        <option value="@{int}" data-i18n="int-u">INT</option>
+                        <option value="@{pow}" data-i18n="pow-u">POW</option>
+                        <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                    </select>
+                    +
+                    <select class="sheet-char sheet-usrinput" title="@{$ID_char2}" name="attr_char2">
+                        <option value="0" selected>0</option>
+                        <option value="@{str}" data-i18n="str-u">STR</option>
+                        <option value="@{con}" data-i18n="con-u">CON</option>
+                        <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                        <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                        <option value="@{int}" data-i18n="int-u">INT</option>
+                        <option value="@{pow}" data-i18n="pow-u">POW</option>
+                        <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                    </select>
+                </div>
+                <div class="sheet-edit sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_experience}" name="attr_experience" value="0"></div>
+                <div class="sheet-edit sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0"></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-fullwidth sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0" readonly></div>
+                <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_augment}" name="attr_augment" value="0"></div>
+                <div class="sheet-play sheet-number-width sheet-cellpad"><input type="number" step="1" max="0" class="sheet-full-width sheet-usrinput" title="@{$ID_penalty}" name="attr_penalty" value="0"></div>
+                <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_skill}" name="roll_roll" value="@{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}}"></button></div>
+            </div>
+            <div class="sheet-id sheet-flex"><div><label class="sheet-left" data-i18n="id-u">ID</label>:&nbsp;</div><div class="sheet-grow"><input type="text" class="sheet-text-left sheet-full-width sheet-value" title="@{$ID_id}" name="attr_id" value="" readonly></div></div>
+            <div class="sheet-edit sheet-skillnotes"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+            <div class="sheet-play sheet-skillnotes"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+        </fieldset>
+    </div>
+</div>

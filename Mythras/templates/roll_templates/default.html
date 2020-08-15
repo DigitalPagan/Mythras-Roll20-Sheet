@@ -1,0 +1,15 @@
+<!-- Default Roll Template -->
+<!-- @{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}} -->
+<rolltemplate class="sheet-rolltemplate-default">
+    <table>
+        <caption>
+            {{#character}}
+            <div class="sheet-character">{{character}}</div>
+            {{/character}}
+            <div class="sheet-name">{{name}}</div>
+        </caption>
+        {{#allprops() character name}}
+        <tr><td class="sheet-label">{{key}}:</td><td class="sheet-value">{{value}}</td></tr>
+        {{/allprops() character name}}
+    </table>
+</rolltemplate>

@@ -1,0 +1,60 @@
+<!-- Default Roll Template -->
+<!-- @{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{ship_condition_skills=[[@{ship_condition_skills}]]}}-->
+<rolltemplate class="sheet-rolltemplate-skill">
+    <table>
+        <caption>
+            {{#character}}
+            <div class="sheet-character">{{character}}</div>
+            {{/character}}
+            <div class="sheet-name">{{name}}</div>
+            {{#rollGreater() fatigue_skills 0}}
+                {{#rollTotal() fatigue_skills 1}}<div class="sheet-info sheet-hard"><span data-i18n="hard-u">Hard</span>, <span data-i18n="due-to-fatigue-u">due to fatigue</span></div>{{/rollTotal() fatigue_skills 1}}
+                {{#rollTotal() fatigue_skills 2}}<div class="sheet-info sheet-formidable"><span data-i18n="formidable-u">Formidable</span>, <span data-i18n="due-to-fatigue-u">due to fatigue</span></div>{{/rollTotal() fatigue_skills 2}}
+                {{#rollTotal() fatigue_skills 3}}<div class="sheet-info sheet-herculean"><span data-i18n="herculean-u">Herculean</span>, <span data-i18n="due-to-fatigue-u">due to fatigue</span></div>{{/rollTotal() fatigue_skills 3}}
+                {{#rollTotal() fatigue_skills 4}}<div class="sheet-info sheet-hopeless"><span data-i18n="hopeless-u">Hopeless</span>, <span data-i18n="due-to-fatigue-u">due to fatigue</span></div>{{/rollTotal() fatigue_skills 4}}
+                {{#rollTotal() fatigue_skills 5}}<div class="sheet-info sheet-hopeless"><span data-i18n="no-action-allowed-u">No action allowed</span>, <span data-i18n="due-to-fatigue-u">due to fatigue</span></div>{{/rollTotal() fatigue_skills 5}}
+            {{/rollGreater() fatigue_skills 0}}
+            {{#rollTotal() encumbered 1}}
+                {{#rollGreater() encumbrance_skills 0}}
+                    {{#rollTotal() encumbrance_skills 1}}<div class="sheet-info sheet-hard"><span data-i18n="one-grade-harder-u">+1 grade harder</span>, <span data-i18n="due-to-enc-u">due to ENC</span></div>{{/rollTotal() encumbrance_skills 1}}
+                    {{#rollTotal() encumbrance_skills 2}}<div class="sheet-info sheet-formidable"><span data-i18n="two-grades-harder-u">+2 grades harder</span>, <span data-i18n="due-to-enc-u">due to ENC</span></div>{{/rollTotal() encumbrance_skills 2}}
+                    {{#rollTotal() encumbrance_skills 3}}<div class="sheet-info sheet-hopeless"><span data-i18n="impossible-u">Impossible</span>, <span data-i18n="due-to-enc-u">due to ENC</span></div>{{/rollTotal() encumbrance_skills 3}}
+                {{/rollGreater() encumbrance_skills 0}}
+            {{/rollTotal() encumbered 1}}
+            {{#ship_condition_skills}}
+                {{#rollGreater() ship_condition_skills 1}}
+                    {{#rollTotal() ship_condition_skills 2}}<div class="sheet-info sheet-hard"><span data-i18n="hard-u">Hard</span>, <span data-i18n="due-to-ship-condition-u">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 2}}
+                    {{#rollTotal() ship_condition_skills 3}}<div class="sheet-info sheet-formidable"><span data-i18n="formidable-u">Formidable</span>, <span data-i18n="due-to-ship-condition-u">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 3}}
+                    {{#rollTotal() ship_condition_skills 4}}<div class="sheet-info sheet-herculean"><span data-i18n="herculean-u">Herculean</span>, <span data-i18n="due-to-ship-condition-u">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 4}}
+                {{/rollGreater() ship_condition_skills 1}}
+            {{/ship_condition_skills}}
+        </caption>
+        <tr class="sheet-very-easy">
+            <td class="sheet-label"><span data-i18n="very-easy-u">Very Easy</span>:</td>
+            <td class="sheet-value">{{roll}} <span data-i18n="vs-u">vs</span> {{very_easy}}/{{very_easy_crit}}</td>
+        </tr>
+        <tr class="sheet-easy">
+            <td class="sheet-label"><span data-i18n="easy-u">Easy</span>:</td>
+            <td class="sheet-value">{{roll}} <span data-i18n="vs-u">vs</span> {{easy}}/{{easy_crit}}</td>
+        </tr>
+        <tr class="sheet-standard">
+            <td class="sheet-label"><span data-i18n="standard-u">Standard</span>:</td>
+            <td class="sheet-value">{{roll}} <span data-i18n="vs-u">vs</span> {{standard}}/{{standard_crit}}</td>
+        </tr>
+        <tr class="sheet-hard">
+            <td class="sheet-label"><span data-i18n="hard-u">Hard</span>:</td>
+            <td class="sheet-value">{{roll}} <span data-i18n="vs-u">vs</span> {{hard}}/{{hard_crit}}</td>
+        </tr>
+        <tr class="sheet-formidable">
+            <td class="sheet-label"><span data-i18n="formidable-u">Formidable</span>:</td>
+            <td class="sheet-value">{{roll}} <span data-i18n="vs-u">vs</span> {{formidable}}/{{formidable_crit}}</td>
+        </tr>
+        <tr class="sheet-herculean">
+            <td class="sheet-label"><span data-i18n="herculean-u">Herculean</span>:</td>
+            <td class="sheet-value">{{roll}} <span data-i18n="vs-u">vs</span> {{herculean}}/{{herculean_crit}}</td>
+        </tr>
+        {{#notes}}
+        <tr><td colspan="2">{{notes}}</td></tr>
+        {{/notes}}
+    </table>
+</rolltemplate>

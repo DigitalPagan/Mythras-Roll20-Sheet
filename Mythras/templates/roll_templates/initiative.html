@@ -1,0 +1,13 @@
+<!-- Initiative Roll Template -->
+<!-- @{roll_display}&{template:initiative} {{name=^{initiative-u}}} @{name_display} {{roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}} -->
+<rolltemplate class="sheet-rolltemplate-initiative">
+    <table>
+        <caption>
+            {{#character}}
+            <div class="sheet-character">{{character}}</div>
+            {{/character}}
+            <div class="sheet-name">{{name}}</div>
+        </caption>
+        <tr><td><span data-i18n="roll-u">Roll</span>:</td><td class="sheet-value">{{roll}}</td></tr>
+    </table>
+</rolltemplate>

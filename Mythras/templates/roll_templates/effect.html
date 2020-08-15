@@ -1,0 +1,58 @@
+<!-- Default Roll Template -->
+<!-- @{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{intensity=@{intensity}}} {{magnitude=@{magnitude}}} {{traits=@{traits}}} @{shaping_traits} {{description=@{description}}} {{page=@{page}}}-->
+<rolltemplate class="sheet-rolltemplate-effect">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{character}}</div>
+            <div class="sheet-name">{{name}}</div>
+        </div>
+        <div class="sheet-subheader sheet-flex">
+            <div class="sheet-flex sheet-grow sheet-rmargin">
+                <div class="sheet-label"><span data-i18n="intensity-u">Intensity</span>:&nbsp;</div>
+                <div class="sheet-grow sheet-value">{{intensity}}</div>
+            </div>
+            <div class="sheet-flex sheet-grow">
+                <div class="sheet-label"><span data-i18n="magnitude-u">Magnitude</span>:&nbsp;</div>
+                <div class="sheet-grow sheet-value">{{magnitude}}</div>
+            </div>
+        </div>
+        {{#traits}}<div class="sheet-trait">{{traits}}</div>{{/traits}}
+        {{#rollGreater() combine 0}}<div class="sheet-trait"><span data-i18n="combine-u">Combine</span>:&nbsp;{{combine}}</div>{{/rollGreater() combine 0}}
+        {{#duration}}<div class="sheet-trait"><span data-i18n="duration-u">Duration</span>:&nbsp;{{duration}}</div>{{/duration}}
+        {{#range}}<div class="sheet-trait"><span data-i18n="range-u">Range</span>:&nbsp;{{range}}</div>{{/range}}
+        {{#targets}}<div class="sheet-trait"><span data-i18n="targets-u">Targets</span>:&nbsp;{{targets}}</div>{{/targets}}
+        {{#rollGreater() ablation 0}}<div class="sheet-trait"><span data-i18n="ablation-u">Ablation</span>:&nbsp;{{ablation}}</div>{{/rollGreater() ablation 0}}
+        {{#rollGreater() focus 0}}<div class="sheet-trait"><span data-i18n="focus-u">Focus</span>:&nbsp;{{focus}}</div>{{/rollGreater() focus 0}}
+        {{#rollGreater() fortune 0}}<div class="sheet-trait"><span data-i18n="fortune-u">Fortune</span>:&nbsp;{{fortune}}</div>{{/rollGreater() fortune 0}}
+        {{#rollGreater() precision 0}}<div class="sheet-trait"><span data-i18n="precision-u">Precision</span>:&nbsp;{{precision}}</div>{{/rollGreater() precision 0}}
+        {{#rollGreater() swiftness 0}}<div class="sheet-trait"><span data-i18n="swiftness-u">Swiftness</span>:&nbsp;{{swiftness}}</div>{{/rollGreater() swiftness 0}}
+        {{#cost}}<div class="sheet-trait"><span data-i18n="cost-u">Cost</span>:&nbsp;{{cost}}</div>{{/cost}}
+        {{#time}}<div class="sheet-trait"><span data-i18n="time-u">Time</span>:&nbsp;{{time}}</div>{{/time}}
+        {{#description}}
+        <div class="sheet-altback">{{description}}</div>
+        {{/description}}
+        {{#page}}
+        <div class="sheet-altback sheet-flex">
+            <div class="sheet-label"><span data-i18n="page-u">Page</span>:&nbsp;</div>
+            <div class="sheet-grow sheet-value">{{page}}</div>
+        </div>
+        {{/page}}
+    </div>
+    <!--
+    <table>
+        <caption>
+            {{#character}}
+            <div class="sheet-character">{{character}}</div>
+            {{/character}}
+            <div class="sheet-name">{{name}}</div>
+        </caption>
+        <tr><td class="sheet-traits" colspan="2">{{#traits}}{{traits}}{{/traits}}{{#range}}<br>{{range}}{{/traits}}</td></tr>
+        {{#description}}
+        <tr><td colspan="2">{{description}}</td></tr>
+        {{/description}}
+        {{#page}}
+        <tr><td class="sheet-label"><span data-i18n="page-u"></span>:</td><td class="sheet-value">{{page}}</td></tr>
+        {{/page}}
+    </table>
+    -->
+</rolltemplate>

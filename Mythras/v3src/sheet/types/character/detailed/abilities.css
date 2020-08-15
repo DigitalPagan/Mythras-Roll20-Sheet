@@ -1,0 +1,50 @@
+/* Columns */
+div.sheet-ability-name {
+    width: 168px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-type {
+    width: 125px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-skill {
+    width: 125px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-skillid {
+    width: 150px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+
+/* Memorized checkbox */
+input[type="checkbox"].sheet-memorized + span::before {
+    margin-left: 7px;
+    margin-right: -4px;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Pictos';
+    content: "S";
+    color: lightgray;
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    border: none;
+}
+
+input[type="checkbox"]:checked.sheet-memorized + span::before {
+    color: black;
+}
+
+input[type="checkbox"].sheet-shaping-toggle:not(:checked) + div.sheet-shaping {
+    display: none;
+}
+
+select.sheet-shaping-trait {
+    width: 100px;
+}

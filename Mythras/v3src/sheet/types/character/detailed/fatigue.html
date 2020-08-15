@@ -1,0 +1,71 @@
+<div class="sheet-section sheet-rpad sheet-grow">
+    <h2 data-i18n="fatigue-u">Fatigue</h2>
+
+    <table class="sheet-full-width">
+        <tr>
+            <th><label data-i18n="current-u">Current</label></th>
+            <th><label data-i18n="skills-u">Skills</label></th>
+            <th><label data-i18n="ap-u">AP</label></th>
+            <th><label data-i18n="init-u">Init</label></th>
+            <th><label data-i18n="move-u">Move</label></th>
+            <th><label data-i18n="recovery-u">Recovery</label></th>
+        </tr>
+        <tr>
+            <td>
+                <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{fatigue}" name="attr_fatigue">
+                    <option value="9" data-i18n="fresh-u" selected>Fresh</option>
+                    <option value="8" data-i18n="winded-u">Winded</option>
+                    <option value="7" data-i18n="tired-u">Tired</option>
+                    <option value="6" data-i18n="wearied-u">Wearied</option>
+                    <option value="5" data-i18n="exhausted-u">Exhausted</option>
+                    <option value="4" data-i18n="debilitated-u">Debilitated</option>
+                    <option value="3" data-i18n="incapacitated-u">Incapacitated</option>
+                    <option value="2" data-i18n="semi-conscious-u">Semi-Conscious</option>
+                    <option value="1" data-i18n="comatose-u">Comatose</option>
+                    <option value="0" data-i18n="dead-u">Dead</option>
+                </select>
+            </td>
+            <td>
+                <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{fatigue_skills}" name="attr_fatigue_skills">
+                    <option value="0" data-i18n="standard-u" selected>Standard</option>
+                    <option value="1" data-i18n="hard-u">Hard</option>
+                    <option value="2" data-i18n="formidable-u">Formidable</option>
+                    <option value="3" data-i18n="herculean-u">Herculean</option>
+                    <option value="4" data-i18n="hopeless-u">Hopeless</option>
+                    <option value="5" data-i18n="na-u">N/A</option>
+                </select>
+            </td>
+            <td>
+                <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{action_points_fatigue}" name="attr_action_points_fatigue">
+                    <option value="0">0</option>
+                    <option value="-1">-1</option>
+                    <option value="-2">-2</option>
+                    <option value="-3">-3</option>
+                    <option value="-99">N/A</option>
+                </select>
+            </td>
+            <td>
+                <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{initiative_bonus_fatigue}" name="attr_initiative_bonus_fatigue">
+                    <option value="0">0</option>
+                    <option value="-2">-2</option>
+                    <option value="-4">-4</option>
+                    <option value="-6">-6</option>
+                    <option value="-8">-8</option>
+                    <option value="-99">N/A</option>
+                </select>
+            </td>
+            <td>
+                <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{movement_rate_fatigue}" name="attr_movement_rate_fatigue">
+                    <option value="+0">0</option>
+                    <option value="-1">-1</option>
+                    <option value="-2">-2</option>
+                    <option value="*.5" data-i18n="half-u">1/2</option>
+                    <option value="*0" data-i18n="na-u">N/A</option>
+                </select>
+            </td>
+            <td><input type="text" class="sheet-number-width-sm" title="@{fatigue_recovery}" name="attr_fatigue_recovery" value="0" readonly> <span data-i18n="hours-u">hours</span></td>
+        </tr>
+    </table>
+
+    <input type="hidden" name="attr_fatigue_max" value="9">
+</div>

@@ -1,0 +1,102 @@
+<!-- Sheet -->
+<div class="wrapper">
+    <!-- Header -->
+    ${new File("src/sheet/generic/header.html").getText()}
+    <hr>
+    <!-- Character -->
+    <div class="sheet-editplay">
+        <!-- Tabs -->
+        ${new File("src/sheet/types/character/tabs.html").getText()}
+
+        <!-- Character Toggles-->
+        <input type="checkbox" class="sheet-spirit-toggle sheet-hidden" name="attr_spirit" value="1">
+        <input type="checkbox" class="sheet-simplified-combat-toggle sheet-hidden " name="attr_simplified_combat_enabled" value="1">
+        <input type="checkbox" class="sheet-magic-points-toggle sheet-hidden" name="attr_magic_points_enabled" value="1" checked>
+        <input type="checkbox" class="sheet-power-points-toggle sheet-hidden" name="attr_power_points_enabled" value="1">
+        <input type="checkbox" class="sheet-prana-points-toggle sheet-hidden" name="attr_prana_points_enabled" value="1">
+        <input type="checkbox" class="sheet-strangeness-toggle sheet-hidden" name="attr_strangeness_enabled" value="1">
+        <input type="checkbox" class="sheet-tenacity-toggle sheet-hidden" name="attr_tenacity_enabled" value="1">
+        <input type="checkbox" class="sheet-dependency-toggle sheet-hidden" name="attr_dependencies_enabled" value="1">
+        <input type="checkbox" class="sheet-peculiarity-toggle sheet-hidden" name="attr_peculiarities_enabled" value="1">
+
+        <!-- Core Tab -->
+        <div class="sheet-tab sheet-tab-core">
+            <!-- Top Stats -->
+            <div class="sheet-flex">
+                <!-- Extended Conflict Toggle-->
+                <input type="checkbox" class="sheet-extended-conflict-toggle sheet-hidden" name="attr_extended_conflict_enabled" value="1">
+                ${new File("src/sheet/types/character/detailed/characteristics.html").getText()}
+                ${new File("src/sheet/types/character/detailed/attributes.html").getText()}
+                ${new File("src/sheet/types/character/detailed/health.html").getText()}
+            </div>
+
+            <!-- Encumbrance & Fatigue -->
+            <div class="sheet-flex sheet-material">
+                ${new File("src/sheet/types/character/detailed/encumbrance.html").getText()}
+                ${new File("src/sheet/types/character/detailed/fatigue.html").getText()}
+            </div>
+
+            <!-- Skills and Passions -->
+            <div class="sheet-flex">
+                <div class="sheet-rmargin" style="width: 422px">
+                    ${new File("src/sheet/types/character/detailed/standard_skills.html").getText()}
+                </div>
+                <div style="width: 423px">
+                    ${new File("src/sheet/types/character/detailed/professional_skills.html").getText()}
+                    ${new File("src/sheet/types/character/detailed/passions.html").getText()}
+                </div>
+            </div>
+        </div>
+
+        <!-- Abilities Tab -->
+        <div class="sheet-tab sheet-tab-abilities">
+            ${new File("src/sheet/types/character/detailed/abilities.html").getText()}
+        </div>
+
+        <!-- Equipment Tab -->
+        <div class="sheet-tab sheet-tab-equipment">
+            ${new File("src/sheet/types/character/detailed/armor.html").getText()}
+            ${new File("src/sheet/types/character/detailed/weapons.html").getText()}
+            <div class="sheet-flex">
+                ${new File("src/sheet/types/character/detailed/gear.html").getText()}
+                ${new File("src/sheet/types/character/detailed/wealth.html").getText()}
+            </div>
+        </div>
+
+        <!-- Background Tab -->
+        <div class="sheet-tab sheet-tab-background">
+            ${new File("src/sheet/types/character/detailed/background.html").getText()}
+        </div>
+
+        <!-- Notes Tab -->
+        <div class="sheet-tab sheet-tab-notes">
+            ${new File("src/sheet/types/character/detailed/notes.html").getText()}
+        </div>
+
+        <!-- Compact Tab Header -->
+
+        <!-- Mook Tab Header -->
+
+        <!-- Compact/Mook Tab  -->
+    </div>
+
+
+    <!-- Configurations -->
+    ${new File("src/sheet/generic/configurations.html").getText()}
+
+    <hr>
+    <!-- Footer -->
+    ${new File("src/sheet/generic/footer.html").getText()}
+</div>
+
+<!-- Sheet Workers -->
+<script type="text/worker">
+${new File("build/Mythras.min.js").getText()}
+</script>
+
+<!-- Roll Templates -->
+${new File("src/roll_templates/default.html").getText()}
+${new File("src/roll_templates/skill.html").getText()}
+${new File("src/roll_templates/effect.html").getText()}
+${new File("src/roll_templates/initiative.html").getText()}
+${new File("src/roll_templates/weapon.html").getText()}

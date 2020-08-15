@@ -1,0 +1,38 @@
+/* Generic*/
+${new File("src/sheet/generic/generic.css").getText()}
+
+/* Header */
+${new File("src/sheet/generic/header.css").getText()}
+
+/* Character*/
+${new File("src/sheet/types/character/tabs.css").getText()}
+/* =Core Tab= */
+${new File("src/sheet/types/character/detailed/characteristics.css").getText()}
+${new File("src/sheet/types/character/detailed/attributes.css").getText()}
+${new File("src/sheet/types/character/detailed/health.css").getText()}
+${new File("src/sheet/types/character/detailed/skills.css").getText()}
+${new File("src/sheet/types/character/detailed/passions.css").getText()}
+/* Abilities */
+${new File("src/sheet/types/character/detailed/abilities.css").getText()}
+/* Equipment */
+${new File("src/sheet/types/character/detailed/equipment.css").getText()}
+
+
+/* Notes */
+${new File("src/sheet/types/character/detailed/notes.css").getText()}
+
+
+/* Roll Templates */
+${new File("src/roll_templates/default.css").getText()}
+${new File("src/roll_templates/skill.css").getText()}
+${new File("src/roll_templates/effect.css").getText()}
+${new File("src/roll_templates/initiative.css").getText()}
+${new File("src/roll_templates/weapon.css").getText()}
+
+
+
+
+
+
+
+

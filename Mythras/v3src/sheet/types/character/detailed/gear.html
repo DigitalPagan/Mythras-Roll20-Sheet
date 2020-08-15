@@ -1,0 +1,55 @@
+<div class="sheet-section sheet-rmargin sheet-rpad sheet-half-col">
+    <h2 data-i18n="gear-u">Gear</h2>
+
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-header sheet-grow sheet-cellpad"><label data-i18n="item-u">Item</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+            <div class="sheet-header sheet-number-width sheet-cellpad"><label data-i18n="enc-u">ENC</label></div>
+            <div class="sheet-header sheet-number-width sheet-cellpad"><label data-i18n-title="quantity-u" title="Quantity">#</label></div>
+            <div class="sheet-header sheet-equipment-location"><label data-i18n="location-u">Location</label></div>
+            <div class="sheet-checkbox-width sheet-header sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="details-tooltip-u">E</label></div>
+        </div>
+        <fieldset class="repeating_equipment">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-play sheet-button-width sheet-text-center sheet-cellpad"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{traits=@{traits}}} {{description=@{description}}} {{page=@{page}}}"></button></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_enc}" name="attr_enc" value="0"></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_quantity}" name="attr_quantity" value="1"></div>
+                <div class="sheet-equipment-location">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
+                        <option value="loadout" data-i18n="worn-u" selected>Worn</option>
+                        <option value="pack" data-i18n="pack-u">Pack</option>
+                        <option value="mount" data-i18n="transport-u">Transport</option>
+                        <option value="camp" data-i18n="camp-u">Camp</option>
+                        <option value="stash" data-i18n="stash-u">Stash</option>
+                        <option value="homebase" data-i18n="homebase-u">Homebase</option>
+                    </select>
+                </div>
+                <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-details" title="@{$ID_details}" name="attr_details" value="1"><span></span></div>
+            </div>
+            <input type="checkbox" class="sheet-hidden sheet-details" name="attr_details" value="1">
+            <div class="sheet-details">
+                <div class="sheet-edit">
+                    <div><label class="sheet-left" data-i18n="traits-u">Traits</label>:</div>
+                    <textarea class="sheet-full-width sheet-gear-note" name="attr_traits"></textarea>
+                    <div><label class="sheet-left" data-i18n="description-u">Description</label>:</div>
+                    <textarea class="sheet-full-width sheet-gear-note" name="attr_description"></textarea>
+                </div>
+                <div class="sheet-play">
+                    <div><span class="sheet-usrnotes sheet-italic" name="attr_traits_display"></span></div>
+                    <div><span class="sheet-usrnotes" name="attr_description"></span></div>
+                </div>
+            </div>
+            <div class="sheet-hidden">
+                <input type="text" name="attr_traits_display" value="" readonly>
+            </div>
+        </fieldset>
+    </div>
+    <div class="sheet-text-right sheet-bmargin">
+        <label class="sheet-left" data-i18n="worn-gear-enc-u">Worn Gear ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{gear_enc}" name="attr_gear_enc" value="0" readonly>&nbsp;
+        <label class="sheet-left" data-i18n="carried-gear-enc-u">Carried Gear ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{gear_enc_carried}" name="attr_gear_enc_carried" value="0" readonly>&nbsp;
+    </div>
+</div>

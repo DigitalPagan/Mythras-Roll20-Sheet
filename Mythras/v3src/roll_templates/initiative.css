@@ -1,0 +1,62 @@
+/* Initiative Roll Template Styles */
+.sheet-rolltemplate-initiative table {
+    width: 100%;
+    border: 3px solid darkgoldenrod;
+    line-height: 1em;
+    font-size: 1em;
+    font-weight: normal;
+    background: white;
+}
+.sheet-rolltemplate-initiative caption {
+    background: darkgoldenrod;
+    color: whitesmoke;
+    padding: 3px 3px 0;
+}
+.sheet-rolltemplate-initiative div.sheet-character {
+    font-size: .75em;
+}
+.sheet-rolltemplate-initiative div.sheet-name {
+    font-family: Palatino, serif;
+    font-size: 1.25em;
+    padding-top: 2px;
+}
+.sheet-rolltemplate-initiative tr {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.sheet-rolltemplate-initiative td {
+    padding: 3px 3px 0;
+    line-height: 1em;
+    vertical-align: middle;
+}
+.sheet-rolltemplate-initiative td.sheet-value {
+    text-align: right;
+}
+.sheet-rolltemplate-initiative .inlinerollresult {
+    display: inline-block;
+    text-align: center;
+    padding: 0px;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-initiative .inlinerollresult.fullcrit {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-initiative .inlinerollresult.fullfail {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-initiative .inlinerollresult.importantroll {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}

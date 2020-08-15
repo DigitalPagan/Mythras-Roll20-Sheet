@@ -1,0 +1,67 @@
+/* Weapon Roll Template Styles */
+.sheet-rolltemplate-weapon table {
+    width: 100%;
+    border: 3px solid firebrick;
+    line-height: 1em;
+    font-size: 1em;
+    font-weight: normal;
+    background: white;
+}
+.sheet-rolltemplate-weapon caption {
+    background: firebrick;
+    color: whitesmoke;
+    padding: 3px 3px 0;
+}
+.sheet-rolltemplate-weapon div.sheet-character {
+    font-size: .75em;
+}
+.sheet-rolltemplate-weapon div.sheet-name {
+    font-family: Palatino, serif;
+    font-size: 1.25em;
+    padding-top: 2px;
+}
+.sheet-rolltemplate-weapon tr {
+    margin: 0;
+    padding: 0;
+}
+.sheet-rolltemplate-weapon td {
+    padding: 3px 3px 0;
+    line-height: 1em;
+    vertical-align: middle;
+}
+.sheet-rolltemplate-weapon tr.sheet-damage {
+    font-weight: bold;
+}
+.sheet-rolltemplate-weapon tr:nth-child(even) {
+    background: linear-gradient(to right, gainsboro, white);
+}
+.sheet-rolltemplate-weapon td.sheet-value {
+    text-align: right;
+}
+.sheet-rolltemplate-weapon .inlinerollresult {
+    display: inline-block;
+    text-align: center;
+    padding: 0px;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-weapon .inlinerollresult.fullcrit {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-weapon .inlinerollresult.fullfail {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-weapon .inlinerollresult.importantroll {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}

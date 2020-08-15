@@ -1,0 +1,59 @@
+<div class="sheet-section sheet-rpad sheet-half-col">
+    <h2 data-i18n="money-and-wealth-u">Money & Wealth</h2>
+
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-header sheet-grow sheet-cellpad"><label data-i18n="currency-u">Currency</label></div>
+            <div class="sheet-header sheet-number-width sheet-cellpad"><label data-i18n="value-u">Value</label></div>
+            <div class="sheet-header sheet-number-width sheet-cellpad"><label data-i18n="enc-u">ENC</label></div>
+            <div class="sheet-header sheet-number-width sheet-cellpad"><label data-i18n-title="quantity-u" title="Quantity">#</label></div>
+            <div class="sheet-header sheet-equipment-location"><label data-i18n="location-u">Location</label></div>
+        </div>
+        <fieldset class="repeating_currency">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_value}" name="attr_value" value="1"></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_enc}" name="attr_enc" value="0"></div>
+                <div class="sheet-number-width sheet-cellpad"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_quantity}" name="attr_quantity" value="1"></div>
+                <div class="sheet-equipment-location">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
+                        <option value="loadout" data-i18n="worn-u" selected>Worn</option>
+                        <option value="pack" data-i18n="pack-u">Pack</option>
+                        <option value="mount" data-i18n="transport-u">Transport</option>
+                        <option value="camp" data-i18n="camp-u">Camp</option>
+                        <option value="stash" data-i18n="stash-u">Stash</option>
+                        <option value="homebase" data-i18n="homebase-u">Homebase</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <table>
+        <tr>
+            <th></th>
+            <th><label data-i18n="day-u">Day</label></th>
+            <th><label data-i18n="week-u">Week</label></th>
+            <th><label data-i18n="month-u">Month</label></th>
+            <th><label data-i18n="year-u">Year</label></th>
+        </tr>
+        <tr>
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="income-u">Income</label></td>
+            <td><input type="number" class="sheet-full-width" title="@{income_day}" name="attr_income_day" value="0"></td>
+            <td><input type="number" class="sheet-full-width" title="@{income_week}" name="attr_income_week" value="0"></td>
+            <td><input type="number" class="sheet-full-width" title="@{income_month}" name="attr_income_month" value="0"></td>
+            <td><input type="number" class="sheet-full-width" title="@{income_year}" name="attr_income_year" value="0"></td>
+        </tr>
+        <tr>
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="expenses-u">Expenses</label></td>
+            <td><input type="number" class="sheet-full-width" title="@{expenses_day}" name="attr_expenses_day" value="0"></td>
+            <td><input type="number" class="sheet-full-width" title="@{expenses_week}" name="attr_expenses_week" value="0"></td>
+            <td><input type="number" class="sheet-full-width" title="@{expenses_month}" name="attr_expenses_month" value="0"></td>
+            <td><input type="number" class="sheet-full-width" title="@{expenses_year}" name="attr_expenses_year" value="0"></td>
+        </tr>
+    </table>
+    <div>
+        <label class="sheet-left" data-i18n="other-u">Other</label>
+        <textarea name="attr_wealth_other"></textarea>
+    </div>
+</div>

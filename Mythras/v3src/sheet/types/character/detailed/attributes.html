@@ -1,0 +1,119 @@
+<div class="sheet-section sheet-rmargin sheet-rpad">
+    <h2 class="sheet-material" data-i18n="attributes-u">Attributes</h2>
+    <h2 class="sheet-spirit" data-i18n="spirit-attributes-u">Spirit Attributes</h2>
+
+    <table class="sheet-full-width" data-i18n-list="attribute-order">
+        <tr>
+            <th><label data-i18n="attribute-u">Attribute</label></th>
+            <th class="sheet-edit"><label data-i18n="base-u">Base</label></th>
+            <th class="sheet-edit"><label data-i18n="other-u">Other</label></th>
+            <th class="sheet-play"><label data-i18n="temp-u">Temp</label></th>
+            <th><label data-i18n="total-u">Total</label></th>
+        </tr>
+        <tr data-i18n-list-item="action_points">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="action-points-u">Action Points</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{action_points_base}" name="attr_action_points_base" value="2" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{action_points_other}" name="attr_action_points_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{action_points_temp}" name="attr_action_points_temp" value="0"></td>
+            <td class="sheet-text-right"><span class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{action_points}" name="attr_action_points" value="2">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{action_points|max}" name="attr_action_points_max" value="2" readonly></td>
+        </tr>
+        <tr class="sheet-extended-conflict" data-i18n-list-item="conflict_pool">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="conflict-pool-u">Conflict Pool</label>:</td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-play"></td>
+            <td class="sheet-text-right"><span class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{conflict_pool}" name="attr_conflict_pool" value="11">/</span><input type="number" class="sheet-impusrinput sheet-number-width" title="@{conflict_pool|max}" name="attr_conflict_pool_max" value="11"></td>
+        </tr>
+        <tr class="sheet-spirit" data-i18n-list-item="spirit_damage">
+            <td class="sheet-text-left"><button type="roll" class="sheet-link sheet-link-label" title="%{spirit_damage}" name="roll_spirit_damage" value="@{roll_display}&{template:weapon} {{name=^{spirit-damage-u}}} @{name_display} {{damage=[[@{spirit_damage}]]}}" data-i18n="damage-u">Damage</button>:</td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-play"></td>
+            <td class="sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="0" readonly></td>
+        </tr>
+        <tr class="sheet-material" data-i18n-list-item="damage_mod">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="damage-modifier-u">Damage Mod</label>:</td>
+            <td class="sheet-edit"><input type="text" class=" sheet-number-width" title="@{damage_mod_base}" name="attr_damage_mod_base" value="0" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{damage_mod_other}" name="attr_damage_mod_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" data-i18n-title="damage-mod-title-u" data-i18n-vars="@{damage_mod_temp},&#13;" title="{{0}}steps on the damage table" name="attr_damage_mod_temp" value="0"></td>
+            <td class="sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{damage_mod}" name="attr_damage_mod" value="0" readonly></td>
+        </tr>
+        <tr data-i18n-list-item="exp_mod">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="experience-modifier-u">Exp Modifier</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{experience_mod_base}" name="attr_experience_mod_base" value="0" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{experience_mod_other}" name="attr_experience_mod_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{experience_mod_temp}" name="attr_experience_mod_temp" value="0"></td>
+            <td class="sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{experience_mod}" name="attr_experience_mod" value="0" readonly></td>
+        </tr>
+        <tr class="sheet-material" data-i18n-list-item="healing_rate">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="healing-rate-u">Healing Rate</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{healing_rate_base}" name="attr_healing_rate_base" value="2" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{healing_rate_other}" name="attr_healing_rate_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{healing_rate_temp}" name="attr_healing_rate_temp" value="0"></td>
+            <td class="sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{healing_rate}" name="attr_healing_rate" value="2" readonly></td>
+        </tr>
+        <tr data-i18n-list-item="initiative">
+            <td class="sheet-text-left"><button type="roll" class="sheet-link sheet-link-label" title="%{initiative}" name="roll_initiative" value="@{roll_display}&{template:initiative} {{name=^{initiative-u}}} @{name_display} {{roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}" data-i18n="initiative-u">Initiative</button>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{initiative_bonus_base}" name="attr_initiative_bonus_base" value="12" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_other}" name="attr_initiative_bonus_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_temp}" name="attr_initiative_bonus_temp" value="0"></td>
+            <td class="sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{initiative_bonus}" name="attr_initiative_bonus" value="12" readonly></td>
+        </tr>
+        <tr class="sheet-spirit" data-i18n-list-item="intensity">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="intensity-u">Intensity</label>:</td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-play"></td>
+            <td class="sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{spirit_intensity}" name="attr_spirit_intensity" value="2" readonly></td>
+        </tr>
+        <tr data-i18n-list-item="luck_points">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="luck-points-u">Luck Points</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{luck_points_base}" name="attr_luck_points_base" value="2" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{luck_points_other}" name="attr_luck_points_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{luck_points_temp}" name="attr_luck_points_temp" value="0"></td>
+            <td class="sheet-text-right"><span class="play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{luck_points}" name="attr_luck_points" value="2">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{luck_points|max}" name="attr_luck_points_max" value="2" readonly></td>
+        </tr>
+        <tr class="sheet-magic-points" data-i18n-list-item="magic_points">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="magic-points-u">Magic Points</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></td>
+            <td class="sheet-text-right"><span class="play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></td>
+        </tr>
+        <tr data-i18n-list-item="move_rate">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="move-rate-u">Move Rate</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{movement_rate_species}" name="attr_movement_rate_species" value="6"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{movement_rate_other}" name="attr_movement_rate_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{movement_rate_temp}" name="attr_movement_rate_temp" value="0"></td>
+            <td class="sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{movement_rate}" name="attr_movement_rate" value="6" readonly></td>
+        </tr>
+        <tr class="sheet-power-points" data-i18n-list-item="power_points">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="power-points-u">power Points</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{power_points_base}" name="attr_power_points_base" value="11" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{power_points_other}" name="attr_power_points_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{power_points_temp}" name="attr_power_points_temp" value="0"></td>
+            <td class="sheet-text-right"><span class="play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{power_points}" name="attr_power_points" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{power_points|max}" name="attr_power_points_max" value="11" readonly></td>
+        </tr>
+        <tr class="sheet-prana-points" data-i18n-list-item="prana_points">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="prana-points-u">Prana Points</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{prana_points_base}" name="attr_prana_points_base" value="11" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{prana_points_other}" name="attr_prana_points_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{prana_points_temp}" name="attr_prana_points_temp" value="0"></td>
+            <td class="sheet-text-right"><span class="play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{prana_points}" name="attr_prana_points" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{prana_points|max}" name="attr_prana_points_max" value="11" readonly></td>
+        </tr>
+        <tr class="sheet-strangeness" data-i18n-list-item="strangeness">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="strangeness-u">Strangeness</label>:</td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-edit"></td>
+            <td class="sheet-play"></td>
+            <td class="sheet-text-right"><input type="number" class="sheet-impusrinput sheet-number-width" title="@{strangeness}" name="attr_strangeness" value="0"></td>
+        </tr>
+        <tr class="sheet-tenacity" data-i18n-list-item="tenacity">
+            <td class="sheet-text-left"><label class="sheet-left" data-i18n="tenacity-u">prana Points</label>:</td>
+            <td class="sheet-edit"><input type="number" class=" sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity_other}" name="attr_tenacity_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity_temp}" name="attr_tenacity_temp" value="0"></td>
+            <td class="sheet-text-right"><span class="play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity}" name="attr_tenacity" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{tenacity|max}" name="attr_tenacity_max" value="11" readonly></td>
+        </tr>
+    </table>
+</div>

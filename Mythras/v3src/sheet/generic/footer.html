@@ -1,0 +1,29 @@
+<div class="sheet-flex sheet-space-between">
+    <div>
+        <input type="number" class="sheet-number-width-sm sheet-usrinput sheet-text-right" title="@{generic_die_count}" name="attr_generic_die_count" value="1">
+        <select style="width: 30px" class="sheet-usrinput" title="@{generic_die}" name="attr_generic_die">
+            <option value="d2">d2</option>
+            <option value="d3">d3</option>
+            <option value="d4">d4</option>
+            <option value="d6">d6</option>
+            <option value="d8">d8</option>
+            <option value="d10">d10</option>
+            <option value="d12">d12</option>
+            <option value="d20">d20</option>
+            <option value="d100" selected>d100</option>
+        </select>
+        +
+        <input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{generic_modifier}" name="attr_generic_modifier" value="0">
+        <button type="roll" class="sheet-nodie" title="%{generic}" name="roll_generic" value="@{roll_display}&{template:default} {{name=@{generic_die_count}@{generic_die}+@{generic_modifier}}} @{name_display} {{^{roll-u}=[[@{generic_die_count}@{generic_die}+@{generic_modifier}]]}}" data-i18n="roll-u">Roll</button>
+    </div>
+    <div class="sheet-grow sheet-text-center">
+        <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug-u">Report a Bug</button>
+        <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum-u">Mythras Roll20 Forum</button>
+        <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author-u">Contact Sheet Author</button>
+    </div>
+    <div>
+        <span data-i18n="version-u">Version</span>: <input type="text" class="sheet-hidden" name="attr_version" value="2.99" readonly><span name="attr_version"></span>
+        <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet-u">Recalculate Sheet</button>
+    </div>
+    <div class="sheet-clear-float"></div>
+</div>

@@ -1,0 +1,62 @@
+<div class="sheet-section sheet-rmargin sheet-rpad">
+    <h2 data-i18n="characteristics-u">Characteristics</h2>
+
+    <table class="sheet-full-width">
+        <tr>
+            <th class="sheet-char-label"></th>
+            <th class="sheet-edit"><label data-i18n="base-u">Base</label></th>
+            <th class="sheet-edit"><label data-i18n="other-u">Other</label></th>
+            <th class="sheet-play"><label data-i18n="temp-u">Temp</label></th>
+            <th><label data-i18n="total-u">Total</label></th>
+        </tr>
+        <tr class="sheet-material">
+            <td class="sheet-char-label"><label class="sheet-left" data-i18n="str-u">STR</label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_base}" name="attr_str_base" value="11"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_other}" name="attr_str_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_temp}" name="attr_str_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_pool}" name="attr_str_pool" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{str}" name="attr_str" value="11" readonly></td>
+        </tr>
+        <tr class="sheet-material">
+            <td class="sheet-char-label"><label class="sheet-left" data-i18n="con-u">CON</label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_base}" name="attr_con_base" value="11"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_other}" name="attr_con_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_temp}" name="attr_con_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_pool}" name="attr_con_pool" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{con}" name="attr_con" value="11" readonly></td>
+        </tr>
+        <tr class="sheet-material">
+            <td class="sheet-char-label"><label class="sheet-left" data-i18n="siz-u">SIZ</label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_base}" name="attr_siz_base" value="13"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_other}" name="attr_siz_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_temp}" name="attr_siz_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_pool}" name="attr_siz_pool" value="13">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{siz}" name="attr_siz" value="13" readonly></td>
+        </tr>
+        <tr class="sheet-material">
+            <td class="sheet-char-label"><label class="sheet-left" data-i18n="dex-u">DEX</label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_base}" name="attr_dex_base" value="11"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_other}" name="attr_dex_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_temp}" name="attr_dex_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_pool}" name="attr_dex_pool" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{dex}" name="attr_dex" value="11" readonly></td>
+        </tr>
+        <tr>
+            <td class="sheet-char-label"><label class="sheet-left"><span name="attr_int_type" data-i18n-dynamic>INT</span></label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_base}" name="attr_int_base" value="13"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_other}" name="attr_int_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_temp}" name="attr_int_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_pool}" name="attr_int_pool" value="13">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{int}" name="attr_int" value="13" readonly></td>
+        </tr>
+        <tr>
+            <td class="sheet-char-label"><label class="sheet-left" data-i18n="pow-u">POW</label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_base}" name="attr_pow_base" value="11"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_other}" name="attr_pow_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_temp}" name="attr_pow_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_pool}" name="attr_pow_pool" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{pow}" name="attr_pow" value="11" readonly></td>
+        </tr>
+        <tr>
+            <td class="sheet-char-label"><label class="sheet-left" data-i18n="cha-u">CHA</label>:</td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_base}" name="attr_cha_base" value="11"></td>
+            <td class="sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_other}" name="attr_cha_other" value="0"></td>
+            <td class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_temp}" name="attr_cha_temp" value="0"></td>
+            <td><span class="sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_pool}" name="attr_cha_pool" value="11">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{pow}" name="attr_cha" value="11" readonly></td>
+        </tr>
+    </table>
+</div>

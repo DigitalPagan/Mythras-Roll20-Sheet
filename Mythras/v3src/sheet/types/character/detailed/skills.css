@@ -1,0 +1,98 @@
+/* Columns */
+div.sheet-skillbase-col {
+    width: 88px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+div.sheet-passiontype-col {
+    width: 80px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Char selects */
+select.sheet-char {
+    width: 40px;
+    text-align: center;
+    text-align-last:center;
+}
+
+/* Enc checkbox */
+input[type="checkbox"].sheet-enc + span::before {
+    margin-left: 7px;
+    margin-right: -4px;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Pictos';
+    content: "a";
+    color: lightgray;
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    border: none;
+}
+
+input[type="checkbox"]:checked.sheet-enc + span::before {
+    color: black;
+}
+
+/* Fumble checkbox */
+input[type="checkbox"].sheet-fumble + span::before {
+    margin-left: 7px;
+    margin-right: -4px;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Pictos';
+    content: "!";
+    color: lightgray;
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    border: none;
+}
+
+input[type="checkbox"]:checked.sheet-fumble + span::before {
+    color: black;
+}
+
+/* Trained checkbox */
+input[type="checkbox"].sheet-trained + span::before {
+    margin-left: 7px;
+    margin-right: -4px;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Pictos';
+    content: "3";
+    color: lightgray;
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    border: none;
+}
+
+input[type="checkbox"]:checked.sheet-trained + span::before {
+    color: black;
+}
+
+/* Notes */
+input.sheet-skillnotes-toggle:not(:checked) ~ div div.sheet-skillnotes {
+    display: none;
+}
+textarea.sheet-skillnotes {
+    font-family: "Patrick Hand", sans-serif;
+    height: 3em;
+    line-height: 1em;
+}
+span.sheet-skillnotes {
+    font-family: "Patrick Hand", sans-serif;
+    line-height: 1em;
+    white-space: pre-line;
+}

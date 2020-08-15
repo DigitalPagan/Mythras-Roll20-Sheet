@@ -1,0 +1,129 @@
+<div class="sheet-section">
+    <h2 data-i18n="weapons-u">Weapons</h2>
+
+    <div class="sheet-bmargin sheet-rmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-header sheet-weapon-name"><label data-i18n="melee-weapon-u">Melee Weapon</label></div>
+            <div class="sheet-play sheet-button-width sheet-header sheet-cellpad"></div>
+            <div class="sheet-header sheet-weapon-damage"><label data-i18n="damage-u">Damage</label></div>
+            <div class="sheet-header sheet-checkbox-width sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="damage-modifier-u">+</label></div>
+            <div class="sheet-header sheet-weapon-size"><label data-i18n="size-u">Size</label></div>
+            <div class="sheet-header sheet-weapon-reach"><label data-i18n="reach-u">Reach</label></div>
+            <div class="sheet-header sheet-number-width-sm sheet-cellpad"><label data-i18n-title="armor-points-u" title="Armor Points" data-i18n="ap-u">AP</label></div>
+            <div class="sheet-header sheet-edit sheet-weapon-hp"><label data-i18n-title="hit-points-u" title="Hit Points" data-i18n="hp-u">HP</label></div>
+            <div class="sheet-header sheet-play sheet-number-width-sm sheet-cellpad"><label data-i18n-title="hit-points-u" title="Hit Points" data-i18n="hp-u">HP</label></div>
+            <div class="sheet-header sheet-number-width sheet-edit sheet-cellpad"><label data-i18n="enc-u">ENC</label></div>
+            <div class="sheet-header sheet-equipment-location"><label data-i18n="location-u">Location</label></div>
+            <div class="sheet-header sheet-grow sheet-cellpad"><label data-i18n="notes-u">Notes</label></div>
+        </div>
+        <fieldset class="repeating_meleeweapon">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-weapon-name"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-play sheet-button-width sheet-text-center sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{notes=@{notes}}}"></button></div>
+                <div class="sheet-weapon-damage"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_damage}" name="attr_damage"></div>
+                <div class="sheet-checkbox-width sheet-cellpad "><input type="checkbox" class="sheet-damage-mod" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}" checked><span></span></div>
+                <div class="sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_size}" name="attr_size"></div>
+                <div class="sheet-weapon-reach"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_reach}" name="attr_reach"></div>
+                <div class="sheet-number-width-sm sheet-cellpad"><input type="number" class="sheet-full-width sheet-usrinput" title="@{$ID_ap}" name="attr_ap"></div>
+                <div class="sheet-edit sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp|max}" name="attr_hp_max" value="0"></div>
+                <div class="sheet-play sheet-number-width-sm sheet-cellpad"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp"></div>
+                <div class="sheet-number-width sheet-edit sheet-cellpad"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_enc}" name="attr_enc" value="0"></div>
+                <div class="sheet-equipment-location">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
+                        <option value="worn" data-i18n="worn-u" selected>Worn</option>
+                        <option value="pack" data-i18n="pack-u">Pack</option>
+                        <option value="mount" data-i18n="transport-u">Transport</option>
+                        <option value="camp" data-i18n="camp-u">Camp</option>
+                        <option value="stash" data-i18n="stash-u">Stash</option>
+                        <option value="homebase" data-i18n="homebase-u">Homebase</option>
+                    </select>
+                </div>
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_notes"></div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="sheet-bmargin sheet-rmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-header sheet-weapon-name"><label data-i18n="ranged-weapon-u">Ranged Weapon</label></div>
+            <div class="sheet-header sheet-play sheet-button-width sheet-cellpad"></div>
+            <div class="sheet-header sheet-weapon-damage"><label data-i18n="damage-u">Damage</label></div>
+            <div class="sheet-header sheet-checkbox-width sheet-cellpad"><label class="sheet-pictos sheet-rpad" data-i18n-title="damage-modifier-u">+</label></div>
+            <div class="sheet-header sheet-weapon-size"><label data-i18n="force-u">Force</label></div>
+            <div class="sheet-header sheet-weapon-reach"><label data-i18n="range-u">Range</label></div>
+            <div class="sheet-header sheet-weapon-reach"><label data-i18n="rate-u">Rate</label></div>
+            <div class="sheet-header sheet-weapon-size"><label data-i18n="load-u">Load</label></div>
+            <div class="sheet-header sheet-weapon-size"><label data-i18n-title="impale-size-u" data-i18n="size-u">Size</label></div>
+            <div class="sheet-header sheet-number-width-sm sheet-cellpad"><label data-i18n-title="armor-points-u" title="Armor Points" data-i18n="ap-u">AP</label></div>
+            <div class="sheet-header sheet-edit sheet-weapon-hp"><label data-i18n-title="hit-points-u" title="Hit Points" data-i18n="hp-u">HP</label></div>
+            <div class="sheet-header sheet-play sheet-number-width-sm sheet-cellpad"><label data-i18n-title="hit-points-u" title="Hit Points" data-i18n="hp-u">HP</label></div>
+            <div class="sheet-header sheet-edit sheet-weapon-size"><label data-i18n="enc-u">ENC</label></div>
+            <div class="sheet-header sheet-equipment-location"><label data-i18n="location-u">Location</label></div>
+            <div class="sheet-header sheet-grow sheet-cellpad"><label data-i18n="notes-u">Notes</label></div>
+        </div>
+        <fieldset class="repeating_rangedweapon">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-weapon-name"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-play sheet-button-width sheet-cellpad"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}"></button></div>
+                <div class="sheet-weapon-damage"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_damage}" name="attr_damage"></div>
+                <div class="sheet-checkbox-width sheet-cellpad"><input type="checkbox" class="sheet-damage-mod" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}"><span></span></div>
+                <div class="sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_force}" name="attr_force"></div>
+                <div class="sheet-weapon-reach"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_range}" name="attr_range"></div>
+                <div class="sheet-weapon-reach"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_fire_rate}" name="attr_fire_rate"></div>
+                <div class="sheet-weapon-size"><input type="number" class="sheet-full-width sheet-usrinput" title="@{$ID_load}" name="attr_load"></div>
+                <div class="sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_impale_size}" name="attr_impale_size"></div>
+                <div class="sheet-number-width-sm sheet-cellpad"><input type="number" class="sheet-full-width sheet-usrinput" title="@{$ID_ap}" name="attr_ap"></div>
+                <div class="sheet-edit sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp|max}" name="attr_hp_max" value="0"></div>
+                <div class="sheet-play sheet-number-width-sm sheet-cellpad"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp"></div>
+                <div class="sheet-edit sheet-weapon-size"><input type="number" class="sheet-full-width sheet-usrinput" title="@{$ID_enc}" name="attr_enc"></div>
+                <div class="sheet-equipment-location">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
+                        <option value="worn" data-i18n="worn-u" selected>Worn</option>
+                        <option value="pack" data-i18n="pack-u">Pack</option>
+                        <option value="mount" data-i18n="transport-u">Transport</option>
+                        <option value="camp" data-i18n="camp-u">Camp</option>
+                        <option value="stash" data-i18n="stash-u">Stash</option>
+                        <option value="homebase" data-i18n="homebase-u">Homebase</option>
+                    </select>
+                </div>
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_notes"></div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="sheet-bmargin sheet-rmargin">
+        <div class="sheet-flex sheet-full-width">
+            <div class="sheet-header sheet-weapon-name"><label data-i18n="ammo-u">Ammo</label></div>
+            <div class="sheet-header sheet-weapon-hp"><label>#</label></div>
+            <div class="sheet-header sheet-weapon-size"><label data-i18n="clips-u">Clips</label></div>
+            <div class="sheet-header sheet-edit sheet-weapon-reach"><label data-i18n="ammo-enc-u">Ammo ENC</label></div>
+            <div class="sheet-header sheet-edit sheet-weapon-reach"><label data-i18n="clip-enc-u">Clip ENC</label></div>
+            <div class="sheet-header sheet-equipment-location"><label data-i18n="location-u">Location</label></div>
+            <div class="sheet-header sheet-grow sheet-cellpad"><label data-i18n="notes-u">Notes</label></div>
+        </div>
+        <fieldset class="repeating_ammo">
+            <div class="sheet-flex sheet-full-width">
+                <div class="sheet-weapon-name"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_ammo">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_ammo|max}" name="attr_amoo_max" value="0"></div>
+                <div class="sheet-weapon-size"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_clips}" name="attr_clips" value="0"></div>
+                <div class="sheet-edit sheet-weapon-reach"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_ammo_enc}" name="attr_ammo_enc" value="0"></div>
+                <div class="sheet-edit sheet-weapon-reach"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_clip_enc}" name="attr_clip_enc" value="0"></div>
+                <div class="sheet-equipment-location">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
+                        <option value="worn" data-i18n="worn-u" selected>Worn</option>
+                        <option value="pack" data-i18n="pack-u">Pack</option>
+                        <option value="mount" data-i18n="transport-u">Transport</option>
+                        <option value="camp" data-i18n="camp-u">Camp</option>
+                        <option value="stash" data-i18n="stash-u">Stash</option>
+                        <option value="homebase" data-i18n="homebase-u">Homebase</option>
+                    </select>
+                </div>
+                <div class="sheet-grow sheet-cellpad"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_notes"></div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="sheet-text-right sheet-bmargin">
+        <label class="sheet-left" data-i18n="worn-weapon-enc-u">Worn Weapon ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{weapon_enc}" name="attr_weapon_enc" value="0" readonly>&nbsp;
+        <label class="sheet-left" data-i18n="carried-weapon-enc-u">Carried Weapon ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{weapon_enc_carried}" name="attr_weapon_enc_carried" value="0" readonly>&nbsp;
+    </div>
+</div>

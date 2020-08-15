@@ -1,0 +1,498 @@
+<div class="sheet-config">
+    <h1 data-i18n="sheet-settings-u">Sheet Settings</h1>
+    <div class="sheet-flex">
+        <!-- Rolls-->
+        <div class="sheet-half-col sheet-rmargin sheet-bpad sheet-section sheet-rpad">
+            <h2 data-i18n="rolls-u">Rolls</h2>
+
+            <!-- Whisper to GM -->
+            <div class="sheet-flex">
+                <div class="sheet-grow">
+                    <label class="sheet-checkbox">
+                        <input type="checkbox" name="attr_roll_display" value="/w gm " checked>
+                        <span data-i18n="whisper-to-gm-u">Whisper to GM</span>
+                    </label>
+                </div>
+
+                <!-- Show name in roll templates -->
+                <div class="sheet-grow">
+                    <label class="sheet-checkbox">
+                        <input type="checkbox" name="attr_name_display" value="{{character=@{character_name}}}" checked>
+                        <span data-i18n="display-name-u">Display Name</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Miscellaneous -->
+        <div class="sheet-half-col sheet-bpad sheet-section sheet-rpad">
+            <h2 data-i18n="miscellaneous-u">Miscellaneous</h2>
+
+            <!-- On-screen Tips -->
+            <label class="sheet-checkbox">
+                <input type="checkbox" name="attr_onscreen_tips" value="1" checked>
+                <span data-i18n="onscreen-tip-label-u">Display on-screen tips intended to help new users learn the sheet.</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="sheet-character">
+        <h1 data-i18n="character-settings-u">Character Settings</h1>
+        <div class="flex">
+            <!-- Characteristics -->
+            <div class="sheet-bpad sheet-rmargin sheet-rpad sheet-grow sheet-section">
+                <h2 data-i18n="characteristics-u">Characteristics</h2>
+
+                <div class="sheet-flex sheet-grow">
+                    <label class="sheet-left sheet-grow" data-i18n="int-type-u">INT Type</label>
+                    <select class="sheet-full-width sheet-usrinput" title="@{int_type}" name="attr_int_type">
+                        <option data-i18n="int-u" value="int-u" selected>INT</option>
+                        <option data-i18n="ins-u" value="ins-u">INS</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Encumbrance -->
+            <div class="sheet-bpad sheet-rpad sheet-section sheet-grow">
+                <h2 data-i18n="encumbrance-u">Encumbrance</h2>
+
+                <div class="sheet-flex">
+                    <label class="sheet-left sheet-grow" data-i18n="worn-armor-u">Worn Armor</label>
+                    <select class="sheet-full-width sheet-usrinput" title="@{worm_armor_multiplier}" name="attr_worn_armor_multiplier">
+                        <option data-i18n="half-enc-u" value=".5" selected>1/2 ENC</option>
+                        <option data-i18n="fourth-enc-u" value=".25">1/4 ENC</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attributes -->
+        <div class="sheet-bpad sheet-section">
+            <h2 data-i18n="attributes-u">Attributes</h2>
+
+            <div class="sheet-flex sheet-bmargin">
+                <!-- Action Points -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="action-points-u">Action Points</h3>
+                    <label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{action_points_add_one}" name="attr_action_points_add_one" value="1"><span data-i18n="plus-one-ap-u">+1 AP</span></label>
+                </div>
+
+                <!-- Damage Modifier -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="damage-modifier-u">Damage Modifier</h3>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="calculate-with-u">Calculate with</label>
+                        <select class="sheet-full-width sheet-usrinput" title="@{damage_mod_calc}" name="attr_damage_mod_calc">
+                            <option data-i18n="str-siz-u" value="0" selected>STR+SIZ</option>
+                            <option data-i18n="str-siz-pow-u" value="1">STR+SIZ+POW</option>
+                            <option data-i18n="str-siz-con-u" value="2">STR+SIZ+CON</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Exp Modifier -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="experience-modifier-u">Exp Modifier</h3>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="calculate-with-u">Calculate with</label>
+                        <select class="sheet-full-width sheet-usrinput" title="@{experience_mod_calc}" name="attr_experience_mod_calc">
+                            <option data-i18n="cha-u" value="0" selected>CHA</option>
+                            <option data-i18n="int-u" value="1">INT</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-flex sheet-bmargin">
+                <!-- Healing Rate -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="healing-rate-u">Healing Rate</h3>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="calculate-with-u">Calculate with</label>
+                        <select class="sheet-full-width sheet-usrinput" title="@{healing_rate_calc}" name="attr_healing_rate_calc">
+                            <option data-i18n="con-u" value="0" selected>CON</option>
+                            <option data-i18n="con-plus-half-pow-u" value="1">CON + half POW</option>
+                        </select>
+                    </div>
+                    <label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{healing_rate_double}" name="attr_healing_rate_double" value="1"><span data-i18n="double-base-healing-rate-u">Double Base Healing Rate</span></label>
+                </div>
+
+                <!-- Initiative -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="initiative-u">Initiative</h3>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="initiative-roll-u">Initiative Roll</label>
+                        <input type="text" class="sheet-usrinput sheet-full-width" title="@{init_dice}" name="attr_init_dice" value="1d10">
+                    </div>
+                    <label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{initiative_add_one_tenth_athletics}" name="attr_initiative_add_one_tenth_athletics" value="1"><span data-i18n="add-one-tenth-athletics-u">Add 1/10 Athletics</span></label>
+                </div>
+
+                <!-- Luck Points -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="luck-points-u">Luck Points</h3>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="calculate-with-u">Calculate with</label>
+                        <select class="sheet-full-width sheet-usrinput" title="@{luck_points_calc}" name="attr_luck_points_calc">
+                            <option data-i18n="pow-u" value="0" selected>POW</option>
+                            <option data-i18n="cha-plus-half-pow-u" value="1">CHA + half POW</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-flex sheet-bmargin">
+                <!-- Move Rate -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="move-rate-u">Move Rate</h3>
+
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="species-fly-u">Species Fly</label>
+                        <input type="text" class="sheet-usrinput sheet-full-width" title="@{movement_rate_species_fly}" name="attr_movement_rate_species_fly" value="0">
+                    </div>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="species-swim-u">Species Swim</label>
+                        <input type="text" class="sheet-usrinput sheet-full-width" title="@{movement_rate_species_swim}" name="attr_movement_rate_species_swim" value="6">
+                    </div>
+                </div>
+
+                <!-- Tenacity -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="tenacity-u">Tenacity</h3>
+                    <div class="sheet-dependencies-enabled"><label class="sheet-checkbox sheet-lpad"><input type="checkbox" title="@{apply_dependencies_penalty}" name="attr_apply_dependencies_penalty" value="1"><span data-i18n="-1-per-full-20-points-in-dependencies-u">-1 per full 20 points in dependencies</span></label></div>
+                </div>
+
+                <!-- Hit Points -->
+                <div class="sheet-third-col sheet-rpad">
+                    <h3 data-i18n="hit-points-u">Hit Points</h3>
+                    <div class="sheet-flex">
+                        <label class="sheet-left sheet-grow" data-i18n="calculate-with-u">Calculate with</label>
+                        <select class="sheet-full-width sheet-usrinput" title="@{hp_calc}" name="attr_hp_calc">
+                            <option data-i18n="con-siz-u" value="0" selected>CON+SIZ</option>
+                            <option data-i18n="con-siz-pow-u" value="1">CON+SIZ+POW</option>
+                            <option data-i18n="con-siz-str-u" value="2">CON+SIZ+STR</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 data-i18n="campaign-settings-u">Campaign Settings</h1>
+
+    <div class="sheet-warnmsg">
+        <span data-i18n="campaign-settings-warning-u">Campaign settings are generally set by your GM and should not be adjusted on a sheet by sheet basis.  They are provided here for visibility, experimentation and other rare use cases.  Make sure to check with your GM before making any alterations.</span>
+    </div>
+
+    <div class="sheet-section sheet-rpad">
+        <div class="sheet-hcombo">
+            <div>
+                <h2 i18n-data="game-setting-u">Game Setting</h2>
+            </div>
+            <div class="sheet-rpad">
+                <select class="sheet-usrinput" name="attr_setting_option">
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="default" data-i18n="default-u" selected>Default</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="after_the_vampire_wars" data-i18n="after-the-vampire-wars-u">After the Vampire Wars</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="agony_and_ecstasy" data-i18n="agony-and-ecstasy-u">Agony and Ecstasy</option>
+                    <option class="sheet-classic-fantasy-style-toggle" name="attr_setting_option" value="classic_fantasy" data-i18n="classic-fantasy-u">Classic Fantasy</option>
+                    <option class="sheet-luther-arkwright-style-toggle" name="attr_setting_option" value="luther_arkwright" data-i18n="luther-arkwright-u">Luther Arkwright</option>
+                    <option class="sheet-m-space-style-toggle" name="attr_setting_option" value="m-space" data-i18n="m-space-u">M-Sapce</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="monster_island" data-i18n="monster-island-u">Monseter Island</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="mythic_britain" data-i18n="mythic-britain-u">Mythic Britain</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="mythic_constantinople" data-i18n="mythic-constantinople-u">Mythic Constantinople</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="mythic_rome" data-i18n="mythic-rome-u">Mythric Rome</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="mythras_imperative" data-i18n="mythras-imperative-u">Mythras Imperative</option>
+                    <option class="sheet-odd-soot-style-toggle" name="attr_setting_option" value="odd_soot" data-i18n="odd-soot-u">Odd Soot</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="thennla" data-i18n="thennla-u">Thennla</option>
+                    <option class="sheet-default-style-toggle" name="attr_setting_option" value="worlds_united" data-i18n="worlds-united-u">Worlds United</option>
+                </select>
+            </div>
+        </div>
+        <span data-i18n="setting-description-u">Sets the default sheet options and mechanics to match the rules as presented in the setting's source book.  Individual options may be overridden below.</span>
+    </div>
+
+    <div class="sheet-flex">
+        <div class="sheet-half-col sheet-rmargin">
+            <!-- System -->
+            <div class="sheet-section sheet-rpad">
+                <h2 data-i18n="system-u">System</h2>
+
+                <!-- Extended Conflict Resolution -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="extended-conflict-resolution-u">Extended Conflict Resolution</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_extended_conflict_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="extended-conflict-resolution-description-u">Use the extended conflict resolution system from M-Space & Odd Soot.  M-Space p. 42 or Odd Soot p. 72.</span>
+
+                <!-- Simplified Combat -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="simplified-combat-u">Simplified Combat</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_simplified_combat_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="simplified-combat-description-u">Uses the optional simplified combat rules from M-Space & Odd Soot. M-Space p. 75 or Odd Soot p. 100</span>
+
+                <!-- Social Conflict -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="social-conflict-u">Social Conflict</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_social_conflict_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="social-conflict-description-u">Uses the optional simplified combat rules from M-Space & Odd Soot. M-Space p. 75 or Odd Soot p. 100</span>
+
+                <!-- The Soot -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="the-soot-u">The Soot</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_the_soot_standard_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="the-soot-description-u">Provide a field to record and roll a character's The Soot value. Odd Soot p. 48.</span>
+            </div>
+
+            <!-- Skills -->
+            <div class="sheet-section sheet-rpad">
+                <h2 data-i18n="skills-u">Skills</h2>
+
+                <!-- Herculean Skill Modifier -->
+                <input class="sheet-hidden" name="attr_herculean_mod" value=".1" readonly>
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="herculean-skill-modifier-u">Herculean Skill Modifier</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_herculean_mod_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value=".1">1/10</option>
+                        <option value=".2">1/5</option>
+                    </select>
+                </div>
+                <span data-i18n="herculean-mod-description-u">Herculean difficulty is 1/10 or 1/5 normal skill value.  Mythras Imperative, M-Space & Odd Soot use 1/5 by default.</span>
+
+                <!-- Boating -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="boating-u">Boating</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_boating_standard_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="boating-description-u">List Boating as a standard skill. Luther Arkwright does not by default.</span>
+                <!-- Drive -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="drive-u">Drive</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_drive_standard_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="boating-description-u">List Drive as a standard skill. Luther Arkwright does not by default.</span>
+                <!-- Ride -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="ride-u">Ride</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_ride_standard_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="boating-description-u">List Ride as a standard skill. Luther Arkwright does not by default.</span>
+                <!-- Status -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="status-u">Status</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_status_standard_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="status-description-u">List Status as a standard skill.</span>
+                <!-- Superstition -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="superstition-u">Superstition</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_superstition_standard_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="superstition-description-u">List Superstition as a standard skill; Mythic Britain p. 136.</span>
+            </div>
+
+            <!-- Weapon Settings -->
+            <div class="sheet-section sheet-rpad">
+                <h2 data-i18n="weapons-u">Weapons</h2>
+
+                <!-- Reach -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="reach-u">Reach</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_reach_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="reach-description-u">Show a reach field for close-combat weapons; Mythras p. 106.  Mythras Imperative, M-Space & Odd Soot do not use reach by default.</span>
+
+                <!-- Fire Rate -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="fire-rate-u">Fire Rate</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_fire_rate_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="fire-rate-description-u">Add a Fire Rate field for automatic weapons; Luther Arkwright p. 97, AtVW p. 60.</span>
+            </div>
+        </div>
+
+
+        <div class="sheet-half-col">
+            <div class="sheet-section sheet-rpad">
+                <!-- Attributes -->
+                <h2 data-i18n="attributes-u">Attributes</h2>
+
+                <!-- Action Point Calculation -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="action-points-calculation-u">Action Points Calculation</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_action_points_calc_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="calculate" data-i18n="calculated-u">Calculated</option>
+                        <option value="set_2" data-i18n="set-at-2-u">Set at 2</option>
+                        <option value="set_3" data-i18n="set-at-3-u">Set at 3</option>
+                    </select>
+                </div>
+                <span data-i18n="action-points-calc-description-u">Calculate Action Points from characteristics or a set static value. Mythras p. 8.  Mythras Imperative, M-Space and Odd Soot use 'Set at 2' by default.</span>
+
+                <!-- Rank -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="rank-u">Rank</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_luck_points_rank_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="rank-description-u">Characters have a Rank which is added to their total Luck Points. Classic Fantasy p. 9.</span>
+
+
+                <!-- Magic Points -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="magic-points-u">Magic Points</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_magic_points_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="magic-points-description-u">List Magic Points as an attribute.</span>
+                <!-- Power Points -->
+               <div class="flex">
+                    <label class="sheet-left" data-i18n="power-points-u">Power Points</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_power_points_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="power-points-description-u">List Power Points as an attribute.</span>
+                <!-- Prana Points -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="prana-points-u">Prana Points</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_prana_points_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="prana-points-description-u">List Prana Points as an attribute; Luther Arkwright p. 19.</span>
+                <!-- Strangeness -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="strangeness-u">Strangeness</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_strangeness_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="strangeness-description-u">List Strangeness as an attribute; M-Space p. 122, Odd Soot Oddities p. 7.</span>
+                <!-- Tenacity -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="tenacity-u">Tenacity</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_tenacity_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="tenacity-description-u">List Tenacity as an attribute.</span>
+            </div>
+
+            <!-- Passions -->
+            <div class="sheet-section sheet-rpad">
+                <h2 data-i18n="passions-u">Passions</h2>
+
+                <!-- Dependencies -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="dependencies-u">Dependencies</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_dependencies_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="dependencies-description-u">Enable dependencies; Mythras Companion p. 29, Luther Arkwright p. 45.</span>
+
+                <!-- Peculiarities -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="peculiarities-u">Peculiarities</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_peculiarities_enabled_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="1" data-i18n="enabled-u">Enabled</option>
+                        <option value="0" data-i18n="disabled-u">Disabled</option>
+                    </select>
+                </div>
+                <span data-i18n="peculiarities-description-u">Use peculiarities. Odd Soot p. 50.</span>
+            </div>
+
+            <!-- Magic -->
+            <div class="sheet-section sheet-rpad">
+                <h2 data-i18n="magic-u">Magic</h2>
+
+                <!-- Folk Magic Range -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="folk-magic-range-u">Folk Magic Range</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_folk_magic_range_multiplier_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value=".2" data-i18n="folk-magic-skill-divided-by-five-u">Folk Magic Skill / 5</option>
+                        <option value="1" data-i18n="folk-magic-skill-u">Folk Magic Skill</option>
+                    </select>
+                </div>
+                <span data-i18n="folk-magic-range-description-u">Range, in meters, of Folk Magic spells with the Ranged trait.  AtVW uses 1/5 by default, p. 76.</span>
+
+                <!-- Max Devotional Pool -->
+                <div class="flex">
+                    <label class="sheet-left" data-i18n="max-devotional-pool-u">Max Devotional Pool</label>
+                    <select class="sheet-full-width sheet-usrinput" name="attr_max_devotional_pool_based_on_option">
+                        <option value="default" data-i18n="setting-default-u" selected>Setting Default</option>
+                        <option value="@{rank_devotion_pool_limit}" data-i18n="per-cult-rank-u">Per Cult Rank</option>
+                        <option value="@{pow}" data-i18n="pow-u">POW</option>
+                    </select>
+                </div>
+                <span data-i18n="max-devotional-pool-description-u">Base the max devotional pool on cult rank or POW.  Mythic Constantinople uses POW by default, p. 80.</span>
+            </div>
+        </div>
+    </div>
+
+</div>

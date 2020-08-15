@@ -1,0 +1,61 @@
+/* Tab Toggles */
+input.sheet-tab-toggle {
+    position: relative;
+    z-index: 9999;
+    cursor: pointer;
+    opacity: 0;
+    width: 101px;
+    height: 1.25em;
+    line-height: 1.25em;
+}
+span.sheet-tab-toggle {
+    display: inline-block;
+    position: relative;
+    width: 101px;
+    text-align: center;
+    font-weight: bold;
+    background: lightgray;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: -101px;
+    margin-bottom: 5px;
+    height: 1.25em;
+    line-height: 1.25em;
+}
+
+input.sheet-tab-toggle-core:checked + span.sheet-tab-toggle-core,
+input.sheet-tab-toggle-equipment:checked + span.sheet-tab-toggle-equipment,
+input.sheet-tab-toggle-abilities:checked + span.sheet-tab-toggle-abilities,
+input.sheet-tab-toggle-background:checked + span.sheet-tab-toggle-background,
+input.sheet-tab-toggle-notes:checked + span.sheet-tab-toggle-notes,
+input.sheet-tab-toggle-compact:checked + span.sheet-tab-toggle-compact,
+input.sheet-tab-toggle-mooks:checked + span.sheet-tab-toggle-mooks,
+input.sheet-tab-toggle-all:checked + span.sheet-tab-toggle-all {
+    background: black;
+    color: lightgray;
+}
+
+div.sheet-tab {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+input.sheet-tab-toggle-core:checked ~ div.sheet-tab-core,
+input.sheet-tab-toggle-abilities:checked ~ div.sheet-tab-abilities,
+input.sheet-tab-toggle-equipment:checked ~ div.sheet-tab-equipment,
+input.sheet-tab-toggle-background:checked ~ div.sheet-tab-background,
+input.sheet-tab-toggle-notes:checked ~ div.sheet-tab-notes,
+input.sheet-tab-toggle-mooks:checked ~ div.sheet-tab-mooks,
+input.sheet-tab-toggle-compact:checked ~ div.sheet-tab-compact,
+input.sheet-tab-toggle-all:checked ~ div.sheet-tab-core,
+input.sheet-tab-toggle-all:checked ~ div.sheet-tab-abilities,
+input.sheet-tab-toggle-all:checked ~ div.sheet-tab-equipment,
+input.sheet-tab-toggle-all:checked ~ div.sheet-tab-background,
+input.sheet-tab-toggle-all:checked ~ div.sheet-tab-notes {
+    visibility: visible;
+    opacity: 1;
+    max-height: 99999999999px;
+    overflow: visible;
+}
