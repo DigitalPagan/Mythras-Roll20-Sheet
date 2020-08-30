@@ -1,7 +1,13 @@
 # Requirements for templates
-jinja2 >= 2.11.1
+jinja2~=2.11.1
 
 # Requirements for minification
-htmlmin >= 0.1.12
-rcssmin >= 1.0.6
-rjsmin >= 1.1.0
+htmlmin~=0.1.12
+rcssmin~=1.0.6
+rjsmin~=1.1.0
+
+# Requirements for upload to roll20
+requests~=2.24.0
+
+# Requirments for saving roll20 passwords for uploading
+keyring~=21.3.1

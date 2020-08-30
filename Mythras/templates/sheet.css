@@ -1,6 +1,8 @@
 {% include 'core/generic.css' %}
 
 {% include 'core/header.css' %}
+{% include 'core/tabs.css' %}
+
 
 /* Roll Templates */
 {% include 'roll_templates/default.css' %}

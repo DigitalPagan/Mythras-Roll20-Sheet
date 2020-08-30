@@ -1,4 +1,17 @@
 <div class="wrapper">
     {% include 'core/header.html' %}
+    <hr>
+    <div class="sheet-editplay">
+        {% include 'core/tabs.html' %}
+        <!-- Character Toggles-->
+        <input type="checkbox" class="sheet-spirit-toggle sheet-hidden" name="attr_spirit" value="1">
+        <input type="checkbox" class="sheet-simplified-combat-toggle sheet-hidden " name="attr_simplified_combat_enabled" value="1">
+        <input type="checkbox" class="sheet-magic-points-toggle sheet-hidden" name="attr_magic_points_enabled" value="1" checked>
+        <input type="checkbox" class="sheet-power-points-toggle sheet-hidden" name="attr_power_points_enabled" value="1">
+        <input type="checkbox" class="sheet-prana-points-toggle sheet-hidden" name="attr_prana_points_enabled" value="1">
+        <input type="checkbox" class="sheet-strangeness-toggle sheet-hidden" name="attr_strangeness_enabled" value="1">
+        <input type="checkbox" class="sheet-tenacity-toggle sheet-hidden" name="attr_tenacity_enabled" value="1">
+        <input type="checkbox" class="sheet-dependency-toggle sheet-hidden" name="attr_dependencies_enabled" value="1">
+        <input type="checkbox" class="sheet-peculiarity-toggle sheet-hidden" name="attr_peculiarities_enabled" value="1">
 </div>
 
