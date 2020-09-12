@@ -1,0 +1,30 @@
+
+
+
+<!-- Sheet mode -->
+<input type="hidden" class="sheet-modetoggle" name="attr_mode" value="edit" />
+<div class="sheet-inline sheet-rmargin">
+    <label class="sheet-left" data-i18n="sheet_mode">Sheet Mode</label>&nbsp;
+    <button type="action" class="sheet-radio sheet-play-btn" name="act_play">Play</button>
+    <button type="action" class="sheet-radio sheet-edit-btn" name="act_edit">Edit</button>
+    <button type="action" class="sheet-radio sheet-config-btn" name="act_config">Configuration</button>
+</div>
+
+<div class='sheet-inline sheet-editconfig'>
+    <label class="sheet-left" data-i18n="sheet_type">Sheet Type</label>&nbsp;
+    <select data-i18n-list="sheet-type-order" title="{{'@{type}'}}" name="attr_type">
+        <option value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
+        <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
+        <option value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
+        <option value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
+        <option value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar_system">Solar System</option>
+    </select>
+</div>
+<input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
+<br>
+
+<div class="sheet-battle-unit">Battle Unit</div>
+
+<div class="sheet-ship">Ship</div>
+<div class="sheet-vehicle">Vehicle</div>
+<div class="sheet-solar-system">Solar System</div>

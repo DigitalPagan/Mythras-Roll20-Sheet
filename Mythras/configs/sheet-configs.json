@@ -1,5 +1,9 @@
 {
   "Mythras": {
-    "display_name": "Mythras"
+    "display_name": "Mythras",
+    "battle_units": true,
+    "ships": true,
+    "vehicles": false,
+    "solar_systems": false
   }
 }

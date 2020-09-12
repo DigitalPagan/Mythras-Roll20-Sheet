@@ -1,0 +1,78 @@
+/* ==Generic Layouts== */
+.sheet-rmargin {
+    margin-right: 5px;
+}
+.sheet-hidden {
+    display: none;
+}
+
+div.sheet-inline {
+    display: inline-block;
+}
+
+/* ==Generic Inputs: Buttons== */
+button.sheet-radio {
+    padding: 0 5px 0;
+    margin: 0 5px 0 0;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    height: 1.25em;
+    border-radius: 10px;
+}
+button.sheet-radio:last-of-type {
+    margin: 0;
+}
+
+/* ==Generic Labels== */
+label {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background: inherit;
+    text-align: center;
+}
+
+label.sheet-left {
+    display: inline;
+    text-align: left;
+}
+label.sheet-left::after {
+    content: ":";
+}
+
+/* ==Mode Toggles== */
+.sheet-modetoggle:not([value="play"]) ~ div .sheet-play,
+.sheet-modetoggle:not([value="edit"]) ~ div .sheet-edit,
+.sheet-modetoggle:not([value="config"]) ~ div .sheet-config,
+.sheet-modetoggle[value="config"] ~ div .sheet-playedit,
+.sheet-modetoggle[value="play"] ~ div .sheet-editconfig,
+.sheet-modetoggle[value="play"] ~ div.sheet-editconfig
+{
+    display: none;
+}
+
+.sheet-modetoggle[value="play"] ~ div button.sheet-play-btn {
+    background: black;
+    color: lightgray;
+}
+.sheet-modetoggle[value="edit"] ~ div button.sheet-edit-btn {
+    background: black;
+    color: lightgray;
+}
+.sheet-modetoggle[value="config"] ~ div button.sheet-config-btn {
+    background: black;
+    color: lightgray;
+}
+
+/* ==Sheet Toggles== */
+.sheet-typetoggle:not([value="battle_unit"]) ~ div.sheet-battle-unit,
+.sheet-typetoggle:not([value="character"]) ~ div.sheet-character,
+.sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
+.sheet-typetoggle:not([value="solar_system"]) ~ div.sheet-solar-system,
+.sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
+    display: none;
+}

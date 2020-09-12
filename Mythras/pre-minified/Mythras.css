@@ -1,3 +1,4 @@
+/* =Generic Styles reused over the sheet= */
 /* Sheet Defaults*/
 div.sheet-wrapper {
     min-width: 850px;
@@ -522,12 +523,11 @@ input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
 }
 
 /* Type Toggles */
-input.sheet-type-toggle-battle-unit:not(:checked) ~ div .sheet-battle-unit,
-input.sheet-type-toggle-character:not(:checked) ~ div .sheet-character,
-input.sheet-type-toggle-frostbyte-vehicle:not(:checked) ~ div .sheet-frostbyte-vehicle,
-input.sheet-type-toggle-mythras-vehicle:not(:checked) ~ div .sheet-mythras-vehicle,
-input.sheet-type-toggle-ship:not(:checked) ~ div .sheet-ship,
-input.sheet-type-toggle-solar-system:not(:checked) ~ div .sheet-solar-system {
+.sheet-typetoggle:not([value="battle_unit"]) ~ div.sheet-battle-unit,
+.sheet-typetoggle:not([value="character"]) ~ div.sheet-character,
+.sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
+.sheet-typetoggle:not([value="solar_system"]) ~ div.sheet-solar-system,
+.sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
     display: none;
 }
 
@@ -576,144 +576,15 @@ input[type="checkbox"].sheet-details:not(:checked) ~ div .sheet-details {
     display: none;
 }
 
-
-div.sheet-info {
-    display: inline-block;
-    width: 673px;
-    margin-right: 5px;
-}
-div.sheet-info-box {
-    display: inline-block;
-    flex: 1 1 auto;
-    padding: 0 5px 0 0;
-}
-div.sheet-info-type {
-    width: 100px;
-}
-div.sheet-info-homeland {
-    width: 100px;
-}
-div.sheet-info-name {
-    width: 125px;
-    flex-grow: 3;
-}
-div.sheet-info-form {
-    width: 50px;
-}
-div.sheet-info-species {
-    width: 100px;
-}
-div.sheet-info-culture {
-    width: 100px;
-}
-div.sheet-info-career {
-    width: 100px;
-}
-div.sheet-info-social-class {
-    width: 100px;
-}
-div.sheet-info-age{
-    width: 25px;
-}
-div.sheet-info-gender{
-    width: 50px;
-}
-div.sheet-info-frame{
-    width: 50px;
-}
-div.sheet-info-weight{
-    width: 50px;
-}
-div.sheet-info-height{
-    width: 50px;
-}
-div.sheet-info-rank {
-    width: 30px;
-}
-input.sheet-rank-toggle:not(:checked) ~ div.sheet-info-rank {
-    display: none;
-}
-input.sheet-the-soot-toggle:not(:checked) ~ div.sheet-info-the-soot {
-    display: none;
-}
-div.sheet-info-the-soot {
-    width: 40px;
-}
-div.sheet-info-xp {
-    width: 40px;
-}
-
-div.sheet-logo {
-    display: flex;
-    flex-direction: column;
-    width: 175px;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-/* Tab Toggles */
-input.sheet-tab-toggle {
-    position: relative;
-    z-index: 9999;
-    cursor: pointer;
-    opacity: 0;
-    width: 101px;
-    height: 1.25em;
-    line-height: 1.25em;
-}
-span.sheet-tab-toggle {
-    display: inline-block;
-    position: relative;
-    width: 101px;
-    text-align: center;
-    font-weight: bold;
-    background: lightgray;
-    color: black;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: -101px;
-    margin-bottom: 5px;
-    height: 1.25em;
-    line-height: 1.25em;
-}
-
-input.sheet-tab-toggle-core:checked + span.sheet-tab-toggle-core,
-input.sheet-tab-toggle-equipment:checked + span.sheet-tab-toggle-equipment,
-input.sheet-tab-toggle-abilities:checked + span.sheet-tab-toggle-abilities,
-input.sheet-tab-toggle-background:checked + span.sheet-tab-toggle-background,
-input.sheet-tab-toggle-notes:checked + span.sheet-tab-toggle-notes,
-input.sheet-tab-toggle-compact:checked + span.sheet-tab-toggle-compact,
-input.sheet-tab-toggle-mooks:checked + span.sheet-tab-toggle-mooks,
-input.sheet-tab-toggle-all:checked + span.sheet-tab-toggle-all {
-    background: black;
-    color: lightgray;
-}
-
-div.sheet-tab {
-    visibility: hidden;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-}
-input.sheet-tab-toggle-core:checked ~ div.sheet-tab-core,
-input.sheet-tab-toggle-abilities:checked ~ div.sheet-tab-abilities,
-input.sheet-tab-toggle-equipment:checked ~ div.sheet-tab-equipment,
-input.sheet-tab-toggle-background:checked ~ div.sheet-tab-background,
-input.sheet-tab-toggle-notes:checked ~ div.sheet-tab-notes,
-input.sheet-tab-toggle-mooks:checked ~ div.sheet-tab-mooks,
-input.sheet-tab-toggle-compact:checked ~ div.sheet-tab-compact,
-input.sheet-tab-toggle-all:checked ~ div.sheet-tab-core,
-input.sheet-tab-toggle-all:checked ~ div.sheet-tab-abilities,
-input.sheet-tab-toggle-all:checked ~ div.sheet-tab-equipment,
-input.sheet-tab-toggle-all:checked ~ div.sheet-tab-background,
-input.sheet-tab-toggle-all:checked ~ div.sheet-tab-notes {
-    visibility: visible;
-    opacity: 1;
-    max-height: 99999999999px;
-    overflow: visible;
-}
+/* =Sheet Type Specific CSS= */
 
 
-/* Roll Templates */
+
+
+
+
+
+/* =Roll Templates= */
 /* Default Roll Template Styles */
 .sheet-rolltemplate-default table {
     width: 100%;

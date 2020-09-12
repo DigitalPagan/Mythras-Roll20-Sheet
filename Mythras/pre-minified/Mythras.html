@@ -1,177 +1,89 @@
-<div class="wrapper">
-    <!-- Sheet Setting Toggles -->
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="default" checked>
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="after_the_vampire_wars">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="agony_and_ecstasy">
-<input type="radio" class="sheet-classic-fantasy-style-toggle sheet-hidden" name="attr_setting_option" value="classic_fantasy">
-<input type="radio" class="sheet-luther-arkwright-style-toggle sheet-hidden" name="attr_setting_option" value="luther_arkwright">
-<input type="radio" class="sheet-m-space-style-toggle sheet-hidden" name="attr_setting_option" value="m-space">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="monster_island">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="mythic_britain">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="mythic_constantinople">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="mythic_rome">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="mythras_imperative">
-<input type="radio" class="sheet-odd-soot-style-toggle sheet-hidden" name="attr_setting_option" value="odd_soot">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="thennla">
-<input type="radio" class="sheet-default-style-toggle sheet-hidden" name="attr_setting_option" value="worlds_united">
+<label class="sheet-left" data-i18n="sheet_type">Sheet Type</label>&nbsp;
+<select data-i18n-list="sheet-type-order" title="@{type}" name="attr_type">
+    <option  value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
+    <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
+    <option  value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
+    <option class="sheet-hidden" value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
+    <option class="sheet-hidden" value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar_system">Solar System</option>
+</select>
+<input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
+<br>
 
-<!-- Sheet Type Toggles-->
-<input type="radio" class="sheet-type-toggle-battle-unit sheet-hidden" name="attr_type" value="battle_unit">
-<input type="radio" class="sheet-type-toggle-character sheet-hidden" name="attr_type" value="character" checked>
-<input type="radio" class="sheet-type-toggle-frostbyte-vehicle sheet-hidden" name="attr_type" value="frostbyte_vehicle">
-<input type="radio" class="sheet-type-toggle-mythras-vehicle sheet-hidden" name="attr_type" value="mythras_vehicle">
-<input type="radio" class="sheet-type-toggle-ship sheet-hidden" name="attr_type" value="ship">
-<input type="radio" class="sheet-type-toggle-solar-system sheet-hidden" name="attr_type" value="solar_system">
+<div class="sheet-battle-unit">Battle Unit</div>
+<div class="sheet-character">
+I'm a character sheet! Yeah!
+</div>
+<div class="sheet-ship">Ship</div>
 
-<!-- Onscreen Tips Toggle -->
-<input type="checkbox" class="sheet-onscreen-tips-toggle sheet-hidden" name="attr_onscreen_tips" value="1" checked>
 
-<!-- Mode Toggles -->
-<input type="radio" class="sheet-edit-toggle sheet-hidden" name="attr_mode" value="edit" checked>
-<input type="radio" class="sheet-play-toggle sheet-hidden" name="attr_mode" value="play">
-<input type="radio" class="sheet-config-toggle sheet-hidden" name="attr_mode" value="config">
 
-<div class="sheet-flex">
-    <!-- Info Section -->
-    <div class="sheet-section sheet-info">
-        <div class="sheet-flex">
-            <div class="sheet-info-box sheet-info-name">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{character_name}" name="attr_character_name">
-                <label class="sheet-under" data-i18n="name-u">Name</label>
-            </div>
-            <div class="sheet-edit sheet-info-box sheet-info-type">
-                <select class="sheet-usrinput sheet-full-width sheet-text-center" data-i18n-list="type-order" title="@{type}" name="attr_type">
-                    <option value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle-unit-u">Battle Unit</option>
-                    <option value="character" data-i18n-list-item="character" data-i18n="character-u" selected>Character</option>
-                    <option value="frostbyte_vehicle" data-i18n-list-item="frostbyte_vehicle" data-i18n="frostbyte-vehicle-u">Vehicle (M-Space/OddSoot)</option>
-                    <option value="mythras_vehicle" data-i18n-list-item="mythras_vehicle" data-i18n="mythras-vehicle-u">Vehicle (Mythras)</option>
-                    <option value="ship" data-i18n-list-item="ship" data-i18n="sns-ship-u">Ship (Ships & Shield Walls)</option>
-                    <option value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar-system-u">Solar System (M-Space)</option>
-                </select>
-                <label class="sheet-under" data-i18n="type-u">Type</label>
-            </div>
-            <div class="sheet-info-box sheet-info-form sheet-character">
-                <select class="sheet-usrinput sheet-full-width sheet-text-center" data-i18n-list="form-order" title="@{spirit}" name="attr_spirit">
-                    <option value="0" data-i18n-list-item="material" data-i18n="material-u" selected>Material</option>
-                    <option value="1" data-i18n-list-item="spirit" data-i18n="spirit-u">Spirit</option>
-                </select>
-                <label class="sheet-under" data-i18n="form-u">Form</label>
-            </div>
-            <div class="sheet-info-box sheet-info-species sheet-character">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{species}" name="attr_species">
-                <label class="sheet-under"><span class="sheet-default-style sheet-m-space-style sheet-odd-soot-style sheet-luther-arkwright-style" data-i18n="species-u">Species</span><span class="sheet-classic-fantasy-style" data-i18n="race-u">Race</span></label>
-            </div>
-            <div class="sheet-info-box sheet-info-culture sheet-character">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{culture}" name="attr_culture">
-                <label class="sheet-under"><span data-i18n="culture-u">Culture</span></label>
-            </div>
-            <div class="sheet-info-box sheet-info-career sheet-character">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{career}" name="attr_career">
-                <label class="sheet-under"><span class="sheet-default-style sheet-m-space-style sheet-odd-soot-style sheet-luther-arkwright-style" data-i18n="career-u">Career</span><span class="sheet-classic-fantasy-style" data-i18n="class-u">Class</span></label>
-            </div>
-        </div>
-        <div class="sheet-flex sheet-character">
-            <div class="sheet-info-box sheet-info-homeland">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{homeland}" name="attr_homeland">
-                <label class="sheet-under" data-i18n="homeland-u">Homeland</label>
-            </div>
-            <div class="sheet-info-box sheet-info-social-class">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{social_class}" name="attr_social_class">
-                <label class="sheet-under" data-i18n="social-class-u">Name</label>
-            </div>
-            <div class="sheet-info-box sheet-info-age">
-                <input type="number" class="sheet-usrinput sheet-full-width" title="@{age}" name="attr_age" value="0">
-                <label class="sheet-under" data-i18n="age-u">Age</label>
-            </div>
-            <div class="sheet-info-box sheet-info-gender">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{gender}" name="attr_gender">
-                <label class="sheet-under" data-i18n="gender-u">Gender</label>
-            </div>
-            <div class="sheet-info-box sheet-info-frame">
-                <input type="text" class="sheet-usrinput sheet-full-width" title="@{frame}" name="attr_frame">
-                <label class="sheet-under" data-i18n="frame-u">Gender</label>
-            </div>
-            <div class="sheet-info-box sheet-info-height">
-                <input type="number" style="padding-right: 25px" class="sheet-usrinput sheet-full-width" title="@{height}" name="attr_height" value="178">
-                <span class="sheet-input-unit" data-i18n="centimetres-short-u">cm</span>
-                <label class="sheet-under" data-i18n="height-u">Height</label>
-            </div>
-            <div class="sheet-info-box sheet-info-weight">
-                <input type="number" style="padding-right: 20px" class="sheet-usrinput sheet-full-width" title="@{weight}" name="attr_weight" value="88">
-                <span class="sheet-input-unit" data-i18n="kilograms-short-u">kg</span>
-                <label class="sheet-under" data-i18n="weight-u">Weight</label>
-            </div>
-            <div class="sheet-info-box sheet-info-xp">
-                <input type="number" class="sheet-usrinput sheet-full-width" title="@{experience_rolls}" name="attr_experience_rolls" value="0">
-                <label class="sheet-under" data-i18n="experience-rolls-u">Exp Rolls</label>
-            </div>
-            <input type="checkbox" class="sheet-rank-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
-            <div class="sheet-info-box sheet-info-rank">
-                <input type="number" class="sheet-usrinput sheet-full-width" title="@{rank}" name="attr_rank" value="0">
-                <label class="sheet-under" data-i18n="rank-u">Rank</label>
-            </div>
-            <input type="checkbox" class="sheet-the-soot-toggle sheet-hidden" name="attr_the_soot_standard" value="1">
-            <div class="sheet-info-box sheet-info-the-soot">
-                <input type="number" class="sheet-usrinput sheet-full-width" title="@{the_soot}" name="attr_the_soot" value="0">
-                <button type="roll" class="sheet-link sheet-link-label-under" name="roll_the_soot" value="1d100" data-i18n="the-soot-u">The Soot</button>
-            </div>
-        </div>
+
+<hr>
+
+<div class="sheet-flex sheet-space-between">
+    <div>
+        <input type="number" class="sheet-number-width-sm sheet-usrinput sheet-text-right" title="@{generic_die_count}" name="attr_generic_die_count" value="1">
+        <select style="width: 30px" class="sheet-usrinput" title="@{generic_die}" name="attr_generic_die">
+            <option value="d2">d2</option>
+            <option value="d3">d3</option>
+            <option value="d4">d4</option>
+            <option value="d6">d6</option>
+            <option value="d8">d8</option>
+            <option value="d10">d10</option>
+            <option value="d12">d12</option>
+            <option value="d20">d20</option>
+            <option value="d100" selected>d100</option>
+        </select>
+        +
+        <input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{generic_modifier}" name="attr_generic_modifier" value="0">
+        <button type="roll" class="sheet-nodie" title="%{generic}" name="roll_generic" value="@{roll_display}&{template:default}
+                {{ name=@{generic_die_count}@{generic_die}+@{generic_modifier}}} @{name_display}
+                {{^{roll-u}=[[@{generic_die_count}@{generic_die}+@{generic_modifier}]]}}" data-i18n="roll">Roll</button>
     </div>
-
-    <!-- Logo Column -->
-    <div class="sheet-logo">
-        <div>
-            <img class="default-style classic-fantasy-style luther-arkwright-style" src="https://i.imgur.com/EzQDmms.png" alt="Mythras">
-            <img class="m-space-style" src="https://i.imgur.com/5uPy3QU.jpg" alt="M-space">
-            <img class="odd-soot-style" src="https://i.imgur.com/35dOQix.jpg" alt="Odd Soot">
-        </div>
-        <div class="sheet-flex">
-            <div><label class="sheet-left" data-i18n="mode-u">Mode</label>:&nbsp;</div>
-            <div class="sheet-full-width">
-                <select class="sheet-full-width sheet-usrinput" name="attr_mode">
-                    <option value="edit" data-i18n="edit-u">Edit</option>
-                    <option value="play" data-i18n="play-u">Play</option>
-                    <option value="config" data-i18n="configuration-u">Configuration</option>
-                </select>
-            </div>
-        </div>
+    <div class="sheet-grow sheet-text-center">
+        <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug">Report a Bug</button>
+        <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum">Mythras Roll20 Forum</button>
+        <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author">Contact Sheet Author</button>
     </div>
+    <div>
+        <span data-i18n="version">Version</span>: <input type="text" class="sheet-hidden" name="attr_version" value="2.99" readonly><span name="attr_version"></span>
+        <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet">Recalculate Sheet</button>
+    </div>
+    <div class="sheet-clear-float"></div>
 </div>
 
-<div>
-    <div class="sheet-edit sheet-infomsg">
-        <span data-i18n="edit-mode-msg-u">You are in <strong>Edit</strong> mode.  This mode is optimized for more permanent changes such as character creation and improvement.</span>
-    </div>
-    <div class="sheet-play sheet-safemsg">
-        <span data-i18n="play-mode-msg-u">You are in <strong>Play</strong> mode.  This is the primary mode intended to be used during actual game play.</span>
-    </div>
-    <div class="sheet-config sheet-noticemsg">
-        <span data-i18n="config-mode-msg-u">You are in <strong>Configuration</strong> mode.  Here you can adjust how the sheet works and how values are calculated.</span>
-    </div>
-</div>
+<!-- Roll Templates -->
+<!-- Default Roll Template -->
+<!-- @{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}} -->
+<rolltemplate class="sheet-rolltemplate-default">
+    <table>
+        <caption>
+            {{#character}}
+            <div class="sheet-character">{{character}}</div>
+            {{/character}}
+            <div class="sheet-name">{{name}}</div>
+        </caption>
+        {{#allprops() character name}}
+        <tr><td class="sheet-label">{{key}}:</td><td class="sheet-value">{{value}}</td></tr>
+        {{/allprops() character name}}
+    </table>
+</rolltemplate><script type="text/worker">
+/* Sheet Mode Toggles */
+const modelist = ["play","edit","config"];
+modelist.forEach(modebutton => {
+    on(`clicked:${modebutton}`, function() {
+        setAttrs({
+            mode: modebutton
+        });
+    });
+});
 
-    <hr>
-    <div class="sheet-editplay">
-        <input type="radio" class="tab-toggle tab-toggle-all" name="attr_character_tab" value="all" checked><span class="tab-toggle tab-toggle-all"><span data-i18n="all-u">All</span></span>
-<input type="radio" class="tab-toggle tab-toggle-core" name="attr_character_tab" value="core"><span class="tab-toggle tab-toggle-core"><span data-i18n="core-u">Core</span></span>
-<input type="radio" class="tab-toggle tab-toggle-abilities" name="attr_character_tab" value="magic"><span class="tab-toggle tab-toggle-abilities"><span data-i18n="abilities-u">Abilities</span></span>
-<input type="radio" class="tab-toggle tab-toggle-equipment" name="attr_character_tab" value="equipment"><span class="tab-toggle tab-toggle-equipment"><span data-i18n="equipment-u">Equipment</span></span>
-<input type="radio" class="tab-toggle tab-toggle-background" name="attr_character_tab" value="background"><span class="tab-toggle tab-toggle-background"><span data-i18n="background-u">Background</span></span>
-<input type="radio" class="tab-toggle tab-toggle-notes" name="attr_character_tab" value="notes"><span class="tab-toggle tab-toggle-notes"><span data-i18n="notes-u">Notes</span></span>
-|
-<input type="radio" class="tab-toggle tab-toggle-compact" name="attr_character_tab" value="compact"><span class="tab-toggle tab-toggle-compact"><span data-i18n="compact-u">Compact</span></span>
-<input type="radio" class="tab-toggle tab-toggle-mooks" name="attr_character_tab" value="mooks"><span class="tab-toggle tab-toggle-mooks"><span data-i18n="mooks-u">Mooks</span></span>
-        <!-- Character Toggles-->
-        <input type="checkbox" class="sheet-spirit-toggle sheet-hidden" name="attr_spirit" value="1">
-        <input type="checkbox" class="sheet-simplified-combat-toggle sheet-hidden " name="attr_simplified_combat_enabled" value="1">
-        <input type="checkbox" class="sheet-magic-points-toggle sheet-hidden" name="attr_magic_points_enabled" value="1" checked>
-        <input type="checkbox" class="sheet-power-points-toggle sheet-hidden" name="attr_power_points_enabled" value="1">
-        <input type="checkbox" class="sheet-prana-points-toggle sheet-hidden" name="attr_prana_points_enabled" value="1">
-        <input type="checkbox" class="sheet-strangeness-toggle sheet-hidden" name="attr_strangeness_enabled" value="1">
-        <input type="checkbox" class="sheet-tenacity-toggle sheet-hidden" name="attr_tenacity_enabled" value="1">
-        <input type="checkbox" class="sheet-dependency-toggle sheet-hidden" name="attr_dependencies_enabled" value="1">
-        <input type="checkbox" class="sheet-peculiarity-toggle sheet-hidden" name="attr_peculiarities_enabled" value="1">
-</div>
-<script type="text/worker">
+/* Sheet Type Specific Worker Scripts */
+
+
+
+
+
+
 
 </script>
