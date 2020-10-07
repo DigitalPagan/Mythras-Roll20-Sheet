@@ -1,10 +1,15 @@
+/* Sheet Config Toggle */
+on("clicked:config", function() {
+    getAttrs(["config_on"], function(v) {
+        setAttrs({config_on: v["config_on"] !== "1" ? "1" : "0"});
+    });
+});
+
 /* Sheet Mode Toggles */
-const modelist = ["play","edit","config"];
+const modelist = ["play","edit"];
 modelist.forEach(modebutton => {
     on(`clicked:${modebutton}`, function() {
-        setAttrs({
-            mode: modebutton
-        });
+        setAttrs({mode: modebutton});
     });
 });
 

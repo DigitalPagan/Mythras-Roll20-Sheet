@@ -1,26 +1,4 @@
-<!-- Header -->
 <div>
-    <input type='hidden' class='sheet-toggle' name='attr_config_on'/>
-    <div class="sheet-space-between">
-        <div>
-            <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
-            <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
-        </div>
-        <button type="action" class="sheet-toggle" name="act_config"><span class="sheet-pictos">y</span></button>
-    </div>
-    <div class="sheet-toggle">
-        <hr>
-        <!-- Sheet Type Selection -->
-        <label class="sheet-left" data-i18n="sheet_type">Sheet Type</label>&nbsp;
-        <select data-i18n-list="sheet-type-order" title="@{type}" name="attr_type">
-            <option  value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
-            <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
-            <option  value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
-            <option class="sheet-hidden" value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
-            <option class="sheet-hidden" value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar_system">Solar System</option>
-        </select>
-        <!-- Sheet Settings -->
-        <div>
     <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet">Recalculate Sheet</button>
 </div>
 
@@ -41,7 +19,7 @@
             <!-- Show name in roll templates -->
             <div class="sheet-grow">
                 <label class="sheet-checkbox">
-                    <input type="checkbox" name="attr_name_display" value="{{character=@{character_name}}}" checked>
+                    <input type="checkbox" name="attr_name_display" value="{{'{{character=@{character_name}}}'}}" checked>
                     <span data-i18n="display-name">Display Name</span>
                 </label>
             </div>
@@ -377,68 +355,3 @@
         </div>
     </div>
 </div>
-    </div>
-</div>
-
-<hr>
-
-<!-- Sheet Types -->
-<input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
-<div class="sheet-battle-unit">Battle Unit</div>
-<div class="sheet-character">
-I'm a character sheet! Yeah!
-</div>
-<div class="sheet-ship">Ship</div>
-
-
-
-
-<!-- Sheet Footer -->
-<hr>
-
-<div class="sheet-space-between">
-    <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug">Report a Bug</button>
-    <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum">Mythras Roll20 Forum</button>
-    <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author">Contact Sheet Author</button>
-</div>
-
-<!-- Roll Templates -->
-<!-- Default Roll Template -->
-<!-- @{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}} -->
-<rolltemplate class="sheet-rolltemplate-default">
-    <table>
-        <caption>
-            {{#character}}
-            <div class="sheet-character">{{character}}</div>
-            {{/character}}
-            <div class="sheet-name">{{name}}</div>
-        </caption>
-        {{#allprops() character name}}
-        <tr><td class="sheet-label">{{key}}:</td><td class="sheet-value">{{value}}</td></tr>
-        {{/allprops() character name}}
-    </table>
-</rolltemplate><script type="text/worker">
-/* Sheet Config Toggle */
-on("clicked:config", function() {
-    getAttrs(["config_on"], function(v) {
-        setAttrs({config_on: v["config_on"] !== "1" ? "1" : "0"});
-    });
-});
-
-/* Sheet Mode Toggles */
-const modelist = ["play","edit"];
-modelist.forEach(modebutton => {
-    on(`clicked:${modebutton}`, function() {
-        setAttrs({mode: modebutton});
-    });
-});
-
-/* Sheet Type Specific Worker Scripts */
-
-
-
-
-
-
-
-</script>
