@@ -21,5 +21,5 @@ checkboxList.forEach(function(button) {
 {% if ships %}{% include 'mythras/ship.js' %}{% endif %}
 {% if vehicles == 'mythras' %}{% include 'mythras/vehicle.js' %}{% endif %}
 {% if vehicles == 'frostbyte' %}{% include 'frostbyte/vehicle.js' %}{% endif %}
-{% if solar_systems %}{% include 'frostbyte/solar_system.js' %}{% endif %}
+{% if star_systems %}{% include 'star_system/star_system.js' %}{% endif %}
 

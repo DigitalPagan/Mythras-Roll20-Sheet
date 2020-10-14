@@ -1,7 +1,7 @@
 {
-    "sheet-type-order": "battle_unit,character,ship,solar_system,vehicle",
+    "sheet-type-order": "battle-unit,character,ship,star-system,vehicle",
     "setting-order": "default,atvw,agony_and_ecstasy,classic_fantasy,luther_arkwright,mspace,monster_island,mythic_britain,mythic_constantinople,mythic_rome,odd_soot,thennla,worlds_united",
-    "type-order": "battle_unit,creature,spirit,frostbyte_vehicle,mythras_vehicle,ship,solar_system",
+    "type-order": "battle_unit,creature,spirit,frostbyte_vehicle,mythras_vehicle,ship,star-system",
     "vehicle-type-order": "default,disabled,mythras,mspace,ships",
     "devotional-pool-type-order": "default,cult_rank,pow",
     "ship-hull-order": "utility,galley,transport",
@@ -670,7 +670,7 @@
     "lift-gas": "Lift Gas",
     "visual-size-sails-up": "Visual Size (Sails Up)",
     "size-rating": "Size Rating",
-    "solar-system": "Solar System",
+    "star-system": "Star System",
     "worlds": "Worlds",
     "sub-sector": "Sub Sector",
     "hex": "Hex",

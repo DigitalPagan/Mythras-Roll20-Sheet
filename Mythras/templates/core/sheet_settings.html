@@ -1,11 +1,11 @@
 <!-- Sheet Type Selection -->
 <label class="sheet-left" data-i18n="sheet-type">Sheet Type</label>&nbsp;
 <select data-i18n-list="sheet-type-order" title="{{'@{type}'}}" class="sheet-usrinput" name="attr_type">
-    <option {% if not battle_units %}class="sheet-hidden"{% endif %} value="battle_unit" data-i18n-list-item="battle-unit" data-i18n="battle_unit">Battle Unit</option>
+    <option {% if not battle_units %}class="sheet-hidden"{% endif %} value="battle-unit" data-i18n-list-item="battle-unit" data-i18n="battle-unit">Battle Unit</option>
     <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
     <option {% if not ships %}class="sheet-hidden"{% endif %} value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
     <option {% if not vehicles %}class="sheet-hidden"{% endif %} value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
-    <option {% if not solar_systems %}class="sheet-hidden"{% endif %} value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar_system">Solar System</option>
+    <option {% if not star_systems %}class="sheet-hidden"{% endif %} value="star_system" data-i18n-list-item="star-system" data-i18n="star-system">Star System</option>
 </select>
 
 <!-- Campaign Settings Warning -->

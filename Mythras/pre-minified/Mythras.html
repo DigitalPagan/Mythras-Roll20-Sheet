@@ -29,7 +29,7 @@
     <!-- Help Section -->
     <input type='hidden' class='sheet-toggle' name='attr_help_enabled'/>
     <div class="sheet-toggle sheet-infomsg">
-        <div class="sheet-space-between">
+        <div class="sheet-space-between-centered">
             <div>
                 <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
                 <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
@@ -40,12 +40,9 @@
             </div>
         </div>
         <p data-i18n="help-description">This is the help section. It can be hidden or revealed at any time by clicking the question mark symbol on the right of the options bar above.  Similiar symbols will appear throughout to share more detailed information if needed.</p>
-        <div><label class="sheet-left" data-i18n="sheet-modes">Sheet Modes</label></div>
-        <p data-i18n="help-modes-info">The sheet operates in one of two modes; edit or play.  Each mode will reveal parts of the sheet relevant to the current mode.  The current mode is shown above in the options bar.  Clicking the current mode will toggle to the other.</p>
-        <li>
-            <ol><label class="sheet-left" data-i18n="edit-mode">Edit Mode</label>Use edit mode when building and improving your character.  Anything labeled Base Mod or Other are provided to make adjustments to the values which are considered normal.  For example, to show the effects of ageing on a characteristic, add an Action Point from a gift or improvements from experience and training to a skill.</ol>
-            <ol><label class="sheet-left" data-i18n="play-mode">Play Mode</label>Use play mode when actively playing the game.  Anything labeled Temp reflects adjustments from in game effects.  Buffs and penalties from magic for example.</ol>
-        </li>
+        <div><label class="sheet-left" data-i18n="edit-mode">Edit Mode</label></div>
+        <p data-i18n="help-edit-info">Use edit mode when building and improving your character or other entity.  It will be enabled initially. Anything labeled Base Mod or Other are provided to make adjustments to the values which are considered normal.  For example, to show the effects of ageing on a characteristic, add an Action Point from a gift or improvements from experience and training to a skill.</p>
+
 
     </div>
 
@@ -56,11 +53,11 @@
         <!-- Sheet Type Selection -->
 <label class="sheet-left" data-i18n="sheet-type">Sheet Type</label>&nbsp;
 <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-usrinput" name="attr_type">
-    <option  value="battle_unit" data-i18n-list-item="battle-unit" data-i18n="battle_unit">Battle Unit</option>
+    <option  value="battle-unit" data-i18n-list-item="battle-unit" data-i18n="battle-unit">Battle Unit</option>
     <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
     <option  value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
-    <option class="sheet-hidden" value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
-    <option class="sheet-hidden" value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar_system">Solar System</option>
+    <option  value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
+    <option  value="star_system" data-i18n-list-item="star-system" data-i18n="star-system">Star System</option>
 </select>
 
 <!-- Campaign Settings Warning -->
@@ -281,7 +278,64 @@ g<br>
 <div class="sheet-ship">Ship</div>
 
 
-
+<!-- M-Space Star System -->
+<div class="sheet-star-system sheet-flex">
+    <div class="sheet-section sheet-rmargin">
+        <h2 data-i18n="stats">Stats</h2>
+        <div class="flex">
+            <label class="sheet-left" data-i18n="name">Name</label>
+            <input type="text" class="sheet-full-width sheet-usrinput" title="@{character_name}" name="attr_character_name">
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="sub-sector" class="bold">Sub Sector</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_subsector"></div>
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="hex" class="bold">Hex</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_hex"></div>
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="star-type" class="bold">Star Type</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_star"></div>
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="planets" class="bold">Planets</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_planets"></div>
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="habitable" class="bold">Habitable</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_habitable"></div>
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="starports" class="bold">Starports</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_starports"></div>
+        </div>
+        <div>
+            <div class="system-label"><span data-i18n="astroid-belt" class="bold">Astroid Belt</span>:</div>
+            <div class="system-field"><input type="text" class="full-width" name="attr_system_astroid_belt"></div>
+        </div>
+        <div><span data-i18n="notes" class="bold">Notes</span>:</div>
+        <div><textarea name="attr_system_notes"></textarea></div>
+    </div>
+    <div>
+        <div class="sheet-section sheet-bmargin">
+            <h2><span data-i18n="species" class="bold">Species</span></h2>
+            <fieldset class="repeating_systemspecies">
+                <div><span data-i18n="name" class="bold">Name</span>: <input type="text" name="attr_name"></div>
+                <div><span data-i18n="description" class="bold">Description</span>:</div>
+                <div><textarea style="height: 5em" name="attr_description"></textarea></div>
+            </fieldset>
+        </div>
+        <div class="sheet-section sheet-bmargin">
+            <h2><span data-i18n="worlds" class="bold">Worlds</span></h2>
+            <fieldset class="repeating_systemworld">
+                <div><span data-i18n="name" class="bold">Name</span>: <input type="text" name="attr_name"></div>
+                <div><span data-i18n="description" class="bold">Description</span>:</div>
+                <div><textarea style="height: 5em" name="attr_description"></textarea></div>
+            </fieldset>
+        </div>
+    </div>
+</div>
 
 <!-- Sheet Footer -->
 <hr>

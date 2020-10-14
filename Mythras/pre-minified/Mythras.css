@@ -73,8 +73,13 @@ div.sheet-sticky-header {
 div.sheet-space-between {
     display: flex;
     justify-content: space-between;
+}
+div.sheet-space-between-centered {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
+
 
 hr {
     margin: 5px 0;
@@ -639,7 +644,7 @@ input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
 .sheet-typetoggle:not([value="battle_unit"]) ~ div.sheet-battle-unit,
 .sheet-typetoggle:not([value="character"]) ~ div.sheet-character,
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
-.sheet-typetoggle:not([value="solar_system"]) ~ div.sheet-solar-system,
+.sheet-typetoggle:not([value="star_system"]) ~ div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
     display: none;
 }

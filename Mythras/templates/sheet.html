@@ -29,7 +29,7 @@
     <!-- Help Section -->
     <input type='hidden' class='sheet-toggle' name='attr_help_enabled'/>
     <div class="sheet-toggle sheet-infomsg">
-        <div class="sheet-space-between">
+        <div class="sheet-space-between-centered">
             <div>
                 <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
                 <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
@@ -68,7 +68,7 @@
 {% if ships %}{% include 'mythras/ship.html' %}{% endif %}
 {% if vehicles == 'mythras' %}{% include 'mythras/vehicle.html' %}{% endif %}
 {% if vehicles == 'frostbyte' %}{% include 'frostbyte/vehicle.html' %}{% endif %}
-{% if solar_systems %}{% include 'frostbyte/solar_system.html' %}{% endif %}
+{% if star_systems %}{% include 'star_system/star_system.html' %}{% endif %}
 
 <!-- Sheet Footer -->
 <hr>
