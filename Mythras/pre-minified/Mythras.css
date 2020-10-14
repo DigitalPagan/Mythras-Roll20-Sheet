@@ -1,52 +1,4 @@
 /* =Generic Styles reused over the sheet= */
-/* === New generic styles === */
-/* Layout */
-div.sheet-space-between {
-    display: flex;
-    justify-content: space-between;
-}
-
-hr {
-    margin: 0 0 5px;
-}
-
-/* Labels */
-label {
-    font-size: 1em;
-    margin: 0;
-    padding: 0;
-    color: inherit;
-    background: inherit;
-}
-label.sheet-under {
-    text-align: center;
-    font-size: .85em;
-}
-label.sheet-left {
-    display: inline;
-    text-align: left;
-}
-label.sheet-left::after {
-    content: ':'
-}
-
-/* Toggles */
-button.sheet-toggle {
-    border: none;
-    background: inherit;
-    color: darkgray;
-    margin: 0;
-    padding: 0;
-}
-input.sheet-toggle[value="1"] ~ div button.sheet-toggle {
-    color: inherit;
-}
-input.sheet-toggle:not([value="1"]) ~ div.sheet-toggle {
-    display: none;
-}
-
-/* === Old generic styles === */
-
 /* Sheet Defaults*/
 div.sheet-character-wrapper {
     min-width: 850px;
@@ -111,14 +63,25 @@ fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
 }
 
 /* Layout */
-div.sheet-float-left {
-    float: left;
+div.sheet-sticky-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background: white;
 }
-div.sheet-float-right {
-    float: right;
+
+div.sheet-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-div.sheet-clear-float {
-    clear: both;
+
+hr {
+    margin: 5px 0;
+}
+
+input.sheet-toggle:not([value="1"]) + div.sheet-toggle {
+    display: none;
 }
 
 div.sheet-flex {
@@ -181,7 +144,7 @@ div.sheet-shrink {
     border: 1px solid black;
     margin-bottom: 5px;
     box-sizing: border-box;
-    padding: 0 0 0 5px;
+    padding: 0 5px 2px;
     border-radius: 10px;
 }
 .sheet-header {
@@ -273,12 +236,20 @@ a.repcontrol_move {
 }
 
 /* Buttons */
-button {
+/*button {
     padding: 0 5px 0;
     margin: 0!important;
     height: 1.5em;!important;
     font-size: 1em !important;
     line-height: 1em;
+}*/
+button.sheet-action-btn {
+    border: solid 1px gray;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+    padding: 2px 5px !important;
+    height: 1.5em;
 }
 button[type=roll] {
     box-sizing: border-box;
@@ -400,6 +371,54 @@ input[type='number'] {
     text-align: center;
 }
 
+/* Checkboxes */
+button.sheet-checkbox {
+    padding: 0;
+    border: solid 1px #a8a8a8;
+    cursor: pointer;
+    color: rgba(255,255,255,0);
+    content: "3";
+    font-family: "Pictos";
+
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+}
+button.sheet-checkico {
+    border: none;
+    background: inherit;
+    color: darkgray;
+    margin: 0 5px 0 0 !important;
+    padding: 0;
+}
+button.sheet-checkbtn {
+    border: solid 1px gray;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+    margin: 0 5px 0 0 !important;
+    padding: 2px;
+    line-height: 1;
+    height: 1.25em;
+}
+
+input.sheet-checkbox[value="1"] + button.sheet-checkbox {
+    color: inherit;
+}
+input.sheet-checkico[value="1"] + button.sheet-checkico {
+    color: inherit;
+}
+input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    border: solid 1px black;
+}
+
 /* Hide checkbox */
 input[type="checkbox"]
 {
@@ -450,14 +469,6 @@ textarea {
     margin: 0px;
 }
 
-
-label.sheet-checkbox {
-    display: inline;
-    font-size: 1em;
-    font-weight: normal;
-    margin: 0;
-    padding: 0;
-}
 select {
     margin: 0 !important;
     height: 1.25em !important;
@@ -474,6 +485,41 @@ span.sheet-input-unit{
 }
 span.sheet-italic {
     font-style: italic;
+}
+
+/* Labels */
+label {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background: inherit;
+}
+label.sheet-under {
+    text-align: center;
+    font-size: .85em;
+}
+label.sheet-left {
+    display: inline;
+    text-align: left;
+}
+label.sheet-left::after {
+    content: ':'
+}
+label.sheet-right {
+    display: inline;
+    font-size: 1em;
+    margin: 0 0 0 5px;
+    padding: 0;
+    text-align: left;
+}
+label.sheet-checkbox {
+    display: inline;
+    font-size: 1em;
+    margin: 0 0 0 5px;
+    padding: 0;
+    text-align: left;
+    font-weight: normal;
 }
 
 /* Tables */
@@ -518,44 +564,36 @@ div.sheet-bottom-border {
     border-bottom: 1px solid black;
 }
 
-/* Onsceen Tips */
-input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-safemsg,
-input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-infomsg,
-input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-noticemsg,
-input.sheet-onscreen-tips-toggle:not(:checked) ~ div .sheet-warnmsg {
-    display: none;
-}
-
 div.sheet-safemsg {
     border: 1px solid darkgreen;
     color: darkgreen;
-    padding: 0 5px 0;
+    padding: 5px;
     background: #dff0d8;
-    margin-bottom: 5px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 div.sheet-infomsg {
     border: 1px solid darkblue;
     color: darkblue;
-    padding: 0 5px 0;
+    padding: 5px;
     background: #d9edf7;
-    margin-bottom: 5px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 div.sheet-noticemsg {
     border: 1px solid darkgoldenrod;
     color: darkgoldenrod;
-    padding: 0 5px 0;
+    padding: 5px;
     background: #fcf8e3;
-    margin-bottom: 5px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 div.sheet-warnmsg {
     border: 1px solid darkred;
     color: darkred;
-    padding: 0 5px 0;
+    padding: 5px;
     background: #f2dede;
-    margin-bottom: 5px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 

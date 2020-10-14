@@ -1,15 +1,17 @@
-/* Sheet Config Toggle */
-on("clicked:config", function() {
-    getAttrs(["config_on"], function(v) {
-        setAttrs({config_on: v["config_on"] !== "1" ? "1" : "0"});
-    });
-});
-
-/* Sheet Mode Toggles */
-const modelist = ["play","edit"];
-modelist.forEach(modebutton => {
-    on(`clicked:${modebutton}`, function() {
-        setAttrs({mode: modebutton});
+/* Common Scripts */
+const checkboxList = ["config", "help", "edit", "whisper", "show_name", "dependencies", "extended_conflict_resolution",
+    "fire_rate", "magic_points", "power_points", "prana_points", "rank", "reach", "simplified_combat", "social_conflict",
+    "tenacity"];
+checkboxList.forEach(function(button) {
+    on(`clicked:${button}`, function() {
+        const flag = `${button}_enabled`;
+        // Check the current value of the hidden flag.
+        getAttrs([flag], function(v) {
+            // Update the value of the hidden flag to "1" for checked or "0" for unchecked.
+            setAttrs({
+                [flag]: v[flag] !== "1" ? "1" : "0"
+            });
+        });
     });
 });
 

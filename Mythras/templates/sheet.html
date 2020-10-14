@@ -1,30 +1,65 @@
 <!-- Header -->
-<div>
-    <input type='hidden' class='sheet-toggle' name='attr_config_on'/>
+<div class="sheet-sticky-header">
     <div class="sheet-space-between">
         <div>
-            <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
-            <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
+            <!-- Roll Options -->
+            <label class="sheet-left sheet-rmargin" data-i18n="rolls">Rolls</label>
+
+            <input type='hidden' class='sheet-checkbtn' name='attr_whisper_enabled' value="1"/>
+            <button type="action" class="sheet-checkbtn" name="act_whisper">Whisper</button>
+
+            <input type='hidden' class='sheet-checkbtn' name='attr_show_name_enabled' value="1"/>
+            <button type="action" class="sheet-checkbtn" name="act_show_name">Show Name</button>
         </div>
-        <button type="action" class="sheet-toggle" name="act_config"><span class="sheet-pictos">y</span></button>
+        <div>
+            <!-- Mode -->
+            <input type='hidden' class='sheet-checkbtn' name='attr_edit_enabled' value="1"/>
+            <button type="action" class="sheet-checkbtn" name="act_edit"><span class="sheet-pictos">p</span> <span data-i18n="edit-mode">Edit Mode</span></button>
+
+            <!-- Campaign Settings Toggle -->
+            <input type='hidden' class='sheet-checkico' name='attr_config_enabled' value="0"/>
+            <button type="action" class="sheet-checkico" name="act_config"><span class="sheet-pictos">y</span></button>
+
+            <!-- Help Toggle -->
+            <input type='hidden' class='sheet-checkico' name='attr_help_enabled' value="0"/>
+            <button type="action" class="sheet-checkico" name="act_help"><span class="sheet-pictos">?</span></button>
+        </div>
     </div>
+
+    <!-- Help Section -->
+    <input type='hidden' class='sheet-toggle' name='attr_help_enabled'/>
+    <div class="sheet-toggle sheet-infomsg">
+        <div class="sheet-space-between">
+            <div>
+                <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
+                <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
+            </div>
+            <div>
+                <span data-i18n="recalc-notice">If your sheet values are incorrect, try clicking here.</span> <span> -> </span>
+                <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet">Recalculate Sheet</button>
+            </div>
+        </div>
+        <p data-i18n="help-description">This is the help section. It can be hidden or revealed at any time by clicking the question mark symbol on the right of the options bar above.  Similiar symbols will appear throughout to share more detailed information if needed.</p>
+        <div><label class="sheet-left" data-i18n="edit-mode">Edit Mode</label></div>
+        <p data-i18n="help-edit-info">Use edit mode when building and improving your character or other entity.  It will be enabled initially. Anything labeled Base Mod or Other are provided to make adjustments to the values which are considered normal.  For example, to show the effects of ageing on a characteristic, add an Action Point from a gift or improvements from experience and training to a skill.</p>
+
+
+    </div>
+
+    <!-- Config Section -->
+    <input type='hidden' class='sheet-toggle' name='attr_config_enabled'/>
     <div class="sheet-toggle">
-        <hr>
-        <!-- Sheet Type Selection -->
-        <label class="sheet-left" data-i18n="sheet_type">Sheet Type</label>&nbsp;
-        <select data-i18n-list="sheet-type-order" title="{{'@{type}'}}" name="attr_type">
-            <option {% if not battle_units %}class="sheet-hidden"{% endif %} value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
-            <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
-            <option {% if not ships %}class="sheet-hidden"{% endif %} value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
-            <option {% if not vehicles %}class="sheet-hidden"{% endif %} value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
-            <option {% if not solar_systems %}class="sheet-hidden"{% endif %} value="solar_system" data-i18n-list-item="solar_system" data-i18n="solar_system">Solar System</option>
-        </select>
         <!-- Sheet Settings -->
         {% include 'core/sheet_settings.html' %}
     </div>
+
+    <hr>
 </div>
 
-<hr>
+
+
+
+
 
 <!-- Sheet Types -->
 <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
