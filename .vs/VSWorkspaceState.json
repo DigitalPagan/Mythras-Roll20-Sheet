@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Mythras",
+    "\\Mythras\\templates",
+    "\\Mythras\\templates\\star_system",
+    "\\Mythras\\v3src",
+    "\\Mythras\\v3src\\sheet",
+    "\\Mythras\\v3src\\sheet\\generic",
+    "\\Mythras\\v3src\\sheet\\types",
+    "\\Mythras\\v3src\\sheet\\types\\character"
+  ],
+  "SelectedNode": "\\Mythras\\build.py",
+  "PreviewInSolutionExplorer": false
+}

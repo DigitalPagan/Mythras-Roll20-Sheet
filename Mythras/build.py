@@ -55,13 +55,13 @@ for sheet, config in sheet_configs.items():
     html_js_premin_content = html_premin_content + "<script type=\"text/worker\">\n" + js_premin_content + "\n</script>"
 
     # Write the pre-minified files
-    with open(html_js_premin_path, "w") as html_js_premin_f:
+    with open(html_js_premin_path, "w", encoding="utf-8") as html_js_premin_f:
         html_js_premin_f.write(html_js_premin_content)
 
-    with open(css_premin_path, "w") as css_premin_f:
+    with open(css_premin_path, "w", encoding="utf-8") as css_premin_f:
         css_premin_f.write(css_premin_content)
 
-    with open(options_path, "w") as options_f:
+    with open(options_path, "w", encoding="utf-8") as options_f:
         options_f.write(options_content)
 
     # Render minified content
@@ -82,10 +82,10 @@ for sheet, config in sheet_configs.items():
     html_js_min_content = html_min_content + '<script type="text/worker">' + js_min_content + '</script>'
 
     # Write minified files
-    with open(html_js_min_path, "w") as html_js_min_f:
+    with open(html_js_min_path, "w", encoding="utf-8") as html_js_min_f:
         html_js_min_f.write(html_js_min_content)
 
-    with open(css_min_path, "w") as css_min_f:
+    with open(css_min_path, "w", encoding="utf-8") as css_min_f:
         css_min_f.write(css_min_content)
 
 if args.upload:
