@@ -1,0 +1,99 @@
+div.sheet-character {
+    min-width: 850px;
+}
+
+/* Character Header Styles */
+div.sheet-info {
+    display: inline-block;
+    width: 673px;
+    margin-right: 5px;
+}
+div.sheet-info-box {
+    display: inline-block;
+    flex: 1 1 auto;
+    padding: 0 5px 0 0;
+}
+div.sheet-info-type {
+    width: 100px;
+}
+div.sheet-info-homeland {
+    width: 100px;
+}
+div.sheet-info-name {
+    width: 125px;
+    flex-grow: 3;
+}
+div.sheet-info-form {
+    width: 50px;
+}
+div.sheet-info-species {
+    width: 100px;
+}
+div.sheet-info-culture {
+    width: 100px;
+}
+div.sheet-info-career {
+    width: 100px;
+}
+div.sheet-info-social-class {
+    width: 100px;
+}
+div.sheet-info-age{
+    width: 25px;
+}
+div.sheet-info-gender{
+    width: 50px;
+}
+div.sheet-info-frame{
+    width: 50px;
+}
+div.sheet-info-weight{
+    width: 50px;
+}
+div.sheet-info-height{
+    width: 50px;
+}
+div.sheet-info-rank {
+    width: 30px;
+}
+input.sheet-rank-toggle:not(:checked) ~ div.sheet-info-rank {
+    display: none;
+}
+input.sheet-the-soot-toggle:not(:checked) ~ div.sheet-info-the-soot {
+    display: none;
+}
+div.sheet-info-the-soot {
+    width: 40px;
+}
+div.sheet-info-xp {
+    width: 40px;
+}
+
+div.sheet-logo {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+/* Form Toggles */
+input.sheet-spirit-toggle:checked ~ div .sheet-material,
+input.sheet-spirit-toggle:not(:checked) ~ div .sheet-spirit {
+    display: none;
+}
+
+/* Extended Conflict Toggle */
+input.sheet-extended-conflict-toggle:not(:checked) ~ div .sheet-extended-conflict {
+    display: none;
+}
+
+/* Simplified Combat Toggle*/
+input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
+    display: none;
+}
+
+/* ID Toggle */
+input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
+    display: none;
+}

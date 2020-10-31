@@ -1,61 +1,103 @@
 <div class="sheet-character">
-g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
-    g<br>
+    <!-- Character Header -->
+    <div class="sheet-flex">
+        <!-- Info Section -->
+        <div class="sheet-section sheet-info">
+            <!-- Info 1st Row -->
+            <div class="sheet-flex">
+                <div class="sheet-info-box sheet-info-name">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{character_name}" name="attr_character_name">
+                    <label class="sheet-under" data-i18n="name">Name</label>
+                </div>
+                <div class="sheet-info-box sheet-info-form">
+                    <select class="sheet-usrinput sheet-full-width sheet-text-center" data-i18n-list="form-order" title="@{spirit}" name="attr_spirit">
+                        <option value="0" data-i18n-list-item="material" data-i18n="material" selected>Material</option>
+                        <option value="1" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
+                    </select>
+                    <label class="sheet-under" data-i18n="form">Form</label>
+                </div>
+                <div class="sheet-info-box sheet-info-species">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{species}" name="attr_species">
+                    <label class="sheet-under" data-i18n="{{  species_name }}">Species</label>
+                </div>
+                <div class="sheet-info-box sheet-info-culture">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{culture}" name="attr_culture">
+                    <label class="sheet-under"><span data-i18n="culture">Culture</span></label>
+                </div>
+                <div class="sheet-info-box sheet-info-career">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{career}" name="attr_career">
+                    <label class="sheet-under" data-i18n="{{ career_name }}">Career</label>
+                </div>
+            </div>
+            <!-- Info 2nd Row -->
+            <div class="sheet-flex">
+                <div class="sheet-info-box sheet-info-homeland">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{homeland}" name="attr_homeland">
+                    <label class="sheet-under" data-i18n="homeland">Homeland</label>
+                </div>
+                <div class="sheet-info-box sheet-info-social-class">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{social_class}" name="attr_social_class">
+                    <label class="sheet-under" data-i18n="social-class">Name</label>
+                </div>
+                <div class="sheet-info-box sheet-info-age">
+                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{age}" name="attr_age" value="0">
+                    <label class="sheet-under" data-i18n="age">Age</label>
+                </div>
+                <div class="sheet-info-box sheet-info-gender">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{gender}" name="attr_gender">
+                    <label class="sheet-under" data-i18n="gender">Gender</label>
+                </div>
+                <div class="sheet-info-box sheet-info-frame">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{frame}" name="attr_frame">
+                    <label class="sheet-under" data-i18n="frame">Gender</label>
+                </div>
+                <div class="sheet-info-box sheet-info-height">
+                    <input type="number" style="padding-right: 25px" class="sheet-usrinput sheet-full-width" title="@{height}" name="attr_height" value="178">
+                    <span class="sheet-input-unit" data-i18n="centimetres-short">cm</span>
+                    <label class="sheet-under" data-i18n="height-bugfix-id">Height</label>
+                </div>
+                <div class="sheet-info-box sheet-info-weight">
+                    <input type="number" style="padding-right: 20px" class="sheet-usrinput sheet-full-width" title="@{weight}" name="attr_weight" value="88">
+                    <span class="sheet-input-unit" data-i18n="kilograms-short">kg</span>
+                    <label class="sheet-under" data-i18n="weight">Weight</label>
+                </div>
+                <div class="sheet-info-box sheet-info-xp">
+                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{experience_rolls}" name="attr_experience_rolls" value="0">
+                    <label class="sheet-under" data-i18n="experience-rolls">Exp Rolls</label>
+                </div>
+                <input type="checkbox" class="sheet-rank-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
+                <div class="sheet-info-box sheet-info-rank">
+                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{rank}" name="attr_rank" value="0">
+                    <label class="sheet-under" data-i18n="rank">Rank</label>
+                </div>
+                <input type="checkbox" class="sheet-the-soot-toggle sheet-hidden" name="attr_the_soot_standard" value="1">
+                <div class="sheet-info-box sheet-info-the-soot">
+                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{the_soot}" name="attr_the_soot" value="0">
+                    <button type="roll" class="sheet-link sheet-link-label-under" name="roll_the_soot" value="1d100" data-i18n="the-soot">The Soot</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header 2nd Column -->
+        <div class="sheet-logo">
+            <!-- Logo -->
+            <div>
+                {% if display_name == 'Mythras' %}<img src="https://i.imgur.com/EzQDmms.png" alt="Mythras">{% endif %}
+                {% if display_name == 'M-Space' %}<img src="https://i.imgur.com/5uPy3QU.jpg" alt="M-space">{% endif %}
+                {% if display_name == 'Odd Soot' %}<img src="https://i.imgur.com/35dOQix.jpg" alt="Odd Soot">{% endif %}
+            </div>
+            <!-- Special Section -->
+            <div>
+                Test
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Sheet Tabs -->
+    <input type='hidden' class='sheet-tab' name='attr_character_tab' value='all'/>
+    <div>
+        <button type="action" name="act_character" >Character</button>
+        <button type="action" name="act_journal" >Journal</button>
+        <button type="action" name="act_configuration" >Configuration</button>
+    </div>
 </div>

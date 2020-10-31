@@ -6,17 +6,17 @@
             <label class="sheet-left sheet-rmargin" data-i18n="rolls">Rolls</label>
 
             <input type='hidden' class='sheet-checkbtn' name='attr_whisper_enabled' value="1"/>
-            <button type="action" class="sheet-checkbtn" name="act_whisper">Whisper</button>
+            <button type="action" class="sheet-checkbtn" name="act_whisper" data-i18n="whisper">Whisper</button>
 
             <input type='hidden' class='sheet-checkbtn' name='attr_show_name_enabled' value="1"/>
-            <button type="action" class="sheet-checkbtn" name="act_show_name">Show Name</button>
+            <button type="action" class="sheet-checkbtn" name="act_show_name" data-i18n="show-name">Show Name</button>
         </div>
         <div>
             <!-- Mode -->
             <input type='hidden' class='sheet-checkbtn' name='attr_edit_enabled' value="1"/>
             <button type="action" class="sheet-checkbtn" name="act_edit"><span class="sheet-pictos">p</span> <span data-i18n="edit-mode">Edit Mode</span></button>
 
-            <!-- Campaign Settings Toggle -->
+            <!-- Configuration Toggle -->
             <input type='hidden' class='sheet-checkico' name='attr_config_enabled' value="0"/>
             <button type="action" class="sheet-checkico" name="act_config"><span class="sheet-pictos">y</span></button>
 
@@ -39,27 +39,33 @@
                 <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet">Recalculate Sheet</button>
             </div>
         </div>
-        <p data-i18n="help-description">This is the help section. It can be hidden or revealed at any time by clicking the question mark symbol on the right of the options bar above.  Similiar symbols will appear throughout to share more detailed information if needed.</p>
-        <div><label class="sheet-left" data-i18n="edit-mode">Edit Mode</label></div>
-        <p data-i18n="help-edit-info">Use edit mode when building and improving your character or other entity.  It will be enabled initially. Anything labeled Base Mod or Other are provided to make adjustments to the values which are considered normal.  For example, to show the effects of ageing on a characteristic, add an Action Point from a gift or improvements from experience and training to a skill.</p>
-
-
+        <hr>
+        <p data-i18n="help-description">This is the help section covering the options bar and it's settings. It can be hidden or revealed at any time by clicking the question mark symbol in the upper-right.  Other help sections can be toggled with similar symbols found through-out the sheet.</p>
+        <label class="sheet-left" data-i18n="edit-mode">Edit Mode</label><br>
+        <p data-i18n="help-edit-info">Use edit mode when building and improving your sheet.  Anything labeled Base Mod or Other is provided permanent or semi-permanent modifications.  For example, the effects of ageing on a characteristic, an additional Action Point from a gift or skill improvements from experience and training.  When disabled the sheet is optimized for game play.  In this mode Temp modifiers are provided for temporary adjustments.  Magic buffs and penalties for example.</p>
+        <label class="sheet-left" data-i18n="whisper">Whisper</label><br>
+        <p data-i18n="help-whisper-info">Send roll results to the GM only.</p>
+        <label class="sheet-left" data-i18n="show-name">Show Name</label><br>
+        <p data-i18n="help-show-name-info">Show the name in roll results.</p>
+        <label class="sheet-left"><span class="sheet-pictos">y</span> <span data-i18n="configuration">Configuration</span></label><br>
+        <p data-i18n="help-configuration-info">Show options to change sheet type, enable or disable optional rules, and modify how the sheet works.</p>
+        <label class="sheet-left" data-i18n="links">Links</label><br>
+        <div class="sheet-space-between">
+            <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug">Report a Bug</button>
+            <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum">Mythras Roll20 Forum</button>
+            <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author">Contact Sheet Author</button>
+        </div>
     </div>
 
     <!-- Config Section -->
     <input type='hidden' class='sheet-toggle' name='attr_config_enabled'/>
     <div class="sheet-toggle">
         <!-- Sheet Settings -->
-        {% include 'core/sheet_settings.html' %}
+        {% include 'core/sheet_configurations.html' %}
     </div>
 
     <hr>
 </div>
-
-
-
-
-
 
 <!-- Sheet Types -->
 <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
@@ -69,15 +75,6 @@
 {% if vehicles == 'mythras' %}{% include 'mythras/vehicle.html' %}{% endif %}
 {% if vehicles == 'frostbyte' %}{% include 'frostbyte/vehicle.html' %}{% endif %}
 {% if star_systems %}{% include 'star_system/star_system.html' %}{% endif %}
-
-<!-- Sheet Footer -->
-<hr>
-
-<div class="sheet-space-between">
-    <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug">Report a Bug</button>
-    <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum">Mythras Roll20 Forum</button>
-    <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author">Contact Sheet Author</button>
-</div>
 
 <!-- Roll Templates -->
 {% include 'roll_templates/default.html' %}

@@ -4,6 +4,8 @@
     "battle_units": true,
     "ships": true,
     "vehicles": true,
-    "star_systems": true
+    "star_systems": true,
+    "species_name": "species",
+    "career_name": "career"
   }
 }

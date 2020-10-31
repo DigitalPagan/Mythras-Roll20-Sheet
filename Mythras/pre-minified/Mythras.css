@@ -1,11 +1,5 @@
 /* =Generic Styles reused over the sheet= */
 /* Sheet Defaults*/
-div.sheet-character-wrapper {
-    min-width: 850px;
-    max-width: 850px;
-    font-family: "Arial", sans-serif;
-    font-size: 1em;
-}
 h1 {
     font-size: 2em;
     font-family: Palatino, serif;
@@ -281,6 +275,7 @@ button[type=roll].sheet-effect::before {
 }
 button.sheet-link {
     padding: 0!important;
+    margin: 0!important;
     background: none!important;
     box-shadow: none!important;
     border: none;
@@ -290,6 +285,7 @@ button.sheet-link {
     text-shadow: none;
     line-height: inherit;
     height: inherit;
+    font-size: 1em !important;
 }
 button.sheet-link-label {
     font-weight: bold;
@@ -471,7 +467,7 @@ textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0px;
+    margin: 0;
 }
 
 select {
@@ -479,8 +475,8 @@ select {
     height: 1.25em !important;
     line-height: 1.25em !important;
     font-size: 1em !important;
-    padding: 0 0 1px!important;
-    box-sizing: content-box!important;
+    padding: 0 0 0!important;
+    box-sizing: border-box!important;
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
@@ -602,40 +598,9 @@ div.sheet-warnmsg {
     border-radius: 5px;
 }
 
-/* Sheet Styles */
-input.sheet-default-style-toggle:not(:checked) ~ div .sheet-default-style,
-input.sheet-classic-fantasy-style-toggle:not(:checked) ~ div .sheet-classic-fantasy-style,
-input.sheet-luther-arkwright-style-toggle:not(:checked) ~ div .sheet-luther-arkwright-style,
-input.sheet-m-space-style-toggle:not(:checked) ~ div .sheet-m-space-style,
-input.sheet-odd-soot-style-toggle:not(:checked) ~ div .sheet-odd-soot-style {
-    display: none;
-}
-
-input.sheet-default-style-toggle:checked ~ div .sheet-default-style,
-input.sheet-classic-fantasy-style-toggle:checked ~ div .sheet-classic-fantasy-style,
-input.sheet-luther-arkwright-style-toggle:checked ~ div .sheet-luther-arkwright-style,
-input.sheet-m-space-style-toggle:checked ~ div .sheet-m-space-style,
-input.sheet-odd-soot-style-toggle:checked ~ div .sheet-odd-soot-style {
-    display: initial;
-}
-
-/* Mode Toggles */
-input.sheet-config-toggle:not(:checked) ~ div .sheet-config,
-input.sheet-config-toggle:not(:checked) ~ div.sheet-config {
-    display: none;
-}
-input.sheet-config-toggle:checked ~ div .sheet-editplay,
-input.sheet-config-toggle:checked ~ div.sheet-editplay {
-    display: none;
-}
-
-input.sheet-play-toggle:not(:checked) ~ div .sheet-play,
+/* Edit Mode*/
+input.sheet-edit-toggle:checked ~ div .sheet-play,
 input.sheet-edit-toggle:not(:checked) ~ div .sheet-edit,
-input.sheet-play-toggle:not(:checked) ~ div.sheet-play,
-input.sheet-edit-toggle:not(:checked) ~ div.sheet-edit {
-    display: none;
-}
-
 input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
     display: none;
 }
@@ -646,27 +611,6 @@ input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
 .sheet-typetoggle:not([value="star_system"]) ~ div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
-    display: none;
-}
-
-/* Form Toggles */
-input.sheet-spirit-toggle:checked ~ div .sheet-material,
-input.sheet-spirit-toggle:not(:checked) ~ div .sheet-spirit {
-    display: none;
-}
-
-/* Extended Conflict Toggle */
-input.sheet-extended-conflict-toggle:not(:checked) ~ div .sheet-extended-conflict {
-    display: none;
-}
-
-/* Simplified Combat Toggle*/
-input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
-    display: none;
-}
-
-/* ID Toggle */
-input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
     display: none;
 }
 
@@ -696,7 +640,105 @@ input[type="checkbox"].sheet-details:not(:checked) ~ div .sheet-details {
 
 /* =Sheet Type Specific CSS= */
 
+div.sheet-character {
+    min-width: 850px;
+}
 
+/* Character Header Styles */
+div.sheet-info {
+    display: inline-block;
+    width: 673px;
+    margin-right: 5px;
+}
+div.sheet-info-box {
+    display: inline-block;
+    flex: 1 1 auto;
+    padding: 0 5px 0 0;
+}
+div.sheet-info-type {
+    width: 100px;
+}
+div.sheet-info-homeland {
+    width: 100px;
+}
+div.sheet-info-name {
+    width: 125px;
+    flex-grow: 3;
+}
+div.sheet-info-form {
+    width: 50px;
+}
+div.sheet-info-species {
+    width: 100px;
+}
+div.sheet-info-culture {
+    width: 100px;
+}
+div.sheet-info-career {
+    width: 100px;
+}
+div.sheet-info-social-class {
+    width: 100px;
+}
+div.sheet-info-age{
+    width: 25px;
+}
+div.sheet-info-gender{
+    width: 50px;
+}
+div.sheet-info-frame{
+    width: 50px;
+}
+div.sheet-info-weight{
+    width: 50px;
+}
+div.sheet-info-height{
+    width: 50px;
+}
+div.sheet-info-rank {
+    width: 30px;
+}
+input.sheet-rank-toggle:not(:checked) ~ div.sheet-info-rank {
+    display: none;
+}
+input.sheet-the-soot-toggle:not(:checked) ~ div.sheet-info-the-soot {
+    display: none;
+}
+div.sheet-info-the-soot {
+    width: 40px;
+}
+div.sheet-info-xp {
+    width: 40px;
+}
+
+div.sheet-logo {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+/* Form Toggles */
+input.sheet-spirit-toggle:checked ~ div .sheet-material,
+input.sheet-spirit-toggle:not(:checked) ~ div .sheet-spirit {
+    display: none;
+}
+
+/* Extended Conflict Toggle */
+input.sheet-extended-conflict-toggle:not(:checked) ~ div .sheet-extended-conflict {
+    display: none;
+}
+
+/* Simplified Combat Toggle*/
+input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
+    display: none;
+}
+
+/* ID Toggle */
+input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
+    display: none;
+}
 
 
 
