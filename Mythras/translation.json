@@ -37,7 +37,7 @@
     "species": "Species",
     "traits-abilities-gifts": "Traits / Abilities / Gifts",
     "rank": "Rank",
-    "experience-rolls": "Exp Rolls",
+    "experience-rolls": "Experience Rolls",
     "age": "Age",
     "gender": "Gender",
     "frame": "Frame",
@@ -778,6 +778,7 @@
     "linguistics-enabled-description": "Use the Linguistics skill instead of individual Language skills.",
     "mooks": "Mooks",
     "form": "Form",
+    "form-order": "corporeal,spirit",
     "spirit-attributes": "Spirit Attributes",
     "material": "Material",
     "spirit": "Spirit",
@@ -1019,5 +1020,6 @@
     "help-configuration-info": "Show options to change sheet type, enable or disable optional rules, and modify how the sheet works.",
     "whisper": "Whisper",
     "show-name": "Show Name",
-    "links": "Links"
+    "links": "Links",
+    "corporeal": "Corporeal"
 }

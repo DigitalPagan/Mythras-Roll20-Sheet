@@ -1,8 +1,8 @@
 /* Common Scripts */
-const checkboxList = ["config", "help", "edit", "whisper", "show_name", "dependencies", "extended_conflict_resolution",
-    "fire_rate", "magic_points", "power_points", "prana_points", "rank", "reach", "simplified_combat", "social_conflict",
-    "tenacity"];
-checkboxList.forEach(function(button) {
+const configCheckboxList = ["config", "help", "edit", "whisper", "show_name", "dependencies", "extended_conflict_resolution",
+    "fire_rate", "luck_points_rank", "magic_points", "power_points", "prana_points", "reach", "simplified_combat",
+    "social_conflict", "tenacity"];
+configCheckboxList.forEach(function(button) {
     on(`clicked:${button}`, function() {
         const flag = `${button}_enabled`;
         // Check the current value of the hidden flag.

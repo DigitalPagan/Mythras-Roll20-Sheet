@@ -56,10 +56,7 @@ div.sheet-info-height{
 div.sheet-info-rank {
     width: 30px;
 }
-input.sheet-rank-toggle:not(:checked) ~ div.sheet-info-rank {
-    display: none;
-}
-input.sheet-the-soot-toggle:not(:checked) ~ div.sheet-info-the-soot {
+input.sheet-rank-toggle:not(:checked) + div.sheet-info-rank {
     display: none;
 }
 div.sheet-info-the-soot {

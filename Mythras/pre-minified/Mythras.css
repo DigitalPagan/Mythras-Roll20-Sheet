@@ -291,11 +291,9 @@ button.sheet-link-label {
     font-weight: bold;
     vertical-align: top;
 }
-button.sheet-link-label-under {
-    font-size: .85em!important;
-    font-weight: bold;
-    vertical-align: top;
-    width: 100%;
+button.sheet-link-label::after {
+    content: ':';
+    text-decoration: none;
 }
 button.sheet-link:hover {
     color: #069;
@@ -698,10 +696,7 @@ div.sheet-info-height{
 div.sheet-info-rank {
     width: 30px;
 }
-input.sheet-rank-toggle:not(:checked) ~ div.sheet-info-rank {
-    display: none;
-}
-input.sheet-the-soot-toggle:not(:checked) ~ div.sheet-info-the-soot {
+input.sheet-rank-toggle:not(:checked) + div.sheet-info-rank {
     display: none;
 }
 div.sheet-info-the-soot {

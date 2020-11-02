@@ -1,0 +1,3 @@
+# Character
+## Info Section
+luck_points_rank -> luck_points_rank_enabled
