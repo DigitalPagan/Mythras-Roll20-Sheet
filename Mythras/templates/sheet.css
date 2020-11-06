@@ -318,7 +318,7 @@ button[type=roll].sheet-link::before {
     background: none!important;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid black;
+    /*border-bottom: 1px solid black;*/
 }
 .sheet-usrnotes {
     font-family: "Patrick Hand", sans-serif;

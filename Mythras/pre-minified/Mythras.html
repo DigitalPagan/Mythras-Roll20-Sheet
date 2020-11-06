@@ -217,6 +217,9 @@
     <hr>
 </div>
 
+<!-- Edit Toogle -->
+<input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit_enabled' value="1" checked>
+
 <!-- Sheet Types -->
 <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
 <div class="sheet-battle-unit">Battle Unit</div>
@@ -228,14 +231,19 @@
             <!-- Info 1st Row -->
             <div class="sheet-flex">
                 <div class="sheet-info-box sheet-info-name">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{character_name}" name="attr_character_name">
+                    <div style="border-bottom: 1px solid black;">
+                        <input type="text" class="sheet-usrinput sheet-edit sheet-full-width" title="@{character_name}" name="attr_character_name">
+                        <span class="sheet-play" name="attr_character_name"></span>
+                    </div>
                     <label class="sheet-under" data-i18n="name">Name</label>
                 </div>
                 <div class="sheet-info-box sheet-info-form">
-                    <select class="sheet-usrinput sheet-full-width sheet-text-center" data-i18n-list="form-order" title="@{spirit}" name="attr_spirit">
-                        <option value="0" data-i18n-list-item="corporeal" data-i18n="corporeal" selected>Corporeal</option>
-                        <option value="1" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
-                    </select>
+                    <div style="border-bottom: 1px solid black;">
+                        <select class="sheet-usrinput sheet-full-width sheet-text-center" data-i18n-list="form-order" title="@{spirit}" name="attr_spirit">
+                            <option value="0" data-i18n-list-item="corporeal" data-i18n="corporeal" selected>Corporeal</option>
+                            <option value="1" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
+                        </select>
+                    </div>
                     <label class="sheet-under" data-i18n="form">Form</label>
                 </div>
                 <div class="sheet-info-box sheet-info-species">
@@ -299,7 +307,7 @@
                 
                 
             </div>
-            <!-- Special Section -->
+            <!-- Experience Rolls Section -->
             <div class="sheet-space-between">
                 <label class="sheet-left" data-i18n="experience-rolls">Exp Rolls</label>
                 <input type="number" class="sheet-usrinput sheet-grow" title="@{experience_rolls}" name="attr_experience_rolls" value="0">
