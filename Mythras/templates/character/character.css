@@ -94,3 +94,39 @@ input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
 input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
     display: none;
 }
+
+/* Character Tabs */
+div.sheet-character-tab-core,
+div.sheet-character-tab-abilities,
+div.sheet-character-tab-equipment,
+div.sheet-character-tab-background,
+div.sheet-character-tab-notes,
+div.sheet-character-tab-compact {
+    display: none;
+}
+
+input.sheet-character-tab[value="core"] ~ div.sheet-character-tab-core,
+input.sheet-character-tab[value="abilities"] ~ div.sheet-character-tab-abilities,
+input.sheet-character-tab[value="equipment"] ~ div.sheet-character-tab-equipment,
+input.sheet-character-tab[value="background"] ~ div.sheet-character-tab-background,
+input.sheet-character-tab[value="notes"] ~ div.sheet-character-tab-notes,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-compact,
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-core,
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-abilities,
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-equipment,
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-background,
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-notes {
+    display: block;
+}
+
+input.sheet-character-tab[value="all"] ~ button.sheet-character-tab-all,
+input.sheet-character-tab[value="core"] ~ button.sheet-character-tab-core,
+input.sheet-character-tab[value="abilities"] ~ button.sheet-character-tab-abilities,
+input.sheet-character-tab[value="equipment"] ~ button.sheet-character-tab-equipment,
+input.sheet-character-tab[value="background"] ~ button.sheet-character-tab-background,
+input.sheet-character-tab[value="notes"] ~ button.sheet-character-tab-notes,
+input.sheet-character-tab[value="compact"] ~ button.sheet-character-tab-compact {
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    border: solid 1px black;
+}
