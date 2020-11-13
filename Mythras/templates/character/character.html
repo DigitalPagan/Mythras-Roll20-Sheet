@@ -87,25 +87,42 @@
 
     <!-- Character Sheet Tabs -->
     <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>|
-    <button type="action" class="sheet-checkbtn sheet-character-tab-compact" name="act_character_tab_compact" data-i18n="compact">Compact</button>
+    <div class="sheet-character-tabs sheet-bmargin">
+        <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>|
+        <button type="action" class="sheet-checkbtn sheet-character-tab-compact" name="act_character_tab_compact" data-i18n="compact">Compact</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>
+    </div>
 
     <div class='sheet-character-tab-core'>
-        <h2>Character</h2>
-        <span>character Stuff Goes here </span>
+        {% include 'character/tabs/core.html' %}
     </div>
 
     <div class='sheet-character-tab-abilities'>
-        <h2>Abilities</h2>
-        <span>abilites Stuff Goes here </span>
+        {% include 'character/tabs/abilities.html' %}
+    </div>
+
+    <div class='sheet-character-tab-equipment'>
+        {% include 'character/tabs/equipment.html' %}
+    </div>
+
+    <div class='sheet-character-tab-background'>
+        {% include 'character/tabs/background.html' %}
+    </div>
+
+    <div class='sheet-character-tab-notes'>
+        {% include 'character/tabs/notes.html' %}
     </div>
 
     <div class='sheet-character-tab-compact'>
-        <h2>Compact</h2>
+        {% include 'character/tabs/compact.html' %}
+    </div>
+
+    <div class='sheet-character-tab-import'>
+        {% include 'character/tabs/import.html' %}
     </div>
 </div>

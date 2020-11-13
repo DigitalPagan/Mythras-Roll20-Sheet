@@ -67,8 +67,8 @@
     <option  value="battle-unit" data-i18n-list-item="battle-unit" data-i18n="battle-unit">Battle Unit</option>
     <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
     <option  value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
-    <option  value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
     <option  value="star_system" data-i18n-list-item="star-system" data-i18n="star-system">Star System</option>
+    <option  value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
 </select>
 
 <!-- Campaign Settings Warning -->
@@ -312,26 +312,89 @@
 
     <!-- Character Sheet Tabs -->
     <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
-    <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>|
-    <button type="action" class="sheet-checkbtn sheet-character-tab-compact" name="act_character_tab_compact" data-i18n="compact">Compact</button>
+    <div class="sheet-character-tabs sheet-bmargin">
+        <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>|
+        <button type="action" class="sheet-checkbtn sheet-character-tab-compact" name="act_character_tab_compact" data-i18n="compact">Compact</button>
+        <button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>
+    </div>
 
     <div class='sheet-character-tab-core'>
-        <h2>Character</h2>
-        <span>character Stuff Goes here </span>
+        
     </div>
 
     <div class='sheet-character-tab-abilities'>
-        <h2>Abilities</h2>
-        <span>abilites Stuff Goes here </span>
+        
+    </div>
+
+    <div class='sheet-character-tab-equipment'>
+        
+    </div>
+
+    <div class='sheet-character-tab-background'>
+        <div class="sheet-section">
+    <h2 data-i18n="background">Background</h2>
+
+    <div class="sheet-flex sheet-bmargin">
+        <div class="sheet-half-col sheet-rmargin">
+            <div><label class="sheet-left" data-i18n="organizations">Organizations</label></div>
+            <div class="sheet-edit"><textarea class="sheet-full-width" title="@{cults_notes}" name="attr_cults_notes"></textarea></div>
+            <div class="sheet-play"><span class="sheet-usrnotes" name="attr_cults_notes"></span></div>
+        </div>
+        <div class="sheet-half-col">
+            <div><label class="sheet-left" data-i18n="contacts">Contacts</label></div>
+            <div class="sheet-edit"><textarea class="sheet-full-width" title="@{contacts_notes}" name="attr_contacts_notes"></textarea></div>
+            <div class="sheet-play"><span class="sheet-usrnotes" name="attr_contacts_notes"></span></div>
+        </div>
+    </div>
+
+    <div class="sheet-flex sheet-bmargin">
+        <div class="sheet-half-col sheet-rmargin">
+            <div><label class="sheet-left" data-i18n="community">Community</label></div>
+            <div class="sheet-edit"><textarea class="sheet-full-width" title="@{community_notes}" name="attr_community_notes"></textarea></div>
+            <div class="sheet-play"><span class="sheet-usrnotes" name="attr_community_notes"></span></div>
+        </div>
+        <div class="sheet-half-col">
+            <div><label class="sheet-left" data-i18n="allies">Allies</label></div>
+            <div class="sheet-edit"><textarea class="sheet-full-width" title="@{allies_notes}" name="attr_allies_notes"></textarea></div>
+            <div class="sheet-play"><span class="sheet-usrnotes" name="attr_allies_notes"></span></div>
+        </div>
+    </div>
+
+    <div class="sheet-flex sheet-bmargin">
+        <div class="sheet-half-col sheet-rmargin">
+            <div><label class="sheet-left" data-i18n="family">Family</label></div>
+            <div class="sheet-edit"><textarea class="sheet-full-width" title="@{family_notes}" name="attr_family_notes"></textarea></div>
+            <div class="sheet-play"><span class="sheet-usrnotes" name="attr_family_notes"></span></div>
+        </div>
+        <div class="sheet-half-col">
+            <div><label class="sheet-left" data-i18n="enemies">Enemies</label></div>
+            <div class="sheet-edit"><textarea class="sheet-full-width" title="@{enemies_notes}" name="attr_enemies_notes"></textarea></div>
+            <div class="sheet-play"><span class="sheet-usrnotes" name="attr_enemies_notes"></span></div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <div class='sheet-character-tab-notes'>
+        <div class="sheet-section">
+    <h2 data-i18n="notes">Notes</h2>
+
+    <div class="sheet-edit"><textarea class="sheet-character-notes" title="@{sheet_notes}" name="attr_sheet_notes"></textarea></div>
+    <div class="sheet-play"><span class="sheet-usrnotes" name="attr_sheet_notes"></span></div>
+</div>
     </div>
 
     <div class='sheet-character-tab-compact'>
-        <h2>Compact</h2>
+        
+    </div>
+
+    <div class='sheet-character-tab-import'>
+        
     </div>
 </div>
 <div class="sheet-ship">Ship</div>

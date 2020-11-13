@@ -518,7 +518,7 @@
     "commander": "Commander",
     "formation": "Formation",
     "default-sheet-type": "Default Sheet Type",
-    "type-description": "Set default sheet type.  Good to change this to NPC once all your PCs are made.",
+    "type-description": "Set the default sheet type.",
     "encounter-generator-json": "Encounter Generator JSON",
     "json-importer": "JSON Importer",
     "spirit-init": "Spirit Init",

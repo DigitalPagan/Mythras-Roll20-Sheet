@@ -42,16 +42,16 @@ for sheet, config in sheet_configs.items():
     css_premin_path = Path(REPOPATH, "{}".format(sheet), "pre-minified", "{}.css".format(sheet))
     html_js_min_path = Path(REPOPATH, "{}".format(sheet), "{}.min.html".format(sheet))
     css_min_path = Path(REPOPATH, "{}".format(sheet), "{}.min.css".format(sheet))
-    options_path = Path(REPOPATH, "{}".format(sheet), "sheet.json".format(sheet))
+    #options_path = Path(REPOPATH, "{}".format(sheet), "sheet.json".format(sheet))
 
     # Render pre-minified content from templates
     html_premin_content = template_env.get_template('sheet.html').render(config)
     js_premin_content = template_env.get_template('workers.js').render(config)
     css_premin_content = template_env.get_template('sheet.css').render(config)
-    options_content = template_env.get_template('sheet.json').render(config)
+    #options_content = template_env.get_template('sheet.json').render(config)
     # have to remove trailing commas from the rendered sheet.json template
-    trailing_comma_regex = r'''(?<=[}\]"']),(?!\s*[{["'])'''
-    options_content = re.sub(trailing_comma_regex, "", options_content, 0)
+    #trailing_comma_regex = r'''(?<=[}\]"']),(?!\s*[{["'])'''
+    #options_content = re.sub(trailing_comma_regex, "", options_content, 0)
     html_js_premin_content = html_premin_content + "<script type=\"text/worker\">\n" + js_premin_content + "\n</script>"
 
     # Write the pre-minified files
@@ -61,8 +61,8 @@ for sheet, config in sheet_configs.items():
     with open(css_premin_path, "w", encoding="utf-8") as css_premin_f:
         css_premin_f.write(css_premin_content)
 
-    with open(options_path, "w", encoding="utf-8") as options_f:
-        options_f.write(options_content)
+    #with open(options_path, "w", encoding="utf-8") as options_f:
+    #    options_f.write(options_content)
 
     # Render minified content
     html_min_content = htmlmin.minify(html_premin_content,
