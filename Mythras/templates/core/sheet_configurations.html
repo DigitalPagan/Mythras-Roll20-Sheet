@@ -21,38 +21,43 @@
             <h2 data-i18n="mechanical-systems">Mechanical Systems</h2>
 
             <!-- Dependencies -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_dependencies_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_dependencies"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="dependencies">Dependencies</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_dependencies_enabled' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="dependencies">Dependencies</span>
+                </label>
             </div>
 
             <!-- Extended Conflict Resolution -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_extended_conflict_resolution_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_extended_conflict_resolution"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="extended-conflict-resolution">Extended Conflict Resolution</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_extended_conflict_resolution_enabled' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="extended-conflict-resolution">Extended Conflict Resolution</span>
+                </label>
             </div>
 
             <!-- Rank -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_luck_points_rank_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_luck_points_rank"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="rank">Rank</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_luck_points_rank' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="rank">Rank</span>
+                </label>
             </div>
 
             <!-- Simplified Combat -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_simplified_combat_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_simplified_combat"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="simplified-combat">Simplified Combat</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_simplified_combat_enabled' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="simplified-combat">Simplified Combat</span>
+                </label>
             </div>
 
             <!-- Social Conflict -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_social_conflict_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_social_conflict"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="social-conflict">social_conflict</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_social_conflict_enabled' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="social-conflict">Social Conflict</span>
+                </label>
             </div>
         </div>
 
@@ -82,19 +87,21 @@
             <label class="sheet-left" data-i18n="close-combat">Close Combat</label>
 
             <!-- Reach -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_reach_enabled' value="0"/>
-                &emsp;<button type="action" class="sheet-checkbox" name="act_reach"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-checkbox" data-i18n="reach">Reach</label>
+            <div>
+                <label class="sheet-checkbox">
+                    &emsp;<input type='checkbox' name='attr_reach_enabled' value="1" checked/><span>3</span>
+                    <span data-i18n="reach">Reach</span>
+                </label>
             </div>
 
             <label class="sheet-left" data-i18n="ranged">Ranged</label>
 
             <!-- Fire Rate -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_fire_rate_enabled' value="0"/>
-                &emsp;<button type="action" class="sheet-checkbox" name="act_fire_rate"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-checkbox" data-i18n="fire-rate">Fire Rate</label>
+            <div>
+                <label class="sheet-checkbox">
+                    &emsp;<input type='checkbox' name='attr_fire_rate_enabled' value="1"/><span>3</span>
+                    <span data-i18n="fire-rate">Fire Rate</span>
+                </label>
             </div>
         </div>
 
@@ -113,31 +120,35 @@
             </div>
 
             <!-- Magic Points -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_magic_points_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_magic_points"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="magic-points">Magic Points</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_magic_points_enabled' value="1" checked/><span>3</span>
+                    <span class="bold" data-i18n="magic-points">Magic Points</span>
+                </label>
             </div>
 
             <!-- Power Points -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_power_points_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_power_points"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="power-points">Power Points</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_power_points_enabled' value="1"/><span>3</span>
+                    <span class="bold" data-i18n="power-points">Power Points</span>
+                </label>
             </div>
 
             <!-- Prana Points -->
-            <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_prana_points_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_prana_points"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="prana-points">Prana Points</label>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_prana_points_enabled' value="1"/><span>3</span>
+                    <span class="bold" data-i18n="prana-points">Prana Points</span>
+                </label>
             </div>
 
             <!-- Tenacity -->
             <div class="flex">
-                <input type='hidden' class='sheet-checkbox' name='attr_tenacity_enabled' value="0"/>
-                <button type="action" class="sheet-checkbox" name="act_tenacity"><span class="sheet-pictos">3</span></button>
-                <label class="sheet-right" data-i18n="tenacity">Tenacity</label>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_tenacity_enabled' value="1"/><span>3</span>
+                    <span class="bold" data-i18n="tenacity">Tenacity</span>
+                </label>
             </div>
         </div>
     </div>

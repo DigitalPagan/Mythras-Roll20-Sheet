@@ -1,7 +1,5 @@
 /* Common Scripts */
-const configCheckboxList = ["config", "help", "edit", "whisper", "show_name", "dependencies", "extended_conflict_resolution",
-    "fire_rate", "luck_points_rank", "magic_points", "power_points", "prana_points", "reach", "simplified_combat",
-    "social_conflict", "tenacity"];
+const configCheckboxList = ["edit", "whisper", "show_name"];
 configCheckboxList.forEach(function(button) {
     on(`clicked:${button}`, function() {
         const flag = `${button}_enabled`;

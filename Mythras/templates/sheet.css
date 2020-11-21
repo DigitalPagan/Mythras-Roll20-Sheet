@@ -62,6 +62,7 @@ div.sheet-sticky-header {
     position: sticky;
     top: 0;
     background: white;
+    z-index: 2147483647;
 }
 
 div.sheet-space-between {
@@ -126,6 +127,9 @@ div.sheet-shrink {
 .sheet-rmargin {
     margin-right: 5px !important;
 }
+.sheet-lmargin {
+    margin-left: 5px !important;
+}
 .sheet-lpad {
     padding-left: 5px !important;
 }
@@ -137,6 +141,9 @@ div.sheet-shrink {
 }
 .sheet-cellpad {
     padding: 1px 1px 0;
+}
+.sheet-bold {
+    font-weight: bold;
 }
 
 .sheet-section {
@@ -164,7 +171,7 @@ div.sheet-shrink {
     flex-shrink: 0;
 }
 .sheet-checkbox-width {
-    width: 21px !important;
+    width: 16px !important;
     flex-shrink: 0;
 }
 .sheet-button-width {
@@ -222,7 +229,7 @@ input[type="checkbox"].sheet-accordion:not(:checked) ~ div.sheet-accordion {
     font-family: 'Pictos';
 }
 .sheet-pictos-three {
-    font-family: 'Pictos Three';
+    font-family: 'Pictos Three' !important;
 }
 
 /* Fieldset */
@@ -291,7 +298,7 @@ button.sheet-link-label {
     font-weight: bold;
     vertical-align: top;
 }
-button.sheet-link-label::after {
+button.sheet-link-label-left::after {
     content: ':';
     text-decoration: none;
 }
@@ -370,31 +377,7 @@ input[type='number'] {
     text-align: center;
 }
 
-/* Checkboxes */
-button.sheet-checkbox {
-    padding: 0;
-    border: solid 1px #a8a8a8;
-    cursor: pointer;
-    color: rgba(255,255,255,0);
-    content: "3";
-    font-family: "Pictos";
-
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 12px;
-}
-button.sheet-checkico {
-    border: none;
-    background: inherit;
-    color: darkgray;
-    margin: 0 5px 0 0 !important;
-    padding: 0;
-}
+/* Checkbtns */
 button.sheet-checkbtn {
     border: solid 1px gray;
     border-radius: 5px;
@@ -406,59 +389,69 @@ button.sheet-checkbtn {
     height: 1.25em;
 }
 
-input.sheet-checkbox[value="1"] + button.sheet-checkbox {
-    color: inherit;
-}
-input.sheet-checkico[value="1"] + button.sheet-checkico {
-    color: inherit;
-}
 input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
     border: solid 1px black;
 }
 
-/* Hide checkbox */
+/* Checkboxes and checkicos */
+/* Hide the default checkbox and set predictable sizing*/
 input[type="checkbox"]
 {
     opacity: 0;
     width: 16px;
     height: 16px;
     position: relative;
-    top: 5px;
-    left: 6px;
-    margin: -10px;
+    margin: 0;
+    padding: 0;
     cursor: pointer;
     z-index: 1;
 }
 
-/* Fake checkbox */
-input[type="checkbox"] + span::before
+/* Stylized span to look like checkbox */
+input[type="checkbox"] + span
 {
-    margin-right: 5px;
-    border: 1px solid #4c4c4c;;
-    line-height: 1em;
+    border: solid 1px #a8a8a8;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
+    color: transparent;
+    font-family: "Pictos";
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
 
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
 
-    background-color: rgba(255, 255, 255, 0.01);
-    content: "";
-    width: 1em;
-    height: 1em;
-    font-size: 1em;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    margin: 0 0 0 -16px;
+    padding: 0;
+    position: absolute;
 
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-input[type="checkbox"]:checked + span::before
+input[type="checkbox"]:checked + span
 {
-    content: "✔";
+    color: inherit;
+}
+
+/* Override stylized span to be a checkico */
+input[type="checkbox"] + span.sheet-checkico
+{
+    border: none;
+    color: darkgray;
+    font-size: 1em;
+}
+input[type="checkbox"]:checked + span.sheet-checkico
+{
+    color: inherit;
 }
 
 textarea {
@@ -493,6 +486,7 @@ label {
     padding: 0;
     color: inherit;
     background: inherit;
+    text-align: center;
 }
 label.sheet-under {
     text-align: center;
@@ -505,20 +499,25 @@ label.sheet-left {
 label.sheet-left::after {
     content: ':'
 }
-label.sheet-right {
+/*label.sheet-right {
     display: inline;
     font-size: 1em;
     margin: 0 0 0 5px;
     padding: 0;
     text-align: left;
-}
+}*/
 label.sheet-checkbox {
     display: inline;
     font-size: 1em;
-    margin: 0 0 0 5px;
+    margin: 0;
     padding: 0;
     text-align: left;
     font-weight: normal;
+    cursor: pointer;
+}
+/* Add some space between the stylized span and the label span*/
+label.sheet-checkbox span:nth-of-type(2) {
+    margin-left: 5px;
 }
 
 /* Tables */
@@ -540,11 +539,11 @@ div.sheet-th {
 }
 div.sheet-td {
     display: table-cell;
-    text-align: center;
+    /*text-align: center;*/
     padding: 1px 1px 0;
     white-space: nowrap;
 }
-table {
+/*table {
     margin-bottom: 5px;
 }
 th {
@@ -558,7 +557,7 @@ td {
     text-align: center;
     padding: 1px 1px 0;
     white-space: nowrap;
-}
+}*/
 div.sheet-bottom-border {
     border-bottom: 1px solid black;
 }

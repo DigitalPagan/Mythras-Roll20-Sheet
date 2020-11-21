@@ -61,7 +61,7 @@
                     <span class="sheet-input-unit" data-i18n="kilograms-short">kg</span>
                     <label class="sheet-under" data-i18n="weight">Weight</label>
                 </div>
-                <input type="checkbox" class="sheet-rank-toggle sheet-hidden" name="attr_luck_points_rank_enabled" value="1">
+                <input type="checkbox" class="sheet-rank-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
                 <div class="sheet-info-box sheet-info-rank">
                     <input type="number" class="sheet-usrinput sheet-full-width" title="@{rank}" name="attr_rank" value="0">
                     <label class="sheet-under" data-i18n="rank">Rank</label>
@@ -98,9 +98,7 @@
         <button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>
     </div>
 
-    <div class='sheet-character-tab-core'>
-        {% include 'character/tabs/core.html' %}
-    </div>
+    {% include 'character/tabs/core.html' %}
 
     <div class='sheet-character-tab-abilities'>
         {% include 'character/tabs/abilities.html' %}

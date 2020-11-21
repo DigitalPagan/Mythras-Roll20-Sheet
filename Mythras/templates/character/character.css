@@ -74,14 +74,14 @@ div.sheet-logo {
     margin-bottom: 5px;
 }
 
-/* Form Toggles */
-input.sheet-spirit-toggle:checked ~ div .sheet-material,
-input.sheet-spirit-toggle:not(:checked) ~ div .sheet-spirit {
+/* Spirit Toggles */
+input.sheet-spirit-toggle:checked + div .sheet-corporeal,
+input.sheet-spirit-toggle:not(:checked) + div .sheet-spirit {
     display: none;
 }
 
 /* Extended Conflict Toggle */
-input.sheet-extended-conflict-toggle:not(:checked) ~ div .sheet-extended-conflict {
+input.sheet-extended-conflict-toggle:not(:checked) + div .sheet-extended-conflict {
     display: none;
 }
 
@@ -91,9 +91,9 @@ input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
 }
 
 /* ID Toggle */
-input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
+/*input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
     display: none;
-}
+}*/
 
 /* Character Tabs */
 div.sheet-character-tab-core,
@@ -134,15 +134,96 @@ input.sheet-character-tab[value="import"] + div.sheet-character-tabs button.shee
     border: solid 1px black;
 }
 
-/* Core */
+/* Core Tab */
+/* Characteristics */
+div.sheet-char-label {
+    background: black;
+    color: lightgray;
+    width: 100%;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    text-align: left;
+}
 
-/* Abilities */
+/* Attributes */
+/* Magic Point Toggles */
+input.sheet-magic-points-toggle:not(:checked) + div.sheet-magic-points {
+    display: none;
+}
+input.sheet-power-points-toggle:not(:checked) + div.sheet-power-points {
+    display: none;
+}
+input.sheet-prana-points-toggle:not(:checked) + div.sheet-prana-points {
+    display: none;
+}
 
-/* Equipment */
+/* Strangeness Toggle */
+input.sheet-strangeness-toggle:not(:checked) + div.sheet-strangeness {
+    display: none;
+}
 
-/* Background */
+/* Tenacity Toggle */
+input.sheet-tenacity-toggle:not(:checked) + div.sheet-tenacity {
+    display: none;
+}
 
-/* Notes */
+/* Health Section */
+/* Hit Location select */
+select.sheet-hit-location {
+    width: 120px;
+}
+
+/* Hide individual locations per hit tables */
+input[type="checkbox"].sheet-location-display-loc2to7-toggle:not(:checked) ~ div.sheet-location-display-loc2to7 {
+    display: none;
+}
+input[type="checkbox"].sheet-location-display-loc8-toggle:not(:checked) + div.sheet-location-display-loc8 {
+    display: none;
+}
+input[type="checkbox"].sheet-location-display-loc9-toggle:not(:checked) + div.sheet-location-display-loc9 {
+    display: none;
+}
+input[type="checkbox"].sheet-location-display-loc10-toggle:not(:checked) + div.sheet-location-display-loc10 {
+    display: none;
+}
+input[type="checkbox"].sheet-location-display-loc11-toggle:not(:checked) + div.sheet-location-display-loc11 {
+    display: none;
+}
+input[type="checkbox"].sheet-location-display-loc12-toggle:not(:checked) + div.sheet-location-display-loc12 {
+    display: none;
+}
+input[type="checkbox"].sheet-location-display-toggle:not(:checked) + .sheet-location-display {
+    display: none;
+}
+
+/* Wounds */
+textarea.sheet-hit-locations-note {
+    height: 195px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+textarea.sheet-hit-locations-note-7 {
+    height: 75px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+textarea.sheet-hit-locations-note-8 {
+    height: 55px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+textarea.sheet-hit-locations-note-9 {
+    height: 35px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Abilities Tab*/
+
+/* Equipment Tab*/
+
+/* Background Tab*/
+
+/* Notes Tab*/
 textarea.sheet-character-notes {
     width: 100%;
     height: 30em;

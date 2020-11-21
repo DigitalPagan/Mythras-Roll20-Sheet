@@ -17,17 +17,15 @@
             <button type="action" class="sheet-checkbtn" name="act_edit"><span class="sheet-pictos">p</span> <span data-i18n="edit-mode">Edit Mode</span></button>
 
             <!-- Configuration Toggle -->
-            <input type='hidden' class='sheet-checkico' name='attr_config_enabled' value="0"/>
-            <button type="action" class="sheet-checkico" name="act_config"><span class="sheet-pictos">y</span></button>
+            <input type='checkbox' name='attr_config' value="1"><span class="sheet-checkico">y</span>
 
             <!-- Help Toggle -->
-            <input type='hidden' class='sheet-checkico' name='attr_help_enabled' value="0"/>
-            <button type="action" class="sheet-checkico" name="act_help"><span class="sheet-pictos">?</span></button>
+            <input type="checkbox" name="attr_sheet_help" value="1" checked><span class="sheet-checkico">?</span>
         </div>
     </div>
 
     <!-- Help Section -->
-    <input type='hidden' class='sheet-toggle' name='attr_help_enabled'/>
+    <input type='hidden' class='sheet-toggle' name='attr_sheet_help' value="1"/>
     <div class="sheet-toggle sheet-infomsg">
         <div class="sheet-space-between-centered">
             <div>
@@ -58,7 +56,7 @@
     </div>
 
     <!-- Config Section -->
-    <input type='hidden' class='sheet-toggle' name='attr_config_enabled'/>
+    <input type='hidden' class='sheet-toggle' name='attr_config' value="0"/>
     <div class="sheet-toggle">
         <!-- Sheet Settings -->
         {% include 'core/sheet_configurations.html' %}
