@@ -1,65 +1,66 @@
-<!-- Header -->
-<div class="sheet-sticky-header">
-    <div class="sheet-space-between">
-        <div>
-            <!-- Roll Options -->
-            <label class="sheet-left sheet-rmargin" data-i18n="rolls">Rolls</label>
-
-            <input type='hidden' class='sheet-checkbtn' name='attr_whisper_enabled' value="1"/>
-            <button type="action" class="sheet-checkbtn" name="act_whisper" data-i18n="whisper">Whisper</button>
-
-            <input type='hidden' class='sheet-checkbtn' name='attr_show_name_enabled' value="1"/>
-            <button type="action" class="sheet-checkbtn" name="act_show_name" data-i18n="show-name">Show Name</button>
-        </div>
-        <div>
-            <!-- Mode -->
-            <input type='hidden' class='sheet-checkbtn' name='attr_edit_enabled' value="1"/>
-            <button type="action" class="sheet-checkbtn" name="act_edit"><span class="sheet-pictos">p</span> <span data-i18n="edit-mode">Edit Mode</span></button>
-
-            <!-- Configuration Toggle -->
-            <input type='checkbox' name='attr_config' value="1"><span class="sheet-checkico">y</span>
-
-            <!-- Help Toggle -->
-            <input type="checkbox" name="attr_sheet_help" value="1" checked><span class="sheet-checkico">?</span>
-        </div>
-    </div>
-
-    <!-- Help Section -->
-    <input type='hidden' class='sheet-toggle' name='attr_sheet_help' value="1"/>
-    <div class="sheet-toggle sheet-infomsg">
-        <div class="sheet-space-between-centered">
-            <div>
-                <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
-                <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
-            </div>
-            <div>
-                <span data-i18n="recalc-notice">If your sheet values are incorrect, try clicking here.</span> <span> -> </span>
-                <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet">Recalculate Sheet</button>
-            </div>
-        </div>
-        <hr>
-        <p data-i18n="help-description">This is the help section covering the options bar and it's settings. It can be hidden or revealed at any time by clicking the question mark symbol in the upper-right.  Other help sections can be toggled with similar symbols found through-out the sheet.</p>
-        <label class="sheet-left" data-i18n="edit-mode">Edit Mode</label><br>
-        <p data-i18n="help-edit-info">Use edit mode when building and improving your sheet.  Anything labeled Base Mod or Other is provided permanent or semi-permanent modifications.  For example, the effects of ageing on a characteristic, an additional Action Point from a gift or skill improvements from experience and training.  When disabled the sheet is optimized for game play.  In this mode Temp modifiers are provided for temporary adjustments.  Magic buffs and penalties for example.</p>
-        <label class="sheet-left" data-i18n="whisper">Whisper</label><br>
-        <p data-i18n="help-whisper-info">Send roll results to the GM only.</p>
-        <label class="sheet-left" data-i18n="show-name">Show Name</label><br>
-        <p data-i18n="help-show-name-info">Show the name in roll results.</p>
-        <label class="sheet-left"><span class="sheet-pictos">y</span> <span data-i18n="configuration">Configuration</span></label><br>
-        <p data-i18n="help-configuration-info">Show options to change sheet type, enable or disable optional rules, and modify how the sheet works.</p>
-        <label class="sheet-left" data-i18n="links">Links</label><br>
+<div class="sheet-mythras-defaults">
+    <!-- Header -->
+    <div class="sheet-sticky-header">
         <div class="sheet-space-between">
-            <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug">Report a Bug</button>
-            <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum">Mythras Roll20 Forum</button>
-            <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author">Contact Sheet Author</button>
-        </div>
-    </div>
+            <div>
+                <!-- Roll Options -->
+                <label class="sheet-left sheet-rmargin" data-i18n="rolls">Rolls</label>
 
-    <!-- Config Section -->
-    <input type='hidden' class='sheet-toggle' name='attr_config' value="0"/>
-    <div class="sheet-toggle">
-        <!-- Sheet Settings -->
-        <!-- Sheet Type Selection -->
+                <input type='hidden' class='sheet-checkbtn' name='attr_whisper_enabled' value="1"/>
+                <button type="action" class="sheet-checkbtn" name="act_whisper" data-i18n="whisper">Whisper</button>
+
+                <input type='hidden' class='sheet-checkbtn' name='attr_show_name_enabled' value="1"/>
+                <button type="action" class="sheet-checkbtn" name="act_show_name" data-i18n="show-name">Show Name</button>
+            </div>
+            <div>
+                <!-- Mode -->
+                <input type='hidden' class='sheet-checkbtn' name='attr_edit_enabled' value="1"/>
+                <button type="action" class="sheet-checkbtn" name="act_edit"><span class="sheet-pictos">p</span> <span data-i18n="edit-mode">Edit Mode</span></button>
+
+                <!-- Configuration Toggle -->
+                <input type='checkbox' name='attr_config' value="1"><span class="sheet-checkico">y</span>
+
+                <!-- Help Toggle -->
+                <input type="checkbox" name="attr_sheet_help" value="1" checked><span class="sheet-checkico">?</span>
+            </div>
+        </div>
+
+        <!-- Help Section -->
+        <input type='hidden' class='sheet-toggle' name='attr_sheet_help' value="1"/>
+        <div class="sheet-toggle sheet-infomsg">
+            <div class="sheet-space-between-centered">
+                <div>
+                    <input type="text" class="sheet-hidden" name="attr_version" value="3.0" readonly>
+                    <label class="sheet-left" data-i18n="sheet-version">Sheet Version</label>&nbsp;<span name="attr_version"></span>
+                </div>
+                <div>
+                    <span data-i18n="recalc-notice">If your sheet values are incorrect, try clicking here.</span> <span> -> </span>
+                    <button type="action" name="act_recalc" class="sheet-action-btn sheet-text-center" data-i18n="recalculate-sheet">Recalculate Sheet</button>
+                </div>
+            </div>
+            <hr>
+            <p data-i18n="help-description">This is the help section covering the options bar and it's settings. It can be hidden or revealed at any time by clicking the question mark symbol in the upper-right.  Other help sections can be toggled with similar symbols found through-out the sheet.</p>
+            <label class="sheet-left" data-i18n="edit-mode">Edit Mode</label><br>
+            <p data-i18n="help-edit-info">Use edit mode when building and improving your sheet.  Anything labeled Base Mod or Other is provided permanent or semi-permanent modifications.  For example, the effects of ageing on a characteristic, an additional Action Point from a gift or skill improvements from experience and training.  When disabled the sheet is optimized for game play.  In this mode Temp modifiers are provided for temporary adjustments.  Magic buffs and penalties for example.</p>
+            <label class="sheet-left" data-i18n="whisper">Whisper</label><br>
+            <p data-i18n="help-whisper-info">Send roll results to the GM only.</p>
+            <label class="sheet-left" data-i18n="show-name">Show Name</label><br>
+            <p data-i18n="help-show-name-info">Show the name in roll results.</p>
+            <label class="sheet-left"><span class="sheet-pictos">y</span> <span data-i18n="configuration">Configuration</span></label><br>
+            <p data-i18n="help-configuration-info">Show options to change sheet type, enable or disable optional rules, and modify how the sheet works.</p>
+            <label class="sheet-left" data-i18n="links">Links</label><br>
+            <div class="sheet-space-between">
+                <button type="roll" class="sheet-link" name="roll_reportbug" value="Report a bug with the sheet here: https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues/new" data-i18n="report-a-bug">Report a Bug</button>
+                <button type="roll" class="sheet-link" name="roll_roll20forum" value="Visit the Mythras Roll20 forum here: https://www.tapatalk.com/groups/designmechanism/mythras-roll20-f19/" data-i18n="mythras-roll20-forum">Mythras Roll20 Forum</button>
+                <button type="roll" class="sheet-link" name="roll_contactsheetauthor" value="Visit the author's profile and send a private message: https://app.roll20.net/users/103705" data-i18n="contact-sheet-author">Contact Sheet Author</button>
+            </div>
+        </div>
+
+        <!-- Config Section -->
+        <input type='hidden' class='sheet-toggle' name='attr_config' value="0"/>
+        <div class="sheet-toggle">
+            <!-- Sheet Settings -->
+            <!-- Sheet Type Selection -->
 <label class="sheet-left" data-i18n="sheet-type">Sheet Type</label>&nbsp;
 <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-usrinput" name="attr_type">
     <option  value="battle-unit" data-i18n-list-item="battle-unit" data-i18n="battle-unit">Battle Unit</option>
@@ -221,18 +222,18 @@
         </div>
     </div>
 </div>
+        </div>
+
+        <hr>
     </div>
 
-    <hr>
-</div>
+    <!-- Edit Toogle -->
+    <input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit_enabled' value="1" checked>
 
-<!-- Edit Toogle -->
-<input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit_enabled' value="1" checked>
-
-<!-- Sheet Types -->
-<input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
-<div class="sheet-battle-unit">Battle Unit</div>
-<div class="sheet-character">
+    <!-- Sheet Types -->
+    <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
+    <div class="sheet-battle-unit">Battle Unit</div>
+    <div class="sheet-character">
     <!-- Character Header -->
     <div class="sheet-flex">
         <!-- Info Section -->
@@ -570,7 +571,7 @@
                 </div>
             </div>
 
-            <div class="sheet-table sheet-full-width">
+            <div class="sheet-table">
                 <div class="sheet-tr">
                     <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_location}" name="roll_hit_location" value="@{roll_display}&{template:hit-location}
                             {{ name=^{hit-location-u}}} @{name_display} {{ low_roll=[[ 1d10 ]]}} {{ roll=[[ 1d20 ]]}}
@@ -618,7 +619,7 @@
                             {{ loc12_end=[[ @{location12_table_end} ]]}} {{ loc12_block=[[ @{location12_block} ]]}}
                             {{ loc12_ap=@{location12_ap}}} {{ loc12_hp=@{location12_hp}}}
                             {{ loc12_hp_max=@{location12_hp|max}}}">1d20</button></div>
-                    <div class="sheet-th sheet-full-width"><label data-i18n="location">Location</label></div>
+                    <div class="sheet-th sheet-full-width"><span>Location</span></div>
                     <div class="sheet-th sheet-edit"><label data-i18n="base">Base</label></div>
                     <div class="sheet-th sheet-edit"><label data-i18n="other">Other</label></div>
                     <div class="sheet-th sheet-play"><label class="sheet-pictos-three">b</label></div>
@@ -885,10 +886,10 @@
         
     </div>
 </div>
-<div class="sheet-ship">Ship</div>
-
-
-<!-- M-Space Star System -->
+    <div class="sheet-ship">Ship</div>
+    
+    
+    <!-- M-Space Star System -->
 <div class="sheet-star-system sheet-flex">
     <div class="sheet-section sheet-rmargin">
         <h2 data-i18n="stats">Stats</h2>
@@ -949,6 +950,7 @@
             </fieldset>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Roll Templates -->

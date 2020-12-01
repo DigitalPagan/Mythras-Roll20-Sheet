@@ -1,5 +1,10 @@
 /* =Generic Styles reused over the sheet= */
 /* Sheet Defaults*/
+div.sheet-mythras-defaults {
+    font-family: "Arial", sans-serif;
+    font-size: 1em;
+}
+
 h1 {
     font-size: 2em;
     font-family: Palatino, serif;
@@ -255,7 +260,9 @@ button.sheet-action-btn {
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     padding: 2px 5px !important;
-    height: 1.5em;
+    height: 1em;
+    line-height: 1em;
+    vertical-align: middle;
 }
 button[type=roll] {
     box-sizing: border-box;
@@ -384,9 +391,12 @@ button.sheet-checkbtn {
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     margin: 0 5px 0 0 !important;
-    padding: 2px;
-    line-height: 1;
+    padding: 0 2px 0;
+    box-sizing: border-box;
     height: 1.25em;
+    overflow: hidden;
+    line-height: 0;
+    vertical-align: middle;
 }
 
 input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
@@ -487,6 +497,7 @@ label {
     color: inherit;
     background: inherit;
     text-align: center;
+    vertical-align: middle;
 }
 label.sheet-under {
     text-align: center;
@@ -536,11 +547,13 @@ div.sheet-th {
     background: dimgray;
     color: lightgray;
     white-space: nowrap;
+    vertical-align: middle;
+    font-weight: bold;
 }
 div.sheet-td {
     display: table-cell;
     /*text-align: center;*/
-    padding: 1px 1px 0;
+    padding: 0 1px 0;
     white-space: nowrap;
 }
 /*table {
