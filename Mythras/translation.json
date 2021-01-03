@@ -1021,5 +1021,12 @@
     "whisper": "Whisper",
     "show-name": "Show Name",
     "links": "Links",
-    "corporeal": "Corporeal"
+    "corporeal": "Corporeal",
+    "augmentation": "Augmentation",
+    "101+-penalty": "101+ Penalty",
+    "base1": "Base1",
+    "base2": "Base2",
+    "prompt": "Prompt",
+    "per-skill": "Per skill",
+    "set": "Set"
 }

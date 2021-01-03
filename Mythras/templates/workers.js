@@ -1,14 +1,24 @@
-/* Common Scripts */
-const configCheckboxList = ["edit", "whisper", "show_name"];
-configCheckboxList.forEach(function(button) {
-    on(`clicked:${button}`, function() {
-        const flag = `${button}_enabled`;
-        // Check the current value of the hidden flag.
-        getAttrs([flag], function(v) {
-            // Update the value of the hidden flag to "1" for checked or "0" for unchecked.
-            setAttrs({
-                [flag]: v[flag] !== "1" ? "1" : "0"
-            });
+/* Option Bar Scripts */
+on(`clicked:edit`, function() {
+    getAttrs(['edit'], function(v) {
+        setAttrs({
+            ['edit']: v['edit'] !== "1" ? "1" : "0"
+        });
+    });
+});
+
+on(`clicked:roll_display`, function() {
+    getAttrs(['roll_display'], function(v) {
+        setAttrs({
+            ['roll_display']: v['roll_display'] !== "/w gm" ? "/w gm" : " "
+        });
+    });
+});
+
+on(`clicked:name_display`, function() {
+    getAttrs(['name_display'], function(v) {
+        setAttrs({
+            ['name_display']: v['name_display'] !== "{{'{{character=@{character_name}}}'}}" ? "{{'{{character=@{character_name}}}'}}" : " "
         });
     });
 });

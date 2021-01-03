@@ -1,5 +1,5 @@
 div.sheet-character {
-    min-width: 850px;
+    min-width: 834px;
 }
 
 /* Character Header Styles */
@@ -172,29 +172,6 @@ select.sheet-hit-location {
     width: 120px;
 }
 
-/* Hide individual locations per hit tables */
-input[type="checkbox"].sheet-location-display-loc2to7-toggle:not(:checked) ~ div.sheet-location-display-loc2to7 {
-    display: none;
-}
-input[type="checkbox"].sheet-location-display-loc8-toggle:not(:checked) + div.sheet-location-display-loc8 {
-    display: none;
-}
-input[type="checkbox"].sheet-location-display-loc9-toggle:not(:checked) + div.sheet-location-display-loc9 {
-    display: none;
-}
-input[type="checkbox"].sheet-location-display-loc10-toggle:not(:checked) + div.sheet-location-display-loc10 {
-    display: none;
-}
-input[type="checkbox"].sheet-location-display-loc11-toggle:not(:checked) + div.sheet-location-display-loc11 {
-    display: none;
-}
-input[type="checkbox"].sheet-location-display-loc12-toggle:not(:checked) + div.sheet-location-display-loc12 {
-    display: none;
-}
-input[type="checkbox"].sheet-location-display-toggle:not(:checked) + .sheet-location-display {
-    display: none;
-}
-
 /* Wounds */
 textarea.sheet-hit-locations-note {
     height: 195px;
@@ -217,9 +194,84 @@ textarea.sheet-hit-locations-note-9 {
     margin-bottom: 5px;
 }
 
-/* Abilities Tab*/
+/* Abilities Tab */
+div.sheet-ability-name {
+    width: 168px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-type {
+    width: 125px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-skill {
+    width: 125px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-skillid {
+    width: 150px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+
+select.sheet-shaping-trait {
+    width: 100px;
+}
 
 /* Equipment Tab*/
+div.sheet-equipment-location {
+    width: 80px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Armor */
+.sheet-armor-field {
+    width: 130px;
+}
+
+/* Weapons */
+div.sheet-weapon-name {
+    width: 115px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+div.sheet-weapon-damage {
+    width: 64px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+div.sheet-weapon-size {
+    width: 38px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+div.sheet-weapon-reach {
+    width: 72px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+div.sheet-weapon-hp {
+    width: 55px;
+    padding: 1px 1px 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Gear */
+.sheet-gear-note {
+    height: 4em;
+}
 
 /* Background Tab*/
 

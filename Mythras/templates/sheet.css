@@ -3,6 +3,8 @@
 div.sheet-mythras-defaults {
     font-family: "Arial", sans-serif;
     font-size: 1em;
+    line-height: 1.25em;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -43,23 +45,28 @@ h4 {
     line-height: 1em;
 }
 
+/* Make the delete buttons appear above the detail toggles */
+.repcontainer .itemcontrol {
+    z-index: 9999;
+}
+
 /* Tweak repeating section buttons so they have a bottom margin and dont overflow when in edit mode. */
-div[class^="repcontrol"] {
+/*div[class^="repcontrol"] {
     margin-bottom: 5px;
 }
 div[class="repcontainer editmode"] ~ div[class^="repcontrol"] button[class="btn repcontrol_add"] {
     display: inline-block!important;
     visibility: hidden;
-}
+}*/
 /* Make repeating section inline-block for display modes */
-fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
+/*fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
     display: inline-block;
-}
+}*/
 
 /* Make the delete buttons appear above the detail toggles */
-.repcontainer .itemcontrol {
+/*.repcontainer .itemcontrol {
     z-index: 9999;
-}
+}*/
 
 /* Layout */
 div.sheet-sticky-header {
@@ -79,13 +86,27 @@ div.sheet-space-between-centered {
     justify-content: space-between;
     align-items: center;
 }
+div.sheet-flex-centered {
+    display: flex;
+    align-items: center;
+}
 
 
 hr {
     margin: 5px 0;
 }
 
-input.sheet-toggle:not([value="1"]) + div.sheet-toggle {
+
+input.sheet-toggle:not([value="1"]) + div.sheet-toggle,
+input[type="checkbox"].sheet-toggle:not(:checked) + div.sheet-toggle {
+    display: none;
+}
+input.sheet-wide-toggle:not([value="1"]) ~ div.sheet-wide-toggle,
+input[type="checkbox"].sheet-wide-toggle:not(:checked) ~ div.sheet-wide-toggle {
+    display: none;
+}
+input.sheet-deep-toggle:not([value="1"]) ~ div sheet-deep-toggle,
+input[type="checkbox"].sheet-deep-toggle:not(:checked) ~ div sheet-deep-toggle {
     display: none;
 }
 
@@ -121,7 +142,7 @@ div.sheet-shrink {
     text-align-last:center;
 }
 .sheet-text-left {
-    text-align: left;
+    text-align: left !important;
 }
 .sheet-text-right {
     text-align: right !important
@@ -182,6 +203,7 @@ div.sheet-shrink {
 .sheet-button-width {
     width: 27px !important;
     flex-shrink: 0;
+    box-sizing: border-box;
 }
 .sheet-full-width {
     width: 100% !important;
@@ -247,30 +269,33 @@ a.repcontrol_move {
 }
 
 /* Buttons */
-/*button {
-    padding: 0 5px 0;
-    margin: 0!important;
-    height: 1.5em;!important;
-    font-size: 1em !important;
-    line-height: 1em;
-}*/
-button.sheet-action-btn {
-    border: solid 1px gray;
+button {
     border-radius: 5px;
-    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
-    color: black;
-    padding: 2px 5px !important;
-    height: 1em;
-    line-height: 1em;
-    vertical-align: middle;
-}
-button[type=roll] {
     box-sizing: border-box;
-    padding: 0;
+    height: 1.25em;
+    overflow: hidden;
+    line-height: 0;
+    vertical-align: middle;
+    font-size: 1em !important;
 }
 button[type=action] {
-    box-sizing: border-box;
-    padding: 0;
+    border: solid 1px gray;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+    margin: 0 5px 0 0 !important;
+    padding: 0 2px 0 !important;
+}
+button[type=action].sheet-action-btn:active {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
+button[type=roll] {
+    border: solid 1px gray;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+    padding: 0 2px 0 !important;
+    margin: 0 !important;
 }
 button[type=roll].sheet-nodie::before {
     content: '';
@@ -278,16 +303,14 @@ button[type=roll].sheet-nodie::before {
 }
 button[type=roll].sheet-d100::before {
     font-family: 'dicefontd10';
-    vertical-align: text-bottom;
-    font-size: 1.75em;
+    font-size: 1.75em !important;
 }
 button[type=roll].sheet-effect::before {
     font-family: 'pictos';
-    vertical-align: text-bottom;
     font-size: 1.25em;
     content: "e";
 }
-button.sheet-link {
+button[type=roll].sheet-link {
     padding: 0!important;
     margin: 0!important;
     background: none!important;
@@ -299,7 +322,31 @@ button.sheet-link {
     text-shadow: none;
     line-height: inherit;
     height: inherit;
-    font-size: 1em !important;
+}
+button[type=roll].sheet-link::before {
+    font-family: "Arial", sans-serif;
+    content: '';
+}
+button[type=roll].sheet-id {
+    padding: 0!important;
+    margin: 0!important;
+    background: none!important;
+    box-shadow: none!important;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    text-shadow: none;
+    line-height: inherit;
+    height: inherit;
+    font-family: "Pictos";
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+button[type=roll].sheet-id::before {
+    font-family: "Arial", sans-serif;
+    content: '';
 }
 button.sheet-link-label {
     font-weight: bold;
@@ -309,12 +356,15 @@ button.sheet-link-label-left::after {
     content: ':';
     text-decoration: none;
 }
-button.sheet-link:hover {
+button.sheet-link:hover,
+button.sheet-id:hover {
     color: #069;
 }
-button[type=roll].sheet-link::before {
-    font-family: "Arial", sans-serif;
-    content: '';
+div.sheet-hover-btn {
+    position: relative;
+}
+div.sheet-hover-btn:hover button {
+    display: inline;
 }
 
 /* Inputs */
@@ -348,11 +398,14 @@ button[type=roll].sheet-link::before {
     border-color: black;
 }
 input {
-    height: 1.25em;
-    font-size: 1em;
+    height: 1.25em !important;
+    line-height: 1.25em !important;
+    font-size: 1.1em;
     margin: 0;
     padding: 0;
     text-align: center;
+    -moz-appearance: none;
+    box-sizing: border-box;
 }
 /*input.sheet-value {
     border: none;
@@ -387,28 +440,36 @@ input[type='number'] {
 /* Checkbtns */
 button.sheet-checkbtn {
     border: solid 1px gray;
-    border-radius: 5px;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     margin: 0 5px 0 0 !important;
     padding: 0 2px 0;
-    box-sizing: border-box;
-    height: 1.25em;
-    overflow: hidden;
-    line-height: 0;
-    vertical-align: middle;
 }
-
-input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
+input.sheet-checkbtn:not([value="0"]) + button.sheet-checkbtn {
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
     border: solid 1px black;
 }
 
-/* Checkboxes and checkicos */
+button.sheet-inverted-checkbtn {
+    border: solid 1px black;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    margin: 0 5px 0 0 !important;
+    padding: 0 2px 0;
+}
+input.sheet-checkbtn[value="0"]  + button.sheet-inverted-checkbtn,
+input.sheet-checkbtn[value=" "] + button.sheet-inverted-checkbtn {
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+    border: solid 1px gray;
+}
+
+/* Checkboxes, checkicos and radios */
 /* Hide the default checkbox and set predictable sizing*/
-input[type="checkbox"]
-{
+input[type="checkbox"],
+input[type="radio"] {
     opacity: 0;
     width: 16px;
     height: 16px;
@@ -458,10 +519,71 @@ input[type="checkbox"] + span.sheet-checkico
     border: none;
     color: darkgray;
     font-size: 1em;
+    font-weight: bold;
 }
 input[type="checkbox"]:checked + span.sheet-checkico
 {
     color: inherit;
+}
+
+/* Override stylized span to be a checkradio */
+input[type="checkbox"] + span.sheet-checkradio
+{
+    border: solid 1px #a8a8a8;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    color: transparent;
+    justify-content: center;
+    align-items: center;
+
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
+    margin: 1px 1px 1px -15px;
+    position: absolute;
+
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+input[type="checkbox"]:checked + span.sheet-checkradio
+{
+    background-image: radial-gradient(black 0%, transparent 75%);
+}
+
+/* Stylized span to look like radio */
+input[type="radio"] + span
+{
+    border: solid 1px #a8a8a8;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    color: transparent;
+    justify-content: center;
+    align-items: center;
+
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
+    margin: 1px 1px 1px -15px;
+    position: absolute;
+
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+input[type="radio"]:checked + span
+{
+    background-image: radial-gradient(black 0%, transparent 75%);
 }
 
 textarea {
@@ -472,16 +594,20 @@ textarea {
 }
 
 select {
-    margin: 0 !important;
-    height: 1.25em !important;
-    line-height: 1.25em !important;
-    font-size: 1em !important;
-    padding: 0 0 0!important;
-    box-sizing: border-box!important;
+    box-sizing: border-box;
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
+    font-size: 1.1em !important;
 }
+select.sheet-disabled {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 1.25em !important;
+    line-height: 1.25em !important;
+    font-size: 1.1em !important;
+}
+
 span.sheet-input-unit{
     margin-left: -25px;
 }
@@ -499,6 +625,11 @@ label {
     text-align: center;
     vertical-align: middle;
 }
+label.sheet-skill {
+    text-align: left;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
 label.sheet-under {
     text-align: center;
     font-size: .85em;
@@ -510,13 +641,6 @@ label.sheet-left {
 label.sheet-left::after {
     content: ':'
 }
-/*label.sheet-right {
-    display: inline;
-    font-size: 1em;
-    margin: 0 0 0 5px;
-    padding: 0;
-    text-align: left;
-}*/
 label.sheet-checkbox {
     display: inline;
     font-size: 1em;
@@ -537,13 +661,19 @@ div.sheet-table {
     margin-bottom: 5px;
     width: 100%;
 }
-div.sheet-tr {
+
+div.sheet-tr,
+div.sheet-table .repitem {
     display: table-row;
 }
+div.sheet-table .repcontainer {
+    display: table-row-group;
+}
+
 div.sheet-th {
     display: table-cell;
     text-align: center;
-    padding: 0 1px 0;
+    padding: 1px;
     background: dimgray;
     color: lightgray;
     white-space: nowrap;
@@ -552,28 +682,15 @@ div.sheet-th {
 }
 div.sheet-td {
     display: table-cell;
-    /*text-align: center;*/
-    padding: 0 1px 0;
-    white-space: nowrap;
-}
-/*table {
-    margin-bottom: 5px;
-}
-th {
     text-align: center;
-    padding: 0 1px 0;
-    background: dimgray;
-    color: lightgray;
+    vertical-align: middle;
+    padding: 1px;
     white-space: nowrap;
 }
-td {
-    text-align: center;
-    padding: 1px 1px 0;
-    white-space: nowrap;
-}*/
 div.sheet-bottom-border {
     border-bottom: 1px solid black;
 }
+
 
 div.sheet-safemsg {
     border: 1px solid darkgreen;
@@ -621,30 +738,6 @@ input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
 .sheet-typetoggle:not([value="star_system"]) ~ div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
-    display: none;
-}
-
-/* Details Toggle */
-input[type="checkbox"].sheet-details + span::before {
-    margin-left: 7px;
-    margin-right: -4px;
-    line-height: 1em;
-    text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    font-family: 'Pictos';
-    content: "E";
-    color: lightgray;
-    width: 1em;
-    height: 1em;
-    font-size: 1.2em;
-    border: none;
-}
-input[type="checkbox"]:checked.sheet-details + span::before {
-    color: black;
-}
-input[type="checkbox"].sheet-details:not(:checked) ~ div.sheet-details,
-input[type="checkbox"].sheet-details:not(:checked) ~ div .sheet-details {
     display: none;
 }
 

@@ -2,19 +2,50 @@
     <!-- Header -->
     <div class="sheet-sticky-header">
         <div class="sheet-space-between">
-            <div>
+            <div class="sheet-flex">
                 <!-- Roll Options -->
-                <label class="sheet-left sheet-rmargin" data-i18n="rolls">Rolls</label>
+                <div>
+                    <input type='hidden' class='sheet-checkbtn' name='attr_roll_display' value="/w gm"/>
+                    <button type="action" class="sheet-inverted-checkbtn" name="act_roll_display" data-i18n="whisper">Whisper</button>
+                </div>
 
-                <input type='hidden' class='sheet-checkbtn' name='attr_whisper_enabled' value="1"/>
-                <button type="action" class="sheet-checkbtn" name="act_whisper" data-i18n="whisper">Whisper</button>
+                <div>
+                    <input type='hidden' class='sheet-checkbtn' name='attr_name_display' value="{{'{{character=@{character_name}}}'}}"/>
+                    <button type="action" class="sheet-inverted-checkbtn" name="act_name_display" data-i18n="show-name">Show Name</button>
+                </div>
 
-                <input type='hidden' class='sheet-checkbtn' name='attr_show_name_enabled' value="1"/>
-                <button type="action" class="sheet-checkbtn" name="act_show_name" data-i18n="show-name">Show Name</button>
+                <div class="sheet-rmargin"><label class="sheet-left" data-i18n="augmentation">Augmentation</label></div>
+                <div class="sheet-rmargin">
+                    <select style="width: auto" class="sheet-usrinput" name="attr_augmentation">
+                        <option value="0" data-i18n="none" selected>None</option>
+                        <option value="?{Augmentation|0}" data-i18n="prompt">Prompt</option>
+                        <option value="@{skill_augmentation}" data-i18n="per-skill">Per skill</option>
+                        <option value="@{set_augmentation}" data-i18n="set">Set</option>
+                    </select>
+
+                </div>
+                <div class="sheet-rmargin">
+                    <input type="number" class="sheet-number-width-sm sheet-usrinput" name="attr_set_augmentation" value="0">
+                </div>
+
+                <div class="sheet-rmargin"><label class="sheet-left" data-i18n="101+-penalty">101+ Penalty</label></div>
+                <div class="sheet-rmargin">
+                    <select style="width: auto" class="sheet-usrinput" name="attr_penalty">
+                        <option value="0" data-i18n="none" selected>None</option>
+                        <option value="?{101+ Penalty|0}" data-i18n="prompt">Prompt</option>
+                        <option value="@{set_penalty}" data-i18n="set">Set</option>
+                    </select>
+
+                </div>
+                <div class="sheet-rmargin">
+                    <input type="number" class="sheet-number-width-sm sheet-usrinput" name="attr_set_penalty" value="0">
+                </div>
+
+
             </div>
             <div>
                 <!-- Mode -->
-                <input type='hidden' class='sheet-checkbtn' name='attr_edit_enabled' value="1"/>
+                <input type='hidden' class='sheet-checkbtn' name='attr_edit' value="1"/>
                 <button type="action" class="sheet-checkbtn" name="act_edit"><span class="sheet-pictos">p</span> <span data-i18n="edit-mode">Edit Mode</span></button>
 
                 <!-- Configuration Toggle -->
@@ -67,7 +98,7 @@
     </div>
 
     <!-- Edit Toogle -->
-    <input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit_enabled' value="1" checked>
+    <input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit' value="1" checked>
 
     <!-- Sheet Types -->
     <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
@@ -81,3 +112,6 @@
 
 <!-- Roll Templates -->
 {% include 'roll_templates/default.html' %}
+{% include 'roll_templates/initiative.html' %}
+{% include 'roll_templates/skill.html' %}
+{% include 'roll_templates/weapon.html' %}

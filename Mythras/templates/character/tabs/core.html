@@ -13,10 +13,10 @@
             <div class="sheet-table sheet-full-width">
                 <div class="sheet-tr">
                     <div class="sheet-th"></div>
-                    <div class="sheet-th sheet-edit"><label data-i18n="base">Base</label></div>
-                    <div class="sheet-th sheet-edit"><label data-i18n="other">Other</label></div>
-                    <div class="sheet-th sheet-play"><label data-i18n="temp">Temp</label></div>
-                    <div class="sheet-th"><label data-i18n="total">Total</label></div>
+                    <div class="sheet-th sheet-edit" data-i18n="base">Base</div>
+                    <div class="sheet-th sheet-edit" data-i18n="other">Other</div>
+                    <div class="sheet-th sheet-play" data-i18n="temp">Temp</div>
+                    <div class="sheet-th" data-i18n="total">Total</div>
                 </div>
                 <div class="sheet-tr sheet-corporeal">
                     <div class="sheet-td sheet-char-label"><label class="sheet-left" data-i18n="str-u">STR</label></div>
@@ -77,11 +77,11 @@
 
             <div class="sheet-table sheet-full-width" data-i18n-list="attribute-order">
                 <div class="sheet-tr">
-                    <div class="sheet-th"><label data-i18n="attribute">Attribute</label></div>
-                    <div class="sheet-th sheet-edit"><label data-i18n="base">Base</label></div>
-                    <div class="sheet-th sheet-edit"><label data-i18n="other">Other</label></div>
-                    <div class="sheet-th sheet-play"><label data-i18n="temp">Temp</label></div>
-                    <div class="sheet-th"><label data-i18n="total">Total</label></div>
+                    <div class="sheet-th" data-i18n="attribute">Attribute</div>
+                    <div class="sheet-th sheet-edit" data-i18n="base">Base</div>
+                    <div class="sheet-th sheet-edit" data-i18n="other">Other</div>
+                    <div class="sheet-th sheet-play" data-i18n="temp">Temp</div>
+                    <div class="sheet-th" data-i18n="total">Total</div>
                 </div>
                 <div class="sheet-tr" data-i18n-list-item="action_points">
                     <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="action-points">Action Points</label></div>
@@ -98,8 +98,7 @@
                     <div class="sheet-td sheet-text-right"><span class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{conflict_pool}" name="attr_conflict_pool" value="11">/</span><input type="number" class="sheet-impusrinput sheet-number-width" title="@{conflict_pool|max}" name="attr_conflict_pool_max" value="11"></div>
                 </div>
                 <div class="sheet-tr sheet-spirit" data-i18n-list-item="spirit_damage">
-                    <div class="sheet-td sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:weapon}
-                            {{ name=^{spirit-damage-u}}} @{name_display} {{ damage=[[@{spirit_damage}]]}}'}}" data-i18n="damage">Damage</button></div>
+                    <div class="sheet-td sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:weapon} {{name=^{spirit-damage}}} @{name_display} {{ damage=[[@{spirit_damage}]]}}'}}" data-i18n="damage">Damage</button></div>
                     <div class="sheet-td sheet-edit"></div>
                     <div class="sheet-td sheet-edit"></div>
                     <div class="sheet-td sheet-play"></div>
@@ -127,13 +126,12 @@
                     <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{healing_rate}" name="attr_healing_rate" value="2" readonly></div>
                 </div>
                 <div class="sheet-tr" data-i18n-list-item="initiative">
-                    <div class="sheet-td sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{initiative}" name="roll_initiative" value="{{'@{roll_display}&{template:initiative}
-                            {{ name=^{initiative-u}}} @{name_display}
-                            {{ roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}'}}" data-i18n="initiative">Initiative</button></div>
+                    <div class="sheet-td sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{initiative}" name="roll_initiative" value="{{'@{roll_display}&{template:initiative} @{name_display} {{name=^{initiative}}} {{roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}'}}" data-i18n="initiative">Initiative</button></div>
                     <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{initiative_bonus_base}" name="attr_initiative_bonus_base" value="12" readonly></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_other}" name="attr_initiative_bonus_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_temp}" name="attr_initiative_bonus_temp" value="0"></div>
                     <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{initiative_bonus}" name="attr_initiative_bonus" value="12" readonly></div>
+                    <input type="hidden" name="attr_init_dice" value="1d10">
                 </div>
                 <div class="sheet-tr sheet-spirit" data-i18n-list-item="intensity">
                     <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="intensity">Intensity</label></div>
@@ -201,7 +199,7 @@
         
         <!-- Health -->
         <div class="sheet-corporeal sheet-section sheet-grow">
-            <div class="sheet-flex">
+            <div class="sheet-flex-centered">
                 <h2 data-i18n="health-and-armor">Health & Armor</h2>
                 <div class="sheet-edit sheet-grow sheet-text-right sheet-complex-combat">
                     <label class="sheet-left" data-18n="hit-locations">Hit Locations</label>
@@ -238,58 +236,13 @@
 
             <div class="sheet-table">
                 <div class="sheet-tr">
-                    <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_location}" name="roll_hit_location" value="{{'@{roll_display}&{template:hit-location}
-                            {{ name=^{hit-location-u}}} @{name_display} {{ low_roll=[[ 1d10 ]]}} {{ roll=[[ 1d20 ]]}}
-                            {{ high_roll=[[ 1d10+10 ]]}} {{ loc1_name=@{location1_name}}}
-                            {{ loc1_start=[[ @{location1_table_start} ]]}} {{ loc1_end=[[ @{location1_table_end} ]]}}
-                            {{ loc1_block=[[ @{location1_block} ]]}} {{ loc1_ap=@{location1_ap}}}
-                            {{ loc1_hp=@{location1_hp}}} {{ loc1_hp_max=@{location1_hp|max}}}
-                            {{ loc2_name=@{location2_name}}} {{ loc2_start=[[ @{location2_table_start} ]]}}
-                            {{ loc2_end=[[ @{location2_table_end} ]]}} {{ loc2_block=[[ @{location2_block} ]]}}
-                            {{ loc2_ap=@{location2_ap}}} {{ loc2_hp=@{location2_hp}}}
-                            {{ loc2_hp_max=@{location2_hp|max}}} {{ loc3_name=@{location3_name}}}
-                            {{ loc3_start=[[ @{location3_table_start} ]]}} {{ loc3_end=[[ @{location3_table_end} ]]}}
-                            {{ loc3_block=[[ @{location3_block} ]]}} {{ loc3_ap=@{location3_ap}}}
-                            {{ loc3_hp=@{location3_hp}}} {{ loc3_hp_max=@{location3_hp|max}}}
-                            {{ loc4_name=@{location4_name}}} {{ loc4_start=[[ @{location4_table_start} ]]}}
-                            {{ loc4_end=[[ @{location4_table_end} ]]}} {{ loc4_block=[[ @{location4_block} ]]}}
-                            {{ loc4_ap=@{location4_ap}}} {{ loc4_hp=@{location4_hp}}}
-                            {{ loc4_hp_max=@{location4_hp|max}}} {{ loc5_name=@{location5_name}}}
-                            {{ loc5_start=[[ @{location5_table_start} ]]}} {{ loc5_end=[[ @{location5_table_end} ]]}}
-                            {{ loc5_block=[[ @{location5_block} ]]}} {{ loc5_ap=@{location5_ap}}}
-                            {{ loc5_hp=@{location5_hp}}} {{ loc5_hp_max=@{location5_hp|max}}}
-                            {{ loc6_name=@{location6_name}}} {{ loc6_start=[[ @{location6_table_start} ]]}}
-                            {{ loc6_end=[[ @{location6_table_end} ]]}} {{ loc6_block=[[ @{location6_block} ]]}}
-                            {{ loc6_ap=@{location6_ap}}} {{ loc6_hp=@{location6_hp}}}
-                            {{ loc6_hp_max=@{location6_hp|max}}} {{ loc7_name=@{location7_name}}}
-                            {{ loc7_start=[[ @{location7_table_start} ]]}} {{ loc7_end=[[ @{location7_table_end} ]]}}
-                            {{ loc7_block=[[ @{location7_block} ]]}} {{ loc7_ap=@{location7_ap}}}
-                            {{ loc7_hp=@{location7_hp}}} {{ loc7_hp_max=@{location7_hp|max}}}
-                            {{ loc8_name=@{location8_name}}} {{ loc8_start=[[ @{location8_table_start} ]]}}
-                            {{ loc8_end=[[ @{location8_table_end} ]]}} {{ loc8_block=[[ @{location8_block} ]]}}
-                            {{ loc8_ap=@{location8_ap}}} {{ loc8_hp=@{location8_hp}}}
-                            {{ loc8_hp_max=@{location8_hp|max}}} {{ loc9_name=@{location9_name}}}
-                            {{ loc9_start=[[ @{location9_table_start} ]]}} {{ loc9_end=[[ @{location9_table_end} ]]}}
-                            {{ loc9_block=[[ @{location9_block} ]]}} {{ loc9_ap=@{location9_ap}}}
-                            {{ loc9_hp=@{location9_hp}}} {{ loc9_hp_max=@{location9_hp|max}}}
-                            {{ loc10_name=@{location10_name}}} {{ loc10_start=[[ @{location10_table_start} ]]}}
-                            {{ loc10_end=[[ @{location10_table_end} ]]}} {{ loc10_block=[[ @{location10_block} ]]}}
-                            {{ loc10_ap=@{location10_ap}}} {{ loc10_hp=@{location10_hp}}}
-                            {{ loc10_hp_max=@{location10_hp|max}}} {{ loc11_name=@{location11_name}}}
-                            {{ loc11_start=[[ @{location11_table_start} ]]}}
-                            {{ loc11_end=[[ @{location11_table_end} ]]}} {{ loc11_block=[[ @{location11_block} ]]}}
-                            {{ loc11_ap=@{location11_ap}}} {{ loc11_hp=@{location11_hp}}}
-                            {{ loc11_hp_max=@{location11_hp|max}}} {{ loc12_name=@{location12_name}}}
-                            {{ loc12_start=[[ @{location12_table_start} ]]}}
-                            {{ loc12_end=[[ @{location12_table_end} ]]}} {{ loc12_block=[[ @{location12_block} ]]}}
-                            {{ loc12_ap=@{location12_ap}}} {{ loc12_hp=@{location12_hp}}}
-                            {{ loc12_hp_max=@{location12_hp|max}}}'}}">1d20</button></div>
-                    <div class="sheet-th sheet-full-width"><span>Location</span></div>
-                    <div class="sheet-th sheet-edit"><label data-i18n="base">Base</label></div>
-                    <div class="sheet-th sheet-edit"><label data-i18n="other">Other</label></div>
-                    <div class="sheet-th sheet-play"><label class="sheet-pictos-three">b</label></div>
-                    <div class="sheet-th sheet-play"><label data-i18n="ap">AP</label></div>
-                    <div class="sheet-th"><label data-i18n="hp">HP</label></div>
+                    <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_location}" name="roll_hit_location" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit-location}}} {{low_roll=[[ 1d10 ]]}} {{roll=[[ 1d20 ]]}} {{high_roll=[[ 1d10+10 ]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[ @{location1_table_start} ]]}} {{loc1_end=[[ @{location1_table_end} ]]}} {{loc1_block=[[ @{location1_block} ]]}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[ @{location2_table_start} ]]}} {{loc2_end=[[ @{location2_table_end} ]]}} {{loc2_block=[[ @{location2_block} ]]}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[ @{location3_table_start} ]]}} {{loc3_end=[[ @{location3_table_end} ]]}} {{loc3_block=[[ @{location3_block} ]]}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[ @{location4_table_start} ]]}} {{loc4_end=[[ @{location4_table_end} ]]}} {{loc4_block=[[ @{location4_block} ]]}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[ @{location5_table_start} ]]}} {{loc5_end=[[ @{location5_table_end} ]]}} {{loc5_block=[[ @{location5_block} ]]}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[ @{location6_table_start} ]]}} {{loc6_end=[[ @{location6_table_end} ]]}} {{loc6_block=[[ @{location6_block} ]]}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[ @{location7_table_start} ]]}} {{loc7_end=[[ @{location7_table_end} ]]}} {{loc7_block=[[ @{location7_block} ]]}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[ @{location8_table_start} ]]}} {{loc8_end=[[ @{location8_table_end} ]]}} {{loc8_block=[[ @{location8_block} ]]}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[ @{location9_table_start} ]]}} {{loc9_end=[[ @{location9_table_end} ]]}} {{loc9_block=[[ @{location9_block} ]]}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[ @{location10_table_start} ]]}} {{loc10_end=[[ @{location10_table_end} ]]}} {{loc10_block=[[ @{location10_block} ]]}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[ @{location11_table_start} ]]}} {{loc11_end=[[ @{location11_table_end} ]]}} {{loc11_block=[[ {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[ @{location12_table_start} ]]}} {{loc12_end=[[ @{location12_table_end} ]]}} {{loc12_block=[[ @{location12_block} ]]}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}">1d20</button></div>
+                    <div class="sheet-th sheet-full-width" data-i18n="location">Location</div>
+                    <div class="sheet-th sheet-edit" data-i18n="base">Base</div>
+                    <div class="sheet-th sheet-edit" data-i18n="other"><label >Other</label></div>
+                    <div class="sheet-th sheet-play sheet-pictos-three">b</div>
+                    <div class="sheet-th sheet-play" data-i18n="ap">AP</div>
+                    <div class="sheet-th" data-i18n="hp">HP</div>
                 </div>
                 <div class="sheet-tr">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_table_start" name="attr_location1_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_table_end" name="attr_location1_table_end" value="0"/></div>
@@ -302,8 +255,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location1_ap}" name="attr_location1_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location1_hp}" name="attr_location1_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location1_hp|max}" name="attr_location1_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc2to7-toggle" name="attr_location2to7_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc2to7">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_location2to7_display" value="1" checked>
+                <div class="sheet-tr sheet-wide-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_table_start" name="attr_location2_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_table_end" name="attr_location2_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location2_name}" name="attr_location2_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_hp_max_base_mod}" name="attr_location2_hp_max_base_mod" value="-5"></div>
@@ -313,8 +266,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location2_ap}" name="attr_location2_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location2_hp}" name="attr_location2_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location2_hp|max}" name="attr_location2_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc2to7-toggle" name="attr_location2to7_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc2to7">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_location2to7_display" value="1" checked>
+                <div class="sheet-tr sheet-wide-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_table_start" name="attr_location3_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_table_end" name="attr_location3_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location3_name}" name="attr_location3_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_hp_max_base_mod}" name="attr_location3_hp_max_base_mod" value="-5"></div>
@@ -325,8 +278,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location3_ap}" name="attr_location3_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location3_hp}" name="attr_location3_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location3_hp|max}" name="attr_location3_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc2to7-toggle" name="attr_location2to7_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc2to7">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_location2to7_display" value="1" checked>
+                <div class="sheet-tr sheet-wide-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_table_start" name="attr_location4_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_table_end" name="attr_location4_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location4_name}" name="attr_location4_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_hp_max_base_mod}" name="attr_location4_hp_max_base_mod" value="-5"></div>
@@ -337,8 +290,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location4_ap}" name="attr_location4_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location4_hp}" name="attr_location4_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location4_hp|max}" name="attr_location4_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc2to7-toggle" name="attr_location2to7_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc2to7">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_location2to7_display" value="1" checked>
+                <div class="sheet-tr sheet-wide-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_table_start" name="attr_location5_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_table_end" name="attr_location5_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location5_name}" name="attr_location5_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_hp_max_base_mod}" name="attr_location5_hp_max_base_mod" value="-5"></div>
@@ -349,8 +302,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location5_ap}" name="attr_location5_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location5_hp}" name="attr_location5_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location5_hp|max}" name="attr_location5_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc2to7-toggle" name="attr_location2to7_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc2to7">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_location2to7_display" value="1" checked>
+                <div class="sheet-tr sheet-wide-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_table_start" name="attr_location6_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_table_end" name="attr_location6_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location6_name}" name="attr_location6_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_hp_max_base_mod}" name="attr_location6_hp_max_base_mod" value="-5"></div>
@@ -361,8 +314,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location6_ap}" name="attr_location6_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location6_hp}" name="attr_location6_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location6_hp|max}" name="attr_location6_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc2to7-toggle" name="attr_location2to7_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc2to7">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_location2to7_display" value="1" checked>
+                <div class="sheet-tr sheet-wide-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_table_start" name="attr_location7_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_table_end" name="attr_location7_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location7_name}" name="attr_location7_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_hp_max_base_mod}" name="attr_location7_hp_max_base_mod" value="-5"></div>
@@ -373,8 +326,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location7_ap}" name="attr_location7_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location7_hp}" name="attr_location7_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location7_hp|max}" name="attr_location7_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc8-toggle" name="attr_location8_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc8">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location8_display" value="1" checked>
+                <div class="sheet-tr sheet-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_table_start" name="attr_location8_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_table_end" name="attr_location8_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location8_name}" name="attr_location8_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_hp_max_base_mod}" name="attr_location8_hp_max_base_mod" value="-5"></div>
@@ -385,8 +338,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location8_ap}" name="attr_location8_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location8_hp}" name="attr_location8_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location8_hp|max}" name="attr_location8_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc9-toggle" name="attr_location9_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc9">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location9_display" value="1" checked>
+                <div class="sheet-tr sheet-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_table_start" name="attr_location9_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_table_end" name="attr_location9_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location9_name}" name="attr_location9_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_hp_max_base_mod}" name="attr_location9_hp_max_base_mod" value="-5"></div>
@@ -397,8 +350,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location9_ap}" name="attr_location9_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location9_hp}" name="attr_location9_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location9_hp|max}" name="attr_location9_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc10-toggle" name="attr_location10_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc10">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location10_display" value="1" checked>
+                <div class="sheet-tr sheet-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_table_start" name="attr_location10_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_table_end" name="attr_location10_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location10_name}" name="attr_location10_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_hp_max_base_mod}" name="attr_location10_hp_max_base_mod" value="-5"></div>
@@ -409,8 +362,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location10_ap}" name="attr_location10_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location10_hp}" name="attr_location10_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location10_hp|max}" name="attr_location10_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc11-toggle" name="attr_location11_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc11">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location11_display" value="1" checked>
+                <div class="sheet-tr sheet-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_table_start" name="attr_location11_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_table_end" name="attr_location11_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location11_name}" name="attr_location11_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_hp_max_base_mod}" name="attr_location11_hp_max_base_mod" value="-5"></div>
@@ -421,8 +374,8 @@
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-number-width sheet-impvalue" title="@{location11_ap}" name="attr_location11_ap" value="0" readonly></div>
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location11_hp}" name="attr_location11_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location11_hp|max}" name="attr_location11_hp_max" value="0" readonly></div>
                 </div>
-                <input type="checkbox" class="sheet-hidden sheet-location-display-loc12-toggle" name="attr_location12_display" value="1" checked>
-                <div class="sheet-tr sheet-location-display-loc12">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location12_display" value="1" checked>
+                <div class="sheet-tr sheet-toggle">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_table_start" name="attr_location12_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_table_end" name="attr_location12_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location12_name}" name="attr_location12_name" value=""></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_hp_max_base_mod}" name="attr_location12_hp_max_base_mod" value="-5"></div>
@@ -434,28 +387,28 @@
                     <div class="sheet-td"><span class="sheet-play"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location12_hp}" name="attr_location12_hp" value="0">/</span><input type="number" class="sheet-number-width sheet-impvalue" title="@{location12_hp|max}" name="attr_location12_hp_max" value="0" readonly></div>
                 </div>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-location-display-toggle" name="attr_location_notes_1_display" value="1">
-            <div class="sheet-location-display">
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location_notes_1_display" value="1">
+            <div class="sheet-toggle">
                 <label data-i18n="wounds">Wounds</label>
                 <textarea class="sheet-hit-locations-note" title="@{wounds}" name="attr_wounds"></textarea>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-location-display-toggle" name="attr_location_notes_7_display" value="1">
-            <div class="sheet-location-display">
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location_notes_7_display" value="1">
+            <div class="sheet-toggle">
                 <label data-i18n="wounds">Wounds</label>
                 <textarea class="sheet-hit-locations-note-7" title="@{wounds}" name="attr_wounds"></textarea>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-location-display-toggle" name="attr_location_notes_8_display" value="1">
-            <div class="sheet-location-display">
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location_notes_8_display" value="1">
+            <div class="sheet-toggle">
                 <label data-i18n="wounds">Wounds</label>
                 <textarea class="sheet-hit-locations-note-8" title="@{wounds}" name="attr_wounds"></textarea>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-location-display-toggle" name="attr_location_notes_9_display" value="1">
-            <div class="sheet-location-display">
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location_notes_9_display" value="1">
+            <div class="sheet-toggle">
                 <label data-i18n="wounds">Wounds</label>
                 <textarea class="sheet-hit-locations-note-9" title="@{wounds}" name="attr_wounds"></textarea>
             </div>
-            <input type="checkbox" class="hidden location-display-toggle" name="attr_location_notes_10_display" value="1">
-            <div class="sheet-location-display">
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_location_notes_10_display" value="1">
+            <div class="sheet-toggle">
                 <label data-i18n="wounds">Wounds</label>
                 <input type="text" class="sheet-full-width sheet-bmargin" title="@{wounds}" name="attr_wounds">
             </div>
@@ -463,20 +416,287 @@
 
     </div>
 
-    <!-- Encumbrance & Fatigue
+    <!-- Encumbrance & Fatigue -->
     <div class="sheet-flex sheet-corporeal">
-        ${new File("src/sheet/types/character/detailed/encumbrance.html").getText()}
-        ${new File("src/sheet/types/character/detailed/fatigue.html").getText()}
-    </div>-->
+        <!-- Encumberance -->
+        <div class="sheet-section sheet-grow sheet-rmargin">
+            <div class="sheet-flex-centered">
+                <h2 data-i18n="encumbrance">Encumbrance</h2>
+                <div class="sheet-edit sheet-grow sheet-text-right">
+                    <label class="sheet-left" data-18n="avg-species-siz">Average Species SIZ</label>
+                    <input type="number" class="sheet-number-width sheet-usrinput" title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                </div>
+                <div class="sheet-play sheet-grow sheet-text-right">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' title="@{pack_equipped}" name='attr_pack_equipped' value="1" checked/><span>3</span>
+                        <span class="sheet-bold" data-i18n="equip-pack">Equip Pack</span>
+                    </label>
+                </div>
+            </div>
 
-    <!-- Skills and Passions
-    <div class="sheet-flex">
-        <div class="sheet-rmargin" style="width 422px">
-            ${new File("src/sheet/types/character/detailed/standard_skills.html").getText()}
+            <div class="sheet-table">
+                <div class="sheet-tr">
+                    <div class="sheet-th" data-i18n="temp">Temp</div>
+                    <div class="sheet-th" data-i18n="current">Current</div>
+                    <div class="sheet-th" data-i18n="carrying-load">Carrying Load</div>
+                    <div class="sheet-th" data-i18n="skills">Skills</div>
+                    <div class="sheet-th" data-i18n="move">Move</div>
+                </div>
+                <div class="sheet-tr">
+                    <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-usrinput" title="@{encumbrance_temp}" name="attr_encumbrance_temp" value="0"></div>
+                    <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-value" title="@{encumbrance_current}" name="attr_encumbrance_current" value="0" readonly></div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_load}" name="attr_encumbrance_load">
+                            <option value="0" data-i18n="normal" selected>Normal</option>
+                            <option value="1" data-i18n="medium">Medium</option>
+                            <option value="2" data-i18n="strenuous">Strenuous</option>
+                            <option value="3" data-i18n="impossible">Impossible</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_skills}" name="attr_encumbrance_skills">
+                            <option value="0" data-i18n="standard" selected>Standard</option>
+                            <option value="1" data-i18n="one-grade-harder">1 grade harder</option>
+                            <option value="2" data-i18n="two-grades-harder">2 grades harder</option>
+                            <option value="3" data-i18n="impossible">Impossible</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{movement_rate_enc}" name="attr_movement_rate_enc">
+                            <option value="+0" data-i18n="normal">Normal</option>
+                            <option value="-2">-2</option>
+                            <option value="*.5" data-i18n="halved">Halved</option>
+                            <option value="*0" data-i18n="impossible">Impossible</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-hidden">
+                <input type="number" step="any" name="attr_armor_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_armor_penalty" value="0" readonly>
+                <input type="number" step="any" name="attr_melee_weapons_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_ranged_weapons_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_loadout_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_pack_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_currency_enc" value="0" readonly>
+                <input type="number" name="attr_burdened_enc" value="22" readonly>
+                <input type="number" name="attr_overloaded_enc" value="33" readonly>
+                <input type="number" name="attr_encumbrance_current_max" value="44" readonly>
+            </div>
         </div>
-        <div style="width 423px">
-            ${new File("src/sheet/types/character/detailed/professional_skills.html").getText()}
-            ${new File("src/sheet/types/character/detailed/passions.html").getText()}
+
+        <!-- Fatigue -->
+        <div class="sheet-section sheet-grow">
+            <h2 data-i18n="fatigue">Fatigue</h2>
+
+            <div class="sheet-table">
+                <div class="sheet-tr">
+                    <div class="sheet-th" data-i18n="current">Current</div>
+                    <div class="sheet-th" data-i18n="skills">Skills</div>
+                    <div class="sheet-th" data-i18n="ap">AP</div>
+                    <div class="sheet-th" data-i18n="init">Init</div>
+                    <div class="sheet-th" data-i18n="move">Move</div>
+                    <div class="sheet-th" data-i18n="recovery">Recovery</div>
+                </div>
+                <div class="sheet-tr">
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{fatigue}" name="attr_fatigue">
+                            <option value="9" data-i18n="fresh" selected>Fresh</option>
+                            <option value="8" data-i18n="winded">Winded</option>
+                            <option value="7" data-i18n="tired">Tired</option>
+                            <option value="6" data-i18n="wearied">Wearied</option>
+                            <option value="5" data-i18n="exhausted">Exhausted</option>
+                            <option value="4" data-i18n="debilitated">Debilitated</option>
+                            <option value="3" data-i18n="incapacitated">Incapacitated</option>
+                            <option value="2" data-i18n="semi-conscious">Semi-Conscious</option>
+                            <option value="1" data-i18n="comatose">Comatose</option>
+                            <option value="0" data-i18n="dead">Dead</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{fatigue_skills}" name="attr_fatigue_skills">
+                            <option value="0" data-i18n="standard" selected>Standard</option>
+                            <option value="1" data-i18n="hard">Hard</option>
+                            <option value="2" data-i18n="formidable">Formidable</option>
+                            <option value="3" data-i18n="herculean">Herculean</option>
+                            <option value="4" data-i18n="hopeless">Hopeless</option>
+                            <option value="5" data-i18n="na">N/A</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{action_points_fatigue}" name="attr_action_points_fatigue">
+                            <option value="0">0</option>
+                            <option value="-1">-1</option>
+                            <option value="-2">-2</option>
+                            <option value="-3">-3</option>
+                            <option value="-99">N/A</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{initiative_bonus_fatigue}" name="attr_initiative_bonus_fatigue">
+                            <option value="0">0</option>
+                            <option value="-2">-2</option>
+                            <option value="-4">-4</option>
+                            <option value="-6">-6</option>
+                            <option value="-8">-8</option>
+                            <option value="-99">N/A</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{movement_rate_fatigue}" name="attr_movement_rate_fatigue">
+                            <option value="+0">0</option>
+                            <option value="-1">-1</option>
+                            <option value="-2">-2</option>
+                            <option value="*.5" data-i18n="half">1/2</option>
+                            <option value="*0" data-i18n="na">N/A</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-sm" title="@{fatigue_recovery}" name="attr_fatigue_recovery" value="0" readonly> <span data-i18n="hours">hours</span></div>
+                </div>
+            </div>
+
+            <input type="hidden" name="attr_fatigue_max" value="9">
         </div>
-    </div>-->
+    </div>
+
+    <!-- Skills and Passions -->
+    <div class="sheet-section">
+        <div class="sheet-flex-centered">
+            <h2><span data-i18n="skills">Skills</span>/<span data-i18n="passions">Passions</span></h2>
+            <div class="sheet-grow sheet-text-right">
+                <label class="sheet-checkbox">
+                    <input type='checkbox' title="@{stdskill_notes}" name='attr_stdskill_notes' value="1"/><span>3</span>
+                    <span data-i18n="notes">Notes</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="sheet-flex">
+            <!-- Skills Left Column -->
+            <div class="sheet-rmargin sheet-half-col">
+                <div class="sheet-flex">
+                    <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
+                    <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="standard-skills">Standard Skills</div></div>
+                    <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
+                    <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
+                    <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                    <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base1">Base1</div></div>
+                    <div class="sheet-th sheet-edit">+</div>
+                    <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base2">Base2</div></div>
+                    <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                    <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                    <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                </div>
+                <div class="sheet-flex">
+                    <div class="sheet-td sheet-play"><input type="radio" name="attr_skill_augmentation" value="4"><span></span></div>
+                    <div class="sheet-td sheet-grow sheet-hover-btn">
+                        <label class="sheet-skill" data-i18n="athletics">Athletics</label>
+                        <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{id=athletics}}'}}">i</button>
+                        <input type="hidden" name="attr_athletics_name" value="^{athletics}">
+                    </div>
+                    <div class="sheet-td sheet-play sheet-pictos">
+                        <input type="checkbox" title="@{athletics_encumbered}" name="attr_athletics_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                    </div>
+                    <div class="sheet-td sheet-pictos">
+                        <input type="checkbox" title="@{athletics_fumbled}" name="attr_athletics_fumbled" value="1"><span class="sheet-checkico">!</span>
+                    </div>
+                    <div class="sheet-td sheet-pictos">
+                        <input type="checkbox" title="@{athletics_trained}" name="attr_athletics_trained" value="1"><span class="sheet-checkico">3</span>
+                    </div>
+                    <div class="sheet-td sheet-edit">
+                        <div class="sheet-number-width" data-i18n="str-u">STR</div>
+                        <input type="hidden" name="attr_athletics_char1" value="@{str}" disabled>
+                    </div>
+                    <div class="sheet-td sheet-edit">+</div>
+                    <div class="sheet-td sheet-edit">
+                        <div class="sheet-number-width" data-i18n="dex-u">DEX</div>
+                        <input type="hidden" name="attr_athletics_char2" value="@{dex}" disabled>
+                    </div>
+                    <div class="sheet-td sheet-edit">
+                        <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{athletics_other}" name="attr_athletics_other" value="0">
+                    </div>
+                    <div class="sheet-td">
+                        <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{athletics_total}" name="attr_athletics_total" value="22" readonly>
+                    </div>
+                    <div class="sheet-td">
+                        <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_skill}" name="roll_athletics_skill" value="{{'@{roll_display}&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}'}}"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Right Column -->
+            <div class="sheet-half-col">
+                <div class="sheet-flex">
+                    <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
+                    <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional-skills">Professional Skills</div></div>
+                    <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
+                    <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
+                    <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                    <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base1">Base1</div></div>
+                    <div class="sheet-th sheet-edit">+</div>
+                    <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base2">Base2</div></div>
+                    <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                    <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                    <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                </div>
+                <fieldset class="repeating_professionalskill">
+                    <div class="sheet-flex">
+                        <div class="sheet-td sheet-play"><input type="checkbox" name="attr_skill_augmentation" value="4"><span class="sheet-checkradio"></span></div>
+                        <div class="sheet-td sheet-grow">
+                            <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
+                        </div>
+                        <div class="sheet-td">
+                            <input type="hidden" name="attr_id" value="repeating_professionalskills_-Lj;lfjal;sa" readonly>
+                            <button type="roll" class="sheet-id sheet-button-width" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}"></button>
+                        </div>
+                        <div class="sheet-td sheet-play sheet-pictos">
+                            <input type="checkbox" title="@{$ID_encumbered}" name="attr_encumbered" value="1" readonly><span class="sheet-checkico">a</span>
+                        </div>
+                        <div class="sheet-td sheet-pictos">
+                            <input type="checkbox" title="@{$ID_fumbled}" name="attr_fumbled" value="1"><span class="sheet-checkico">!</span>
+                        </div>
+                        <div class="sheet-td sheet-pictos">
+                            <input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span>
+                        </div>
+                        <div class="sheet-td sheet-edit">
+                            <select class="sheet-number-width sheet-text-center sheet-usrinput" title="@{$ID_char1}" name="attr_char1">
+                                <option value="0" selected>0</option>
+                                <option value="@{str}" data-i18n="str-u">STR</option>
+                                <option value="@{con}" data-i18n="con-u">CON</option>
+                                <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                <option value="@{int}" data-i18n="int-u">INT</option>
+                                <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-edit">+</div>
+                        <div class="sheet-td sheet-edit">
+                            <select class="sheet-number-width sheet-text-center sheet-usrinput" title="@{$ID_char2}" name="attr_char2">
+                                <option value="0" selected>0</option>
+                                <option value="@{str}" data-i18n="str-u">STR</option>
+                                <option value="@{con}" data-i18n="con-u">CON</option>
+                                <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                <option value="@{int}" data-i18n="int-u">INT</option>
+                                <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-edit">
+                            <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0">
+                        </div>
+                        <div class="sheet-td">
+                            <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0" readonly>
+                        </div>
+                        <div class="sheet-td">
+                            <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_skill}" name="roll_skill" value="{{'&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}'}}"></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
 </div>

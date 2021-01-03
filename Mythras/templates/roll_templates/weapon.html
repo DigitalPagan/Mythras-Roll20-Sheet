@@ -1,25 +1,25 @@
-<!-- Initiative Roll Template -->
-<!-- @{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{force=@{force}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}} -->
+<!-- Weapon Roll Template -->
+<!-- {{'@{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{force=@{force}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}'}} -->
 <rolltemplate class="sheet-rolltemplate-weapon">
     <table>
         <caption>
-            {{#character}}
-            <div class="sheet-character">{{character}}</div>
-            {{/character}}
-            <div class="sheet-name">{{name}}</div>
+            {{'{{#character}}'}}
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            {{'{{/character}}'}}
+            <div class="sheet-name">{{'{{name}}'}}</div>
         </caption>
-        <tr class="sheet-damage"><td class="sheet-label"><span data-i18n="damage-u">Damage</span>: </td><td class="sheet-value">{{damage}}</td></tr>
-        {{#size}}
-        <tr><td><span data-i18n="size-u">Size</span>:</td><td class="sheet-value">{{size}}</td></tr>
-        {{/size}}
-        {{#force}}
-        <tr><td><span data-i18n="force-u">Force</span>:</td><td class="sheet-value">{{force}}</td></tr>
-        {{/force}}
-        {{#impale_size}}
-        <tr><td><span data-i18n="impale-size-u">Impale Size</span>:</td><td class="sheet-value">{{impale_size}}</td></tr>
-        {{/impale_size}}
-        {{#notes}}
-        <tr class="sheet-altback"><td colspan="2">{{notes}}</td></tr>
-        {{/notes}}
+        <tr class="sheet-damage"><td class="sheet-label"><span data-i18n="damage">Damage</span>: </td><td class="sheet-value">{{'{{ damage}}'}}</td></tr>
+        {{'{{#size}}'}}
+        <tr><td><span data-i18n="size">Size</span>:</td><td class="sheet-value">{{'{{size}}'}}</td></tr>
+        {{'{{/size}}'}}
+        {{'{{#force}}'}}
+        <tr><td><span data-i18n="force">Force</span>:</td><td class="sheet-value">{{'{{force}}'}}</td></tr>
+        {{'{{/force}}'}}
+        {{'{{#impale_size}}'}}
+        <tr><td><span data-i18n="impale-size">Impale Size</span>:</td><td class="sheet-value">{{'{{impale_size}}'}}</td></tr>
+        {{'{{/impale_size}}'}}
+        {{'{{#notes}}'}}
+        <tr class="sheet-altback"><td colspan="2">{{'{{notes}}'}}</td></tr>
+        {{'{{/notes}}'}}
     </table>
 </rolltemplate>
