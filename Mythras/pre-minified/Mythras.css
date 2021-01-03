@@ -63,11 +63,6 @@ div[class="repcontainer editmode"] ~ div[class^="repcontrol"] button[class="btn 
     display: inline-block;
 }*/
 
-/* Make the delete buttons appear above the detail toggles */
-/*.repcontainer .itemcontrol {
-    z-index: 9999;
-}*/
-
 /* Layout */
 div.sheet-sticky-header {
     position: -webkit-sticky;
@@ -165,9 +160,6 @@ div.sheet-shrink {
 .sheet-bpad {
     padding-bottom: 5px !important;
 }
-.sheet-cellpad {
-    padding: 1px 1px 0;
-}
 .sheet-bold {
     font-weight: bold;
 }
@@ -178,12 +170,6 @@ div.sheet-shrink {
     box-sizing: border-box;
     padding: 0 5px 2px;
     border-radius: 10px;
-}
-.sheet-header {
-    text-align: center;
-    background: dimgray;
-    color: lightgray;
-    white-space: nowrap;
 }
 .sheet-hidden {
     display: none;
