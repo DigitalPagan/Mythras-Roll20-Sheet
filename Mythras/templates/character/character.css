@@ -90,11 +90,6 @@ input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
     display: none;
 }
 
-/* ID Toggle */
-/*input.sheet-id-toggle:not(:checked) ~ div div.sheet-id {
-    display: none;
-}*/
-
 /* Character Tabs */
 div.sheet-character-tab-core,
 div.sheet-character-tab-abilities,
@@ -192,6 +187,24 @@ textarea.sheet-hit-locations-note-9 {
     height: 35px;
     width: 100%;
     margin-bottom: 5px;
+}
+
+/* Skills */
+div.sheet-skill-base {
+    width: 94px;
+    flex-shrink: 0;
+}
+textarea.sheet-skillnotes {
+    font-family: "Patrick Hand", sans-serif;
+    height: 3em;
+    line-height: 1em;
+    font-size: 1.1em;
+}
+span.sheet-skillnotes {
+    font-family: "Patrick Hand", sans-serif;
+    line-height: 1em;
+    white-space: pre-line;
+    font-size: 1.1em;
 }
 
 /* Abilities Tab */

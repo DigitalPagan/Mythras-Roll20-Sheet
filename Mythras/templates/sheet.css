@@ -50,18 +50,22 @@ h4 {
     z-index: 9999;
 }
 
-/* Tweak repeating section buttons so they have a bottom margin and dont overflow when in edit mode. */
-/*div[class^="repcontrol"] {
-    margin-bottom: 5px;
+/* Give repcontrol a height so it doesn't overflow in edit_mode */
+div.repcontrol {
+    display: block;
+    height: 1.25em !important;
 }
-div[class="repcontainer editmode"] ~ div[class^="repcontrol"] button[class="btn repcontrol_add"] {
-    display: inline-block!important;
-    visibility: hidden;
-}*/
-/* Make repeating section inline-block for display modes */
-/*fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
+
+/* Prevent done button from overflowing */
+button.recontrol_edit {
+    height: 1.25em !important;
     display: inline-block;
-}*/
+}
+
+/* Make repeating section inline-block for display modes */
+fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
+    display: inline-block;
+}
 
 /* Layout */
 div.sheet-sticky-header {
@@ -69,7 +73,7 @@ div.sheet-sticky-header {
     position: sticky;
     top: 0;
     background: white;
-    z-index: 2147483647;
+    z-index: 100;
 }
 
 div.sheet-space-between {
@@ -175,7 +179,7 @@ div.sheet-shrink {
     display: none;
 }
 .sheet-number-width {
-    width: 47px !important;
+    width: 40px !important;
     flex-shrink: 0;
 }
 .sheet-number-width-sm {
@@ -196,6 +200,9 @@ div.sheet-shrink {
 }
 .sheet-auto-width {
     width: auto !important;
+}
+.sheet-help {
+    cursor: help;
 }
 
 /* Section Accordion */
@@ -328,7 +335,7 @@ button[type=roll].sheet-id {
     display: none;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 3px;
 }
 button[type=roll].sheet-id::before {
     font-family: "Arial", sans-serif;

@@ -399,7 +399,7 @@
     "school": "School",
     "reversible": "Reversible",
     "actions": "Actions",
-    "xp": "XP",
+    "experience-abbv2": "XP",
     "mp": "MP",
     "cost-reduction": "Cost Reduction",
     "apply-penalty": "Apply Penalty",
@@ -1028,5 +1028,9 @@
     "base2": "Base2",
     "prompt": "Prompt",
     "per-skill": "Per skill",
-    "set": "Set"
+    "set": "Set",
+    "affected_by_encumbrance": "Affected by encumbrance",
+    "use_for_augmentation": "Use for augmentation",
+    "show_details": "Show details",
+    "resistance_skills": "Resistance Skills"
 }
