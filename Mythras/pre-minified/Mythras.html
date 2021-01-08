@@ -937,7 +937,7 @@
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">{</div></div>
-                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="resistance_skills">Resistance Skills</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="resistance_skill">Resistance Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="affected_by_encumbrance">a</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
@@ -955,7 +955,7 @@
                     <!-- Athletics -->
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">{</div></div>
-                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="standard-skills">Standard Skills</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="standard_skill">Standard Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="affected_by_encumbrance">a</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
@@ -1017,7 +1017,7 @@
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
-                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional-skills">Professional Skills</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional_skill">Professional Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
@@ -1034,7 +1034,7 @@
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
                                 <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
-                                <input type="hidden" name="attr_id" value="repeating_professionalskills_-Lj;lfjal;sa" readonly>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this skill" readonly>
                             </div>
                             <div class="sheet-td">
                                 <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}"></button>
@@ -1058,6 +1058,7 @@
                                     <option value="@{int}" data-i18n="int-u">INT</option>
                                     <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                    <option value="21">21</option>
                                 </select>
                             </div>
                             <div class="sheet-td sheet-edit">
@@ -1070,6 +1071,13 @@
                                     <option value="@{int}" data-i18n="int-u">INT</option>
                                     <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                    <option value="-@{str}" data-i18n="negative-str-u">-STR</option>
+                                    <option value="-@{con}" data-i18n="negative-con-u">-CON</option>
+                                    <option value="-@{siz}" data-i18n="negative-siz-u">-SIZ</option>
+                                    <option value="-@{dex}" data-i18n="negative-dex-u">-DEX</option>
+                                    <option value="-@{int}" data-i18n="negative-int-u">-INT</option>
+                                    <option value="-@{pow}" data-i18n="negative-pow-u">-POW</option>
+                                    <option value="-@{cha}" data-i18n="negative-cha-u">-CHA</option>
                                 </select>
                             </div>
                             <div class="sheet-td sheet-edit">
@@ -1091,41 +1099,52 @@
                 </div>
 
                 <!-- Passions -->
-                <div class="sheet-flex sheet-bmargin">
-                    <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
-                    <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passions">Passions</div></div>
-                    <div class="sheet-th"><div class="sheet-button-width"></div></div>
-                    <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
-                    <div class="sheet-th"><div class="sheet-number-width">%</div></div>
-                    <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
-                </div>
-                <fieldset class="repeating_passion">
+                <div class="Sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-play"><input type="checkbox" name="attr_skill_augmentation" value="4"><span class="sheet-checkradio"></span></div>
-                        <div class="sheet-td sheet-grow sheet-hover-btn">
-                            <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
-                            <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
-                            <input type="hidden" name="attr_id" value="repeating_passion_-abcd123" readonly>
-                        </div>
-                        <div class="sheet-td">
-                            <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}"></button>
-                        </div>
-                        <div class="sheet-td">
-                            <input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span>
-                        </div>
-                        <div class="sheet-td">
-                            <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_total}" name="attr_total" value="0" readonly>
-                        </div>
-                        <div class="sheet-td">
-                            <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span>
-                        </div>
+                        <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passion">Passion</div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-passiontype" data-i18n="type">Type</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
-                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1">
-                    <div class="sheet-toggle">
-                        <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
-                        <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
-                    </div>
-                </fieldset>
+                    <fieldset class="repeating_passion">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-play"><input type="checkbox" name="attr_skill_augmentation" value="4"><span class="sheet-checkradio"></span></div>
+                            <div class="sheet-td sheet-grow sheet-hover-btn">
+                                <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this passion" readonly>
+                            </div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}"></button>
+                            </div>
+                            <div class="sheet-td">
+                                <select class="sheet-passiontype sheet-text-center sheet-usrinput" title="@{$ID_type}" name="attr_type">
+                                    <option value="corruption" data-i18n="corruption">Corruption</option>
+                                    <option value="dependency" data-i18n="dependency">Dependency</option>
+                                    <option value="passion" data-i18n="passion" selected>Passion</option>
+                                    <option value="peculiarity" data-i18n="peculiarity">Peculiarity</option>
+                                </select>
+                            </div>
+                            <div class="sheet-td">
+                                <input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span>
+                            </div>
+                            <div class="sheet-td">
+                                <input type="number" step="1" class="sheet-number-width sheet-impusrinput" title="@{$ID_total}" name="attr_total" value="0">
+                            </div>
+                            <div class="sheet-td">
+                                <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span>
+                            </div>
+                        </div>
+                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1">
+                        <div class="sheet-toggle">
+                            <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+                            <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
         </div>
 
@@ -1982,9 +2001,12 @@
             {{/character}}
             <div class="sheet-name">{{name}}</div>
         </caption>
-        {{#allprops() character name}}
+        {{#allprops() character name id}}
         <tr><td class="sheet-label">{{key}}:</td><td class="sheet-value">{{value}}</td></tr>
-        {{/allprops() character name}}
+        {{/allprops() character name id}}
+        {{#id}}
+        <tr><td class="sheet-id" colspan="2">{{id}}</td></tr>
+        {{/id}}
     </table>
 </rolltemplate>
 <!-- Initiative Roll Template -->
@@ -2112,6 +2134,39 @@ on(`clicked:name_display`, function() {
 
 /* Sheet Type Specific Worker Scripts */
 
+/* Common Autocalc Constants */
+const strGetAttrs = ['str_base', 'str_other', 'str_temp'];
+const dexGetAttrs = ['dex_base', 'dex_other', 'dex_temp'];
+const sizGetAttrs = ['siz_base', 'siz_other', 'siz_temp'];
+const conGetAttrs = ['con_base', 'con_other', 'con_temp'];
+const powGetAttrs = ['pow_base', 'pow_other', 'pow_temp'];
+const intGetAttrs = ['int_base', 'int_other', 'int_temp'];
+const chaGetAttrs = ['cha_base', 'cha_other', 'cha_temp'];
+const allCharGetAttrs = strGetAttrs.concat(dexGetAttrs, sizGetAttrs, conGetAttrs, powGetAttrs, intGetAttrs, chaGetAttrs);
+
+const charStdSkillIds = {
+    str: ['athletics'],
+    dex: ['athletics'],
+    siz: [],
+    con: [],
+    pow: [],
+    int: [],
+    cha: []
+};
+const allStdSkillIds = Array.from(
+    new Set(
+        charStdSkillIds['str'].concat(charStdSkillIds['dex'], charStdSkillIds['siz'], charStdSkillIds['con'],
+            charStdSkillIds['pow'], charStdSkillIds['int'], charStdSkillIds['cha'])
+    )
+);
+
+const stdSkillChars = {
+    'athletics': ['str', 'dex']
+}
+
+
+
+/* Character Tabs */
 const charactertabs = ["all","core","abilities","equipment","background","notes","compact"];
 charactertabs.forEach(button => {
     on(`clicked:character_tab_${button}`, function() {
@@ -2120,6 +2175,242 @@ charactertabs.forEach(button => {
         });
     });
 });
+
+/* Characteristics Function */
+/**
+ * @param {string}  base   The characteristic's base value from getAttrs.
+ * @param {string}  other  The characteristic's other value from getAttrs.
+ * @param {string}  temp   The characteristic's temp value from getAttrs.
+ * @return {int}    The total value of the characteristic.
+ */
+function calcChar(base, other, temp) {
+    return parseInt(base) + parseInt(other) + parseInt(temp);
+}
+
+/**
+ * @param {Object}  v   The values from the trigger's getAttrs call.
+ * @return {Object}     Object containing all calculated chars.
+ */
+function buildCharObj(v) {
+    let charObj = {};
+
+    ["str", "dex", "siz", "con", "pow", "int", "cha"].forEach(char => {
+        charObj[`${char}`] = calcChar(v[`${char}_base`], v[`${char}_other`], v[`${char}_temp`]);
+    });
+
+    return charObj;
+}
+
+/* Skill Functions */
+/**
+ * @param {Array} ids   List of the standard skill ids to get attrs for.
+ * @return {Array}      Array of the attrs to get for skill calc.
+ */
+function getStdSkillGetAttrs(ids) {
+    let stdSkillGetAttrs = [];
+
+    ids.forEach(id => {
+        stdSkillGetAttrs.push(`${id}_other`)
+    });
+
+    return stdSkillGetAttrs;
+}
+
+/**
+ * Calculates the value of multiple standard skills.
+ *
+ * @param {Array}   ids         List of standard skill ids to calculate values for.
+ * @param {Object}  charObj     Pre-parsed char values.
+ * @param {Object}  v           Values from trigger's getAttrs.
+ *
+ * @return {Object} The calculated skill values.
+ */
+function calcStdSkills(ids, charObj, v) {
+    let newVals = {};
+    ids.forEach(id => {
+        newVals[`${id}_total`] = charObj[stdSkillChars[`${id}`][0]] + charObj[stdSkillChars[`${id}`][1]] + parseInt(v[`${id}_other`]);
+    });
+    return newVals;
+}
+
+function calcProSkillTotal(charObj, char1, char2, other) {
+    console.log("char1 = " + char1 + " char2 = " + char2 + " other = " + other)
+    let char1Val;
+    let char2Val;
+    switch(char1) {
+        case '@{str}':
+            char1Val = charObj['str'];
+            break;
+        case '@{dex}':
+            char1Val = charObj['dex'];
+            break;
+        case '@{siz}':
+            char1Val = charObj['siz'];
+            break;
+        case '@{con}':
+            char1Val = charObj['con'];
+            break;
+        case '@{pow}':
+            char1Val = charObj['pow'];
+            break;
+        case '@{int}':
+            char1Val = charObj['int'];
+            break;
+        case '@{char}':
+            char1Val = charObj['char'];
+            break;
+        case '21':
+            char1Val = 21;
+            break;
+        default:
+            char1Val = 0;
+    }
+
+    switch(char2) {
+        case '@{str}':
+            char2Val = charObj['str'];
+            break;
+        case '@{dex}':
+            char2Val = charObj['dex'];
+            break;
+        case '@{siz}':
+            char2Val = charObj['siz'];
+            break;
+        case '@{con}':
+            char2Val = charObj['con'];
+            break;
+        case '@{pow}':
+            char2Val = charObj['pow'];
+            break;
+        case '@{int}':
+            char2Val = charObj['int'];
+            break;
+        case '@{char}':
+            char2Val = charObj['char'];
+            break;
+        case '-@{str}':
+            char2Val = -charObj['str'];
+            break;
+        case '-@{dex}':
+            char2Val = -charObj['dex'];
+            break;
+        case '-@{siz}':
+            char2Val = -charObj['siz'];
+            break;
+        case '-@{con}':
+            char2Val = -charObj['con'];
+            break;
+        case '-@{pow}':
+            char2Val = -charObj['pow'];
+            break;
+        case '-@{int}':
+            char2Val = -charObj['int'];
+            break;
+        case '-@{char}':
+            char2Val = -charObj['char'];
+            break;
+        default:
+            char2Val = 0;
+    }
+    
+    return char1Val + char2Val + parseInt(other);
+}
+
+function calcProSkillEncumbered(char1, char2) {
+    let char1bool = false;
+    let char2bool = false;
+
+    if (char1 === '@{str}' || char1 === '@{dex}') {
+        char1bool = true;
+    }
+    if (char2 === '@{str}' || char2 === '@{dex}' || char2 === '-@{str}' || char2 === '-@{dex}') {
+        char2bool = true;
+    }
+
+    return char1bool || char2bool;
+}
+
+function calcProSkills(ids, charObj, v) {
+    let newVals = {};
+    ids.forEach(id => {
+        const skillId = `repeating_professionalskill_${id}`;
+        newVals[`${skillId}_total`] = calcProSkillTotal(charObj, v[`${skillId}_char1`], v[`${skillId}_char2`], v[`${skillId}_other`]);
+        newVals[`${skillId}_encumbered`] = calcProSkillEncumbered(v[`${skillId}_char1`], v[`${skillId}_char2`]);
+    });
+    return newVals;
+}
+
+/* Characteristic Triggers */
+['str','con','siz','int','pow','dex','cha'].forEach(char => {
+    on(`change:${char}_base change:${char}_other change:${char}_temp`, function() {
+        const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds[char]);
+
+        getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs), function(v) {
+                const charObj = buildCharObj(v);
+                const newStdSkillVals = calcStdSkills(charStdSkillIds[char], charObj, v);
+                const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+                setAttrs({
+                    [char]: charObj[char],
+                    ...newStdSkillVals,
+                    ...newProSkillVals
+                });
+            });
+        });
+    });
+});
+
+/* Skill Triggers */
+/* Standard Skill Totals */
+allStdSkillIds.forEach(skillId => {
+    on(`change:${skillId}_other`, function(event) {
+        getAttrs(allCharGetAttrs.concat([`${skillId}_other`]), function(v) {
+            let charObj = buildCharObj(v);
+            let char1 = charObj[stdSkillChars[`${skillId}`][0]];
+            let char2 = charObj[stdSkillChars[`${skillId}`][1]];
+
+            setAttrs({
+                [`${skillId}_total`]: char1 + char2 + parseInt(v[`${skillId}_other`])
+            });
+        });
+    });
+});
+
+/* Professional Skill Total and Encumbered */
+on("change:repeating_professionalskill:char1 change:repeating_professionalskill:char2 " +
+    "change:repeating_professionalskill:other change:repeating_professionalskill:encumbered", function(event) {
+    let id = "repeating_professionalskill_" + event.sourceAttribute.split('_')[2];
+
+    getAttrs(allCharGetAttrs.concat([`${id}_char1`, `${id}_char2`, `${id}_other`]), function(v) {
+        const charObj = buildCharObj(v);
+
+        setAttrs({
+            [`${id}_total`]: calcProSkillTotal(charObj, v[`${id}_char1`], v[`${id}_char2`], v[`${id}_other`]),
+            [`${id}_encumbered`]: calcProSkillEncumbered(v[`${id}_char1`], v[`${id}_char2`])
+        });
+    });
+});
+/* Professional Skill IDs */
+on("change:repeating_professionalskill", function(event) {
+    let id = "repeating_professionalskill_" + event.sourceAttribute.split('_')[2];
+    setAttrs({[`${id}_id`]: `${id}`});
+});
+
+
+/* Passion IDs */
+on("change:repeating_passion", function(event) {
+    let id = "repeating_passion_" + event.sourceAttribute.split('_')[2];
+    setAttrs({[`${id}_id`]: `${id}`});
+});
+
+
+
 
 
 

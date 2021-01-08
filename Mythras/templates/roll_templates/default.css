@@ -39,10 +39,14 @@
 .sheet-rolltemplate-default td.sheet-value {
     text-align: right;
 }
+.sheet-rolltemplate-default td.sheet-id {
+    font-weight: normal;
+    text-align: center;
+}
 .sheet-rolltemplate-default .inlinerollresult {
     display: inline-block;
     text-align: center;
-    padding: 0px;
+    padding: 0;
     border: none;
     color: inherit;
     background: inherit;

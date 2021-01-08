@@ -571,7 +571,7 @@
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">{</div></div>
-                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="resistance_skills">Resistance Skills</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="resistance_skill">Resistance Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="affected_by_encumbrance">a</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
@@ -589,7 +589,7 @@
                     <!-- Athletics -->
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">{</div></div>
-                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="standard-skills">Standard Skills</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="standard_skill">Standard Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="affected_by_encumbrance">a</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
@@ -651,7 +651,7 @@
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
-                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional-skills">Professional Skills</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional_skill">Professional Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
@@ -668,7 +668,7 @@
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
                                 <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}">i</button>
-                                <input type="hidden" name="attr_id" value="repeating_professionalskills_-Lj;lfjal;sa" readonly>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this skill" readonly>
                             </div>
                             <div class="sheet-td">
                                 <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="{{'&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}'}}"></button>
@@ -692,6 +692,7 @@
                                     <option value="@{int}" data-i18n="int-u">INT</option>
                                     <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                    <option value="21">21</option>
                                 </select>
                             </div>
                             <div class="sheet-td sheet-edit">
@@ -704,6 +705,13 @@
                                     <option value="@{int}" data-i18n="int-u">INT</option>
                                     <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                    <option value="-@{str}" data-i18n="negative-str-u">-STR</option>
+                                    <option value="-@{con}" data-i18n="negative-con-u">-CON</option>
+                                    <option value="-@{siz}" data-i18n="negative-siz-u">-SIZ</option>
+                                    <option value="-@{dex}" data-i18n="negative-dex-u">-DEX</option>
+                                    <option value="-@{int}" data-i18n="negative-int-u">-INT</option>
+                                    <option value="-@{pow}" data-i18n="negative-pow-u">-POW</option>
+                                    <option value="-@{cha}" data-i18n="negative-cha-u">-CHA</option>
                                 </select>
                             </div>
                             <div class="sheet-td sheet-edit">
@@ -725,41 +733,52 @@
                 </div>
 
                 <!-- Passions -->
-                <div class="sheet-flex sheet-bmargin">
-                    <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
-                    <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passions">Passions</div></div>
-                    <div class="sheet-th"><div class="sheet-button-width"></div></div>
-                    <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
-                    <div class="sheet-th"><div class="sheet-number-width">%</div></div>
-                    <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
-                </div>
-                <fieldset class="repeating_passion">
+                <div class="Sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-play"><input type="checkbox" name="attr_skill_augmentation" value="4"><span class="sheet-checkradio"></span></div>
-                        <div class="sheet-td sheet-grow sheet-hover-btn">
-                            <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
-                            <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}">i</button>
-                            <input type="hidden" name="attr_id" value="repeating_passion_-abcd123" readonly>
-                        </div>
-                        <div class="sheet-td">
-                            <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="{{'&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}'}}"></button>
-                        </div>
-                        <div class="sheet-td">
-                            <input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span>
-                        </div>
-                        <div class="sheet-td">
-                            <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_total}" name="attr_total" value="0" readonly>
-                        </div>
-                        <div class="sheet-td">
-                            <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span>
-                        </div>
+                        <div class="sheet-th sheet-pictos sheet-play"><div class="sheet-checkbox-width">{</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passion">Passion</div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-passiontype" data-i18n="type">Type</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
-                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1">
-                    <div class="sheet-toggle">
-                        <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
-                        <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
-                    </div>
-                </fieldset>
+                    <fieldset class="repeating_passion">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-play"><input type="checkbox" name="attr_skill_augmentation" value="4"><span class="sheet-checkradio"></span></div>
+                            <div class="sheet-td sheet-grow sheet-hover-btn">
+                                <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this passion" readonly>
+                            </div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="{{'&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}'}}"></button>
+                            </div>
+                            <div class="sheet-td">
+                                <select class="sheet-passiontype sheet-text-center sheet-usrinput" title="@{$ID_type}" name="attr_type">
+                                    <option value="corruption" data-i18n="corruption">Corruption</option>
+                                    <option value="dependency" data-i18n="dependency">Dependency</option>
+                                    <option value="passion" data-i18n="passion" selected>Passion</option>
+                                    <option value="peculiarity" data-i18n="peculiarity">Peculiarity</option>
+                                </select>
+                            </div>
+                            <div class="sheet-td">
+                                <input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span>
+                            </div>
+                            <div class="sheet-td">
+                                <input type="number" step="1" class="sheet-number-width sheet-impusrinput" title="@{$ID_total}" name="attr_total" value="0">
+                            </div>
+                            <div class="sheet-td">
+                                <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span>
+                            </div>
+                        </div>
+                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1">
+                        <div class="sheet-toggle">
+                            <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+                            <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
         </div>
 

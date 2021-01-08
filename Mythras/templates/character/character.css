@@ -206,6 +206,9 @@ span.sheet-skillnotes {
     white-space: pre-line;
     font-size: 1.1em;
 }
+.sheet-passiontype {
+    width: 105px;
+}
 
 /* Abilities Tab */
 div.sheet-ability-name {

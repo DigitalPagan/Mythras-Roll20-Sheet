@@ -8,8 +8,11 @@
             {{'{{/character}}'}}
             <div class="sheet-name">{{'{{name}}'}}</div>
         </caption>
-        {{'{{#allprops() character name}}'}}
+        {{'{{#allprops() character name id}}'}}
         <tr><td class="sheet-label">{{'{{key}}'}}:</td><td class="sheet-value">{{'{{value}}'}}</td></tr>
-        {{'{{/allprops() character name}}'}}
+        {{'{{/allprops() character name id}}'}}
+        {{'{{#id}}'}}
+        <tr><td class="sheet-id" colspan="2">{{'{{id}}'}}</td></tr>
+        {{'{{/id}}'}}
     </table>
 </rolltemplate>
