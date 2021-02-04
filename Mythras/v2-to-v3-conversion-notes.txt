@@ -4,3 +4,6 @@ consolidate into _other
 
 ## Notes
 notes -> sheet_notes
+
+## Wealth
+income & expense to single text

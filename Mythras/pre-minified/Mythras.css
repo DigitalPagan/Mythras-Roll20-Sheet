@@ -76,6 +76,13 @@ div.sheet-sticky-header {
     z-index: 100;
 }
 
+div.sheet-flex {
+    display: flex;
+}
+div.sheet-flex-rev {
+    display: flex;
+    flex-direction: row-reverse;
+}
 div.sheet-space-between {
     display: flex;
     justify-content: space-between;
@@ -90,28 +97,35 @@ div.sheet-flex-centered {
     align-items: center;
 }
 
+/* Row highlighting */
+div.sheet-hl:hover {
+    /*background: #F0F0F0;*/
+    background: #fcf8e3;
+}
+.repitem:hover {
+    /*background: #F0F0F0;*/
+    background: #fcf8e3;
+}
+
 
 hr {
     margin: 5px 0;
 }
 
 
-input.sheet-toggle:not([value="1"]) + div.sheet-toggle,
-input[type="checkbox"].sheet-toggle:not(:checked) + div.sheet-toggle {
+input.sheet-toggle:not([value="1"]) + .sheet-toggle,
+input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle {
     display: none;
 }
-input.sheet-wide-toggle:not([value="1"]) ~ div.sheet-wide-toggle,
-input[type="checkbox"].sheet-wide-toggle:not(:checked) ~ div.sheet-wide-toggle {
+input.sheet-wide-toggle:not([value="1"]) ~ .sheet-wide-toggle,
+input[type="checkbox"].sheet-wide-toggle:not(:checked) ~ .sheet-wide-toggle {
     display: none;
 }
-input.sheet-deep-toggle:not([value="1"]) ~ div sheet-deep-toggle,
-input[type="checkbox"].sheet-deep-toggle:not(:checked) ~ div sheet-deep-toggle {
+input.sheet-deep-toggle:not([value="1"]) ~ div .sheet-deep-toggle,
+input[type="checkbox"].sheet-deep-toggle:not(:checked) ~ div .sheet-deep-toggle {
     display: none;
 }
 
-div.sheet-flex {
-    display: flex;
-}
 div.sheet-half-col {
     width: 50%;
 }
@@ -167,6 +181,9 @@ div.sheet-shrink {
 .sheet-bold {
     font-weight: bold;
 }
+.sheet-wrap {
+    white-space: normal !important;
+ }
 
 .sheet-section {
     border: 1px solid black;
@@ -250,6 +267,9 @@ input[type="checkbox"].sheet-accordion:not(:checked) ~ div.sheet-accordion {
 }
 .sheet-pictos-three {
     font-family: 'Pictos Three' !important;
+}
+.sheet-pictos-custom {
+    font-family: 'Pictos Custom' !important;
 }
 
 /* Fieldset */
@@ -663,13 +683,18 @@ div.sheet-table .repcontainer {
     display: table-row-group;
 }
 
+div.sheet-th-tr {
+    display: flex;
+    align-items: center;
+    color: lightgray;
+    background: dimgray;
+}
 div.sheet-th {
-    display: table-cell;
+    display:table-cell;
     text-align: center;
     padding: 1px;
     background: dimgray;
     color: lightgray;
-    white-space: nowrap;
     vertical-align: middle;
     font-weight: bold;
 }
@@ -731,6 +756,11 @@ input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
 .sheet-typetoggle:not([value="star_system"]) ~ div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
+    display: none;
+}
+
+/* Firearm Traits Toggle*/
+input.sheet-firearms-toggle:not(:checked) + div .sheet-firearm-trait {
     display: none;
 }
 
@@ -989,27 +1019,27 @@ div.sheet-equipment-location {
 
 /* Weapons */
 div.sheet-weapon-name {
-    width: 115px;
+    width: 140px;
     padding: 1px 1px 0;
     text-align: center;
     flex-shrink: 0;
 }
 
-div.sheet-weapon-damage {
+.sheet-weapon-damage {
     width: 64px;
     padding: 1px 1px 0;
     text-align: center;
     flex-shrink: 0;
 }
 
-div.sheet-weapon-size {
+.sheet-weapon-size {
     width: 38px;
     padding: 1px 1px 0;
     text-align: center;
     flex-shrink: 0;
 }
 
-div.sheet-weapon-reach {
+.sheet-weapon-reach {
     width: 72px;
     padding: 1px 1px 0;
     text-align: center;
@@ -1028,6 +1058,10 @@ div.sheet-weapon-hp {
 }
 
 /* Background Tab*/
+textarea.sheet-background-notes {
+    width: 100%;
+    height: 7.5em;
+}
 
 /* Notes Tab*/
 textarea.sheet-character-notes {
