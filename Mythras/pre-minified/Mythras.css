@@ -420,6 +420,12 @@ input {
     -moz-appearance: none;
     box-sizing: border-box;
 }
+input:invalid {
+    border: solid 1px red;
+}
+select:invalid {
+    border: solid 1px red;
+}
 /*input.sheet-value {
     border: none;
     border-radius: 0;
@@ -854,7 +860,7 @@ input.sheet-extended-conflict-toggle:not(:checked) + div .sheet-extended-conflic
 }
 
 /* Simplified Combat Toggle*/
-input.sheet-simplified-combat-toggle:checked ~ div .sheet-complex-combat {
+input.sheet-simplified-combat-toggle:checked + div.sheet-complex-combat {
     display: none;
 }
 
@@ -908,6 +914,10 @@ div.sheet-char-label {
 }
 
 /* Attributes */
+select.sheet-attr-calc-width {
+    width: 100px;
+}
+
 /* Magic Point Toggles */
 input.sheet-magic-points-toggle:not(:checked) + div.sheet-magic-points {
     display: none;

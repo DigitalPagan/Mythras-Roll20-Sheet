@@ -422,9 +422,47 @@
         </div>
 
         <!-- Attributes -->
-        <div class="sheet-section sheet-rmargin">
+        <div class="sheet-section sheet-rmargin sheet-bmargin">
             <h2 class="sheet-corporeal" data-i18n="attributes">Attributes</h2>
             <h2 class="sheet-spirit" data-i18n="spirit-attributes">Spirit Attributes</h2>
+
+            <div class="sheet-flex">
+                <div class="sheet-th sheet-grow" data-i18n="attribute">Attribute</div>
+                <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                <div class="sheet-th sheet-play"><div class="sheet-number-width" data-i18n="temp">Temp</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="total">Total</div></div>
+                <div class="sheet-th sheet-edit"><div class="sheet-checkbox-width sheet-help sheet-pictos" data-i18n-title="Advanced Configuration">y</div></div>
+            </div>
+            <div data-i18n-list="attribute-order">
+                <div class="sheet-flex sheet-hl" data-i18n-list-item="action_points">
+                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="action-points">Action Points</label></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{action_points_base}" name="attr_action_points_base" value="2" readonly></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{action_points_other}" name="attr_action_points_other" value="0"></div>
+                    <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{action_points_temp}" name="attr_action_points_temp" value="0"></div>
+                    <div class="sheet-td sheet-text-right"><span class="sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{action_points}" name="attr_action_points" value="2">/</span><input type="number" class="sheet-impvalue sheet-number-width" title="@{action_points|max}" name="attr_action_points_max" value="2" readonly></div>
+                    <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                </div>
+                <div class="sheet-hl" data-i18n-list-item="damage_mod">
+                    <div class="sheet-flex">
+                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="damage-modifier">Damage Mod</label></div>
+                        <div class="sheet-td sheet-edit"><input type="text" class=" sheet-number-width" title="@{damage_mod_base}" name="attr_damage_mod_base" value="0" readonly></div>
+                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{damage_mod_other}" name="attr_damage_mod_other" value="0"></div>
+                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" data-i18n-title="damage-mod-title" data-i18n-vars="@{damage_mod_temp},&#13;" title="0steps on the damage table" name="attr_damage_mod_temp" value="0"></div>
+                        <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{damage_mod}" name="attr_damage_mod" value="0" readonly></div>
+                        <div class="sheet-td sheet-edit"><input type="checkbox" title="@{damage_mod_config}" name="attr_damage_mod_config" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_damage_mod_config" value="1">
+                    <div class="sheet-edit sheet-toggle">
+                        &emsp;<label class="sheet-left" data-i18n="calculate_with">Calculate with</label>
+                        <select class="sheet-usrinput sheet-attr-calc-width" name="attr_damage_mod_calc">
+                            <option data-i18n="str-siz" value="0" selected>STR+SIZ</option>
+                            <option data-i18n="str-siz-pow" value="1">STR+SIZ+POW</option>
+                            <option data-i18n="str-siz-con" value="2">STR+SIZ+CON</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
             <div class="sheet-table sheet-full-width" data-i18n-list="attribute-order">
                 <div class="sheet-tr sheet-hl">
@@ -433,6 +471,7 @@
                     <div class="sheet-th sheet-edit" data-i18n="other">Other</div>
                     <div class="sheet-th sheet-play" data-i18n="temp">Temp</div>
                     <div class="sheet-th" data-i18n="total">Total</div>
+                    <div class="sheet-th sheet-edit sheet-help sheet-pictos" data-i18n-title="Advanced Configuration">y</div>
                 </div>
                 <div class="sheet-tr sheet-hl" data-i18n-list-item="action_points">
                     <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="action-points">Action Points</label></div>
@@ -461,6 +500,7 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{damage_mod_other}" name="attr_damage_mod_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" data-i18n-title="damage-mod-title" data-i18n-vars="@{damage_mod_temp},&#13;" title="0steps on the damage table" name="attr_damage_mod_temp" value="0"></div>
                     <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{damage_mod}" name="attr_damage_mod" value="0" readonly></div>
+                    <div class="sheet-td sheet-edit"><input type="checkbox" title="@{damage_mod_config}" name="attr_damage_mod_config" value="1"><span class="sheet-checkico">y</span></div>
                 </div>
                 <div class="sheet-tr sheet-hl" data-i18n-list-item="exp_mod">
                     <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="experience-modifier">Exp Modifier</label></div>
@@ -552,10 +592,17 @@
         <div class="sheet-corporeal sheet-section sheet-grow">
             <div class="sheet-flex-centered">
                 <h2 data-i18n="health-and-armor">Health & Armor</h2>
+                <input type='checkbox' class="sheet-hidden sheet-simplified-combat-toggle" name='attr_simplified_combat_enabled' value="1"/>
                 <div class="sheet-edit sheet-grow sheet-text-right sheet-complex-combat">
                     <label class="sheet-left" data-18n="hit-locations">Hit Locations</label>
                     <select class="sheet-usrinput sheet-hit-location" title="@{hit_locations}" name="attr_hit_locations" data-i18n-list="hit-location-order">
-                        <option value="custom" data-i18n="custom" data-i18n-list-item="custom" selected >Custom</option>
+                        <option value="custom1" data-i18n="custom_1_location" data-i18n-list-item="custom_1_location" selected >Custom(1 Location)</option>
+                        <option value="custom7" data-i18n="custom_7_locations" data-i18n-list-item="custom_7_locations" selected >Custom(7 Locations)</option>
+                        <option value="custom8" data-i18n="custom_8_locations" data-i18n-list-item="custom_8_locations" selected >Custom(8 Locations)</option>
+                        <option value="custom9" data-i18n="custom_9_locations" data-i18n-list-item="custom_9_locations" selected >Custom(9 Locations)</option>
+                        <option value="custom10" data-i18n="custom_10_locations" data-i18n-list-item="custom_10_locations" selected >Custom(10 Locations)</option>
+                        <option value="custom11" data-i18n="custom_11_locations" data-i18n-list-item="custom_11_locations" selected >Custom(11 Locations)</option>
+                        <option value="custom" data-i18n="custom_12_locations" data-i18n-list-item="custom_12_locations" selected >Custom(12 Locations)</option>
                         <option value="rabble" data-i18n="rabble-underling" data-i18n-list-item="rabble">Rabble/Underling</option>
                         <option class="sheet-hidden" value="simplified" data-i18n="simplified-combat">Simplified Combat</option>
                         <option data-i18n-list-item="spacer" disabled>──────────</option>
@@ -571,13 +618,16 @@
                         <option value="pachyderm" data-i18n="pachyderm" data-i18n-list-item="pachyderm">Pachyderm</option>
                         <option value="quadruped" data-i18n="quadruped" data-i18n-list-item="quadruped">Quadruped</option>
                         <option value="serpentine" data-i18n="serpentine" data-i18n-list-item="serpentine">Serpentine</option>
-                        <option value="tailed_arachnid" data-i18n="tailed-arachnid" data-i18n-list-item="tailed_arachnid">Tailed Arachnid</option>
-                        <option value="tailed_biped" data-i18n="tailed-biped" data-i18n-list-item="tailed_biped">Tailed Biped</option>
-                        <option value="tailed_quadruped" data-i18n="tailed-quadruped" data-i18n-list-item="tailed_quadruped">Tailed Quadruped</option>
-                        <option value="winged_biped" data-i18n="winged-biped" data-i18n-list-item="winged_biped">Winged Biped</option>
-                        <option value="winged_insect" data-i18n="winged-insect" data-i18n-list-item="winged_insect">Winged Insect</option>
-                        <option value="winged_quadruped" data-i18n="winged-quadruped" data-i18n-list-item="winged_quadruped">Winged Quadruped</option>
+                        <option value="tailed_arachnid" data-i18n="tailed_arachnid" data-i18n-list-item="tailed_arachnid">Tailed Arachnid</option>
+                        <option value="tailed_biped" data-i18n="tailed_biped" data-i18n-list-item="tailed_biped">Tailed Biped</option>
+                        <option value="tailed_quadruped" data-i18n="tailed_quadruped" data-i18n-list-item="tailed_quadruped">Tailed Quadruped</option>
+                        <option value="winged_biped" data-i18n="winged_biped" data-i18n-list-item="winged_biped">Winged Biped</option>
+                        <option value="winged_insect" data-i18n="winged_insect" data-i18n-list-item="winged_insect">Winged Insect</option>
+                        <option value="winged_quadruped" data-i18n="winged_quadruped" data-i18n-list-item="winged_quadruped">Winged Quadruped</option>
                     </select>
+                </div>
+                <div class="sheet-edit sheet-text-right">
+                    <input type="checkbox" title="@{health_config}" name="attr_health_config" value="1"><span class="sheet-checkico">y</span>
                 </div>
                 <div class="sheet-play sheet-grow sheet-text-right">
                     <label class="sheet-left" data-18n="temp-ap-all">Temp AP (All)</label><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{all_armor_temp}" name="attr_all_armor_temp" value="0">
@@ -585,12 +635,23 @@
                 </div>
             </div>
 
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_health_config" value="1">
+            <div class="sheet-toggle">
+                <label class="sheet-left" data-18n="hit_point_calculation">Hit Point Calculation</label>
+                <select class="sheet-usrinput" name="attr_hp_calc">
+                    <option data-i18n="con-siz" value="0" selected>CON+SIZ</option>
+                    <option data-i18n="con-siz-pow" value="1">CON+SIZ+POW</option>
+                    <option data-i18n="con-siz-str" value="2">CON+SIZ+STR</option>
+                </select>
+            </div>
             <div class="sheet-table">
                 <div class="sheet-tr">
                     <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_location}" name="roll_hit_location" value="@{roll_display}&{template:hit-location} {{name=^{hit-location}}} {{low_roll=[[ 1d10 ]]}} {{roll=[[ 1d20 ]]}} {{high_roll=[[ 1d10+10 ]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[ @{location1_table_start} ]]}} {{loc1_end=[[ @{location1_table_end} ]]}} {{loc1_block=[[ @{location1_block} ]]}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[ @{location2_table_start} ]]}} {{loc2_end=[[ @{location2_table_end} ]]}} {{loc2_block=[[ @{location2_block} ]]}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[ @{location3_table_start} ]]}} {{loc3_end=[[ @{location3_table_end} ]]}} {{loc3_block=[[ @{location3_block} ]]}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[ @{location4_table_start} ]]}} {{loc4_end=[[ @{location4_table_end} ]]}} {{loc4_block=[[ @{location4_block} ]]}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[ @{location5_table_start} ]]}} {{loc5_end=[[ @{location5_table_end} ]]}} {{loc5_block=[[ @{location5_block} ]]}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[ @{location6_table_start} ]]}} {{loc6_end=[[ @{location6_table_end} ]]}} {{loc6_block=[[ @{location6_block} ]]}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[ @{location7_table_start} ]]}} {{loc7_end=[[ @{location7_table_end} ]]}} {{loc7_block=[[ @{location7_block} ]]}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[ @{location8_table_start} ]]}} {{loc8_end=[[ @{location8_table_end} ]]}} {{loc8_block=[[ @{location8_block} ]]}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[ @{location9_table_start} ]]}} {{loc9_end=[[ @{location9_table_end} ]]}} {{loc9_block=[[ @{location9_block} ]]}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[ @{location10_table_start} ]]}} {{loc10_end=[[ @{location10_table_end} ]]}} {{loc10_block=[[ @{location10_block} ]]}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[ @{location11_table_start} ]]}} {{loc11_end=[[ @{location11_table_end} ]]}} {{loc11_block=[[ {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[ @{location12_table_start} ]]}} {{loc12_end=[[ @{location12_table_end} ]]}} {{loc12_block=[[ @{location12_block} ]]}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}">1d20</button></div>
                     <div class="sheet-th sheet-full-width" data-i18n="location">Location</div>
-                    <div class="sheet-th sheet-edit" data-i18n="base">Base</div>
-                    <div class="sheet-th sheet-edit" data-i18n="other"><label >Other</label></div>
+                    <div class="sheet-th sheet-edit sheet-help" data-i18n-title="armor_armor_points" data-i18n="armor-abrv3_ap">Arm. AP</div>
+                    <div class="sheet-th sheet-edit sheet-help" data-i18n-title="other_armor_points" data-i18n="other-abrv3_ap">Oth. AP</div>
+                    <div class="sheet-th sheet-edit sheet-help" data-i18n-title="base_hit_points" data-i18n="base_hp">Base HP</div>
+                    <div class="sheet-th sheet-edit sheet-help" data-i18n-title="other_hit_points" data-i18n="other_hp"><label >Other</label></div>
                     <div class="sheet-th sheet-play sheet-pictos-three">b</div>
                     <div class="sheet-th sheet-play" data-i18n="ap">AP</div>
                     <div class="sheet-th" data-i18n="hp">HP</div>
@@ -598,6 +659,8 @@
                 <div class="sheet-tr sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_table_start" name="attr_location1_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_table_end" name="attr_location1_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location1_name}" name="attr_location1_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap}" name="attr_location1_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_other_ap}" name="attr_location1_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_hp_max_base_mod}" name="attr_location1_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location1_hp_max_other}" name="attr_location1_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play sheet-checkbox-width sheet-text-center">
@@ -610,6 +673,8 @@
                 <div class="sheet-tr sheet-wide-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_table_start" name="attr_location2_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_table_end" name="attr_location2_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location2_name}" name="attr_location2_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap}" name="attr_location2_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_other_ap}" name="attr_location2_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_hp_max_base_mod}" name="attr_location2_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location2_hp_max_other}" name="attr_location2_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -621,6 +686,8 @@
                 <div class="sheet-tr sheet-wide-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_table_start" name="attr_location3_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_table_end" name="attr_location3_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location3_name}" name="attr_location3_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap}" name="attr_location3_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_other_ap}" name="attr_location3_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_hp_max_base_mod}" name="attr_location3_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location3_hp_max_other}" name="attr_location3_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -633,6 +700,8 @@
                 <div class="sheet-tr sheet-wide-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_table_start" name="attr_location4_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_table_end" name="attr_location4_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location4_name}" name="attr_location4_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap}" name="attr_location4_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_other_ap}" name="attr_location4_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_hp_max_base_mod}" name="attr_location4_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location4_hp_max_other}" name="attr_location4_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -645,6 +714,8 @@
                 <div class="sheet-tr sheet-wide-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_table_start" name="attr_location5_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_table_end" name="attr_location5_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location5_name}" name="attr_location5_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap}" name="attr_location5_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_other_ap}" name="attr_location5_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_hp_max_base_mod}" name="attr_location5_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location5_hp_max_other}" name="attr_location5_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -657,6 +728,8 @@
                 <div class="sheet-tr sheet-wide-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_table_start" name="attr_location6_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_table_end" name="attr_location6_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location6_name}" name="attr_location6_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap}" name="attr_location6_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_other_ap}" name="attr_location6_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_hp_max_base_mod}" name="attr_location6_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location6_hp_max_other}" name="attr_location6_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -669,6 +742,8 @@
                 <div class="sheet-tr sheet-wide-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_table_start" name="attr_location7_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_table_end" name="attr_location7_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location7_name}" name="attr_location7_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap}" name="attr_location7_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_other_ap}" name="attr_location7_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_hp_max_base_mod}" name="attr_location7_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location7_hp_max_other}" name="attr_location7_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -681,6 +756,8 @@
                 <div class="sheet-tr sheet-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_table_start" name="attr_location8_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_table_end" name="attr_location8_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location8_name}" name="attr_location8_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap}" name="attr_location8_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_other_ap}" name="attr_location8_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_hp_max_base_mod}" name="attr_location8_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location8_hp_max_other}" name="attr_location8_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -693,6 +770,8 @@
                 <div class="sheet-tr sheet-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_table_start" name="attr_location9_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_table_end" name="attr_location9_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location9_name}" name="attr_location9_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap}" name="attr_location9_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_other_ap}" name="attr_location9_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_hp_max_base_mod}" name="attr_location9_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location9_hp_max_other}" name="attr_location9_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -705,6 +784,8 @@
                 <div class="sheet-tr sheet-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_table_start" name="attr_location10_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_table_end" name="attr_location10_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location10_name}" name="attr_location10_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap}" name="attr_location10_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_other_ap}" name="attr_location10_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_hp_max_base_mod}" name="attr_location10_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location10_hp_max_other}" name="attr_location10_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -717,6 +798,8 @@
                 <div class="sheet-tr sheet-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_table_start" name="attr_location11_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_table_end" name="attr_location11_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location11_name}" name="attr_location11_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap}" name="attr_location11_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_other_ap}" name="attr_location11_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_hp_max_base_mod}" name="attr_location11_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location11_hp_max_other}" name="attr_location11_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -729,6 +812,8 @@
                 <div class="sheet-tr sheet-toggle sheet-hl">
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_table_start" name="attr_location12_table_start" value="0"/>-<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_table_end" name="attr_location12_table_end" value="0"/></div>
                     <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center sheet-usrinput" title="@{location12_name}" name="attr_location12_name" value=""></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap}" name="attr_location12_armor_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_other_ap}" name="attr_location12_other_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width-sm" title="@{hp_max_base}" name="attr_hp_max_base" value="5" readonly>+<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_hp_max_base_mod}" name="attr_location12_hp_max_base_mod" value="-5"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-number-width sheet-usrinput" title="@{location12_hp_max_other}" name="attr_location12_hp_max_other" value="0"></div>
                     <div class="sheet-td sheet-play">
@@ -903,7 +988,7 @@
                             <option value="*0" data-i18n="na">N/A</option>
                         </select>
                     </div>
-                    <div class="sheet-td"><input type="text" class="sheet-number-width-sm" title="@{fatigue_recovery}" name="attr_fatigue_recovery" value="0" readonly> <span data-i18n="hours">hours</span></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-sm" title="@{fatigue_recovery}" name="attr_fatigue_recovery" value="0" readonly> <span name="attr_fatigue_recovery_unit" data-i18n-dynamic>Mins</span><input type="hidden" name="attr_fatigue_recovery_unit" value="minutes-abrv4"></div>
                 </div>
             </div>
 
@@ -1384,7 +1469,7 @@
             <div class="sheet-tr sheet-hl">
                 <div class="sheet-th" data-i18n="hit-location">Hit Location</div>
                 <div class="sheet-th" data-i18n="type">Type</div>
-                <div class="sheet-th" data-i18n="armor">Armor</div>
+                <div class="sheet-th sheet-help" data-i18n-title="armor_points" data-i18n="ap">AP</div>
                 <div class="sheet-th" data-i18n="enc">ENC</div>
                 <div class="sheet-th sheet-full-width" data-i18n="notes">Notes</div>
                 <div class="sheet-th" data-i18n="location">Location</div>
@@ -1392,8 +1477,8 @@
             <div class="sheet-tr sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location1_name}" name="attr_location1_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location1_armor_type}" name="attr_location1_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap}" name="attr_location1_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap|max}" name="attr_location1_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_enc}" step="any" name="attr_location1_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap}" name="attr_location1_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_enc}" step="any" name="attr_location1_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location1_armor_notes}" name="attr_location1_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location1_armor_equipped}" name="attr_location1_armor_equipped">
@@ -1410,8 +1495,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location2_name}" name="attr_location2_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location2_armor_type}" name="attr_location2_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap}" name="attr_location2_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap|max}" name="attr_location2_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap}" name="attr_location2_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location2_armor_equipped}" name="attr_location2_armor_equipped">
@@ -1427,8 +1512,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location3_name}" name="attr_location3_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location3_armor_type}" name="attr_location3_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap}" name="attr_location3_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap|max}" name="attr_location3_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_enc}" step="any" name="attr_location3_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap}" name="attr_location3_armor_ap" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_enc}" step="any" name="attr_location3_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location3_armor_notes}" name="attr_location3_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location3_armor_equipped}" name="attr_location3_armor_equipped">
@@ -1444,8 +1529,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location4_name}" name="attr_location4_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location4_armor_type}" name="attr_location4_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap}" name="attr_location4_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap|max}" name="attr_location4_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_enc}" step="any" name="attr_location4_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap}" name="attr_location4_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_enc}" step="any" name="attr_location4_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location4_armor_notes}" name="attr_location4_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location4_armor_equipped}" name="attr_location4_armor_equipped">
@@ -1461,8 +1546,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location5_name}" name="attr_location5_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location5_armor_type}" name="attr_location5_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap}" name="attr_location5_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap|max}" name="attr_location5_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_enc}" step="any" name="attr_location5_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap}" name="attr_location5_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_enc}" step="any" name="attr_location5_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location5_armor_notes}" name="attr_location5_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location5_armor_equipped}" name="attr_location5_armor_equipped">
@@ -1478,8 +1563,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location6_name}" name="attr_location6_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location6_armor_type}" name="attr_location6_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap}" name="attr_location6_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap|max}" name="attr_location6_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_enc}" step="any" name="attr_location6_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap}" name="attr_location6_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_enc}" step="any" name="attr_location6_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location6_armor_notes}" name="attr_location6_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location6_armor_equipped}" name="attr_location6_armor_equipped">
@@ -1495,8 +1580,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location7_name}" name="attr_location7_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location7_armor_type}" name="attr_location7_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap}" name="attr_location7_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap|max}" name="attr_location7_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_enc}" step="any" name="attr_location7_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap}" name="attr_location7_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_enc}" step="any" name="attr_location7_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location7_armor_notes}" name="attr_location7_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location7_armor_equipped}" name="attr_location7_armor_equipped">
@@ -1513,8 +1598,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location8_name}" name="attr_location8_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location8_armor_type}" name="attr_location8_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap}" name="attr_location8_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap|max}" name="attr_location8_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_enc}" step="any" name="attr_location8_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap}" name="attr_location8_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_enc}" step="any" name="attr_location8_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location8_armor_notes}" name="attr_location8_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location8_armor_equipped}" name="attr_location8_armor_equipped">
@@ -1531,8 +1616,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location9_name}" name="attr_location9_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location9_armor_type}" name="attr_location9_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap}" name="attr_location9_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap|max}" name="attr_location9_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_enc}" step="any" name="attr_location9_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap}" name="attr_location9_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_enc}" step="any" name="attr_location9_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location9_armor_notes}" name="attr_location9_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location9_armor_equipped}" name="attr_location9_armor_equipped">
@@ -1549,8 +1634,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location10_name}" name="attr_location10_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location10_armor_type}" name="attr_location10_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap}" name="attr_location10_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap|max}" name="attr_location10_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_enc}" step="any" name="attr_location10_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap}" name="attr_location10_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_enc}" step="any" name="attr_location10_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location10_armor_notes}" name="attr_location10_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location10_armor_equipped}" name="attr_location10_armor_equipped">
@@ -1567,8 +1652,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location11_name}" name="attr_location11_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location11_armor_type}" name="attr_location11_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap}" name="attr_location11_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap|max}" name="attr_location11_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_enc}" step="any" name="attr_location11_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap}" name="attr_location11_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_enc}" step="any" name="attr_location11_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location11_armor_notes}" name="attr_location11_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location11_armor_equipped}" name="attr_location11_armor_equipped">
@@ -1585,8 +1670,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location12_name}" name="attr_location12_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location12_armor_type}" name="attr_location12_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap}" name="attr_location12_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap|max}" name="attr_location12_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_enc}" step="any" name="attr_location12_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap}" name="attr_location12_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_enc}" step="any" name="attr_location12_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location12_armor_notes}" name="attr_location12_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location12_armor_equipped}" name="attr_location12_armor_equipped">
@@ -2093,7 +2178,7 @@ const intGetAttrs = ['int_base', 'int_other', 'int_temp'];
 const chaGetAttrs = ['cha_base', 'cha_other', 'cha_temp'];
 const allCharGetAttrs = strGetAttrs.concat(dexGetAttrs, sizGetAttrs, conGetAttrs, powGetAttrs, intGetAttrs, chaGetAttrs);
 
-const armorGetAttrs = ['location1_armor_enc', 'location1_armor_equipped',
+const armorEncGetAttrs = ['location1_armor_enc', 'location1_armor_equipped',
     'location2_armor_enc', 'location2_armor_equipped',
     'location3_armor_enc', 'location3_armor_equipped',
     'location4_armor_enc', 'location4_armor_equipped',
@@ -2106,6 +2191,34 @@ const armorGetAttrs = ['location1_armor_enc', 'location1_armor_equipped',
     'location11_armor_enc', 'location11_armor_equipped',
     'location12_armor_enc', 'location12_armor_equipped',
     'half_effective_armor_enc'];
+
+const armorLocGetAttrs = ['location1_other_ap', 'location1_armor_ap', 'location1_armor_equipped',
+    'location2_other_ap', 'location2_armor_ap', 'location2_armor_equipped',
+    'location3_other_ap', 'location3_armor_ap', 'location3_armor_equipped',
+    'location4_other_ap', 'location4_armor_ap', 'location4_armor_equipped',
+    'location5_other_ap', 'location5_armor_ap', 'location5_armor_equipped',
+    'location6_other_ap', 'location6_armor_ap', 'location6_armor_equipped',
+    'location7_other_ap', 'location7_armor_ap', 'location7_armor_equipped',
+    'location8_other_ap', 'location8_armor_ap', 'location8_armor_equipped',
+    'location9_other_ap', 'location9_armor_ap', 'location9_armor_equipped',
+    'location10_other_ap', 'location10_armor_ap', 'location10_armor_equipped',
+    'location11_other_ap', 'location11_armor_ap', 'location11_armor_equipped',
+    'location12_other_ap', 'location12_armor_ap', 'location12_armor_equipped',
+    'all_armor_temp'];
+
+const hitPointGetAttrs = ['location1_hp_max_base_mod', 'location1_hp_max_other', 'location1_hp', 'location1_hp_max',
+    'location2_hp_max_base_mod', 'location2_hp_max_other', 'location2_hp', 'location2_hp_max',
+    'location3_hp_max_base_mod', 'location3_hp_max_other', 'location3_hp', 'location3_hp_max',
+    'location4_hp_max_base_mod', 'location4_hp_max_other', 'location4_hp', 'location4_hp_max',
+    'location5_hp_max_base_mod', 'location5_hp_max_other', 'location5_hp', 'location5_hp_max',
+    'location6_hp_max_base_mod', 'location6_hp_max_other', 'location6_hp', 'location6_hp_max',
+    'location7_hp_max_base_mod', 'location7_hp_max_other', 'location7_hp', 'location7_hp_max',
+    'location8_hp_max_base_mod', 'location8_hp_max_other', 'location8_hp', 'location8_hp_max',
+    'location9_hp_max_base_mod', 'location9_hp_max_other', 'location9_hp', 'location9_hp_max',
+    'location10_hp_max_base_mod', 'location10_hp_max_other', 'location10_hp', 'location10_hp_max',
+    'location11_hp_max_base_mod', 'location11_hp_max_other', 'location11_hp', 'location11_hp_max',
+    'location12_hp_max_base_mod', 'location12_hp_max_other', 'location12_hp', 'location12_hp_max',
+    'hp_max_base', 'all_hp_temp', 'simplified_combat_enabled', 'hp_calc'];
 
 const encGetAttrs = ['avg_species_siz', 'encumbrance_temp', 'pack_equipped', 'effective_armor_enc', 'armor_enc_carried',
     'weapons_enc', 'weapons_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
@@ -2128,6 +2241,370 @@ const allStdSkillIds = Array.from(
 
 const stdSkillChars = {
     'athletics': ['str', 'dex']
+}
+
+const fatigueTable = {
+    9: ['0', '0', '0', '+0', 0],
+    8: ['1', '0', '0', '+0', .25],
+    7: ['1', '0', '0', '-1', 3],
+    6: ['2', '0', '-2', '-2', 6],
+    5: ['2', '-1', '-4', '*.5', 12],
+    4: ['3', '-2', '-6', '*.5', 18],
+    3: ['3', '-3', '-8', '*0', 24],
+    2: ['4', '-99', '-99', '*0', 36],
+    1: ['5', '-99', '-99', '*0', 48],
+    0: ['5', '-99', '-99', '*0', '-']
+};
+
+const hitLocationTable = {
+    custom1: {
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom7: {
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom8: {
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom9: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    custom10: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    custom11: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    rabble: {
+        location1_table_start: 1, location1_table_end: 20, location1_name: getTranslationByKey('hit_points'), location1_hp_max_base_mod: 0,
+        location2_table_start: 0, location2_table_end: 0, location2_name: " ", location2_hp_max_base_mod: '-',
+        location3_table_start: 0, location3_table_end: 0, location3_name: " ", location3_hp_max_base_mod: '-',
+        location4_table_start: 0, location4_table_end: 0, location4_name: " ", location4_hp_max_base_mod: '-',
+        location5_table_start: 0, location5_table_end: 0, location5_name: " ", location5_hp_max_base_mod: '-',
+        location6_table_start: 0, location6_table_end: 0, location6_name: " ", location6_hp_max_base_mod: '-',
+        location7_table_start: 0, location7_table_end: 0, location7_name: " ", location7_hp_max_base_mod: '-',
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    simplified: {
+        location1_table_start: 1, location1_table_end: 20, location1_name: getTranslationByKey('hit_points'), location1_hp_max_base_mod: 0,
+        location2_table_start: 0, location2_table_end: 0, location2_name: " ", location2_hp_max_base_mod: '-',
+        location3_table_start: 0, location3_table_end: 0, location3_name: " ", location3_hp_max_base_mod: '-',
+        location4_table_start: 0, location4_table_end: 0, location4_name: " ", location4_hp_max_base_mod: '-',
+        location5_table_start: 0, location5_table_end: 0, location5_name: " ", location5_hp_max_base_mod: '-',
+        location6_table_start: 0, location6_table_end: 0, location6_name: " ", location6_hp_max_base_mod: '-',
+        location7_table_start: 0, location7_table_end: 0, location7_name: " ", location7_hp_max_base_mod: '-',
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    arachnid: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 5, location3_table_end: 6, location3_name: getTranslationByKey('mid_right_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 7, location4_table_end: 8, location4_name: getTranslationByKey('mid_left_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 9, location5_table_end: 10, location5_name: getTranslationByKey('fore_right_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 11, location6_table_end: 12, location6_name: getTranslationByKey('fore_left_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 13, location7_table_end: 14, location7_name: getTranslationByKey('abdomen'), location7_hp_max_base_mod: 2,
+        location8_table_start: 15, location8_table_end: 16, location8_name: getTranslationByKey('front_right_leg'), location8_hp_max_base_mod: -1,
+        location9_table_start: 17, location9_table_end: 18, location9_name: getTranslationByKey('front_left_leg'), location9_hp_max_base_mod: -1,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('cephalothorax'), location10_hp_max_base_mod: 1,
+        location11_table_start: 0, location11_table_end: 0, location11_name: "", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: "", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    humanoid: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 7, location3_table_end: 9, location3_name: getTranslationByKey('abdomen'), location3_hp_max_base_mod: 1,
+        location4_table_start: 10, location4_table_end: 12, location4_name: getTranslationByKey('chest'), location4_hp_max_base_mod: 2,
+        location5_table_start: 13, location5_table_end: 15, location5_name: getTranslationByKey('right_arm'), location5_hp_max_base_mod: -1,
+        location6_table_start: 16, location6_table_end: 18, location6_name: getTranslationByKey('left_arm'), location6_hp_max_base_mod: -1,
+        location7_table_start: 19, location7_table_end: 20, location7_name: getTranslationByKey('head'), location7_hp_max_base_mod: 0,
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    centaurid: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 7, location3_table_end: 8, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 9, location4_table_end: 10, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 12, location5_name: getTranslationByKey('front_right_leg'), location5_hp_max_base_mod: 0,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('front_left_leg'), location6_hp_max_base_mod: 0,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('chest'), location7_hp_max_base_mod: -1,
+        location8_table_start: 17, location8_table_end: 17, location8_name: getTranslationByKey('right_arm'), location8_hp_max_base_mod: -4,
+        location9_table_start: 18, location9_table_end: 18, location9_name: getTranslationByKey('left_arm'), location9_hp_max_base_mod: -4,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: -3,
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    decapoda: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 3, location3_name: getTranslationByKey('mid_right_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 4, location4_table_end: 4, location4_name: getTranslationByKey('mid_left_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 5, location5_table_end: 5, location5_name: getTranslationByKey('fore_right_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 6, location6_table_end: 6, location6_name: getTranslationByKey('fore_left_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 7, location7_table_end: 7, location7_name: getTranslationByKey('front_right_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 8, location8_table_end: 8, location8_name: getTranslationByKey('front_left_leg'), location8_hp_max_base_mod: -1,
+        location9_table_start: 9, location9_table_end: 10, location9_name: getTranslationByKey('abdomen'), location9_hp_max_base_mod: 1,
+        location10_table_start: 11, location10_table_end: 16, location10_name: getTranslationByKey('cephalothorax'), location10_hp_max_base_mod: 2,
+        location11_table_start: 17, location11_table_end: 18, location11_name: getTranslationByKey('right_pincer'), location11_hp_max_base_mod: 2,
+        location12_table_start: 19, location12_table_end: 20, location12_name: getTranslationByKey('left_pincer'), location12_hp_max_base_mod: 0,
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    decapodiform: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('tentacle_1'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('tentacle_2'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 3, location3_name: getTranslationByKey('tentacle_3'), location3_hp_max_base_mod: -1,
+        location4_table_start: 4, location4_table_end: 4, location4_name: getTranslationByKey('tentacle_4'), location4_hp_max_base_mod: -1,
+        location5_table_start: 5, location5_table_end: 5, location5_name: getTranslationByKey('tentacle_5'), location5_hp_max_base_mod: -1,
+        location6_table_start: 6, location6_table_end: 6, location6_name: getTranslationByKey('tentacle_6'), location6_hp_max_base_mod: -1,
+        location7_table_start: 7, location7_table_end: 7, location7_name: getTranslationByKey('tentacle_7'), location7_hp_max_base_mod: -1,
+        location8_table_start: 8, location8_table_end: 8, location8_name: getTranslationByKey('tentacle_8'), location8_hp_max_base_mod: -1,
+        location9_table_start: 9, location9_table_end: 11, location9_name: getTranslationByKey('long-tentacle_1'), location9_hp_max_base_mod: 0,
+        location10_table_start: 12, location10_table_end: 14, location10_name: getTranslationByKey('long-tentacle_2'), location10_hp_max_base_mod: 0,
+        location11_table_start: 15, location11_table_end: 17, location11_name: getTranslationByKey('body'), location11_hp_max_base_mod: 2,
+        location12_table_start: 18, location12_table_end: 20, location12_name: getTranslationByKey('head'), location12_hp_max_base_mod: 1,
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    dorsal_finned_aquatic: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('dorsal_fin'), location2_hp_max_base_mod: -1,
+        location3_table_start: 7, location3_table_end: 10, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 11, location4_table_end: 14, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 15, location5_table_end: 16, location5_name: getTranslationByKey('right_fin'), location5_hp_max_base_mod: -1,
+        location6_table_start: 17, location6_table_end: 18, location6_name: getTranslationByKey('left_fin'), location6_hp_max_base_mod: -1,
+        location7_table_start: 19, location7_table_end: 20, location7_name: getTranslationByKey('head'), location7_hp_max_base_mod: 0,
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    draconic: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_right_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 6, location3_name: getTranslationByKey('rear_left_leg'), location3_hp_max_base_mod: 0,
+        location4_table_start: 7, location4_table_end: 8, location4_name: getTranslationByKey('hindquarters'), location4_hp_max_base_mod: 1,
+        location5_table_start: 9, location5_table_end: 10, location5_name: getTranslationByKey('right_wing'), location5_hp_max_base_mod: -1,
+        location6_table_start: 11, location6_table_end: 12, location6_name: getTranslationByKey('left_wing'), location6_hp_max_base_mod: -1,
+        location7_table_start: 13, location7_table_end: 14, location7_name: getTranslationByKey('forequarters'), location7_hp_max_base_mod: 2,
+        location8_table_start: 15, location8_table_end: 16, location8_name: getTranslationByKey('front_right_leg'), location8_hp_max_base_mod: 0,
+        location9_table_start: 17, location9_table_end: 18, location9_name: getTranslationByKey('front_left_leg'), location9_hp_max_base_mod: 0,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: 0,
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    insect: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('right_rear_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('left_rear_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 3, location3_name: getTranslationByKey('mid_right_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 4, location4_table_end: 4, location4_name: getTranslationByKey('mid_left_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 5, location5_table_end: 9, location5_name: getTranslationByKey('abdomen'), location5_hp_max_base_mod: 1,
+        location6_table_start: 10, location6_table_end: 13, location6_name: getTranslationByKey('thorax'), location6_hp_max_base_mod: 2,
+        location7_table_start: 14, location7_table_end: 14, location7_name: getTranslationByKey('front_right_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 15, location8_table_end: 15, location8_name: getTranslationByKey('front_left_leg'), location8_hp_max_base_mod: -1,
+        location9_table_start: 16, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    octopodiform: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tentacle_1'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('tentacle_2'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 6, location3_name: getTranslationByKey('tentacle_3'), location3_hp_max_base_mod: 0,
+        location4_table_start: 7, location4_table_end: 8, location4_name: getTranslationByKey('tentacle_4'), location4_hp_max_base_mod: 0,
+        location5_table_start: 9, location5_table_end: 10, location5_name: getTranslationByKey('tentacle_5'), location5_hp_max_base_mod: 0,
+        location6_table_start: 11, location6_table_end: 12, location6_name: getTranslationByKey('tentacle_6'), location6_hp_max_base_mod: 0,
+        location7_table_start: 13, location7_table_end: 14, location7_name: getTranslationByKey('tentacle_7'), location7_hp_max_base_mod: 0,
+        location8_table_start: 15, location8_table_end: 16, location8_name: getTranslationByKey('tentacle_8'), location8_hp_max_base_mod: 0,
+        location9_table_start: 17, location9_table_end: 18, location9_name: getTranslationByKey('body'), location9_hp_max_base_mod: 1,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: 2,
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    pachyderm: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 8, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 9, location4_table_end: 12, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 13, location5_table_end: 14, location5_name: getTranslationByKey('front_right_leg'), location5_hp_max_base_mod: 0,
+        location6_table_start: 15, location6_table_end: 16, location6_name: getTranslationByKey('front_left_leg'), location6_hp_max_base_mod: 0,
+        location7_table_start: 17, location7_table_end: 17, location7_name: getTranslationByKey('trunk'), location7_hp_max_base_mod: -1,
+        location8_table_start: 18, location8_table_end: 20, location8_name: getTranslationByKey('head'), location8_hp_max_base_mod: 0,
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    quadruped: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 7, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 13, location5_name: getTranslationByKey('front_right_leg'), location5_hp_max_base_mod: 0,
+        location6_table_start: 14, location6_table_end: 16, location6_name: getTranslationByKey('front_left_leg'), location6_hp_max_base_mod: 0,
+        location7_table_start: 17, location7_table_end: 20, location7_name: getTranslationByKey('head'), location7_hp_max_base_mod: 0,
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    serpentine: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail_tip'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 5, location2_name: getTranslationByKey('mid_end-length'), location2_hp_max_base_mod: 0,
+        location3_table_start: 6, location3_table_end: 7, location3_name: getTranslationByKey('fore_end-length'), location3_hp_max_base_mod: 0,
+        location4_table_start: 8, location4_table_end: 9, location4_name: getTranslationByKey('rear_mid-length'), location4_hp_max_base_mod: 1,
+        location5_table_start: 10, location5_table_end: 12, location5_name: getTranslationByKey('mid_mid-length'), location5_hp_max_base_mod: 1,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('fore_mid-length'), location6_hp_max_base_mod: 1,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('rear_fore-length'), location7_hp_max_base_mod: 0,
+        location8_table_start: 17, location8_table_end: 18, location8_name: getTranslationByKey('mid_fore-length'), location8_hp_max_base_mod: 0,
+        location9_table_start: 19, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    tailed_arachnid: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 3, location2_name: getTranslationByKey('rear_right_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 4, location3_table_end: 4, location3_name: getTranslationByKey('rear_left_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 5, location4_table_end: 5, location4_name: getTranslationByKey('mid_right_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 6, location5_table_end: 6, location5_name: getTranslationByKey('mid_left_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 7, location6_table_end: 7, location6_name: getTranslationByKey('fore_right_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 8, location7_table_end: 8, location7_name: getTranslationByKey('fore_left_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 9, location8_table_end: 12, location8_name: getTranslationByKey('thorax'), location8_hp_max_base_mod: 1,
+        location9_table_start: 13, location9_table_end: 15, location9_name: getTranslationByKey('right_pincer'), location9_hp_max_base_mod: 0,
+        location10_table_start: 16, location10_table_end: 18, location10_name: getTranslationByKey('left_pincer'), location10_hp_max_base_mod: 0,
+        location11_table_start: 19, location11_table_end: 20, location11_name: getTranslationByKey('cephalothorax'), location11_hp_max_base_mod: 2,
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    tailed_biped: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 5, location2_name: getTranslationByKey('right_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 6, location3_table_end: 7, location3_name: getTranslationByKey('left_leg'), location3_hp_max_base_mod: 0,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('abdomen'), location4_hp_max_base_mod: 1,
+        location5_table_start: 11, location5_table_end: 14, location5_name: getTranslationByKey('chest'), location5_hp_max_base_mod: 2,
+        location6_table_start: 15, location6_table_end: 16, location6_name: getTranslationByKey('right_arm'), location6_hp_max_base_mod: -1,
+        location7_table_start: 17, location7_table_end: 18, location7_name: getTranslationByKey('left_arm'), location7_hp_max_base_mod: -1,
+        location8_table_start: 19, location8_table_end: 20, location8_name: getTranslationByKey('head'), location8_hp_max_base_mod: 0,
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    tailed_quadruped: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 5, location2_name: getTranslationByKey('rear_right_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 6, location3_table_end: 7, location3_name: getTranslationByKey('rear_left_leg'), location3_hp_max_base_mod: 0,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('hindquarters'), location4_hp_max_base_mod: 1,
+        location5_table_start: 11, location5_table_end: 14, location5_name: getTranslationByKey('forequarters'), location5_hp_max_base_mod: 2,
+        location6_table_start: 15, location6_table_end: 16, location6_name: getTranslationByKey('front_right_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 17, location7_table_end: 18, location7_name: getTranslationByKey('front_left_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 19, location8_table_end: 20, location8_name: getTranslationByKey('head'), location8_hp_max_base_mod: 0,
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    winged_biped: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 7, location3_table_end: 9, location3_name: getTranslationByKey('abdomen'), location3_hp_max_base_mod: 1,
+        location4_table_start: 10, location4_table_end: 10, location4_name: getTranslationByKey('chest'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 12, location5_name: getTranslationByKey('right_wing'), location5_hp_max_base_mod: 0,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('left_wing'), location6_hp_max_base_mod: 0,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('right_arm'), location7_hp_max_base_mod: -1,
+        location8_table_start: 17, location8_table_end: 18, location8_name: getTranslationByKey('left_arm'), location8_hp_max_base_mod: -1,
+        location9_table_start: 19, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    winged_insect: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 4, location3_name: getTranslationByKey('metathorax'), location3_hp_max_base_mod: 1,
+        location4_table_start: 5, location4_table_end: 5, location4_name: getTranslationByKey('mid_right_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 6, location5_table_end: 6, location5_name: getTranslationByKey('mid_left_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 7, location6_table_end: 10, location6_name: getTranslationByKey('prothorax'), location6_hp_max_base_mod: 2,
+        location7_table_start: 11, location7_table_end: 12, location7_name: getTranslationByKey('right_wing'), location7_hp_max_base_mod: -1,
+        location8_table_start: 13, location8_table_end: 14, location8_name: getTranslationByKey('left_wing'), location8_hp_max_base_mod: -1,
+        location9_table_start: 15, location9_table_end: 16, location9_name: getTranslationByKey('front_right_leg'), location9_hp_max_base_mod: -1,
+        location10_table_start: 17, location10_table_end: 18, location10_name: getTranslationByKey('front_left_leg'), location10_hp_max_base_mod: -1,
+        location11_table_start: 19, location11_table_end: 20, location11_name: getTranslationByKey('head'), location11_hp_max_base_mod: 0,
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    winged_quadruped: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 7, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 12, location5_name: getTranslationByKey('right_wing'), location5_hp_max_base_mod: -1,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('left_wing'), location6_hp_max_base_mod: -1,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('front_right_leg'), location7_hp_max_base_mod: 0,
+        location8_table_start: 17, location8_table_end: 18, location8_name: getTranslationByKey('front_left_leg'), location8_hp_max_base_mod: 0,
+        location9_table_start: 19, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    }
 }
 
 
@@ -2165,6 +2642,68 @@ function buildCharObj(v) {
     });
 
     return charObj;
+}
+
+
+
+/* Atribute Functions */
+/**
+ * @param {Integer} con   The con value.
+ * @param {Integer} siz   The siz value.
+ * @param {Integer} pow   The pow value.
+ * @param {Integer} str   The str value.
+ * @param {String} hp_calc   The select value to determine how base HP is calculated.
+ * @param {String} simplified_combat_enabled   The select value to determine if simplified combat is enabled.
+ * @return {Integer}      Value of the base HP.
+ */
+function calcBaseHP(con, siz, pow, str, hp_calc, simplified_combat_enabled ) {
+    let modifier = 5;
+    if (simplified_combat_enabled === '1') {
+        modifier = 2;
+    }
+
+    if (hp_calc === '1') {
+       return Math.ceil((con + siz + pow)/modifier);
+    } else if (hp_calc === '2') {
+        return Math.ceil((con + siz + str)/modifier);
+    } else {
+        return Math.ceil((con + siz)/modifier);
+    }
+}
+
+/**
+ * @param {String} num   Number of the location being calculated.
+ * @param {Integer} hp_max_base   The base HP.
+ * @param {String} hp_max_base_mod   Unparsed base HP mod.
+ * @param {String} hp_max_other   Unparsed HP other.
+ * @param {Integer} all_hp_temp   Parsed HP temp.
+ * @param {String} currentHP   Current HP.
+ * @param {String} currentMax   Current max HP.
+ * @return {Object}      Values of the location HP and location HP max.
+ */
+function calcLocationHP(num, hp_max_base, hp_max_base_mod, hp_max_other, all_hp_temp, currentHP, currentMax) {
+    if (isNaN(parseInt(hp_max_base_mod))) {
+        return {[`location${num}_hp`]: 0, [`location${num}_hp_max`]: 0};
+    } else {
+        const newMax = hp_max_base + parseInt(hp_max_base_mod) + parseInt(hp_max_other) + all_hp_temp;
+        const diff = parseInt(currentHP) - parseInt(currentMax);
+        return {[`location${num}_hp`]: newMax + diff, [`location${num}_hp_max`]: newMax};
+    }
+}
+
+/**
+ * @param {String} other_ap   Other armor
+ * @param {String} armor_ap   AP from armor
+ * @param {Integer} all_armor_temp   Parsed Temp armor
+ * @param {String} equipped   Armor location
+ * @return {Object}      Values of the location HP and location HP max.
+ */
+function calcLocationAP(other_ap, armor_ap, all_armor_temp, equipped) {
+    if (equipped === '1') {
+        return parseInt(armor_ap) + parseInt(other_ap) + all_armor_temp;
+    } else {
+        return parseInt(other_ap) + all_armor_temp;
+    }
 }
 
 /* Skill Functions */
@@ -2428,6 +2967,35 @@ function calcEnc(str, v) {
     }
 }
 
+function calcFatigueRecovery(fatigue, healing_rate) {
+    let recovery = '-';
+    let recoveryUnit = "hours";
+    console.log(fatigueTable[fatigue][4]);
+    if (fatigueTable[fatigue][4] !== '-') {
+        recovery = parseFloat((fatigueTable[fatigue][4] / healing_rate).toFixed(2));
+        console.log(recovery);
+
+        if (recovery < 1) {
+            recovery = Math.ceil(recovery * 60);
+            recoveryUnit = "minutes-abrv4";
+        }
+    }
+
+    console.log(recovery);
+    console.log(recoveryUnit);
+    return {fatigue_recovery: recovery, fatigue_recovery_unit: recoveryUnit};
+}
+
+function calcFatigue(fatigue, healing_rate) {
+    return {
+        fatigue_skills: fatigueTable[fatigue][0],
+        action_points_fatigue: fatigueTable[fatigue][1],
+        initiative_bonus_fatigue: fatigueTable[fatigue][2],
+        movement_rate_fatigue: fatigueTable[fatigue][3],
+        ...calcFatigueRecovery(fatigue, healing_rate)
+    };
+}
+
 /* Characteristic Triggers */
 ['str', 'con','siz','int','pow','dex','cha'].forEach(char => {
     on(`change:${char}_base change:${char}_other change:${char}_temp`, function() {
@@ -2470,6 +3038,95 @@ function calcEnc(str, v) {
         });
     });
 });
+
+/* Attribute Triggers */
+/* Hit Locations */
+on('change:hit_locations', function(event) {
+    setAttrs( hitLocationTable[event.newValue] );
+});
+
+/* Locational Hit Points */
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
+    on(`change:location${num}_hp_max_base_mod change:location${num}_hp_max_other`, function() {
+        getAttrs(['hp_max_base', `location${num}_hp_max_base_mod`, `location${num}_hp_max_other`, 'all_hp_temp',
+            `location${num}_hp`, `location${num}_hp_max`], function(v) {
+            setAttrs( calcLocationHP(num, parseInt(v['hp_max_base']), v[`location${num}_hp_max_base_mod`], v[`location${num}_hp_max_other`],
+                parseInt(v['all_hp_temp']), v[`location${num}_hp`], v[`location${num}_hp_max`]) );
+        });
+    });
+});
+
+/* All Hit Points */
+on('change:hp_calc change:all_hp_temp change:simplified_combat_enabled', function() {
+    getAttrs(['str', 'con', 'siz', 'pow'].concat(hitPointGetAttrs), function(v) {
+        const hp_max_base = calcBaseHP(parseInt(v['con']), parseInt(v['siz']), parseInt(v['pow']), parseInt(v['str']),
+            v['hp_calc'], v['simplified_combat_enabled']);
+        const all_hp_temp = parseInt(v['all_hp_temp']);
+        let baseAttrs = {};
+        if (v['simplified_combat_enabled'] === '1') {
+            baseAttrs = {hit_locations: "custom1", ...hitLocationTable['simplified']};
+        }
+        setAttrs({
+            hp_max_base: hp_max_base, ...baseAttrs,
+            ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
+                all_hp_temp, v['location1_hp'], v['location1_hp_max']),
+            ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
+                all_hp_temp, v['location2_hp'], v['location2_hp_max']),
+            ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
+                all_hp_temp, v['location3_hp'], v['location3_hp_max']),
+            ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
+                all_hp_temp, v['location4_hp'], v['location4_hp_max']),
+            ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
+                all_hp_temp, v['location5_hp'], v['location5_hp_max']),
+            ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
+                all_hp_temp, v['location6_hp'], v['location6_hp_max']),
+            ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
+                all_hp_temp, v['location7_hp'], v['location7_hp_max']),
+            ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
+                all_hp_temp, v['location8_hp'], v['location8_hp_max']),
+            ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
+                all_hp_temp, v['location9_hp'], v['location9_hp_max']),
+            ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
+                all_hp_temp, v['location10_hp'], v['location10_hp_max']),
+            ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
+                all_hp_temp, v['location11_hp'], v['location11_hp_max']),
+            ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
+                all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+        });
+    });
+});
+
+/* Locational Armor Points */
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
+    on(`change:location${num}_other_ap change:location${num}_armor_ap`, function() {
+        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp', `location${num}_armor_equipped`], function(v) {
+            setAttrs({[`location${num}_ap`]: calcLocationAP(v[`location${num}_other_ap`], v[`location${num}_armor_ap`], parseInt(v['all_armor_temp']), v[`location${num}_armor_equipped`]) });
+        });
+    });
+});
+
+/* All Armor Points */
+on('change:all_armor_temp', function() {
+    getAttrs(armorLocGetAttrs, function(v) {
+        const all_armor_temp = parseInt(v['all_armor_temp']);
+        setAttrs({
+            location1_ap: calcLocationAP(v['location1_other_ap'], v['location1_armor_ap'], all_armor_temp, v['location1_armor_equipped']),
+            location2_ap: calcLocationAP(v['location2_other_ap'], v['location2_armor_ap'], all_armor_temp, v['location2_armor_equipped']),
+            location3_ap: calcLocationAP(v['location3_other_ap'], v['location3_armor_ap'], all_armor_temp, v['location3_armor_equipped']),
+            location4_ap: calcLocationAP(v['location4_other_ap'], v['location4_armor_ap'], all_armor_temp, v['location4_armor_equipped']),
+            location5_ap: calcLocationAP(v['location5_other_ap'], v['location5_armor_ap'], all_armor_temp, v['location5_armor_equipped']),
+            location6_ap: calcLocationAP(v['location6_other_ap'], v['location6_armor_ap'], all_armor_temp, v['location6_armor_equipped']),
+            location7_ap: calcLocationAP(v['location7_other_ap'], v['location7_armor_ap'], all_armor_temp, v['location7_armor_equipped']),
+            location8_ap: calcLocationAP(v['location8_other_ap'], v['location8_armor_ap'], all_armor_temp, v['location8_armor_equipped']),
+            location9_ap: calcLocationAP(v['location9_other_ap'], v['location9_armor_ap'], all_armor_temp, v['location9_armor_equipped']),
+            location10_ap: calcLocationAP(v['location10_other_ap'], v['location10_armor_ap'], all_armor_temp, v['location10_armor_equipped']),
+            location11_ap: calcLocationAP(v['location11_other_ap'], v['location11_armor_ap'], all_armor_temp, v['location11_armor_equipped']),
+            location12_ap: calcLocationAP(v['location12_other_ap'], v['location12_armor_ap'], all_armor_temp, v['location12_armor_equipped'])
+        });
+    });
+});
+
+
 
 /* Skill Triggers */
 /* Standard Skill Totals */
@@ -2516,9 +3173,31 @@ on("change:repeating_passion", function(event) {
 
 /* Encumbrance Triggers */
 /* Armor ENC and Armor Penalty*/
-on("change:location12_armor_equipped change:location12_armor_enc change:location11_armor_equipped change:location11_armor_enc change:location10_armor_equipped change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_equipped change:location9_armor_enc change:location8_armor_equipped change:location_armor_enc change:location7_armor_equipped change:location7_armor_enc change:location6_armor_equipped change:location6_armor_enc change:location5_armor_equipped change:location5_armor_enc change:location4_armor_equipped change:location4_armor_enc change:location3_armor_equipped change:location3_armor_enc change:location2_armor_equipped change:location2_armor_enc change:location1_armor_equipped change:location1_armor_enc change:half_effective_armor_enc", function() {
-    getAttrs(armorGetAttrs, function(v) {
-        setAttrs( calcArmorEncAndPenalty(v) );
+on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
+    getAttrs(armorEncGetAttrs, function(v) {
+        const armorAttrs = calcArmorEncAndPenalty(v);
+        v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
+        v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
+        setAttrs({
+            ...armorAttrs,
+            ...calcEnc(parseInt(v['str']), v)
+        });
+    });
+});
+
+/* Armor Equipped */
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
+    on(`change:location${num}_armor_equipped`, function() {
+        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp'].concat(armorEncGetAttrs), function(v) {
+            const armorAttrs = calcArmorEncAndPenalty(v);
+            v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
+            v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
+            setAttrs({
+                [`location${num}_ap`]: calcLocationAP(v[`location${num}_other_ap`], v[`location${num}_armor_ap`], parseInt(v['all_armor_temp']), v[`location${num}_armor_equipped`]),
+                ...armorAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
+        });
     });
 });
 
@@ -2537,7 +3216,13 @@ on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeatin
         });
 
         getAttrs(weaponGetAttrs, function(v) {
-            setAttrs( calcWeaponEnc(weaponIds, v) );
+            const weaponAttrs = calcWeaponEnc(weaponIds, v);
+            v['weapons_enc'] = weaponAttrs['weapons_enc'];
+            v['weapons_enc_carried'] = weaponAttrs['weapons_enc_carried'];
+            setAttrs({
+                ...weaponAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
         });
     });
 });
@@ -2556,8 +3241,14 @@ on("change:repeating_equipment:enc change:repeating_equipment:quantity change:re
             gearGetAttrs.push(`repeating_equipment_${id}_enc`, `repeating_equipment_${id}_quantity`, `repeating_equipment_${id}_location`)
         });
 
-        getAttrs(gearGetAttrs, function(v) {
-            setAttrs( calcGenericRepeatingEnc(gearIds, 'equipment', v) );
+        getAttrs(['str'].concat(gearGetAttrs, encGetAttrs), function(v) {
+            const gearAttrs = calcGenericRepeatingEnc(gearIds, 'equipment', v);
+            v['equipment_enc'] = gearAttrs['equipment_enc'];
+            v['equipment_enc_carried'] = gearAttrs['equipment_enc_carried'];
+            setAttrs({
+                ...gearAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
         });
     });
 });
@@ -2576,17 +3267,29 @@ on("change:repeating_currency:enc change:repeating_currency:quantity change:repe
             currencyGetAttrs.push(`repeating_currency_${id}_enc`, `repeating_currency_${id}_quantity`, `repeating_currency_${id}_location`)
         });
 
-        getAttrs(currencyGetAttrs, function(v) {
-            setAttrs( calcGenericRepeatingEnc(currencyIds, 'currency', v) );
+        getAttrs(['str'].concat(currencyGetAttrs, encGetAttrs), function(v) {
+            const currencyAttrs = calcGenericRepeatingEnc(currencyIds, 'currency', v);
+            v['currency_enc'] = currencyAttrs['currency_enc'];
+            v['currency_enc_carried'] = currencyAttrs['currency_enc_carried'];
+            setAttrs({
+                ...currencyAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
         });
     });
 });
 
 /* ENC */
-on("change:avg_species_siz change:effective_armor_enc change:armor_enc_carried change:weapons_enc change:weapons_enc_carried change:pack_equipped change:equipment_enc change:equipment_enc_carried change:currency_enc change:currency_enc_carried change:encumbrance_temp", function() {
-    getAttrs(encGetAttrs.concat(strGetAttrs), function(v) {
-        const str = calcChar(v['str_base'], v['str_other'], v['str_temp']);
-        setAttrs( calcEnc(str, v) );
+on("change:avg_species_siz change:pack_equipped change:encumbrance_temp", function() {
+    getAttrs(['str'].concat(encGetAttrs), function(v) {
+        setAttrs( calcEnc(parseInt(v['str']), v) );
+    });
+});
+
+/* Fatigue */
+on("change:fatigue", function() {
+    getAttrs(['fatigue', 'healing_rate'], function(v) {
+        setAttrs( calcFatigue(v['fatigue'], parseInt(v['healing_rate'])) );
     });
 });
 

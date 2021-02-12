@@ -8,7 +8,7 @@ const intGetAttrs = ['int_base', 'int_other', 'int_temp'];
 const chaGetAttrs = ['cha_base', 'cha_other', 'cha_temp'];
 const allCharGetAttrs = strGetAttrs.concat(dexGetAttrs, sizGetAttrs, conGetAttrs, powGetAttrs, intGetAttrs, chaGetAttrs);
 
-const armorGetAttrs = ['location1_armor_enc', 'location1_armor_equipped',
+const armorEncGetAttrs = ['location1_armor_enc', 'location1_armor_equipped',
     'location2_armor_enc', 'location2_armor_equipped',
     'location3_armor_enc', 'location3_armor_equipped',
     'location4_armor_enc', 'location4_armor_equipped',
@@ -21,6 +21,34 @@ const armorGetAttrs = ['location1_armor_enc', 'location1_armor_equipped',
     'location11_armor_enc', 'location11_armor_equipped',
     'location12_armor_enc', 'location12_armor_equipped',
     'half_effective_armor_enc'];
+
+const armorLocGetAttrs = ['location1_other_ap', 'location1_armor_ap', 'location1_armor_equipped',
+    'location2_other_ap', 'location2_armor_ap', 'location2_armor_equipped',
+    'location3_other_ap', 'location3_armor_ap', 'location3_armor_equipped',
+    'location4_other_ap', 'location4_armor_ap', 'location4_armor_equipped',
+    'location5_other_ap', 'location5_armor_ap', 'location5_armor_equipped',
+    'location6_other_ap', 'location6_armor_ap', 'location6_armor_equipped',
+    'location7_other_ap', 'location7_armor_ap', 'location7_armor_equipped',
+    'location8_other_ap', 'location8_armor_ap', 'location8_armor_equipped',
+    'location9_other_ap', 'location9_armor_ap', 'location9_armor_equipped',
+    'location10_other_ap', 'location10_armor_ap', 'location10_armor_equipped',
+    'location11_other_ap', 'location11_armor_ap', 'location11_armor_equipped',
+    'location12_other_ap', 'location12_armor_ap', 'location12_armor_equipped',
+    'all_armor_temp'];
+
+const hitPointGetAttrs = ['location1_hp_max_base_mod', 'location1_hp_max_other', 'location1_hp', 'location1_hp_max',
+    'location2_hp_max_base_mod', 'location2_hp_max_other', 'location2_hp', 'location2_hp_max',
+    'location3_hp_max_base_mod', 'location3_hp_max_other', 'location3_hp', 'location3_hp_max',
+    'location4_hp_max_base_mod', 'location4_hp_max_other', 'location4_hp', 'location4_hp_max',
+    'location5_hp_max_base_mod', 'location5_hp_max_other', 'location5_hp', 'location5_hp_max',
+    'location6_hp_max_base_mod', 'location6_hp_max_other', 'location6_hp', 'location6_hp_max',
+    'location7_hp_max_base_mod', 'location7_hp_max_other', 'location7_hp', 'location7_hp_max',
+    'location8_hp_max_base_mod', 'location8_hp_max_other', 'location8_hp', 'location8_hp_max',
+    'location9_hp_max_base_mod', 'location9_hp_max_other', 'location9_hp', 'location9_hp_max',
+    'location10_hp_max_base_mod', 'location10_hp_max_other', 'location10_hp', 'location10_hp_max',
+    'location11_hp_max_base_mod', 'location11_hp_max_other', 'location11_hp', 'location11_hp_max',
+    'location12_hp_max_base_mod', 'location12_hp_max_other', 'location12_hp', 'location12_hp_max',
+    'hp_max_base', 'all_hp_temp', 'simplified_combat_enabled', 'hp_calc'];
 
 const encGetAttrs = ['avg_species_siz', 'encumbrance_temp', 'pack_equipped', 'effective_armor_enc', 'armor_enc_carried',
     'weapons_enc', 'weapons_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
@@ -43,6 +71,370 @@ const allStdSkillIds = Array.from(
 
 const stdSkillChars = {
     'athletics': ['str', 'dex']
+}
+
+const fatigueTable = {
+    9: ['0', '0', '0', '+0', 0],
+    8: ['1', '0', '0', '+0', .25],
+    7: ['1', '0', '0', '-1', 3],
+    6: ['2', '0', '-2', '-2', 6],
+    5: ['2', '-1', '-4', '*.5', 12],
+    4: ['3', '-2', '-6', '*.5', 18],
+    3: ['3', '-3', '-8', '*0', 24],
+    2: ['4', '-99', '-99', '*0', 36],
+    1: ['5', '-99', '-99', '*0', 48],
+    0: ['5', '-99', '-99', '*0', '-']
+};
+
+const hitLocationTable = {
+    custom1: {
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom7: {
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom8: {
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom9: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    custom10: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    custom11: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    custom: {
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    rabble: {
+        location1_table_start: 1, location1_table_end: 20, location1_name: getTranslationByKey('hit_points'), location1_hp_max_base_mod: 0,
+        location2_table_start: 0, location2_table_end: 0, location2_name: " ", location2_hp_max_base_mod: '-',
+        location3_table_start: 0, location3_table_end: 0, location3_name: " ", location3_hp_max_base_mod: '-',
+        location4_table_start: 0, location4_table_end: 0, location4_name: " ", location4_hp_max_base_mod: '-',
+        location5_table_start: 0, location5_table_end: 0, location5_name: " ", location5_hp_max_base_mod: '-',
+        location6_table_start: 0, location6_table_end: 0, location6_name: " ", location6_hp_max_base_mod: '-',
+        location7_table_start: 0, location7_table_end: 0, location7_name: " ", location7_hp_max_base_mod: '-',
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    simplified: {
+        location1_table_start: 1, location1_table_end: 20, location1_name: getTranslationByKey('hit_points'), location1_hp_max_base_mod: 0,
+        location2_table_start: 0, location2_table_end: 0, location2_name: " ", location2_hp_max_base_mod: '-',
+        location3_table_start: 0, location3_table_end: 0, location3_name: " ", location3_hp_max_base_mod: '-',
+        location4_table_start: 0, location4_table_end: 0, location4_name: " ", location4_hp_max_base_mod: '-',
+        location5_table_start: 0, location5_table_end: 0, location5_name: " ", location5_hp_max_base_mod: '-',
+        location6_table_start: 0, location6_table_end: 0, location6_name: " ", location6_hp_max_base_mod: '-',
+        location7_table_start: 0, location7_table_end: 0, location7_name: " ", location7_hp_max_base_mod: '-',
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    arachnid: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 5, location3_table_end: 6, location3_name: getTranslationByKey('mid_right_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 7, location4_table_end: 8, location4_name: getTranslationByKey('mid_left_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 9, location5_table_end: 10, location5_name: getTranslationByKey('fore_right_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 11, location6_table_end: 12, location6_name: getTranslationByKey('fore_left_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 13, location7_table_end: 14, location7_name: getTranslationByKey('abdomen'), location7_hp_max_base_mod: 2,
+        location8_table_start: 15, location8_table_end: 16, location8_name: getTranslationByKey('front_right_leg'), location8_hp_max_base_mod: -1,
+        location9_table_start: 17, location9_table_end: 18, location9_name: getTranslationByKey('front_left_leg'), location9_hp_max_base_mod: -1,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('cephalothorax'), location10_hp_max_base_mod: 1,
+        location11_table_start: 0, location11_table_end: 0, location11_name: "", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: "", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    humanoid: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 7, location3_table_end: 9, location3_name: getTranslationByKey('abdomen'), location3_hp_max_base_mod: 1,
+        location4_table_start: 10, location4_table_end: 12, location4_name: getTranslationByKey('chest'), location4_hp_max_base_mod: 2,
+        location5_table_start: 13, location5_table_end: 15, location5_name: getTranslationByKey('right_arm'), location5_hp_max_base_mod: -1,
+        location6_table_start: 16, location6_table_end: 18, location6_name: getTranslationByKey('left_arm'), location6_hp_max_base_mod: -1,
+        location7_table_start: 19, location7_table_end: 20, location7_name: getTranslationByKey('head'), location7_hp_max_base_mod: 0,
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    centaurid: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 7, location3_table_end: 8, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 9, location4_table_end: 10, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 12, location5_name: getTranslationByKey('front_right_leg'), location5_hp_max_base_mod: 0,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('front_left_leg'), location6_hp_max_base_mod: 0,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('chest'), location7_hp_max_base_mod: -1,
+        location8_table_start: 17, location8_table_end: 17, location8_name: getTranslationByKey('right_arm'), location8_hp_max_base_mod: -4,
+        location9_table_start: 18, location9_table_end: 18, location9_name: getTranslationByKey('left_arm'), location9_hp_max_base_mod: -4,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: -3,
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    decapoda: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 3, location3_name: getTranslationByKey('mid_right_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 4, location4_table_end: 4, location4_name: getTranslationByKey('mid_left_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 5, location5_table_end: 5, location5_name: getTranslationByKey('fore_right_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 6, location6_table_end: 6, location6_name: getTranslationByKey('fore_left_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 7, location7_table_end: 7, location7_name: getTranslationByKey('front_right_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 8, location8_table_end: 8, location8_name: getTranslationByKey('front_left_leg'), location8_hp_max_base_mod: -1,
+        location9_table_start: 9, location9_table_end: 10, location9_name: getTranslationByKey('abdomen'), location9_hp_max_base_mod: 1,
+        location10_table_start: 11, location10_table_end: 16, location10_name: getTranslationByKey('cephalothorax'), location10_hp_max_base_mod: 2,
+        location11_table_start: 17, location11_table_end: 18, location11_name: getTranslationByKey('right_pincer'), location11_hp_max_base_mod: 2,
+        location12_table_start: 19, location12_table_end: 20, location12_name: getTranslationByKey('left_pincer'), location12_hp_max_base_mod: 0,
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    decapodiform: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('tentacle_1'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('tentacle_2'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 3, location3_name: getTranslationByKey('tentacle_3'), location3_hp_max_base_mod: -1,
+        location4_table_start: 4, location4_table_end: 4, location4_name: getTranslationByKey('tentacle_4'), location4_hp_max_base_mod: -1,
+        location5_table_start: 5, location5_table_end: 5, location5_name: getTranslationByKey('tentacle_5'), location5_hp_max_base_mod: -1,
+        location6_table_start: 6, location6_table_end: 6, location6_name: getTranslationByKey('tentacle_6'), location6_hp_max_base_mod: -1,
+        location7_table_start: 7, location7_table_end: 7, location7_name: getTranslationByKey('tentacle_7'), location7_hp_max_base_mod: -1,
+        location8_table_start: 8, location8_table_end: 8, location8_name: getTranslationByKey('tentacle_8'), location8_hp_max_base_mod: -1,
+        location9_table_start: 9, location9_table_end: 11, location9_name: getTranslationByKey('long-tentacle_1'), location9_hp_max_base_mod: 0,
+        location10_table_start: 12, location10_table_end: 14, location10_name: getTranslationByKey('long-tentacle_2'), location10_hp_max_base_mod: 0,
+        location11_table_start: 15, location11_table_end: 17, location11_name: getTranslationByKey('body'), location11_hp_max_base_mod: 2,
+        location12_table_start: 18, location12_table_end: 20, location12_name: getTranslationByKey('head'), location12_hp_max_base_mod: 1,
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    dorsal_finned_aquatic: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('dorsal_fin'), location2_hp_max_base_mod: -1,
+        location3_table_start: 7, location3_table_end: 10, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 11, location4_table_end: 14, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 15, location5_table_end: 16, location5_name: getTranslationByKey('right_fin'), location5_hp_max_base_mod: -1,
+        location6_table_start: 17, location6_table_end: 18, location6_name: getTranslationByKey('left_fin'), location6_hp_max_base_mod: -1,
+        location7_table_start: 19, location7_table_end: 20, location7_name: getTranslationByKey('head'), location7_hp_max_base_mod: 0,
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    draconic: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_right_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 6, location3_name: getTranslationByKey('rear_left_leg'), location3_hp_max_base_mod: 0,
+        location4_table_start: 7, location4_table_end: 8, location4_name: getTranslationByKey('hindquarters'), location4_hp_max_base_mod: 1,
+        location5_table_start: 9, location5_table_end: 10, location5_name: getTranslationByKey('right_wing'), location5_hp_max_base_mod: -1,
+        location6_table_start: 11, location6_table_end: 12, location6_name: getTranslationByKey('left_wing'), location6_hp_max_base_mod: -1,
+        location7_table_start: 13, location7_table_end: 14, location7_name: getTranslationByKey('forequarters'), location7_hp_max_base_mod: 2,
+        location8_table_start: 15, location8_table_end: 16, location8_name: getTranslationByKey('front_right_leg'), location8_hp_max_base_mod: 0,
+        location9_table_start: 17, location9_table_end: 18, location9_name: getTranslationByKey('front_left_leg'), location9_hp_max_base_mod: 0,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: 0,
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    insect: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('right_rear_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('left_rear_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 3, location3_name: getTranslationByKey('mid_right_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 4, location4_table_end: 4, location4_name: getTranslationByKey('mid_left_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 5, location5_table_end: 9, location5_name: getTranslationByKey('abdomen'), location5_hp_max_base_mod: 1,
+        location6_table_start: 10, location6_table_end: 13, location6_name: getTranslationByKey('thorax'), location6_hp_max_base_mod: 2,
+        location7_table_start: 14, location7_table_end: 14, location7_name: getTranslationByKey('front_right_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 15, location8_table_end: 15, location8_name: getTranslationByKey('front_left_leg'), location8_hp_max_base_mod: -1,
+        location9_table_start: 16, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    octopodiform: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tentacle_1'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('tentacle_2'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 6, location3_name: getTranslationByKey('tentacle_3'), location3_hp_max_base_mod: 0,
+        location4_table_start: 7, location4_table_end: 8, location4_name: getTranslationByKey('tentacle_4'), location4_hp_max_base_mod: 0,
+        location5_table_start: 9, location5_table_end: 10, location5_name: getTranslationByKey('tentacle_5'), location5_hp_max_base_mod: 0,
+        location6_table_start: 11, location6_table_end: 12, location6_name: getTranslationByKey('tentacle_6'), location6_hp_max_base_mod: 0,
+        location7_table_start: 13, location7_table_end: 14, location7_name: getTranslationByKey('tentacle_7'), location7_hp_max_base_mod: 0,
+        location8_table_start: 15, location8_table_end: 16, location8_name: getTranslationByKey('tentacle_8'), location8_hp_max_base_mod: 0,
+        location9_table_start: 17, location9_table_end: 18, location9_name: getTranslationByKey('body'), location9_hp_max_base_mod: 1,
+        location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: 2,
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+    },
+    pachyderm: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 8, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 9, location4_table_end: 12, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 13, location5_table_end: 14, location5_name: getTranslationByKey('front_right_leg'), location5_hp_max_base_mod: 0,
+        location6_table_start: 15, location6_table_end: 16, location6_name: getTranslationByKey('front_left_leg'), location6_hp_max_base_mod: 0,
+        location7_table_start: 17, location7_table_end: 17, location7_name: getTranslationByKey('trunk'), location7_hp_max_base_mod: -1,
+        location8_table_start: 18, location8_table_end: 20, location8_name: getTranslationByKey('head'), location8_hp_max_base_mod: 0,
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    quadruped: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 7, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 13, location5_name: getTranslationByKey('front_right_leg'), location5_hp_max_base_mod: 0,
+        location6_table_start: 14, location6_table_end: 16, location6_name: getTranslationByKey('front_left_leg'), location6_hp_max_base_mod: 0,
+        location7_table_start: 17, location7_table_end: 20, location7_name: getTranslationByKey('head'), location7_hp_max_base_mod: 0,
+        location8_table_start: 0, location8_table_end: 0, location8_name: " ", location8_hp_max_base_mod: '-',
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    serpentine: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail_tip'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 5, location2_name: getTranslationByKey('mid_end-length'), location2_hp_max_base_mod: 0,
+        location3_table_start: 6, location3_table_end: 7, location3_name: getTranslationByKey('fore_end-length'), location3_hp_max_base_mod: 0,
+        location4_table_start: 8, location4_table_end: 9, location4_name: getTranslationByKey('rear_mid-length'), location4_hp_max_base_mod: 1,
+        location5_table_start: 10, location5_table_end: 12, location5_name: getTranslationByKey('mid_mid-length'), location5_hp_max_base_mod: 1,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('fore_mid-length'), location6_hp_max_base_mod: 1,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('rear_fore-length'), location7_hp_max_base_mod: 0,
+        location8_table_start: 17, location8_table_end: 18, location8_name: getTranslationByKey('mid_fore-length'), location8_hp_max_base_mod: 0,
+        location9_table_start: 19, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    tailed_arachnid: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 3, location2_name: getTranslationByKey('rear_right_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 4, location3_table_end: 4, location3_name: getTranslationByKey('rear_left_leg'), location3_hp_max_base_mod: -1,
+        location4_table_start: 5, location4_table_end: 5, location4_name: getTranslationByKey('mid_right_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 6, location5_table_end: 6, location5_name: getTranslationByKey('mid_left_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 7, location6_table_end: 7, location6_name: getTranslationByKey('fore_right_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 8, location7_table_end: 8, location7_name: getTranslationByKey('fore_left_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 9, location8_table_end: 12, location8_name: getTranslationByKey('thorax'), location8_hp_max_base_mod: 1,
+        location9_table_start: 13, location9_table_end: 15, location9_name: getTranslationByKey('right_pincer'), location9_hp_max_base_mod: 0,
+        location10_table_start: 16, location10_table_end: 18, location10_name: getTranslationByKey('left_pincer'), location10_hp_max_base_mod: 0,
+        location11_table_start: 19, location11_table_end: 20, location11_name: getTranslationByKey('cephalothorax'), location11_hp_max_base_mod: 2,
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    tailed_biped: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 5, location2_name: getTranslationByKey('right_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 6, location3_table_end: 7, location3_name: getTranslationByKey('left_leg'), location3_hp_max_base_mod: 0,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('abdomen'), location4_hp_max_base_mod: 1,
+        location5_table_start: 11, location5_table_end: 14, location5_name: getTranslationByKey('chest'), location5_hp_max_base_mod: 2,
+        location6_table_start: 15, location6_table_end: 16, location6_name: getTranslationByKey('right_arm'), location6_hp_max_base_mod: -1,
+        location7_table_start: 17, location7_table_end: 18, location7_name: getTranslationByKey('left_arm'), location7_hp_max_base_mod: -1,
+        location8_table_start: 19, location8_table_end: 20, location8_name: getTranslationByKey('head'), location8_hp_max_base_mod: 0,
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    tailed_quadruped: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 5, location2_name: getTranslationByKey('rear_right_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 6, location3_table_end: 7, location3_name: getTranslationByKey('rear_left_leg'), location3_hp_max_base_mod: 0,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('hindquarters'), location4_hp_max_base_mod: 1,
+        location5_table_start: 11, location5_table_end: 14, location5_name: getTranslationByKey('forequarters'), location5_hp_max_base_mod: 2,
+        location6_table_start: 15, location6_table_end: 16, location6_name: getTranslationByKey('front_right_leg'), location6_hp_max_base_mod: -1,
+        location7_table_start: 17, location7_table_end: 18, location7_name: getTranslationByKey('front_left_leg'), location7_hp_max_base_mod: -1,
+        location8_table_start: 19, location8_table_end: 20, location8_name: getTranslationByKey('head'), location8_hp_max_base_mod: 0,
+        location9_table_start: 0, location9_table_end: 0, location9_name: " ", location9_hp_max_base_mod: '-',
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    winged_biped: {
+        location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 4, location2_table_end: 6, location2_name: getTranslationByKey('left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 7, location3_table_end: 9, location3_name: getTranslationByKey('abdomen'), location3_hp_max_base_mod: 1,
+        location4_table_start: 10, location4_table_end: 10, location4_name: getTranslationByKey('chest'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 12, location5_name: getTranslationByKey('right_wing'), location5_hp_max_base_mod: 0,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('left_wing'), location6_hp_max_base_mod: 0,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('right_arm'), location7_hp_max_base_mod: -1,
+        location8_table_start: 17, location8_table_end: 18, location8_name: getTranslationByKey('left_arm'), location8_hp_max_base_mod: -1,
+        location9_table_start: 19, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    },
+    winged_insect: {
+        location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
+        location2_table_start: 2, location2_table_end: 2, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: -1,
+        location3_table_start: 3, location3_table_end: 4, location3_name: getTranslationByKey('metathorax'), location3_hp_max_base_mod: 1,
+        location4_table_start: 5, location4_table_end: 5, location4_name: getTranslationByKey('mid_right_leg'), location4_hp_max_base_mod: -1,
+        location5_table_start: 6, location5_table_end: 6, location5_name: getTranslationByKey('mid_left_leg'), location5_hp_max_base_mod: -1,
+        location6_table_start: 7, location6_table_end: 10, location6_name: getTranslationByKey('prothorax'), location6_hp_max_base_mod: 2,
+        location7_table_start: 11, location7_table_end: 12, location7_name: getTranslationByKey('right_wing'), location7_hp_max_base_mod: -1,
+        location8_table_start: 13, location8_table_end: 14, location8_name: getTranslationByKey('left_wing'), location8_hp_max_base_mod: -1,
+        location9_table_start: 15, location9_table_end: 16, location9_name: getTranslationByKey('front_right_leg'), location9_hp_max_base_mod: -1,
+        location10_table_start: 17, location10_table_end: 18, location10_name: getTranslationByKey('front_left_leg'), location10_hp_max_base_mod: -1,
+        location11_table_start: 19, location11_table_end: 20, location11_name: getTranslationByKey('head'), location11_hp_max_base_mod: 0,
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+    },
+    winged_quadruped: {
+        location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
+        location2_table_start: 3, location2_table_end: 4, location2_name: getTranslationByKey('rear_left_leg'), location2_hp_max_base_mod: 0,
+        location3_table_start: 5, location3_table_end: 7, location3_name: getTranslationByKey('hindquarters'), location3_hp_max_base_mod: 1,
+        location4_table_start: 8, location4_table_end: 10, location4_name: getTranslationByKey('forequarters'), location4_hp_max_base_mod: 2,
+        location5_table_start: 11, location5_table_end: 12, location5_name: getTranslationByKey('right_wing'), location5_hp_max_base_mod: -1,
+        location6_table_start: 13, location6_table_end: 14, location6_name: getTranslationByKey('left_wing'), location6_hp_max_base_mod: -1,
+        location7_table_start: 15, location7_table_end: 16, location7_name: getTranslationByKey('front_right_leg'), location7_hp_max_base_mod: 0,
+        location8_table_start: 17, location8_table_end: 18, location8_name: getTranslationByKey('front_left_leg'), location8_hp_max_base_mod: 0,
+        location9_table_start: 19, location9_table_end: 20, location9_name: getTranslationByKey('head'), location9_hp_max_base_mod: 0,
+        location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
+        location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
+        location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
+        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+    }
 }
 
 
@@ -80,6 +472,68 @@ function buildCharObj(v) {
     });
 
     return charObj;
+}
+
+
+
+/* Atribute Functions */
+/**
+ * @param {Integer} con   The con value.
+ * @param {Integer} siz   The siz value.
+ * @param {Integer} pow   The pow value.
+ * @param {Integer} str   The str value.
+ * @param {String} hp_calc   The select value to determine how base HP is calculated.
+ * @param {String} simplified_combat_enabled   The select value to determine if simplified combat is enabled.
+ * @return {Integer}      Value of the base HP.
+ */
+function calcBaseHP(con, siz, pow, str, hp_calc, simplified_combat_enabled ) {
+    let modifier = 5;
+    if (simplified_combat_enabled === '1') {
+        modifier = 2;
+    }
+
+    if (hp_calc === '1') {
+       return Math.ceil((con + siz + pow)/modifier);
+    } else if (hp_calc === '2') {
+        return Math.ceil((con + siz + str)/modifier);
+    } else {
+        return Math.ceil((con + siz)/modifier);
+    }
+}
+
+/**
+ * @param {String} num   Number of the location being calculated.
+ * @param {Integer} hp_max_base   The base HP.
+ * @param {String} hp_max_base_mod   Unparsed base HP mod.
+ * @param {String} hp_max_other   Unparsed HP other.
+ * @param {Integer} all_hp_temp   Parsed HP temp.
+ * @param {String} currentHP   Current HP.
+ * @param {String} currentMax   Current max HP.
+ * @return {Object}      Values of the location HP and location HP max.
+ */
+function calcLocationHP(num, hp_max_base, hp_max_base_mod, hp_max_other, all_hp_temp, currentHP, currentMax) {
+    if (isNaN(parseInt(hp_max_base_mod))) {
+        return {[`location${num}_hp`]: 0, [`location${num}_hp_max`]: 0};
+    } else {
+        const newMax = hp_max_base + parseInt(hp_max_base_mod) + parseInt(hp_max_other) + all_hp_temp;
+        const diff = parseInt(currentHP) - parseInt(currentMax);
+        return {[`location${num}_hp`]: newMax + diff, [`location${num}_hp_max`]: newMax};
+    }
+}
+
+/**
+ * @param {String} other_ap   Other armor
+ * @param {String} armor_ap   AP from armor
+ * @param {Integer} all_armor_temp   Parsed Temp armor
+ * @param {String} equipped   Armor location
+ * @return {Object}      Values of the location HP and location HP max.
+ */
+function calcLocationAP(other_ap, armor_ap, all_armor_temp, equipped) {
+    if (equipped === '1') {
+        return parseInt(armor_ap) + parseInt(other_ap) + all_armor_temp;
+    } else {
+        return parseInt(other_ap) + all_armor_temp;
+    }
 }
 
 /* Skill Functions */
@@ -343,6 +797,35 @@ function calcEnc(str, v) {
     }
 }
 
+function calcFatigueRecovery(fatigue, healing_rate) {
+    let recovery = '-';
+    let recoveryUnit = "hours";
+    console.log(fatigueTable[fatigue][4]);
+    if (fatigueTable[fatigue][4] !== '-') {
+        recovery = parseFloat((fatigueTable[fatigue][4] / healing_rate).toFixed(2));
+        console.log(recovery);
+
+        if (recovery < 1) {
+            recovery = Math.ceil(recovery * 60);
+            recoveryUnit = "minutes-abrv4";
+        }
+    }
+
+    console.log(recovery);
+    console.log(recoveryUnit);
+    return {fatigue_recovery: recovery, fatigue_recovery_unit: recoveryUnit};
+}
+
+function calcFatigue(fatigue, healing_rate) {
+    return {
+        fatigue_skills: fatigueTable[fatigue][0],
+        action_points_fatigue: fatigueTable[fatigue][1],
+        initiative_bonus_fatigue: fatigueTable[fatigue][2],
+        movement_rate_fatigue: fatigueTable[fatigue][3],
+        ...calcFatigueRecovery(fatigue, healing_rate)
+    };
+}
+
 /* Characteristic Triggers */
 ['str', 'con','siz','int','pow','dex','cha'].forEach(char => {
     on(`change:${char}_base change:${char}_other change:${char}_temp`, function() {
@@ -385,6 +868,95 @@ function calcEnc(str, v) {
         });
     });
 });
+
+/* Attribute Triggers */
+/* Hit Locations */
+on('change:hit_locations', function(event) {
+    setAttrs( hitLocationTable[event.newValue] );
+});
+
+/* Locational Hit Points */
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
+    on(`change:location${num}_hp_max_base_mod change:location${num}_hp_max_other`, function() {
+        getAttrs(['hp_max_base', `location${num}_hp_max_base_mod`, `location${num}_hp_max_other`, 'all_hp_temp',
+            `location${num}_hp`, `location${num}_hp_max`], function(v) {
+            setAttrs( calcLocationHP(num, parseInt(v['hp_max_base']), v[`location${num}_hp_max_base_mod`], v[`location${num}_hp_max_other`],
+                parseInt(v['all_hp_temp']), v[`location${num}_hp`], v[`location${num}_hp_max`]) );
+        });
+    });
+});
+
+/* All Hit Points */
+on('change:hp_calc change:all_hp_temp change:simplified_combat_enabled', function() {
+    getAttrs(['str', 'con', 'siz', 'pow'].concat(hitPointGetAttrs), function(v) {
+        const hp_max_base = calcBaseHP(parseInt(v['con']), parseInt(v['siz']), parseInt(v['pow']), parseInt(v['str']),
+            v['hp_calc'], v['simplified_combat_enabled']);
+        const all_hp_temp = parseInt(v['all_hp_temp']);
+        let baseAttrs = {};
+        if (v['simplified_combat_enabled'] === '1') {
+            baseAttrs = {hit_locations: "custom1", ...hitLocationTable['simplified']};
+        }
+        setAttrs({
+            hp_max_base: hp_max_base, ...baseAttrs,
+            ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
+                all_hp_temp, v['location1_hp'], v['location1_hp_max']),
+            ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
+                all_hp_temp, v['location2_hp'], v['location2_hp_max']),
+            ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
+                all_hp_temp, v['location3_hp'], v['location3_hp_max']),
+            ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
+                all_hp_temp, v['location4_hp'], v['location4_hp_max']),
+            ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
+                all_hp_temp, v['location5_hp'], v['location5_hp_max']),
+            ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
+                all_hp_temp, v['location6_hp'], v['location6_hp_max']),
+            ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
+                all_hp_temp, v['location7_hp'], v['location7_hp_max']),
+            ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
+                all_hp_temp, v['location8_hp'], v['location8_hp_max']),
+            ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
+                all_hp_temp, v['location9_hp'], v['location9_hp_max']),
+            ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
+                all_hp_temp, v['location10_hp'], v['location10_hp_max']),
+            ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
+                all_hp_temp, v['location11_hp'], v['location11_hp_max']),
+            ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
+                all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+        });
+    });
+});
+
+/* Locational Armor Points */
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
+    on(`change:location${num}_other_ap change:location${num}_armor_ap`, function() {
+        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp', `location${num}_armor_equipped`], function(v) {
+            setAttrs({[`location${num}_ap`]: calcLocationAP(v[`location${num}_other_ap`], v[`location${num}_armor_ap`], parseInt(v['all_armor_temp']), v[`location${num}_armor_equipped`]) });
+        });
+    });
+});
+
+/* All Armor Points */
+on('change:all_armor_temp', function() {
+    getAttrs(armorLocGetAttrs, function(v) {
+        const all_armor_temp = parseInt(v['all_armor_temp']);
+        setAttrs({
+            location1_ap: calcLocationAP(v['location1_other_ap'], v['location1_armor_ap'], all_armor_temp, v['location1_armor_equipped']),
+            location2_ap: calcLocationAP(v['location2_other_ap'], v['location2_armor_ap'], all_armor_temp, v['location2_armor_equipped']),
+            location3_ap: calcLocationAP(v['location3_other_ap'], v['location3_armor_ap'], all_armor_temp, v['location3_armor_equipped']),
+            location4_ap: calcLocationAP(v['location4_other_ap'], v['location4_armor_ap'], all_armor_temp, v['location4_armor_equipped']),
+            location5_ap: calcLocationAP(v['location5_other_ap'], v['location5_armor_ap'], all_armor_temp, v['location5_armor_equipped']),
+            location6_ap: calcLocationAP(v['location6_other_ap'], v['location6_armor_ap'], all_armor_temp, v['location6_armor_equipped']),
+            location7_ap: calcLocationAP(v['location7_other_ap'], v['location7_armor_ap'], all_armor_temp, v['location7_armor_equipped']),
+            location8_ap: calcLocationAP(v['location8_other_ap'], v['location8_armor_ap'], all_armor_temp, v['location8_armor_equipped']),
+            location9_ap: calcLocationAP(v['location9_other_ap'], v['location9_armor_ap'], all_armor_temp, v['location9_armor_equipped']),
+            location10_ap: calcLocationAP(v['location10_other_ap'], v['location10_armor_ap'], all_armor_temp, v['location10_armor_equipped']),
+            location11_ap: calcLocationAP(v['location11_other_ap'], v['location11_armor_ap'], all_armor_temp, v['location11_armor_equipped']),
+            location12_ap: calcLocationAP(v['location12_other_ap'], v['location12_armor_ap'], all_armor_temp, v['location12_armor_equipped'])
+        });
+    });
+});
+
+
 
 /* Skill Triggers */
 /* Standard Skill Totals */
@@ -431,9 +1003,31 @@ on("change:repeating_passion", function(event) {
 
 /* Encumbrance Triggers */
 /* Armor ENC and Armor Penalty*/
-on("change:location12_armor_equipped change:location12_armor_enc change:location11_armor_equipped change:location11_armor_enc change:location10_armor_equipped change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_equipped change:location9_armor_enc change:location8_armor_equipped change:location_armor_enc change:location7_armor_equipped change:location7_armor_enc change:location6_armor_equipped change:location6_armor_enc change:location5_armor_equipped change:location5_armor_enc change:location4_armor_equipped change:location4_armor_enc change:location3_armor_equipped change:location3_armor_enc change:location2_armor_equipped change:location2_armor_enc change:location1_armor_equipped change:location1_armor_enc change:half_effective_armor_enc", function() {
-    getAttrs(armorGetAttrs, function(v) {
-        setAttrs( calcArmorEncAndPenalty(v) );
+on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
+    getAttrs(armorEncGetAttrs, function(v) {
+        const armorAttrs = calcArmorEncAndPenalty(v);
+        v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
+        v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
+        setAttrs({
+            ...armorAttrs,
+            ...calcEnc(parseInt(v['str']), v)
+        });
+    });
+});
+
+/* Armor Equipped */
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
+    on(`change:location${num}_armor_equipped`, function() {
+        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp'].concat(armorEncGetAttrs), function(v) {
+            const armorAttrs = calcArmorEncAndPenalty(v);
+            v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
+            v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
+            setAttrs({
+                [`location${num}_ap`]: calcLocationAP(v[`location${num}_other_ap`], v[`location${num}_armor_ap`], parseInt(v['all_armor_temp']), v[`location${num}_armor_equipped`]),
+                ...armorAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
+        });
     });
 });
 
@@ -452,7 +1046,13 @@ on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeatin
         });
 
         getAttrs(weaponGetAttrs, function(v) {
-            setAttrs( calcWeaponEnc(weaponIds, v) );
+            const weaponAttrs = calcWeaponEnc(weaponIds, v);
+            v['weapons_enc'] = weaponAttrs['weapons_enc'];
+            v['weapons_enc_carried'] = weaponAttrs['weapons_enc_carried'];
+            setAttrs({
+                ...weaponAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
         });
     });
 });
@@ -471,8 +1071,14 @@ on("change:repeating_equipment:enc change:repeating_equipment:quantity change:re
             gearGetAttrs.push(`repeating_equipment_${id}_enc`, `repeating_equipment_${id}_quantity`, `repeating_equipment_${id}_location`)
         });
 
-        getAttrs(gearGetAttrs, function(v) {
-            setAttrs( calcGenericRepeatingEnc(gearIds, 'equipment', v) );
+        getAttrs(['str'].concat(gearGetAttrs, encGetAttrs), function(v) {
+            const gearAttrs = calcGenericRepeatingEnc(gearIds, 'equipment', v);
+            v['equipment_enc'] = gearAttrs['equipment_enc'];
+            v['equipment_enc_carried'] = gearAttrs['equipment_enc_carried'];
+            setAttrs({
+                ...gearAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
         });
     });
 });
@@ -491,17 +1097,29 @@ on("change:repeating_currency:enc change:repeating_currency:quantity change:repe
             currencyGetAttrs.push(`repeating_currency_${id}_enc`, `repeating_currency_${id}_quantity`, `repeating_currency_${id}_location`)
         });
 
-        getAttrs(currencyGetAttrs, function(v) {
-            setAttrs( calcGenericRepeatingEnc(currencyIds, 'currency', v) );
+        getAttrs(['str'].concat(currencyGetAttrs, encGetAttrs), function(v) {
+            const currencyAttrs = calcGenericRepeatingEnc(currencyIds, 'currency', v);
+            v['currency_enc'] = currencyAttrs['currency_enc'];
+            v['currency_enc_carried'] = currencyAttrs['currency_enc_carried'];
+            setAttrs({
+                ...currencyAttrs,
+                ...calcEnc(parseInt(v['str']), v)
+            });
         });
     });
 });
 
 /* ENC */
-on("change:avg_species_siz change:effective_armor_enc change:armor_enc_carried change:weapons_enc change:weapons_enc_carried change:pack_equipped change:equipment_enc change:equipment_enc_carried change:currency_enc change:currency_enc_carried change:encumbrance_temp", function() {
-    getAttrs(encGetAttrs.concat(strGetAttrs), function(v) {
-        const str = calcChar(v['str_base'], v['str_other'], v['str_temp']);
-        setAttrs( calcEnc(str, v) );
+on("change:avg_species_siz change:pack_equipped change:encumbrance_temp", function() {
+    getAttrs(['str'].concat(encGetAttrs), function(v) {
+        setAttrs( calcEnc(parseInt(v['str']), v) );
+    });
+});
+
+/* Fatigue */
+on("change:fatigue", function() {
+    getAttrs(['fatigue', 'healing_rate'], function(v) {
+        setAttrs( calcFatigue(v['fatigue'], parseInt(v['healing_rate'])) );
     });
 });
 

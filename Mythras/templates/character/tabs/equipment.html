@@ -16,7 +16,7 @@
             <div class="sheet-tr sheet-hl">
                 <div class="sheet-th" data-i18n="hit-location">Hit Location</div>
                 <div class="sheet-th" data-i18n="type">Type</div>
-                <div class="sheet-th" data-i18n="armor">Armor</div>
+                <div class="sheet-th sheet-help" data-i18n-title="armor_points" data-i18n="ap">AP</div>
                 <div class="sheet-th" data-i18n="enc">ENC</div>
                 <div class="sheet-th sheet-full-width" data-i18n="notes">Notes</div>
                 <div class="sheet-th" data-i18n="location">Location</div>
@@ -24,8 +24,8 @@
             <div class="sheet-tr sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location1_name}" name="attr_location1_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location1_armor_type}" name="attr_location1_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap}" name="attr_location1_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap|max}" name="attr_location1_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_enc}" step="any" name="attr_location1_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_ap}" name="attr_location1_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location1_armor_enc}" step="any" name="attr_location1_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location1_armor_notes}" name="attr_location1_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location1_armor_equipped}" name="attr_location1_armor_equipped">
@@ -42,8 +42,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location2_name}" name="attr_location2_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location2_armor_type}" name="attr_location2_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap}" name="attr_location2_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap|max}" name="attr_location2_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_ap}" name="attr_location2_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location2_armor_equipped}" name="attr_location2_armor_equipped">
@@ -59,8 +59,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location3_name}" name="attr_location3_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location3_armor_type}" name="attr_location3_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap}" name="attr_location3_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap|max}" name="attr_location3_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_enc}" step="any" name="attr_location3_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_ap}" name="attr_location3_armor_ap" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location3_armor_enc}" step="any" name="attr_location3_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location3_armor_notes}" name="attr_location3_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location3_armor_equipped}" name="attr_location3_armor_equipped">
@@ -76,8 +76,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location4_name}" name="attr_location4_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location4_armor_type}" name="attr_location4_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap}" name="attr_location4_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap|max}" name="attr_location4_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_enc}" step="any" name="attr_location4_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_ap}" name="attr_location4_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location4_armor_enc}" step="any" name="attr_location4_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location4_armor_notes}" name="attr_location4_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location4_armor_equipped}" name="attr_location4_armor_equipped">
@@ -93,8 +93,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location5_name}" name="attr_location5_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location5_armor_type}" name="attr_location5_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap}" name="attr_location5_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap|max}" name="attr_location5_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_enc}" step="any" name="attr_location5_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_ap}" name="attr_location5_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location5_armor_enc}" step="any" name="attr_location5_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location5_armor_notes}" name="attr_location5_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location5_armor_equipped}" name="attr_location5_armor_equipped">
@@ -110,8 +110,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location6_name}" name="attr_location6_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location6_armor_type}" name="attr_location6_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap}" name="attr_location6_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap|max}" name="attr_location6_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_enc}" step="any" name="attr_location6_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_ap}" name="attr_location6_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location6_armor_enc}" step="any" name="attr_location6_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location6_armor_notes}" name="attr_location6_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location6_armor_equipped}" name="attr_location6_armor_equipped">
@@ -127,8 +127,8 @@
             <div class="sheet-tr sheet-wide-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location7_name}" name="attr_location7_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location7_armor_type}" name="attr_location7_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap}" name="attr_location7_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap|max}" name="attr_location7_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_enc}" step="any" name="attr_location7_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_ap}" name="attr_location7_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location7_armor_enc}" step="any" name="attr_location7_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location7_armor_notes}" name="attr_location7_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location7_armor_equipped}" name="attr_location7_armor_equipped">
@@ -145,8 +145,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location8_name}" name="attr_location8_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location8_armor_type}" name="attr_location8_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap}" name="attr_location8_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap|max}" name="attr_location8_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_enc}" step="any" name="attr_location8_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_ap}" name="attr_location8_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location8_armor_enc}" step="any" name="attr_location8_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location8_armor_notes}" name="attr_location8_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location8_armor_equipped}" name="attr_location8_armor_equipped">
@@ -163,8 +163,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location9_name}" name="attr_location9_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location9_armor_type}" name="attr_location9_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap}" name="attr_location9_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap|max}" name="attr_location9_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_enc}" step="any" name="attr_location9_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_ap}" name="attr_location9_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location9_armor_enc}" step="any" name="attr_location9_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location9_armor_notes}" name="attr_location9_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location9_armor_equipped}" name="attr_location9_armor_equipped">
@@ -181,8 +181,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location10_name}" name="attr_location10_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location10_armor_type}" name="attr_location10_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap}" name="attr_location10_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap|max}" name="attr_location10_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_enc}" step="any" name="attr_location10_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_ap}" name="attr_location10_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location10_armor_enc}" step="any" name="attr_location10_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location10_armor_notes}" name="attr_location10_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location10_armor_equipped}" name="attr_location10_armor_equipped">
@@ -199,8 +199,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location11_name}" name="attr_location11_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location11_armor_type}" name="attr_location11_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap}" name="attr_location11_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap|max}" name="attr_location11_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_enc}" step="any" name="attr_location11_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_ap}" name="attr_location11_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location11_armor_enc}" step="any" name="attr_location11_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location11_armor_notes}" name="attr_location11_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location11_armor_equipped}" name="attr_location11_armor_equipped">
@@ -217,8 +217,8 @@
             <div class="sheet-tr sheet-toggle sheet-hl">
                 <div class="sheet-td sheet-text-center"><input type="text" class="sheet-armor-field sheet-text-center sheet-usrinput" title="@{location12_name}" name="attr_location12_name" value=""></div>
                 <div class="sheet-td"><input type="text" class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location12_armor_type}" name="attr_location12_armor_type" value=""></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap}" name="attr_location12_armor_ap" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap|max}" name="attr_location12_armor_ap_max" value="0"></div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_enc}" step="any" name="attr_location12_armor_enc" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_ap}" name="attr_location12_armor_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{location12_armor_enc}" step="any" name="attr_location12_armor_enc" min="0" value="0"></div>
                 <div class="sheet-td sheet-full-width"><input type="text" class="sheet-usrinput sheet-text-center sheet-full-width" title="@{location12_armor_notes}" name="attr_location12_armor_notes"></div>
                 <div class="sheet-td">
                     <select class="sheet-usrinput sheet-text-center sheet-armor-field" title="@{location12_armor_equipped}" name="attr_location12_armor_equipped">
