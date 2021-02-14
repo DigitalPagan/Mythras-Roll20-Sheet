@@ -140,19 +140,16 @@ div.sheet-char-label {
 }
 
 /* Attributes */
-select.sheet-attr-calc-width {
+.sheet-attr-calc-width {
     width: 100px;
 }
 
-/* Magic Point Toggles */
-input.sheet-magic-points-toggle:not(:checked) + div.sheet-magic-points {
-    display: none;
+/* Traits */
+.sheet-trait-name {
+    width: 150px;
 }
-input.sheet-power-points-toggle:not(:checked) + div.sheet-power-points {
-    display: none;
-}
-input.sheet-prana-points-toggle:not(:checked) + div.sheet-prana-points {
-    display: none;
+.sheet-trait-type {
+    width: 120px;
 }
 
 /* Strangeness Toggle */

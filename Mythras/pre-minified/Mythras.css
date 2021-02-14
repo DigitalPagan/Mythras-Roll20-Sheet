@@ -83,8 +83,17 @@ div.sheet-flex-rev {
     display: flex;
     flex-direction: row-reverse;
 }
+div.sheet-space-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
 div.sheet-space-between {
     display: flex;
+    justify-content: space-between;
+}
+div.sheet-vert-space-between {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 div.sheet-space-between-centered {
@@ -181,6 +190,9 @@ div.sheet-shrink {
 .sheet-bold {
     font-weight: bold;
 }
+.sheet-lite {
+    font-weight: normal;
+}
 .sheet-wrap {
     white-space: normal !important;
  }
@@ -189,11 +201,14 @@ div.sheet-shrink {
     border: 1px solid black;
     margin-bottom: 5px;
     box-sizing: border-box;
-    padding: 0 5px 2px;
+    padding: 0 5px 5px;
     border-radius: 10px;
 }
 .sheet-hidden {
     display: none;
+}
+.sheet-invisible {
+    visibility: hidden;
 }
 .sheet-number-width {
     width: 40px !important;
@@ -311,12 +326,22 @@ button[type=roll] {
     margin: 0 !important;
 }
 button[type=roll].sheet-nodie::before {
+    font-family: "Arial", sans-serif;
     content: '';
-    box-sizing: border-box;
+}
+button[type=roll].sheet-nodie:active {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%) !important;
+    color: whitesmoke !important;
 }
 button[type=roll].sheet-d100::before {
     font-family: 'dicefontd10';
     font-size: 1.75em !important;
+}
+button[type=roll].sheet-d6::before {
+    font-family: 'dicefontd6';
+    content: 'f';
+    font-size: 1.25em !important;
 }
 button[type=roll].sheet-effect::before {
     font-family: 'pictos';
@@ -677,7 +702,6 @@ label.sheet-checkbox span:nth-of-type(2) {
 /* Tables */
 div.sheet-table {
     display: table;
-    margin-bottom: 5px;
     width: 100%;
 }
 
@@ -914,19 +938,16 @@ div.sheet-char-label {
 }
 
 /* Attributes */
-select.sheet-attr-calc-width {
+.sheet-attr-calc-width {
     width: 100px;
 }
 
-/* Magic Point Toggles */
-input.sheet-magic-points-toggle:not(:checked) + div.sheet-magic-points {
-    display: none;
+/* Traits */
+.sheet-trait-name {
+    width: 150px;
 }
-input.sheet-power-points-toggle:not(:checked) + div.sheet-power-points {
-    display: none;
-}
-input.sheet-prana-points-toggle:not(:checked) + div.sheet-prana-points {
-    display: none;
+.sheet-trait-type {
+    width: 120px;
 }
 
 /* Strangeness Toggle */
