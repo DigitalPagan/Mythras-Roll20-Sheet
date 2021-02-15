@@ -245,7 +245,6 @@ input[type="checkbox"].sheet-accordion
     position: relative;
     top: 0;
     left: 0;
-    margin: -10px;
     cursor: pointer;
     z-index: 1;
 }
@@ -255,6 +254,12 @@ h4.sheet-accordion {
     width: 100%;
     margin-left: -100%;
     padding-left: 16px;
+}
+h2.sheet-accordion {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-left: -100%;
 }
 
 input[type="checkbox"].sheet-accordion + h4::after {
@@ -267,8 +272,22 @@ input[type="checkbox"].sheet-accordion + h4::after {
     content: " ►";
 }
 
+input[type="checkbox"].sheet-accordion + h2::after {
+    margin-right: 5px;
+    line-height: 1.25em;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    content: "►";
+    font-size: 1.5em;
+}
+
 input[type="checkbox"].sheet-accordion:checked + h4::after {
     content: " ▼";
+}
+
+input[type="checkbox"].sheet-accordion:checked + h2::after {
+    content: "▼";
 }
 
 input[type="checkbox"].sheet-accordion:not(:checked) ~ div.sheet-accordion {
