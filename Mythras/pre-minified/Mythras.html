@@ -947,41 +947,30 @@
         </div>
     </div>
 
-    <!-- Traits & Active Effects -->
+    <!-- Conditions & Active Effects -->
     <div class="sheet-section">
-        <div class="sheet-flex-centered">
-            <h2 data-i18n="miscellaneous_traits_and_active_effects">Miscellaneous Traits & Active Effects</h2>
-            <div class="sheet-grow sheet-text-right">
-                <button type="action" class="sheet-rmargin" data-i18n="all">All</button>
-                <button type="action" class="sheet-rmargin" data-i18n="traits">Traits</button>
-                <button type="action" class="sheet-rmargin" data-i18n="creature_abilities">Creature Abilities</button>
-                <button type="action" class="sheet-rmargin" data-i18n="gifts">Gifts</button>
-                <button type="action" class="sheet-rmargin" data-i18n="conditions">Conditions</button>
-                <button type="action" class="sheet-rmargin" data-i18n="effects">Effects</button>
-                <button type="action" data-i18n="none">None</button>
-            </div>
-        </div>
+        <input type="checkbox" class="sheet-accordion" name="attr_conditions_accordion" value="1" checked>
+        <h2 class="sheet-accordion" data-i18n="conditions_and_active_effects">Conditions & Active Effects</h2>
 
-        <div class="sheet-flex">
-            <div class="sheet-th"><div class="sheet-trait-name" data-i18n="name">Name</div></div>
-            <div class="sheet-th"><div class="sheet-trait-type" data-i18n="type">Type</div></div>
-            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-        </div>
-        <fieldset class="repeating_trait">
+        <div class="sheet-accordion">
             <div class="sheet-flex">
-                <div class="sheet-td"><input type="text" class="sheet-trait-name sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
-                <div class="sheet-td">
-                    <select class="sheet-trait-type sheet-text-center sheet-usrinput" title="@{$ID_type}" name="attr_type">
-                        <option value="trait" data-i18n="trait">Trait</option>
-                        <option value="trait" data-i18n="creature_ability">Creature Ability</option>
-                        <option value="trait" data-i18n="gift">Gift</option>
-                        <option value="trait" data-i18n="condition">Condition</option>
-                        <option value="trait" data-i18n="effect">Effect</option>
-                    </select>
-                </div>
-                <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
+                <div class="sheet-th"><div class="sheet-trait-name" data-i18n="name">Name</div></div>
+                <div class="sheet-th"><div class="sheet-trait-type" data-i18n="type">Type</div></div>
+                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
             </div>
-        </fieldset>
+            <fieldset class="repeating_condition">
+                <div class="sheet-flex">
+                    <div class="sheet-td"><input type="text" class="sheet-trait-name sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-trait-type sheet-text-center sheet-usrinput" title="@{$ID_type}" data-i18n-list="condition_type_order" name="attr_type">
+                            <option value="condition" data-i18n="condition" data-i18n-list-item="condition" selected>Condition</option>
+                            <option value="effect" data-i18n="effect" data-i18n-list-item="effect">Effect</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_desc}" name="attr_desc"></div>
+                </div>
+            </fieldset>
+        </div>
     </div>
 
     <!-- Encumbrance & Fatigue -->
@@ -1129,7 +1118,7 @@
     </div>
 
     <!-- Movement -->
-    <div class="sheet-section sheet-play sheet-flex-centered">
+    <div style="padding-bottom: 0;" class="sheet-section sheet-play sheet-flex-centered">
         <h2 data-i18n="movement">Movement</h2>
         <div class="sheet-grow sheet-space-evenly">
             <button type="roll" class="sheet-nodie"><span data-i18n="run">Run</span>/<span data-i18n="sprint">Sprint</span></button>&nbsp;

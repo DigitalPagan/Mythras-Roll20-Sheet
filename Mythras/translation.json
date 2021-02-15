@@ -1078,7 +1078,8 @@
     "damage_mod": "Damage Mod",
     "spirit_attrs": "Spirit attrs",
     "hit_locations": "Hit Locations",
-    "miscellaneous_traits_and_active_effects": "Miscellaneous Traits & Active Effects",
+    "conditions_and_active_effects": "Conditions & Active Effects",
     "effect": "Effect",
-    "creature_ability": "Creature Ability"
+    "creature_ability": "Creature Ability",
+    "condition_type_order": "condition,effect"
 }
