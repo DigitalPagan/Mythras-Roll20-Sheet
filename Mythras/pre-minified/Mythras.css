@@ -962,11 +962,8 @@ div.sheet-char-label {
 }
 
 /* Traits */
-.sheet-trait-name {
+.sheet-trait-field {
     width: 150px;
-}
-.sheet-trait-type {
-    width: 120px;
 }
 
 /* Strangeness Toggle */

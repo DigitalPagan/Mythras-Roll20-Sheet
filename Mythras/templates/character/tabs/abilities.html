@@ -1,3 +1,26 @@
+<!-- Traits, Creature Abilities & Gifts -->
+<div class="sheet-section">
+    <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
+    <h2 class="sheet-accordion" data-i18n="traits_creature_abilities_gifts_etc">Traits, Creature Abilities, Gifts, etc</h2>
+
+    <div class="sheet-accordion">
+        <div class="sheet-flex">
+            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
+            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
+            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
+        </div>
+        <fieldset class="repeating_trait">
+            <div class="sheet-flex">
+                <div class="sheet-td"><input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                <div class="sheet-td">
+                    <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
+                </div>
+                <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
 <!-- Abilities -->
 <div class="sheet-section">
     <h2 data-i18n="abilities">Abilities</h2>

@@ -181,7 +181,7 @@
     "vs101plus": "vs101+",
     "traits": "Traits",
     "weapons": "Weapons",
-    "hours": "hours",
+    "hours-l": "hours",
     "characteristic-short": "Char",
     "base-value": "Base Value",
     "training-and-experience": "Training & Experience",
@@ -1070,7 +1070,7 @@
     "base_hp": "Base HP",
     "other_hp": "Other HP",
     "armor_points": "Armor Points",
-    "minutes-abrv4": "mins",
+    "minutes-abrv-l": "mins",
     "advanced_configuration": "Advanced Configuration",
     "binding_id": "Binding ID",
     "-1_per_full_20_points_of_dependencies": "-1 per full 20 points of dependencies",
@@ -1081,5 +1081,11 @@
     "conditions_and_active_effects": "Conditions & Active Effects",
     "effect": "Effect",
     "creature_ability": "Creature Ability",
-    "condition_type_order": "condition,effect"
+    "condition_type_order": "condition,effect",
+    "traits_creature_abilities_gifts_etc": "Traits, Creature Abilities, Gifts, etc",
+    "other_armor_points-abrv": "0.AP",
+    "other_hit_points-abrv": "O.HP",
+    "base_hit_points-abrv": "B.HP",
+    "base_hit_points": "Base Hit Points",
+    "other_hit_points": "Other Hit Points"
 }

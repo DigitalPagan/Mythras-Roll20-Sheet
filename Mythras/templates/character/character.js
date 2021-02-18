@@ -88,32 +88,25 @@ const fatigueTable = {
 
 const hitLocationTable = {
     custom1: {
-        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     custom7: {
-        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     custom8: {
-        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     custom9: {
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0
     },
     custom10: {
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0
     },
     custom11: {
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0
     },
     custom: {
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1
     },
     rabble: {
         location1_table_start: 1, location1_table_end: 20, location1_name: getTranslationByKey('hit_points'), location1_hp_max_base_mod: 0,
@@ -128,8 +121,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     simplified: {
         location1_table_start: 1, location1_table_end: 20, location1_name: getTranslationByKey('hit_points'), location1_hp_max_base_mod: 0,
@@ -144,8 +136,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 1, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 0, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     arachnid: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
@@ -160,8 +151,7 @@ const hitLocationTable = {
         location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('cephalothorax'), location10_hp_max_base_mod: 1,
         location11_table_start: 0, location11_table_end: 0, location11_name: "", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: "", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0
     },
     humanoid: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('right_leg'), location1_hp_max_base_mod: 0,
@@ -176,8 +166,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     centaurid: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
@@ -192,8 +181,7 @@ const hitLocationTable = {
         location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: -3,
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0
     },
     decapoda: {
         location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
@@ -208,8 +196,7 @@ const hitLocationTable = {
         location10_table_start: 11, location10_table_end: 16, location10_name: getTranslationByKey('cephalothorax'), location10_hp_max_base_mod: 2,
         location11_table_start: 17, location11_table_end: 18, location11_name: getTranslationByKey('right_pincer'), location11_hp_max_base_mod: 2,
         location12_table_start: 19, location12_table_end: 20, location12_name: getTranslationByKey('left_pincer'), location12_hp_max_base_mod: 0,
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1
     },
     decapodiform: {
         location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('tentacle_1'), location1_hp_max_base_mod: -1,
@@ -224,8 +211,7 @@ const hitLocationTable = {
         location10_table_start: 12, location10_table_end: 14, location10_name: getTranslationByKey('long-tentacle_2'), location10_hp_max_base_mod: 0,
         location11_table_start: 15, location11_table_end: 17, location11_name: getTranslationByKey('body'), location11_hp_max_base_mod: 2,
         location12_table_start: 18, location12_table_end: 20, location12_name: getTranslationByKey('head'), location12_hp_max_base_mod: 1,
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 1
     },
     dorsal_finned_aquatic: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
@@ -240,8 +226,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     draconic: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
@@ -256,8 +241,7 @@ const hitLocationTable = {
         location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: 0,
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0
     },
     insect: {
         location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('right_rear_leg'), location1_hp_max_base_mod: -1,
@@ -272,8 +256,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0
     },
     octopodiform: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tentacle_1'), location1_hp_max_base_mod: 0,
@@ -288,8 +271,7 @@ const hitLocationTable = {
         location10_table_start: 19, location10_table_end: 20, location10_name: getTranslationByKey('head'), location10_hp_max_base_mod: 2,
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 1
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 0, location12_display: 0
     },
     pachyderm: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
@@ -304,8 +286,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     quadruped: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
@@ -320,8 +301,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 1, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 0, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     serpentine: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail_tip'), location1_hp_max_base_mod: 0,
@@ -336,8 +316,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0
     },
     tailed_arachnid: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
@@ -352,8 +331,7 @@ const hitLocationTable = {
         location10_table_start: 16, location10_table_end: 18, location10_name: getTranslationByKey('left_pincer'), location10_hp_max_base_mod: 0,
         location11_table_start: 19, location11_table_end: 20, location11_name: getTranslationByKey('cephalothorax'), location11_hp_max_base_mod: 2,
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0
     },
     tailed_biped: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
@@ -368,8 +346,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     tailed_quadruped: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('tail'), location1_hp_max_base_mod: 0,
@@ -384,8 +361,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 1, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 0, location10_display: 0, location11_display: 0, location12_display: 0
     },
     winged_biped: {
         location1_table_start: 1, location1_table_end: 3, location1_name: getTranslationByKey('right_leg'), location1_hp_max_base_mod: 0,
@@ -400,8 +376,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0
     },
     winged_insect: {
         location1_table_start: 1, location1_table_end: 1, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: -1,
@@ -416,8 +391,7 @@ const hitLocationTable = {
         location10_table_start: 17, location10_table_end: 18, location10_name: getTranslationByKey('front_left_leg'), location10_hp_max_base_mod: -1,
         location11_table_start: 19, location11_table_end: 20, location11_name: getTranslationByKey('head'), location11_hp_max_base_mod: 0,
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 0, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 1, location11_display: 1, location12_display: 0
     },
     winged_quadruped: {
         location1_table_start: 1, location1_table_end: 2, location1_name: getTranslationByKey('rear_right_leg'), location1_hp_max_base_mod: 0,
@@ -432,8 +406,7 @@ const hitLocationTable = {
         location10_table_start: 0, location10_table_end: 0, location10_name: " ", location10_hp_max_base_mod: '-',
         location11_table_start: 0, location11_table_end: 0, location11_name: " ", location11_hp_max_base_mod: '-',
         location12_table_start: 0, location12_table_end: 0, location12_name: " ", location12_hp_max_base_mod: '-',
-        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0,
-        location_notes_1_display: 0, location_notes_7_display: 0, location_notes_8_display: 0, location_notes_9_display: 1, location_notes_10_display: 0
+        location2to7_display: 1, location8_display: 1, location9_display: 1, location10_display: 0, location11_display: 0, location12_display: 0
     }
 }
 
@@ -799,7 +772,7 @@ function calcEnc(str, v) {
 
 function calcFatigueRecovery(fatigue, healing_rate) {
     let recovery = '-';
-    let recoveryUnit = "hours";
+    let recoveryUnit = "hours-l";
     console.log(fatigueTable[fatigue][4]);
     if (fatigueTable[fatigue][4] !== '-') {
         recovery = parseFloat((fatigueTable[fatigue][4] / healing_rate).toFixed(2));
@@ -807,7 +780,7 @@ function calcFatigueRecovery(fatigue, healing_rate) {
 
         if (recovery < 1) {
             recovery = Math.ceil(recovery * 60);
-            recoveryUnit = "minutes-abrv4";
+            recoveryUnit = "minutes-abrv-l";
         }
     }
 
@@ -826,50 +799,217 @@ function calcFatigue(fatigue, healing_rate) {
     };
 }
 
+function calcActionPoints(dex, int, armor_points_other, armor_points_temp, action_points_calc, fatigue) {
+    var base_value;
+    if (action_points_calc === "set_2") {
+        base_value = 2;
+    } else if (action_points_calc === "set_3") {
+        base_value = 3;
+    } else {
+        base_value = Math.ceil((int + dex) / 12);
+    }
+
+    var action_points = base_value + parseInt(armor_points_other) + parseInt(armor_points_temp) + parseInt(fatigueTable[fatigue][1]);
+
+    if (action_points < 0) {
+        action_points = 0;
+    }
+
+    return {action_points_base: base_value, action_points_max: action_points};
+}
+
 /* Characteristic Triggers */
-['str', 'con','siz','int','pow','dex','cha'].forEach(char => {
-    on(`change:${char}_base change:${char}_other change:${char}_temp`, function() {
-        const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds[char]);
+/* STR */
+on('change:str_base change:str_other change:str_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['str']);
 
-        getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-            let proSkillGetAttrs = [];
-            proSkillIds.forEach(id => {
-                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
+
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, encGetAttrs), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            const newEncVals = calcEnc(charObj['str'], v);
+            setAttrs({
+                str: charObj['str'],
+                ...newStdSkillVals,
+                ...newProSkillVals,
+                ...newEncVals
             });
+        });
+    });
+});
 
-            let getAttrArray = [];
-            if (char === 'str') {
-                getAttrArray = getAttrArray.concat(allCharGetAttrs, stdSkillGetAttrs, proSkillGetAttrs, encGetAttrs);
-            } else {
-                getAttrArray = getAttrArray.concat(allCharGetAttrs, stdSkillGetAttrs, proSkillGetAttrs);
-            }
+/* CON */
+/* TODO HP and HealingRate/FatigueRecovery */
+on('change:con_base change:con_other change:con_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['con']);
 
-            getAttrs(getAttrArray, function(v) {
-                const charObj = buildCharObj(v);
-                const newStdSkillVals = calcStdSkills(charStdSkillIds[char], charObj, v);
-                const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
 
-                if (char === 'str') {
-                    const newEncVals = calcEnc(charObj[char], v);
-                    setAttrs({
-                        [char]: charObj[char],
-                        ...newStdSkillVals,
-                        ...newProSkillVals,
-                        ...newEncVals
-                    });
-                } else {
-                    setAttrs({
-                        [char]: charObj[char],
-                        ...newStdSkillVals,
-                        ...newProSkillVals
-                    });
-                }
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['con'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            setAttrs({
+                con: charObj['con'],
+                ...newStdSkillVals,
+                ...newProSkillVals
+            });
+        });
+    });
+});
+
+/* DEX */
+on('change:dex_base change:dex_other change:dex_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['dex']);
+
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
+
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
+            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue']), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            const newActionPointVals = calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
+                v['action_points_calc'], v['fatigue']);
+
+            setAttrs({
+                dex: charObj['dex'],
+                ...newStdSkillVals,
+                ...newProSkillVals,
+                ...newActionPointVals
+            });
+        });
+    });
+});
+
+/* SIZ */
+/* TODO HP */
+on('change:siz_base change:siz_other change:siz_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['siz']);
+
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
+
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['siz'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            setAttrs({
+                siz: charObj['siz'],
+                ...newStdSkillVals,
+                ...newProSkillVals
+            });
+        });
+    });
+});
+
+/* INT */
+on('change:int_base change:int_other change:int_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['int']);
+
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
+
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
+            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue']), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['int'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            const newActionPointVals = calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
+                v['action_points_calc'], v['fatigue']);
+
+            setAttrs({
+                int: charObj['int'],
+                ...newStdSkillVals,
+                ...newProSkillVals,
+                ...newActionPointVals
+            });
+        });
+    });
+});
+
+/* POW */
+on('change:pow_base change:pow_other change:pow_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['pow']);
+
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
+
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['pow'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            setAttrs({
+                pow: charObj['pow'],
+                ...newStdSkillVals,
+                ...newProSkillVals
+            });
+        });
+    });
+});
+
+/* CHA */
+on('change:cha_base change:cha_other change:cha_temp', function() {
+    const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['cha']);
+
+    getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+        let proSkillGetAttrs = [];
+        proSkillIds.forEach(id => {
+            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+        });
+
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs), function(v) {
+            const charObj = buildCharObj(v);
+            const newStdSkillVals = calcStdSkills(charStdSkillIds['cha'], charObj, v);
+            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
+
+            setAttrs({
+                cha: charObj['cha'],
+                ...newStdSkillVals,
+                ...newProSkillVals
             });
         });
     });
 });
 
 /* Attribute Triggers */
+/* Action Point Triggers */
+on('change:action_points_other change:action_points_temp change:action_points_calc', function() {
+    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'], function(v) {
+        setAttrs( calcActionPoints(parseInt(v['dex']), parseInt(v['int']), v['action_points_other'], v['action_points_temp'],
+            v['action_points_calc'], v['fatigue']));
+    });
+});
+
 /* Hit Locations */
 on('change:hit_locations', function(event) {
     setAttrs( hitLocationTable[event.newValue] );
@@ -961,7 +1101,7 @@ on('change:all_armor_temp', function() {
 /* Skill Triggers */
 /* Standard Skill Totals */
 allStdSkillIds.forEach(skillId => {
-    on(`change:${skillId}_other`, function(event) {
+    on(`change:${skillId}_other`, function() {
         getAttrs(allCharGetAttrs.concat([`${skillId}_other`]), function(v) {
             let charObj = buildCharObj(v);
             let char1 = charObj[stdSkillChars[`${skillId}`][0]];
@@ -1118,9 +1258,14 @@ on("change:avg_species_siz change:pack_equipped change:encumbrance_temp", functi
 
 /* Fatigue */
 on("change:fatigue", function() {
-    getAttrs(['fatigue', 'healing_rate'], function(v) {
-        setAttrs( calcFatigue(v['fatigue'], parseInt(v['healing_rate'])) );
+
+    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'healing_rate'], function(v) {
+        const newFatigueVals = calcFatigue(v['fatigue'], parseInt(v['healing_rate']));
+        setAttrs({
+            ...newFatigueVals,
+            ...calcActionPoints(parseInt(v['dex']), parseInt(v['int']), v['action_points_other'], v['action_points_temp'],
+                v['action_points_calc'], newFatigueVals['action_points_fatigue'])
+        });
     });
 });
-
 
