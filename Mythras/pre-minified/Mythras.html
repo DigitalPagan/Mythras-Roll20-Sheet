@@ -3083,10 +3083,8 @@ function calcEnc(str, v) {
 function calcFatigueRecovery(fatigue, healing_rate) {
     let recovery = '-';
     let recoveryUnit = "hours-l";
-    console.log(fatigueTable[fatigue][4]);
     if (fatigueTable[fatigue][4] !== '-') {
         recovery = parseFloat((fatigueTable[fatigue][4] / healing_rate).toFixed(2));
-        console.log(recovery);
 
         if (recovery < 1) {
             recovery = Math.ceil(recovery * 60);
@@ -3094,8 +3092,6 @@ function calcFatigueRecovery(fatigue, healing_rate) {
         }
     }
 
-    console.log(recovery);
-    console.log(recoveryUnit);
     return {fatigue_recovery: recovery, fatigue_recovery_unit: recoveryUnit};
 }
 
@@ -3178,6 +3174,26 @@ function calcExpMod(cha, int, experience_mod_calc, experience_mod_other, experie
     };
 }
 
+function calcHealingRate(con, pow, healing_rate_calc, healing_rate_other, healing_rate_temp, healing_rate_double) {
+    let base_multiplier;
+    let base_value;
+    if (healing_rate_double === '1') {
+        base_multiplier = 2;
+    } else {
+        base_multiplier = 1;
+    }
+
+    if (healing_rate_calc === '1') {
+        base_value = Math.ceil(Math.ceil(con+(pow/2))/6) * base_multiplier;
+    } else {
+        base_value = Math.ceil(con/6) * base_multiplier;
+    }
+
+    return {
+        healing_rate_base: base_value,
+        healing_rate: base_value + parseInt(healing_rate_other) + parseInt(healing_rate_temp)
+    };
+}
 
 /* Characteristic Triggers */
 /* STR */
@@ -3235,7 +3251,6 @@ on('change:str_base change:str_other change:str_temp', function() {
 });
 
 /* CON */
-/* TODO HealingRate/FatigueRecovery */
 on('change:con_base change:con_other change:con_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['con']);
 
@@ -3246,11 +3261,14 @@ on('change:con_base change:con_other change:con_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
+            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
+            ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double']), function(v) {
             const charObj = buildCharObj(v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
+            const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
+                v['healing_rate_temp'], v['healing_rate_double']);
 
             setAttrs({
                 con: charObj['con'],
@@ -3258,6 +3276,8 @@ on('change:con_base change:con_other change:con_temp', function() {
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
+                ...healingRateVals,
+                ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
                 hp_max_base: hp_max_base,
                 ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
                     all_hp_temp, v['location1_hp'], v['location1_hp_max']),
@@ -3405,11 +3425,14 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
+            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
+            ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double']), function(v) {
             const charObj = buildCharObj(v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
+            const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
+                v['healing_rate_temp'], v['healing_rate_double']);
 
             setAttrs({
                 pow: charObj['pow'],
@@ -3417,6 +3440,8 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
+                ...healingRateVals,
+                ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
                 hp_max_base: hp_max_base,
                 ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
                     all_hp_temp, v['location1_hp'], v['location1_hp_max']),
@@ -3494,6 +3519,18 @@ on('change:experience_mod_calc change:experience_mod_other change:experience_mod
     getAttrs(['cha', 'int', 'experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'], function(v) {
         setAttrs( calcExpMod(parseInt(v['cha']), parseInt(v['int']), v['experience_mod_calc'], v['experience_mod_other'],
             v['experience_mod_temp']));
+    });
+});
+
+/* Healing Rate Triggers */
+on('change:healing_rate_calc change:healing_rate_other change:healing_rate_temp change:healing_rate_double', function() {
+    getAttrs(['con', 'pow', 'healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double', 'fatigue'], function(v) {
+        const healingRateVals = calcHealingRate(parseInt(v['con']), parseInt(v['pow']), v['healing_rate_calc'], v['healing_rate_other'],
+            v['healing_rate_temp'], v['healing_rate_double']);
+        setAttrs({
+            ...healingRateVals,
+            ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate'])
+        });
     });
 });
 
