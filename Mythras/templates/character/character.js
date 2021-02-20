@@ -851,8 +851,23 @@ function calcDamageMod(str, siz, con, pow, damage_mod_calc, damage_mod_other, da
     return {
         damage_mod_base: base_damage_mod_value,
         damage_mod: damageTable(base_damage_mod_step + parseInt(damage_mod_other) + parseInt(damage_mod_temp))
-    }
+    };
 }
+
+function calcExpMod(cha, int, experience_mod_calc, experience_mod_other, experience_mod_temp) {
+    let base_value;
+    if(experience_mod_calc === '1') {
+        base_value = Math.ceil(int/6)-2;
+    } else {
+        base_value = Math.ceil(cha/6)-2;
+    }
+
+    return {
+        experience_mod_base: base_value,
+        experience_mod: base_value + parseInt(experience_mod_other) + parseInt(experience_mod_temp)
+    };
+}
+
 
 /* Characteristic Triggers */
 /* STR */
@@ -868,18 +883,15 @@ on('change:str_base change:str_other change:str_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, encGetAttrs, hitPointGetAttrs,
             ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
 
-            const newEncVals = calcEnc(charObj['str'], v);
             setAttrs({
                 str: charObj['str'],
-                ...newStdSkillVals,
-                ...newProSkillVals,
-                ...newEncVals,
+                ...calcStdSkills(charStdSkillIds['str'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
+                ...calcEnc(charObj['str'], v),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
                 hp_max_base: hp_max_base,
@@ -926,16 +938,14 @@ on('change:con_base change:con_other change:con_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
             ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['con'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
 
             setAttrs({
                 con: charObj['con'],
-                ...newStdSkillVals,
-                ...newProSkillVals,
+                ...calcStdSkills(charStdSkillIds['con'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
                 hp_max_base: hp_max_base,
@@ -981,17 +991,13 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
             ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
-
-            const newActionPointVals = calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                v['action_points_calc'], v['fatigue']);
 
             setAttrs({
                 dex: charObj['dex'],
-                ...newStdSkillVals,
-                ...newProSkillVals,
-                ...newActionPointVals
+                ...calcStdSkills(charStdSkillIds['dex'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
+                ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
+                    v['action_points_calc'], v['fatigue'])
             });
         });
     });
@@ -1010,16 +1016,14 @@ on('change:siz_base change:siz_other change:siz_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
             ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['siz'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
 
             setAttrs({
                 siz: charObj['siz'],
-                ...newStdSkillVals,
-                ...newProSkillVals,
+                ...calcStdSkills(charStdSkillIds['siz'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
                 hp_max_base: hp_max_base,
@@ -1063,19 +1067,18 @@ on('change:int_base change:int_other change:int_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue']), function(v) {
+            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'],
+            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['int'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
-
-            const newActionPointVals = calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                v['action_points_calc'], v['fatigue']);
 
             setAttrs({
                 int: charObj['int'],
-                ...newStdSkillVals,
-                ...newProSkillVals,
-                ...newActionPointVals
+                ...calcStdSkills(charStdSkillIds['int'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
+                ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
+                    v['action_points_calc'], v['fatigue']),
+                ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
+                    v['experience_mod_temp'])
             });
         });
     });
@@ -1094,16 +1097,14 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
             ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['pow'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
 
             setAttrs({
                 pow: charObj['pow'],
-                ...newStdSkillVals,
-                ...newProSkillVals,
+                ...calcStdSkills(charStdSkillIds['pow'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
                 hp_max_base: hp_max_base,
@@ -1146,15 +1147,16 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
             proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
         });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs), function(v) {
+        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
+            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp']), function(v) {
             const charObj = buildCharObj(v);
-            const newStdSkillVals = calcStdSkills(charStdSkillIds['cha'], charObj, v);
-            const newProSkillVals = calcProSkills(proSkillIds, charObj, v);
 
             setAttrs({
                 cha: charObj['cha'],
-                ...newStdSkillVals,
-                ...newProSkillVals
+                ...calcStdSkills(charStdSkillIds['cha'], charObj, v),
+                ...calcProSkills(proSkillIds, charObj, v),
+                ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
+                    v['experience_mod_temp'])
             });
         });
     });
@@ -1176,6 +1178,15 @@ on('change:damage_mod_calc change:damage_mod_other change:damage_mod_temp', func
             v['damage_mod_calc'], v['damage_mod_other'], v['damage_mod_temp']));
     });
 });
+
+/* Experience Mod Triggers */
+on('change:experience_mod_calc change:experience_mod_other change:experience_mod_temp', function() {
+    getAttrs(['cha', 'int', 'experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'], function(v) {
+        setAttrs( calcExpMod(parseInt(v['cha']), parseInt(v['int']), v['experience_mod_calc'], v['experience_mod_other'],
+            v['experience_mod_temp']));
+    });
+});
+
 
 /* Hit Locations */
 on('change:hit_locations', function(event) {
