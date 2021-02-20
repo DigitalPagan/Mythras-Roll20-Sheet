@@ -885,6 +885,20 @@ function calcHealingRate(con, pow, healing_rate_calc, healing_rate_other, healin
     };
 }
 
+function calcInitiativeBonus(int, dex, initiative_bonus_other, initiative_bonus_temp, armor_penalty, initiative_bonus_fatigue, athletics_total, initiative_add_one_tenth_athletics) {
+    let athletics_bonus = 0;
+    if (initiative_add_one_tenth_athletics === '1') {
+        athletics_bonus = Math.ceil(athletics_total/10);
+    }
+    const base_value = Math.ceil((int + dex) / 2);
+
+    return {
+        initiative_bonus_base: base_value,
+        initiative_bonus: base_value + parseInt(initiative_bonus_other) + parseInt(initiative_bonus_temp) +
+            armor_penalty + athletics_bonus + initiative_bonus_fatigue
+    };
+}
+
 /* Characteristic Triggers */
 /* STR */
 on('change:str_base change:str_other change:str_temp', function() {
@@ -897,17 +911,24 @@ on('change:str_base change:str_other change:str_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, encGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
+            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
+            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+                'initiative_add_one_tenth_athletics']), function(v) {
             const charObj = buildCharObj(v);
+            const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
+            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
             setAttrs({
                 str: charObj['str'],
-                ...calcStdSkills(charStdSkillIds['str'], charObj, v),
+                ...standardSkillVals,
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcEnc(charObj['str'], v),
+                ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                    v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
+                    v['initiative_add_one_tenth_athletics']),
                 ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                     v['damage_mod_other'], v['damage_mod_temp']),
                 hp_max_base: hp_max_base,
@@ -1009,15 +1030,22 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue']), function(v) {
+            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'],
+            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+                'initiative_add_one_tenth_athletics']), function(v) {
             const charObj = buildCharObj(v);
+            const standardSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, v);
+            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
             setAttrs({
                 dex: charObj['dex'],
-                ...calcStdSkills(charStdSkillIds['dex'], charObj, v),
+                ...standardSkillVals,
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                    v['action_points_calc'], v['fatigue'])
+                    v['action_points_calc'], v['fatigue']),
+                ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                    v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
+                    v['initiative_add_one_tenth_athletics'])
             });
         });
     });
@@ -1088,8 +1116,11 @@ on('change:int_base change:int_other change:int_temp', function() {
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
             ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'],
-            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp']), function(v) {
+            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
+            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+                'initiative_add_one_tenth_athletics']), function(v) {
             const charObj = buildCharObj(v);
+            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
             setAttrs({
                 int: charObj['int'],
@@ -1098,7 +1129,10 @@ on('change:int_base change:int_other change:int_temp', function() {
                 ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
                     v['action_points_calc'], v['fatigue']),
                 ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
-                    v['experience_mod_temp'])
+                    v['experience_mod_temp']),
+                ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                    v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, parseInt(v['athletics_total']),
+                    v['initiative_add_one_tenth_athletics'])
             });
         });
     });
@@ -1224,6 +1258,19 @@ on('change:healing_rate_calc change:healing_rate_other change:healing_rate_temp 
     });
 });
 
+/* Initiative Triggers */
+on('change:initiative_bonus_other change:initiative_bonus_temp change:initiative_add_one_tenth_athletics', function() {
+    getAttrs(['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'fatigue', 'athletics_total',
+        'initiative_add_one_tenth_athletics'], function(v) {
+        const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2])
+        setAttrs({
+            ...calcInitiativeBonus(parseInt(v['int']), parseInt(v['dex']), v['initiative_bonus_other'],
+                v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, parseInt(v['athletics_total']),
+                v['initiative_add_one_tenth_athletics'])
+        });
+    });
+});
+
 
 /* Hit Locations */
 on('change:hit_locations', function(event) {
@@ -1317,14 +1364,27 @@ on('change:all_armor_temp', function() {
 /* Standard Skill Totals */
 allStdSkillIds.forEach(skillId => {
     on(`change:${skillId}_other`, function() {
-        getAttrs(allCharGetAttrs.concat([`${skillId}_other`]), function(v) {
+        getAttrs(allCharGetAttrs.concat([`${skillId}_other`], ['initiative_bonus_other', 'initiative_bonus_temp',
+            'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue']), function(v) {
             let charObj = buildCharObj(v);
             let char1 = charObj[stdSkillChars[`${skillId}`][0]];
             let char2 = charObj[stdSkillChars[`${skillId}`][1]];
 
-            setAttrs({
-                [`${skillId}_total`]: char1 + char2 + parseInt(v[`${skillId}_other`])
-            });
+            if (`${skillId}` === 'athletics') {
+                const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
+                const athletics_total = char1 + char2 + parseInt(v[`${skillId}_other`]);
+
+                setAttrs({
+                    athletics_total: athletics_total,
+                    ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                        v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, athletics_total,
+                        v['initiative_add_one_tenth_athletics'])
+                });
+            } else {
+                setAttrs({
+                    [`${skillId}_total`]: char1 + char2 + parseInt(v[`${skillId}_other`])
+                });
+            }
         });
     });
 });
@@ -1359,13 +1419,18 @@ on("change:repeating_passion", function(event) {
 /* Encumbrance Triggers */
 /* Armor ENC and Armor Penalty*/
 on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
-    getAttrs(armorEncGetAttrs, function(v) {
+    getAttrs(armorEncGetAttrs.concat(['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty',
+        'athletics_total', 'initiative_add_one_tenth_athletics', 'fatigue']), function(v) {
         const armorAttrs = calcArmorEncAndPenalty(v);
         v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
         v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
+        const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
         setAttrs({
             ...armorAttrs,
-            ...calcEnc(parseInt(v['str']), v)
+            ...calcEnc(parseInt(v['str']), v),
+            ...calcInitiativeBonus(parseInt(v['int']), parseInt(v['dex']), v['initiative_bonus_other'],
+                v['initiative_bonus_temp'], armorAttrs['armor_penalty'], initiative_bonus_fatigue, parseInt(v['athletics_total']),
+                v['initiative_add_one_tenth_athletics'])
         });
     });
 });
@@ -1373,14 +1438,20 @@ on("change:location12_armor_enc change:location11_armor_enc change:location10_ar
 /* Armor Equipped */
 ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
     on(`change:location${num}_armor_equipped`, function() {
-        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp'].concat(armorEncGetAttrs), function(v) {
+        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp'].concat(armorEncGetAttrs,
+            ['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+            'initiative_add_one_tenth_athletics', 'fatigue']), function(v) {
             const armorAttrs = calcArmorEncAndPenalty(v);
+            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
             v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
             v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
             setAttrs({
                 [`location${num}_ap`]: calcLocationAP(v[`location${num}_other_ap`], v[`location${num}_armor_ap`], parseInt(v['all_armor_temp']), v[`location${num}_armor_equipped`]),
                 ...armorAttrs,
-                ...calcEnc(parseInt(v['str']), v)
+                ...calcEnc(parseInt(v['str']), v),
+                ...calcInitiativeBonus(parseInt(v['int']), parseInt(v['dex']), v['initiative_bonus_other'],
+                    v['initiative_bonus_temp'], armorAttrs['armor_penalty'], initiative_bonus_fatigue, parseInt(v['athletics_total']),
+                    v['initiative_add_one_tenth_athletics'])
             });
         });
     });
@@ -1473,13 +1544,19 @@ on("change:avg_species_siz change:pack_equipped change:encumbrance_temp", functi
 
 /* Fatigue */
 on("change:fatigue", function() {
-
-    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'healing_rate'], function(v) {
+    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'healing_rate',
+        'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+        'initiative_add_one_tenth_athletics'], function(v) {
+        const dex = parseInt(v['dex']);
+        const int = parseInt(v['int'])
         const newFatigueVals = calcFatigue(v['fatigue'], parseInt(v['healing_rate']));
         setAttrs({
             ...newFatigueVals,
-            ...calcActionPoints(parseInt(v['dex']), parseInt(v['int']), v['action_points_other'], v['action_points_temp'],
-                v['action_points_calc'], newFatigueVals['action_points_fatigue'])
+            ...calcActionPoints(dex, int, v['action_points_other'], v['action_points_temp'],
+                v['action_points_calc'], v['fatigue']),
+            ...calcInitiativeBonus(int, dex, v['initiative_bonus_other'], v['initiative_bonus_temp'],
+                parseInt(v['armor_penalty']), parseInt(newFatigueVals['initiative_bonus_fatigue']), parseInt(v['athletics_total']),
+                v['initiative_add_one_tenth_athletics'])
         });
     });
 });
