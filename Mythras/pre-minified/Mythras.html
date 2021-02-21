@@ -3102,7 +3102,7 @@ function calcFatigue(fatigue, healing_rate) {
     };
 }
 
-function calcActionPoints(dex, int, armor_points_other, armor_points_temp, action_points_calc, fatigue, action_points, action_points_max) {
+function calcActionPoints(dex, int, action_points_other, action_points_temp, action_points_calc, fatigue, action_points, action_points_max) {
     let base_value;
     if (action_points_calc === "set_2") {
         base_value = 2;
@@ -3112,7 +3112,7 @@ function calcActionPoints(dex, int, armor_points_other, armor_points_temp, actio
         base_value = Math.ceil((int + dex) / 12);
     }
 
-    let new_action_points_max = base_value + parseInt(armor_points_other) + parseInt(armor_points_temp) + parseInt(fatigueTable[fatigue][1]);
+    let new_action_points_max = base_value + parseInt(action_points_other) + parseInt(action_points_temp) + parseInt(fatigueTable[fatigue][1]);
     if (new_action_points_max < 0) {
         new_action_points_max = 0;
     }
@@ -3263,6 +3263,42 @@ function calcMoveRate(movement_rate_species, movement_rate_other, movement_rate_
     }
 
     return {movement_rate: applyMovementMod(moveAfterFatigue, movement_rate_enc)};
+}
+
+function calcSpiritAP(pow, int, spirit_ap_other, spirit_ap_temp, action_points_calc, spirit_ap, spirit_ap_max) {
+    let base_value;
+    if (action_points_calc === "set_2") {
+        base_value = 2;
+    } else if (action_points_calc === "set_3") {
+        base_value = 3;
+    } else {
+        base_value = Math.ceil((int + pow) / 12);
+    }
+
+    let new_spirit_ap_max = base_value + parseInt(spirit_ap_other) + parseInt(spirit_ap_temp);
+    if (new_spirit_ap_max < 0) {
+        new_spirit_ap_max = 0;
+    }
+    const diff_spirit_ap_max = new_spirit_ap_max - parseInt(spirit_ap_max);
+
+    return {
+        spirit_ap_base: base_value,
+        spirit_ap_max: new_spirit_ap_max,
+        spirit_ap: parseInt(spirit_ap) + diff_spirit_ap_max
+    };
+}
+
+function calcSpiritDamage() {
+
+}
+
+function calcSpiritInitiative(int, cha, spirit_ib_other, spirit_ib_temp) {
+    const base_value = Math.ceil((int + cha) / 2);
+
+    return {
+        spirit_ib_base: base_value,
+        spirit_ib: base_value + parseInt(spirit_ib_other) + parseInt(spirit_ib_temp)
+    };
 }
 
 /* Characteristic Triggers */
@@ -3485,8 +3521,8 @@ on('change:int_base change:int_other change:int_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
             ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'],
             ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
-            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
-                'initiative_add_one_tenth_athletics']), function(v) {
+            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
+            ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max'], ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
             const charObj = buildCharObj(v);
             const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
@@ -3500,7 +3536,10 @@ on('change:int_base change:int_other change:int_temp', function() {
                     v['experience_mod_temp']),
                 ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
                     v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, parseInt(v['athletics_total']),
-                    v['initiative_add_one_tenth_athletics'])
+                    v['initiative_add_one_tenth_athletics']),
+                ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
+                    v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
+                ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
             });
         });
     });
@@ -3521,7 +3560,8 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
             ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
             ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points',
                 'luck_points_max'],
-            ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max']), function(v) {
+            ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'],
+            ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max', 'action_points_calc']), function(v) {
             const charObj = buildCharObj(v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
@@ -3539,6 +3579,8 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                 ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
                 ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
                     v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
+                ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
+                    v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
                 hp_max_base: hp_max_base,
                 ...calcMagicPoints(charObj['pow'], v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max']),
                 ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
@@ -3582,8 +3624,8 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
             ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
-            ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank',
-                'luck_points', 'luck_points_max']), function(v) {
+            ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points', 'luck_points_max'],
+            ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
             const charObj = buildCharObj(v);
 
             setAttrs({
@@ -3593,7 +3635,8 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
                 ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
                     v['experience_mod_temp']),
                 ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
-                    v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max'])
+                    v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
+                ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
             });
         });
     });
@@ -3601,10 +3644,21 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
 
 /* Attribute Triggers */
 /* Action Point Triggers */
-on('change:action_points_other change:action_points_temp change:action_points_calc', function() {
+on('change:action_points_other change:action_points_temp', function() {
     getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'], function(v) {
         setAttrs( calcActionPoints(parseInt(v['dex']), parseInt(v['int']), v['action_points_other'], v['action_points_temp'],
             v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']));
+    });
+});
+on('change:action_points_calc', function() {
+    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points',
+        'action_points_max'].concat(['pow', 'spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max']), function(v) {
+        setAttrs({
+            ...calcActionPoints(parseInt(v['dex']), parseInt(v['int']), v['action_points_other'], v['action_points_temp'],
+                v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
+            ...calcSpiritAP(parseInt(v['pow']), parseInt(v['int']), v['spirit_ap_other'], v['spirit_ap_temp'],
+                v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max'])
+        });
     });
 });
 
@@ -3679,6 +3733,26 @@ on('change:movement_rate_species change:movement_rate_other change:movement_rate
     });
 });
 
+/* Spirit Action Points Triggers */
+on('change:spirit_ap_other change:spirit_ap_temp', function() {
+    getAttrs(['int', 'pow', 'spirit_ap_other', 'spirit_ap_temp', 'action_points_calc', 'spirit_ap', 'spirit_ap_max'], function(v) {
+        setAttrs({
+            ...calcSpiritAP(parseInt(v['pow']), parseInt(v['int']), v['spirit_ap_other'], v['spirit_ap_temp'],
+                v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max'])
+        });
+    });
+});
+
+/* Spirit Damage Triggers */
+
+/* Spirit Initiative Triggers */
+on('change:spirit_ib_other change:spirit_ib_temp', function() {
+    getAttrs(['int', 'cha', 'spirit_ib_other', 'spirit_ib_temp'], function(v) {
+        setAttrs({
+            ...calcSpiritInitiative(parseInt(v['int']), parseInt(v['cha']), v['spirit_ib_other'], v['spirit_ib_temp'])
+        });
+    });
+});
 
 /* Hit Locations */
 on('change:hit_locations', function(event) {
