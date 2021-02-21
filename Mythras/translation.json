@@ -1087,5 +1087,6 @@
     "other_hit_points-abrv": "O.HP",
     "base_hit_points-abrv": "B.HP",
     "base_hit_points": "Base Hit Points",
-    "other_hit_points": "Other Hit Points"
+    "other_hit_points": "Other Hit Points",
+    "add_rank_to_luck": "Add Rank to Luck"
 }

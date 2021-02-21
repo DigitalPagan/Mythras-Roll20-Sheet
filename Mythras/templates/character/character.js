@@ -717,15 +717,12 @@ function calcGenericRepeatingEnc(ids, fieldName, v) {
 function calcEnc(str, v) {
     const wornEnc = parseFloat(v['effective_armor_enc']) + parseFloat(v['weapons_enc']) + parseFloat(v['equipment_enc']) +
         parseFloat(v['currency_enc']);
-    console.log(wornEnc);
     const packEnc = (parseFloat(v['armor_enc_carried']) + parseFloat(v['weapons_enc_carried']) +
         parseFloat(v['equipment_enc_carried']) + parseFloat(v['currency_enc_carried'])) * parseInt(v['pack_equipped']);
-    console.log(packEnc);
     const enc = parseFloat(((wornEnc + packEnc + parseFloat(v['encumbrance_temp']) ) * (parseInt(v['avg_species_siz']) / 13)).toFixed(2));
     const burdened = str * 2;
     const overloaded = str * 3;
     const enc_max = str * 4;
-    console.log(enc);
 
     if (enc > enc_max) {
         return {
@@ -795,8 +792,8 @@ function calcFatigue(fatigue, healing_rate) {
     };
 }
 
-function calcActionPoints(dex, int, armor_points_other, armor_points_temp, action_points_calc, fatigue) {
-    var base_value;
+function calcActionPoints(dex, int, armor_points_other, armor_points_temp, action_points_calc, fatigue, action_points, action_points_max) {
+    let base_value;
     if (action_points_calc === "set_2") {
         base_value = 2;
     } else if (action_points_calc === "set_3") {
@@ -805,13 +802,17 @@ function calcActionPoints(dex, int, armor_points_other, armor_points_temp, actio
         base_value = Math.ceil((int + dex) / 12);
     }
 
-    var action_points = base_value + parseInt(armor_points_other) + parseInt(armor_points_temp) + parseInt(fatigueTable[fatigue][1]);
-
-    if (action_points < 0) {
-        action_points = 0;
+    let new_action_points_max = base_value + parseInt(armor_points_other) + parseInt(armor_points_temp) + parseInt(fatigueTable[fatigue][1]);
+    if (new_action_points_max < 0) {
+        new_action_points_max = 0;
     }
+    const diff_action_points_max = new_action_points_max - parseInt(action_points_max);
 
-    return {action_points_base: base_value, action_points_max: action_points};
+    return {
+        action_points_base: base_value,
+        action_points_max: new_action_points_max,
+        action_points: parseInt(action_points) + diff_action_points_max
+    };
 }
 
 function findDamageStep(value) {
@@ -899,6 +900,61 @@ function calcInitiativeBonus(int, dex, initiative_bonus_other, initiative_bonus_
     };
 }
 
+function calcLuckPoints(pow, cha, luck_points_calc, luck_points_other, luck_points_temp, luck_points_rank, rank, luck_points, luck_points_max) {
+    let base_value;
+    if (luck_points_calc === '1') {
+        base_value = Math.ceil(Math.ceil(cha+(pow/2))/6) + (parseInt(luck_points_rank) * parseInt(rank));
+    } else {
+        base_value = Math.ceil(pow/6) + (parseInt(luck_points_rank) * parseInt(rank));
+    }
+
+    const new_luck_points_max = base_value + parseInt(luck_points_temp) + parseInt(luck_points_other);
+    const diff_luck_points_max = new_luck_points_max - parseInt(luck_points_max);
+
+    return {
+        luck_points_base: base_value,
+        luck_points_max: new_luck_points_max,
+        luck_points: parseInt(luck_points) + diff_luck_points_max
+    };
+}
+
+function calcMagicPoints(pow, magic_points_other, magic_points_temp, magic_points, magic_points_max) {
+    const new_magic_points_max = pow + parseInt(magic_points_other) + parseInt(magic_points_temp);
+    const diff_magic_points_max = new_magic_points_max - parseInt(magic_points_max);
+
+    return {
+        magic_points_base: pow,
+        magic_points_max: new_magic_points_max,
+        magic_points: parseInt(magic_points) + diff_magic_points_max
+    };
+}
+
+function applyMovementMod(value, modifier) {
+    if (modifier === '-1') {
+        return value - 1;
+    } else if (modifier === '-2') {
+        return value - 2;
+    } else if (modifier === '*.5') {
+        return Math.ceil(value / 2);
+    } else if (modifier === '*0') {
+        return 0;
+    } else {
+        return value;
+    }
+}
+
+function calcMoveRate(movement_rate_species, movement_rate_other, movement_rate_temp, movement_rate_fatigue, movement_rate_enc) {
+    const base_value = parseInt(movement_rate_species) + parseInt(movement_rate_other) + parseInt(movement_rate_temp);
+    const moveAfterFatigue = applyMovementMod(base_value, movement_rate_fatigue);
+    const moveAfterEnc = applyMovementMod(moveAfterFatigue, movement_rate_enc);
+
+    if (moveAfterEnc < 0) {
+        return {movement_rate: 0};
+    }
+
+    return {movement_rate: applyMovementMod(moveAfterFatigue, movement_rate_enc)};
+}
+
 /* Characteristic Triggers */
 /* STR */
 on('change:str_base change:str_other change:str_temp', function() {
@@ -913,19 +969,21 @@ on('change:str_base change:str_other change:str_temp', function() {
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, encGetAttrs, hitPointGetAttrs,
             ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
             ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
-                'initiative_add_one_tenth_athletics']), function(v) {
+                'initiative_add_one_tenth_athletics'],
+            ['movement_rate_species', 'movement_rate_other', 'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
             const charObj = buildCharObj(v);
             const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
             const all_hp_temp = parseInt(v['all_hp_temp']);
             const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
+            const newEncVals = calcEnc(charObj['str'], v);
 
             setAttrs({
                 str: charObj['str'],
                 ...standardSkillVals,
                 ...calcProSkills(proSkillIds, charObj, v),
-                ...calcEnc(charObj['str'], v),
+                ...newEncVals,
                 ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
                     v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
                     v['initiative_add_one_tenth_athletics']),
@@ -1030,7 +1088,7 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'],
+            ['action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue'],
             ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
                 'initiative_add_one_tenth_athletics']), function(v) {
             const charObj = buildCharObj(v);
@@ -1042,7 +1100,7 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
                 ...standardSkillVals,
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                    v['action_points_calc'], v['fatigue']),
+                    v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
                 ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
                     v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
                     v['initiative_add_one_tenth_athletics'])
@@ -1115,7 +1173,7 @@ on('change:int_base change:int_other change:int_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'],
+            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'],
             ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
             ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
                 'initiative_add_one_tenth_athletics']), function(v) {
@@ -1127,7 +1185,7 @@ on('change:int_base change:int_other change:int_temp', function() {
                 ...calcStdSkills(charStdSkillIds['int'], charObj, v),
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                    v['action_points_calc'], v['fatigue']),
+                    v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
                 ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
                     v['experience_mod_temp']),
                 ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
@@ -1150,7 +1208,10 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
             ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
-            ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double']), function(v) {
+            ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
+            ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points',
+                'luck_points_max'],
+            ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max']), function(v) {
             const charObj = buildCharObj(v);
             const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                 v['hp_calc'], v['simplified_combat_enabled']);
@@ -1166,7 +1227,10 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                     v['damage_mod_other'], v['damage_mod_temp']),
                 ...healingRateVals,
                 ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
+                ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
+                    v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
                 hp_max_base: hp_max_base,
+                ...calcMagicPoints(charObj['pow'], v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max']),
                 ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
                     all_hp_temp, v['location1_hp'], v['location1_hp_max']),
                 ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
@@ -1207,7 +1271,9 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
         });
 
         getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp']), function(v) {
+            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
+            ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank',
+                'luck_points', 'luck_points_max']), function(v) {
             const charObj = buildCharObj(v);
 
             setAttrs({
@@ -1215,7 +1281,9 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
                 ...calcStdSkills(charStdSkillIds['cha'], charObj, v),
                 ...calcProSkills(proSkillIds, charObj, v),
                 ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
-                    v['experience_mod_temp'])
+                    v['experience_mod_temp']),
+                ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
+                    v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max'])
             });
         });
     });
@@ -1224,9 +1292,9 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
 /* Attribute Triggers */
 /* Action Point Triggers */
 on('change:action_points_other change:action_points_temp change:action_points_calc', function() {
-    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue'], function(v) {
+    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'], function(v) {
         setAttrs( calcActionPoints(parseInt(v['dex']), parseInt(v['int']), v['action_points_other'], v['action_points_temp'],
-            v['action_points_calc'], v['fatigue']));
+            v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']));
     });
 });
 
@@ -1267,6 +1335,36 @@ on('change:initiative_bonus_other change:initiative_bonus_temp change:initiative
             ...calcInitiativeBonus(parseInt(v['int']), parseInt(v['dex']), v['initiative_bonus_other'],
                 v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, parseInt(v['athletics_total']),
                 v['initiative_add_one_tenth_athletics'])
+        });
+    });
+});
+
+/* Luck Point Triggers */
+on('change:luck_points_other change:luck_points_temp change:luck_points_calc change:luck_points_rank change:rank', function() {
+    getAttrs(['pow', 'cha', 'luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank',
+        'luck_points', 'luck_points_max'], function(v) {
+        setAttrs({
+            ...calcLuckPoints(parseInt(v['pow']), parseInt(v['cha']), v['luck_points_calc'], v['luck_points_other'],
+                v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max'])
+        });
+    });
+});
+
+/* Magic Point Triggers */
+on('change:magic_points_other change:magic_points_temp', function() {
+    getAttrs(['pow', 'magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'], function(v) {
+        setAttrs({
+            ...calcMagicPoints(parseInt(v['pow']), v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max'])
+        });
+    });
+});
+
+/* Movement Rate Triggers */
+on('change:movement_rate_species change:movement_rate_other change:movement_rate_temp', function() {
+    getAttrs(['movement_rate_species', 'movement_rate_other', 'movement_rate_temp', 'movement_rate_fatigue', 'movement_rate_enc'], function(v) {
+        setAttrs({
+            ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                v['movement_rate_fatigue'], v['movement_rate_enc'])
         });
     });
 });
@@ -1419,18 +1517,24 @@ on("change:repeating_passion", function(event) {
 /* Encumbrance Triggers */
 /* Armor ENC and Armor Penalty*/
 on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
-    getAttrs(armorEncGetAttrs.concat(['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty',
-        'athletics_total', 'initiative_add_one_tenth_athletics', 'fatigue']), function(v) {
+    getAttrs(armorEncGetAttrs.concat(encGetAttrs, ['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty',
+        'athletics_total', 'initiative_add_one_tenth_athletics', 'fatigue'],
+        ['str', 'movement_rate_species', 'movement_rate_other', 'movement_rate_temp']), function(v) {
         const armorAttrs = calcArmorEncAndPenalty(v);
         v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
         v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
         const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
+        const newEncVals = calcEnc(parseInt(v['str']), v);
         setAttrs({
             ...armorAttrs,
-            ...calcEnc(parseInt(v['str']), v),
+            ...newEncVals,
+            ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                v['movement_rate_fatigue'], newEncVals['movement_rate_enc']),
             ...calcInitiativeBonus(parseInt(v['int']), parseInt(v['dex']), v['initiative_bonus_other'],
                 v['initiative_bonus_temp'], armorAttrs['armor_penalty'], initiative_bonus_fatigue, parseInt(v['athletics_total']),
-                v['initiative_add_one_tenth_athletics'])
+                v['initiative_add_one_tenth_athletics']),
+            ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
         });
     });
 });
@@ -1438,17 +1542,21 @@ on("change:location12_armor_enc change:location11_armor_enc change:location10_ar
 /* Armor Equipped */
 ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(num => {
     on(`change:location${num}_armor_equipped`, function() {
-        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp'].concat(armorEncGetAttrs,
+        getAttrs([`location${num}_other_ap`, `location${num}_armor_ap`, 'all_armor_temp'].concat(armorEncGetAttrs, encGetAttrs,
             ['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
-            'initiative_add_one_tenth_athletics', 'fatigue']), function(v) {
+            'initiative_add_one_tenth_athletics', 'fatigue'],
+            ['str', 'movement_rate_species', 'movement_rate_other', 'movement_rate_temp']), function(v) {
             const armorAttrs = calcArmorEncAndPenalty(v);
             const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
             v['effective_armor_enc'] = armorAttrs['effective_armor_enc'];
             v['armor_enc_carried'] = armorAttrs['armor_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
             setAttrs({
                 [`location${num}_ap`]: calcLocationAP(v[`location${num}_other_ap`], v[`location${num}_armor_ap`], parseInt(v['all_armor_temp']), v[`location${num}_armor_equipped`]),
                 ...armorAttrs,
-                ...calcEnc(parseInt(v['str']), v),
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc']),
                 ...calcInitiativeBonus(parseInt(v['int']), parseInt(v['dex']), v['initiative_bonus_other'],
                     v['initiative_bonus_temp'], armorAttrs['armor_penalty'], initiative_bonus_fatigue, parseInt(v['athletics_total']),
                     v['initiative_add_one_tenth_athletics'])
@@ -1471,13 +1579,17 @@ on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeatin
             weaponGetAttrs.push(`repeating_weapon_${id}_enc`, `repeating_weapon_${id}_ammo_enc`, `repeating_weapon_${id}_clip_enc`, `repeating_weapon_${id}_ammo`, `repeating_weapon_${id}_clips`, `repeating_weapon_${id}_location`)
         });
 
-        getAttrs(weaponGetAttrs, function(v) {
+        getAttrs(weaponGetAttrs.concat(encGetAttrs, ['str', 'movement_rate_species', 'movement_rate_other', 'movement_rate_temp',
+            'movement_rate_fatigue']), function(v) {
             const weaponAttrs = calcWeaponEnc(weaponIds, v);
             v['weapons_enc'] = weaponAttrs['weapons_enc'];
             v['weapons_enc_carried'] = weaponAttrs['weapons_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
             setAttrs({
                 ...weaponAttrs,
-                ...calcEnc(parseInt(v['str']), v)
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
             });
         });
     });
@@ -1497,13 +1609,17 @@ on("change:repeating_equipment:enc change:repeating_equipment:quantity change:re
             gearGetAttrs.push(`repeating_equipment_${id}_enc`, `repeating_equipment_${id}_quantity`, `repeating_equipment_${id}_location`)
         });
 
-        getAttrs(['str'].concat(gearGetAttrs, encGetAttrs), function(v) {
+        getAttrs(['str'].concat(gearGetAttrs, encGetAttrs, ['movement_rate_species', 'movement_rate_other',
+            'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
             const gearAttrs = calcGenericRepeatingEnc(gearIds, 'equipment', v);
             v['equipment_enc'] = gearAttrs['equipment_enc'];
             v['equipment_enc_carried'] = gearAttrs['equipment_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
             setAttrs({
                 ...gearAttrs,
-                ...calcEnc(parseInt(v['str']), v)
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
             });
         });
     });
@@ -1523,13 +1639,17 @@ on("change:repeating_currency:enc change:repeating_currency:quantity change:repe
             currencyGetAttrs.push(`repeating_currency_${id}_enc`, `repeating_currency_${id}_quantity`, `repeating_currency_${id}_location`)
         });
 
-        getAttrs(['str'].concat(currencyGetAttrs, encGetAttrs), function(v) {
+        getAttrs(['str'].concat(currencyGetAttrs, encGetAttrs, ['movement_rate_species', 'movement_rate_other',
+            'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
             const currencyAttrs = calcGenericRepeatingEnc(currencyIds, 'currency', v);
             v['currency_enc'] = currencyAttrs['currency_enc'];
             v['currency_enc_carried'] = currencyAttrs['currency_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
             setAttrs({
                 ...currencyAttrs,
-                ...calcEnc(parseInt(v['str']), v)
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
             });
         });
     });
@@ -1537,26 +1657,35 @@ on("change:repeating_currency:enc change:repeating_currency:quantity change:repe
 
 /* ENC */
 on("change:avg_species_siz change:pack_equipped change:encumbrance_temp", function() {
-    getAttrs(['str'].concat(encGetAttrs), function(v) {
-        setAttrs( calcEnc(parseInt(v['str']), v) );
+    getAttrs(['str'].concat(encGetAttrs, ['movement_rate_species', 'movement_rate_other', 'movement_rate_temp',
+        'movement_rate_fatigue']), function(v) {
+        const newEncVals = calcEnc(parseInt(v['str']), v);
+        setAttrs({
+            ...newEncVals,
+            ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+            v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
+        });
     });
 });
 
 /* Fatigue */
 on("change:fatigue", function() {
-    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'healing_rate',
-        'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
-        'initiative_add_one_tenth_athletics'], function(v) {
+    getAttrs(['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'action_points',
+        'action_points_max', 'fatigue', 'healing_rate', 'initiative_bonus_other', 'initiative_bonus_temp',
+        'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics', 'movement_rate_species',
+        'movement_rate_other', 'movement_rate_temp', 'movement_rate_enc'], function(v) {
         const dex = parseInt(v['dex']);
         const int = parseInt(v['int'])
         const newFatigueVals = calcFatigue(v['fatigue'], parseInt(v['healing_rate']));
         setAttrs({
             ...newFatigueVals,
             ...calcActionPoints(dex, int, v['action_points_other'], v['action_points_temp'],
-                v['action_points_calc'], v['fatigue']),
+                v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
             ...calcInitiativeBonus(int, dex, v['initiative_bonus_other'], v['initiative_bonus_temp'],
                 parseInt(v['armor_penalty']), parseInt(newFatigueVals['initiative_bonus_fatigue']), parseInt(v['athletics_total']),
-                v['initiative_add_one_tenth_athletics'])
+                v['initiative_add_one_tenth_athletics']),
+            ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                newFatigueVals['movement_rate_fatigue'], v['movement_rate_enc'])
         });
     });
 });
