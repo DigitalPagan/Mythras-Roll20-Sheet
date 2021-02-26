@@ -795,7 +795,7 @@ div.sheet-warnmsg {
 /* Edit Mode*/
 input.sheet-edit-toggle:checked ~ div .sheet-play,
 input.sheet-edit-toggle:not(:checked) ~ div .sheet-edit,
-input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
+input.sheet-edit-toggle:not(:checked) ~ div fieldset:not(.sheet-editinplay) ~ .repcontrol {
     display: none;
 }
 

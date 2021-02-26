@@ -792,10 +792,11 @@ div.sheet-warnmsg {
     border-radius: 5px;
 }
 
-/* Edit Mode*/
+/* Edit Mode */
+/* editinplay class excludes a repeating section from hiding controls in play mode */
 input.sheet-edit-toggle:checked ~ div .sheet-play,
 input.sheet-edit-toggle:not(:checked) ~ div .sheet-edit,
-input.sheet-edit-toggle:not(:checked) ~ div .repcontrol {
+input.sheet-edit-toggle:not(:checked) ~ div fieldset:not(.sheet-editinplay) ~ .repcontrol {
     display: none;
 }
 
