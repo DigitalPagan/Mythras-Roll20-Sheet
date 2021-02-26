@@ -72,8 +72,10 @@ div.sheet-sticky-header {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background: white;
     z-index: 100;
+    background: white;
+    border-bottom: 2px solid black;
+    margin-bottom: 5px;
 }
 
 div.sheet-flex {
@@ -792,7 +794,8 @@ div.sheet-warnmsg {
     border-radius: 5px;
 }
 
-/* Edit Mode*/
+/* Edit Mode */
+/* editinplay class excludes a repeating section from hiding controls in play mode */
 input.sheet-edit-toggle:checked ~ div .sheet-play,
 input.sheet-edit-toggle:not(:checked) ~ div .sheet-edit,
 input.sheet-edit-toggle:not(:checked) ~ div fieldset:not(.sheet-editinplay) ~ .repcontrol {
