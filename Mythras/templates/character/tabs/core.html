@@ -310,18 +310,26 @@
                 <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_damage">
                     <div class="sheet-flex">
                         <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:weapon} {{name=^{spirit-damage}}} @{name_display} {{ damage=[[@{spirit_damage}]]}}'}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="0"></div>
+                        <div class="sheet-td sheet-edit"><input type="text" class="sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="1d2" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_other}" name="attr_spirit_damage_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_temp}" name="attr_spirit_damage_temp" value="0"></div>
                         <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
                         <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
-                        <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="0" readonly></div>
+                        <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="1d2" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="checkbox" title="@{damage_mod_details}" name="attr_spirit_damage_details" value="1"><span class="sheet-checkico">y</span></div>
                     </div>
                     <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_spirit_damage_details" value="1">
                     <div class="sheet-edit sheet-toggle">
+                        &emsp;<label class="sheet-left sheet-lite" data-i18n="calculate_with">Calculate with</label>
+                            <select class="sheet-usrinput sheet-attr-calc-width" title="@{spirit_damage_calc}" name="attr_spirit_damage_calc">
+                                <option data-i18n="willpower" value="willpower" selected>Willpower</option>
+                                <option data-i18n="binding" value="binding">Binding</option>
+                            </select>
+                        <input type="hidden" class="sheet-binding-toggle" name="attr_spirit_damage_calc" value="willpower">
+                        <div class="sheet-toggle">
                         &emsp;<label class="sheet-left sheet-lite" data-i18n="binding_id">Binding ID</label><br>
-                        &emsp;<input type="text" class="sheet-usrinput" name="attr_binding_id">
+                        &emsp;<input type="text" class="sheet-usrinput" title="@{binding_id}" name="attr_binding_id">
+                        </div>
                     </div>
                 </div>
                 <!-- Spirit Initiative -->

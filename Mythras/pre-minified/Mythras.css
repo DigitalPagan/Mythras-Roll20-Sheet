@@ -732,12 +732,12 @@ div.sheet-table .repcontainer {
     display: table-row-group;
 }
 
-div.sheet-th-tr {
+/*div.sheet-th-tr {
     display: flex;
     align-items: center;
     color: lightgray;
     background: dimgray;
-}
+}*/
 div.sheet-th {
     display:table-cell;
     text-align: center;
@@ -973,6 +973,11 @@ input.sheet-strangeness-toggle:not(:checked) + div.sheet-strangeness {
 
 /* Tenacity Toggle */
 input.sheet-tenacity-toggle:not(:checked) + div.sheet-tenacity {
+    display: none;
+}
+
+/* Binding Toggle */
+input.sheet-binding-toggle:not([value="binding"]) + .sheet-toggle {
     display: none;
 }
 

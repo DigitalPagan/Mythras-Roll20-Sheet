@@ -51,7 +51,7 @@ const hitPointGetAttrs = ['location1_hp_max_base_mod', 'location1_hp_max_other',
     'hp_max_base', 'all_hp_temp', 'simplified_combat_enabled', 'hp_calc'];
 
 const encGetAttrs = ['avg_species_siz', 'encumbrance_temp', 'pack_equipped', 'effective_armor_enc', 'armor_enc_carried',
-    'weapons_enc', 'weapons_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
+    'meleeweapon_enc', 'meleeweapon_enc_carried', 'rangedweapon_enc', 'rangedweapon_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
 
 const charStdSkillIds = {
     str: ['athletics'],
@@ -673,7 +673,7 @@ function calcArmorEncAndPenalty(v) {
     return newVals;
 }
 
-function calcWeaponEnc(weaponIds, v) {
+/*function calcWeaponEnc(weaponIds, v) {
     let newVals = {};
     let wornWeaponEnc = 0;
     let packWeaponEnc = 0;
@@ -692,7 +692,7 @@ function calcWeaponEnc(weaponIds, v) {
     newVals['weapons_enc'] = parseFloat(wornWeaponEnc.toFixed(2));
     newVals['weapons_enc_carried'] = parseFloat(packWeaponEnc.toFixed(2));
     return newVals;
-}
+}*/
 
 function calcGenericRepeatingEnc(ids, fieldName, v) {
     let newVals = {};
@@ -715,10 +715,11 @@ function calcGenericRepeatingEnc(ids, fieldName, v) {
 }
 
 function calcEnc(str, v) {
-    const wornEnc = parseFloat(v['effective_armor_enc']) + parseFloat(v['weapons_enc']) + parseFloat(v['equipment_enc']) +
-        parseFloat(v['currency_enc']);
-    const packEnc = (parseFloat(v['armor_enc_carried']) + parseFloat(v['weapons_enc_carried']) +
-        parseFloat(v['equipment_enc_carried']) + parseFloat(v['currency_enc_carried'])) * parseInt(v['pack_equipped']);
+    const wornEnc = parseFloat(v['effective_armor_enc']) + parseFloat(v['meleeweapon_enc']) +
+        parseFloat(v['rangedweapon_enc']) + parseFloat(v['equipment_enc']) + parseFloat(v['currency_enc']);
+    const packEnc = (parseFloat(v['armor_enc_carried']) + parseFloat(v['meleeweapon_enc_carried']) +
+        parseFloat(v['rangedweapon_enc_carried']) + parseFloat(v['equipment_enc_carried']) +
+        parseFloat(v['currency_enc_carried'])) * parseInt(v['pack_equipped']);
     const enc = parseFloat(((wornEnc + packEnc + parseFloat(v['encumbrance_temp']) ) * (parseInt(v['avg_species_siz']) / 13)).toFixed(2));
     const burdened = str * 2;
     const overloaded = str * 3;
@@ -824,7 +825,18 @@ function damageTable(step) {
     const die_steps = [0, '1d2','1d4','1d6','1d8'];
     const d10s = Math.floor(stepAbs/5);
     const notd10s = stepAbs % 5; // % calculates remainder after division.
-    const mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+    let mod;
+    if (stepAbs === 6) {
+        mod = '2d6';
+    } else if (stepAbs === 7) {
+        mod = '1d8+1d6';
+    } else if (stepAbs === 8) {
+        mod = '2d8';
+    } else if (stepAbs === 9) {
+        mod = '1d10+1d8';
+    } else {
+        mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+    }
     if (step >= 0) {
         return mod;
     } else {
@@ -978,8 +990,39 @@ function calcSpiritAP(pow, int, spirit_ap_other, spirit_ap_temp, action_points_c
     };
 }
 
-function calcSpiritDamage() {
-
+// TODO char triggers
+// TODO add willpower skill
+// TODO fix attr trigger to use willpower not athletics
+// TODO willpower and binding triggers
+function calcSpiritDamage(willpower_total, spirit_damage_other, spirit_damage_temp, spirit_damage_calc, binding_id) {
+    let base_steps;
+    if (spirit_damage_calc === 'willpower') {
+        base_steps = Math.ceil((willpower_total/2)/20);
+        console.log("base_steps = " + base_steps);
+        console.log("other = " + spirit_damage_other);
+        console.log("temp = " + spirit_damage_temp);
+        return {
+            spirit_damage_base: damageTable(base_steps),
+            spirit_damage: damageTable(base_steps + parseInt(spirit_damage_other) + parseInt(spirit_damage_temp))
+        };
+    } else {
+        if (binding_id === '') {
+            return {
+                spirit_damage_base: 0,
+                spirit_damage: 0
+            }
+        } else {
+            // I see no way around using the 2nd getAttrs and setAttrs in this case
+            getAttrs([`${binding_id}_total`], function(v){
+                base_steps = Math.ceil(parseInt(v[`${binding_id}_total`])/20);
+                setAttrs({
+                    spirit_damage_base: damageTable(base_steps),
+                    spirit_damage: damageTable(base_steps + parseInt(spirit_damage_other) + parseInt(spirit_damage_temp))
+                });
+            });
+            return {};
+        }
+    }
 }
 
 function calcSpiritInitiative(int, cha, spirit_ib_other, spirit_ib_temp) {
@@ -1434,6 +1477,14 @@ on('change:spirit_ap_other change:spirit_ap_temp', function() {
 });
 
 /* Spirit Damage Triggers */
+on('change:spirit_damage_other change:spirit_damage_temp change:spirit_damage_calc change:binding_id', function() {
+    getAttrs(['athletics_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id'], function(v) {
+        setAttrs({
+            ...calcSpiritDamage(parseInt(v['athletics_total']), v['spirit_damage_other'], v['spirit_damage_temp'],
+                v['spirit_damage_calc'], v['binding_id'])
+        });
+    });
+});
 
 /* Spirit Initiative Triggers */
 on('change:spirit_ib_other change:spirit_ib_temp', function() {
@@ -1640,12 +1691,16 @@ on("change:location12_armor_enc change:location11_armor_enc change:location10_ar
 });
 
 /* Weapon IDs */
-on("change:repeating_weapon", function(event) {
-    let id = "repeating_weapon_" + event.sourceAttribute.split('_')[2];
+on("change:repeating_meleeweapon", function(event) {
+    let id = "repeating_meleeweapon_" + event.sourceAttribute.split('_')[2];
+    setAttrs({[`${id}_id`]: `${id}`});
+});
+on("change:repeating_rangedweapon", function(event) {
+    let id = "repeating_rangedweapon_" + event.sourceAttribute.split('_')[2];
     setAttrs({[`${id}_id`]: `${id}`});
 });
 
-/* Weapon ENC */
+/* Weapon ENC
 on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeating_weapon:clip_enc change:repeating_weapon:ammo change:repeating_weapon:clips change:repeating_weapon:location", function() {
     getSectionIDs("repeating_weapon", function(weaponIds) {
         let weaponGetAttrs = [];
@@ -1661,6 +1716,54 @@ on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeatin
             const newEncVals = calcEnc(parseInt(v['str']), v);
             setAttrs({
                 ...weaponAttrs,
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
+            });
+        });
+    });
+}); */
+
+/* Melee ENC */
+on("change:repeating_meleeweapon:enc change:repeating_meleeweapon:quantity change:repeating_meleeweapon:location", function() {
+    getSectionIDs("repeating_meleeweapon", function(meleeIds) {
+        let meleeGetAttrs = [];
+        meleeIds.forEach(id => {
+            meleeGetAttrs.push(`repeating_meleeweapon_${id}_enc`, `repeating_meleeweapon_${id}_quantity`, `repeating_meleeweapon_${id}_location`)
+        });
+
+        getAttrs(['str'].concat(meleeGetAttrs, encGetAttrs, ['movement_rate_species', 'movement_rate_other',
+            'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
+            const meleeAttrs = calcGenericRepeatingEnc(meleeIds, 'meleeweapon', v);
+            v['meleeweapon_enc'] = meleeAttrs['meleeweapon_enc'];
+            v['meleeweapon_enc_carried'] = meleeAttrs['meleeweapon_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
+            setAttrs({
+                ...meleeAttrs,
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
+            });
+        });
+    });
+});
+
+/* Ranged ENC */
+on("change:repeating_rangedweapon:enc change:repeating_rangedweapon:quantity change:repeating_rangedweapon:location", function() {
+    getSectionIDs("repeating_rangedweapon", function(rangedIds) {
+        let rangedGetAttrs = [];
+        rangedIds.forEach(id => {
+            rangedGetAttrs.push(`repeating_rangedweapon_${id}_enc`, `repeating_rangedweapon_${id}_quantity`, `repeating_rangedweapon_${id}_location`)
+        });
+
+        getAttrs(['str'].concat(rangedGetAttrs, encGetAttrs, ['movement_rate_species', 'movement_rate_other',
+            'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
+            const rangedAttrs = calcGenericRepeatingEnc(rangedIds, 'rangedweapon', v);
+            v['rangedweapon_enc'] = rangedAttrs['rangedweapon_enc'];
+            v['rangedweapon_enc_carried'] = rangedAttrs['rangedweapon_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
+            setAttrs({
+                ...rangedAttrs,
                 ...newEncVals,
                 ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
                     v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])

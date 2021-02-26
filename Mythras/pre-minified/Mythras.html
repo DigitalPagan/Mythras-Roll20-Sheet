@@ -654,18 +654,26 @@
                 <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_damage">
                     <div class="sheet-flex">
                         <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="@{roll_display}&{template:weapon} {{name=^{spirit-damage}}} @{name_display} {{ damage=[[@{spirit_damage}]]}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="0"></div>
+                        <div class="sheet-td sheet-edit"><input type="text" class="sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="1d2" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_other}" name="attr_spirit_damage_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_temp}" name="attr_spirit_damage_temp" value="0"></div>
                         <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
                         <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
-                        <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="0" readonly></div>
+                        <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="1d2" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="checkbox" title="@{damage_mod_details}" name="attr_spirit_damage_details" value="1"><span class="sheet-checkico">y</span></div>
                     </div>
                     <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_spirit_damage_details" value="1">
                     <div class="sheet-edit sheet-toggle">
+                        &emsp;<label class="sheet-left sheet-lite" data-i18n="calculate_with">Calculate with</label>
+                            <select class="sheet-usrinput sheet-attr-calc-width" title="@{spirit_damage_calc}" name="attr_spirit_damage_calc">
+                                <option data-i18n="willpower" value="willpower" selected>Willpower</option>
+                                <option data-i18n="binding" value="binding">Binding</option>
+                            </select>
+                        <input type="hidden" class="sheet-binding-toggle" name="attr_spirit_damage_calc" value="willpower">
+                        <div class="sheet-toggle">
                         &emsp;<label class="sheet-left sheet-lite" data-i18n="binding_id">Binding ID</label><br>
-                        &emsp;<input type="text" class="sheet-usrinput" name="attr_binding_id">
+                        &emsp;<input type="text" class="sheet-usrinput" title="@{binding_id}" name="attr_binding_id">
+                        </div>
                     </div>
                 </div>
                 <!-- Spirit Initiative -->
@@ -1825,7 +1833,7 @@
                 </div>
             </div>
         </div>
-        <div class="sheet-text-right sheet-bmargin">
+        <div class="sheet-text-right">
             <label class="sheet-left" data-i18n="worn_armor_enc">Worn Armor ENC</label>:&nbsp;
             <span data-i18n="actual">Actual</span>&nbsp;<input type="number" class="sheet-value sheet-number-width" title="@{armor_enc}" name="attr_armor_enc" value="0" readonly>&nbsp;
             <span data-i18n="effective">Effective</span>&nbsp;<input type="number" class="sheet-value sheet-number-width" title="@{effective_armor_enc}" name="attr_effective_armor_enc" value="0" readonly>&nbsp;
@@ -1843,45 +1851,41 @@
 
     <input type='checkbox' class="sheet-hidden sheet-firearms-toggle" name='attr_firearms_enabled' value="1"/>
     <div class="sheet-bmargin sheet-rmargin">
-        <div class="sheet-th-tr">
-            <div class="sheet-th sheet-weapon-name" data-i18n="weapon">Weapon</div>
-            <div class="sheet-th sheet-checkbox-width sheet-pictos-custom sheet-help" data-i18n-title="ranged_weapon">[</div>
+        <div class="sheet-flex">
+            <div class="sheet-th sheet-weapon-name" data-i18n="melee_weapon">Melee Weapon</div>
+            <div class="sheet-th sheet-play sheet-button-width"></div>
             <div class="sheet-th sheet-weapon-damage" data-i18n="damage">Damage</div>
             <div class="sheet-th sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="damage_modifier">+</div>
-            <div class="sheet-th sheet-play sheet-button-width"></div>
-            <div class="sheet-th sheet-weapon-size"><span data-i18n="size">Size</span> / <span data-i18n="force">Force</span></div>
-            <div class="sheet-th sheet-weapon-reach"><span data-i18n="reach">Reach</span> / <span data-i18n="range">Range</span></div>
+            <div class="sheet-th sheet-weapon-size"><span data-i18n="size">Size</span></div>
+            <div class="sheet-th sheet-weapon-reach"><span data-i18n="reach">Reach</span></div>
             <div class="sheet-th sheet-number-width-sm sheet-help" data-i18n-title="armor-points" title="Armor Points" data-i18n="ap">AP</div>
             <div class="sheet-th sheet-edit sheet-weapon-hp sheet-help" data-i18n-title="hit-points" title="Hit Points" data-i18n="hp">HP</div>
             <div class="sheet-th sheet-play sheet-number-width-sm sheet-help" data-i18n-title="hit-points" title="Hit Points" data-i18n="hp">HP</div>
             <div class="sheet-th sheet-grow"><span data-i18n="traits">Traits</span> / <span data-i18n="effects">Effects</span> / <span data-i18n="notes">Notes</span></div>
-            <div class="sheet-th sheet-weapon-hp sheet-help" data-i18n-title="ammunition" title="Ammunition" data-i18n="ammunition-abrv4">Ammo</div>
-            <div class="sheet-th sheet-number-width-sm sheet-pictos sheet-help sheet-firearm-trait" data-i18n-title="clips" title="Clips">=</div>
+            <div class="sheet-th sheet-number-width-sm sheet-help" data-i18n-title="quantity" title="Quantity">#</div>
             <div class="sheet-th sheet-equipment-location" data-i18n="location">Location</div>
             <div class="sheet-th sheet-pictos sheet-checkbox-width sheet-help" data-i18n-title="show_details">E</div>
         </div>
-        <fieldset class="repeating_weapon">
+        <fieldset class="repeating_meleeweapon">
             <div class="sheet-flex">
                 <div class="sheet-td sheet-weapon-name sheet-hover-btn">
                     <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
                     <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
                     <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
                 </div>
-                <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_ranged" title="@{$ID_ranged}" value="1"><span class="sheet-checkico sheet-pictos-custom">[</span></div>
+                <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{notes=@{notes}}}"></button></div>
                 <div class="sheet-td sheet-weapon-damage"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_damage}" name="attr_damage"></div>
                 <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}" checked><span class="sheet-checkico">+</span></div>
-                <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{notes=@{notes}}}"></button></div>
                 <div class="sheet-td sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_size}" name="attr_size"></div>
                 <div class="sheet-td sheet-weapon-reach"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_reach}" name="attr_reach"></div>
                 <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-usrinput" title="@{$ID_ap}" name="attr_ap"></div>
                 <div class="sheet-td sheet-edit sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp|max}" name="attr_hp_max" step="1" min="0" value="0"></div>
                 <div class="sheet-td sheet-play sheet-number-width-sm"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0"></div>
                 <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_notes"></div>
-                <div class="sheet-td sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_ammo}" name="attr_ammo" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_ammo|max}" name="attr_ammo_max" value="0"></div>
-                <div class="sheet-td sheet-number-width-sm sheet-firearm-trait"><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_clips}" name="attr_clips" value="0"></div>
+                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_quantity}" name="attr_quantity" value="1"></div>
                 <div class="sheet-td sheet-equipment-location">
                     <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
-                        <option value="worn" data-i18n="worn" selected>Worn</option>
+                        <option value="loadout" data-i18n="worn" selected>Worn</option>
                         <option value="pack" data-i18n="pack">Pack</option>
                         <option value="mount" data-i18n="transport">Transport</option>
                         <option value="camp" data-i18n="camp">Camp</option>
@@ -1889,36 +1893,95 @@
                         <option value="homebase" data-i18n="homebase">Homebase</option>
                     </select>
                 </div>
-                <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_details" title="@{$ID_details}" value="1"><span class="sheet-checkico">E</span></div>
+                <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_details" title="@{$ID_details}" value="1" checked><span class="sheet-checkico">E</span></div>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1">
-            <ul class="sheet-toggle">
-                <li>
-                    <!-- Maximized Damage -->
-                    <label class="sheet-edit sheet-left sheet-help" data-i18n-title="maximized_damage" data-i18n="maximized-abrv3_damage">Max. Damage</label>
-                    <input type="text" class="sheet-edit sheet-weapon-damage sheet-usrinput" title="@{$ID_maximized_damage}" name="attr_maximized_damage">
-                    <!-- Fire Rate -->
-                    <label class="sheet-left sheet-firearm-trait" data-i18n="fire_rate">Fire Rate</label><input type="text" class="weapon-reach sheet-usrinput sheet-firearm-trait" title="@{$ID_fire_rate}" name="attr_fire_rate" value="">
-                    <!-- Load -->
-                    <label class="sheet-left" data-i18n="load">Load</label><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_load}" name="attr_load" value="1">
-                    <!-- Impale Size -->
-                    <label class="sheet-left" data-i18n="impale_size">Impale Size</label><input type="text" class="sheet-weapon-size sheet-usrinput" title="@{$ID_impale_size}" name="attr_impale_size" value="">
-                    <!-- ENC -->
-                    <label class="sheet-left sheet-edit" data-i18n="enc">ENC</label><input type="number" class="sheet-edit sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_enc}" name="attr_enc" value="0">
-                    <!-- Ammo ENC -->
-                    <label class="sheet-left sheet-edit" data-i18n="ammo_enc">Ammo ENC</label><input type="number" class="sheet-edit sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_ammo_enc}" name="attr_ammo_enc" value="0">
-                    <!-- Clip ENC -->
-                    <label class="sheet-left sheet-edit sheet-firearm-trait" data-i18n="clip_enc">Clip ENC</label><input type="number" class="sheet-edit sheet-number-width-sm sheet-usrinput sheet-firearm-trait" step="1" min="0" title="@{$ID_clip_enc}" name="attr_clip_enc" value="0">
-                </li>
-            </ul>
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1" checked>
+            <div class="sheet-edit sheet-toggle">
+                &emsp;
+                <!-- Maximized Damage -->
+                <label class="sheet-left sheet-help" data-i18n-title="maximized_damage" data-i18n="maximized-abrv3_damage">Max. Damage</label>
+                <input type="text" class="sheet-edit sheet-weapon-damage sheet-usrinput" title="@{$ID_maximized_damage}" name="attr_maximized_damage">
+                <!-- ENC -->
+                <label class="sheet-left" data-i18n="enc">ENC</label><input type="number" class="sheet-edit sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_enc}" name="attr_enc" value="0">
+            </div>
         </fieldset>
     </div>
 
-    <div class="sheet-text-right sheet-bmargin">
-        <label class="sheet-left" data-i18n="worn_weapon_enc">Worn Weapon ENC</label>:&nbsp;
-        <input type="number" class="sheet-value sheet-number-width" title="@{weapons_enc}" name="attr_weapons_enc" value="0" readonly>&nbsp;
-        <label class="sheet-left" data-i18n="pack_weapon_enc">Pack Weapon ENC</label>:&nbsp;
-        <input type="number" class="sheet-value sheet-number-width" title="@{weapons_enc_carried}" name="attr_weapons_enc_carried" value="0" readonly>&nbsp;
+    <input type='checkbox' class="sheet-hidden sheet-firearms-toggle" name='attr_firearms_enabled' value="1"/>
+    <div class="sheet-bmargin sheet-rmargin">
+        <div class="sheet-flex">
+            <div class="sheet-th sheet-weapon-name" data-i18n="ranged_weapon">Ranged Weapon</div>
+            <div class="sheet-th sheet-play sheet-button-width"></div>
+            <div class="sheet-th sheet-weapon-damage" data-i18n="damage">Damage</div>
+            <div class="sheet-th sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="damage_modifier">+</div>
+            <div class="sheet-th sheet-weapon-size"><span data-i18n="force">Force</span></div>
+            <div class="sheet-th sheet-weapon-reach"><span data-i18n="range">Range</span></div>
+            <div class="sheet-th sheet-number-width-sm sheet-help" data-i18n-title="armor-points" title="Armor Points" data-i18n="ap">AP</div>
+            <div class="sheet-th sheet-edit sheet-weapon-hp sheet-help" data-i18n-title="hit-points" title="Hit Points" data-i18n="hp">HP</div>
+            <div class="sheet-th sheet-play sheet-number-width-sm sheet-help" data-i18n-title="hit-points" title="Hit Points" data-i18n="hp">HP</div>
+            <div class="sheet-th sheet-grow"><span data-i18n="traits">Traits</span> / <span data-i18n="effects">Effects</span> / <span data-i18n="notes">Notes</span></div>
+            <div class="sheet-th sheet-weapon-hp sheet-help" data-i18n-title="ammunition" title="Ammunition" data-i18n="ammunition-abrv4">Ammo</div>
+            <div class="sheet-th sheet-number-width-sm sheet-help" data-i18n-title="quantity" title="Quantity">#</div>
+            <div class="sheet-th sheet-equipment-location" data-i18n="location">Location</div>
+            <div class="sheet-th sheet-pictos sheet-checkbox-width sheet-help" data-i18n-title="show_details">E</div>
+        </div>
+        <fieldset class="repeating_rangedweapon">
+            <div class="sheet-flex">
+                <div class="sheet-td sheet-weapon-name sheet-hover-btn">
+                    <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
+                    <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
+                </div>
+                <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{notes=@{notes}}}"></button></div>
+                <div class="sheet-td sheet-weapon-damage"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_damage}" name="attr_damage"></div>
+                <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}" checked><span class="sheet-checkico">+</span></div>
+                <div class="sheet-td sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_size}" name="attr_size"></div>
+                <div class="sheet-td sheet-weapon-reach"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_reach}" name="attr_reach"></div>
+                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-usrinput" title="@{$ID_ap}" name="attr_ap"></div>
+                <div class="sheet-td sheet-edit sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp|max}" name="attr_hp_max" step="1" min="0" value="0"></div>
+                <div class="sheet-td sheet-play sheet-number-width-sm"><input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0"></div>
+                <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_notes"></div>
+                <div class="sheet-td sheet-weapon-hp"><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_ammo}" name="attr_ammo" value="0">/<input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_ammo|max}" name="attr_ammo_max" value="0"></div>
+                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_quantity}" name="attr_quantity" value="1"></div>
+                <div class="sheet-td sheet-equipment-location">
+                    <select class="sheet-full-width sheet-usrinput sheet-text-center sheet-armor-field" title="@{$ID_location}" name="attr_location">
+                        <option value="loadout" data-i18n="worn" selected>Worn</option>
+                        <option value="pack" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+                <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_details" title="@{$ID_details}" value="1" checked><span class="sheet-checkico">E</span></div>
+            </div>
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1" checked>
+            <div class="sheet-toggle">
+                &emsp;
+                <!-- Maximized Damage -->
+                <label class="sheet-edit sheet-left sheet-help" data-i18n-title="maximized_damage" data-i18n="maximized-abrv3_damage">Max. Damage</label>
+                <input type="text" class="sheet-edit sheet-weapon-damage sheet-usrinput" title="@{$ID_maximized_damage}" name="attr_maximized_damage">
+                <!-- Load -->
+                <label class="sheet-left" data-i18n="load">Load</label><input type="number" class="sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_load}" name="attr_load" value="1">
+                <!-- Impale Size -->
+                <label class="sheet-left" data-i18n="impale_size">Impale Size</label><input type="text" class="sheet-weapon-size sheet-usrinput" title="@{$ID_impale_size}" name="attr_impale_size" value="">
+                <!-- Fire Rate -->
+                <label class="sheet-left sheet-firearm-trait" data-i18n="fire_rate">Fire Rate</label><input type="text" class="weapon-reach sheet-usrinput sheet-firearm-trait" title="@{$ID_fire_rate}" name="attr_fire_rate" value="">
+                <!-- ENC -->
+                <label class="sheet-left sheet-edit" data-i18n="enc">ENC</label><input type="number" class="sheet-edit sheet-number-width-sm sheet-usrinput" step="1" min="0" title="@{$ID_enc}" name="attr_enc" value="0">
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="sheet-text-right">
+        <label class="sheet-left" data-i18n="worn_melee_enc">Worn Melee ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{meleeweapon_enc}" name="attr_meleeweapon_enc" value="0" readonly>&nbsp;
+        <label class="sheet-left" data-i18n="pack_melee_enc">Pack Melee ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{meleeweapon_enc_carried}" name="attr_meleeweapon_enc_carried" value="0" readonly>&nbsp;
+        <label class="sheet-left" data-i18n="worn_ranged_enc">Worn Ranged ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{rangedweapon_enc}" name="attr_rangedweapon_enc" value="0" readonly>&nbsp;
+        <label class="sheet-left" data-i18n="pack_ranged_enc">Pack Ranged ENC</label>:&nbsp;
+        <input type="number" class="sheet-value sheet-number-width" title="@{rangedweapon_enc_carried}" name="attr_rangedweapon_enc_carried" value="0" readonly>&nbsp;
     </div>
 </div>
 
@@ -1973,7 +2036,7 @@
                 </div>
             </fieldset>
         </div>
-        <div class="sheet-text-right sheet-bmargin">
+        <div class="sheet-text-right">
             <label class="sheet-left" data-i18n="worn_gear_enc">Worn Gear ENC</label>:&nbsp;
             <input type="number" class="sheet-value sheet-number-width" title="@{equipment_enc}" name="attr_equipment_enc" value="0" readonly>&nbsp;
             <label class="sheet-left" data-i18n="pack_gear_enc">Pack Gear ENC</label>:&nbsp;
@@ -2017,7 +2080,7 @@
             </fieldset>
         </div>
 
-        <div class="sheet-text-right sheet-bmargin">
+        <div class="sheet-text-right">
             <label class="sheet-left" data-i18n="worn_currency_enc">Worn Currency ENC</label>:&nbsp;
             <input type="number" class="sheet-value sheet-number-width" title="@{currency_enc}" name="attr_currency_enc" value="0" readonly>&nbsp;
             <label class="sheet-left" data-i18n="pack_currency_enc">Pack Currency ENC</label>:&nbsp;
@@ -2361,7 +2424,7 @@ const hitPointGetAttrs = ['location1_hp_max_base_mod', 'location1_hp_max_other',
     'hp_max_base', 'all_hp_temp', 'simplified_combat_enabled', 'hp_calc'];
 
 const encGetAttrs = ['avg_species_siz', 'encumbrance_temp', 'pack_equipped', 'effective_armor_enc', 'armor_enc_carried',
-    'weapons_enc', 'weapons_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
+    'meleeweapon_enc', 'meleeweapon_enc_carried', 'rangedweapon_enc', 'rangedweapon_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
 
 const charStdSkillIds = {
     str: ['athletics'],
@@ -2983,7 +3046,7 @@ function calcArmorEncAndPenalty(v) {
     return newVals;
 }
 
-function calcWeaponEnc(weaponIds, v) {
+/*function calcWeaponEnc(weaponIds, v) {
     let newVals = {};
     let wornWeaponEnc = 0;
     let packWeaponEnc = 0;
@@ -3002,7 +3065,7 @@ function calcWeaponEnc(weaponIds, v) {
     newVals['weapons_enc'] = parseFloat(wornWeaponEnc.toFixed(2));
     newVals['weapons_enc_carried'] = parseFloat(packWeaponEnc.toFixed(2));
     return newVals;
-}
+}*/
 
 function calcGenericRepeatingEnc(ids, fieldName, v) {
     let newVals = {};
@@ -3025,10 +3088,11 @@ function calcGenericRepeatingEnc(ids, fieldName, v) {
 }
 
 function calcEnc(str, v) {
-    const wornEnc = parseFloat(v['effective_armor_enc']) + parseFloat(v['weapons_enc']) + parseFloat(v['equipment_enc']) +
-        parseFloat(v['currency_enc']);
-    const packEnc = (parseFloat(v['armor_enc_carried']) + parseFloat(v['weapons_enc_carried']) +
-        parseFloat(v['equipment_enc_carried']) + parseFloat(v['currency_enc_carried'])) * parseInt(v['pack_equipped']);
+    const wornEnc = parseFloat(v['effective_armor_enc']) + parseFloat(v['meleeweapon_enc']) +
+        parseFloat(v['rangedweapon_enc']) + parseFloat(v['equipment_enc']) + parseFloat(v['currency_enc']);
+    const packEnc = (parseFloat(v['armor_enc_carried']) + parseFloat(v['meleeweapon_enc_carried']) +
+        parseFloat(v['rangedweapon_enc_carried']) + parseFloat(v['equipment_enc_carried']) +
+        parseFloat(v['currency_enc_carried'])) * parseInt(v['pack_equipped']);
     const enc = parseFloat(((wornEnc + packEnc + parseFloat(v['encumbrance_temp']) ) * (parseInt(v['avg_species_siz']) / 13)).toFixed(2));
     const burdened = str * 2;
     const overloaded = str * 3;
@@ -3134,7 +3198,18 @@ function damageTable(step) {
     const die_steps = [0, '1d2','1d4','1d6','1d8'];
     const d10s = Math.floor(stepAbs/5);
     const notd10s = stepAbs % 5; // % calculates remainder after division.
-    const mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+    let mod;
+    if (stepAbs === 6) {
+        mod = '2d6';
+    } else if (stepAbs === 7) {
+        mod = '1d8+1d6';
+    } else if (stepAbs === 8) {
+        mod = '2d8';
+    } else if (stepAbs === 9) {
+        mod = '1d10+1d8';
+    } else {
+        mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+    }
     if (step >= 0) {
         return mod;
     } else {
@@ -3288,8 +3363,39 @@ function calcSpiritAP(pow, int, spirit_ap_other, spirit_ap_temp, action_points_c
     };
 }
 
-function calcSpiritDamage() {
-
+// TODO char triggers
+// TODO add willpower skill
+// TODO fix attr trigger to use willpower not athletics
+// TODO willpower and binding triggers
+function calcSpiritDamage(willpower_total, spirit_damage_other, spirit_damage_temp, spirit_damage_calc, binding_id) {
+    let base_steps;
+    if (spirit_damage_calc === 'willpower') {
+        base_steps = Math.ceil((willpower_total/2)/20);
+        console.log("base_steps = " + base_steps);
+        console.log("other = " + spirit_damage_other);
+        console.log("temp = " + spirit_damage_temp);
+        return {
+            spirit_damage_base: damageTable(base_steps),
+            spirit_damage: damageTable(base_steps + parseInt(spirit_damage_other) + parseInt(spirit_damage_temp))
+        };
+    } else {
+        if (binding_id === '') {
+            return {
+                spirit_damage_base: 0,
+                spirit_damage: 0
+            }
+        } else {
+            // I see no way around using the 2nd getAttrs and setAttrs in this case
+            getAttrs([`${binding_id}_total`], function(v){
+                base_steps = Math.ceil(parseInt(v[`${binding_id}_total`])/20);
+                setAttrs({
+                    spirit_damage_base: damageTable(base_steps),
+                    spirit_damage: damageTable(base_steps + parseInt(spirit_damage_other) + parseInt(spirit_damage_temp))
+                });
+            });
+            return {};
+        }
+    }
 }
 
 function calcSpiritInitiative(int, cha, spirit_ib_other, spirit_ib_temp) {
@@ -3744,6 +3850,14 @@ on('change:spirit_ap_other change:spirit_ap_temp', function() {
 });
 
 /* Spirit Damage Triggers */
+on('change:spirit_damage_other change:spirit_damage_temp change:spirit_damage_calc change:binding_id', function() {
+    getAttrs(['athletics_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id'], function(v) {
+        setAttrs({
+            ...calcSpiritDamage(parseInt(v['athletics_total']), v['spirit_damage_other'], v['spirit_damage_temp'],
+                v['spirit_damage_calc'], v['binding_id'])
+        });
+    });
+});
 
 /* Spirit Initiative Triggers */
 on('change:spirit_ib_other change:spirit_ib_temp', function() {
@@ -3950,12 +4064,16 @@ on("change:location12_armor_enc change:location11_armor_enc change:location10_ar
 });
 
 /* Weapon IDs */
-on("change:repeating_weapon", function(event) {
-    let id = "repeating_weapon_" + event.sourceAttribute.split('_')[2];
+on("change:repeating_meleeweapon", function(event) {
+    let id = "repeating_meleeweapon_" + event.sourceAttribute.split('_')[2];
+    setAttrs({[`${id}_id`]: `${id}`});
+});
+on("change:repeating_rangedweapon", function(event) {
+    let id = "repeating_rangedweapon_" + event.sourceAttribute.split('_')[2];
     setAttrs({[`${id}_id`]: `${id}`});
 });
 
-/* Weapon ENC */
+/* Weapon ENC
 on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeating_weapon:clip_enc change:repeating_weapon:ammo change:repeating_weapon:clips change:repeating_weapon:location", function() {
     getSectionIDs("repeating_weapon", function(weaponIds) {
         let weaponGetAttrs = [];
@@ -3971,6 +4089,55 @@ on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeatin
             const newEncVals = calcEnc(parseInt(v['str']), v);
             setAttrs({
                 ...weaponAttrs,
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
+            });
+        });
+    });
+}); */
+
+/* Melee ENC */
+on("change:repeating_meleeweapon:enc change:repeating_meleeweapon:quantity change:repeating_meleeweapon:location", function() {
+    console.log("melee enc");
+    getSectionIDs("repeating_meleeweapon", function(meleeIds) {
+        let meleeGetAttrs = [];
+        meleeIds.forEach(id => {
+            meleeGetAttrs.push(`repeating_meleeweapon_${id}_enc`, `repeating_meleeweapon_${id}_quantity`, `repeating_meleeweapon_${id}_location`)
+        });
+
+        getAttrs(['str'].concat(meleeGetAttrs, encGetAttrs, ['movement_rate_species', 'movement_rate_other',
+            'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
+            const meleeAttrs = calcGenericRepeatingEnc(meleeIds, 'meleeweapon', v);
+            v['meleeweapon_enc'] = meleeAttrs['meleeweapon_enc'];
+            v['meleeweapon_enc_carried'] = meleeAttrs['meleeweapon_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
+            setAttrs({
+                ...meleeAttrs,
+                ...newEncVals,
+                ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
+                    v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])
+            });
+        });
+    });
+});
+
+/* Ranged ENC */
+on("change:repeating_rangedweapon:enc change:repeating_rangedweapon:quantity change:repeating_rangedweapon:location", function() {
+    getSectionIDs("repeating_rangedweapon", function(rangedIds) {
+        let rangedGetAttrs = [];
+        rangedIds.forEach(id => {
+            rangedGetAttrs.push(`repeating_rangedweapon_${id}_enc`, `repeating_rangedweapon_${id}_quantity`, `repeating_rangedweapon_${id}_location`)
+        });
+
+        getAttrs(['str'].concat(rangedGetAttrs, encGetAttrs, ['movement_rate_species', 'movement_rate_other',
+            'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
+            const rangedAttrs = calcGenericRepeatingEnc(rangedIds, 'rangedweapon', v);
+            v['rangedweapon_enc'] = rangedAttrs['rangedweapon_enc'];
+            v['rangedweapon_enc_carried'] = rangedAttrs['rangedweapon_enc_carried'];
+            const newEncVals = calcEnc(parseInt(v['str']), v);
+            setAttrs({
+                ...rangedAttrs,
                 ...newEncVals,
                 ...calcMoveRate(v['movement_rate_species'], v['movement_rate_other'], v['movement_rate_temp'],
                     v['movement_rate_fatigue'], newEncVals['movement_rate_enc'])

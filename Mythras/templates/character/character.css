@@ -159,6 +159,11 @@ input.sheet-tenacity-toggle:not(:checked) + div.sheet-tenacity {
     display: none;
 }
 
+/* Binding Toggle */
+input.sheet-binding-toggle:not([value="binding"]) + .sheet-toggle {
+    display: none;
+}
+
 /* Health Section */
 /* Hit Location select */
 select.sheet-hit-location {
