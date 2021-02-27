@@ -230,7 +230,8 @@
     "base-move": "Base Move",
     "greater-than": "greater than",
     "athletics": "Athletics",
-    "very-easy": "Very Easy",
+    "very_easy": "Very Easy",
+    "verbose": "Verbose",
     "easy": "Easy",
     "one-grade-harder": "1 grade harder",
     "two-grades-harder": "2 grades harder",
@@ -901,7 +902,7 @@
     "traditions": "Traditions",
     "ten-minutes": "10 Minutes",
     "social-conflict-description": "Use social conflict rules from the Mythras Companion p. 14.",
-    "social-conflict": "Social Conflict",
+    "social_conflict": "Social Conflict",
     "confidence": "Confidence",
     "social-damage": "Social Damange",
     "social-initiative": "Social Initiative",
@@ -1090,5 +1091,8 @@
     "base_hit_points-abrv": "B.HP",
     "base_hit_points": "Base Hit Points",
     "other_hit_points": "Other Hit Points",
-    "add_rank_to_luck": "Add Rank to Luck"
+    "add_rank_to_luck": "Add Rank to Luck",
+    "difficulty": "Difficulty",
+    "use_for_social_attack": "Use for Social Attack",
+    "use_for_social_defense": "User for Social Defense"
 }

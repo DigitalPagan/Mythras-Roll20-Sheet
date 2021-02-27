@@ -123,7 +123,7 @@ hr {
     margin: 5px 0;
 }
 
-
+/* Display Toggles */
 input.sheet-toggle:not([value="1"]) + .sheet-toggle,
 input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle {
     display: none;
@@ -134,6 +134,12 @@ input[type="checkbox"].sheet-wide-toggle:not(:checked) ~ .sheet-wide-toggle {
 }
 input.sheet-deep-toggle:not([value="1"]) ~ div .sheet-deep-toggle,
 input[type="checkbox"].sheet-deep-toggle:not(:checked) ~ div .sheet-deep-toggle {
+    display: none;
+}
+input.sheet-set-toggle:not([value^="@{set_"]) + .sheet-toggle {
+    display: none;
+}
+input.sheet-augment-toggle:not([value^="@{skill_"]) + div .sheet-augment-toggle {
     display: none;
 }
 
@@ -339,7 +345,7 @@ button[type=action].sheet-action-btn:active {
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
-button[type=roll] {
+button[type="roll"] {
     border: solid 1px gray;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
@@ -350,24 +356,39 @@ button[type=roll].sheet-nodie::before {
     font-family: "Arial", sans-serif;
     content: '';
 }
-button[type=roll].sheet-nodie:active {
-    border: solid 1px black !important;
-    background: linear-gradient(to bottom, gray 16%, dimgray 79%) !important;
-    color: whitesmoke !important;
+button[type="roll"].sheet-nodie:hover {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
 }
 button[type=roll].sheet-d100::before {
     font-family: 'dicefontd10';
     font-size: 1.75em !important;
+}
+button[type="roll"].sheet-d100:hover {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
 }
 button[type=roll].sheet-d6::before {
     font-family: 'dicefontd6';
     content: 'f';
     font-size: 1.25em !important;
 }
+button[type="roll"].sheet-d6:hover {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
 button[type=roll].sheet-effect::before {
     font-family: 'pictos';
     font-size: 1.25em;
     content: "e";
+}
+button[type="roll"].sheet-effect:hover {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
 }
 button[type=roll].sheet-link {
     padding: 0!important;
@@ -546,8 +567,7 @@ input[type="radio"] {
 }
 
 /* Stylized span to look like checkbox */
-input[type="checkbox"] + span
-{
+input[type="checkbox"] + span {
     border: solid 1px #a8a8a8;
     text-align: center;
     display: inline-block;
@@ -573,22 +593,53 @@ input[type="checkbox"] + span
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-input[type="checkbox"]:checked + span
-{
+input[type="checkbox"]:checked + span {
     color: inherit;
 }
 
-/* Override stylized span to be a checkico */
-input[type="checkbox"] + span.sheet-checkico
+/* Stylized span to look like radio  */
+input[type="radio"] + span {
+    border: solid 1px #a8a8a8;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    color: transparent;
+    justify-content: center;
+    align-items: center;
+    font-family: "Pictos";
+
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
+    margin: 1px 1px 1px -15px;
+    position: absolute;
+
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+input[type="radio"]:checked + span {
+    background-image: radial-gradient(black 0%, transparent 75%);
+}
+
+/* Override stylized span to be a checkico or radioico */
+input[type="checkbox"] + span.sheet-checkico,
+input[type="radio"] + span.sheet-radioico
 {
     border: none;
     color: darkgray;
     font-size: 1em;
     font-weight: bold;
 }
-input[type="checkbox"]:checked + span.sheet-checkico
+input[type="checkbox"]:checked + span.sheet-checkico,
+input[type="radio"]:checked + span.sheet-radioico
 {
     color: inherit;
+    background-image: none;
 }
 
 /* Override stylized span to be a checkradio */
@@ -617,36 +668,6 @@ input[type="checkbox"] + span.sheet-checkradio
     border-radius: 50%;
 }
 input[type="checkbox"]:checked + span.sheet-checkradio
-{
-    background-image: radial-gradient(black 0%, transparent 75%);
-}
-
-/* Stylized span to look like radio */
-input[type="radio"] + span
-{
-    border: solid 1px #a8a8a8;
-    text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    color: transparent;
-    justify-content: center;
-    align-items: center;
-
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-
-    width: 14px;
-    height: 14px;
-    box-sizing: border-box;
-    margin: 1px 1px 1px -15px;
-    position: absolute;
-
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-}
-input[type="radio"]:checked + span
 {
     background-image: radial-gradient(black 0%, transparent 75%);
 }

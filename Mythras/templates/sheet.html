@@ -14,30 +14,43 @@
                     <button type="action" class="sheet-inverted-checkbtn" name="act_name_display" data-i18n="show-name">Show Name</button>
                 </div>
 
+                <div class="sheet-rmargin"><label class="sheet-left" data-i18n="difficulty">Difficulty</label></div>
+                <div class="sheet-rmargin">
+                    <select class="sheet-auto-width sheet-usrinput sheet-text-center" name="attr_difficulty">
+                        <option value="0" data-i18n="verbose" selected>verbose</option>
+                        <option value="1" data-i18n="very_easy">Very Easy</option>
+                        <option value="2" data-i18n="easy">Easy</option>
+                        <option value="3" data-i18n="standard">Standard</option>
+                        <option value="4" data-i18n="hard">Hard</option>
+                        <option value="5" data-i18n="formidable">Formidable</option>
+                        <option value="6" data-i18n="herculean">Herculean</option>
+                    </select>
+                </div>
+
                 <div class="sheet-rmargin"><label class="sheet-left" data-i18n="augmentation">Augmentation</label></div>
                 <div class="sheet-rmargin">
-                    <select style="width: auto" class="sheet-usrinput" name="attr_augmentation">
+                    <select class="sheet-auto-width sheet-usrinput sheet-text-center" name="attr_augmentation">
                         <option value="0" data-i18n="none" selected>None</option>
                         <option value="?{Augmentation|0}" data-i18n="prompt">Prompt</option>
-                        <option value="@{skill_augmentation}" data-i18n="per-skill">Per skill</option>
+                        <option value="@{skill_augment}" data-i18n="per-skill">Per skill</option>
                         <option value="@{set_augmentation}" data-i18n="set">Set</option>
                     </select>
-
                 </div>
-                <div class="sheet-rmargin">
+                <input type="hidden" class="sheet-set-toggle" name="attr_augmentation">
+                <div class="sheet-rmargin sheet-toggle">
                     <input type="number" class="sheet-number-width-sm sheet-usrinput" name="attr_set_augmentation" value="0">
                 </div>
 
                 <div class="sheet-rmargin"><label class="sheet-left" data-i18n="101+-penalty">101+ Penalty</label></div>
                 <div class="sheet-rmargin">
-                    <select style="width: auto" class="sheet-usrinput" name="attr_penalty">
+                    <select class="sheet-auto-width sheet-usrinput sheet-text-center" name="attr_penalty">
                         <option value="0" data-i18n="none" selected>None</option>
                         <option value="?{101+ Penalty|0}" data-i18n="prompt">Prompt</option>
                         <option value="@{set_penalty}" data-i18n="set">Set</option>
                     </select>
-
                 </div>
-                <div class="sheet-rmargin">
+                <input type="hidden" class="sheet-set-toggle" name="attr_penalty">
+                <div class="sheet-rmargin sheet-toggle">
                     <input type="number" class="sheet-number-width-sm sheet-usrinput" name="attr_set_penalty" value="0">
                 </div>
 

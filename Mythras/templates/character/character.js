@@ -1639,6 +1639,35 @@ on("change:repeating_passion", function(event) {
     setAttrs({[`${id}_id`]: `${id}`});
 });
 
+/* Skill Augmentation Triggers */
+on("change:skill_augment change:repeating_passion:augment change:repeating_professionalskill:augment", function(event) {
+    const sourceAttr = event.sourceAttribute;
+    console.log("sourceAttr = " + sourceAttr);
+    if (event.sourceType !== 'sheetworker') {
+        getSectionIDs("repeating_passion", function(passionIds) {
+        getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+            let newVals = {};
+            passionIds.forEach(id => {
+                newVals[`repeating_passion_${id}_augment`] = 0;
+            });
+            proSkillIds.forEach(id => {
+                newVals[`repeating_professionalskill_${id}_augment`] = 0;
+            });
+            if (sourceAttr.startsWith('repeating_')) {
+                targetVal = sourceAttr.replace('_augment', '_total');
+                newVals['skill_augment'] = '@{skill_augment_value}';
+                newVals[sourceAttr] = '1';
+                newVals['skill_augment_value'] = `ceil(@{${targetVal}}/5)`;
+            }
+
+            setAttrs(newVals);
+        });
+        });
+    } else {
+        console.log("augment change trigger by sheetWorker not running autocalc");
+    }
+});
+
 /* Encumbrance Triggers */
 /* Armor ENC and Armor Penalty*/
 on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
@@ -1866,4 +1895,6 @@ on("change:fatigue", function() {
         });
     });
 });
+
+
 
