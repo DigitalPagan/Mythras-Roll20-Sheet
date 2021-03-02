@@ -563,8 +563,8 @@ function calcProSkillTotal(charObj, char1, char2, other) {
         case '@{int}':
             char1Val = charObj['int'];
             break;
-        case '@{char}':
-            char1Val = charObj['char'];
+        case '@{cha}':
+            char1Val = charObj['cha'];
             break;
         case '21':
             char1Val = 21;
@@ -592,8 +592,8 @@ function calcProSkillTotal(charObj, char1, char2, other) {
         case '@{int}':
             char2Val = charObj['int'];
             break;
-        case '@{char}':
-            char2Val = charObj['char'];
+        case '@{cha}':
+            char2Val = charObj['cha'];
             break;
         case '-@{str}':
             char2Val = -charObj['str'];
@@ -613,8 +613,8 @@ function calcProSkillTotal(charObj, char1, char2, other) {
         case '-@{int}':
             char2Val = -charObj['int'];
             break;
-        case '-@{char}':
-            char2Val = -charObj['char'];
+        case '-@{cha}':
+            char2Val = -charObj['cha'];
             break;
         default:
             char2Val = 0;
@@ -637,10 +637,10 @@ function calcProSkillEncumbered(char1, char2) {
     return char1bool || char2bool;
 }
 
-function calcProSkills(ids, charObj, v) {
+function calcProSkills(type, ids, charObj, v) {
     let newVals = {};
     ids.forEach(id => {
-        const skillId = `repeating_professionalskill_${id}`;
+        const skillId = `repeating_${type}_${id}`;
         newVals[`${skillId}_total`] = calcProSkillTotal(charObj, v[`${skillId}_char1`], v[`${skillId}_char2`], v[`${skillId}_other`]);
         newVals[`${skillId}_encumbered`] = calcProSkillEncumbered(v[`${skillId}_char1`], v[`${skillId}_char2`]);
     });
@@ -1034,65 +1034,93 @@ function calcSpiritInitiative(int, cha, spirit_ib_other, spirit_ib_temp) {
     };
 }
 
+function calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+    let newVals = {};
+    passionIds.forEach(id => {
+        newVals[`repeating_passion_${id}_augment`] = 0;
+    });
+    proSkillIds.forEach(id => {
+        newVals[`repeating_professionalskill_${id}_augment`] = 0;
+    });
+    combatStyleIds.forEach(id => {
+        newVals[`repeating_combatstyle_${id}_augment`] = 0;
+    });
+    if (sourceAttr.startsWith('repeating_')) {
+        targetVal = sourceAttr.replace('_augment', '_total');
+        newVals['skill_augment'] = '@{skill_augment_value}';
+        newVals[sourceAttr] = '1';
+        newVals['skill_augment_value'] = `ceil(@{${targetVal}}/5)`;
+    }
+
+    return newVals;
+}
+
 /* Characteristic Triggers */
 /* STR */
 on('change:str_base change:str_other change:str_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['str']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, encGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
-            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
-                'initiative_add_one_tenth_athletics'],
-            ['movement_rate_species', 'movement_rate_other', 'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
-            const charObj = buildCharObj(v);
-            const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, v);
-            const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
-                v['hp_calc'], v['simplified_combat_enabled']);
-            const all_hp_temp = parseInt(v['all_hp_temp']);
-            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
-            const newEncVals = calcEnc(charObj['str'], v);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, encGetAttrs, hitPointGetAttrs,
+                ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
+                ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+                    'initiative_add_one_tenth_athletics'],
+                ['movement_rate_species', 'movement_rate_other', 'movement_rate_temp', 'movement_rate_fatigue']), function(v) {
+                const charObj = buildCharObj(v);
+                const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, v);
+                const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
+                    v['hp_calc'], v['simplified_combat_enabled']);
+                const all_hp_temp = parseInt(v['all_hp_temp']);
+                const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
+                const newEncVals = calcEnc(charObj['str'], v);
 
-            setAttrs({
-                str: charObj['str'],
-                ...standardSkillVals,
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...newEncVals,
-                ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
-                    v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
-                    v['initiative_add_one_tenth_athletics']),
-                ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
-                    v['damage_mod_other'], v['damage_mod_temp']),
-                hp_max_base: hp_max_base,
-                ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
-                    all_hp_temp, v['location1_hp'], v['location1_hp_max']),
-                ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
-                    all_hp_temp, v['location2_hp'], v['location2_hp_max']),
-                ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
-                    all_hp_temp, v['location3_hp'], v['location3_hp_max']),
-                ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
-                    all_hp_temp, v['location4_hp'], v['location4_hp_max']),
-                ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
-                    all_hp_temp, v['location5_hp'], v['location5_hp_max']),
-                ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
-                    all_hp_temp, v['location6_hp'], v['location6_hp_max']),
-                ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
-                    all_hp_temp, v['location7_hp'], v['location7_hp_max']),
-                ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
-                    all_hp_temp, v['location8_hp'], v['location8_hp_max']),
-                ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
-                    all_hp_temp, v['location9_hp'], v['location9_hp_max']),
-                ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
-                    all_hp_temp, v['location10_hp'], v['location10_hp_max']),
-                ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
-                    all_hp_temp, v['location11_hp'], v['location11_hp_max']),
-                ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
-                    all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                setAttrs({
+                    str: charObj['str'],
+                    ...standardSkillVals,
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...newEncVals,
+                    ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                        v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
+                        v['initiative_add_one_tenth_athletics']),
+                    ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
+                        v['damage_mod_other'], v['damage_mod_temp']),
+                    hp_max_base: hp_max_base,
+                    ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
+                        all_hp_temp, v['location1_hp'], v['location1_hp_max']),
+                    ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
+                        all_hp_temp, v['location2_hp'], v['location2_hp_max']),
+                    ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
+                        all_hp_temp, v['location3_hp'], v['location3_hp_max']),
+                    ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
+                        all_hp_temp, v['location4_hp'], v['location4_hp_max']),
+                    ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
+                        all_hp_temp, v['location5_hp'], v['location5_hp_max']),
+                    ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
+                        all_hp_temp, v['location6_hp'], v['location6_hp_max']),
+                    ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
+                        all_hp_temp, v['location7_hp'], v['location7_hp_max']),
+                    ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
+                        all_hp_temp, v['location8_hp'], v['location8_hp_max']),
+                    ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
+                        all_hp_temp, v['location9_hp'], v['location9_hp_max']),
+                    ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
+                        all_hp_temp, v['location10_hp'], v['location10_hp_max']),
+                    ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
+                        all_hp_temp, v['location11_hp'], v['location11_hp_max']),
+                    ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
+                        all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                });
             });
         });
     });
@@ -1103,54 +1131,61 @@ on('change:con_base change:con_other change:con_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['con']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
-            ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double']), function(v) {
-            const charObj = buildCharObj(v);
-            const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
-                v['hp_calc'], v['simplified_combat_enabled']);
-            const all_hp_temp = parseInt(v['all_hp_temp']);
-            const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
-                v['healing_rate_temp'], v['healing_rate_double']);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs,
+                ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
+                ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double']), function(v) {
+                const charObj = buildCharObj(v);
+                const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
+                    v['hp_calc'], v['simplified_combat_enabled']);
+                const all_hp_temp = parseInt(v['all_hp_temp']);
+                const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
+                    v['healing_rate_temp'], v['healing_rate_double']);
 
-            setAttrs({
-                con: charObj['con'],
-                ...calcStdSkills(charStdSkillIds['con'], charObj, v),
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
-                    v['damage_mod_other'], v['damage_mod_temp']),
-                ...healingRateVals,
-                ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
-                hp_max_base: hp_max_base,
-                ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
-                    all_hp_temp, v['location1_hp'], v['location1_hp_max']),
-                ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
-                    all_hp_temp, v['location2_hp'], v['location2_hp_max']),
-                ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
-                    all_hp_temp, v['location3_hp'], v['location3_hp_max']),
-                ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
-                    all_hp_temp, v['location4_hp'], v['location4_hp_max']),
-                ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
-                    all_hp_temp, v['location5_hp'], v['location5_hp_max']),
-                ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
-                    all_hp_temp, v['location6_hp'], v['location6_hp_max']),
-                ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
-                    all_hp_temp, v['location7_hp'], v['location7_hp_max']),
-                ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
-                    all_hp_temp, v['location8_hp'], v['location8_hp_max']),
-                ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
-                    all_hp_temp, v['location9_hp'], v['location9_hp_max']),
-                ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
-                    all_hp_temp, v['location10_hp'], v['location10_hp_max']),
-                ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
-                    all_hp_temp, v['location11_hp'], v['location11_hp_max']),
-                ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
-                    all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                setAttrs({
+                    con: charObj['con'],
+                    ...calcStdSkills(charStdSkillIds['con'], charObj, v),
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
+                        v['damage_mod_other'], v['damage_mod_temp']),
+                    ...healingRateVals,
+                    ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
+                    hp_max_base: hp_max_base,
+                    ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
+                        all_hp_temp, v['location1_hp'], v['location1_hp_max']),
+                    ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
+                        all_hp_temp, v['location2_hp'], v['location2_hp_max']),
+                    ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
+                        all_hp_temp, v['location3_hp'], v['location3_hp_max']),
+                    ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
+                        all_hp_temp, v['location4_hp'], v['location4_hp_max']),
+                    ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
+                        all_hp_temp, v['location5_hp'], v['location5_hp_max']),
+                    ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
+                        all_hp_temp, v['location6_hp'], v['location6_hp_max']),
+                    ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
+                        all_hp_temp, v['location7_hp'], v['location7_hp_max']),
+                    ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
+                        all_hp_temp, v['location8_hp'], v['location8_hp_max']),
+                    ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
+                        all_hp_temp, v['location9_hp'], v['location9_hp_max']),
+                    ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
+                        all_hp_temp, v['location10_hp'], v['location10_hp_max']),
+                    ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
+                        all_hp_temp, v['location11_hp'], v['location11_hp_max']),
+                    ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
+                        all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                });
             });
         });
     });
@@ -1161,28 +1196,35 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['dex']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue'],
-            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
-                'initiative_add_one_tenth_athletics']), function(v) {
-            const charObj = buildCharObj(v);
-            const standardSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, v);
-            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs,
+                ['action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue'],
+                ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
+                    'initiative_add_one_tenth_athletics']), function(v) {
+                const charObj = buildCharObj(v);
+                const standardSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, v);
+                const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
-            setAttrs({
-                dex: charObj['dex'],
-                ...standardSkillVals,
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                    v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
-                ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
-                    v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
-                    v['initiative_add_one_tenth_athletics'])
+                setAttrs({
+                    dex: charObj['dex'],
+                    ...standardSkillVals,
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
+                        v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
+                    ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                        v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
+                        v['initiative_add_one_tenth_athletics'])
+                });
             });
         });
     });
@@ -1193,49 +1235,56 @@ on('change:siz_base change:siz_other change:siz_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['siz']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
-            const charObj = buildCharObj(v);
-            const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
-                v['hp_calc'], v['simplified_combat_enabled']);
-            const all_hp_temp = parseInt(v['all_hp_temp']);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs,
+                ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp']), function(v) {
+                const charObj = buildCharObj(v);
+                const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
+                    v['hp_calc'], v['simplified_combat_enabled']);
+                const all_hp_temp = parseInt(v['all_hp_temp']);
 
-            setAttrs({
-                siz: charObj['siz'],
-                ...calcStdSkills(charStdSkillIds['siz'], charObj, v),
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
-                    v['damage_mod_other'], v['damage_mod_temp']),
-                hp_max_base: hp_max_base,
-                ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
-                    all_hp_temp, v['location1_hp'], v['location1_hp_max']),
-                ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
-                    all_hp_temp, v['location2_hp'], v['location2_hp_max']),
-                ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
-                    all_hp_temp, v['location3_hp'], v['location3_hp_max']),
-                ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
-                    all_hp_temp, v['location4_hp'], v['location4_hp_max']),
-                ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
-                    all_hp_temp, v['location5_hp'], v['location5_hp_max']),
-                ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
-                    all_hp_temp, v['location6_hp'], v['location6_hp_max']),
-                ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
-                    all_hp_temp, v['location7_hp'], v['location7_hp_max']),
-                ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
-                    all_hp_temp, v['location8_hp'], v['location8_hp_max']),
-                ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
-                    all_hp_temp, v['location9_hp'], v['location9_hp_max']),
-                ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
-                    all_hp_temp, v['location10_hp'], v['location10_hp_max']),
-                ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
-                    all_hp_temp, v['location11_hp'], v['location11_hp_max']),
-                ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
-                    all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                setAttrs({
+                    siz: charObj['siz'],
+                    ...calcStdSkills(charStdSkillIds['siz'], charObj, v),
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
+                        v['damage_mod_other'], v['damage_mod_temp']),
+                    hp_max_base: hp_max_base,
+                    ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
+                        all_hp_temp, v['location1_hp'], v['location1_hp_max']),
+                    ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
+                        all_hp_temp, v['location2_hp'], v['location2_hp_max']),
+                    ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
+                        all_hp_temp, v['location3_hp'], v['location3_hp_max']),
+                    ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
+                        all_hp_temp, v['location4_hp'], v['location4_hp_max']),
+                    ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
+                        all_hp_temp, v['location5_hp'], v['location5_hp_max']),
+                    ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
+                        all_hp_temp, v['location6_hp'], v['location6_hp_max']),
+                    ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
+                        all_hp_temp, v['location7_hp'], v['location7_hp_max']),
+                    ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
+                        all_hp_temp, v['location8_hp'], v['location8_hp_max']),
+                    ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
+                        all_hp_temp, v['location9_hp'], v['location9_hp_max']),
+                    ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
+                        all_hp_temp, v['location10_hp'], v['location10_hp_max']),
+                    ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
+                        all_hp_temp, v['location11_hp'], v['location11_hp_max']),
+                    ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
+                        all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                });
             });
         });
     });
@@ -1246,33 +1295,40 @@ on('change:int_base change:int_other change:int_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['int']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'],
-            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
-            ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
-            ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max'], ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
-            const charObj = buildCharObj(v);
-            const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs,
+                ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'],
+                ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
+                ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
+                ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max'], ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
+                const charObj = buildCharObj(v);
+                const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
-            setAttrs({
-                int: charObj['int'],
-                ...calcStdSkills(charStdSkillIds['int'], charObj, v),
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
-                    v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
-                ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
-                    v['experience_mod_temp']),
-                ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
-                    v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, parseInt(v['athletics_total']),
-                    v['initiative_add_one_tenth_athletics']),
-                ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
-                    v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
-                ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
+                setAttrs({
+                    int: charObj['int'],
+                    ...calcStdSkills(charStdSkillIds['int'], charObj, v),
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
+                        v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
+                    ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
+                        v['experience_mod_temp']),
+                    ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
+                        v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, parseInt(v['athletics_total']),
+                        v['initiative_add_one_tenth_athletics']),
+                    ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
+                        v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
+                    ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
+                });
             });
         });
     });
@@ -1283,63 +1339,70 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['pow']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, hitPointGetAttrs,
-            ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
-            ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
-            ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points',
-                'luck_points_max'],
-            ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'],
-            ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max', 'action_points_calc']), function(v) {
-            const charObj = buildCharObj(v);
-            const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
-                v['hp_calc'], v['simplified_combat_enabled']);
-            const all_hp_temp = parseInt(v['all_hp_temp']);
-            const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
-                v['healing_rate_temp'], v['healing_rate_double']);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs,
+                ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
+                ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
+                ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points',
+                    'luck_points_max'],
+                ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'],
+                ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max', 'action_points_calc']), function(v) {
+                const charObj = buildCharObj(v);
+                const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
+                    v['hp_calc'], v['simplified_combat_enabled']);
+                const all_hp_temp = parseInt(v['all_hp_temp']);
+                const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
+                    v['healing_rate_temp'], v['healing_rate_double']);
 
-            setAttrs({
-                pow: charObj['pow'],
-                ...calcStdSkills(charStdSkillIds['pow'], charObj, v),
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
-                    v['damage_mod_other'], v['damage_mod_temp']),
-                ...healingRateVals,
-                ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
-                ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
-                    v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
-                ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
-                    v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
-                hp_max_base: hp_max_base,
-                ...calcMagicPoints(charObj['pow'], v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max']),
-                ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
-                    all_hp_temp, v['location1_hp'], v['location1_hp_max']),
-                ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
-                    all_hp_temp, v['location2_hp'], v['location2_hp_max']),
-                ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
-                    all_hp_temp, v['location3_hp'], v['location3_hp_max']),
-                ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
-                    all_hp_temp, v['location4_hp'], v['location4_hp_max']),
-                ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
-                    all_hp_temp, v['location5_hp'], v['location5_hp_max']),
-                ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
-                    all_hp_temp, v['location6_hp'], v['location6_hp_max']),
-                ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
-                    all_hp_temp, v['location7_hp'], v['location7_hp_max']),
-                ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
-                    all_hp_temp, v['location8_hp'], v['location8_hp_max']),
-                ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
-                    all_hp_temp, v['location9_hp'], v['location9_hp_max']),
-                ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
-                    all_hp_temp, v['location10_hp'], v['location10_hp_max']),
-                ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
-                    all_hp_temp, v['location11_hp'], v['location11_hp_max']),
-                ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
-                    all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                setAttrs({
+                    pow: charObj['pow'],
+                    ...calcStdSkills(charStdSkillIds['pow'], charObj, v),
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
+                        v['damage_mod_other'], v['damage_mod_temp']),
+                    ...healingRateVals,
+                    ...calcFatigueRecovery(v['fatigue'], healingRateVals['healing_rate']),
+                    ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
+                        v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
+                    ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
+                        v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
+                    hp_max_base: hp_max_base,
+                    ...calcMagicPoints(charObj['pow'], v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max']),
+                    ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
+                        all_hp_temp, v['location1_hp'], v['location1_hp_max']),
+                    ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
+                        all_hp_temp, v['location2_hp'], v['location2_hp_max']),
+                    ...calcLocationHP('3', hp_max_base, v['location3_hp_max_base_mod'], v['location3_hp_max_other'],
+                        all_hp_temp, v['location3_hp'], v['location3_hp_max']),
+                    ...calcLocationHP('4', hp_max_base, v['location4_hp_max_base_mod'], v['location4_hp_max_other'],
+                        all_hp_temp, v['location4_hp'], v['location4_hp_max']),
+                    ...calcLocationHP('5', hp_max_base, v['location5_hp_max_base_mod'], v['location5_hp_max_other'],
+                        all_hp_temp, v['location5_hp'], v['location5_hp_max']),
+                    ...calcLocationHP('6', hp_max_base, v['location6_hp_max_base_mod'], v['location6_hp_max_other'],
+                        all_hp_temp, v['location6_hp'], v['location6_hp_max']),
+                    ...calcLocationHP('7', hp_max_base, v['location7_hp_max_base_mod'], v['location7_hp_max_other'],
+                        all_hp_temp, v['location7_hp'], v['location7_hp_max']),
+                    ...calcLocationHP('8', hp_max_base, v['location8_hp_max_base_mod'], v['location8_hp_max_other'],
+                        all_hp_temp, v['location8_hp'], v['location8_hp_max']),
+                    ...calcLocationHP('9', hp_max_base, v['location9_hp_max_base_mod'], v['location9_hp_max_other'],
+                        all_hp_temp, v['location9_hp'], v['location9_hp_max']),
+                    ...calcLocationHP('10', hp_max_base, v['location10_hp_max_base_mod'], v['location10_hp_max_other'],
+                        all_hp_temp, v['location10_hp'], v['location10_hp_max']),
+                    ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
+                        all_hp_temp, v['location11_hp'], v['location11_hp_max']),
+                    ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
+                        all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                });
             });
         });
     });
@@ -1350,26 +1413,33 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
     const stdSkillGetAttrs = getStdSkillGetAttrs(charStdSkillIds['cha']);
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-        let proSkillGetAttrs = [];
-        proSkillIds.forEach(id => {
-            proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
-        });
+        getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+            let proSkillGetAttrs = [];
+            proSkillIds.forEach(id => {
+                proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
+            });
+            let combatStyleGetAttrs = [];
+            combatStyleIds.forEach(id => {
+                combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
+            });
 
-        getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs,
-            ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
-            ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points', 'luck_points_max'],
-            ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
-            const charObj = buildCharObj(v);
+            getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs,
+                ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
+                ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points', 'luck_points_max'],
+                ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
+                const charObj = buildCharObj(v);
 
-            setAttrs({
-                cha: charObj['cha'],
-                ...calcStdSkills(charStdSkillIds['cha'], charObj, v),
-                ...calcProSkills(proSkillIds, charObj, v),
-                ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
-                    v['experience_mod_temp']),
-                ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
-                    v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
-                ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
+                setAttrs({
+                    cha: charObj['cha'],
+                    ...calcStdSkills(charStdSkillIds['cha'], charObj, v),
+                    ...calcProSkills("professionalskill", proSkillIds, charObj, v),
+                    ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
+                    ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
+                        v['experience_mod_temp']),
+                    ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
+                        v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
+                    ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
+                });
             });
         });
     });
@@ -1612,59 +1682,35 @@ allStdSkillIds.forEach(skillId => {
     });
 });
 
-/* Professional Skill Total and Encumbered */
+/* Professional Skill & Combat Style Total and Encumbered */
 on("change:repeating_professionalskill:char1 change:repeating_professionalskill:char2 " +
-    "change:repeating_professionalskill:other change:repeating_professionalskill:encumbered", function(event) {
-    let id = "repeating_professionalskill_" + event.sourceAttribute.split('_')[2];
+    "change:repeating_professionalskill:other change:repeating_professionalskill:encumbered " +
+    "change:repeating_combatstyle:char1 change:repeating_combatstyle:char2 " +
+    "change:repeating_combatstyle:other change:repeating_combatstyle:encumbered", function(event) {
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
 
-    getAttrs(allCharGetAttrs.concat([`${id}_char1`, `${id}_char2`, `${id}_other`]), function(v) {
+    getAttrs(allCharGetAttrs.concat([`repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`, `repeating_${type}_${id}_other`]), function(v) {
         const charObj = buildCharObj(v);
 
         setAttrs({
-            [`${id}_total`]: calcProSkillTotal(charObj, v[`${id}_char1`], v[`${id}_char2`], v[`${id}_other`]),
-            [`${id}_encumbered`]: calcProSkillEncumbered(v[`${id}_char1`], v[`${id}_char2`])
+            [`repeating_${type}_${id}_total`]: calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]),
+            [`repeating_${type}_${id}_encumbered`]: calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`])
         });
     });
 });
-/* Professional Skill IDs */
-on("change:repeating_professionalskill", function(event) {
-    let id = "repeating_professionalskill_" + event.sourceAttribute.split('_')[2];
-    setAttrs({[`${id}_id`]: `${id}`});
-});
-
-
-/* Passion IDs */
-on("change:repeating_passion", function(event) {
-    let id = "repeating_passion_" + event.sourceAttribute.split('_')[2];
-    setAttrs({[`${id}_id`]: `${id}`});
-});
 
 /* Skill Augmentation Triggers */
-on("change:skill_augment change:repeating_passion:augment change:repeating_professionalskill:augment", function(event) {
+on("change:skill_augment change:repeating_passion:augment change:repeating_professionalskill:augment change:repeating_combatstyle:augment", function(event) {
     const sourceAttr = event.sourceAttribute;
-    console.log("sourceAttr = " + sourceAttr);
     if (event.sourceType !== 'sheetworker') {
         getSectionIDs("repeating_passion", function(passionIds) {
-        getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-            let newVals = {};
-            passionIds.forEach(id => {
-                newVals[`repeating_passion_${id}_augment`] = 0;
+            getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+                getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+                    setAttrs(calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                });
             });
-            proSkillIds.forEach(id => {
-                newVals[`repeating_professionalskill_${id}_augment`] = 0;
-            });
-            if (sourceAttr.startsWith('repeating_')) {
-                targetVal = sourceAttr.replace('_augment', '_total');
-                newVals['skill_augment'] = '@{skill_augment_value}';
-                newVals[sourceAttr] = '1';
-                newVals['skill_augment_value'] = `ceil(@{${targetVal}}/5)`;
-            }
-
-            setAttrs(newVals);
         });
-        });
-    } else {
-        console.log("augment change trigger by sheetWorker not running autocalc");
     }
 });
 
@@ -1719,15 +1765,7 @@ on("change:location12_armor_enc change:location11_armor_enc change:location10_ar
     });
 });
 
-/* Weapon IDs */
-on("change:repeating_meleeweapon", function(event) {
-    let id = "repeating_meleeweapon_" + event.sourceAttribute.split('_')[2];
-    setAttrs({[`${id}_id`]: `${id}`});
-});
-on("change:repeating_rangedweapon", function(event) {
-    let id = "repeating_rangedweapon_" + event.sourceAttribute.split('_')[2];
-    setAttrs({[`${id}_id`]: `${id}`});
-});
+
 
 /* Weapon ENC
 on("change:repeating_weapon:enc change:repeating_weapon:ammo_enc change:repeating_weapon:clip_enc change:repeating_weapon:ammo change:repeating_weapon:clips change:repeating_weapon:location", function() {
@@ -1801,11 +1839,7 @@ on("change:repeating_rangedweapon:enc change:repeating_rangedweapon:quantity cha
     });
 });
 
-/* Gear IDs */
-on("change:repeating_equipment", function(event) {
-    let id = "repeating_equipment_" + event.sourceAttribute.split('_')[2];
-    setAttrs({[`${id}_id`]: `${id}`});
-});
+
 
 /* Gear ENC */
 on("change:repeating_equipment:enc change:repeating_equipment:quantity change:repeating_equipment:location", function() {
@@ -1829,12 +1863,6 @@ on("change:repeating_equipment:enc change:repeating_equipment:quantity change:re
             });
         });
     });
-});
-
-/* Currency IDs */
-on("change:repeating_currency", function(event) {
-    let id = "repeating_currency_" + event.sourceAttribute.split('_')[2];
-    setAttrs({[`${id}_id`]: `${id}`});
 });
 
 /* Currency ENC */
@@ -1894,6 +1922,15 @@ on("change:fatigue", function() {
                 newFatigueVals['movement_rate_fatigue'], v['movement_rate_enc'])
         });
     });
+});
+
+/* Repeating IDs */
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
+    "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +
+    "change:repeating_trait", function(event) {
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    setAttrs({[`repeating_${type}_${id}_id`]: `repeating_${type}_${id}`});
 });
 
 

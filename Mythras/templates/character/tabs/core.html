@@ -611,7 +611,11 @@
             </div>
             <fieldset class="repeating_condition sheet-editinplay">
                 <div class="sheet-flex">
-                    <div class="sheet-td"><input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this condition" readonly>
+                    </div>
                     <div class="sheet-td">
                         <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
                     </div>
@@ -799,8 +803,13 @@
     <div class="sheet-section">
         <h2><span data-i18n="skills">Skills</span>/<span data-i18n="passions">Passions</span></h2>
 
-        <input type="radio" name="attr_skill_augment" value="@{skill_augment_value}"><span></span>
-        <input type="text" name="attr_skill_augment_value" value="">
+        <div class="sheet-hidden">
+            <input type="radio" name="attr_skill_augment" value="@{skill_augment_value}">
+            <input type="text" name="attr_skill_augment_value" value="">
+            <input type="radio" name="attr_social_attack" value="@{social_attack_id}">
+            <input type="text" name="attr_social_attack_id" value="">
+            <input type="radio" name="attr_social_defense" value="other">
+        </div>
 
         <input type="hidden" class="sheet-augment-toggle" name="attr_augmentation">
         <div class="sheet-flex">
@@ -895,6 +904,101 @@
 
             <!-- Skills Right Column -->
             <div class="sheet-half-col">
+                <!-- Combat Styles -->
+                <div class="sheet-bmargin">
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-checkbox-width">&</div></div>
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="combat_style">Combat Style</div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                        <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                        <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                        <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
+                    </div>
+                    <fieldset class="repeating_combatstyle">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
+                            <div class="sheet-td sheet-grow sheet-hover-btn">
+                                <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this skill" readonly>
+                            </div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="{{'&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}'}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-play sheet-pictos">
+                                <input type="checkbox" title="@{$ID_encumbered}" name="attr_encumbered" value="1" checked readonly><span class="sheet-checkico">a</span>
+                            </div>
+                            <div class="sheet-td sheet-pictos">
+                                <input type="checkbox" title="@{$ID_fumbled}" name="attr_fumbled" value="1"><span class="sheet-checkico">!</span>
+                            </div>
+                            <div class="sheet-td sheet-pictos">
+                                <input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <select class="sheet-number-width sheet-text-center sheet-usrinput" title="@{$ID_char1}" name="attr_char1">
+                                    <option value="0">0</option>
+                                    <option value="@{str}" data-i18n="str-u" selected>STR</option>
+                                    <option value="@{con}" data-i18n="con-u">CON</option>
+                                    <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                    <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                    <option value="@{int}" data-i18n="int-u">INT</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                    <option value="21">21</option>
+                                </select>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <select class="sheet-number-width sheet-text-center sheet-usrinput" title="@{$ID_char2}" name="attr_char2">
+                                    <option value="0">0</option>
+                                    <option value="@{str}" data-i18n="str-u">STR</option>
+                                    <option value="@{con}" data-i18n="con-u">CON</option>
+                                    <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                    <option value="@{dex}" data-i18n="dex-u" selected>DEX</option>
+                                    <option value="@{int}" data-i18n="int-u">INT</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                    <option value="-@{str}" data-i18n="negative-str-u">-STR</option>
+                                    <option value="-@{con}" data-i18n="negative-con-u">-CON</option>
+                                    <option value="-@{siz}" data-i18n="negative-siz-u">-SIZ</option>
+                                    <option value="-@{dex}" data-i18n="negative-dex-u">-DEX</option>
+                                    <option value="-@{int}" data-i18n="negative-int-u">-INT</option>
+                                    <option value="-@{pow}" data-i18n="negative-pow-u">-POW</option>
+                                    <option value="-@{cha}" data-i18n="negative-cha-u">-CHA</option>
+                                </select>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0">
+                            </div>
+                            <div class="sheet-td">
+                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0" readonly>
+                            </div>
+                            <div class="sheet-td">
+                                <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span>
+                            </div>
+                        </div>
+                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1" checked>
+                        <div class="sheet-toggle">
+                            <div class="sheet-flex">
+                                <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
+                                <div class="sheet-edit sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_traits}" name="attr_traits"></div>
+                                <div class="sheet-play"><span class="sheet-usrnotes" name="attr_traits"></span></div>
+                            </div>
+                            <div class="sheet-flex">
+                                <div><label class="sheet-left" data-i18n="weapons">Weapons</label></div>
+                                <div class="sheet-edit sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_weapons}" name="attr_weapons"></div>
+                                <div class="sheet-play"><span class="sheet-usrnotes" name="attr_weapons"></span></div>
+                            </div>
+                            <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
+                            <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
+                        </div>
+                    </fieldset>
+                </div>
+
                 <!-- Professional Skills -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">

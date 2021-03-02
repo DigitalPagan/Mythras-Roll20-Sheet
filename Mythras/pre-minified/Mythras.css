@@ -723,6 +723,7 @@ label.sheet-under {
 label.sheet-left {
     display: inline;
     text-align: left;
+    margin-right: 5px;
 }
 label.sheet-left::after {
     content: ':'
