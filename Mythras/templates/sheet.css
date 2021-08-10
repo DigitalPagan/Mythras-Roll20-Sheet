@@ -8,7 +8,7 @@ div.sheet-mythras-defaults {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.5em;
     font-family: Palatino, serif;
     font-weight: bold;
     border-bottom: 1px solid black;
@@ -16,13 +16,13 @@ h1 {
 
 }
 h2 {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-family: Palatino, serif;
     font-weight: bold;
     padding: 0;
     margin: 0;
     height: 1.25em;
-    line-height: 1.5em;
+    line-height: 1.25em;
 }
 h3 {
     font-size: 1.25em;
@@ -209,7 +209,7 @@ div.sheet-shrink {
     border: 1px solid black;
     margin-bottom: 5px;
     box-sizing: border-box;
-    padding: 0 5px 5px;
+    padding: 2px 5px 2px;
     border-radius: 10px;
 }
 .sheet-hidden {
@@ -324,7 +324,7 @@ a.repcontrol_move {
 }
 
 /* Buttons */
-button {
+.ui-dialog .charsheet button {
     border-radius: 5px;
     box-sizing: border-box;
     height: 1.25em;
@@ -333,64 +333,74 @@ button {
     vertical-align: middle;
     font-size: 1em !important;
 }
-button[type=action] {
+.ui-dialog .charsheet button[type=action] {
     border: solid 1px gray;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     margin: 0 5px 0 0 !important;
     padding: 0 2px 0 !important;
 }
-button[type=action].sheet-action-btn:active {
+.ui-dialog .charsheet button[type=action].sheet-action-btn:active {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
-button[type="roll"] {
+.ui-dialog .charsheet button[type="roll"] {
     border: solid 1px gray;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     padding: 0 2px 0 !important;
     margin: 0 !important;
 }
-button[type=roll].sheet-nodie::before {
+.ui-dialog .charsheet button[type=roll].sheet-nodie::before {
     font-family: "Arial", sans-serif;
     content: '';
 }
-button[type="roll"].sheet-nodie:hover {
+.ui-dialog .charsheet button[type="roll"].sheet-nodie:hover {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
-button[type=roll].sheet-d100::before {
+.ui-dialog .charsheet button[type=roll].sheet-d100::before {
     font-family: 'dicefontd10';
     font-size: 1.75em !important;
 }
-button[type="roll"].sheet-d100:hover {
+.ui-dialog .charsheet button[type="roll"].sheet-d100:hover {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
-button[type=roll].sheet-d6::before {
+.ui-dialog .charsheet button[type=roll].sheet-d6::before {
     font-family: 'dicefontd6';
     content: 'f';
     font-size: 1.25em !important;
 }
-button[type="roll"].sheet-d6:hover {
+.ui-dialog .charsheet button[type="roll"].sheet-d6:hover {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
-button[type=roll].sheet-effect::before {
+.ui-dialog .charsheet button[type=roll].sheet-effect::before {
     font-family: 'pictos';
     font-size: 1.25em;
     content: "e";
 }
-button[type="roll"].sheet-effect:hover {
+.ui-dialog .charsheet button[type="roll"].sheet-effect:hover {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
-button[type=roll].sheet-link {
+.ui-dialog .charsheet button[type=roll].sheet-improve::before {
+    font-family: 'pictos';
+    font-size: 1.1em;
+    content: "{";
+}
+.ui-dialog .charsheet button[type="roll"].sheet-improve:hover {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
+.ui-dialog .charsheet button[type=roll].sheet-link {
     padding: 0!important;
     margin: 0!important;
     background: none!important;
@@ -403,7 +413,7 @@ button[type=roll].sheet-link {
     line-height: inherit;
     height: inherit;
 }
-button[type=roll].sheet-link::before {
+.ui-dialog .charsheet button[type=roll].sheet-link::before {
     font-family: "Arial", sans-serif;
     content: '';
 }
@@ -412,7 +422,7 @@ button[type=roll].sheet-id {
     margin: 0!important;
     background: none!important;
     box-shadow: none!important;
-    border: none;
+    border: none!important;
     cursor: pointer;
     color: inherit;
     text-shadow: none;
@@ -424,20 +434,20 @@ button[type=roll].sheet-id {
     top: 0;
     right: 3px;
 }
-button[type=roll].sheet-id::before {
+.ui-dialog .charsheet button[type=roll].sheet-id::before {
     font-family: "Arial", sans-serif;
     content: '';
 }
-button.sheet-link-label {
+.ui-dialog .charsheet button.sheet-link-label {
     font-weight: bold;
     vertical-align: top;
 }
-button.sheet-link-label-left::after {
+.ui-dialog .charsheet button.sheet-link-label-left::after {
     content: ':';
     text-decoration: none;
 }
-button.sheet-link:hover,
-button.sheet-id:hover {
+.ui-dialog .charsheet button.sheet-link:hover,
+.ui-dialog .charsheet button.sheet-id:hover {
     color: #069;
 }
 div.sheet-hover-btn {
@@ -703,9 +713,9 @@ span.sheet-italic {
 
 /* Labels */
 label {
-    font-size: 1em;
-    margin: 0;
-    padding: 0;
+    font-size: 1em !important;
+    margin: 0 !important;
+    padding: 0 !important;
     color: inherit;
     background: inherit;
     text-align: center;
@@ -715,6 +725,7 @@ label.sheet-skill {
     text-align: left;
     width: 100%;
     border-bottom: 1px solid black;
+    font-weight: normal;
 }
 label.sheet-under {
     text-align: center;
@@ -723,7 +734,7 @@ label.sheet-under {
 label.sheet-left {
     display: inline;
     text-align: left;
-    margin-right: 5px;
+    margin-right: 5px !important;
 }
 label.sheet-left::after {
     content: ':'
@@ -849,6 +860,7 @@ input.sheet-firearms-toggle:not(:checked) + div .sheet-firearm-trait {
 /* =Roll Templates= */
 {% include 'roll_templates/default.css' %}
 {% include 'roll_templates/effect.css' %}
+{% include 'roll_templates/improvement.css' %}
 {% include 'roll_templates/initiative.css' %}
 {% include 'roll_templates/skill.css' %}
 {% include 'roll_templates/weapon.css' %}

@@ -299,7 +299,8 @@
     "max-pow-of-spirits": "Max POW of Spirits",
     "spirit_ap": "Spirit AP",
     "spirit_init": "Spirit Init",
-    "spirit-damage": "Spirit Damage",
+    "spirit_initiative": "Spirit Initiative",
+    "spirit_damage": "Spirit Damage",
     "trance": "Trance",
     "binding": "Binding",
     "allies": "Allies",
@@ -1094,5 +1095,7 @@
     "add_rank_to_luck": "Add Rank to Luck",
     "difficulty": "Difficulty",
     "use_for_social_attack": "Use for Social Attack",
-    "use_for_social_defense": "User for Social Defense"
+    "use_for_social_defense": "User for Social Defense",
+    "result": "Result",
+    "improvement": "Improvement"
 }

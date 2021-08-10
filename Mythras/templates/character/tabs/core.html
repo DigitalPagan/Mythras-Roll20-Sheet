@@ -199,7 +199,7 @@
                 <!-- Initiative -->
                 <div class="sheet-hl" data-i18n-list-item="initiative">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{initiative}" name="roll_initiative" value="{{'@{roll_display}&{template:initiative} @{name_display} {{name=^{initiative}}} {{roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}'}}" data-i18n="initiative">Initiative</button></div>
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{initiative}" name="roll_initiative" value="{{'@{roll_display}&{template:default} {{yellow=1}} @{name_display} {{name=^{initiative}}} {{^{roll}=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}'}}" data-i18n="initiative">Initiative</button></div>
                         <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{initiative_bonus_base}" name="attr_initiative_bonus_base" value="12" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_other}" name="attr_initiative_bonus_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_temp}" name="attr_initiative_bonus_temp" value="0"></div>
@@ -309,7 +309,7 @@
                 <!-- Spirit Damage -->
                 <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_damage">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:weapon} {{name=^{spirit-damage}}} @{name_display} {{ damage=[[@{spirit_damage}]]}}'}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=^{spirit_damage}}} @{name_display} {{^{damage}=[[@{spirit_damage}]]}}'}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
                         <div class="sheet-td sheet-edit"><input type="text" class="sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="1d2" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_other}" name="attr_spirit_damage_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_temp}" name="attr_spirit_damage_temp" value="0"></div>
@@ -335,7 +335,7 @@
                 <!-- Spirit Initiative -->
                 <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_init">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_initiative}" name="roll_spirit_initiative" value="{{'@{roll_display}&{template:initiative} @{name_display} {{name=^{spirit_initiative}}} {{roll=[[@{init_dice} + @{spirit_ib} &{tracker}]]}}'}}" data-i18n="spirit_init">Spirit Init</button></div>
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_initiative}" name="roll_spirit_initiative" value="{{'@{roll_display}&{template:default} {{yellow=1}} @{name_display} {{name=^{spirit_initiative}}} {{^{roll}=[[@{init_dice} + @{spirit_ib} &{tracker}]]}}'}}" data-i18n="spirit_init">Spirit Init</button></div>
                         <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{spirit_ib_base}" name="attr_spirit_ib" value="12" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_other}" name="attr_spirit_ib_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_temp}" name="attr_spirit_ib_temp" value="0"></div>
@@ -855,16 +855,19 @@
                     <!-- Athletics -->
                     <div class="sheet-hl">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" name="attr_social_attack" value="athletics"><span class="sheet-radioico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" name="attr_social_defense" value="athletics"><span class="sheet-radioico">q</span></div>
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack}" name="attr_social_attack" value="athletics"><span class="sheet-radioico">w</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense}" name="attr_social_defense" value="athletics"><span class="sheet-radioico">q</span></div>
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augment}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <label class="sheet-skill" data-i18n="athletics">Athletics</label>
-                                <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{id=athletics}}'}}">i</button>
+                                <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">i</button>
                                 <input type="hidden" name="attr_athletics_name" value="^{athletics}">
                             </div>
-                            <div class="sheet-td">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="{{'@{roll_display}&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=[[@{augmentation}]]}}'}}"></button>
+                            <div class="sheet-td sheet-play">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="{{'@{roll_display}&{template:default} @{name_display} {{name=This is a long test name for wrap}} {{roll=[[1d100]]}} {{1d10+10=[[@{augmentation}]]}}'}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <button type="roll" class="sheet-improve sheet-button-width" title="%{athletics_improve}" name="roll_athletics_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{athletics}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{athletics_fumbled}]]}} {{skill=[[@{athletics_total}]]}} {{fumbled=[[@{athletics_fumbled}]]}}'}}"></button>
                             </div>
                             <div class="sheet-td sheet-play">
                                 <input type="checkbox" title="@{athletics_encumbered}" name="attr_athletics_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>

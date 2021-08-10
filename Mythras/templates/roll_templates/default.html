@@ -1,18 +1,19 @@
 <!-- Default Roll Template -->
-<!-- {{'@{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}}'}} -->
+<!-- {{'@{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{color=#}}{{roll=[[1d8]]}}'}} -->
 <rolltemplate class="sheet-rolltemplate-default">
-    <table>
-        <caption>
-            {{'{{#character}}'}}
+    <div class="sheet-border {{'{{#red}}red{{/red}}'}}{{'{{#orange}}orange{{/orange}}'}}{{'{{#yellow}}yellow{{/yellow}}'}}{{'{{#green}}green{{/green}}'}}{{'{{#blue}}blue{{/blue}}'}}{{'{{#purple}}purple{{/purple}}'}}{{'{{#gray}}gray{{/gray}}'}}">
+        <div class="sheet-header {{'{{#red}}red{{/red}}'}}{{'{{#orange}}orange{{/orange}}'}}{{'{{#yellow}}yellow{{/yellow}}'}}{{'{{#green}}green{{/green}}'}}{{'{{#blue}}blue{{/blue}}'}}{{'{{#purple}}purple{{/purple}}'}}{{'{{#gray}}gray{{/gray}}'}}">
             <div class="sheet-character">{{'{{character}}'}}</div>
-            {{'{{/character}}'}}
             <div class="sheet-name">{{'{{name}}'}}</div>
-        </caption>
-        {{'{{#allprops() character name id}}'}}
-        <tr><td class="sheet-label">{{'{{key}}'}}:</td><td class="sheet-value">{{'{{value}}'}}</td></tr>
-        {{'{{/allprops() character name id}}'}}
-        {{'{{#id}}'}}
-        <tr><td class="sheet-id" colspan="2">{{'{{id}}'}}</td></tr>
-        {{'{{/id}}'}}
-    </table>
+        </div>
+        {{'{{#allprops() character name notes red orange yellow green blue indigo purple gray}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key">{{'{{key}}'}}:</div>
+            <div class="sheet-value">{{'{{value}}'}}</div>
+        </div>
+        {{'{{/allprops() character name notes red orange yellow green blue indigo purple gray}}'}}
+        {{'{{#notes}}'}}
+        <div class="sheet-listitem">{{'{{notes}}'}}</div>
+        {{'{{/notes}}'}}
+    </div>
 </rolltemplate>

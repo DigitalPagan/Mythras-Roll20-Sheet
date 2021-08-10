@@ -1,52 +1,85 @@
 /* Default Roll Template Styles */
-.sheet-rolltemplate-default table {
-    width: 100%;
-    border: 3px solid black;
-    line-height: 1em;
-    font-size: 1em;
-    font-weight: normal;
+.sheet-rolltemplate-default div.sheet-border {
+    border: 2px solid black;
     background: white;
 }
-.sheet-rolltemplate-default caption {
+.sheet-rolltemplate-default div.sheet-border.sheet-red {
+    border: 2px solid firebrick;
+}
+.sheet-rolltemplate-default div.sheet-border.sheet-orange {
+    border: 2px solid chocolate;
+}
+.sheet-rolltemplate-default div.sheet-border.sheet-yellow {
+    border: 2px solid darkgoldenrod;
+}
+.sheet-rolltemplate-default div.sheet-border.sheet-green {
+    border: 2px solid forestgreen;
+}
+.sheet-rolltemplate-default div.sheet-border.sheet-blue {
+    border: 2px solid #5962A3;
+}
+.sheet-rolltemplate-default div.sheet-border.sheet-purple {
+    border: 2px solid darkmagenta;
+}
+.sheet-rolltemplate-default div.sheet-border.sheet-gray {
+    border: 2px solid dimgray;
+}
+.sheet-rolltemplate-default div.sheet-header {
     background: black;
     color: whitesmoke;
-    padding: 3px 3px 0;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-red {
+    background: firebrick;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-orange {
+    background: chocolate;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-yellow {
+    background: darkgoldenrod;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-green {
+    background: forestgreen;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-blue {
+    background: #5962A3;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-purple {
+    background: darkmagenta;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-gray {
+    background: dimgray;
 }
 .sheet-rolltemplate-default div.sheet-character {
-    font-size: .75em;
+    font-size: .9em;
+    text-align: center;
 }
 .sheet-rolltemplate-default div.sheet-name {
     font-family: Palatino, serif;
+    text-align: center;
     font-size: 1.25em;
-    padding-top: 2px;
 }
-.sheet-rolltemplate-default tr {
-    margin: 0;
-    padding: 0;
+
+.sheet-rolltemplate-default div.sheet-listitem {
+    display: flex;
+    padding: 2px 1px 0;
 }
-.sheet-rolltemplate-default tr:nth-child(even) {
+.sheet-rolltemplate-default div.sheet-listitem:nth-child(odd) {
     background: linear-gradient(to right, gainsboro, white);
 }
-.sheet-rolltemplate-default td {
-    padding: 3px 3px 0;
-    line-height: 1em;
-    vertical-align: middle;
-}
-.sheet-rolltemplate-default td.sheet-label {
+.sheet-rolltemplate-default div.sheet-key {
     font-weight: bold;
     text-align: left;
 }
-.sheet-rolltemplate-default td.sheet-value {
+.sheet-rolltemplate-default div.sheet-value {
     text-align: right;
+    flex-grow: 1;
 }
-.sheet-rolltemplate-default td.sheet-id {
-    font-weight: normal;
-    text-align: center;
-}
+
 .sheet-rolltemplate-default .inlinerollresult {
     display: inline-block;
     text-align: center;
     padding: 0;
+    margin: 0;
     border: none;
     color: inherit;
     background: inherit;

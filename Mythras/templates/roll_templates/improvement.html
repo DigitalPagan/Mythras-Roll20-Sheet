@@ -1,0 +1,40 @@
+<!-- Improvement Roll Template -->
+<!-- {{'@{roll_display}&{template:improvement} {{name=@{name}}} @{name_display} {{roll=[[1d100 + @{int}]]}} {{improvement=[[1d4+1+@{fumbled}]]}} {{skill=[[@{skill_total}]]}} {{fumbled=[[@{fumbled}]]}}'}} -->
+<rolltemplate class="sheet-rolltemplate-improvement">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="result">Result</span>:</div>
+            <div class="sheet-value">{{'{{roll}} ≥ {{skill}}'}}</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="fumbled">Fumbled</span>:</div>
+            {{'{{#rollTotal() fumbled 0}}'}}
+            <div class="sheet-value"><span data-i18n="no">No</span></div>
+            {{'{{/rollTotal() fumbled 0}}'}}
+            {{'{{#rollTotal() fumbled 1}}'}}
+            <div class="sheet-value"><span data-i18n="yes">Yes</span></div>
+            {{'{{/rollTotal() fumbled 1}}'}}
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="improvement">Improvement</span>:</div>
+            {{'{{#^rollLess() roll skill}}'}}
+            <div class="sheet-value">+{{'{{improvement}}'}}%</div>
+            {{'{{/^rollLess() roll skill}}'}}
+            {{'{{#rollLess() roll skill}}'}}
+            {{'{{#rollTotal() fumbled 0}}'}}
+            <div class="sheet-value">+1%</div>
+            {{'{{/rollTotal() fumbled 0}}'}}
+            {{'{{#rollTotal() fumbled 1}}'}}
+            <div class="sheet-value">+2%</div>
+            {{'{{/rollTotal() fumbled 1}}'}}
+            {{'{{/rollLess() roll skill}}'}}
+        </div>
+        {{'{{#notes}}'}}
+        <div class="sheet-listitem">{{'{{notes}}'}}</div>
+        {{'{{/notes}}'}}
+    </div>
+</rolltemplate>

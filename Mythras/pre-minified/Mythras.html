@@ -554,7 +554,7 @@
                 <!-- Initiative -->
                 <div class="sheet-hl" data-i18n-list-item="initiative">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{initiative}" name="roll_initiative" value="@{roll_display}&{template:initiative} @{name_display} {{name=^{initiative}}} {{roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}" data-i18n="initiative">Initiative</button></div>
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{initiative}" name="roll_initiative" value="@{roll_display}&{template:default} {{yellow=1}} @{name_display} {{name=^{initiative}}} {{^{roll}=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}}" data-i18n="initiative">Initiative</button></div>
                         <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{initiative_bonus_base}" name="attr_initiative_bonus_base" value="12" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_other}" name="attr_initiative_bonus_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{initiative_bonus_temp}" name="attr_initiative_bonus_temp" value="0"></div>
@@ -664,7 +664,7 @@
                 <!-- Spirit Damage -->
                 <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_damage">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="@{roll_display}&{template:weapon} {{name=^{spirit-damage}}} @{name_display} {{ damage=[[@{spirit_damage}]]}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="@{roll_display}&{template:default} {{red=1}} {{name=^{spirit_damage}}} @{name_display} {{^{damage}=[[@{spirit_damage}]]}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
                         <div class="sheet-td sheet-edit"><input type="text" class="sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="1d2" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_other}" name="attr_spirit_damage_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_temp}" name="attr_spirit_damage_temp" value="0"></div>
@@ -690,7 +690,7 @@
                 <!-- Spirit Initiative -->
                 <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_init">
                     <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_initiative}" name="roll_spirit_initiative" value="@{roll_display}&{template:initiative} @{name_display} {{name=^{spirit_initiative}}} {{roll=[[@{init_dice} + @{spirit_ib} &{tracker}]]}}" data-i18n="spirit_init">Spirit Init</button></div>
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_initiative}" name="roll_spirit_initiative" value="@{roll_display}&{template:default} {{yellow=1}} @{name_display} {{name=^{spirit_initiative}}} {{^{roll}=[[@{init_dice} + @{spirit_ib} &{tracker}]]}}" data-i18n="spirit_init">Spirit Init</button></div>
                         <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{spirit_ib_base}" name="attr_spirit_ib" value="12" readonly></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_other}" name="attr_spirit_ib_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_temp}" name="attr_spirit_ib_temp" value="0"></div>
@@ -1210,16 +1210,19 @@
                     <!-- Athletics -->
                     <div class="sheet-hl">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" name="attr_social_attack" value="athletics"><span class="sheet-radioico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" name="attr_social_defense" value="athletics"><span class="sheet-radioico">q</span></div>
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack}" name="attr_social_attack" value="athletics"><span class="sheet-radioico">w</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense}" name="attr_social_defense" value="athletics"><span class="sheet-radioico">q</span></div>
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augment}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <label class="sheet-skill" data-i18n="athletics">Athletics</label>
-                                <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm &{template:default} {{name=@{athletics_name}}} {{id=athletics}}">i</button>
+                                <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm &{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}">i</button>
                                 <input type="hidden" name="attr_athletics_name" value="^{athletics}">
                             </div>
-                            <div class="sheet-td">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="@{roll_display}&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=[[@{augmentation}]]}}"></button>
+                            <div class="sheet-td sheet-play">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="@{roll_display}&{template:default} @{name_display} {{name=This is a long test name for wrap}} {{roll=[[1d100]]}} {{1d10+10=[[@{augmentation}]]}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <button type="roll" class="sheet-improve sheet-button-width" title="%{athletics_improve}" name="roll_athletics_improve" value="@{roll_display}&{template:improvement} {{name=^{athletics}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{athletics_fumbled}]]}} {{skill=[[@{athletics_total}]]}} {{fumbled=[[@{athletics_fumbled}]]}}"></button>
                             </div>
                             <div class="sheet-td sheet-play">
                                 <input type="checkbox" title="@{athletics_encumbered}" name="attr_athletics_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
@@ -2374,120 +2377,63 @@
 
 <!-- Roll Templates -->
 <!-- Default Roll Template -->
-<!-- @{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}} -->
+<!-- @{roll_display}&{template:default} {{name=@{name}}} @{name_display} {{color=#}}{{roll=[[1d8]]}} -->
 <rolltemplate class="sheet-rolltemplate-default">
-    <table>
-        <caption>
-            {{#character}}
+    <div class="sheet-border {{#red}}red{{/red}}{{#orange}}orange{{/orange}}{{#yellow}}yellow{{/yellow}}{{#green}}green{{/green}}{{#blue}}blue{{/blue}}{{#purple}}purple{{/purple}}{{#gray}}gray{{/gray}}">
+        <div class="sheet-header {{#red}}red{{/red}}{{#orange}}orange{{/orange}}{{#yellow}}yellow{{/yellow}}{{#green}}green{{/green}}{{#blue}}blue{{/blue}}{{#purple}}purple{{/purple}}{{#gray}}gray{{/gray}}">
             <div class="sheet-character">{{character}}</div>
-            {{/character}}
             <div class="sheet-name">{{name}}</div>
-        </caption>
-        {{#allprops() character name id}}
-        <tr><td class="sheet-label">{{key}}:</td><td class="sheet-value">{{value}}</td></tr>
-        {{/allprops() character name id}}
-        {{#id}}
-        <tr><td class="sheet-id" colspan="2">{{id}}</td></tr>
-        {{/id}}
-    </table>
-</rolltemplate>
-<!-- Initiative Roll Template -->
-<!-- @{roll_display}&{template:initiative} {{character=@{character_name}}} {{name=^{initiative}}} {{roll=[[@{init_dice} + @{initiative_bonus} &{tracker}]]}} -->
-<rolltemplate class="sheet-rolltemplate-initiative">
-    <table>
-        <caption>
-            {{#character}}
-            <div class="sheet-character">{{character}}</div>
-            {{/character}}
-            <div class="sheet-name">{{name}}</div>
-        </caption>
-        <tr><td><span data-i18n="roll">Roll</span>:</td><td class="sheet-value">{{roll}}</td></tr>
-    </table>
-</rolltemplate>
-<!-- Default Roll Template -->
-<!-- @{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{ship_condition_skills=[[@{ship_condition_skills}]]}}-->
-<rolltemplate class="sheet-rolltemplate-skill">
-    <table>
-        <caption>
-            {{#character}}
-            <div class="sheet-character">{{character}}</div>
-            {{/character }}
-            <div class="sheet-name">{{name}}</div>
-            {{#rollGreater() fatigue_skills 0}}
-                {{#rollTotal() fatigue_skills 1}}<div class="sheet-info sheet-hard"><span data-i18n="hard">Hard</span>, <span data-i18n="due-to-fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 1}}
-                {{#rollTotal() fatigue_skills 2}}<div class="sheet-info sheet-formidable"><span data-i18n="formidable">Formidable</span>, <span data-i18n="due-to-fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 2}}
-                {{#rollTotal() fatigue_skills 3}}<div class="sheet-info sheet-herculean"><span data-i18n="herculean">Herculean</span>, <span data-i18n="due-to-fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 3}}
-                {{#rollTotal() fatigue_skills 4}}<div class="sheet-info sheet-hopeless"><span data-i18n="hopeless">Hopeless</span>, <span data-i18n="due-to-fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 4}}
-                {{#rollTotal() fatigue_skills 5}}<div class="sheet-info sheet-hopeless"><span data-i18n="no-action-allowed">No action allowed</span>, <span data-i18n="due-to-fatigue">due to fatigue</span></div>{ {/rollTotal() fatigue_skills 5}}
-            {{/rollGreater() fatigue_skills 0}}
-            {{#rollTotal() encumbered 1}}
-                {{#rollGreater() encumbrance_skills 0}}
-                    {{#rollTotal() encumbrance_skills 1}}<div class="sheet-info sheet-hard"><span data-i18n="one-grade-harder">+1 grade harder</span>, <span data-i18n="due-to-enc">due to ENC</span></div>{{/rollTotal() encumbrance_skills 1}}
-                    {{#rollTotal() encumbrance_skills 2}}<div class="sheet-info sheet-formidable"><span data-i18n="two-grades-harder">+2 grades harder</span>, <span data-i18n="due-to-enc">due to ENC</span></div>{{/rollTotal() encumbrance_skills 2}}
-                    {{#rollTotal() encumbrance_skills 3}}<div class="sheet-info sheet-hopeless"><span data-i18n="impossible">Impossible</span>, <span data-i18n="due-to-enc">due to ENC</span></div>{{/rollTotal() encumbrance_skills 3}}
-                { {/rollGreater() encumbrance_skills 0}}
-            {{/rollTotal() encumbered 1}}
-            {{#ship_condition_skills}}
-                {{#rollGreater() ship_condition_skills 1}}
-                    {{#rollTotal() ship_condition_skills 2}}<div class="sheet-info sheet-hard"><span data-i18n="hard">Hard</span>, <span data-i18n="due-to-ship-condition">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 2}}
-                    {{#rollTotal() ship_condition_skills 3}}<div class="sheet-info sheet-formidable"><span data-i18n="formidable">Formidable</span>, <span data-i18n="due-to-ship-condition">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 3}}
-                    {{#rollTotal() ship_condition_skills 4}}<div class="sheet-info sheet-herculean"><span data-i18n="herculean">Herculean</span>, <span data-i18n="due-to-ship-condition">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 4}}
-                {{/rollGreater() ship_condition_skills 1}}
-            {{/ship_condition_skills }}
-        </caption>
-        <tr class="sheet-very-easy">
-            <td class="sheet-label"><span data-i18n="very-easy">Very Easy</span>:</td>
-            <td class="sheet-value">{{roll}} <span data-i18n="vs">vs</span> {{very_easy}}/{{very_easy_crit}}</td>
-        </tr>
-        <tr class="sheet-easy">
-            <td class="sheet-label"><span data-i18n="easy">Easy</span>:</td>
-            <td class="sheet-value">{{roll}} <span data-i18n="vs">vs</span> {{easy}}/{{easy_crit}}</td>
-        </tr>
-        <tr class="sheet-standard">
-            <td class="sheet-label"><span data-i18n="standard">Standard</span>:</td>
-            <td class="sheet-value">{{roll}} <span data-i18n="vs">vs</span> {{standard}}/{{standard_crit}}</td>
-        </tr>
-        <tr class="sheet-hard">
-            <td class="sheet-label"><span data-i18n="hard">Hard</span>:</td>
-            <td class="sheet-value">{{roll}} <span data-i18n="vs">vs</span> {{hard}}/{{hard_crit}}</td>
-        </tr>
-        <tr class="sheet-formidable">
-            <td class="sheet-label"><span data-i18n="formidable">Formidable</span>:</td>
-            <td class="sheet-value">{{roll}} <span data-i18n="vs">vs</span> {{formidable}}/{{formidable_crit}}</td>
-        </tr>
-        <tr class="sheet-herculean">
-            <td class="sheet-label"><span data-i18n="herculean">Herculean</span>:</td>
-            <td class="sheet-value">{{roll}} <span data-i18n="vs">vs</span> {{herculean}}/{{herculean_crit}}</td>
-        </tr>
+        </div>
+        {{#allprops() character name notes red orange yellow green blue indigo purple gray}}
+        <div class="sheet-listitem">
+            <div class="sheet-key">{{key}}:</div>
+            <div class="sheet-value">{{value}}</div>
+        </div>
+        {{/allprops() character name notes red orange yellow green blue indigo purple gray}}
         {{#notes}}
-        <tr><td colspan="2">{{notes}}</td></tr>
-        {{/notes }}
-    </table>
-</rolltemplate>
-<!-- Weapon Roll Template -->
-<!-- @{roll_display}&{template:weapon} {{name=@{name}}} @{name_display} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{size=@{size}}} {{force=@{force}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}} -->
-<rolltemplate class="sheet-rolltemplate-weapon">
-    <table>
-        <caption>
-            {{#character}}
-            <div class="sheet-character">{{character}}</div>
-            {{/character}}
-            <div class="sheet-name">{{name}}</div>
-        </caption>
-        <tr class="sheet-damage"><td class="sheet-label"><span data-i18n="damage">Damage</span>: </td><td class="sheet-value">{{ damage}}</td></tr>
-        {{#size}}
-        <tr><td><span data-i18n="size">Size</span>:</td><td class="sheet-value">{{size}}</td></tr>
-        {{/size}}
-        {{#force}}
-        <tr><td><span data-i18n="force">Force</span>:</td><td class="sheet-value">{{force}}</td></tr>
-        {{/force}}
-        {{#impale_size}}
-        <tr><td><span data-i18n="impale-size">Impale Size</span>:</td><td class="sheet-value">{{impale_size}}</td></tr>
-        {{/impale_size}}
-        {{#notes}}
-        <tr class="sheet-altback"><td colspan="2">{{notes}}</td></tr>
+        <div class="sheet-listitem">{{notes}}</div>
         {{/notes}}
-    </table>
+    </div>
+</rolltemplate>
+<!-- Improvement Roll Template -->
+<!-- @{roll_display}&{template:improvement} {{name=@{name}}} @{name_display} {{roll=[[1d100 + @{int}]]}} {{improvement=[[1d4+1+@{fumbled}]]}} {{skill=[[@{skill_total}]]}} {{fumbled=[[@{fumbled}]]}} -->
+<rolltemplate class="sheet-rolltemplate-improvement">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{character}}</div>
+            <div class="sheet-name">{{name}}</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="result">Result</span>:</div>
+            <div class="sheet-value">{{roll}} ≥ {{skill}}</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="fumbled">Fumbled</span>:</div>
+            {{#rollTotal() fumbled 0}}
+            <div class="sheet-value"><span data-i18n="no">No</span></div>
+            {{/rollTotal() fumbled 0}}
+            {{#rollTotal() fumbled 1}}
+            <div class="sheet-value"><span data-i18n="yes">Yes</span></div>
+            {{/rollTotal() fumbled 1}}
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="improvement">Improvement</span>:</div>
+            {{#^rollLess() roll skill}}
+            <div class="sheet-value">+{{improvement}}%</div>
+            {{/^rollLess() roll skill}}
+            {{#rollLess() roll skill}}
+            {{#rollTotal() fumbled 0}}
+            <div class="sheet-value">+1%</div>
+            {{/rollTotal() fumbled 0}}
+            {{#rollTotal() fumbled 1}}
+            <div class="sheet-value">+2%</div>
+            {{/rollTotal() fumbled 1}}
+            {{/rollLess() roll skill}}
+        </div>
+        {{#notes}}
+        <div class="sheet-listitem">{{notes}}</div>
+        {{/notes}}
+    </div>
 </rolltemplate><script type="text/worker">
 /* Option Bar Scripts */
 on(`clicked:edit`, function() {
