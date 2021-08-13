@@ -54,11 +54,11 @@ const encGetAttrs = ['avg_species_siz', 'encumbrance_temp', 'pack_equipped', 'ef
     'meleeweapon_enc', 'meleeweapon_enc_carried', 'rangedweapon_enc', 'rangedweapon_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
 
 const charStdSkillIds = {
-    str: ['athletics'],
+    str: ['athletics', 'swim'],
     dex: ['athletics'],
     siz: [],
-    con: [],
-    pow: [],
+    con: ['swim'],
+    pow: ['willpower'],
     int: [],
     cha: []
 };
@@ -70,7 +70,9 @@ const allStdSkillIds = Array.from(
 );
 
 const stdSkillChars = {
-    'athletics': ['str', 'dex']
+    'athletics': ['str', 'dex'],
+    'swim': ['str', 'con'],
+    'willpower': ['pow', 'pow']
 }
 
 const fatigueTable = {
