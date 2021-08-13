@@ -547,7 +547,7 @@ input.sheet-checkbtn:not([value="0"]) + button.sheet-checkbtn {
     border: solid 1px black;
 }
 
-button.sheet-inverted-checkbtn {
+.ui-dialog .charsheet button.sheet-inverted-checkbtn {
     border: solid 1px black;
     border-radius: 5px;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
@@ -555,8 +555,8 @@ button.sheet-inverted-checkbtn {
     margin: 0 5px 0 0 !important;
     padding: 0 2px 0;
 }
-input.sheet-checkbtn[value="0"]  + button.sheet-inverted-checkbtn,
-input.sheet-checkbtn[value=" "] + button.sheet-inverted-checkbtn {
+.charsheet input.sheet-checkbtn[value="0"]  + button.sheet-inverted-checkbtn,
+.charsheet input.sheet-checkbtn[value=" "] + button.sheet-inverted-checkbtn {
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     border: solid 1px gray;
@@ -1452,142 +1452,98 @@ textarea.sheet-character-notes {
     background: inherit;
     font-weight: inherit;
 }
-/* Initiative Roll Template Styles */
-.sheet-rolltemplate-initiative table {
-    width: 100%;
-    border: 3px solid darkgoldenrod;
-    line-height: 1em;
-    font-size: 1em;
-    font-weight: normal;
-    background: white;
-}
-.sheet-rolltemplate-initiative caption {
-    background: darkgoldenrod;
-    color: whitesmoke;
-    padding: 3px 3px 0;
-}
-.sheet-rolltemplate-initiative div.sheet-character {
-    font-size: .75em;
-}
-.sheet-rolltemplate-initiative div.sheet-name {
-    font-family: Palatino, serif;
-    font-size: 1.25em;
-    padding-top: 2px;
-}
-.sheet-rolltemplate-initiative tr {
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-}
-.sheet-rolltemplate-initiative td {
-    padding: 3px 3px 0;
-    line-height: 1em;
-    vertical-align: middle;
-}
-.sheet-rolltemplate-initiative td.sheet-value {
-    text-align: right;
-}
-.sheet-rolltemplate-initiative .inlinerollresult {
-    display: inline-block;
-    text-align: center;
-    padding: 0px;
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-.sheet-rolltemplate-initiative .inlinerollresult.fullcrit {
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-.sheet-rolltemplate-initiative .inlinerollresult.fullfail {
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-.sheet-rolltemplate-initiative .inlinerollresult.importantroll {
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
 /* Skill Roll Template Styles */
-.sheet-rolltemplate-skill table {
-    width: 100%;
-    border: 3px solid dimgray;
-    line-height: 1em;
-    font-size: 1em;
-    font-weight: normal;
+.sheet-rolltemplate-skill div.sheet-border {
+    border: 2px solid dimgray;
     background: white;
 }
-.sheet-rolltemplate-skill caption {
+.sheet-rolltemplate-skill div.sheet-header {
     background: dimgray;
     color: whitesmoke;
-    padding: 3px 3px 0;
 }
 .sheet-rolltemplate-skill div.sheet-character {
-    font-size: .75em;
+    font-size: .9em;
+    text-align: center;
 }
 .sheet-rolltemplate-skill div.sheet-name {
     font-family: Palatino, serif;
-    font-size: 1.25em;
-    padding-top: 2px;
-}
-.sheet-rolltemplate-skill div.sheet-info {
-    padding: 2px 0 0;
     text-align: center;
+    font-size: 1.25em;
 }
-.sheet-rolltemplate-skill tr {
-    margin: 0;
-    padding: 0;
-}
-.sheet-rolltemplate-skill tr.sheet-very-easy {
-    background: #DFF0D8;
+
+.sheet-rolltemplate-skill div.sheet-hard-notice {
+    padding: 2px 1px 0;
+    background: yellow;
     color: black;
 }
-.sheet-rolltemplate-skill tr.sheet-easy {
-    background: #D9EDF7;
+.sheet-rolltemplate-skill div.sheet-formidable-notice {
+    padding: 2px 1px 0;
+    background: orange;
     color: black;
 }
-.sheet-rolltemplate-skill tr.sheet-standard {
-    background: gainsboro;
-    color: black;
-    font-weight: bold;
-}
-.sheet-rolltemplate-skill .sheet-hard {
-    background: #fcf8e3;
+.sheet-rolltemplate-skill div.sheet-herculean-notice {
+    padding: 2px 1px 0;
+    background: red;
     color: black;
 }
-.sheet-rolltemplate-skill .sheet-formidable {
-    background: #FFEBCC;
-    color: black;
-}
-.sheet-rolltemplate-skill .sheet-herculean {
-    background: #f2dede;
-    color: black;
-}
-.sheet-rolltemplate-skill .sheet-hopeless {
+.sheet-rolltemplate-skill div.sheet-hopeless-notice {
+    padding: 2px 1px 0;
     background: black;
     color: lightgray;
 }
-.sheet-rolltemplate-skill td {
-    padding: 3px 3px 0;
-    line-height: 1em;
-    vertical-align: middle;
+
+.sheet-rolltemplate-skill div.sheet-listitem {
+    display: flex;
+    padding: 2px 1px 0;
 }
-.sheet-rolltemplate-skill td.sheet-label {
+.sheet-rolltemplate-skill div.sheet-listitem:nth-child(odd) {
+    background: linear-gradient(to right, gainsboro, white);
+}
+.sheet-rolltemplate-skill div.sheet-very-easy {
+    display: flex;
+    padding: 2px 1px 0;
+    background: #DFF0D8;
+}
+.sheet-rolltemplate-skill div.sheet-easy {
+    display: flex;
+    padding: 2px 1px 0;
+    background: #D9EDF7;
+}
+.sheet-rolltemplate-skill div.sheet-standard {
+    display: flex;
+    padding: 2px 1px 0;
+    background: gainsboro;
+}
+.sheet-rolltemplate-skill div.sheet-hard {
+    display: flex;
+    padding: 2px 1px 0;
+    background: #fcf8e3;
+}
+.sheet-rolltemplate-skill div.sheet-formidable {
+    display: flex;
+    padding: 2px 1px 0;
+    background: #FFEBCC;
+}
+.sheet-rolltemplate-skill div.sheet-herculean {
+    display: flex;
+    padding: 2px 1px 0;
+    background: #f2dede;
+}
+
+.sheet-rolltemplate-skill div.sheet-key {
+    font-weight: bold;
     text-align: left;
 }
-.sheet-rolltemplate-skill td.sheet-value {
+.sheet-rolltemplate-skill div.sheet-value {
     text-align: right;
+    flex-grow: 1;
 }
-.sheet-rolltemplate-skill .inlinerollresult  {
+
+.sheet-rolltemplate-skill .inlinerollresult {
     display: inline-block;
     text-align: center;
-    padding: 0px;
+    padding: 0;
+    margin: 0;
     border: none;
     color: inherit;
     background: inherit;
@@ -1606,73 +1562,6 @@ textarea.sheet-character-notes {
     font-weight: inherit;
 }
 .sheet-rolltemplate-skill .inlinerollresult.importantroll {
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-/* Weapon Roll Template Styles */
-.sheet-rolltemplate-weapon table {
-    width: 100%;
-    border: 3px solid firebrick;
-    line-height: 1em;
-    font-size: 1em;
-    font-weight: normal;
-    background: white;
-}
-.sheet-rolltemplate-weapon caption {
-    background: firebrick;
-    color: whitesmoke;
-    padding: 3px 3px 0;
-}
-.sheet-rolltemplate-weapon div.sheet-character {
-    font-size: .75em;
-}
-.sheet-rolltemplate-weapon div.sheet-name {
-    font-family: Palatino, serif;
-    font-size: 1.25em;
-    padding-top: 2px;
-}
-.sheet-rolltemplate-weapon tr {
-    margin: 0;
-    padding: 0;
-}
-.sheet-rolltemplate-weapon td {
-    padding: 3px 3px 0;
-    line-height: 1em;
-    vertical-align: middle;
-}
-.sheet-rolltemplate-weapon tr.sheet-damage {
-    font-weight: bold;
-}
-.sheet-rolltemplate-weapon tr:nth-child(even) {
-    background: linear-gradient(to right, gainsboro, white);
-}
-.sheet-rolltemplate-weapon td.sheet-value {
-    text-align: right;
-}
-.sheet-rolltemplate-weapon .inlinerollresult {
-    display: inline-block;
-    text-align: center;
-    padding: 0px;
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-.sheet-rolltemplate-weapon .inlinerollresult.fullcrit {
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-.sheet-rolltemplate-weapon .inlinerollresult.fullfail {
-    border: none;
-    color: inherit;
-    background: inherit;
-    font-weight: inherit;
-}
-.sheet-rolltemplate-weapon .inlinerollresult.importantroll {
     border: none;
     color: inherit;
     background: inherit;

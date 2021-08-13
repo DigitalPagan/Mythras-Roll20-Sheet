@@ -1,0 +1,118 @@
+<!-- Skill Roll Template -->
+<!-- {{'@{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}}'}} -->
+<rolltemplate class="sheet-rolltemplate-skill">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}</div>
+        </div>
+
+        {{'{{#rollGreater() fatigue_skills 0}}'}}
+            {{'{{#rollTotal() fatigue_skills 1}}'}}<div class="sheet-hard-notice"><span data-i18n="hard">Hard</span>, <span data-i18n="due_to_fatigue">due to fatigue</span></div>{{'{{/rollTotal() fatigue_skills 1}}'}}
+            {{'{{#rollTotal() fatigue_skills 2}}'}}<div class="sheet-formidable-notice"><span data-i18n="formidable">Formidable</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{'{{/rollTotal() fatigue_skills 2}}'}}
+            {{'{{#rollTotal() fatigue_skills 3}}'}}<div class="sheet-herculean-notice"><span data-i18n="herculean">Herculean</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{'{{/rollTotal() fatigue_skills 3}}'}}
+            {{'{{#rollTotal() fatigue_skills 4}}'}}<div class="sheet-hopeless-notice"><span data-i18n="hopeless">Hopeless</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{'{{/rollTotal() fatigue_skills 4}}'}}
+            {{'{{#rollTotal() fatigue_skills 5}}'}}<div class="sheet-hopeless-notice"><span data-i18n="no_action_allowed">No action allowed</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{'{{/rollTotal() fatigue_skills 5}}'}}
+        {{'{{/rollGreater() fatigue_skills 0}}'}}
+
+        {{'{{#rollTotal() encumbered 1}}'}}
+            {{'{{#rollTotal() encumbrance_skills 1}}'}}<div class="sheet-hard-notice"><span data-i18n="1_grade_harder">1 grade harder</span>,&nbsp;<span data-i18n="due_to_enc">due to ENC</span></div>{{'{{/rollTotal() encumbrance_skills 1}}'}}
+            {{'{{#rollTotal() encumbrance_skills 2}}'}}<div class="sheet-formidable-notice"><span data-i18n="2_grades_harder">2 grades harder</span>,&nbsp;<span data-i18n="due_to_enc">due to ENC</span></div>{{'{{/rollTotal() encumbrance_skills 2}}'}}
+            {{'{{#rollTotal() encumbrance_skills 3}}'}}<div class="sheet-hopeless-notice"><span data-i18n="impossible">Impossible</span>,&nbsp;<span data-i18n="due_to_enc">due to ENC</span></div>{{'{{/rollTotal() encumbrance_skills 3}}'}}
+        {{'{{/rollTotal() encumbered 1}}'}}
+
+        {{'{{#ship_condition_skills}}'}}
+            {{'{{#rollTotal() ship_condition_skills 2}}'}}<div class="sheet-hard-notice"><span data-i18n="hard">Hard</span>,&nbsp;<span data-i18n="due_to_ship_condition">due to ship condition</span></div>{{'{{/rollTotal() ship_condition_skills 2}}'}}
+            {{'{{#rollTotal() ship_condition_skills 3}}'}}<div class="sheet-formidable-notice"><span data-i18n="formidable">Formidable</span>,&nbsp;<span data-i18n="due_to_ship_condition">due to ship condition</span></div>{{'{{/rollTotal() ship_condition_skills 3}}'}}
+            {{'{{#rollTotal() ship_condition_skills 4}}'}}<div class="sheet-herculean-notice"><span data-i18n="herculean">Herculean</span>,&nbsp;<span data-i18n="due_to_ship_condition">due to ship condition</span></div>{{'{{/rollTotal() ship_condition_skills 4}}'}}
+        {{'{{/ship_condition_skills }}'}}
+
+        {{'{{#^rollTotal() augmentation 0}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="augmentation">Augmentation</span>:</div>
+            <div class="sheet-value">{{'{{augmentation}}'}}</div>
+        </div>
+        {{'{{/^rollTotal() augmentation 0}}'}}
+        {{'{{#^rollTotal() penalty 0}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="101+_penalty">101+ Penalty</span>:</div>
+            <div class="sheet-value">{{'{{penalty}}'}}</div>
+        </div>
+        {{'{{/^rollTotal() penalty 0}}'}}
+
+        {{'{{#rollTotal() difficulty 0}}'}}
+        <div class="sheet-very-easy">
+            <div class="sheet-key"><span data-i18n="very_easy">Very Easy</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{very_easy}}'}} <span data-i18n="crit">Crit</span>: {{'{{very_easy_crit}}'}}</div>
+        </div>
+        <div class="sheet-easy">
+            <div class="sheet-key"><span data-i18n="easy">Easy</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{easy}}'}} <span data-i18n="crit">Crit</span>: {{'{{easy_crit}}'}}</div>
+        </div>
+        <div class="sheet-standard">
+            <div class="sheet-key"><span data-i18n="standard">Standard</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{standard}}'}} <span data-i18n="crit">Crit</span>: {{'{{standard_crit}}'}}</div>
+        </div>
+        <div class="sheet-hard">
+            <div class="sheet-key"><span data-i18n="hard">Hard</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{hard}}'}} <span data-i18n="crit">Crit</span>: {{'{{hard_crit}}'}}</div>
+        </div>
+        <div class="sheet-formidable">
+            <div class="sheet-key"><span data-i18n="formidable">Formidable</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{formidable}}'}} <span data-i18n="crit">Crit</span>: {{'{{formidable_crit}}'}}</div>
+        </div>
+        <div class="sheet-herculean">
+            <div class="sheet-key"><span data-i18n="herculean">Herculean</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{herculean}}'}} <span data-i18n="crit">Crit</span>: {{'{{herculean_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 0}}'}}
+
+        {{'{{#rollTotal() difficulty 1}}'}}
+        <div class="sheet-very-easy">
+            <div class="sheet-key"><span data-i18n="very_easy">Very Easy</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{very_easy}}'}} <span data-i18n="crit">Crit</span>: {{'{{very_easy_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 1}}'}}
+
+        {{'{{#rollTotal() difficulty 2}}'}}
+        <div class="sheet-easy">
+            <div class="sheet-key"><span data-i18n="easy">Easy</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{easy}}'}} <span data-i18n="crit">Crit</span>: {{'{{easy_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 2}}'}}
+
+        {{'{{#rollTotal() difficulty 3}}'}}
+        <div class="sheet-standard">
+            <div class="sheet-key"><span data-i18n="standard">Standard</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{standard}}'}} <span data-i18n="crit">Crit</span>: {{'{{standard_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 3}}'}}
+
+        {{'{{#rollTotal() difficulty 4}}'}}
+        <div class="sheet-hard">
+            <div class="sheet-key"><span data-i18n="hard">Hard</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{hard}}'}} <span data-i18n="crit">Crit</span>: {{'{{hard_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 4}}'}}
+
+        {{'{{#rollTotal() difficulty 5}}'}}
+        <div class="sheet-formidable">
+            <div class="sheet-key"><span data-i18n="formidable">Formidable</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{formidable}}'}} <span data-i18n="crit">Crit</span>: {{'{{formidable_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 5}}'}}
+
+        {{'{{#rollTotal() difficulty 6}}'}}
+        <div class="sheet-herculean">
+            <div class="sheet-key"><span data-i18n="herculean">Herculean</span>:</div>
+            <div class="sheet-value">{{'{{roll}}'}} ≤ {{'{{herculean}}'}} <span data-i18n="crit">Crit</span>: {{'{{herculean_crit}}'}}</div>
+        </div>
+        {{'{{/rollTotal() difficulty 6}}'}}
+
+        {{'{{#notes}}'}}
+        <div>{{'{{notes}}'}}</div>
+        {{'{{/notes}}'}}
+    </div>
+</rolltemplate>
+
+

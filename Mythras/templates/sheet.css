@@ -547,7 +547,7 @@ input.sheet-checkbtn:not([value="0"]) + button.sheet-checkbtn {
     border: solid 1px black;
 }
 
-button.sheet-inverted-checkbtn {
+.ui-dialog .charsheet button.sheet-inverted-checkbtn {
     border: solid 1px black;
     border-radius: 5px;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
@@ -555,8 +555,8 @@ button.sheet-inverted-checkbtn {
     margin: 0 5px 0 0 !important;
     padding: 0 2px 0;
 }
-input.sheet-checkbtn[value="0"]  + button.sheet-inverted-checkbtn,
-input.sheet-checkbtn[value=" "] + button.sheet-inverted-checkbtn {
+.charsheet input.sheet-checkbtn[value="0"]  + button.sheet-inverted-checkbtn,
+.charsheet input.sheet-checkbtn[value=" "] + button.sheet-inverted-checkbtn {
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
     border: solid 1px gray;
@@ -861,6 +861,4 @@ input.sheet-firearms-toggle:not(:checked) + div .sheet-firearm-trait {
 {% include 'roll_templates/default.css' %}
 {% include 'roll_templates/effect.css' %}
 {% include 'roll_templates/improvement.css' %}
-{% include 'roll_templates/initiative.css' %}
 {% include 'roll_templates/skill.css' %}
-{% include 'roll_templates/weapon.css' %}

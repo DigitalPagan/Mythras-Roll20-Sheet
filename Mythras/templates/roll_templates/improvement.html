@@ -4,11 +4,7 @@
     <div class="sheet-border">
         <div class="sheet-header">
             <div class="sheet-character">{{'{{character}}'}}</div>
-            <div class="sheet-name">{{'{{name}}'}}</div>
-        </div>
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="result">Result</span>:</div>
-            <div class="sheet-value">{{'{{roll}} ≥ {{skill}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}({{'{{skill}}'}})</div>
         </div>
         <div class="sheet-listitem">
             <div class="sheet-key"><span data-i18n="fumbled">Fumbled</span>:</div>
@@ -20,16 +16,16 @@
             {{'{{/rollTotal() fumbled 1}}'}}
         </div>
         <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="improvement">Improvement</span>:</div>
+            <div class="sheet-key"><span data-i18n="result">Result</span>:</div>
             {{'{{#^rollLess() roll skill}}'}}
-            <div class="sheet-value">+{{'{{improvement}}'}}%</div>
+            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span> +{{'{{improvement}}'}}%)</div>
             {{'{{/^rollLess() roll skill}}'}}
             {{'{{#rollLess() roll skill}}'}}
             {{'{{#rollTotal() fumbled 0}}'}}
-            <div class="sheet-value">+1%</div>
+            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span> +1%)</div>
             {{'{{/rollTotal() fumbled 0}}'}}
             {{'{{#rollTotal() fumbled 1}}'}}
-            <div class="sheet-value">+2%</div>
+            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span> +2%)</div>
             {{'{{/rollTotal() fumbled 1}}'}}
             {{'{{/rollLess() roll skill}}'}}
         </div>

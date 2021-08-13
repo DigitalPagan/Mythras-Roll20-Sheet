@@ -5,11 +5,13 @@
             <div class="sheet-flex">
                 <!-- Roll Options -->
                 <div>
+                    <!-- TODO fix button display status -->
                     <input type='hidden' class='sheet-checkbtn' name='attr_roll_display' value="/w gm"/>
                     <button type="action" class="sheet-inverted-checkbtn" name="act_roll_display" data-i18n="whisper">Whisper</button>
                 </div>
 
                 <div>
+                    <!-- TODO fix button display status -->
                     <input type='hidden' class='sheet-checkbtn' name='attr_name_display' value="{{character=@{character_name}}}"/>
                     <button type="action" class="sheet-inverted-checkbtn" name="act_name_display" data-i18n="show-name">Show Name</button>
                 </div>
@@ -41,7 +43,7 @@
                     <input type="number" class="sheet-number-width-sm sheet-usrinput" name="attr_set_augmentation" value="0">
                 </div>
 
-                <div class="sheet-rmargin"><label class="sheet-left" data-i18n="101+-penalty">101+ Penalty</label></div>
+                <div class="sheet-rmargin"><label class="sheet-left" data-i18n="101+_penalty">101+ Penalty</label></div>
                 <div class="sheet-rmargin">
                     <select class="sheet-auto-width sheet-usrinput sheet-text-center" name="attr_penalty">
                         <option value="0" data-i18n="none" selected>None</option>
@@ -1020,8 +1022,8 @@
                     <div class="sheet-td">
                         <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_skills}" name="attr_encumbrance_skills">
                             <option value="0" data-i18n="standard" selected>Standard</option>
-                            <option value="1" data-i18n="one-grade-harder">1 grade harder</option>
-                            <option value="2" data-i18n="two-grades-harder">2 grades harder</option>
+                            <option value="1" data-i18n="1_grade_harder">1 grade harder</option>
+                            <option value="2" data-i18n="2_grades_harder">2 grades harder</option>
                             <option value="3" data-i18n="impossible">Impossible</option>
                         </select>
                     </div>
@@ -1151,6 +1153,8 @@
         <h2 class="sheet-accordion" data-i18n="social_conflict">Social Conflict</h2>
 
         <div class="sheet-accordion">
+            <input type="text" class="sheet-full-width" name="attr_social_attack_id_value" value="@{social_attack}" disabled>
+            <input type="text" class="sheet-full-width" name="attr_social_defense_id_value" value="@{social_defense}" disabled>
         </div>
     </div>
 
@@ -1159,11 +1163,12 @@
         <h2><span data-i18n="skills">Skills</span>/<span data-i18n="passions">Passions</span></h2>
 
         <div class="sheet-hidden">
-            <input type="radio" name="attr_skill_augment" value="@{skill_augment_value}">
+            <input type="radio" name="attr_skill_augment" value="@{skill_augment_value}"><span></span>
             <input type="text" name="attr_skill_augment_value" value="">
-            <input type="radio" name="attr_social_attack" value="@{social_attack_id}">
-            <input type="text" name="attr_social_attack_id" value="">
-            <input type="radio" name="attr_social_defense" value="other">
+            <input type="radio" name="attr_social_attack_id" value="@{social_attack_id_value}"><span></span>
+            <input type="text" name="attr_social_attack_id_value" value="">
+            <input type="radio" name="attr_social_defense_id" value="@{social_defense_id_value}"><span></span>
+            <input type="text" name="attr_social_defense_id_value" value="">
         </div>
 
         <input type="hidden" class="sheet-augment-toggle" name="attr_augmentation">
@@ -1210,16 +1215,16 @@
                     <!-- Athletics -->
                     <div class="sheet-hl">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack}" name="attr_social_attack" value="athletics"><span class="sheet-radioico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense}" name="attr_social_defense" value="athletics"><span class="sheet-radioico">q</span></div>
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augment}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="athletics"><span class="sheet-radioico">w</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="athletics"><span class="sheet-radioico">q</span></div>
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <label class="sheet-skill" data-i18n="athletics">Athletics</label>
                                 <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm &{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}">i</button>
                                 <input type="hidden" name="attr_athletics_name" value="^{athletics}">
                             </div>
                             <div class="sheet-td sheet-play">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="@{roll_display}&{template:default} @{name_display} {{name=This is a long test name for wrap}} {{roll=[[1d100]]}} {{1d10+10=[[@{augmentation}]]}}"></button>
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="@{roll_display}&{template:skill} @{name_display} {{name=^{athletics}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{athletics_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{athletics_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{athletics_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{athletics_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{athletics_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{athletics_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{athletics_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{athletics_total}*1.5)+@{penalty})]]}} {{standard=[[@{athletics_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{athletics_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{athletics_total}+@{penalty})]]}} {{hard=[[ceil((@{athletics_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{athletics_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{athletics_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{athletics_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{athletics_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{athletics_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{athletics_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{athletics_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{athletics_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{athletics_notes}}}"></button>
                             </div>
                             <div class="sheet-td sheet-edit">
                                 <button type="roll" class="sheet-improve sheet-button-width" title="%{athletics_improve}" name="roll_athletics_improve" value="@{roll_display}&{template:improvement} {{name=^{athletics}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{athletics_fumbled}]]}} {{skill=[[@{athletics_total}]]}} {{fumbled=[[@{athletics_fumbled}]]}}"></button>
@@ -1265,12 +1270,14 @@
                 <!-- Combat Styles -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-checkbox-width">&</div></div>
+                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="combat_style">Combat Style</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
-                        <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
-                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
-                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                        <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="affected_by_encumbrance">a</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="trained">3</div></div>
                         <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
                         <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
                         <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
@@ -1279,14 +1286,19 @@
                     </div>
                     <fieldset class="repeating_combatstyle">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
-                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
                                 <input type="hidden" name="attr_id" value="unset, please change any value in this skill" readonly>
                             </div>
-                            <div class="sheet-td">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}"></button>
+                            <div class="sheet-td sheet-play">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="@{roll_display}&{template:skill} @{name_display} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <button type="roll" class="sheet-improve sheet-button-width" title="%{$ID_improve}" name="roll_improve" value="@{roll_display}&{template:improvement} {{name=@{name}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{fumbled}]]}} {{skill=[[@{total}]]}} {{fumbled=[[@{fumbled}]]}}"></button>
                             </div>
                             <div class="sheet-td sheet-play sheet-pictos">
                                 <input type="checkbox" title="@{$ID_encumbered}" name="attr_encumbered" value="1" checked readonly><span class="sheet-checkico">a</span>
@@ -1360,12 +1372,14 @@
                 <!-- Professional Skills -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-checkbox-width">&</div></div>
+                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional_skill">Professional Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
-                        <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-checkbox-width">a</div></div>
-                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">!</div></div>
-                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                        <div class="sheet-th sheet-play sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="affected_by_encumbrance">a</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="trained">3</div></div>
                         <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
                         <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
                         <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
@@ -1374,14 +1388,19 @@
                     </div>
                     <fieldset class="repeating_professionalskill">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
-                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
                                 <input type="hidden" name="attr_id" value="unset, please change any value in this skill" readonly>
                             </div>
-                            <div class="sheet-td">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=@{augmentation}}}"></button>
+                            <div class="sheet-td sheet-play">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="@{roll_display}&{template:skill} @{name_display} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <button type="roll" class="sheet-improve sheet-button-width" title="%{$ID_improve}" name="roll_improve" value="@{roll_display}&{template:improvement} {{name=@{name}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{fumbled}]]}} {{skill=[[@{total}]]}} {{fumbled=[[@{fumbled}]]}}"></button>
                             </div>
                             <div class="sheet-td sheet-play sheet-pictos">
                                 <input type="checkbox" title="@{$ID_encumbered}" name="attr_encumbered" value="1" readonly><span class="sheet-checkico">a</span>
@@ -1445,24 +1464,35 @@
                 <!-- Passions -->
                 <div class="Sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-checkbox-width">&</div></div>
+                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passion">Passion</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-button-width sheet-edit"></div></div>
                         <div class="sheet-th"><div class="sheet-passiontype" data-i18n="type">Type</div></div>
-                        <div class="sheet-th sheet-pictos"><div class="sheet-checkbox-width">3</div></div>
+                        <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="trained">3</div></div>
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
                     <fieldset class="repeating_passion">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
+                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
+                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
-                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}">i</button>
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
                                 <input type="hidden" name="attr_id" value="unset, please change any value in this passion" readonly>
                             </div>
-                            <div class="sheet-td">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="&{template:default} @{name_display} {{name=@{athletics_name}}} {{roll=[[1d100]]}} {{augmentation=[[@{augmentation}]]}}"></button>
+                            <div class="sheet-td sheet-play">
+                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{$ID_roll}" name="roll_roll" value="@{roll_display}&{template:skill} @{name_display} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <button type="roll" class="sheet-improve sheet-button-width" title="%{$ID_improve}" name="roll_improve" value="@{roll_display}&{template:improvement} {{name=@{name}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}} {{fumbled=[[0]]}}"></button>
+                            </div>
+                            <div class="sheet-td sheet-edit">
+                                <button type="roll" class="sheet-waxorwane sheet-button-width" title="%{$ID_waxorwane}" name="roll_waxorwane" value="@{roll_display}&{template:default} {{purple=1}} {{name=@{name}}} @{name_display} {{^{weak}=+/-[[1d10]]%}} {{^{moderate}=+/-[[1d10+5]]%}} {{^{strong}=+/-[[1d10+10]]%}}"></button>
                             </div>
                             <div class="sheet-td">
                                 <select class="sheet-passiontype sheet-text-center sheet-usrinput" title="@{$ID_type}" name="attr_type">
@@ -2401,11 +2431,7 @@
     <div class="sheet-border">
         <div class="sheet-header">
             <div class="sheet-character">{{character}}</div>
-            <div class="sheet-name">{{name}}</div>
-        </div>
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="result">Result</span>:</div>
-            <div class="sheet-value">{{roll}} ≥ {{skill}}</div>
+            <div class="sheet-name">{{name}}({{skill}})</div>
         </div>
         <div class="sheet-listitem">
             <div class="sheet-key"><span data-i18n="fumbled">Fumbled</span>:</div>
@@ -2417,16 +2443,16 @@
             {{/rollTotal() fumbled 1}}
         </div>
         <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="improvement">Improvement</span>:</div>
+            <div class="sheet-key"><span data-i18n="result">Result</span>:</div>
             {{#^rollLess() roll skill}}
-            <div class="sheet-value">+{{improvement}}%</div>
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span> +{{improvement}}%)</div>
             {{/^rollLess() roll skill}}
             {{#rollLess() roll skill}}
             {{#rollTotal() fumbled 0}}
-            <div class="sheet-value">+1%</div>
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span> +1%)</div>
             {{/rollTotal() fumbled 0}}
             {{#rollTotal() fumbled 1}}
-            <div class="sheet-value">+2%</div>
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span> +2%)</div>
             {{/rollTotal() fumbled 1}}
             {{/rollLess() roll skill}}
         </div>
@@ -2434,7 +2460,761 @@
         <div class="sheet-listitem">{{notes}}</div>
         {{/notes}}
     </div>
-</rolltemplate><script type="text/worker">
+</rolltemplate>
+<!-- Skill Roll Template -->
+<!-- @{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} -->
+<rolltemplate class="sheet-rolltemplate-skill">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{character}}</div>
+            <div class="sheet-name">{{name}}({{original}})</div>
+        </div>
+
+        {{#rollGreater() fatigue_skills 0}}
+            {{#rollTotal() fatigue_skills 1}}<div class="sheet-hard-notice"><span data-i18n="hard">Hard</span>, <span data-i18n="due_to_fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 1}}
+            {{#rollTotal() fatigue_skills 2}}<div class="sheet-formidable-notice"><span data-i18n="formidable">Formidable</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 2}}
+            {{#rollTotal() fatigue_skills 3}}<div class="sheet-herculean-notice"><span data-i18n="herculean">Herculean</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 3}}
+            {{#rollTotal() fatigue_skills 4}}<div class="sheet-hopeless-notice"><span data-i18n="hopeless">Hopeless</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 4}}
+            {{#rollTotal() fatigue_skills 5}}<div class="sheet-hopeless-notice"><span data-i18n="no_action_allowed">No action allowed</span>,&nbsp;<span data-i18n="due_to_fatigue">due to fatigue</span></div>{{/rollTotal() fatigue_skills 5}}
+        {{/rollGreater() fatigue_skills 0}}
+
+        {{#rollTotal() encumbered 1}}
+            {{#rollTotal() encumbrance_skills 1}}<div class="sheet-hard-notice"><span data-i18n="1_grade_harder">1 grade harder</span>,&nbsp;<span data-i18n="due_to_enc">due to ENC</span></div>{{/rollTotal() encumbrance_skills 1}}
+            {{#rollTotal() encumbrance_skills 2}}<div class="sheet-formidable-notice"><span data-i18n="2_grades_harder">2 grades harder</span>,&nbsp;<span data-i18n="due_to_enc">due to ENC</span></div>{{/rollTotal() encumbrance_skills 2}}
+            {{#rollTotal() encumbrance_skills 3}}<div class="sheet-hopeless-notice"><span data-i18n="impossible">Impossible</span>,&nbsp;<span data-i18n="due_to_enc">due to ENC</span></div>{{/rollTotal() encumbrance_skills 3}}
+        {{/rollTotal() encumbered 1}}
+
+        {{#ship_condition_skills}}
+            {{#rollTotal() ship_condition_skills 2}}<div class="sheet-hard-notice"><span data-i18n="hard">Hard</span>,&nbsp;<span data-i18n="due_to_ship_condition">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 2}}
+            {{#rollTotal() ship_condition_skills 3}}<div class="sheet-formidable-notice"><span data-i18n="formidable">Formidable</span>,&nbsp;<span data-i18n="due_to_ship_condition">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 3}}
+            {{#rollTotal() ship_condition_skills 4}}<div class="sheet-herculean-notice"><span data-i18n="herculean">Herculean</span>,&nbsp;<span data-i18n="due_to_ship_condition">due to ship condition</span></div>{{/rollTotal() ship_condition_skills 4}}
+        {{/ship_condition_skills }}
+
+        {{#^rollTotal() augmentation 0}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="augmentation">Augmentation</span>:</div>
+            <div class="sheet-value">{{augmentation}}</div>
+        </div>
+        {{/^rollTotal() augmentation 0}}
+        {{#^rollTotal() penalty 0}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="101+_penalty">101+ Penalty</span>:</div>
+            <div class="sheet-value">{{penalty}}</div>
+        </div>
+        {{/^rollTotal() penalty 0}}
+
+        {{#rollTotal() difficulty 0}}
+        <div class="sheet-very-easy">
+            <div class="sheet-key"><span data-i18n="very_easy">Very Easy</span>&nbsp;({{very_easy}}|{{very_easy_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() very_easy_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() very_easy_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() very_easy_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() very_easy_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll very_easy}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll very_easy}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll very_easy}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll very_easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll very_easy_crit}}
+            {{/^rollGreater() roll very_easy}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll very_easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll very_easy_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        <div class="sheet-easy">
+            <div class="sheet-key"><span data-i18n="easy">Easy</span>&nbsp;({{easy}}|{{easy_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() easy_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() easy_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() easy_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() easy_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll easy}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll easy}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll easy}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll easy_crit}}
+            {{/^rollGreater() roll easy}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll easy_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        <div class="sheet-standard">
+            <div class="sheet-key"><span data-i18n="standard">Standard</span>&nbsp;({{standard}}|{{standard_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() standard_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() standard_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() standard_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() standard_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll standard}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll standard}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll standard}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll standard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll standard_crit}}
+            {{/^rollGreater() roll standard}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll standard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll standard_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        <div class="sheet-hard">
+            <div class="sheet-key"><span data-i18n="hard">Hard</span>&nbsp;({{hard}}|{{hard_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() hard_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() hard_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() hard_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() hard_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll hard}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll hard}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll hard}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll hard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll hard_crit}}
+            {{/^rollGreater() roll hard}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll hard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll hard_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        <div class="sheet-formidable">
+            <div class="sheet-key"><span data-i18n="formidable">Formidable</span>&nbsp;({{formidable}}|{{formidable_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() formidable_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() formidable_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() formidable_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() formidable_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll formidable}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll formidable}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll formidable}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll formidable_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll formidable_crit}}
+            {{/^rollGreater() roll formidable}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll formidable_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll formidable_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        <div class="sheet-herculean">
+            <div class="sheet-key"><span data-i18n="herculean">Herculean</span>&nbsp;({{herculean}}|{{herculean_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() herculean_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() herculean_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() herculean_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() herculean_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll herculean}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll herculean}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll herculean}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll herculean_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll herculean_crit}}
+            {{/^rollGreater() roll herculean}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll herculean_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll herculean_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 0}}
+
+        {{#rollTotal() difficulty 1}}
+        <div class="sheet-very-easy">
+            <div class="sheet-key"><span data-i18n="very_easy">Very Easy</span>&nbsp;({{very_easy}}|{{very_easy_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() very_easy_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() very_easy_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() very_easy_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() very_easy_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll very_easy}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll very_easy}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll very_easy}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll very_easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll very_easy_crit}}
+            {{/^rollGreater() roll very_easy}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll very_easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll very_easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll very_easy_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 1}}
+
+        {{#rollTotal() difficulty 2}}
+        <div class="sheet-easy">
+            <div class="sheet-key"><span data-i18n="easy">Easy</span>&nbsp;({{easy}}|{{easy_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() easy_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() easy_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() easy_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() easy_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll easy}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll easy}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll easy}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll easy_crit}}
+            {{/^rollGreater() roll easy}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll easy_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll easy_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll easy_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 2}}
+
+        {{#rollTotal() difficulty 3}}
+        <div class="sheet-standard">
+            <div class="sheet-key"><span data-i18n="standard">Standard</span>&nbsp;({{standard}}|{{standard_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() standard_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() standard_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() standard_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() standard_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll standard}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll standard}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll standard}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll standard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll standard_crit}}
+            {{/^rollGreater() roll standard}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll standard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll standard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll standard_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 3}}
+
+        {{#rollTotal() difficulty 4}}
+        <div class="sheet-hard">
+            <div class="sheet-key"><span data-i18n="hard">Hard</span>&nbsp;({{hard}}|{{hard_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() hard_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() hard_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() hard_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() hard_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll hard}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll hard}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll hard}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll hard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll hard_crit}}
+            {{/^rollGreater() roll hard}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll hard_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll hard_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll hard_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 4}}
+
+        {{#rollTotal() difficulty 5}}
+        <div class="sheet-formidable">
+            <div class="sheet-key"><span data-i18n="formidable">Formidable</span>&nbsp;({{formidable}}|{{formidable_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() formidable_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() formidable_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() formidable_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() formidable_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll formidable}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll formidable}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll formidable}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll formidable_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll formidable_crit}}
+            {{/^rollGreater() roll formidable}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll formidable_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll formidable_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll formidable_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 5}}
+
+        {{#rollTotal() difficulty 6}}
+        <div class="sheet-herculean">
+            <div class="sheet-key"><span data-i18n="herculean">Herculean</span>&nbsp;({{herculean}}|{{herculean_crit}}):</div>
+            <!-- 95+ Auto Fail -->
+            {{#rollGreater() roll 95}}
+            <!-- score > 100 -->
+            {{#rollGreater() herculean_fumble 100}}
+            <!-- roll = 100 (fumble) -->
+            {{#rollTotal() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollTotal() roll 100}}
+            <!-- roll < 100 (fail) -->
+            {{#rollLess() roll 100}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 100}}
+            {{/rollGreater() herculean_fumble 100}}
+            <!-- score <= 100 -->
+            {{#rollLess() herculean_fumble 101}}
+            <!-- roll 99 to 100 (fumble) -->
+            {{#rollGreater() roll 98}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            {{/rollGreater() roll 98}}
+            <!-- roll < 99 (fail) -->
+            {{#rollLess() roll 99}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollLess() roll 99}}
+            {{/rollLess() herculean_fumble 101}}
+            {{/rollGreater() roll 95}}
+            <!-- 6 to 95 Normal Logic -->
+            {{#rollBetween() roll 6 95}}
+            <!-- roll > total (fail) -->
+            {{#rollGreater() roll herculean}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            {{/rollGreater() roll herculean}}
+            <!-- roll <= total -->
+            {{#^rollGreater() roll herculean}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll herculean_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll herculean_crit}}
+            {{/^rollGreater() roll herculean}}
+            {{/rollBetween() roll 6 95}}
+            <!-- 5- Auto Fail -->
+            {{#rollLess() roll 6}}
+            <!-- roll > crit (success) -->
+            {{#rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            {{/rollGreater() roll herculean_crit}}
+            <!-- roll <= crit (crit) -->
+            {{#^rollGreater() roll herculean_crit}}
+            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            {{/^rollGreater() roll herculean_crit}}
+            {{/rollLess() roll 6}}
+        </div>
+        {{/rollTotal() difficulty 6}}
+
+        {{#notes}}
+        <div>{{notes}}</div>
+        {{/notes}}
+    </div>
+</rolltemplate>
+
+<script type="text/worker">
 /* Option Bar Scripts */
 on(`clicked:edit`, function() {
     getAttrs(['edit'], function(v) {
@@ -3098,7 +3878,11 @@ function calcProSkillEncumbered(char1, char2) {
         char2bool = true;
     }
 
-    return char1bool || char2bool;
+    if (char1bool || char2bool) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 function calcProSkills(type, ids, charObj, v) {
@@ -3514,6 +4298,48 @@ function calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
         newVals['skill_augment'] = '@{skill_augment_value}';
         newVals[sourceAttr] = '1';
         newVals['skill_augment_value'] = `ceil(@{${targetVal}}/5)`;
+    }
+
+    return newVals;
+}
+
+function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+    let newVals = {};
+    passionIds.forEach(id => {
+        newVals[`repeating_passion_${id}_social_attack`] = 0;
+    });
+    proSkillIds.forEach(id => {
+        newVals[`repeating_professionalskill_${id}_social_attack`] = 0;
+    });
+    combatStyleIds.forEach(id => {
+        newVals[`repeating_combatstyle_${id}_social_attack`] = 0;
+    });
+    if (sourceAttr.startsWith('repeating_')) {
+        targetVal = sourceAttr.replace('_social_attack', '');
+        newVals['social_attack_id'] = '@{social_attack_id_value}';
+        newVals[sourceAttr] = '1';
+        newVals['social_attack_id_value'] = `${targetVal}`;
+    }
+
+    return newVals;
+}
+
+function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+    let newVals = {};
+    passionIds.forEach(id => {
+        newVals[`repeating_passion_${id}_social_defense`] = 0;
+    });
+    proSkillIds.forEach(id => {
+        newVals[`repeating_professionalskill_${id}_social_defense`] = 0;
+    });
+    combatStyleIds.forEach(id => {
+        newVals[`repeating_combatstyle_${id}_social_defense`] = 0;
+    });
+    if (sourceAttr.startsWith('repeating_')) {
+        targetVal = sourceAttr.replace('_social_defense', '');
+        newVals['social_defense_id'] = '@{social_defense_id_value}';
+        newVals[sourceAttr] = '1';
+        newVals['social_defense_id_value'] = `${targetVal}`;
     }
 
     return newVals;
@@ -4172,6 +4998,36 @@ on("change:skill_augment change:repeating_passion:augment change:repeating_profe
             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
                 getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
                     setAttrs(calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                });
+            });
+        });
+    }
+});
+
+/* Social Attack ID Triggers */
+on("change:social_attack_id change:repeating_passion:social_attack change:repeating_professionalskill:social_attack change:repeating_combatstyle:social_attack", function(event) {
+    console.log("social attack triggered by = " + event.sourceAttribute);
+    const sourceAttr = event.sourceAttribute;
+    if (event.sourceType !== 'sheetworker') {
+        getSectionIDs("repeating_passion", function(passionIds) {
+            getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+                getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+                    setAttrs(calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                });
+            });
+        });
+    }
+});
+
+/* Social Defense ID Triggers */
+on("change:social_defense_id change:repeating_passion:social_defense change:repeating_professionalskill:social_defense change:repeating_combatstyle:social_defense", function(event) {
+    console.log("social defense triggered by = " + event.sourceAttribute);
+    const sourceAttr = event.sourceAttribute;
+    if (event.sourceType !== 'sheetworker') {
+        getSectionIDs("repeating_passion", function(passionIds) {
+            getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+                getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+                    setAttrs(calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds));
                 });
             });
         });

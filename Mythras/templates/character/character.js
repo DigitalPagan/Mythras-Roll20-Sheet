@@ -634,7 +634,11 @@ function calcProSkillEncumbered(char1, char2) {
         char2bool = true;
     }
 
-    return char1bool || char2bool;
+    if (char1bool || char2bool) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 function calcProSkills(type, ids, charObj, v) {
@@ -1050,6 +1054,48 @@ function calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
         newVals['skill_augment'] = '@{skill_augment_value}';
         newVals[sourceAttr] = '1';
         newVals['skill_augment_value'] = `ceil(@{${targetVal}}/5)`;
+    }
+
+    return newVals;
+}
+
+function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+    let newVals = {};
+    passionIds.forEach(id => {
+        newVals[`repeating_passion_${id}_social_attack`] = 0;
+    });
+    proSkillIds.forEach(id => {
+        newVals[`repeating_professionalskill_${id}_social_attack`] = 0;
+    });
+    combatStyleIds.forEach(id => {
+        newVals[`repeating_combatstyle_${id}_social_attack`] = 0;
+    });
+    if (sourceAttr.startsWith('repeating_')) {
+        targetVal = sourceAttr.replace('_social_attack', '');
+        newVals['social_attack_id'] = '@{social_attack_id_value}';
+        newVals[sourceAttr] = '1';
+        newVals['social_attack_id_value'] = `${targetVal}`;
+    }
+
+    return newVals;
+}
+
+function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+    let newVals = {};
+    passionIds.forEach(id => {
+        newVals[`repeating_passion_${id}_social_defense`] = 0;
+    });
+    proSkillIds.forEach(id => {
+        newVals[`repeating_professionalskill_${id}_social_defense`] = 0;
+    });
+    combatStyleIds.forEach(id => {
+        newVals[`repeating_combatstyle_${id}_social_defense`] = 0;
+    });
+    if (sourceAttr.startsWith('repeating_')) {
+        targetVal = sourceAttr.replace('_social_defense', '');
+        newVals['social_defense_id'] = '@{social_defense_id_value}';
+        newVals[sourceAttr] = '1';
+        newVals['social_defense_id_value'] = `${targetVal}`;
     }
 
     return newVals;
@@ -1708,6 +1754,36 @@ on("change:skill_augment change:repeating_passion:augment change:repeating_profe
             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
                 getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
                     setAttrs(calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                });
+            });
+        });
+    }
+});
+
+/* Social Attack ID Triggers */
+on("change:social_attack_id change:repeating_passion:social_attack change:repeating_professionalskill:social_attack change:repeating_combatstyle:social_attack", function(event) {
+    console.log("social attack triggered by = " + event.sourceAttribute);
+    const sourceAttr = event.sourceAttribute;
+    if (event.sourceType !== 'sheetworker') {
+        getSectionIDs("repeating_passion", function(passionIds) {
+            getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+                getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+                    setAttrs(calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                });
+            });
+        });
+    }
+});
+
+/* Social Defense ID Triggers */
+on("change:social_defense_id change:repeating_passion:social_defense change:repeating_professionalskill:social_defense change:repeating_combatstyle:social_defense", function(event) {
+    console.log("social defense triggered by = " + event.sourceAttribute);
+    const sourceAttr = event.sourceAttribute;
+    if (event.sourceType !== 'sheetworker') {
+        getSectionIDs("repeating_passion", function(passionIds) {
+            getSectionIDs("repeating_professionalskill", function(proSkillIds) {
+                getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
+                    setAttrs(calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds));
                 });
             });
         });
