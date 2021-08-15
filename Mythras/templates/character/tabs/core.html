@@ -836,55 +836,56 @@
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
-                    <!-- TODO i18n order -->
-                    <!-- Willpower -->
-                    <div class="sheet-hl">
-                        <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="willpower"><span class="sheet-radioico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="willpower"><span class="sheet-radioico">q</span></div>
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{willpower_total}/5)"><span class="sheet-radioico">&</span></div>
-                            <div class="sheet-td sheet-grow sheet-hover-btn">
-                                <label class="sheet-skill" data-i18n="willpower">Willpower</label>
-                                <button type="roll" class="sheet-id" title="%{willpower_id}" name="roll_willpower_id" value="/w gm {{'&{template:default} {{name=@{willpower_name}}} {{^{id}=willpower}}'}}">i</button>
-                                <input type="hidden" name="attr_willpower_name" value="^{willpower}">
+                    <div data-i18n-list="resistance-skills-order">
+                        <!-- Willpower -->
+                        <div class="sheet-hl" data-i18n-list-item="willpower">
+                            <div class="sheet-flex">
+                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="willpower"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="willpower"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{willpower_total}/5)"><span class="sheet-radioico">&</span></div>
+                                <div class="sheet-td sheet-grow sheet-hover-btn">
+                                    <label class="sheet-skill" data-i18n="willpower">Willpower</label>
+                                    <button type="roll" class="sheet-id" title="%{willpower_id}" name="roll_willpower_id" value="/w gm {{'&{template:default} {{name=@{willpower_name}}} {{^{id}=willpower}}'}}">i</button>
+                                    <input type="hidden" name="attr_willpower_name" value="^{willpower}">
+                                </div>
+                                <div class="sheet-td sheet-play">
+                                    <button type="roll" class="sheet-d100 sheet-button-width" title="%{willpower_roll}" name="roll_willpower_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=^{willpower}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{willpower_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{willpower_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{willpower_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{willpower_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{willpower_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{willpower_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{willpower_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{willpower_total}*1.5)+@{penalty})]]}} {{standard=[[@{willpower_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{willpower_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{willpower_total}+@{penalty})]]}} {{hard=[[ceil((@{willpower_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{willpower_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{willpower_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{willpower_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{willpower_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{willpower_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{willpower_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{willpower_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{willpower_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{willpower_notes}}}'}}"></button>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <button type="roll" class="sheet-improve sheet-button-width" title="%{willpower_improve}" name="roll_willpower_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{willpower}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{willpower_fumbled}]]}} {{skill=[[@{willpower_total}]]}} {{fumbled=[[@{willpower_fumbled}]]}}'}}"></button>
+                                </div>
+                                <div class="sheet-td sheet-play">
+                                    <input type="checkbox" title="@{willpower_encumbered}" name="attr_willpower_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{willpower_fumbled}" name="attr_willpower_fumbled" value="1"><span class="sheet-checkico">!</span>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{willpower_trained}" name="attr_willpower_trained" value="1"><span class="sheet-checkico">3</span>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <div class="sheet-number-width" data-i18n="pow-u">POW</div>
+                                    <input type="hidden" name="attr_willpower_char1" value="@{pow}" disabled>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <div class="sheet-number-width" data-i18n="pow-u">POW</div>
+                                    <input type="hidden" name="attr_willpower_char2" value="@{pow}" disabled>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{willpower_other}" name="attr_willpower_other" value="0">
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{willpower_total}" name="attr_willpower_total" value="22" readonly>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{willpower_details}" name="attr_willpower_details" value="1"><span class="sheet-checkico">E</span>
+                                </div>
                             </div>
-                            <div class="sheet-td sheet-play">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{willpower_roll}" name="roll_willpower_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=^{willpower}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{willpower_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{willpower_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{willpower_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{willpower_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{willpower_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{willpower_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{willpower_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{willpower_total}*1.5)+@{penalty})]]}} {{standard=[[@{willpower_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{willpower_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{willpower_total}+@{penalty})]]}} {{hard=[[ceil((@{willpower_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{willpower_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{willpower_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{willpower_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{willpower_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{willpower_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{willpower_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{willpower_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{willpower_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{willpower_notes}}}'}}"></button>
+                            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_willpower_details" value="1">
+                            <div class="sheet-toggle">
+                                <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{willpower_notes}" name="attr_willpower_notes"></textarea></div>
+                                <div class="sheet-play"><span class="sheet-skillnotes" name="attr_willpower_notes"></span></div>
                             </div>
-                            <div class="sheet-td sheet-edit">
-                                <button type="roll" class="sheet-improve sheet-button-width" title="%{willpower_improve}" name="roll_willpower_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{willpower}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{willpower_fumbled}]]}} {{skill=[[@{willpower_total}]]}} {{fumbled=[[@{willpower_fumbled}]]}}'}}"></button>
-                            </div>
-                            <div class="sheet-td sheet-play">
-                                <input type="checkbox" title="@{willpower_encumbered}" name="attr_willpower_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{willpower_fumbled}" name="attr_willpower_fumbled" value="1"><span class="sheet-checkico">!</span>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{willpower_trained}" name="attr_willpower_trained" value="1"><span class="sheet-checkico">3</span>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <div class="sheet-number-width" data-i18n="pow-u">POW</div>
-                                <input type="hidden" name="attr_willpower_char1" value="@{pow}" disabled>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <div class="sheet-number-width" data-i18n="pow-u">POW</div>
-                                <input type="hidden" name="attr_willpower_char2" value="@{pow}" disabled>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{willpower_other}" name="attr_willpower_other" value="0">
-                            </div>
-                            <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{willpower_total}" name="attr_willpower_total" value="22" readonly>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{willpower_details}" name="attr_willpower_details" value="1"><span class="sheet-checkico">E</span>
-                            </div>
-                        </div>
-                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_willpower_details" value="1">
-                        <div class="sheet-toggle">
-                            <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{willpower_notes}" name="attr_willpower_notes"></textarea></div>
-                            <div class="sheet-play"><span class="sheet-skillnotes" name="attr_willpower_notes"></span></div>
                         </div>
                     </div>
                 </div>
@@ -907,106 +908,107 @@
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
 
-                    <!-- TODO i18n order -->
-                    <!-- Athletics -->
-                    <div class="sheet-hl">
-                        <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="athletics"><span class="sheet-radioico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="athletics"><span class="sheet-radioico">q</span></div>
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
-                            <div class="sheet-td sheet-grow sheet-hover-btn">
-                                <label class="sheet-skill" data-i18n="athletics">Athletics</label>
-                                <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">i</button>
-                                <input type="hidden" name="attr_athletics_name" value="^{athletics}">
+                    <div data-i18n-list="standard-skills-order">
+                        <!-- Athletics -->
+                        <div class="sheet-hl" data-i18n-list-item="athletics">
+                            <div class="sheet-flex">
+                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="athletics"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="athletics"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
+                                <div class="sheet-td sheet-grow sheet-hover-btn">
+                                    <label class="sheet-skill" data-i18n="athletics">Athletics</label>
+                                    <button type="roll" class="sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">i</button>
+                                    <input type="hidden" name="attr_athletics_name" value="^{athletics}">
+                                </div>
+                                <div class="sheet-td sheet-play">
+                                    <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=^{athletics}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{athletics_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{athletics_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{athletics_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{athletics_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{athletics_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{athletics_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{athletics_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{athletics_total}*1.5)+@{penalty})]]}} {{standard=[[@{athletics_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{athletics_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{athletics_total}+@{penalty})]]}} {{hard=[[ceil((@{athletics_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{athletics_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{athletics_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{athletics_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{athletics_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{athletics_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{athletics_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{athletics_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{athletics_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{athletics_notes}}}'}}"></button>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <button type="roll" class="sheet-improve sheet-button-width" title="%{athletics_improve}" name="roll_athletics_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{athletics}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{athletics_fumbled}]]}} {{skill=[[@{athletics_total}]]}} {{fumbled=[[@{athletics_fumbled}]]}}'}}"></button>
+                                </div>
+                                <div class="sheet-td sheet-play">
+                                    <input type="checkbox" title="@{athletics_encumbered}" name="attr_athletics_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{athletics_fumbled}" name="attr_athletics_fumbled" value="1"><span class="sheet-checkico">!</span>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{athletics_trained}" name="attr_athletics_trained" value="1"><span class="sheet-checkico">3</span>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <div class="sheet-number-width" data-i18n="str-u">STR</div>
+                                    <input type="hidden" name="attr_athletics_char1" value="@{str}" disabled>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <div class="sheet-number-width" data-i18n="dex-u">DEX</div>
+                                    <input type="hidden" name="attr_athletics_char2" value="@{dex}" disabled>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{athletics_other}" name="attr_athletics_other" value="0">
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{athletics_total}" name="attr_athletics_total" value="22" readonly>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{athletics_details}" name="attr_athletics_details" value="1"><span class="sheet-checkico">E</span>
+                                </div>
                             </div>
-                            <div class="sheet-td sheet-play">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{athletics_roll}" name="roll_athletics_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=^{athletics}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{athletics_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{athletics_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{athletics_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{athletics_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{athletics_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{athletics_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{athletics_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{athletics_total}*1.5)+@{penalty})]]}} {{standard=[[@{athletics_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{athletics_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{athletics_total}+@{penalty})]]}} {{hard=[[ceil((@{athletics_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{athletics_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{athletics_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{athletics_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{athletics_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{athletics_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{athletics_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{athletics_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{athletics_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{athletics_notes}}}'}}"></button>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <button type="roll" class="sheet-improve sheet-button-width" title="%{athletics_improve}" name="roll_athletics_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{athletics}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{athletics_fumbled}]]}} {{skill=[[@{athletics_total}]]}} {{fumbled=[[@{athletics_fumbled}]]}}'}}"></button>
-                            </div>
-                            <div class="sheet-td sheet-play">
-                                <input type="checkbox" title="@{athletics_encumbered}" name="attr_athletics_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{athletics_fumbled}" name="attr_athletics_fumbled" value="1"><span class="sheet-checkico">!</span>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{athletics_trained}" name="attr_athletics_trained" value="1"><span class="sheet-checkico">3</span>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <div class="sheet-number-width" data-i18n="str-u">STR</div>
-                                <input type="hidden" name="attr_athletics_char1" value="@{str}" disabled>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <div class="sheet-number-width" data-i18n="dex-u">DEX</div>
-                                <input type="hidden" name="attr_athletics_char2" value="@{dex}" disabled>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{athletics_other}" name="attr_athletics_other" value="0">
-                            </div>
-                            <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{athletics_total}" name="attr_athletics_total" value="22" readonly>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{athletics_details}" name="attr_athletics_details" value="1"><span class="sheet-checkico">E</span>
+                            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_athletics_details" value="1">
+                            <div class="sheet-toggle">
+                                <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{athletics_notes}" name="attr_athletics_notes"></textarea></div>
+                                <div class="sheet-play"><span class="sheet-skillnotes" name="attr_athletics_notes"></span></div>
                             </div>
                         </div>
-                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_athletics_details" value="1">
-                        <div class="sheet-toggle">
-                            <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{athletics_notes}" name="attr_athletics_notes"></textarea></div>
-                            <div class="sheet-play"><span class="sheet-skillnotes" name="attr_athletics_notes"></span></div>
-                        </div>
-                    </div>
 
-                    <!-- Swim -->
-                    <div class="sheet-hl">
-                        <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="swim"><span class="sheet-radioico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="swim"><span class="sheet-radioico">q</span></div>
-                            <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{swim_total}/5)"><span class="sheet-radioico">&</span></div>
-                            <div class="sheet-td sheet-grow sheet-hover-btn">
-                                <label class="sheet-skill" data-i18n="swim">Swim</label>
-                                <button type="roll" class="sheet-id" title="%{swim_id}" name="roll_swim_id" value="/w gm {{'&{template:default} {{name=@{swim_name}}} {{^{id}=swim}}'}}">i</button>
-                                <input type="hidden" name="attr_swim_name" value="^{swim}">
+                        <!-- Swim -->
+                        <div class="sheet-hl" data-i18n-list-item="swim">
+                            <div class="sheet-flex">
+                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="swim"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="swim"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{swim_total}/5)"><span class="sheet-radioico">&</span></div>
+                                <div class="sheet-td sheet-grow sheet-hover-btn">
+                                    <label class="sheet-skill" data-i18n="swim">Swim</label>
+                                    <button type="roll" class="sheet-id" title="%{swim_id}" name="roll_swim_id" value="/w gm {{'&{template:default} {{name=@{swim_name}}} {{^{id}=swim}}'}}">i</button>
+                                    <input type="hidden" name="attr_swim_name" value="^{swim}">
+                                </div>
+                                <div class="sheet-td sheet-play">
+                                    <button type="roll" class="sheet-d100 sheet-button-width" title="%{swim_roll}" name="roll_swim_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=^{swim}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{swim_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{swim_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{swim_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{swim_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{swim_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{swim_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{swim_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{swim_total}*1.5)+@{penalty})]]}} {{standard=[[@{swim_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{swim_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{swim_total}+@{penalty})]]}} {{hard=[[ceil((@{swim_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{swim_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{swim_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{swim_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{swim_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{swim_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{swim_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{swim_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{swim_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{swim_notes}}}'}}"></button>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <button type="roll" class="sheet-improve sheet-button-width" title="%{swim_improve}" name="roll_swim_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{swim}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{swim_fumbled}]]}} {{skill=[[@{swim_total}]]}} {{fumbled=[[@{swim_fumbled}]]}}'}}"></button>
+                                </div>
+                                <div class="sheet-td sheet-play">
+                                    <input type="checkbox" title="@{swim_encumbered}" name="attr_swim_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{swim_fumbled}" name="attr_swim_fumbled" value="1"><span class="sheet-checkico">!</span>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{swim_trained}" name="attr_swim_trained" value="1"><span class="sheet-checkico">3</span>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <div class="sheet-number-width" data-i18n="str-u">STR</div>
+                                    <input type="hidden" name="attr_swim_char1" value="@{str}" disabled>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <div class="sheet-number-width" data-i18n="con-u">CON</div>
+                                    <input type="hidden" name="attr_swim_char2" value="@{con}" disabled>
+                                </div>
+                                <div class="sheet-td sheet-edit">
+                                    <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{swim_other}" name="attr_swim_other" value="0">
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{swim_total}" name="attr_swim_total" value="22" readonly>
+                                </div>
+                                <div class="sheet-td">
+                                    <input type="checkbox" title="@{swim_details}" name="attr_swim_details" value="1"><span class="sheet-checkico">E</span>
+                                </div>
                             </div>
-                            <div class="sheet-td sheet-play">
-                                <button type="roll" class="sheet-d100 sheet-button-width" title="%{swim_roll}" name="roll_swim_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=^{swim}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{swim_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{swim_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{swim_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{swim_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{swim_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{swim_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{swim_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{swim_total}*1.5)+@{penalty})]]}} {{standard=[[@{swim_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{swim_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{swim_total}+@{penalty})]]}} {{hard=[[ceil((@{swim_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{swim_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{swim_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{swim_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{swim_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{swim_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{swim_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{swim_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{swim_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{swim_notes}}}'}}"></button>
+                            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_swim_details" value="1">
+                            <div class="sheet-toggle">
+                                <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{swim_notes}" name="attr_swim_notes"></textarea></div>
+                                <div class="sheet-play"><span class="sheet-skillnotes" name="attr_swim_notes"></span></div>
                             </div>
-                            <div class="sheet-td sheet-edit">
-                                <button type="roll" class="sheet-improve sheet-button-width" title="%{swim_improve}" name="roll_swim_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{swim}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{swim_fumbled}]]}} {{skill=[[@{swim_total}]]}} {{fumbled=[[@{swim_fumbled}]]}}'}}"></button>
-                            </div>
-                            <div class="sheet-td sheet-play">
-                                <input type="checkbox" title="@{swim_encumbered}" name="attr_swim_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{swim_fumbled}" name="attr_swim_fumbled" value="1"><span class="sheet-checkico">!</span>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{swim_trained}" name="attr_swim_trained" value="1"><span class="sheet-checkico">3</span>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <div class="sheet-number-width" data-i18n="str-u">STR</div>
-                                <input type="hidden" name="attr_swim_char1" value="@{str}" disabled>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <div class="sheet-number-width" data-i18n="con-u">CON</div>
-                                <input type="hidden" name="attr_swim_char2" value="@{con}" disabled>
-                            </div>
-                            <div class="sheet-td sheet-edit">
-                                <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{swim_other}" name="attr_swim_other" value="0">
-                            </div>
-                            <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{swim_total}" name="attr_swim_total" value="22" readonly>
-                            </div>
-                            <div class="sheet-td">
-                                <input type="checkbox" title="@{swim_details}" name="attr_swim_details" value="1"><span class="sheet-checkico">E</span>
-                            </div>
-                        </div>
-                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_swim_details" value="1">
-                        <div class="sheet-toggle">
-                            <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{swim_notes}" name="attr_swim_notes"></textarea></div>
-                            <div class="sheet-play"><span class="sheet-skillnotes" name="attr_swim_notes"></span></div>
                         </div>
                     </div>
                 </div>
