@@ -1191,7 +1191,7 @@
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
-
+                    <!-- TODO i18n order -->
                     <!-- Willpower -->
                     <div class="sheet-hl">
                         <div class="sheet-flex">
@@ -1261,6 +1261,8 @@
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
+
+                    <!-- TODO i18n order -->
                     <!-- Athletics -->
                     <div class="sheet-hl">
                         <div class="sheet-flex">
@@ -4340,11 +4342,7 @@ function calcSpiritAP(pow, int, spirit_ap_other, spirit_ap_temp, action_points_c
     };
 }
 
-// TODO char triggers
-// TODO add willpower skill
-// TODO fix attr trigger to use willpower not athletics
-// TODO willpower and binding triggers
-function calcSpiritDamage(willpower_total, spirit_damage_other, spirit_damage_temp, spirit_damage_calc, binding_id) {
+function calcSpiritDamage(willpower_total, spirit_damage_other, spirit_damage_temp, spirit_damage_calc, binding_id, binding_total) {
     let base_steps;
     if (spirit_damage_calc === 'willpower') {
         base_steps = Math.ceil((willpower_total/2)/20);
@@ -4362,15 +4360,23 @@ function calcSpiritDamage(willpower_total, spirit_damage_other, spirit_damage_te
                 spirit_damage: 0
             }
         } else {
-            // I see no way around using the 2nd getAttrs and setAttrs in this case
-            getAttrs([`${binding_id}_total`], function(v){
-                base_steps = Math.ceil(parseInt(v[`${binding_id}_total`])/20);
-                setAttrs({
+            if (typeof binding_total === 'undefined') {
+                // I see no way around using the 2nd getAttrs and setAttrs in this case
+                getAttrs([`${binding_id}_total`], function(v){
+                    base_steps = Math.ceil(parseInt(v[`${binding_id}_total`])/20);
+                    setAttrs({
+                        spirit_damage_base: damageTable(base_steps),
+                        spirit_damage: damageTable(base_steps + parseInt(spirit_damage_other) + parseInt(spirit_damage_temp))
+                    });
+                });
+                return {};
+            } else {
+                base_steps = Math.ceil(parseInt(binding_total)/20);
+                return {
                     spirit_damage_base: damageTable(base_steps),
                     spirit_damage: damageTable(base_steps + parseInt(spirit_damage_other) + parseInt(spirit_damage_temp))
-                });
-            });
-            return {};
+                }
+            }
         }
     }
 }
@@ -4747,17 +4753,19 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                 ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points',
                     'luck_points_max'],
                 ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'],
-                ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max', 'action_points_calc']), function(v) {
+                ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max', 'action_points_calc'],
+                ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id']), function(v) {
                 const charObj = buildCharObj(v);
                 const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                     v['hp_calc'], v['simplified_combat_enabled']);
                 const all_hp_temp = parseInt(v['all_hp_temp']);
                 const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
                     v['healing_rate_temp'], v['healing_rate_double']);
+                const standardSkillVals = calcStdSkills(charStdSkillIds['pow'], charObj, v);
 
                 setAttrs({
                     pow: charObj['pow'],
-                    ...calcStdSkills(charStdSkillIds['pow'], charObj, v),
+                    ...standardSkillVals,
                     ...calcProSkills("professionalskill", proSkillIds, charObj, v),
                     ...calcProSkills("combatstyle", combatStyleIds, charObj, v),
                     ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
@@ -4793,7 +4801,8 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                     ...calcLocationHP('11', hp_max_base, v['location11_hp_max_base_mod'], v['location11_hp_max_other'],
                         all_hp_temp, v['location11_hp'], v['location11_hp_max']),
                     ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
-                        all_hp_temp, v['location12_hp'], v['location12_hp_max'])
+                        all_hp_temp, v['location12_hp'], v['location12_hp_max']),
+                    ...calcSpiritDamage(standardSkillVals['willpower_total'], v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id'])
                 });
             });
         });
@@ -4940,9 +4949,9 @@ on('change:spirit_ap_other change:spirit_ap_temp', function() {
 
 /* Spirit Damage Triggers */
 on('change:spirit_damage_other change:spirit_damage_temp change:spirit_damage_calc change:binding_id', function() {
-    getAttrs(['athletics_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id'], function(v) {
+    getAttrs(['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id'], function(v) {
         setAttrs({
-            ...calcSpiritDamage(parseInt(v['athletics_total']), v['spirit_damage_other'], v['spirit_damage_temp'],
+            ...calcSpiritDamage(parseInt(v['willpower_total']), v['spirit_damage_other'], v['spirit_damage_temp'],
                 v['spirit_damage_calc'], v['binding_id'])
         });
     });
@@ -5050,7 +5059,8 @@ on('change:all_armor_temp', function() {
 allStdSkillIds.forEach(skillId => {
     on(`change:${skillId}_other`, function() {
         getAttrs(allCharGetAttrs.concat([`${skillId}_other`], ['initiative_bonus_other', 'initiative_bonus_temp',
-            'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue']), function(v) {
+            'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue'],
+        ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id']), function(v) {
             let charObj = buildCharObj(v);
             let char1 = charObj[stdSkillChars[`${skillId}`][0]];
             let char2 = charObj[stdSkillChars[`${skillId}`][1]];
@@ -5064,6 +5074,13 @@ allStdSkillIds.forEach(skillId => {
                     ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
                         v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, athletics_total,
                         v['initiative_add_one_tenth_athletics'])
+                });
+            } else if (`${skillId}` === 'willpower') {
+                const willpower_total = char1 + char2 + parseInt(v[`${skillId}_other`]);
+
+                setAttrs({
+                    willpower_total: willpower_total,
+                    ...calcSpiritDamage(willpower_total, v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id'])
                 });
             } else {
                 setAttrs({
@@ -5082,12 +5099,20 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
 
-    getAttrs(allCharGetAttrs.concat([`repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`, `repeating_${type}_${id}_other`]), function(v) {
+    getAttrs(allCharGetAttrs.concat([`repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`, `repeating_${type}_${id}_other`],
+        ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id']), function(v) {
         const charObj = buildCharObj(v);
+        const skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
+        let spiritDamageVals = [];
+
+        if (`repeating_professionalskill_${id}` === v['binding_id']) {
+            spiritDamageVals = calcSpiritDamage(v['willpower_total'], v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id'], skillTotal);
+        }
 
         setAttrs({
-            [`repeating_${type}_${id}_total`]: calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]),
-            [`repeating_${type}_${id}_encumbered`]: calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`])
+            [`repeating_${type}_${id}_total`]: skillTotal,
+            [`repeating_${type}_${id}_encumbered`]: calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`]),
+            ...spiritDamageVals
         });
     });
 });
