@@ -400,6 +400,16 @@ a.repcontrol_move {
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
 }
+.ui-dialog .charsheet button[type=roll].sheet-waxorwane::before {
+    font-family: 'pictos';
+    font-size: 1.1em;
+    content: "r";
+}
+.ui-dialog .charsheet button[type="roll"].sheet-waxorwane:hover {
+    border: solid 1px black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
 .ui-dialog .charsheet button[type=roll].sheet-link {
     padding: 0!important;
     margin: 0!important;
