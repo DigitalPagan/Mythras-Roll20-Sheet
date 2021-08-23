@@ -1,0 +1,246 @@
+<!-- Hit Table Roll Template -->
+<!-- {{'@{roll_display}&{template:hittable} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}}'}} -->
+<rolltemplate class="sheet-rolltemplate-hittable">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}</div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" style="width:100%;"><span data-i18n="result">Result</span></div>
+                <div class="sheet-th sheet-pictos-three sheet-help" data-i18n-title="passive_block_size" title="Passive Block Size">b</div>
+                <div class="sheet-th sheet-pictos sheet-help" data-i18n-title="armor_points" title="Armor Points">U</div>
+                <div class="sheet-th sheet-help" data-i18n-title="hit_points" title="Hit Points"><span data-i18n="hp">HP</span></div>
+            </div>
+            {{'{{#roll_low}}'}}
+            <div class="sheet-tr">
+                {{'{{#rollBetween() roll_low loc1_start loc1_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc1_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc1_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc1_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc1_hp}}/{{loc1_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc1_start loc1_end}}'}}
+                {{'{{#rollBetween() roll_low loc2_start loc2_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc2_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc2_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc2_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc2_hp}}/{{loc2_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc2_start loc2_end}}'}}
+                {{'{{#rollBetween() roll_low loc3_start loc3_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc3_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc3_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc3_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc3_hp}}/{{loc3_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc3_start loc3_end}}'}}
+                {{'{{#rollBetween() roll_low loc4_start loc4_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc4_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc4_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc4_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc4_hp}}/{{loc4_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc4_start loc4_end}}'}}
+                {{'{{#rollBetween() roll_low loc5_start loc5_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc5_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc5_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc5_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc5_hp}}/{{loc5_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc5_start loc5_end}}'}}
+                {{'{{#rollBetween() roll_low loc6_start loc6_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc6_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc6_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc6_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc6_hp}}/{{loc6_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc6_start loc6_end}}'}}
+                {{'{{#rollBetween() roll_low loc7_start loc7_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc7_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc7_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc7_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc7_hp}}/{{loc7_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc7_start loc7_end}}'}}
+                {{'{{#rollBetween() roll_low loc8_start loc8_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc8_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc8_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc8_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc8_hp}}/{{loc8_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc8_start loc8_end}}'}}
+                {{'{{#rollBetween() roll_low loc9_start loc9_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc9_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc9_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc9_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc9_hp}}/{{loc9_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc9_start loc9_end}}'}}
+                {{'{{#rollBetween() roll_low loc10_start loc10_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc10_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc10_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc10_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc10_hp}}/{{loc10_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc10_start loc10_end}}'}}
+                {{'{{#rollBetween() roll_low loc11_start loc11_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc11_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc11_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc11_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc11_hp}}/{{loc11_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc11_start loc11_end}}'}}
+                {{'{{#rollBetween() roll_low loc12_start loc12_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_low}}({{loc12_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc12_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc12_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc12_hp}}/{{loc12_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_low loc12_start loc12_end}}'}}
+            </div>
+            {{'{{/roll_low}}'}}
+            {{'{{#roll}}'}}
+            <div class="sheet-tr">
+                {{'{{#rollBetween() roll loc1_start loc1_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc1_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc1_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc1_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc1_hp}}/{{loc1_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc1_start loc1_end}}'}}
+                {{'{{#rollBetween() roll loc2_start loc2_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc2_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc2_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc2_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc2_hp}}/{{loc2_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc2_start loc2_end}}'}}
+                {{'{{#rollBetween() roll loc3_start loc3_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc3_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc3_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc3_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc3_hp}}/{{loc3_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc3_start loc3_end}}'}}
+                {{'{{#rollBetween() roll loc4_start loc4_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc4_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc4_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc4_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc4_hp}}/{{loc4_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc4_start loc4_end}}'}}
+                {{'{{#rollBetween() roll loc5_start loc5_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc5_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc5_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc5_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc5_hp}}/{{loc5_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc5_start loc5_end}}'}}
+                {{'{{#rollBetween() roll loc6_start loc6_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc6_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc6_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc6_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc6_hp}}/{{loc6_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc6_start loc6_end}}'}}
+                {{'{{#rollBetween() roll loc7_start loc7_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc7_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc7_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc7_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc7_hp}}/{{loc7_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc7_start loc7_end}}'}}
+                {{'{{#rollBetween() roll loc8_start loc8_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc8_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc8_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc8_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc8_hp}}/{{loc8_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc8_start loc8_end}}'}}
+                {{'{{#rollBetween() roll loc9_start loc9_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc9_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc9_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc9_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc9_hp}}/{{loc9_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc9_start loc9_end}}'}}
+                {{'{{#rollBetween() roll loc10_start loc10_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc10_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc10_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc10_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc10_hp}}/{{loc10_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc10_start loc10_end}}'}}
+                {{'{{#rollBetween() roll loc11_start loc11_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc11_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc11_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc11_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc11_hp}}/{{loc11_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc11_start loc11_end}}'}}
+                {{'{{#rollBetween() roll loc12_start loc12_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}({{loc12_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc12_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc12_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc12_hp}}/{{loc12_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll loc12_start loc12_end}}'}}
+            </div>
+            {{'{{/roll}}'}}
+            {{'{{#roll_high}}'}}
+            <div class="sheet-tr">
+                {{'{{#rollBetween() roll_high loc1_start loc1_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc1_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc1_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc1_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc1_hp}}/{{loc1_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc1_start loc1_end}}'}}
+                {{'{{#rollBetween() roll_high loc2_start loc2_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc2_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc2_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc2_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc2_hp}}/{{loc2_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc2_start loc2_end}}'}}
+                {{'{{#rollBetween() roll_high loc3_start loc3_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc3_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc3_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc3_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc3_hp}}/{{loc3_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc3_start loc3_end}}'}}
+                {{'{{#rollBetween() roll_high loc4_start loc4_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc4_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc4_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc4_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc4_hp}}/{{loc4_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc4_start loc4_end}}'}}
+                {{'{{#rollBetween() roll_high loc5_start loc5_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc5_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc5_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc5_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc5_hp}}/{{loc5_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc5_start loc5_end}}'}}
+                {{'{{#rollBetween() roll_high loc6_start loc6_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc6_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc6_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc6_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc6_hp}}/{{loc6_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc6_start loc6_end}}'}}
+                {{'{{#rollBetween() roll_high loc7_start loc7_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc7_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc7_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc7_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc7_hp}}/{{loc7_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc7_start loc7_end}}'}}
+                {{'{{#rollBetween() roll_high loc8_start loc8_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc8_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc8_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc8_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc8_hp}}/{{loc8_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc8_start loc8_end}}'}}
+                {{'{{#rollBetween() roll_high loc9_start loc9_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc9_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc9_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc9_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc9_hp}}/{{loc9_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc9_start loc9_end}}'}}
+                {{'{{#rollBetween() roll_high loc10_start loc10_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc10_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc10_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc10_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc10_hp}}/{{loc10_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc10_start loc10_end}}'}}
+                {{'{{#rollBetween() roll_high loc11_start loc11_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc11_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc11_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc11_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc11_hp}}/{{loc11_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc11_start loc11_end}}'}}
+                {{'{{#rollBetween() roll_high loc12_start loc12_end}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll_high}}({{loc12_name}})'}}</div>
+                <div class="sheet-td">{{'{{loc12_block}}'}}</div>
+                <div class="sheet-td">{{'{{loc12_ap}}'}}</div>
+                <div class="sheet-td">{{'{{loc12_hp}}/{{loc12_hp_max}}'}}</div>
+                {{'{{/rollBetween() roll_high loc12_start loc12_end}}'}}
+            </div>
+            {{'{{/roll_high}}'}}
+        </div>
+    </div>
+</rolltemplate>

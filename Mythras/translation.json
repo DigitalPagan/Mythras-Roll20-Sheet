@@ -97,7 +97,6 @@
     "healthy-gift": "Healthy Gift (Double Healing Rate)",
     "armor": "Armor",
     "dependencies": "Dependencies",
-    "hit-locations": "Hit Locations",
     "con-siz": "CON+SIZ",
     "con-siz-pow": "CON+SIZ+POW",
     "con-siz-str": "CON+SIZ+STR",
@@ -920,7 +919,7 @@
     "pool": "Pool",
     "resource": "Resource",
     "passively-blocked": "Passively Blocked",
-    "hit-location": "Hit Location",
+    "hit_location": "Hit Location",
     "d10-location": "d10 Location",
     "d20-location": "d20 Location",
     "d10plus10-location": "d10+10 Location",
@@ -1105,5 +1104,7 @@
     "success": "Success",
     "fumble": "Fumble",
     "weak": "Weak",
-    "strong": "Strong"
+    "strong": "Strong",
+    "hit_table": "Hit Table",
+    "passive_block_size": "Passive Block Size"
 }

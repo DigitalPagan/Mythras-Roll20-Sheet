@@ -870,5 +870,6 @@ input.sheet-firearms-toggle:not(:checked) + div .sheet-firearm-trait {
 /* =Roll Templates= */
 {% include 'roll_templates/default.css' %}
 {% include 'roll_templates/effect.css' %}
+{% include 'roll_templates/hittable.css' %}
 {% include 'roll_templates/improvement.css' %}
 {% include 'roll_templates/skill.css' %}

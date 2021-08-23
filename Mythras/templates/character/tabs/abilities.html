@@ -13,7 +13,7 @@
             <div class="sheet-flex">
                 <div class="sheet-td sheet-hover-btn">
                     <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{id=@{id}}}'}}">i</button>
+                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                     <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
                 </div>
                 <div class="sheet-td">
