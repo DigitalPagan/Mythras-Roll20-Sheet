@@ -54,24 +54,49 @@ const encGetAttrs = ['avg_species_siz', 'encumbrance_temp', 'pack_equipped', 'ef
     'meleeweapon_enc', 'meleeweapon_enc_carried', 'rangedweapon_enc', 'rangedweapon_enc_carried', 'equipment_enc', 'equipment_enc_carried', 'currency_enc', 'currency_enc_carried'];
 
 const charStdSkillIds = {
-    str: ['athletics', 'swim'],
-    dex: ['athletics'],
-    siz: [],
-    con: ['swim'],
-    pow: ['willpower'],
-    int: [],
-    cha: []
+    str: ['athletics', 'brawn', 'boating', 'swim', 'unarmed'],
+    dex: ['athletics', 'conceal', 'dance', 'drive', 'evade', 'first_aid', 'ride', 'stealth', 'unarmed'],
+    siz: ['brawn'],
+    con: ['boating', 'endurance', 'swim'],
+    pow: ['conceal', 'drive', 'insight', 'perception', 'ride', 'sing', 'superstition', 'willpower'],
+    int: ['customs', 'deceit', 'first_aid', 'home_parallel', 'insight', 'locale', 'native_tongue', 'perception', 'stealth', 'superstition'],
+    cha: ['dance', 'deceit', 'influence', 'native_tongue', 'sing'],
+    zero: ['status', 'strangeness', 'the_soot']
 };
 const allStdSkillIds = Array.from(
     new Set(
         charStdSkillIds['str'].concat(charStdSkillIds['dex'], charStdSkillIds['siz'], charStdSkillIds['con'],
-            charStdSkillIds['pow'], charStdSkillIds['int'], charStdSkillIds['cha'])
+            charStdSkillIds['pow'], charStdSkillIds['int'], charStdSkillIds['cha'], charStdSkillIds['zero'])
     )
 );
 
 const stdSkillChars = {
     'athletics': ['str', 'dex'],
+    'brawn': ['str', 'siz'],
+    'boating': ['str', 'con'],
+    'conceal': ['dex', 'pow'],
+    'customs': ['int', 'int'],
+    'dance': ['dex', 'cha'],
+    'deceit': ['int', 'cha'],
+    'drive': ['dex', 'pow'],
+    'endurance': ['con', 'con'],
+    'evade': ['dex', 'dex'],
+    'first_aid': ['dex', 'int'],
+    'home_parallel': ['int', 'int'],
+    'influence': ['cha', 'cha'],
+    'insight': ['int', 'pow'],
+    'locale': ['int', 'int'],
+    'native_tongue': ['int', 'cha'],
+    'perception': ['int', 'pow'],
+    'ride': ['dex', 'pow'],
+    'sing': ['pow', 'cha'],
+    'status': ['zero', 'zero'],
+    'stealth': ['dex', 'int'],
+    'strangeness': ['zero', 'zero'],
+    'superstition': ['21-int', 'pow'],
     'swim': ['str', 'con'],
+    'the_soot': ['zero', 'zero'],
+    'unarmed': ['str', 'dex'],
     'willpower': ['pow', 'pow']
 }
 
@@ -446,6 +471,10 @@ function buildCharObj(v) {
         charObj[`${char}`] = calcChar(v[`${char}_base`], v[`${char}_other`], v[`${char}_temp`]);
     });
 
+    // Special values
+    charObj["21-int"] = 21 - charObj["int"];
+    charObj['zero'] = 0;
+
     return charObj;
 }
 
@@ -568,8 +597,8 @@ function calcProSkillTotal(charObj, char1, char2, other) {
         case '@{cha}':
             char1Val = charObj['cha'];
             break;
-        case '21':
-            char1Val = 21;
+        case '(21-@{int})':
+            char1Val = 21 - charObj['int'];
             break;
         default:
             char1Val = 0;
@@ -597,27 +626,6 @@ function calcProSkillTotal(charObj, char1, char2, other) {
         case '@{cha}':
             char2Val = charObj['cha'];
             break;
-        case '-@{str}':
-            char2Val = -charObj['str'];
-            break;
-        case '-@{dex}':
-            char2Val = -charObj['dex'];
-            break;
-        case '-@{siz}':
-            char2Val = -charObj['siz'];
-            break;
-        case '-@{con}':
-            char2Val = -charObj['con'];
-            break;
-        case '-@{pow}':
-            char2Val = -charObj['pow'];
-            break;
-        case '-@{int}':
-            char2Val = -charObj['int'];
-            break;
-        case '-@{cha}':
-            char2Val = -charObj['cha'];
-            break;
         default:
             char2Val = 0;
     }
@@ -632,7 +640,7 @@ function calcProSkillEncumbered(char1, char2) {
     if (char1 === '@{str}' || char1 === '@{dex}') {
         char1bool = true;
     }
-    if (char2 === '@{str}' || char2 === '@{dex}' || char2 === '-@{str}' || char2 === '-@{dex}') {
+    if (char2 === '@{str}' || char2 === '@{dex}') {
         char2bool = true;
     }
 
