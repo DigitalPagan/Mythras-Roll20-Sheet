@@ -1099,5 +1099,7 @@
     "weak": "Weak",
     "strong": "Strong",
     "hit_table": "Hit Table",
-    "passive_block_size": "Passive Block Size"
+    "passive_block_size": "Passive Block Size",
+    "conflict": "Conflict",
+    "spirit_combat": "Spirit Combat"
 }

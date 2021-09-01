@@ -161,10 +161,10 @@ div.sheet-flex-col {
     display: flex;
     flex-direction: column;
 }
-div.sheet-grow {
+.sheet-grow {
     flex-grow: 1;
 }
-div.sheet-shrink {
+.sheet-shrink {
     flex-shrink: 1;
 }
 .sheet-text-center {

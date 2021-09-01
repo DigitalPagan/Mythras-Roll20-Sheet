@@ -172,7 +172,7 @@
             <h2 data-i18n="skills">Skills</h2>
 
             <!-- Herculean Skill Modifier -->
-            <div class="flex">
+            <div class="sheet-flex">
                 <label class="sheet-left" data-i18n="herculean-modifier">Herculean Modifier</label>
                 <select class="sheet-full-width sheet-usrinput" name="attr_herculean_mod">
                     <option value=".1">1/10</option>
@@ -264,7 +264,7 @@
             <h2 data-i18n="attributes">Attributes</h2>
 
             <!-- Action Point Calculation -->
-            <div class="flex">
+            <div class="sheet-flex">
                 <label class="sheet-left" data-i18n="action_points">Action Points</label>
                 <select class="sheet-full-width sheet-usrinput" name="attr_action_points_calc">
                     <option value="calculate" data-i18n="calculated" selected>Calculated</option>
@@ -1183,23 +1183,33 @@
         </div>
     </div>
 
-    <!-- Combat -->
+    <!-- Conflict -->
     <div class="sheet-section">
-        <input type="checkbox" class="sheet-accordion" name="attr_combat_section_toggle" value="1">
-        <h2 class="sheet-accordion" data-i18n="combat">Combat</h2>
-
-        <div class="sheet-accordion">
+        <div class="sheet-flex">
+            <h2><span data-i18n="conflict">Conflict</span>:&nbsp;</h2>
+            <input type='hidden' class='sheet-conflict-mode' name='attr_conflict_mode' value='none'>
+            <div class="sheet-conflict-mode sheet-bmargin">
+                <button type="action" class="sheet-checkbtn sheet-conflict-mode-none" name="act_conflict_mode_none" data-i18n="none">None</button>
+                <button type="action" class="sheet-checkbtn sheet-conflict-mode-combat" name="act_conflict_mode_combat" data-i18n="combat">Combat</button>
+                <button type="action" class="sheet-checkbtn sheet-conflict-mode-spirit-combat" name="act_conflict_mode_spirit_combat" data-i18n="spirit_combat">Spirit Combat</button>
+                <button type="action" class="sheet-checkbtn sheet-conflict-mode-social-conflict" name="act_conflict_mode_social_conflict" data-i18n="social_conflict">Social Conflict</button>
+            </div>
         </div>
-    </div>
 
-    <!-- Social Conflict -->
-    <div class="sheet-section">
-        <input type="checkbox" class="sheet-accordion" name="attr_social_conflict_section_toggle" value="1">
-        <h2 class="sheet-accordion" data-i18n="social_conflict">Social Conflict</h2>
+        <input type='hidden' class='sheet-conflict-mode' name='attr_conflict_mode' value='none'>
+        <div class='sheet-conflict-mode-combat'>
+            combat stuff
+        </div>
 
-        <div class="sheet-accordion">
+        <div class='sheet-conflict-mode-spirit-combat'>
+            spirit combat stuff
+        </div>
+
+        <div class='sheet-conflict-mode-social-conflict'>
+            social conflict stuff
             <input type="text" class="sheet-full-width" name="attr_social_attack_id_value" value="@{social_attack}" disabled>
             <input type="text" class="sheet-full-width" name="attr_social_defense_id_value" value="@{social_defense}" disabled>
+        </div>
         </div>
     </div>
 
@@ -1218,14 +1228,14 @@
 
         <input type="hidden" class="sheet-augment-toggle" name="attr_augmentation">
         <div class="sheet-flex">
-            <input type="checkbox" class="sheet-deep-toggle sheet-hidden" name="attr_social_conflict_section_toggle" value="1">
+            <input type="hidden" class="sheet-conflict-mode" name="attr_conflict_mode" value="none">
             <!-- Skills Left Column -->
             <div class="sheet-rmargin sheet-half-col">
                 <!-- Resistance Skills -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
                         <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="resistance_skill">Resistance Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
@@ -1242,8 +1252,8 @@
                         <!-- Brawn -->
                         <div class="sheet-hl" data-i18n-list-item="brawn">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="brawn"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="brawn"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="brawn"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="brawn"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{brawn_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="brawn">Brawn</label>
@@ -1293,8 +1303,8 @@
                         <!-- Endurance -->
                         <div class="sheet-hl" data-i18n-list-item="endurance">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="endurance"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="endurance"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="endurance"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="endurance"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{endurance_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="endurance">Endurance</label>
@@ -1344,8 +1354,8 @@
                         <!-- Evade -->
                         <div class="sheet-hl" data-i18n-list-item="evade">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="evade"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="evade"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="evade"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="evade"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{evade_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="evade">Evade</label>
@@ -1395,8 +1405,8 @@
                         <!-- Willpower -->
                         <div class="sheet-hl" data-i18n-list-item="willpower">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="willpower"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="willpower"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="willpower"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="willpower"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{willpower_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="willpower">Willpower</label>
@@ -1448,8 +1458,8 @@
                 <!-- Standard Skills -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
                         <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="standard_skill">Standard Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
@@ -1467,8 +1477,8 @@
                         <!-- Athletics -->
                         <div class="sheet-hl" data-i18n-list-item="athletics">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="athletics"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="athletics"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="athletics"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="athletics"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{athletics_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="athletics">Athletics</label>
@@ -1519,8 +1529,8 @@
                         <div class="sheet-hl" data-i18n-list-item="boating">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_boating_standard" value="1" checked>
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="boating"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="boating"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="boating"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="boating"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{boating_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="boating">Boating</label>
@@ -1570,8 +1580,8 @@
                         <!-- Conceal -->
                         <div class="sheet-hl" data-i18n-list-item="conceal">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="conceal"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="conceal"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="conceal"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="conceal"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{conceal_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="conceal">Conceal</label>
@@ -1621,8 +1631,8 @@
                         <!-- Customs -->
                         <div class="sheet-hl" data-i18n-list-item="customs">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="customs"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="customs"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="customs"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="customs"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{customs_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="customs">Customs</label>
@@ -1672,8 +1682,8 @@
                         <!-- Dance -->
                         <div class="sheet-hl" data-i18n-list-item="dance">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="dance"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="dance"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="dance"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="dance"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{dance_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="dance">Dance</label>
@@ -1723,8 +1733,8 @@
                         <!-- Deceit -->
                         <div class="sheet-hl" data-i18n-list-item="deceit">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="deceit"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="deceit"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="deceit"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="deceit"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{deceit_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="deceit">Deceit</label>
@@ -1775,8 +1785,8 @@
                         <div class="sheet-hl" data-i18n-list-item="drive">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_drive_standard" value="1" checked>
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="drive"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="drive"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="drive"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="drive"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{drive_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="drive">Drive</label>
@@ -1826,8 +1836,8 @@
                         <!-- First Aid -->
                         <div class="sheet-hl" data-i18n-list-item="first_aid">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="first_aid"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="first_aid"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="first_aid"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="first_aid"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{first_aid_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="first_aid">First Aid</label>
@@ -1878,8 +1888,8 @@
                         <div class="sheet-hl" data-i18n-list-item="home_parallel">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_home_parallel_standard" value="1">
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="home_parallel"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="home_parallel"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="home_parallel"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="home_parallel"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{home_parallel_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="home_parallel">Home Parallel</label>
@@ -1929,8 +1939,8 @@
                         <!-- Influence -->
                         <div class="sheet-hl" data-i18n-list-item="influence">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="influence"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="influence"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="influence"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="influence"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{influence_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="influence">Influence</label>
@@ -1980,8 +1990,8 @@
                         <!-- Insight -->
                         <div class="sheet-hl" data-i18n-list-item="insight">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="insight"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="insight"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="insight"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="insight"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{insight_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="insight">Insight</label>
@@ -2032,8 +2042,8 @@
                         <div class="sheet-hl" data-i18n-list-item="locale">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_locale_standard" value="1" checked>
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="locale"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="locale"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="locale"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="locale"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{locale_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="locale">Locale</label>
@@ -2083,8 +2093,8 @@
                         <!-- Native Tongue -->
                         <div class="sheet-hl" data-i18n-list-item="native_tongue">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="native_tongue"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="native_tongue"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="native_tongue"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="native_tongue"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{native_tongue_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="native_tongue">Native Tongue</label>
@@ -2134,8 +2144,8 @@
                         <!-- Perception -->
                         <div class="sheet-hl" data-i18n-list-item="perception">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="perception"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="perception"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="perception"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="perception"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{perception_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="perception">Perception</label>
@@ -2186,8 +2196,8 @@
                         <div class="sheet-hl" data-i18n-list-item="ride">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_ride_standard" value="1" checked>
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="ride"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="ride"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="ride"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="ride"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{ride_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="ride">Ride</label>
@@ -2237,8 +2247,8 @@
                         <!-- Sing -->
                         <div class="sheet-hl" data-i18n-list-item="sing">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="sing"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="sing"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="sing"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="sing"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{sing_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="sing">Sing</label>
@@ -2289,8 +2299,8 @@
                         <div class="sheet-hl" data-i18n-list-item="status">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_status_standard" value="1">
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="status"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="status"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="status"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="status"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{status_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="status">Status</label>
@@ -2340,8 +2350,8 @@
                         <!-- Stealth -->
                         <div class="sheet-hl" data-i18n-list-item="stealth">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="stealth"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="stealth"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="stealth"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="stealth"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{stealth_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="stealth">Stealth</label>
@@ -2392,8 +2402,8 @@
                         <div class="sheet-hl" data-i18n-list-item="strangeness">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_strangeness_standard" value="1">
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="strangeness"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="strangeness"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="strangeness"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="strangeness"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{strangeness_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="strangeness">Strangeness</label>
@@ -2444,8 +2454,8 @@
                         <div class="sheet-hl" data-i18n-list-item="superstition">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_superstition_standard" value="1">
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="superstition"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="superstition"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="superstition"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="superstition"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{superstition_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="superstition">Superstition</label>
@@ -2495,8 +2505,8 @@
                         <!-- Swim -->
                         <div class="sheet-hl" data-i18n-list-item="swim">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="swim"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="swim"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="swim"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="swim"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{swim_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="swim">Swim</label>
@@ -2547,8 +2557,8 @@
                         <div class="sheet-hl" data-i18n-list-item="the_soot">
                             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_the_soot_standard" value="1">
                             <div class="sheet-flex sheet-toggle">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="the_soot"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="the_soot"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="the_soot"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="the_soot"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{the_soot_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="the_soot">The Soot</label>
@@ -2598,8 +2608,8 @@
                         <!-- Unarmed -->
                         <div class="sheet-hl" data-i18n-list-item="unarmed">
                             <div class="sheet-flex">
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="unarmed"><span class="sheet-radioico">w</span></div>
-                                <div class="sheet-td sheet-deep-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="unarmed"><span class="sheet-radioico">q</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_attack_id}" name="attr_social_attack_id" value="unarmed"><span class="sheet-radioico">w</span></div>
+                                <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="radio" title="@{social_defense_id}" name="attr_social_defense_id" value="unarmed"><span class="sheet-radioico">q</span></div>
                                 <div class="sheet-td sheet-augment-toggle sheet-play"><input type="radio" title="@{skill_augmentation}" name="attr_skill_augment" value="ceil(@{unarmed_total}/5)"><span class="sheet-radioico">&</span></div>
                                 <div class="sheet-td sheet-grow sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="unarmed">Unarmed</label>
@@ -2655,8 +2665,8 @@
                 <!-- Combat Styles -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
                         <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="combat_style">Combat Style</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
@@ -2671,8 +2681,8 @@
                     </div>
                     <fieldset class="repeating_combatstyle">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
+                            <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
+                            <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
                             <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
@@ -2750,8 +2760,8 @@
                 <!-- Professional Skills -->
                 <div class="sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
                         <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="professional_skill">Professional Skill</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
@@ -2766,8 +2776,8 @@
                     </div>
                     <fieldset class="repeating_professionalskill">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
+                            <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
+                            <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
                             <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
@@ -2835,8 +2845,8 @@
                 <!-- Passions -->
                 <div class="Sheet-bmargin">
                     <div class="sheet-flex">
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
-                        <div class="sheet-th sheet-pictos sheet-deep-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
+                        <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
                         <div class="sheet-th sheet-pictos sheet-augment-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_augmentation">&</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passion">Passion</div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
@@ -2848,8 +2858,8 @@
                     </div>
                     <fieldset class="repeating_passion">
                         <div class="sheet-flex">
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
-                            <div class="sheet-td sheet-deep-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
+                            <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
+                            <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
                             <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
                             <div class="sheet-td sheet-grow sheet-hover-btn">
                                 <input type="text" class="sheet-full-width sheet-text-left sheet-usrinput" title="@{$ID_name}" name="attr_name" value="">
@@ -5312,6 +5322,16 @@ charactertabs.forEach(button => {
     on(`clicked:character_tab_${button}`, function() {
         setAttrs({
             character_tab: button
+        });
+    });
+});
+
+/* Conflict Mode */
+const conflictmodes = ["none","combat","spirit_combat","social_conflict"];
+conflictmodes.forEach(button => {
+    on(`clicked:conflict_mode_${button}`, function() {
+        setAttrs({
+            conflict_mode: button
         });
     });
 });

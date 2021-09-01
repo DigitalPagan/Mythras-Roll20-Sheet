@@ -449,6 +449,16 @@ charactertabs.forEach(button => {
     });
 });
 
+/* Conflict Mode */
+const conflictmodes = ["none","combat","spirit_combat","social_conflict"];
+conflictmodes.forEach(button => {
+    on(`clicked:conflict_mode_${button}`, function() {
+        setAttrs({
+            conflict_mode: button
+        });
+    });
+});
+
 /* Characteristics Function */
 /**
  * @param {string}  base   The characteristic's base value from getAttrs.
