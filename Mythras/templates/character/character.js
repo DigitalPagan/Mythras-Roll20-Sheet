@@ -1053,12 +1053,74 @@ function calcSpiritDamage(willpower_total, spirit_damage_other, spirit_damage_te
     }
 }
 
+function calcSocialDamage(attackSkill, social_damage_other, social_damage_temp) {
+    const base_steps = Math.ceil(parseInt(attackSkill)/20);
+    return {
+        social_damage_base: damageTable(base_steps),
+        social_damage: damageTable(base_steps + parseInt(social_damage_other) + parseInt(social_damage_temp))
+    }
+}
+
 function calcSpiritInitiative(int, cha, spirit_ib_other, spirit_ib_temp) {
     const base_value = Math.ceil((int + cha) / 2);
 
     return {
         spirit_ib_base: base_value,
         spirit_ib: base_value + parseInt(spirit_ib_other) + parseInt(spirit_ib_temp)
+    };
+}
+
+function calcSocialInitiative(int, cha, social_initiative_other, social_initiative_temp) {
+    const base_value = Math.ceil((int + cha) / 2);
+
+    return {
+        social_initiative_base: base_value,
+        social_initiative: base_value + parseInt(social_initiative_other) + parseInt(social_initiative_temp)
+    };
+}
+
+function calcConfidence(willpower, confidence_other, confidence_temp) {
+    const base_value = Math.floor(willpower/20);
+
+    return {
+        confidence_base: base_value,
+        confidence: base_value + parseInt(confidence_other) + parseInt(confidence_temp)
+    };
+}
+
+function calcComposure(pow, composure_other, composure_temp, current, currentMax) {
+    const base_value = Math.ceil(pow/3);
+    const newMax = base_value + parseInt(composure_other) + parseInt(composure_temp);
+    const diff = parseInt(current) - parseInt(currentMax);
+
+    return {
+        composure_base: base_value,
+        composure: newMax + diff,
+        composure_max: newMax
+    };
+}
+
+function calcIntegrity(cha, integrity_other, integrity_temp, current, currentMax) {
+    const base_value = Math.ceil(cha/3);
+    const newMax = base_value + parseInt(integrity_other) + parseInt(integrity_temp);
+    const diff = parseInt(current) - parseInt(currentMax);
+
+    return {
+        integrity_base: base_value,
+        integrity: newMax + diff,
+        integrity_max: base_value + parseInt(integrity_other) + parseInt(integrity_temp)
+    };
+}
+
+function calcResolve(int, resolve_other, resolve_temp, current, currentMax) {
+    const base_value = Math.ceil(int/3);
+    const newMax = base_value + parseInt(resolve_other) + parseInt(resolve_temp);
+    const diff = parseInt(current) - parseInt(currentMax);
+
+    return {
+        resolve_base: base_value,
+        resolve: newMax + diff,
+        resolve_max: base_value + parseInt(resolve_other) + parseInt(resolve_temp)
     };
 }
 
@@ -1083,7 +1145,7 @@ function calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
     return newVals;
 }
 
-function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, social_attack_id) {
     let newVals = {};
     passionIds.forEach(id => {
         newVals[`repeating_passion_${id}_social_attack`] = 0;
@@ -1099,12 +1161,18 @@ function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
         newVals['social_attack_id'] = '@{social_attack_id_value}';
         newVals[sourceAttr] = '1';
         newVals['social_attack_id_value'] = `${targetVal}`;
+        newVals['social_attack_name_value'] = `@{${targetVal}_name}`;
+        newVals['social_attack_total_value'] = `@{${targetVal}_total}`;
+    } else {
+        newVals['social_attack_id_value'] = `${social_attack_id}`;
+        newVals['social_attack_name_value'] = getTranslationByKey(`${social_attack_id}`);
+        newVals['social_attack_total_value'] = `@{${social_attack_id}_total}`;
     }
 
     return newVals;
 }
 
-function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
+function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, social_defense_id) {
     let newVals = {};
     passionIds.forEach(id => {
         newVals[`repeating_passion_${id}_social_defense`] = 0;
@@ -1120,6 +1188,12 @@ function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds) 
         newVals['social_defense_id'] = '@{social_defense_id_value}';
         newVals[sourceAttr] = '1';
         newVals['social_defense_id_value'] = `${targetVal}`;
+        newVals['social_defense_name_value'] = `@{${targetVal}_name}`;
+        newVals['social_defense_total_value'] = `@{${targetVal}_total}`;
+    } else {
+        newVals['social_defense_id_value'] = `${social_defense_id}`;
+        newVals['social_defense_name_value'] = getTranslationByKey(`${social_defense_id}`);
+        newVals['social_defense_total_value'] = `@{${social_defense_id}_total}`;
     }
 
     return newVals;
@@ -1379,7 +1453,8 @@ on('change:int_base change:int_other change:int_temp', function() {
                 ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'],
                 ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
                 ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
-                ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max'], ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
+                ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max'], ['spirit_ib_other', 'spirit_ib_temp'],
+                ['social_initiative_other', 'social_initiative_temp'], ['resolve_other', 'resolve_temp', 'resolve', 'resolve_max']), function(v) {
                 const charObj = buildCharObj(v);
                 const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
@@ -1397,7 +1472,9 @@ on('change:int_base change:int_other change:int_temp', function() {
                         v['initiative_add_one_tenth_athletics']),
                     ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
                         v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
-                    ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
+                    ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp']),
+                    ...calcSocialInitiative(charObj['int'], charObj['cha'], v['social_initiative_other'], v['social_initiative_temp']),
+                    ...calcResolve(charObj['int'], v['resolve_other'], v['resolve_temp'], v['resolve'], v['resolve_max'])
                 });
             });
         });
@@ -1426,7 +1503,9 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                     'luck_points_max'],
                 ['magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'],
                 ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max', 'action_points_calc'],
-                ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id']), function(v) {
+                ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id'],
+                ['social_initiative_other', 'social_initiative_temp'], ['confidence_other', 'confidence_temp'],
+                ['composure_other', 'composure_temp', 'composure', 'composure_max']), function(v) {
                 const charObj = buildCharObj(v);
                 const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                     v['hp_calc'], v['simplified_combat_enabled']);
@@ -1448,6 +1527,7 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                         v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
                     ...calcSpiritAP(charObj['pow'], charObj['int'], v['spirit_ap_other'], v['spirit_ap_temp'],
                         v['action_points_calc'], v['spirit_ap'], v['spirit_ap_max']),
+                    ...calcSocialInitiative(charObj['int'], charObj['cha'], v['social_initiative_other'], v['social_initiative_temp']),
                     hp_max_base: hp_max_base,
                     ...calcMagicPoints(charObj['pow'], v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max']),
                     ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
@@ -1474,7 +1554,9 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                         all_hp_temp, v['location11_hp'], v['location11_hp_max']),
                     ...calcLocationHP('12', hp_max_base, v['location12_hp_max_base_mod'], v['location12_hp_max_other'],
                         all_hp_temp, v['location12_hp'], v['location12_hp_max']),
-                    ...calcSpiritDamage(standardSkillVals['willpower_total'], v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id'])
+                    ...calcSpiritDamage(standardSkillVals['willpower_total'], v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id']),
+                    ...calcConfidence(standardSkillVals['willpower_total'], v['confidence_other'], v['confidence_temp']),
+                    ...calcComposure(charObj['pow'], v['composure_other'], v['composure_temp'], v['composure'], v['composure_max'])
                 });
             });
         });
@@ -1499,7 +1581,8 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
             getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs,
                 ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
                 ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points', 'luck_points_max'],
-                ['spirit_ib_other', 'spirit_ib_temp']), function(v) {
+                ['spirit_ib_other', 'spirit_ib_temp'], ['social_initiative_other', 'social_initiative_temp'],
+                ['integrity_other', 'integrity_temp', 'integrity', 'integrity_max']), function(v) {
                 const charObj = buildCharObj(v);
 
                 setAttrs({
@@ -1511,7 +1594,9 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
                         v['experience_mod_temp']),
                     ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
                         v['luck_points_temp'], v['luck_points_rank'], v['rank'], v['luck_points'], v['luck_points_max']),
-                    ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp'])
+                    ...calcSpiritInitiative(charObj['int'], charObj['cha'], v['spirit_ib_other'], v['spirit_ib_temp']),
+                    ...calcSocialInitiative(charObj['int'], charObj['cha'], v['social_initiative_other'], v['social_initiative_temp']),
+                    ...calcIntegrity(charObj['cha'], v['integrity_other'], v['integrity_temp'], v['integrity'], v['integrity_max'])
                 });
             });
         });
@@ -1638,6 +1723,52 @@ on('change:spirit_ib_other change:spirit_ib_temp', function() {
     });
 });
 
+/* Confidence Triggers */
+on('change:confidence_other change:confidence_temp', function() {
+    getAttrs(['willpower_total', 'confidence_other', 'confidence_temp'], function(v) {
+        setAttrs({
+            ...calcConfidence(parseInt(v['willpower_total']), v['confidence_other'], v['confidence_temp'])
+        });
+    });
+});
+
+/* Social Initiative Triggers */
+on('change:social_initiative_other change:social_initiative_temp', function() {
+    getAttrs(['int', 'cha', 'social_initiative_other', 'social_initiative_temp'], function(v) {
+        setAttrs({
+            ...calcSocialInitiative(parseInt(v['int']), parseInt(v['cha']), v['social_initiative_other'], v['social_initiative_temp'])
+        });
+    });
+});
+
+/* Composure Triggers */
+on('change:composure_other change:composure_temp', function() {
+    getAttrs(['pow', 'composure_other', 'composure_temp', 'composure', 'composure_max'], function(v) {
+        setAttrs({
+            ...calcComposure(parseInt(v['pow']), v['composure_other'], v['composure_temp'], v['composure'], v['composure_max'])
+        });
+    });
+});
+
+/* Integrity Triggers */
+on('change:integrity_other change:integrity_temp', function() {
+    getAttrs(['cha', 'integrity_other', 'integrity_temp', 'integrity', 'integrity_max'], function(v) {
+        setAttrs({
+            ...calcIntegrity(parseInt(v['cha']), v['integrity_other'], v['integrity_temp'], v['integrity'], v['integrity_max'])
+        });
+    });
+});
+
+/* Resolve Triggers */
+on('change:resolve_other change:resolve_temp', function() {
+    getAttrs(['int', 'resolve_other', 'resolve_temp', 'resolve', 'resolve_max'], function(v) {
+        setAttrs({
+            ...calcResolve(parseInt(v['int']), v['resolve_other'], v['resolve_temp'], v['resolve'], v['resolve_max'])
+        });
+    });
+});
+
+
 /* Hit Locations */
 on('change:hit_locations', function(event) {
     setAttrs( hitLocationTable[event.newValue] );
@@ -1732,7 +1863,8 @@ allStdSkillIds.forEach(skillId => {
     on(`change:${skillId}_other`, function() {
         getAttrs(allCharGetAttrs.concat([`${skillId}_other`], ['initiative_bonus_other', 'initiative_bonus_temp',
             'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue'],
-        ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id']), function(v) {
+        ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'binding_id'],
+        ['confidence_other', 'confidence_temp']), function(v) {
             let charObj = buildCharObj(v);
             let char1 = charObj[stdSkillChars[`${skillId}`][0]];
             let char2 = charObj[stdSkillChars[`${skillId}`][1]];
@@ -1752,7 +1884,8 @@ allStdSkillIds.forEach(skillId => {
 
                 setAttrs({
                     willpower_total: willpower_total,
-                    ...calcSpiritDamage(willpower_total, v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id'])
+                    ...calcSpiritDamage(willpower_total, v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['binding_id']),
+                    ...calcConfidence(willpower_total, v['confidence_other'], v['confidence_temp'])
                 });
             } else {
                 setAttrs({
@@ -1811,7 +1944,9 @@ on("change:social_attack_id change:repeating_passion:social_attack change:repeat
         getSectionIDs("repeating_passion", function(passionIds) {
             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
                 getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-                    setAttrs(calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                    getAttrs(['social_attack_id'], function(v) {
+                        setAttrs(calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, v['social_attack_id']));
+                    });
                 });
             });
         });
@@ -1826,7 +1961,9 @@ on("change:social_defense_id change:repeating_passion:social_defense change:repe
         getSectionIDs("repeating_passion", function(passionIds) {
             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
                 getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-                    setAttrs(calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds));
+                    getAttrs(['social_defense_id'], function(v) {
+                        setAttrs(calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, v['social_defense_id']));
+                    });
                 });
             });
         });

@@ -900,7 +900,7 @@
     "confidence": "Confidence",
     "social-damage": "Social Damange",
     "social-initiative": "Social Initiative",
-    "resolution-pool": "Resolution Pool",
+    "resolution_pool": "Resolution Pool",
     "composure": "Composure",
     "integrity": "Integrity",
     "resolve": "Resolve",
@@ -1101,5 +1101,8 @@
     "hit_table": "Hit Table",
     "passive_block_size": "Passive Block Size",
     "conflict": "Conflict",
-    "spirit_combat": "Spirit Combat"
+    "spirit_combat": "Spirit Combat",
+    "combat_mode_order": "combat,extended_conflict,social_conflict,spirit_combat",
+    "social_attack": "Social Attack",
+    "social_defense": "Social Defense"
 }

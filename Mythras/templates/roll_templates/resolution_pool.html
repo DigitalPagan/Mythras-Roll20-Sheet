@@ -1,0 +1,34 @@
+<!-- Hit Table Roll Template -->
+<!-- {{'@{roll_display}&{template:resolution_pool} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}}'}} -->
+<rolltemplate class="sheet-rolltemplate-resolution_pool">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}</div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" style="width:100%;"><span data-i18n="result">Result</span></div>
+                <div class="sheet-th sheet-pictos sheet-help" data-i18n-title="confidence" title="Confidence">U</div>
+                <div class="sheet-th"><span data-i18n="pool">Pool</span></div>
+            </div>
+            <div class="sheet-tr">
+                {{'{{#rollBetween() roll 1 4}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}(<span data-i18n="composure">Composure</span>)'}}</div>
+                <div class="sheet-td">{{'{{confidence}}'}}</div>
+                <div class="sheet-td">{{'{{composure}}/{{composure_max}}'}}</div>
+                {{'{{/rollBetween() roll 1 4}}'}}
+                {{'{{#rollBetween() roll 5 8}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}(<span data-i18n="integrity">Integrity</span>)'}}</div>
+                <div class="sheet-td">{{'{{confidence}}'}}</div>
+                <div class="sheet-td">{{'{{integrity}}/{{integrity_max}}'}}</div>
+                {{'{{/rollBetween() roll 5 8}}'}}
+                {{'{{#rollBetween() roll 9 12}}'}}
+                <div class="sheet-td" style="width:100%;">{{'{{roll}}(<span data-i18n="resolve">Resolve</span>)'}}</div>
+                <div class="sheet-td">{{'{{confidence}}'}}</div>
+                <div class="sheet-td">{{'{{resolve}}/{{resolve_max}}'}}</div>
+                {{'{{/rollBetween() roll 9 12}}'}}
+            </div>
+        </div>
+    </div>
+</rolltemplate>

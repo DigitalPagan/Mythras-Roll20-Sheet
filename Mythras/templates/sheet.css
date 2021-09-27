@@ -737,6 +737,12 @@ label.sheet-skill {
     border-bottom: 1px solid black;
     font-weight: normal;
 }
+label.sheet-underlined {
+    display: inline-block;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-weight: normal;
+}
 label.sheet-under {
     text-align: center;
     font-size: .85em;
@@ -870,6 +876,7 @@ input.sheet-firearms-toggle:not(:checked) + div .sheet-firearm-trait {
 /* =Roll Templates= */
 {% include 'roll_templates/default.css' %}
 {% include 'roll_templates/effect.css' %}
-{% include 'roll_templates/hittable.css' %}
+{% include 'roll_templates/hit_location.css' %}
 {% include 'roll_templates/improvement.css' %}
+{% include 'roll_templates/resolution_pool.css' %}
 {% include 'roll_templates/skill.css' %}
