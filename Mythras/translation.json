@@ -6,7 +6,7 @@
     "devotional-pool-type-order": "default,cult_rank,pow",
     "ship-hull-order": "utility,galley,transport",
     "hit-location-order": "custom_1_location,custom_7_locations,custom_8_locations,custom_9_locations,custom_10_locations,custom_11_locations,custom_12_locations,rabble,simple,spacer,arachnid,biped,centaurid,decapoda,decapodiform,dorsal_finned_aquatic,draconic,insect,octopodiform,pachyderm,quadruped,serpentine,tailed_arachnid,tailed_biped,tailed_quadruped,winged_biped,winged_insect,winged_quadruped",
-    "attribute-order": "action_points,conflict_pool,spirit_damage,damage_mod,exp_mod,healing_rate,initiative,intensity,luck_points,magic_points,move_rate,power_points,prana_points,strangeness,tenacity",
+    "attribute-order": "action_points,damage_mod,exp_mod,healing_rate,initiative,luck_points,magic_points,move_rate,power_points,prana_points,tenacity",
     "combat-skill-order": "binding,brawn,evade,endurance,willpower",
     "mook-combat-skill-order": "binding,brawn,evade,endurance,unarmed,willpower",
     "resistance-skill-order": "brawn,endurance,evade,willpower",
@@ -1104,5 +1104,8 @@
     "spirit_combat": "Spirit Combat",
     "combat_mode_order": "combat,extended_conflict,social_conflict,spirit_combat",
     "social_attack": "Social Attack",
-    "social_defense": "Social Defense"
+    "social_defense": "Social Defense",
+    "spirit_combat_skill": "Spirit Combat Skill",
+    "half_skill": "Half Skill",
+    "full_skill": "Full Skill"
 }

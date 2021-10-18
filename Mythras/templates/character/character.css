@@ -194,12 +194,14 @@ textarea.sheet-hit-locations-note-9 {
 
 /* Conflict Mode */
 div.sheet-conflict-mode-combat,
+div.sheet-conflict-mode-extended-conflict,
 div.sheet-conflict-mode-spirit-combat,
 div.sheet-conflict-mode-social-conflict {
     display: none;
 }
 
 input.sheet-conflict-mode[value="combat"] ~ div.sheet-conflict-mode-combat,
+input.sheet-conflict-mode[value="extended_conflict"] ~ div.sheet-conflict-mode-extended-conflict,
 input.sheet-conflict-mode[value="spirit_combat"] ~ div.sheet-conflict-mode-spirit-combat,
 input.sheet-conflict-mode[value="social_conflict"] ~ div.sheet-conflict-mode-social-conflict {
     display: block;
@@ -207,15 +209,12 @@ input.sheet-conflict-mode[value="social_conflict"] ~ div.sheet-conflict-mode-soc
 
 input.sheet-conflict-mode[value="none"] + div.sheet-conflict-mode button.sheet-conflict-mode-none,
 input.sheet-conflict-mode[value="combat"] + div.sheet-conflict-mode button.sheet-conflict-mode-combat,
+input.sheet-conflict-mode[value="extended_conflict"] + div.sheet-conflict-mode button.sheet-conflict-mode-extended-conflict,
 input.sheet-conflict-mode[value="spirit_combat"] + div.sheet-conflict-mode button.sheet-conflict-mode-spirit-combat,
 input.sheet-conflict-mode[value="social_conflict"] + div.sheet-conflict-mode button.sheet-conflict-mode-social-conflict {
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
     border: solid 1px black;
-}
-
-input.sheet-conflict-mode:not([value="social_conflict"]) ~ div .sheet-social-conflict-toggle {
-    display: none;
 }
 
 /* Skills */

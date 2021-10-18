@@ -93,16 +93,9 @@
         </div>
 
         <!-- Attributes -->
+        <!-- TODO fix toggles -->
         <div class="sheet-section sheet-rmargin sheet-bmargin">
-            <div class="sheet-flex-centered">
-                <h2 data-i18n="attributes">Attributes</h2>
-                <div class="sheet-grow sheet-text-right">
-                    <label class="sheet-checkbox" title="@{spirit}">
-                        <input type='checkbox' name='attr_spirit' value="1"/><span>3</span>
-                        <span class="sheet-bold" data-i18n="spirit_attrs">Spirit Attrs</span>
-                    </label>
-                </div>
-            </div>
+            <h2 data-i18n="attributes">Attributes</h2>
 
             <div class="sheet-flex">
                 <div class="sheet-th sheet-grow" data-i18n="attribute">Attribute</div>
@@ -292,56 +285,6 @@
                         <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
                         <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
                         <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{movement_rate}" name="attr_movement_rate" value="6" readonly></div>
-                        <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
-                    </div>
-                </div>
-                <!-- Spirit Action Points -->
-                <div class="sheet-flex sheet-spirit sheet-hl" data-i18n-list-item="spirit_ap">
-                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="spirit_ap">Spirit AP</label></div>
-                    <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{spirit_ap_base}" name="attr_spirit_ap_base" value="2" readonly></div>
-                    <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ap_other}" name="attr_spirit_ap_other" value="0"></div>
-                    <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ap_temp}" name="attr_spirit_ap_temp" value="0"></div>
-                    <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ap}" name="attr_spirit_ap" value="2"></div>
-                    <div class="sheet-td sheet-play">/</div>
-                    <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{spirit_ap|max}" name="attr_spirit_ap_max" value="2" readonly></div>
-                    <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
-                </div>
-                <!-- Spirit Damage -->
-                <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_damage">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=^{spirit_damage}}} @{name_display} {{^{damage}=[[@{spirit_damage}]]}}'}}" data-i18n="spirit_damage-abrv3">Spirit Dmg</button></div>
-                        <div class="sheet-td sheet-edit"><input type="text" class="sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="1d2" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_other}" name="attr_spirit_damage_other" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_temp}" name="attr_spirit_damage_temp" value="0"></div>
-                        <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
-                        <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
-                        <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="1d2" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="checkbox" title="@{damage_mod_details}" name="attr_spirit_damage_details" value="1"><span class="sheet-checkico">y</span></div>
-                    </div>
-                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_spirit_damage_details" value="1">
-                    <div class="sheet-edit sheet-toggle">
-                        &emsp;<label class="sheet-left sheet-lite" data-i18n="calculate_with">Calculate with</label>
-                            <select class="sheet-usrinput sheet-attr-calc-width" title="@{spirit_damage_calc}" name="attr_spirit_damage_calc">
-                                <option data-i18n="willpower" value="willpower" selected>Willpower</option>
-                                <option data-i18n="binding" value="binding">Binding</option>
-                            </select>
-                        <input type="hidden" class="sheet-binding-toggle" name="attr_spirit_damage_calc" value="willpower">
-                        <div class="sheet-toggle">
-                        &emsp;<label class="sheet-left sheet-lite" data-i18n="binding_id">Binding ID</label><br>
-                        &emsp;<input type="text" class="sheet-usrinput" title="@{binding_id}" name="attr_binding_id">
-                        </div>
-                    </div>
-                </div>
-                <!-- Spirit Initiative -->
-                <div class="sheet-spirit sheet-hl" data-i18n-list-item="spirit_init">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_initiative}" name="roll_spirit_initiative" value="{{'@{roll_display}&{template:default} {{yellow=1}} @{name_display} {{name=^{spirit_initiative}}} {{^{roll}=[[@{init_dice} + @{spirit_ib} &{tracker}]]}}'}}" data-i18n="spirit_init">Spirit Init</button></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{spirit_ib_base}" name="attr_spirit_ib" value="12" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_other}" name="attr_spirit_ib_other" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_temp}" name="attr_spirit_ib_temp" value="0"></div>
-                        <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
-                        <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
-                        <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{spirit_ib}" name="attr_spirit_ib" value="12" readonly></div>
                         <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
                     </div>
                 </div>
@@ -784,37 +727,47 @@
                 combat stuff
             </div>
 
-            <div class='sheet-conflict-mode-spirit-combat' data-i18n-list-item="extended_conflict">
-                spirit combat stuff
+            <div class='sheet-conflict-mode-extended-conflict' data-i18n-list-item="extended_conflict">
+                extended stuff
             </div>
 
             <div class='sheet-conflict-mode-social-conflict'  data-i18n-list-item="social_conflict">
                 <div class="sheet-flex">
                     <!-- Social Skills -->
                     <div class="sheet-grow sheet-rmargin">
+                        <!-- Social Attack Skill -->
                         <div class="sheet-flex">
                             <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="social_attack">Social Attack</div></div>
                             <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                             <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         </div>
                         <div class="sheet-flex">
+                            <input type="hidden" name="attr_social_attack_encumbered" value="@{social_attack_encumbered_value}" disabled>
+                            <input type="hidden" name="attr_social_attack_encumbered_value" value="@{influence_encumbered}" readonly>
+                            <input type="hidden" name="attr_social_attack_notes" value="@{social_attack_notes_value}" disabled>
+                            <input type="hidden" name="attr_social_attack_notes_value" value="@{influence_notes}" readonly>
                             <input type="hidden" name="attr_social_attack_name_value" value="Influence" readonly>
                             <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{social_attack_name}" name="attr_social_attack_name" value="@{social_attack_name_value}" disabled></div>
                             <input type="hidden" name="attr_social_attack_total_value" value="@{influence_total}" readonly>
                             <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{social_attack_total}" name="attr_social_attack_total" value="@{social_attack_total_value}" disabled></div>
-                            <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{social_attack_roll}" name="roll_social_attack_roll" value=""></button></div>
+                            <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{social_attack_roll}" name="roll_social_attack_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=@{social_attack_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{social_attack_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{social_attack_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_attack_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_attack_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_attack_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_attack_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_attack_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_attack_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_attack_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_attack_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_attack_total}+@{penalty})]]}} {{hard=[[ceil((@{social_attack_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_attack_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_attack_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_attack_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_attack_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_attack_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_attack_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_attack_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_attack_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_attack_notes}}}'}}"></button></div>
                         </div>
+                        <!-- Social Defense Skill -->
                         <div class="sheet-flex">
                             <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="social_defense">Social Defense</div></div>
                             <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                             <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         </div>
                         <div class="sheet-flex">
+                            <input type="hidden" name="attr_social_defense_encumbered" value="@{social_defense_encumbered_value}" disabled>
+                            <input type="hidden" name="attr_social_defense_encumbered_value" value="@{deceit_encumbered}" readonly>
+                            <input type="hidden" name="attr_social_defense_notes" value="@{social_defense_notes_value}" disabled>
+                            <input type="hidden" name="attr_social_defense_notes_value" value="@{deceit_notes}" readonly>
                             <input type="hidden" name="attr_social_defense_name_value" value="Deceit" readonly>
                             <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{social_defense_name}" name="attr_social_defense_name" value="@{social_defense_name_value}" disabled></div>
                             <input type="hidden" name="attr_social_defense_total_value" value="@{deceit_total}" readonly>
                             <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{social_defense_total}" name="attr_social_defense_total" value="@{social_defense_total_value}" disabled></div>
-                            <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{social_defense_roll}" name="roll_social_defense_roll" value=""></button></div>
+                            <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{social_defense_roll}" name="roll_social_defense_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=@{social_defense_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{social_defense_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{social_defense_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_defense_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_defense_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_defense_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_defense_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_defense_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_defense_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_defense_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_defense_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_defense_total}+@{penalty})]]}} {{hard=[[ceil((@{social_defense_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_defense_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_defense_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_defense_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_defense_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_defense_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_defense_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_defense_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_defense_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_defense_notes}}}'}}"></button></div>
                         </div>
                     </div>
 
@@ -907,8 +860,114 @@
                 </div>
             </div>
 
+            <!-- Spirit Combat Conflict Mode -->
             <div class='sheet-conflict-mode-spirit-combat' data-i18n-list-item="spirit_combat">
-                spirit combat stuff
+                <div class="sheet-flex">
+                    <!-- Spirit Combat Skill -->
+                    <div class="sheet-grow sheet-rmargin">
+                        <div class="sheet-flex">
+                            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="spirit_combat_skill">Spirit Combat Skill</div></div>
+                            <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                            <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        </div>
+                        <div class="sheet-flex">
+                            <input type="hidden" name="attr_spirit_combat_skill_encumbered" value="@{spirit_combat_skill_encumbered_value}" disabled>
+                            <input type="hidden" name="attr_spirit_combat_skill_encumbered_value" value="@{willpower_encumbered}" readonly>
+                            <input type="hidden" name="attr_spirit_combat_skill_notes" value="@{spirit_combat_skill_notes_value}" disabled>
+                            <input type="hidden" name="attr_spirit_combat_skill_notes_value" value="@{willpower_notes}" readonly>
+                            <input type="hidden" name="attr_spirit_combat_skill_name_value" value="Willpower" readonly>
+                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{spirit_combat_skill_name}" name="attr_spirit_combat_skill_name" value="@{spirit_combat_skill_name_value}" disabled></div>
+                            <input type="hidden" name="attr_spirit_combat_skill_total_value" value="@{spirit_combat_skill_total}" readonly>
+                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{spirit_combat_skill_total}" name="attr_spirit_combat_skill_total" value="@{spirit_combat_skill_total_value}" disabled></div>
+                            <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{spirit_combat_skill_roll}" name="roll_spirit_combat_skill_roll" value="{{'@{roll_display}&{template:skill} @{name_display} {{name=@{spirit_combat_skill_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{spirit_combat_skill_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{spirit_combat_skill_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{spirit_combat_skill_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{spirit_combat_skill_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{spirit_combat_skill_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{spirit_combat_skill_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{spirit_combat_skill_total}*1.5)+@{penalty})]]}} {{standard=[[@{spirit_combat_skill_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{spirit_combat_skill_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{spirit_combat_skill_total}+@{penalty})]]}} {{hard=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{spirit_combat_skill_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{spirit_combat_skill_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{spirit_combat_skill_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{spirit_combat_skill_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{spirit_combat_skill_notes}}}'}}"></button></div>
+                        </div>
+                        <div class="sheet-edit sheet-flex">
+                            <div><label class="sheet-left sheet-lite" data-i18n="id">ID</label></div>
+                            <div class="sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{spirit_combat_skill_id}" name="attr_spirit_combat_skill_id" value="willpower"></div>
+                        </div>
+                    </div>
+                    <!-- Spirit Action Points -->
+                    <div class="sheet-rmargin">
+                        <div class="sheet-flex">
+                            <div class="sheet-th sheet-grow" data-i18n="attribute">Attribute</div>
+                            <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                            <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                            <div class="sheet-th sheet-play"><div class="sheet-number-width" data-i18n="temp">Temp</div></div>
+                            <div class="sheet-th sheet-play"><div class="sheet-number-width sheet-help" data-i18n-title="current" data-i18n="current-abrv4">Curr</div></div>
+                            <div class="sheet-th sheet-play"><div class="sheet-invisible">/</div></div>
+                            <div class="sheet-th"><div class="sheet-number-width" data-i18n="max">Max</div></div>
+                        </div>
+                        <div class="sheet-flex" data-i18n-list-item="spirit_ap">
+                            <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="action_points">Action Points</label></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{spirit_ap_base}" name="attr_spirit_ap_base" value="2" readonly></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ap_other}" name="attr_spirit_ap_other" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ap_temp}" name="attr_spirit_ap_temp" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ap}" name="attr_spirit_ap" value="2"></div>
+                            <div class="sheet-td sheet-play">/</div>
+                            <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{spirit_ap|max}" name="attr_spirit_ap_max" value="2" readonly></div>
+                        </div>
+                    </div>
+                    <!-- Spirit Damage -->
+                    <div class="sheet-rmargin">
+                        <div class="sheet-flex">
+                            <div class="sheet-th sheet-grow" data-i18n="attribute">Attribute</div>
+                            <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                            <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                            <div class="sheet-th sheet-play"><div class="sheet-number-width" data-i18n="temp">Temp</div></div>
+                            <div class="sheet-th"><div class="sheet-number-width" data-i18n="max">Max</div></div>
+                        </div>
+                        <div data-i18n-list-item="spirit_damage">
+                            <div class="sheet-flex">
+                                <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_damage}" name="roll_spirit_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=^{spirit_damage}}} @{name_display} {{^{damage}=[[@{spirit_damage}]]}}'}}" data-i18n="damage">Damage</button></div>
+                                <div class="sheet-td sheet-edit"><input type="text" class="sheet-number-width" title="@{spirit_damage_base}" name="attr_spirit_damage_base" value="1d2" readonly></div>
+                                <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_other}" name="attr_spirit_damage_other" value="0"></div>
+                                <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_damage_temp}" name="attr_spirit_damage_temp" value="0"></div>
+                                <div class="sheet-td sheet-text-right"><input type="text" class="sheet-impvalue sheet-number-width" title="@{spirit_damage}" name="attr_spirit_damage" value="1d2" readonly></div>
+                            </div>
+                            <div class="sheet-edit sheet-flex">
+                                <div><label class="sheet-left sheet-lite" data-i18n="calculate_with">Calculate with</label></div>
+                                <div class="sheet-grow">
+                                    <select class="sheet-usrinput sheet-full-width" title="@{spirit_damage_calc}" name="attr_spirit_damage_calc">
+                                        <option data-i18n="half_skill" value=".5" selected>Half Skill</option>
+                                        <option data-i18n="full_skill" value="1">full_skill</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--<input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_spirit_damage_details" value="1">
+                            <div class="sheet-edit sheet-toggle">
+                                &emsp;<label class="sheet-left sheet-lite" data-i18n="calculate_with">Calculate with</label>
+                                <select class="sheet-usrinput sheet-attr-calc-width" title="@{spirit_damage_calc}" name="attr_spirit_damage_calc">
+                                    <option data-i18n="willpower" value="willpower" selected>Willpower</option>
+                                    <option data-i18n="binding" value="binding">Binding</option>
+                                </select>
+                                <input type="hidden" class="sheet-binding-toggle" name="attr_spirit_damage_calc" value="willpower">
+                                <div class="sheet-toggle">
+                                    &emsp;<label class="sheet-left sheet-lite" data-i18n="binding_id">Binding ID</label><br>
+                                    &emsp;<input type="text" class="sheet-usrinput" title="@{binding_id}" name="attr_binding_id">
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                    <!-- Spirit Initiative -->
+                    <div>
+                        <div class="sheet-flex">
+                            <div class="sheet-th sheet-grow" data-i18n="attribute">Attribute</div>
+                            <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                            <div class="sheet-th sheet-edit"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                            <div class="sheet-th sheet-play"><div class="sheet-number-width" data-i18n="temp">Temp</div></div>
+                            <div class="sheet-th"><div class="sheet-number-width" data-i18n="max">Max</div></div>
+                        </div>
+                        <div data-i18n-list-item="spirit_init">
+                            <div class="sheet-flex">
+                                <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{spirit_initiative}" name="roll_spirit_initiative" value="{{'@{roll_display}&{template:default} {{yellow=1}} @{name_display} {{name=^{spirit_initiative}}} {{^{roll}=[[@{init_dice} + @{spirit_ib} &{tracker}]]}}'}}" data-i18n="initiative">Initiative</button></div>
+                                <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{spirit_ib_base}" name="attr_spirit_ib" value="12" readonly></div>
+                                <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_other}" name="attr_spirit_ib_other" value="0"></div>
+                                <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{spirit_ib_temp}" name="attr_spirit_ib_temp" value="0"></div>
+                                <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{spirit_ib}" name="attr_spirit_ib" value="12" readonly></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -930,7 +989,6 @@
         <div class="sheet-flex">
             <input type="hidden" class="sheet-conflict-mode" name="attr_conflict_mode" value="none">
             <!-- Skills Left Column -->
-            <!-- TODO fix encumbrance on standard skills -->
             <div class="sheet-rmargin sheet-half-col">
                 <!-- Resistance Skills -->
                 <div class="sheet-bmargin">
@@ -1347,7 +1405,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{customs_improve}" name="roll_customs_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{customs}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{customs_fumbled}]]}} {{skill=[[@{customs_total}]]}} {{fumbled=[[@{customs_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{customs_encumbered}" name="attr_customs_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{customs_encumbered}" name="attr_customs_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{customs_fumbled}" name="attr_customs_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1449,7 +1507,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{deceit_improve}" name="roll_deceit_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{deceit}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{deceit_fumbled}]]}} {{skill=[[@{deceit_total}]]}} {{fumbled=[[@{deceit_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{deceit_encumbered}" name="attr_deceit_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{deceit_encumbered}" name="attr_deceit_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{deceit_fumbled}" name="attr_deceit_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1604,7 +1662,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{home_parallel_improve}" name="roll_home_parallel_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{home_parallel}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{home_parallel_fumbled}]]}} {{skill=[[@{home_parallel_total}]]}} {{fumbled=[[@{home_parallel_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{home_parallel_encumbered}" name="attr_home_parallel_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{home_parallel_encumbered}" name="attr_home_parallel_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{home_parallel_fumbled}" name="attr_home_parallel_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1655,7 +1713,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{influence_improve}" name="roll_influence_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{influence}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{influence_fumbled}]]}} {{skill=[[@{influence_total}]]}} {{fumbled=[[@{influence_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{influence_encumbered}" name="attr_influence_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{influence_encumbered}" name="attr_influence_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{influence_fumbled}" name="attr_influence_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1706,7 +1764,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{insight_improve}" name="roll_insight_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{insight}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{insight_fumbled}]]}} {{skill=[[@{insight_total}]]}} {{fumbled=[[@{insight_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{insight_encumbered}" name="attr_insight_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{insight_encumbered}" name="attr_insight_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{insight_fumbled}" name="attr_insight_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1758,7 +1816,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{locale_improve}" name="roll_locale_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{locale}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{locale_fumbled}]]}} {{skill=[[@{locale_total}]]}} {{fumbled=[[@{locale_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{locale_encumbered}" name="attr_locale_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{locale_encumbered}" name="attr_locale_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{locale_fumbled}" name="attr_locale_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1809,7 +1867,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{native_tongue_improve}" name="roll_native_tongue_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{native_tongue}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{native_tongue_fumbled}]]}} {{skill=[[@{native_tongue_total}]]}} {{fumbled=[[@{native_tongue_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{native_tongue_encumbered}" name="attr_native_tongue_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{native_tongue_encumbered}" name="attr_native_tongue_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{native_tongue_fumbled}" name="attr_native_tongue_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1860,7 +1918,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{perception_improve}" name="roll_perception_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{perception}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{perception_fumbled}]]}} {{skill=[[@{perception_total}]]}} {{fumbled=[[@{perception_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{perception_encumbered}" name="attr_perception_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{perception_encumbered}" name="attr_perception_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{perception_fumbled}" name="attr_perception_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -1963,7 +2021,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{sing_improve}" name="roll_sing_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{sing}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{sing_fumbled}]]}} {{skill=[[@{sing_total}]]}} {{fumbled=[[@{sing_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{sing_encumbered}" name="attr_sing_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{sing_encumbered}" name="attr_sing_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{sing_fumbled}" name="attr_sing_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -2015,7 +2073,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{status_improve}" name="roll_status_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{status}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{status_fumbled}]]}} {{skill=[[@{status_total}]]}} {{fumbled=[[@{status_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{status_encumbered}" name="attr_status_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{status_encumbered}" name="attr_status_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{status_fumbled}" name="attr_status_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -2118,7 +2176,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{strangeness_improve}" name="roll_strangeness_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{strangeness}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{strangeness_fumbled}]]}} {{skill=[[@{strangeness_total}]]}} {{fumbled=[[@{strangeness_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{strangeness_encumbered}" name="attr_strangeness_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{strangeness_encumbered}" name="attr_strangeness_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{strangeness_fumbled}" name="attr_strangeness_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -2170,7 +2228,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{superstition_improve}" name="roll_superstition_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{superstition}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{superstition_fumbled}]]}} {{skill=[[@{superstition_total}]]}} {{fumbled=[[@{superstition_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{superstition_encumbered}" name="attr_superstition_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{superstition_encumbered}" name="attr_superstition_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{superstition_fumbled}" name="attr_superstition_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -2273,7 +2331,7 @@
                                     <button type="roll" class="sheet-improve sheet-button-width" title="%{the_soot_improve}" name="roll_the_soot_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{the_soot}}} @{name_display} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1+@{the_soot_fumbled}]]}} {{skill=[[@{the_soot_total}]]}} {{fumbled=[[@{the_soot_fumbled}]]}}'}}"></button>
                                 </div>
                                 <div class="sheet-td sheet-play">
-                                    <input type="checkbox" title="@{the_soot_encumbered}" name="attr_the_soot_encumbered" value="1" checked disabled><span class="sheet-checkico">a</span>
+                                    <input type="checkbox" title="@{the_soot_encumbered}" name="attr_the_soot_encumbered" value="1" disabled><span class="sheet-checkico">a</span>
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{the_soot_fumbled}" name="attr_the_soot_fumbled" value="1"><span class="sheet-checkico">!</span>
@@ -2559,6 +2617,7 @@
                     </div>
                     <fieldset class="repeating_passion">
                         <div class="sheet-flex">
+                            <input type="hidden" name="attr_encumbered" value="0" disabled>
                             <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_attack_id}" name="attr_social_attack" value="1"><span class="sheet-checkico">w</span></div>
                             <div class="sheet-td sheet-social-conflict-toggle sheet-play"><input type="checkbox" title="@{social_defense_id}" name="attr_social_defense" value="1"><span class="sheet-checkico">q</span></div>
                             <div class="sheet-td sheet-augment-toggle sheet-play"><input type="checkbox" title="@{skill_augment}" name="attr_augment" value="1"><span class="sheet-checkico">&</span></div>
