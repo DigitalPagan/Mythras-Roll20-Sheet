@@ -948,7 +948,7 @@ input.sheet-spirit-toggle:not(:checked) + div .sheet-spirit {
 }
 
 /* Extended Conflict Toggle */
-input.sheet-extended-conflict-toggle:not(:checked) + div .sheet-extended-conflict {
+input.sheet-extended-conflict-toggle:not(:checked) ~ div .sheet-extended-conflict {
     display: none;
 }
 
@@ -1103,6 +1103,13 @@ span.sheet-skillnotes {
 }
 .sheet-passiontype {
     width: 105px;
+}
+
+/* Passions */
+input.sheet-dependencies-toggle:not(:checked) ~ div .sheet-dependencies-toggle,
+input.sheet-corruptions-toggle:not(:checked) ~ div .sheet-corruptions-toggle,
+input.sheet-peculiarities-toggle:not(:checked) ~ div .sheet-peculiarities-toggle {
+    display: none;
 }
 
 /* Abilities Tab */

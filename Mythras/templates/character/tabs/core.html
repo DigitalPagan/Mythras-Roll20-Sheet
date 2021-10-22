@@ -3,7 +3,7 @@
 <div class='sheet-character-tab-core'>
     <!-- Top Stats -->
     <!-- Extended Conflict Toggle -->
-    <input type="checkbox" class="sheet-extended-conflict-toggle sheet-hidden" name="attr_extended_conflict_resolution_enabled" value="1">
+
     <div class="sheet-flex">
         <!-- Characteristics -->
         <div class=" sheet-section sheet-rmargin">
@@ -15,8 +15,6 @@
                     <div class="sheet-th sheet-edit" data-i18n="base">Base</div>
                     <div class="sheet-th sheet-edit" data-i18n="other">Other</div>
                     <div class="sheet-th sheet-play" data-i18n="temp">Temp</div>
-                    <div class="sheet-th sheet-play sheet-extended-conflict" data-i18n="pool">Pool</div>
-                    <div class="sheet-th sheet-play sheet-extended-conflict"><span class="sheet-invisible">/</span></div>
                     <div class="sheet-th" data-i18n="total">Total</div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -24,8 +22,6 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_base}" name="attr_str_base" value="11"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_other}" name="attr_str_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_temp}" name="attr_str_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_pool}" name="attr_str_pool" value="11"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{str}" name="attr_str" value="11" readonly></div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -33,8 +29,6 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_base}" name="attr_con_base" value="11"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_other}" name="attr_con_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_temp}" name="attr_con_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_pool}" name="attr_con_pool" value="11"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{con}" name="attr_con" value="11" readonly></div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -42,8 +36,6 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_base}" name="attr_siz_base" value="13"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_other}" name="attr_siz_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_temp}" name="attr_siz_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_pool}" name="attr_siz_pool" value="13"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{siz}" name="attr_siz" value="13" readonly></div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -51,8 +43,6 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_base}" name="attr_dex_base" value="11"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_other}" name="attr_dex_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_temp}" name="attr_dex_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_pool}" name="attr_dex_pool" value="11"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{dex}" name="attr_dex" value="11" readonly></div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -60,8 +50,6 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_base}" name="attr_int_base" value="13"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_other}" name="attr_int_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_temp}" name="attr_int_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_pool}" name="attr_int_pool" value="13"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{int}" name="attr_int" value="13" readonly></div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -69,8 +57,6 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_base}" name="attr_pow_base" value="11"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_other}" name="attr_pow_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_temp}" name="attr_pow_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_pool}" name="attr_pow_pool" value="11"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{pow}" name="attr_pow" value="11" readonly></div>
                 </div>
                 <div class="sheet-tr sheet-hl">
@@ -78,22 +64,12 @@
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_base}" name="attr_cha_base" value="11"></div>
                     <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_other}" name="attr_cha_other" value="0"></div>
                     <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_temp}" name="attr_cha_temp" value="0"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_pool}" name="attr_cha_pool" value="11"></div>
-                    <div class="sheet-td sheet-play sheet-extended-conflict">/</div>
                     <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{pow}" name="attr_cha" value="11" readonly></div>
-                </div>
-            </div>
-            <!-- Conflict Pool -->
-            <div class="sheet-table">
-                <div class="sheet-tr sheet-extended-conflict sheet-play sheet-hl">
-                    <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="composite_pool">Composite Pool</label></div>
-                    <div class="sheet-td sheet-text-right"><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{conflict_pool}" name="attr_conflict_pool" value="11">/<input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{conflict_pool|max}" name="attr_conflict_pool_max" value="11"><button type="roll" class="sheet-d6 sheet-button-width"></button></div>
                 </div>
             </div>
         </div>
 
         <!-- Attributes -->
-        <!-- TODO fix toggles -->
         <div class="sheet-section sheet-rmargin sheet-bmargin">
             <h2 data-i18n="attributes">Attributes</h2>
 
@@ -234,45 +210,19 @@
                     </div>
                 </div>
                 <!-- Magic Points -->
-                <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_magic_points_enabled' value="1" checked/>
-                <div class="sheet-toggle sheet-hl" data-i18n-list-item="magic_points">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="magic_points">Magic Points</label></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11"></div>
-                        <div class="sheet-td sheet-play">/</div>
-                        <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
-                    </div>
-                </div>
-                <!-- Power Points -->
-                <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_power_points_enabled' value="1"/>
-                <div class="sheet-toggle sheet-hl" data-i18n-list-item="power_points">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="power_points">Power Points</label></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11"></div>
-                        <div class="sheet-td sheet-play">/</div>
-                        <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
-                    </div>
-                </div>
-                <!-- Prana Points -->
-                <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_prana_points_enabled' value="1"/>
-                <div class="sheet-toggle sheet-hl" data-i18n-list-item="prana_points">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="prana_points">Prana Points</label></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11"></div>
-                        <div class="sheet-td sheet-play">/</div>
-                        <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                <div data-i18n-list-item="magic_points">
+                    <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_magic_points_enabled' value="1" checked/>
+                    <div class="sheet-toggle sheet-hl">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="magic_points">Magic Points</label></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11"></div>
+                            <div class="sheet-td sheet-play">/</div>
+                            <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                        </div>
                     </div>
                 </div>
                 <!-- Movement Rate -->
@@ -288,25 +238,59 @@
                         <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
                     </div>
                 </div>
-                <!-- Tenacity -->
-                <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_tenacity_enabled' value="1"/>
-                <div class="sheet-toggle sheet-hl" data-i18n-list-item="tenacity">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="tenacity">Tenacity</label></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></div>
-                        <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity_other}" name="attr_tenacity_other" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity_temp}" name="attr_tenacity_temp" value="0"></div>
-                        <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity}" name="attr_tenacity" value="11"></div>
-                        <div class="sheet-td sheet-play">/</div>
-                        <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{tenacity|max}" name="attr_tenacity_max" value="11" readonly></div>
-                        <div class="sheet-td sheet-checkbox-width sheet-edit"><input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_dependencies_enabled' value="1"/><div class="sheet-toggle"><input type="checkbox" title="@{tenacity_details}" name="attr_tenacity_details" value="1"><span class="sheet-checkico">y</span></div></div>
+                <!-- Power Points -->
+                <div data-i18n-list-item="power_points">
+                    <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_power_points_enabled' value="1"/>
+                    <div class="sheet-toggle sheet-hl" >
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="power_points">Power Points</label></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11"></div>
+                            <div class="sheet-td sheet-play">/</div>
+                            <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                        </div>
                     </div>
-                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_tenacity_details" value="1">
-                    <div class="sheet-edit sheet-toggle">
-                        &emsp;<label class="sheet-checkbox">
-                            <input type='checkbox' title="@{apply_dependencies_penalty}" name='attr_apply_dependencies_penalty' value="1" checked/><span>3</span>
-                            <span data-i18n="-1_per_full_20_points_of_dependencies">-1 per full 20 points of dependencies</span>
-                        </label>
+                </div>
+                <!-- Prana Points -->
+                <div data-i18n-list-item="prana_points">
+                    <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_prana_points_enabled' value="1"/>
+                    <div class="sheet-toggle sheet-hl">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="prana_points">Prana Points</label></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{magic_points_base}" name="attr_magic_points_base" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_other}" name="attr_magic_points_other" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{magic_points}" name="attr_magic_points" value="11"></div>
+                            <div class="sheet-td sheet-play">/</div>
+                            <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tenacity -->
+                <div data-i18n-list-item="tenacity">
+                    <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_tenacity_enabled' value="1"/>
+                    <div class="sheet-toggle sheet-hl">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="tenacity">Tenacity</label></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></div>
+                            <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity_other}" name="attr_tenacity_other" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity_temp}" name="attr_tenacity_temp" value="0"></div>
+                            <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{tenacity}" name="attr_tenacity" value="11"></div>
+                            <div class="sheet-td sheet-play">/</div>
+                            <div class="sheet-td"><input type="number" class="sheet-impvalue sheet-number-width" title="@{tenacity|max}" name="attr_tenacity_max" value="11" readonly></div>
+                            <div class="sheet-td sheet-checkbox-width sheet-edit"><input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_dependencies_enabled' value="1"/><div class="sheet-toggle"><input type="checkbox" title="@{tenacity_details}" name="attr_tenacity_details" value="1"><span class="sheet-checkico">y</span></div></div>
+                        </div>
+                        <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_tenacity_details" value="1">
+                        <div class="sheet-edit sheet-toggle">
+                            &emsp;<label class="sheet-checkbox">
+                                <input type='checkbox' title="@{apply_dependencies_penalty}" name='attr_apply_dependencies_penalty' value="1" checked/><span>3</span>
+                                <span data-i18n="apply_dependencies_penalty">Apply Dependencies Penalty</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -712,10 +696,12 @@
     <div class="sheet-section">
         <div class="sheet-flex">
             <h2><span data-i18n="conflict">Conflict</span>:&nbsp;</h2>
+            <input type="checkbox" class="sheet-extended-conflict-toggle sheet-hidden" name="attr_extended_conflict_resolution_enabled" value="1">
             <input type='hidden' class='sheet-conflict-mode' name='attr_conflict_mode' value='none'>
             <div class="sheet-conflict-mode sheet-bmargin">
                 <button type="action" class="sheet-checkbtn sheet-conflict-mode-none" name="act_conflict_mode_none" data-i18n="none">None</button>
                 <button type="action" class="sheet-checkbtn sheet-conflict-mode-combat" name="act_conflict_mode_combat" data-i18n="combat">Combat</button>
+                <button type="action" class="sheet-checkbtn sheet-extended-conflict sheet-conflict-mode-extended-conflict" name="act_conflict_mode_extended_conflict" data-i18n="extended_conflict">Extended Conflict</button>
                 <button type="action" class="sheet-checkbtn sheet-conflict-mode-spirit-combat" name="act_conflict_mode_spirit_combat" data-i18n="spirit_combat">Spirit Combat</button>
                 <button type="action" class="sheet-checkbtn sheet-conflict-mode-social-conflict" name="act_conflict_mode_social_conflict" data-i18n="social_conflict">Social Conflict</button>
             </div>
@@ -728,7 +714,30 @@
             </div>
 
             <div class='sheet-conflict-mode-extended-conflict' data-i18n-list-item="extended_conflict">
-                extended stuff
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-th"><span data-i18n="str-u">STR</span></div>
+                        <div class="sheet-th"><span data-i18n="con-u">CON</span></div>
+                        <div class="sheet-th"><span data-i18n="siz-u">SIZ</span></div>
+                        <div class="sheet-th"><span data-i18n="dex-u">DEX</span></div>
+                        <div class="sheet-th"><span data-i18n="int-u">INT</span></div>
+                        <div class="sheet-th"><span data-i18n="pow-u">POW</span></div>
+                        <div class="sheet-th"><span data-i18n="cha-u">CHA</span></div>
+                        <div class="sheet-th"><span data-i18n="composite">Composite</span></div>
+                        <div class="sheet-th"><span data-i18n="damage">Damage</span></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{str_pool}" name="attr_str_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{str}" name="attr_str" value="11" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{con_pool}" name="attr_con_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{con}" name="attr_con" value="11" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_pool}" name="attr_siz_pool" value="13">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{siz}" name="attr_siz" value="13" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{dex_pool}" name="attr_dex_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{dex}" name="attr_dex" value="11" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{int_pool}" name="attr_int_pool" value="13">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{int}" name="attr_int" value="13" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_pool}" name="attr_pow_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{pow}" name="attr_pow" value="11" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_pool}" name="attr_cha_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{cha}" name="attr_cha" value="11" readonly></div>
+                        <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{conflict_pool}" name="attr_conflict_pool" value="11">/<input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{conflict_pool|max}" name="attr_conflict_pool_max" value="11"></div>
+                        <div class="sheet-td"><button type="roll" class="sheet-d6 sheet-button-width"></button></div>
+                    </div>
+                </div>
             </div>
 
             <div class='sheet-conflict-mode-social-conflict'  data-i18n-list-item="social_conflict">
@@ -2602,7 +2611,7 @@
                 </div>
 
                 <!-- Passions -->
-                <div class="Sheet-bmargin">
+                <div class="sheet-bmargin">
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_attack">w</div></div>
                         <div class="sheet-th sheet-pictos sheet-social-conflict-toggle sheet-play"><div class="sheet-help sheet-checkbox-width" data-i18n-title="use_for_social_defense">q</div></div>
@@ -2615,6 +2624,9 @@
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                         <div class="sheet-th sheet-pictos"><div class="sheet-help sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
                     </div>
+                    <input type="checkbox" class="sheet-hidden sheet-corruptions-toggle" name="attr_corruptions_enabled" value="1">
+                    <input type="checkbox" class="sheet-hidden sheet-dependencies-toggle" name="attr_dependencies_enabled" value="1">
+                    <input type="checkbox" class="sheet-hidden sheet-peculiarities-toggle" name="attr_peculiarities_enabled" value="1">
                     <fieldset class="repeating_passion">
                         <div class="sheet-flex">
                             <input type="hidden" name="attr_encumbered" value="0" disabled>
@@ -2637,10 +2649,10 @@
                             </div>
                             <div class="sheet-td">
                                 <select class="sheet-passiontype sheet-text-center sheet-usrinput" title="@{$ID_type}" name="attr_type">
-                                    <option value="corruption" data-i18n="corruption">Corruption</option>
-                                    <option value="dependency" data-i18n="dependency">Dependency</option>
+                                    <option value="corruption" class="sheet-corruptions-toggle" data-i18n="corruption">Corruption</option>
+                                    <option value="dependency" class="sheet-dependencies-toggle" data-i18n="dependency">Dependency</option>
                                     <option value="passion" data-i18n="passion" selected>Passion</option>
-                                    <option value="peculiarity" data-i18n="peculiarity">Peculiarity</option>
+                                    <option value="peculiarity" class="sheet-peculiarities-toggle" data-i18n="peculiarity">Peculiarity</option>
                                 </select>
                             </div>
                             <div class="sheet-td">
@@ -2659,6 +2671,14 @@
                             <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
                         </div>
                     </fieldset>
+                </div>
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_dependencies_enabled" value="1">
+                <div class="sheet-toggle">
+                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_apply_dependencies_penalty" value="1" checked>
+                    <div class="sheet-toggle sheet-text-right">
+                        <label class="sheet-left" data-i18n="tenacity_penalty">Tenacity Penalty</label>
+                        <input class="sheet-number-width" name="attr_tenacity_dependencies" title="@{tenacity_dependencies}" value="0" readonly>
+                    </div>
                 </div>
             </div>
         </div>

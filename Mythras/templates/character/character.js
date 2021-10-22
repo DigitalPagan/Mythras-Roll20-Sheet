@@ -450,7 +450,7 @@ charactertabs.forEach(button => {
 });
 
 /* Conflict Mode */
-const conflictmodes = ["none","combat","spirit_combat","social_conflict"];
+const conflictmodes = ["none","combat","extended_conflict","spirit_combat","social_conflict"];
 conflictmodes.forEach(button => {
     on(`clicked:conflict_mode_${button}`, function() {
         setAttrs({
@@ -990,6 +990,17 @@ function calcMagicPoints(pow, magic_points_other, magic_points_temp, magic_point
         magic_points_base: pow,
         magic_points_max: new_magic_points_max,
         magic_points: parseInt(magic_points) + diff_magic_points_max
+    };
+}
+
+function calcTenacity(pow, tenacity_other, tenacity_temp, tenacity, tenacity_max, tenacity_dependencies) {
+    const new_magic_points_max = pow + parseInt(tenacity_other) + parseInt(tenacity_temp) + tenacity_dependencies;
+    const diff_magic_points_max = new_magic_points_max - parseInt(tenacity_max);
+
+    return {
+        tenacity_base: pow,
+        tenacity_max: new_magic_points_max,
+        tenacity: parseInt(tenacity) + diff_magic_points_max
     };
 }
 
@@ -1568,7 +1579,8 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                 ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
                 ['social_initiative_other', 'social_initiative_temp'], ['confidence_other', 'confidence_temp'],
                 ['composure_other', 'composure_temp', 'composure', 'composure_max'],
-                ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function(v) {
+                ['social_damage_temp', 'social_damage_other', 'social_attack_id_value'],
+                ['tenacity_other', 'tenacity_temp', 'tenacity_dependencies', 'tenacity', 'tenacity_max']), function(v) {
                 const charObj = buildCharObj(v);
                 const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                     v['hp_calc'], v['simplified_combat_enabled']);
@@ -1593,6 +1605,7 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                     ...calcSocialInitiative(charObj['int'], charObj['cha'], v['social_initiative_other'], v['social_initiative_temp']),
                     hp_max_base: hp_max_base,
                     ...calcMagicPoints(charObj['pow'], v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max']),
+                    ...calcTenacity(charObj['pow'], v['tenacity_other'], v['tenacity_temp'], v['tenacity'], v['tenacity_max'], parseInt(v['tenacity_dependencies'])),
                     ...calcLocationHP('1', hp_max_base, v['location1_hp_max_base_mod'], v['location1_hp_max_other'],
                         all_hp_temp, v['location1_hp'], v['location1_hp_max']),
                     ...calcLocationHP('2', hp_max_base, v['location2_hp_max_base_mod'], v['location2_hp_max_other'],
@@ -1744,6 +1757,15 @@ on('change:magic_points_other change:magic_points_temp', function() {
     getAttrs(['pow', 'magic_points_other', 'magic_points_temp', 'magic_points', 'magic_points_max'], function(v) {
         setAttrs({
             ...calcMagicPoints(parseInt(v['pow']), v['magic_points_other'], v['magic_points_temp'], v['magic_points'], v['magic_points_max'])
+        });
+    });
+});
+
+/* Tenacity Triggers */
+on('change:tenacity_other change:tenacity_temp', function() {
+    getAttrs(['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies'], function(v) {
+        setAttrs({
+            ...calcTenacity(parseInt(v['pow']), v['tenacity_other'], v['tenacity_temp'], v['tenacity'], v['tenacity_max'], parseInt(v['tenacity_dependencies']))
         });
     });
 });
@@ -2008,29 +2030,46 @@ allStdSkillIds.forEach(skillId => {
 });
 
 /* Passion Triggers */
-on("change:repeating_passion:total", function(event) {
-    const id = event.sourceAttribute.split('_')[2];
+on("change:repeating_passion:total change:repeating_passion:type", function(event) {
+    const sourceId = event.sourceAttribute.split('_')[2];
 
-    getAttrs([`repeating_passion_${id}_total`].concat(
-        ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-        ['social_damage_other', 'social_damage_temp', 'social_attack_id_value']), function(v) {
-        const passionTotal = parseInt(v[`repeating_passion_${id}_total`]);
+    getSectionIDs("repeating_passion", function(passionIds) {
+        let passionGetAttrs = [];
+        passionIds.forEach(id => {
+            passionGetAttrs.push(`repeating_passion_${id}_total`, `repeating_passion_${id}_type`)
+        });
 
-        let socialDamageVals = {};
-        if (`repeating_passion_${id}` === v['social_attack_id_value']) {
-            socialDamageVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], passionTotal);
-        }
+        getAttrs(passionGetAttrs.concat(
+            ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
+            ['social_damage_other', 'social_damage_temp', 'social_attack_id_value'],
+            ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies']), function(v) {
+            const passionTotal = parseInt(v[`repeating_passion_${sourceId}_total`]);
 
-        let spiritDamageVals = {};
-        if (`repeating_passion_${id}` === v['spirit_combat_skill_id']) {
-            spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], passionTotal);
-        }
+            let socialDamageVals = {};
+            if (`repeating_passion_${sourceId}` === v['social_attack_id_value']) {
+                socialDamageVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], passionTotal);
+            }
 
-        // TODO Tenacity Modifier
+            let spiritDamageVals = {};
+            if (`repeating_passion_${sourceId}` === v['spirit_combat_skill_id']) {
+                spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], passionTotal);
+            }
 
-        setAttrs({
-            ...spiritDamageVals,
-            ...socialDamageVals
+            let dependenciesTotal = 0;
+            passionIds.forEach(id => {
+                if(v[`repeating_passion_${id}_type`] === 'dependency') {
+                    dependenciesTotal = dependenciesTotal +  parseInt(v[`repeating_passion_${id}_total`])
+                }
+            });
+
+            const tenacityPenalty = 0 - Math.floor(dependenciesTotal/20);
+
+            setAttrs({
+                ...calcTenacity(parseInt(v['pow']), v['tenacity_other'], v['tenacity_temp'], v['tenacity'], v['tenacity_max'], tenacityPenalty),
+                tenacity_dependencies: tenacityPenalty,
+                ...spiritDamageVals,
+                ...socialDamageVals
+            });
         });
     });
 });

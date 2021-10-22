@@ -18,6 +18,7 @@
     "resist-order": "blank,brawn,endurance,evade,willpower,special",
     "social-conflict-attribute-order": "confidence,damage,initiative",
     "passion-type-order": "corruption,dependency,passion,peculiarity",
+    "passion-toggle-order": "corruptions,dependencies,peculiarities",
     "ability-type-order": "ability,animism_spirit,fae_mutation,fae_power,folk_spell,gift,lycanthrope_power,mystic_talent,psionic_talent,shifter_power,sorcery_spell,super_power,theism_miracle,trait,vampire_power",
     "settings": "Settings",
     "version": "Version",
@@ -970,7 +971,7 @@
     "augment-tooltip": "Modification from augmentation(applied before difficulty and does not increase critical value)",
     "vs101-tooltip": "Penalty from opposing a score higher than 100(applied after difficulty, use negative values)",
     "dependency-bump-tooltip": "Dependency increased for an experience roll in the past year",
-    "tenacity-penalty": "Tenacity Penalty",
+    "tenacity_penalty": "Tenacity Penalty",
     "ref-tooltip": "Source book and page reference",
     "ref": "Ref.",
     "memorized-tooltip": "Memorized or practiced",
@@ -1070,7 +1071,7 @@
     "minutes-abrv-l": "mins",
     "advanced_configuration": "Advanced Configuration",
     "binding_id": "Binding ID",
-    "-1_per_full_20_points_of_dependencies": "-1 per full 20 points of dependencies",
+    "apply_dependencies_penalty": "Apply Dependencies Penalty",
     "spirit_damage-abrv3": "Spirit Dmg",
     "damage_mod": "Damage Mod",
     "spirit_attrs": "Spirit attrs",
@@ -1107,5 +1108,9 @@
     "social_defense": "Social Defense",
     "spirit_combat_skill": "Spirit Combat Skill",
     "half_skill": "Half Skill",
-    "full_skill": "Full Skill"
+    "full_skill": "Full Skill",
+    "corruptions": "Corruptions",
+    "peculiarities": "Peculiarities",
+    "extended_conflict": "Extended Conflict",
+    "composite": "Composite"
 }
