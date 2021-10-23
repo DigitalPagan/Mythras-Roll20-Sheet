@@ -2,8 +2,6 @@
 <!-- Spirit Toggle -->
 <div class='sheet-character-tab-core'>
     <!-- Top Stats -->
-    <!-- Extended Conflict Toggle -->
-
     <div class="sheet-flex">
         <!-- Characteristics -->
         <div class=" sheet-section sheet-rmargin">
@@ -538,73 +536,7 @@
 
     <!-- Encumbrance & Fatigue -->
     <div class="sheet-flex">
-        <!-- Encumberance -->
-        <div class="sheet-section sheet-grow sheet-rmargin">
-            <div class="sheet-flex-centered">
-                <h2 data-i18n="encumbrance">Encumbrance</h2>
-                <div class="sheet-edit sheet-grow sheet-text-right">
-                    <label class="sheet-left" data-18n="avg-species-siz">Average Species SIZ</label>
-                    <input type="number" class="sheet-number-width sheet-usrinput" title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
-                </div>
-                <div class="sheet-play sheet-grow sheet-text-right">
-                    <label class="sheet-checkbox">
-                        <input type='checkbox' title="@{pack_equipped}" name='attr_pack_equipped' value="1" checked/><span>3</span>
-                        <span class="sheet-bold" data-i18n="equip-pack">Equip Pack</span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="sheet-table">
-                <div class="sheet-tr">
-                    <div class="sheet-th" data-i18n="temp">Temp</div>
-                    <div class="sheet-th" data-i18n="current">Current</div>
-                    <div class="sheet-th" data-i18n="carrying-load">Carrying Load</div>
-                    <div class="sheet-th" data-i18n="skills">Skills</div>
-                    <div class="sheet-th" data-i18n="move">Move</div>
-                </div>
-                <div class="sheet-tr">
-                    <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-usrinput" title="@{encumbrance_temp}" name="attr_encumbrance_temp" value="0"></div>
-                    <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-value" title="@{encumbrance_current}" name="attr_encumbrance_current" value="0" readonly></div>
-                    <div class="sheet-td">
-                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_load}" name="attr_encumbrance_load">
-                            <option value="0" data-i18n="normal" selected>Normal</option>
-                            <option value="1" data-i18n="medium">Medium</option>
-                            <option value="2" data-i18n="strenuous">Strenuous</option>
-                            <option value="3" data-i18n="impossible">Impossible</option>
-                        </select>
-                    </div>
-                    <div class="sheet-td">
-                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_skills}" name="attr_encumbrance_skills">
-                            <option value="0" data-i18n="standard" selected>Standard</option>
-                            <option value="1" data-i18n="1_grade_harder">1 grade harder</option>
-                            <option value="2" data-i18n="2_grades_harder">2 grades harder</option>
-                            <option value="3" data-i18n="impossible">Impossible</option>
-                        </select>
-                    </div>
-                    <div class="sheet-td">
-                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{movement_rate_enc}" name="attr_movement_rate_enc">
-                            <option value="+0" data-i18n="normal">Normal</option>
-                            <option value="-2">-2</option>
-                            <option value="*.5" data-i18n="halved">Halved</option>
-                            <option value="*0" data-i18n="impossible">Impossible</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sheet-hidden">
-                <input type="number" step="any" name="attr_armor_enc" value="0" readonly>
-                <input type="number" step="any" name="attr_armor_penalty" value="0" readonly>
-                <input type="number" step="any" name="attr_melee_weapons_enc" value="0" readonly>
-                <input type="number" step="any" name="attr_ranged_weapons_enc" value="0" readonly>
-                <input type="number" step="any" name="attr_loadout_enc" value="0" readonly>
-                <input type="number" step="any" name="attr_pack_enc" value="0" readonly>
-                <input type="number" step="any" name="attr_currency_enc" value="0" readonly>
-                <input type="number" name="attr_burdened_enc" value="22" readonly>
-                <input type="number" name="attr_overloaded_enc" value="33" readonly>
-                <input type="number" name="attr_encumbrance_current_max" value="44" readonly>
-            </div>
-        </div>
+        {% include 'character/tabs/common/encumbrance.html' %}
 
         <!-- Fatigue -->
         <div class="sheet-section sheet-grow">
@@ -710,7 +642,9 @@
         <div data-i18n-list="combat_mode_order">
             <input type='hidden' class='sheet-conflict-mode' name='attr_conflict_mode' value='none'>
             <div class='sheet-conflict-mode-combat' data-i18n-list-item="combat">
-                combat stuff
+                <!-- TODO maybe move stuff above into combat section? -->
+
+                {% include 'character/tabs/common/weapons.html' %}
             </div>
 
             <div class='sheet-conflict-mode-extended-conflict' data-i18n-list-item="extended_conflict">

@@ -207,6 +207,10 @@ input.sheet-conflict-mode[value="social_conflict"] ~ div.sheet-conflict-mode-soc
     display: block;
 }
 
+input.sheet-conflict-mode:not([value="social_conflict"]) ~ div .sheet-social-conflict-toggle {
+    display: none;
+}
+
 input.sheet-conflict-mode[value="none"] + div.sheet-conflict-mode button.sheet-conflict-mode-none,
 input.sheet-conflict-mode[value="combat"] + div.sheet-conflict-mode button.sheet-conflict-mode-combat,
 input.sheet-conflict-mode[value="extended_conflict"] + div.sheet-conflict-mode button.sheet-conflict-mode-extended-conflict,

@@ -277,6 +277,7 @@ input[type="checkbox"].sheet-accordion + h4::after {
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 4px;
+    font-size: .75em;
     content: " ►";
 }
 
@@ -287,7 +288,7 @@ input[type="checkbox"].sheet-accordion + h2::after {
     display: inline-block;
     vertical-align: middle;
     content: "►";
-    font-size: 1.5em;
+    font-size: .75em;
 }
 
 input[type="checkbox"].sheet-accordion:checked + h4::after {
@@ -360,6 +361,7 @@ a.repcontrol_move {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button[type=roll].sheet-d100::before {
     font-family: 'dicefontd10';
@@ -369,6 +371,7 @@ a.repcontrol_move {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button[type=roll].sheet-d6::before {
     font-family: 'dicefontd6';
@@ -379,6 +382,7 @@ a.repcontrol_move {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button[type=roll].sheet-effect::before {
     font-family: 'pictos';
@@ -389,6 +393,7 @@ a.repcontrol_move {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button[type=roll].sheet-improve::before {
     font-family: 'pictos';
@@ -399,6 +404,7 @@ a.repcontrol_move {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button[type=roll].sheet-waxorwane::before {
     font-family: 'pictos';
@@ -409,6 +415,7 @@ a.repcontrol_move {
     border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button[type=roll].sheet-link {
     padding: 0!important;
@@ -795,6 +802,7 @@ div.sheet-th {
     background: dimgray;
     color: lightgray;
     vertical-align: middle;
+    font-weight: normal;
 }
 div.sheet-td {
     display: table-cell;
@@ -1072,6 +1080,10 @@ input.sheet-conflict-mode[value="extended_conflict"] ~ div.sheet-conflict-mode-e
 input.sheet-conflict-mode[value="spirit_combat"] ~ div.sheet-conflict-mode-spirit-combat,
 input.sheet-conflict-mode[value="social_conflict"] ~ div.sheet-conflict-mode-social-conflict {
     display: block;
+}
+
+input.sheet-conflict-mode:not([value="social_conflict"]) ~ div .sheet-social-conflict-toggle {
+    display: none;
 }
 
 input.sheet-conflict-mode[value="none"] + div.sheet-conflict-mode button.sheet-conflict-mode-none,

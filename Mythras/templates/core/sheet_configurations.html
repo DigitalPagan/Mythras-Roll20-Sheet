@@ -139,10 +139,22 @@
         <div class="sheet-section">
             <h2 data-i18n="weapons">Weapons</h2>
 
-            <label class="sheet-checkbox">
-                <input type='checkbox' name='attr_firearms_enabled' value="1"/><span>3</span>
-                <span data-i18n="firearm_traits">Firearm Traits</span>
-            </label>
+            <div><label class="sheet-left" data-i18n="close_combat">Close Combat</label></div>
+            <!-- Reach -->
+            <div class="sheet-lpad">
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_reach_enabled' value="1" checked><span>3</span>
+                    <span data-i18n="reach">Reach</span>
+                </label>
+            </div>
+
+            <div><label class="sheet-left" data-i18n="ranged">Ranged</label></div>
+            <div class="sheet-lpad">
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_fire_rate_enabled' value="1"/><span>3</span>
+                    <span data-i18n="fire_rate">Fire Rate</span>
+                </label>
+            </div>
         </div>
 
         <div class="sheet-section sheet-rpad">
