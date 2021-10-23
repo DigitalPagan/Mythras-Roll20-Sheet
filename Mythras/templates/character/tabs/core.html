@@ -669,7 +669,7 @@
                         <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{pow_pool}" name="attr_pow_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{pow}" name="attr_pow" value="11" readonly></div>
                         <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width" title="@{cha_pool}" name="attr_cha_pool" value="11">/<input type="number" class="sheet-impvalue sheet-number-width" title="@{cha}" name="attr_cha" value="11" readonly></div>
                         <div class="sheet-td"><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{conflict_pool}" name="attr_conflict_pool" value="11">/<input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{conflict_pool|max}" name="attr_conflict_pool_max" value="11"></div>
-                        <div class="sheet-td"><button type="roll" class="sheet-d6 sheet-button-width"></button></div>
+                        <div class="sheet-td"><button type="roll" class="sheet-d6 sheet-button-width" title="%{extended_conflict_damage}" name="roll_extended_conlict_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=^{extended_conflict_damage}}} @{name_display} {{^{damage}=[[1d6]]}}'}}"></button></div>
                     </div>
                 </div>
             </div>

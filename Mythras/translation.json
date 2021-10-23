@@ -1113,5 +1113,6 @@
     "peculiarities": "Peculiarities",
     "extended_conflict": "Extended Conflict",
     "composite": "Composite",
-    "close_combat": "Close Combat"
+    "close_combat": "Close Combat",
+    "extended_conflict_damage": "Extended Conflict Damage"
 }
