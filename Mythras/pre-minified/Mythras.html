@@ -1133,11 +1133,11 @@
     <div style="padding-bottom: 0;" class="sheet-section sheet-play sheet-flex-centered">
         <h2 data-i18n="movement">Movement</h2>
         <div class="sheet-grow sheet-space-evenly">
-            <button type="roll" class="sheet-nodie"><span data-i18n="run">Run</span>/<span data-i18n="sprint">Sprint</span></button>&nbsp;
-            <button type="roll" class="sheet-nodie" data-i18n="swim">Swim</button>&nbsp;
-            <button type="roll" class="sheet-nodie" data-i18n="running_jump">Running Jump</button>&nbsp;
-            <button type="roll" class="sheet-nodie" data-i18n="standing_jump">Standing Jump</button>&nbsp;
-            <button type="roll" class="sheet-nodie" data-i18n="climb">Climb</button>
+            <button type="roll" class="sheet-nodie" title="%{run}" name="roll_run" value="@{roll_display}&{template:default} {{name=^{run}/^{sprint}}} @{name_display} {{^{run}=[[3]]}} {{^{sprint}=[[5]]}}"><span data-i18n="run">Run</span>/<span data-i18n="sprint">Sprint</span></button>&nbsp;
+            <button type="roll" class="sheet-nodie" title="%{swim}" name="roll_swim" data-i18n="swim">Swim</button>&nbsp;
+            <button type="roll" class="sheet-nodie" title="%{running_jump}" name="roll_running_jump" data-i18n="running_jump">Running Jump</button>&nbsp;
+            <button type="roll" class="sheet-nodie" title="%{standing_jump}" name="roll_standing_jump" data-i18n="standing_jump">Standing Jump</button>&nbsp;
+            <button type="roll" class="sheet-nodie" title="%{climb}" name="roll_climb" data-i18n="climb">Climb</button>
         </div>
     </div>
 
