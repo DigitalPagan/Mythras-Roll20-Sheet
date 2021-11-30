@@ -1114,5 +1114,7 @@
     "extended_conflict": "Extended Conflict",
     "composite": "Composite",
     "close_combat": "Close Combat",
-    "extended_conflict_damage": "Extended Conflict Damage"
+    "extended_conflict_damage": "Extended Conflict Damage",
+    "meters": "meters",
+    "swim-notes": "If swim/float/sink; >1=swim, 0=float, <1=sink"
 }
