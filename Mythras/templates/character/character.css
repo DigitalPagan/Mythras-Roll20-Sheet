@@ -91,6 +91,20 @@ input.sheet-simplified-combat-toggle:checked + div.sheet-complex-combat {
 }
 
 /* Character Tabs */
+/*div.sheet-character-tabs {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 100;
+    background: white;
+    border-bottom: 2px solid black;
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 0 2px 5px;
+    /*padding: 2px;
+    background: black;
+    color: lightgray;
+}*/
+
 div.sheet-character-tab-core,
 div.sheet-character-tab-abilities,
 div.sheet-character-tab-equipment,
@@ -142,6 +156,13 @@ div.sheet-char-label {
 /* Attributes */
 .sheet-attr-calc-width {
     width: 100px;
+}
+input.sheet-movement-calc[value="standard"] ~ div.sheet-custom-movement,
+input.sheet-movement-calc[value="custom"] ~ div.sheet-standard-movement {
+    display: none;
+}
+.sheet-custom-movement-width {
+    width: 130px;
 }
 
 /* Traits */
@@ -250,6 +271,104 @@ input.sheet-peculiarities-toggle:not(:checked) ~ div .sheet-peculiarities-toggle
 }
 
 /* Abilities Tab */
+/* Abilities Type Filter Buttons */
+input.sheet-abilities-type-filter[value="all"] ~ button.sheet-abilities-type-filter-all,
+input.sheet-abilities-type-filter[value="alchemy"] ~ button.sheet-abilities-type-filter-alchemy,
+input.sheet-abilities-type-filter[value="animism"] ~ button.sheet-abilities-type-filter-animism,
+input.sheet-abilities-type-filter[value="arcane_magic"] ~ button.sheet-abilities-type-filter-arcane-magic,
+input.sheet-abilities-type-filter[value="artifice"] ~ button.sheet-abilities-type-filter-artifice,
+input.sheet-abilities-type-filter[value="divine_magic"] ~ button.sheet-abilities-type-filter-divine-magic,
+input.sheet-abilities-type-filter[value="fae_powers"] ~ button.sheet-abilities-type-filter-fae-powers,
+input.sheet-abilities-type-filter[value="folk_magic"] ~ button.sheet-abilities-type-filter-folk-magic,
+input.sheet-abilities-type-filter[value="magic"] ~ button.sheet-abilities-type-filter-magic,
+input.sheet-abilities-type-filter[value="mysticism"] ~ button.sheet-abilities-type-filter-mysticism,
+input.sheet-abilities-type-filter[value="psionics"] ~ button.sheet-abilities-type-filter-psionics,
+input.sheet-abilities-type-filter[value="psychic_powers"] ~ button.sheet-abilities-type-filter-psychic-powers,
+input.sheet-abilities-type-filter[value="sorcery"] ~ button.sheet-abilities-type-filter-sorcery,
+input.sheet-abilities-type-filter[value="super_powers"] ~ button.sheet-abilities-type-filter-super-powers,
+input.sheet-abilities-type-filter[value="theism"] ~ button.sheet-abilities-type-filter-theism,
+input.sheet-abilities-type-filter[value="other"] ~ button.sheet-abilities-type-filter-other {
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    border: solid 1px black;
+}
+
+/* Abilities Rank Filter Buttons */
+input.sheet-abilities-rank-filter[value="all"] ~ button.sheet-abilities-rank-filter-all,
+input.sheet-abilities-rank-filter[value="0"] ~ button.sheet-abilities-rank-filter-0,
+input.sheet-abilities-rank-filter[value="1"] ~ button.sheet-abilities-rank-filter-1,
+input.sheet-abilities-rank-filter[value="2"] ~ button.sheet-abilities-rank-filter-2,
+input.sheet-abilities-rank-filter[value="3"] ~ button.sheet-abilities-rank-filter-3,
+input.sheet-abilities-rank-filter[value="4"] ~ button.sheet-abilities-rank-filter-4,
+input.sheet-abilities-rank-filter[value="5"] ~ button.sheet-abilities-rank-filter-5 {
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    border: solid 1px black;
+}
+
+input[type="checkbox"].sheet-rank-toggle:not(:checked) ~ div .sheet-rank-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-abilities-armor-penalty-toggle:not(:checked) ~ div .sheet-abilities-armor-penalty-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-abilities-prompts-toggle:not(:checked) ~ div .sheet-abilities-prompts-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-alchemy-toggle:not(:checked) ~ div .sheet-alchemy-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-animism-toggle:not(:checked) ~ div .sheet-animism-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-artifice-toggle:not(:checked) ~ div .sheet-artifice-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-arcane-magic-toggle:not(:checked) ~ div .sheet-arcane-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-divine-magic-toggle:not(:checked) ~ div .sheet-divine-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-fae-powers-toggle:not(:checked) ~ div .sheet-fae-powers-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-folk-magic-toggle:not(:checked) ~ div .sheet-folk-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-magic-toggle:not(:checked) ~ div .sheet-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-mysticism-toggle:not(:checked) ~ div .sheet-mysticism-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-psionics-toggle:not(:checked) ~ div .sheet-psionics-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-psychicpowers-toggle:not(:checked) ~ div .sheet-psychicpowers-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-sorcery-toggle:not(:checked) ~ div .sheet-sorcery-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-superpowers-toggle:not(:checked) ~ div .sheet-superpowers-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-theism-toggle:not(:checked) ~ div .sheet-theism-toggle {
+    display: none;
+}
+
+
+div.sheet-devotion-name {
+    width: 150px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-devotion-limit {
+    width: 50px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
 div.sheet-ability-name {
     width: 168px;
     flex-shrink: 0;
@@ -261,7 +380,12 @@ div.sheet-ability-type {
     padding: 1px 1px 0;
 }
 div.sheet-ability-skill {
-    width: 125px;
+    width: 140px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-prompts {
+    width: 75px;
     flex-shrink: 0;
     padding: 1px 1px 0;
 }
@@ -271,8 +395,11 @@ div.sheet-ability-skillid {
     padding: 1px 1px 0;
 }
 
-select.sheet-shaping-trait {
-    width: 100px;
+/* Limitations */
+div.sheet-limitation-name {
+    width: 200px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
 }
 
 /* Equipment Tab*/

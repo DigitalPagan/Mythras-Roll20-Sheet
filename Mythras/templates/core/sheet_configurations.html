@@ -2,7 +2,7 @@
 <label class="sheet-left" data-i18n="sheet-type">Sheet Type</label>&nbsp;
 <select data-i18n-list="sheet-type-order" title="{{'@{type}'}}" class="sheet-usrinput" name="attr_type">
     <option {% if not battle_units %}class="sheet-hidden"{% endif %} value="battle-unit" data-i18n-list-item="battle-unit" data-i18n="battle-unit">Battle Unit</option>
-    <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
+    <option value="character" data-i18n-list-item="character" data-i18n="character" selected><span data-i18n="character">Character</span>/<span data-i18n="creature">Creature</span></option>
     <option {% if not ships %}class="sheet-hidden"{% endif %} value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
     <option {% if not star_systems %}class="sheet-hidden"{% endif %} value="star_system" data-i18n-list-item="star-system" data-i18n="star-system">Star System</option>
     <option {% if not vehicles %}class="sheet-hidden"{% endif %} value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
@@ -49,6 +49,14 @@
                 <label class="sheet-checkbox">
                     <input type='checkbox' name='attr_social_conflict_enabled' value="1"/><span>3</span>
                     <span class="sheet-bold" data-i18n="social_conflict">Social Conflict</span>
+                </label>
+            </div>
+
+            <!-- Limitations -->
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_limitations_enabled' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="limitations">Limitations</span>
                 </label>
             </div>
         </div>
@@ -238,6 +246,153 @@
         <!-- Abilities -->
         <div class="sheet-section sheet-rpad">
             <h2 data-i18n="abilities">Abilities</h2>
+
+            <div><label class="sheet-left" data-i18n="fields">Fields</label></div>
+            <div class="sheet-lpad">
+                <!-- Armor Penalty -->
+                <div>
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_abilities_armor_penalty_enabled' value="1"><span>3</span>
+                        <span data-i18n="armor_penalty">Armor Penalty</span>
+                    </label>
+                </div>
+                <!-- Prompts -->
+                <div>
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_abilities_prompts_enabled' value="1"><span>3</span>
+                        <span data-i18n="prompts">Prompts</span>
+                    </label>
+                </div>
+            </div>
+
+            <div><label class="sheet-left" data-i18n="types">Types</label></div>
+            <div class="sheet-lpad" data-i18n-list="ability-type-order">
+                <!-- Alchemy -->
+                <div data-i18n-list-item="alchemy">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_alchemy_enabled' value="1"><span>3</span>
+                        <span data-i18n="alchemy">Alchemy</span>
+                    </label>
+                </div>
+
+                <!-- Animism -->
+                <div data-i18n-list-item="animism">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_animism_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="animism">Animism</span>
+                    </label>
+                </div>
+
+                <!-- Arcane Magic -->
+                <div data-i18n-list-item="arcane_magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_arcane_magic_enabled' value="1"><span>3</span>
+                        <span data-i18n="arcane_magic">Arcane Magic</span>
+                        (<label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_arcane_magic_prompts_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="prompt_for_intensity">Prompt for intensity</span></label>)
+                    </label>
+                </div>
+
+                <!-- Artifice -->
+                <div data-i18n-list-item="artifice">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_artifice_enabled' value="1"><span>3</span>
+                        <span data-i18n="artifice">Artifice</span>
+                    </label>
+                </div>
+
+                <!-- Divine Magic -->
+                <div data-i18n-list-item="divine_magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_divine_magic_enabled' value="1"><span>3</span>
+                        <span data-i18n="divine_magic">Divine Magic</span>
+                        (<label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_divine_magic_prompts_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="prompt_for_intensity">Prompt for intensity</span></label>)
+                    </label>
+                </div>
+
+                <!-- Fae Powers -->
+                <div data-i18n-list-item="fae_powers">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_fae_powers_enabled' value="1"><span>3</span>
+                        <span data-i18n="fae_powers">Fae Powers</span>
+                    </label>
+                </div>
+
+                <!-- Folk Magic -->
+                <div data-i18n-list-item="folk_magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_folk_magic_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="folk_magic">Folk Magic</span>
+                    </label>
+                </div>
+
+                <!-- Magic -->
+                <div data-i18n-list-item="magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_magic_enabled' value="1"><span>3</span>
+                        <span data-i18n="magic">Magic</span>
+                    </label>
+                </div>
+
+                <!-- Mysticism -->
+                <div data-i18n-list-item="mysticism">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_mysticism_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="mysticism">Mysticism</span>
+                        (<label class="sheet-checkbox">
+                            <input type='checkbox' name='attr_mysticism_prompts_enabled' value="1" checked><span>3</span>
+                            <span data-i18n="prompt_for_intensity">Prompt for intensity</span>
+                        </label>)
+                    </label>
+                </div>
+
+                <!-- Psionics -->
+                <div data-i18n-list-item="psionics">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_psionics_enabled' value="1"><span>3</span>
+                        <span data-i18n="psionics">Psionics</span>
+                    </label>
+                </div>
+
+                <!-- Psychic Powers -->
+                <div data-i18n-list-item="psychic_powers">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_psychic_powers_enabled' value="1"><span>3</span>
+                        <span data-i18n="psychic_powers">Psychic Powers</span>
+                    </label>
+                </div>
+
+                <!-- Sorcery -->
+                <div data-i18n-list-item="sorcery">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_sorcery_enabled' value="1"><span>3</span>
+                        <span data-i18n="sorcery">Sorcery</span>
+                    </label>
+                    (<label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_sorcery_prompts_enabled' value="1" checked><span>3</span>
+                    <span data-i18n="prompt_for_casting_components">Prompt for casting components</span>
+                </label>)
+                </div>
+
+                <!-- Super Powers -->
+                <div data-i18n-list-item="super_powers">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_superpowers_enabled' value="1"><span>3</span>
+                        <span data-i18n="super_powers">Super Powers</span>
+                    </label>
+                </div>
+
+                <!-- Theism -->
+                <div data-i18n-list-item="theism">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_theism_enabled' value="1"><span>3</span>
+                        <span data-i18n="theism">Theism</span>
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 </div>

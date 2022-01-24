@@ -63,7 +63,7 @@ button.recontrol_edit {
 }
 
 /* Make repeating section inline-block for display modes */
-fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
+fieldset.sheet-inline~.repcontainer > .repitem {
     display: inline-block;
 }
 
@@ -76,8 +76,16 @@ div.sheet-sticky-header {
     background: white;
     border-bottom: 2px solid black;
     margin-bottom: 5px;
+    width: 100%;
+    padding: 0 2px 5px;
+    /*padding: 2px;
+    background: black;
+    color: lightgray;*/
 }
 
+div.sheet-inline-block {
+    display: inline-block;
+}
 div.sheet-flex {
     display: flex;
 }
@@ -121,6 +129,7 @@ div.sheet-hl:hover {
 
 hr {
     margin: 5px 0;
+    border-top: 2px solid black;
 }
 
 /* Display Toggles */
@@ -179,6 +188,9 @@ div.sheet-flex-col {
 }
 .sheet-bmargin {
     margin-bottom: 5px;
+}
+.sheet-tmargin {
+    margin-top: 5px;
 }
 .sheet-rmargin {
     margin-right: 5px !important;
@@ -698,11 +710,45 @@ input[type="checkbox"]:checked + span.sheet-checkradio
     background-image: radial-gradient(black 0%, transparent 75%);
 }
 
-textarea {
+.sheet-auto-expand {
+    position: relative;
+    cursor: text;
+    word-wrap: break-word;
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 1.1em;
+}
+.sheet-auto-expand span {
+    visibility: hidden;
+    white-space: pre-wrap;
+    display: block;
+}
+.largedialog .sheet-auto-expand textarea {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin: 0;
+    overflow: auto;
+    resize: none;
+    min-height: 4em;
+    height: 100%;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    padding: inherit;
+    text-align: inherit;
+    text-transform: inherit;
+}
+
+.largedialog textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
+    height: 4em;
 }
 
 select {
@@ -966,6 +1012,20 @@ input.sheet-simplified-combat-toggle:checked + div.sheet-complex-combat {
 }
 
 /* Character Tabs */
+/*div.sheet-character-tabs {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 100;
+    background: white;
+    border-bottom: 2px solid black;
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 0 2px 5px;
+    /*padding: 2px;
+    background: black;
+    color: lightgray;
+}*/
+
 div.sheet-character-tab-core,
 div.sheet-character-tab-abilities,
 div.sheet-character-tab-equipment,
@@ -1017,6 +1077,13 @@ div.sheet-char-label {
 /* Attributes */
 .sheet-attr-calc-width {
     width: 100px;
+}
+input.sheet-movement-calc[value="standard"] ~ div.sheet-custom-movement,
+input.sheet-movement-calc[value="custom"] ~ div.sheet-standard-movement {
+    display: none;
+}
+.sheet-custom-movement-width {
+    width: 130px;
 }
 
 /* Traits */
@@ -1125,6 +1192,104 @@ input.sheet-peculiarities-toggle:not(:checked) ~ div .sheet-peculiarities-toggle
 }
 
 /* Abilities Tab */
+/* Abilities Type Filter Buttons */
+input.sheet-abilities-type-filter[value="all"] ~ button.sheet-abilities-type-filter-all,
+input.sheet-abilities-type-filter[value="alchemy"] ~ button.sheet-abilities-type-filter-alchemy,
+input.sheet-abilities-type-filter[value="animism"] ~ button.sheet-abilities-type-filter-animism,
+input.sheet-abilities-type-filter[value="arcane_magic"] ~ button.sheet-abilities-type-filter-arcane-magic,
+input.sheet-abilities-type-filter[value="artifice"] ~ button.sheet-abilities-type-filter-artifice,
+input.sheet-abilities-type-filter[value="divine_magic"] ~ button.sheet-abilities-type-filter-divine-magic,
+input.sheet-abilities-type-filter[value="fae_powers"] ~ button.sheet-abilities-type-filter-fae-powers,
+input.sheet-abilities-type-filter[value="folk_magic"] ~ button.sheet-abilities-type-filter-folk-magic,
+input.sheet-abilities-type-filter[value="magic"] ~ button.sheet-abilities-type-filter-magic,
+input.sheet-abilities-type-filter[value="mysticism"] ~ button.sheet-abilities-type-filter-mysticism,
+input.sheet-abilities-type-filter[value="psionics"] ~ button.sheet-abilities-type-filter-psionics,
+input.sheet-abilities-type-filter[value="psychic_powers"] ~ button.sheet-abilities-type-filter-psychic-powers,
+input.sheet-abilities-type-filter[value="sorcery"] ~ button.sheet-abilities-type-filter-sorcery,
+input.sheet-abilities-type-filter[value="super_powers"] ~ button.sheet-abilities-type-filter-super-powers,
+input.sheet-abilities-type-filter[value="theism"] ~ button.sheet-abilities-type-filter-theism,
+input.sheet-abilities-type-filter[value="other"] ~ button.sheet-abilities-type-filter-other {
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    border: solid 1px black;
+}
+
+/* Abilities Rank Filter Buttons */
+input.sheet-abilities-rank-filter[value="all"] ~ button.sheet-abilities-rank-filter-all,
+input.sheet-abilities-rank-filter[value="0"] ~ button.sheet-abilities-rank-filter-0,
+input.sheet-abilities-rank-filter[value="1"] ~ button.sheet-abilities-rank-filter-1,
+input.sheet-abilities-rank-filter[value="2"] ~ button.sheet-abilities-rank-filter-2,
+input.sheet-abilities-rank-filter[value="3"] ~ button.sheet-abilities-rank-filter-3,
+input.sheet-abilities-rank-filter[value="4"] ~ button.sheet-abilities-rank-filter-4,
+input.sheet-abilities-rank-filter[value="5"] ~ button.sheet-abilities-rank-filter-5 {
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+    border: solid 1px black;
+}
+
+input[type="checkbox"].sheet-rank-toggle:not(:checked) ~ div .sheet-rank-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-abilities-armor-penalty-toggle:not(:checked) ~ div .sheet-abilities-armor-penalty-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-abilities-prompts-toggle:not(:checked) ~ div .sheet-abilities-prompts-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-alchemy-toggle:not(:checked) ~ div .sheet-alchemy-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-animism-toggle:not(:checked) ~ div .sheet-animism-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-artifice-toggle:not(:checked) ~ div .sheet-artifice-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-arcane-magic-toggle:not(:checked) ~ div .sheet-arcane-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-divine-magic-toggle:not(:checked) ~ div .sheet-divine-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-fae-powers-toggle:not(:checked) ~ div .sheet-fae-powers-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-folk-magic-toggle:not(:checked) ~ div .sheet-folk-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-magic-toggle:not(:checked) ~ div .sheet-magic-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-mysticism-toggle:not(:checked) ~ div .sheet-mysticism-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-psionics-toggle:not(:checked) ~ div .sheet-psionics-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-psychicpowers-toggle:not(:checked) ~ div .sheet-psychicpowers-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-sorcery-toggle:not(:checked) ~ div .sheet-sorcery-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-superpowers-toggle:not(:checked) ~ div .sheet-superpowers-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-theism-toggle:not(:checked) ~ div .sheet-theism-toggle {
+    display: none;
+}
+
+
+div.sheet-devotion-name {
+    width: 150px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-devotion-limit {
+    width: 50px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
 div.sheet-ability-name {
     width: 168px;
     flex-shrink: 0;
@@ -1136,7 +1301,12 @@ div.sheet-ability-type {
     padding: 1px 1px 0;
 }
 div.sheet-ability-skill {
-    width: 125px;
+    width: 140px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-ability-prompts {
+    width: 75px;
     flex-shrink: 0;
     padding: 1px 1px 0;
 }
@@ -1146,8 +1316,11 @@ div.sheet-ability-skillid {
     padding: 1px 1px 0;
 }
 
-select.sheet-shaping-trait {
-    width: 100px;
+/* Limitations */
+div.sheet-limitation-name {
+    width: 200px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
 }
 
 /* Equipment Tab*/
@@ -1331,95 +1504,42 @@ textarea.sheet-character-notes {
 }
 /* Effect Roll Template Styles */
 .sheet-rolltemplate-effect div.sheet-border {
-    border: 3px solid #5962A3;
+    border: 2px solid #5962A3;
     background: white;
+    font-size: 1em;
 }
 .sheet-rolltemplate-effect div.sheet-header {
     background: #5962A3;
     color: whitesmoke;
-    padding: 0 3px 0;
 }
 .sheet-rolltemplate-effect div.sheet-subheader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2px 1px 0;
     background: dimgray;
     color: lightgray;
-    padding: 2px 3px 0;
-    margin-bottom: 2px;
-}
-.sheet-rolltemplate-effect div.sheet-rmargin {
-    margin-right: 5px;
 }
 .sheet-rolltemplate-effect div.sheet-character {
-    font-size: .75em;
-    margin: 0;
+    font-size: .9em;
+    text-align: center;
 }
 .sheet-rolltemplate-effect div.sheet-name {
     font-family: Palatino, serif;
+    text-align: center;
     font-size: 1.25em;
-    margin: 0;
 }
-.sheet-rolltemplate-effect div.sheet-trait {
+.sheet-rolltemplate-effect div.sheet-traits {
     font-style: italic;
-    padding: 0 3px 0;
+    padding: 2px 1px 0;
 }
-.sheet-rolltemplate-effect div.sheet-flex {
-    display: flex;
-}
-.sheet-rolltemplate-effect div.sheet-grow {
-    flex-grow: 1;
-}
-.sheet-rolltemplate-effect div.sheet-label {
-    font-weight: bold;
-    text-align: left;
-}
-.sheet-rolltemplate-effect div.sheet-value {
-    text-align: right;
-}
-.sheet-rolltemplate-effect div.sheet-altback {
-    padding: 2px 3px 0;
-}
-.sheet-rolltemplate-effect div.sheet-altback:nth-child(even) {
-    background: linear-gradient(to right, gainsboro, white);
-}
-
-
-/*
-.sheet-rolltemplate-effect table {
-    width: 100%;
-    border: 3px solid navy;
-    line-height: 1em;
-    font-size: 1em;
-    font-weight: normal;
-    background: white;
-}
-.sheet-rolltemplate-effect caption {
-    background: navy;
-    color: lightgray;
-    padding: 3px 3px 0;
-}
-
-.sheet-rolltemplate-effect tr {
-    margin: 0;
-    padding: 0;
-}
-.sheet-rolltemplate-effect tr:nth-child(even) {
-    background: linear-gradient(to right, gainsboro, white);
-}
-.sheet-rolltemplate-effect td {
-    padding: 3px 3px 0;
-    line-height: 1em;
-}
-.sheet-rolltemplate-effect td.sheet-label {
-    font-weight: bold;
-    text-align: left;
-}
-.sheet-rolltemplate-effect td.sheet-traits {
+.sheet-rolltemplate-effect div.sheet-traits {
     font-style: italic;
-    text-align: left;
+    padding: 2px 1px 0;
 }
-.sheet-rolltemplate-effect td.sheet-value {
-    text-align: right;
+.sheet-rolltemplate-effect div.sheet-description {
+    padding: 2px 1px 0;
 }
-*/
 .sheet-rolltemplate-effect .inlinerollresult  {
     display: inline-block;
     text-align: center;
@@ -1446,6 +1566,24 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+}
+.sheet-rolltemplate-effect a {
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em !important;
+    border: solid 1px gray !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+    padding: 0 2px 0 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.sheet-rolltemplate-effect a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+    text-shadow: none;
 }
 /* Hit Table Roll Template Styles */
 .sheet-rolltemplate-hittable div.sheet-border {
@@ -1609,6 +1747,104 @@ textarea.sheet-character-notes {
     font-weight: inherit;
 }
 .sheet-rolltemplate-improvement .inlinerollresult.importantroll {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+/* Movement Roll Template Styles */
+.sheet-rolltemplate-movement div.sheet-border {
+    border: 2px solid black;
+    background: white;
+}
+.sheet-rolltemplate-movement div.sheet-header {
+    background: black;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-movement div.sheet-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.sheet-rolltemplate-movement div.sheet-tr {
+    display: table-row;
+}
+.sheet-rolltemplate-movement div.sheet-th {
+    display:table-cell;
+    text-align: center;
+    padding: 1px;
+    background: dimgray;
+    color: lightgray;
+    vertical-align: middle;
+}
+.sheet-rolltemplate-movement div.sheet-td {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px;
+    white-space: nowrap;
+}
+.sheet-rolltemplate-movement div.sheet-character {
+    font-size: .9em;
+    text-align: center;
+}
+.sheet-rolltemplate-movement div.sheet-name {
+    font-family: Palatino, serif;
+    text-align: center;
+    font-size: 1.25em;
+}
+
+.sheet-rolltemplate-movement .sheet-bold {
+    font-weight: bold;
+}
+
+.sheet-rolltemplate-movement .sheet-pictos {
+    font-family: 'Pictos';
+}
+
+.sheet-rolltemplate-movement .sheet-help {
+    cursor: help;
+}
+
+.sheet-rolltemplate-movement div.sheet-listitem {
+    display: flex;
+    padding: 2px 1px 0;
+}
+.sheet-rolltemplate-movement div.sheet-listitem:nth-child(odd) {
+    background: linear-gradient(to right, gainsboro, white);
+}
+.sheet-rolltemplate-movement div.sheet-key {
+    font-weight: bold;
+    text-align: left;
+}
+.sheet-rolltemplate-movement div.sheet-value {
+    text-align: right;
+    flex-grow: 1;
+}
+
+.sheet-rolltemplate-movement .inlinerollresult {
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-movement .inlinerollresult.fullcrit {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-movement .inlinerollresult.fullfail {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-movement .inlinerollresult.importantroll {
     border: none;
     color: inherit;
     background: inherit;

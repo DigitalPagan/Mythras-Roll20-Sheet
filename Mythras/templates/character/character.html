@@ -1,95 +1,6 @@
 <div class="sheet-character">
-    <!-- Character Header -->
-    <div class="sheet-flex">
-        <!-- Info Section -->
-        <div class="sheet-section sheet-info">
-            <!-- Info 1st Row -->
-            <div class="sheet-flex">
-                <div class="sheet-info-box sheet-info-name">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{character_name}" name="attr_character_name">
-                    <label class="sheet-under" data-i18n="name">Name</label>
-                </div>
-                <div class="sheet-info-box sheet-info-species">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{species}" name="attr_species">
-                    <label class="sheet-under" data-i18n="{{  species_name }}">Species</label>
-                </div>
-                <div class="sheet-info-box sheet-info-culture">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{culture}" name="attr_culture">
-                    <label class="sheet-under"><span data-i18n="culture">Culture</span></label>
-                </div>
-                <div class="sheet-info-box sheet-info-career">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{career}" name="attr_career">
-                    <label class="sheet-under" data-i18n="{{ career_name }}">Career</label>
-                </div>
-            </div>
-            <!-- Info 2nd Row -->
-            <div class="sheet-flex">
-                <div class="sheet-info-box sheet-info-homeland">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{homeland}" name="attr_homeland">
-                    <label class="sheet-under" data-i18n="homeland">Homeland</label>
-                </div>
-                <div class="sheet-info-box sheet-info-social-class">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{social_class}" name="attr_social_class">
-                    <label class="sheet-under" data-i18n="social-class">Name</label>
-                </div>
-                <div class="sheet-info-box sheet-info-age">
-                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{age}" name="attr_age" value="0">
-                    <label class="sheet-under" data-i18n="age">Age</label>
-                </div>
-                <div class="sheet-info-box sheet-info-gender">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{gender}" name="attr_gender">
-                    <label class="sheet-under" data-i18n="gender">Gender</label>
-                </div>
-                <div class="sheet-info-box sheet-info-frame">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{frame}" name="attr_frame">
-                    <label class="sheet-under" data-i18n="frame">Gender</label>
-                </div>
-                <div class="sheet-info-box sheet-info-height">
-                    <input type="number" style="padding-right: 25px" class="sheet-usrinput sheet-full-width" title="@{height}" name="attr_height" value="178">
-                    <span class="sheet-input-unit" data-i18n="centimetres-short">cm</span>
-                    <label class="sheet-under" data-i18n="height-bugfix-id">Height</label>
-                </div>
-                <div class="sheet-info-box sheet-info-weight">
-                    <input type="number" style="padding-right: 20px" class="sheet-usrinput sheet-full-width" title="@{weight}" name="attr_weight" value="88">
-                    <span class="sheet-input-unit" data-i18n="kilograms-short">kg</span>
-                    <label class="sheet-under" data-i18n="weight">Weight</label>
-                </div>
-                <input type="checkbox" class="sheet-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
-                <div class="sheet-info-box sheet-toggle sheet-info-rank">
-                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{rank}" name="attr_rank" value="0">
-                    <label class="sheet-under" data-i18n="rank">Rank</label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Header 2nd Column -->
-        <div class="sheet-logo">
-            <!-- Logo -->
-            <div>
-                {% if display_name == 'Mythras' %}<img src="https://i.imgur.com/EzQDmms.png" alt="Mythras">{% endif %}
-                {% if display_name == 'M-Space' %}<img src="https://i.imgur.com/5uPy3QU.jpg" alt="M-space">{% endif %}
-                {% if display_name == 'Odd Soot' %}<img src="https://i.imgur.com/35dOQix.jpg" alt="Odd Soot">{% endif %}
-            </div>
-            <!-- Experience Rolls Section -->
-            <div class="sheet-space-between">
-                <label class="sheet-left" data-i18n="experience-rolls">Exp Rolls</label>
-                <input type="number" class="sheet-usrinput sheet-grow" title="@{experience_rolls}" name="attr_experience_rolls" value="0">
-            </div>
-        </div>
-    </div>
-
     <!-- Character Sheet Tabs -->
     <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
-    <div class="sheet-character-tabs sheet-bmargin">
-        <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>|
-        <button type="action" class="sheet-checkbtn sheet-character-tab-compact" name="act_character_tab_compact" data-i18n="compact">Compact</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>
-    </div>
 
     {% include 'character/tabs/core.html' %}
 
@@ -107,10 +18,6 @@
 
     <div class='sheet-character-tab-notes'>
         {% include 'character/tabs/notes.html' %}
-    </div>
-
-    <div class='sheet-character-tab-compact'>
-        {% include 'character/tabs/compact.html' %}
     </div>
 
     <div class='sheet-character-tab-import'>

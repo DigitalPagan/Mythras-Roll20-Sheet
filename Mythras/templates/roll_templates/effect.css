@@ -1,94 +1,41 @@
 /* Effect Roll Template Styles */
 .sheet-rolltemplate-effect div.sheet-border {
-    border: 3px solid #5962A3;
+    border: 2px solid #5962A3;
     background: white;
+    font-size: 1em;
 }
 .sheet-rolltemplate-effect div.sheet-header {
     background: #5962A3;
     color: whitesmoke;
-    padding: 0 3px 0;
 }
 .sheet-rolltemplate-effect div.sheet-subheader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2px 1px 0;
     background: dimgray;
     color: lightgray;
-    padding: 2px 3px 0;
-    margin-bottom: 2px;
-}
-.sheet-rolltemplate-effect div.sheet-rmargin {
-    margin-right: 5px;
 }
 .sheet-rolltemplate-effect div.sheet-character {
-    font-size: .75em;
-    margin: 0;
+    font-size: .9em;
+    text-align: center;
 }
 .sheet-rolltemplate-effect div.sheet-name {
     font-family: Palatino, serif;
+    text-align: center;
     font-size: 1.25em;
-    margin: 0;
 }
-.sheet-rolltemplate-effect div.sheet-trait {
+.sheet-rolltemplate-effect div.sheet-traits {
     font-style: italic;
-    padding: 0 3px 0;
+    padding: 2px 1px 0;
 }
-.sheet-rolltemplate-effect div.sheet-flex {
-    display: flex;
-}
-.sheet-rolltemplate-effect div.sheet-grow {
-    flex-grow: 1;
-}
-.sheet-rolltemplate-effect div.sheet-label {
-    font-weight: bold;
-    text-align: left;
-}
-.sheet-rolltemplate-effect div.sheet-value {
-    text-align: right;
-}
-.sheet-rolltemplate-effect div.sheet-altback {
-    padding: 2px 3px 0;
-}
-.sheet-rolltemplate-effect div.sheet-altback:nth-child(even) {
-    background: linear-gradient(to right, gainsboro, white);
-}
-
-
-/*
-.sheet-rolltemplate-effect table {
-    width: 100%;
-    border: 3px solid navy;
-    line-height: 1em;
-    font-size: 1em;
-    font-weight: normal;
-    background: white;
-}
-.sheet-rolltemplate-effect caption {
-    background: navy;
-    color: lightgray;
-    padding: 3px 3px 0;
-}
-
-.sheet-rolltemplate-effect tr {
-    margin: 0;
-    padding: 0;
-}
-.sheet-rolltemplate-effect tr:nth-child(even) {
-    background: linear-gradient(to right, gainsboro, white);
-}
-.sheet-rolltemplate-effect td {
-    padding: 3px 3px 0;
-    line-height: 1em;
-}
-.sheet-rolltemplate-effect td.sheet-label {
-    font-weight: bold;
-    text-align: left;
-}
-.sheet-rolltemplate-effect td.sheet-traits {
+.sheet-rolltemplate-effect div.sheet-traits {
     font-style: italic;
-    text-align: left;
+    padding: 2px 1px 0;
 }
-.sheet-rolltemplate-effect td.sheet-value {
-    text-align: right;
+.sheet-rolltemplate-effect div.sheet-description {
+    padding: 2px 1px 0;
 }
-*/
 .sheet-rolltemplate-effect .inlinerollresult  {
     display: inline-block;
     text-align: center;
@@ -115,4 +62,22 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+}
+.sheet-rolltemplate-effect a {
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em !important;
+    border: solid 1px gray !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+    padding: 0 2px 0 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.sheet-rolltemplate-effect a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+    text-shadow: none;
 }

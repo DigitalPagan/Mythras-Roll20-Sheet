@@ -1,0 +1,98 @@
+/* Movement Roll Template Styles */
+.sheet-rolltemplate-movement div.sheet-border {
+    border: 2px solid black;
+    background: white;
+}
+.sheet-rolltemplate-movement div.sheet-header {
+    background: black;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-movement div.sheet-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.sheet-rolltemplate-movement div.sheet-tr {
+    display: table-row;
+}
+.sheet-rolltemplate-movement div.sheet-th {
+    display:table-cell;
+    text-align: center;
+    padding: 1px;
+    background: dimgray;
+    color: lightgray;
+    vertical-align: middle;
+}
+.sheet-rolltemplate-movement div.sheet-td {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px;
+    white-space: nowrap;
+}
+.sheet-rolltemplate-movement div.sheet-character {
+    font-size: .9em;
+    text-align: center;
+}
+.sheet-rolltemplate-movement div.sheet-name {
+    font-family: Palatino, serif;
+    text-align: center;
+    font-size: 1.25em;
+}
+
+.sheet-rolltemplate-movement .sheet-bold {
+    font-weight: bold;
+}
+
+.sheet-rolltemplate-movement .sheet-pictos {
+    font-family: 'Pictos';
+}
+
+.sheet-rolltemplate-movement .sheet-help {
+    cursor: help;
+}
+
+.sheet-rolltemplate-movement div.sheet-listitem {
+    display: flex;
+    padding: 2px 1px 0;
+}
+.sheet-rolltemplate-movement div.sheet-listitem:nth-child(odd) {
+    background: linear-gradient(to right, gainsboro, white);
+}
+.sheet-rolltemplate-movement div.sheet-key {
+    font-weight: bold;
+    text-align: left;
+}
+.sheet-rolltemplate-movement div.sheet-value {
+    text-align: right;
+    flex-grow: 1;
+}
+
+.sheet-rolltemplate-movement .inlinerollresult {
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-movement .inlinerollresult.fullcrit {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-movement .inlinerollresult.fullfail {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}
+.sheet-rolltemplate-movement .inlinerollresult.importantroll {
+    border: none;
+    color: inherit;
+    background: inherit;
+    font-weight: inherit;
+}

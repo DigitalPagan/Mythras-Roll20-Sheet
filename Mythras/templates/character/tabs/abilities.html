@@ -1,252 +1,427 @@
-<!-- TODO Refine UI for abilities -->
-<!-- TODO Sorting for abilities -->
-<!-- TODO Toggles for ability types -->
-<!-- TODO Autocalc for abilities -->
-<!-- Traits, Creature Abilities & Gifts -->
-<div class="sheet-section">
-    <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
-    <h2 class="sheet-accordion" data-i18n="traits_creature_abilities_gifts_etc">Traits, Creature Abilities, Gifts, etc</h2>
-
-    <div class="sheet-accordion">
-        <div class="sheet-flex">
-            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
-            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
-            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-        </div>
-        <fieldset class="repeating_trait">
-            <div class="sheet-flex">
-                <div class="sheet-td sheet-hover-btn">
-                    <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
-                    <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
-                </div>
-                <div class="sheet-td">
-                    <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
-                </div>
-                <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
-            </div>
-        </fieldset>
-    </div>
-</div>
-
+<!-- TODO: filter for starred on collapse -->
 <!-- Abilities -->
 <div class="sheet-section">
-    <h2 data-i18n="abilities">Abilities</h2>
+    <!-- Ability Toggles -->
+    <input type="checkbox" class="sheet-rank-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
+    <input type="checkbox" class="sheet-abilities-armor-penalty-toggle sheet-hidden" name="attr_abilities_armor_penalty_enabled" value="1">
+    <input type="checkbox" class="sheet-abilities-prompts-toggle sheet-hidden" name="attr_abilities_prompts_enabled" value="1">
+    <input type="checkbox" class="sheet-alchemy-toggle sheet-hidden" name="attr_alchemy_enabled" value="1">
+    <input type="checkbox" class="sheet-artifice-toggle sheet-hidden" name="attr_artifice_enabled" value="1">
+    <input type="checkbox" class="sheet-animism-toggle sheet-hidden" name="attr_animism_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-arcane-magic-toggle sheet-hidden" name="attr_arcane_magic_enabled" value="1">
+    <input type="checkbox" class="sheet-divine-magic-toggle sheet-hidden" name="attr_divine_magic_enabled" value="1">
+    <input type="checkbox" class="sheet-fae-powers-toggle sheet-hidden" name="attr_fae_powers_enabled" value="1">
+    <input type="checkbox" class="sheet-folk-magic-toggle sheet-hidden" name="attr_folk_magic_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-magic-toggle sheet-hidden" name="attr_magic_enabled" value="1">
+    <input type="checkbox" class="sheet-mysticism-toggle sheet-hidden" name="attr_mysticism_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-psionics-toggle sheet-hidden" name="attr_psionics_enabled" value="1">
+    <input type="checkbox" class="sheet-psychicpowers-toggle sheet-hidden" name="attr_psychic_powers_enabled" value="1">
+    <input type="checkbox" class="sheet-superpowers-toggle sheet-hidden" name="attr_superpowers_enabled" value="1">
+    <input type="checkbox" class="sheet-sorcery-toggle sheet-hidden" name="attr_sorcery_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-theism-toggle sheet-hidden" name="attr_theism_enabled" value="1" checked>
 
-    <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
-    <div class="sheet-bmargin">
-        <div class="sheet-flex">
-            <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="memorized-tooltip">S</span></div>
-            <div class="sheet-ability-name sheet-th"><span data-i18n="ability">Ability</span></div>
-            <div class="sheet-play sheet-button-width sheet-th"></div>
-            <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
-            <div class="sheet-number-width sheet-th"><span data-i18n="rank">Rank</span></div>
-            <div class="sheet-ability-skill sheet-th"><span data-i18n="roll-skill">Roll Skill</span></div>
-            <div class="sheet-number-width-sm sheet-th"><span>%</span></div>
-            <div class="sheet-play sheet-button-width sheet-th"></div>
-            <div class="sheet-ability-skill sheet-th"><span data-i18n="other-skill">Other Skill</span></div>
-            <div class="sheet-number-width-sm sheet-th"><span>%</span></div>
-            <div class="sheet-grow sheet-th"><span data-i18n="page">Page</span></div>
-            <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="details-tooltip">E</span></div>
+    <!-- Abilities Title -->
+    <div class="sheet-flex-centered">
+        <div>
+            <input type="checkbox" class="sheet-accordion" name="attr_abilities_section_toggle" value="1" checked>
+            <h2 class="sheet-accordion" data-i18n="abilities">Abilities</h2>
         </div>
-        <fieldset class="repeating_ability">
-            <div class="sheet-flex">
-                <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_memorized}" name="attr_memorized" value="1" checked><span class="sheet-checkico">S</span></div>
-                <div class="sheet-td sheet-ability-name"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
-                <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{intensity=@{intensity}}} {{magnitude=@{magnitude}}} {{traits=@{traits}}} @{shaping_traits} {{description=@{description}}} {{page=@{page}}}'}}"></button></div>
-                <div class="sheet-td sheet-ability-type">
-                    <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
-                        <option value="ability" data-i18n-list-item="ability" data-i18n="ability" selected>Ability</option>
-                        <option value="animism_spirit" data-i18n-list-item="animism_spirit" data-i18n="animism-spirit">Animism Spirit</option>
-                        <option value="fae_mutation" data-i18n-list-item="fae_mutation" data-i18n="fae-mutation">Fae Mutation</option>
-                        <option value="fae_power" data-i18n-list-item="fae_power" data-i18n="fae-power">Fae Power</option>
-                        <option value="folk_spell" data-i18n-list-item="folk_spell" data-i18n="folk-spell">Folk Spell</option>
-                        <option value="gift" data-i18n-list-item="gift" data-i18n="gift">Gift</option>
-                        <option value="lycanthrope_power" data-i18n-list-item="lycanthrope_power" data-i18n="lycanthrope-power">Lycanthrope Power</option>
-                        <option value="mystic_talent" data-i18n-list-item="mystic_talent" data-i18n="mystic-talent">Mystic Talent</option>
-                        <option value="psionic_talent" data-i18n-list-item="psionic_talent" data-i18n="psionic-talent">Psionic Talent</option>
-                        <option value="shifter_power" data-i18n-list-item="shifter_power" data-i18n="shifter-power">Shifter Power</option>
-                        <option value="sorcery_spell" data-i18n-list-item="sorcery_spell" data-i18n="sorcery-spell">Sorcery Spell</option>
-                        <option value="super_power" data-i18n-list-item="super_power" data-i18n="super-power">Super Power</option>
-                        <option value="theism_miracle" data-i18n-list-item="theism_miracle" data-i18n="theism-miracle">Theism Miracle</option>
-                        <option value="trait" data-i18n-list-item="trait" data-i18n="trait">Trait</option>
-                        <option value="vampire_power" data-i18n-list-item="vampire_power" data-i18n="vampire-power">Vampire Power</option>
-                    </select>
-                </div>
-                <div class="sheet-td sheet-number-width">
-                    <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_rank}" name="attr_ability_rank">
-                        <option value="" selected>-</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_roll_skill_name}" name="attr_roll_skill_name_display" value="@{roll_skill_name}" disabled></div>
-                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_roll_skill_value}" name="attr_roll_skill_total_display" value="@{roll_skill_value}" disabled> </div>
-                <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-d100" title="%{$ID_skill}" name="roll_skill" value="@{roll_skill_roll}"></button></div>
-                <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_other_skill}" name="attr_other_skill_display" value="@{other_skill_name}" disabled></div>
-                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_other_skill_value}" name="attr_other_skill_total_display" value="@{other_skill_value}" disabled> </div>
-                <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_page"></div>
-                <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span></div>
+        <div class="sheet-grow sheet-flex-rev sheet-text-right">
+            <div class="sheet-edit">
+                <input type='checkbox' name='attr_abilities_config' value="1"><span class="sheet-checkico">y</span>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-wide-toggle sheet-deep-toggle" name="attr_details" value="1" checked>
-            <div class="sheet-wide-toggle">
-                <div class="sheet-edit sheet-flex">
-                    <div class="sheet-flex sheet-rmargin sheet-half-col">
-                        <div><label class="sheet-left" data-i18n="roll-skill-id">Roll Skill ID</label>:&nbsp;</div>
-                        <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_roll_skill_id}" name="attr_roll_skill_id" value=""></div>
+            <div class="sheet-play">
+                <fieldset class="repeating_devotion sheet-inline">
+                    <label class="sheet-left sheet-lmargin"><span name="attr_name"></span></label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{$ID_devotional_pool}" name="attr_devotional_pool" value="0">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{$ID_devotional_pool|max}" name="attr_devotional_pool_max" value="@{rank_devotion_pool_limit}" disabled>
+                    <div class="sheet-hidden">
+                        <input type="text" name="attr_name" value="">
+                        <input type="text" name="attr_rank_devotion_pool_limit" value="0">
                     </div>
-                    <div class="sheet-flex sheet-half-col">
-                        <div><label class="sheet-left" data-i18n="other-skill-id">Other Skill ID</label>:&nbsp;</div>
-                        <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_other_skill_id}" name="attr_other_skill_id" value=""></div>
+                </fieldset>
+            </div>
+            <div class="sheet-play">
+                <div data-i18n-list="magic-attribute-order">
+                    <div class="sheet-inline-block" data-i18n-list-item="magic_points">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_magic_points_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="magic_points">Magic Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{magic_points}" name="attr_magic_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
+                    </div>
+                    <div class="sheet-inline-block" data-i18n-list-item="power_points">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_power_points_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="power_points">Power Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{power_points}" name="attr_power_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{power_points|max}" name="attr_power_points_max" value="11" readonly></div>
+                    </div>
+                    <div class="sheet-inline-block" data-i18n-list-item="prana_points">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_prana_points_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="prana_points">Prana Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{prana_points}" name="attr_prana_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{prana_points|max}" name="attr_prana_points_max" value="11" readonly></div>
+                    </div>
+                    <div class="sheet-inline-block" data-i18n-list-item="tenacity">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_tenacity_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="tenacity">Tenacity</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{tenacity|max}" name="attr_tenacity_max" value="11" readonly></div>
                     </div>
                 </div>
             </div>
-            <div class="sheet-flex">
-                <div class="sheet-id sheet-flex sheet-third-col sheet-grow sheet-rmargin">
-                    <div><label class="sheet-left" data-i18n="ability-id">Ability ID</label>:&nbsp;</div>
-                    <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_id}" name="attr_id" readonly></div>
-                </div>
-                <div class="sheet-deep-toggle sheet-edit sheet-flex sheet-third-col sheet-grow sheet-rmargin">
-                    <div><label class="sheet-left" data-i18n="intensity">Intensity</label>:&nbsp;</div>
-                    <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_intensity}" name="attr_intensity" value=""></div>
-                </div>
-                <div class="sheet-deep-toggle sheet-edit sheet-flex sheet-third-col sheet-grow">
-                    <div><label class="sheet-left" data-i18n="magnitude">Magnitude</label>:&nbsp;</div>
-                    <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_magnitude}" name="attr_magnitude" value=""></div>
-                </div>
-            </div>
-            <div class="sheet-wide-toggle">
-                <div class="sheet-edit sheet-flex">
-                    <div class="sheet-third-col sheet-rmargin">
-                        <div><label class="sheet-left" data-i18n="traits">Traits</label>:</div>
-                        <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
-                    </div>
-                    <div class="sheet-grow">
-                        <div><label class="sheet-left" data-i18n="description">Description</label>:</div>
-                        <div><textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea></div>
-                    </div>
-                </div>
-                <div class="sheet-play">
-                    <div><span class="sheet-usrnotes sheet-italic" name="attr_traits_display"></span></div>
-                    <div><span class="sheet-usrnotes" name="attr_description"></span></div>
-                </div>
-                <input type="text" class="sheet-hidden" name="attr_shaping_traits" value="">
-                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_show_shaping" value="1">
-                <div class="sheet-toggle sheet-edit ">
-                    <div><label class="sheet-left" data-i18n="shaping-traits">Shaping Traits</label>:</div>
-                    <div class="sheet-flex sheet-space-between">
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="combine">Combine</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_combine}" name="attr_shaped_combine">
-                                <option data-i18n="disabled" value="0">Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_combine_query}" selected>Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="duration">Duration</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_duration}" name="attr_shaped_duration">
-                                <option data-i18n="disabled" value=" ">Disabled</option>
-                                <option data-i18n="standard" value="@{shaped_duration_formula}" selected>Standard</option>
-                                <option data-i18n="extended" value="@{shaped_duration_extended_formula}">Extended</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="magnitude">Magnitude</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_magnitude}" name="attr_shaped_magnitude">
-                                <option data-i18n="disabled" value="1">Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_magnitude_formula}" selected>Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="range">Range</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_range}" name="attr_shaped_range">
-                                <option data-i18n="disabled" value=" ">Disabled</option>
-                                <option data-i18n="standard" value="@{shaped_range_formula}" selected>Standard</option>
-                                <option data-i18n="sympathetic" value="@{shaped_range_sympathetic_formula}">Sympathetic</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex">
-                            <div><span data-i18n="targets">Targets</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_targets}" name="attr_shaped_targets">
-                                <option data-i18n="disabled" value=" ">Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_targets_formula}" selected>Enabled</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="sheet-flex sheet-space-between">
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="ablation">Ablation</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_ablation}" name="attr_shaped_ablation">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_ablation_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="focus">Focus</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_focus}" name="attr_shaped_focus">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_focus_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="fortune">Fortune</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_fortune}" name="attr_shaped_fortune">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_fortune_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="precision">Precision</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_precision}" name="attr_shaped_precision">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_precision_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex">
-                            <div><span data-i18n="swiftness">Swiftness</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_swiftness}" name="attr_shaped_swiftness">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_swiftness_query}">Enabled</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-hidden">
-                <input type="text" name="attr_roll_skill_name" value="" readonly>
-                <input type="text" name="attr_roll_skill_value" value="" readonly>
-                <input type="text" name="attr_roll_skill_roll" value="" readonly>
-                <input type="text" name="attr_other_skill_name" value="" readonly>
-                <input type="text" name="attr_other_skill_value" value="" readonly>
-                <input type="text" name="attr_traits_display" value="" readonly>
-            </div>
-        </fieldset>
+        </div>
     </div>
 
     <!-- Pre-made Formulas -->
     <div class="sheet-hidden">
-        <!-- Sorcery Shaping -->
-        <input type="text" name="attr_shaped_combine_formula" value="{{'{{combine=[[ ?{Combine|0|1|2|3|4|5|6|7|8|9|10} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_combine_query" value="{{'?{Combine|0|1|2|3|4|5|6|7|8|9|10}'}}" disabled>
-        <input type="text" name="attr_shaped_duration_formula" value="{{ '{{duration=[[ ?{Duration|0 - POW, @{pow}|1 - 2&times;POW,  2*@{pow}|2 - 3&times;POW,  3*@{pow}|3 - 4&times;POW,  4*@{pow}|4 - 5&times;POW,  5*@{pow}|5 - 6&times;POW,  6*@{pow}|6 - 7&times;POW,  7*@{pow}|7 - 8&times;POW,  8*@{pow}|8 - 9&times;POW,  9*@{pow}|9 - 10&times;POW,  10*@{pow}|10 - 11&times;POW,  11*@{pow}}]] ^{minutes-u}}}'}}" disabled>
-        <input type="text" name="attr_shaped_duration_extended_formula" value="{{ '{{duration=[[@{pow} ?{Extended Duration|0 - POW turns, *1]] turns|1 - POW rounds, *1]] rounds|2 - POW minutes, *1]] minutes|3 - POW &times; 5 minutes, *5]] minutes|4 - POW &times; 15 minutes, *15]] minutes|5 - POW hours, *1]] hours|6 - POW &times; 6 hours, *6]] hours|7 - POW days, *1]] days|8 - POW weeks, *1]] weeks|9 - POW months, *1]] months|5 - POW years, *1]] years} }}'}}" disabled>
-        <input type="text" name="attr_shaped_magnitude_formula" value="{{'[[ ?{Magnitude|0 - Magnitude 1, 1|1 - Magnitude 2, 2|2 - Magnitude 3, 3|3 - Magnitude 4, 4|4 - Magnitude 5, 5|5 - Magnitude 6, 6|6 - Magnitude 7, 7|7 - Magnitude 8, 8|8 - Magnitude 9, 9|9 - Magnitude 10, 10|10 - Magnitude 11, 11} ]]'}}" disabled>
-        <input type="text" name="attr_shaped_range_formula" value="{{'{{range=[[ ?{Range|0 - Touch, 0|1 - 1m&times;POW,  1*@{pow}|2 - 5m&times;POW,  5*@{pow}|3 - 10m&times;POW,  10*@{pow}|4 - 50m&times;POW,  50*@{pow}|5 - 100m&times;POW,  100*@{pow}|6 - 500m&times;POW,  500*@{pow}|7 - 1km&times;POW,  1000*@{pow}|8 - 5km&times;POW,  5000*@{pow}|9 - 10km&times;POW,  10000*@{pow}|10 - 15km&times;POW,  15000*@{pow}}]] ^{metres-u}}}'}}" disabled>
-        <input type="text" name="attr_shaped_range_sympathetic_formula" value="{{'{{range=?{Range|0 - Touch, Touch|1 - 2+ fragments of the target, 2+ fragments of the target|2 - A fragments of the target, A fragments of the target|3 - Any personal object that the target has worn or carried continuously for a year, Any personal object that the target has worn or carried continuously for a year|4 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year|5 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year|6 - Any object the target has created or consumed, Any object the target has created or consumed|7 - A live video of the target, A live video of the target|8 - A recorded video of the target made within the last year, A recorded video of the target made within the last year|9 - A clear photograph of the target made within the last year, A clear photograph of the target made within the last year|10 - The caster has ever spent over an hour interacting with the target, The caster has ever spent over an hour interacting with the target} }}'}}" disabled>
-        <input type="text" name="attr_shaped_targets_formula" value="{{'{{ targets=[[ ?{Target|0 - 1 Target, 1|1 - 2 Targets, 2|2 - 3 Targets, 3|3 - 4 Targets, 4|4 - 5 Targets, 5|5 - 6 Targets, 6|6 - 7 Targets, 7|7 - 8 Targets, 8|8 - 9 Targets, 9|9 - 10 Targets, 10|10 - 11 Targets, 11} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_ablation_formula" value="{{'{{ablation=[[ ?{Ablation|0|1|2|3|4|5|6|7|8|9|10} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_ablation_query" value="{{'?{Ablation|0|1|2|3|4|5|6|7|8|9|10}'}}" disabled>
-        <input type="text" name="attr_shaped_focus_formula" value="{{'{{focus=[[ ?{Focus|0|1|2|3|4|5|6|7|8|9|10} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_focus_query" value="{{'?{Focus|0|1|2|3|4|5|6|7|8|9|10}'}}" disabled>
-        <input type="text" name="attr_shaped_fortune_formula" value="{{'{{fortune=[[ ?{Fortune|0|1|2|3|4|5|6|7|8|9|10} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_fortune_query" value="{{'?{Fortune|0|1|2|3|4|5|6|7|8|9|10}'}}" disabled>
-        <input type="text" name="attr_shaped_precision_formula" value="{{'{{precision=[[ ?{Precision|0|1|2|3|4|5|6|7|8|9|10} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_precision_query" value="{{'?{Precision|0|1|2|3|4|5|6|7|8|9|10}'}}" disabled>
-        <input type="text" name="attr_shaped_swiftness_formula" value="{{'{{swiftness=[[ ?{Swiftness|0|1|2|3|4|5|6|7|8|9|10} ]]}}'}}" disabled>
-        <input type="text" name="attr_shaped_swiftness_query" value="{{'?{Swiftness|0|1|2|3|4|5|6|7|8|9|10}'}}" disabled>
+        <input type="text" name="attr_casting_components" value="{{'@{component_ablation} @{component_area} @{component_combine} @{component_duration} @{component_focus} @{component_fortune} @{component_magnitude} @{component_precision} @{component_range} @{component_services} @{component_swiftness} @{component_targets} @{component_terms}'}}" disabled>
+        <!-- Prompt Intensity -->
+        <input type="text" name="attr_prompt_intensity" value="{{'{{^{intensity}=?{Intensity|1}}}'}}" disabled>
+        <!-- Ablation -->
+        <input type="text" name="attr_component_ablation_0plus1" value="{{'{{^{ablation}=?{Ablation|0 - None, None (0pts)|1 - -1 Magnitude, -1 Magnitude (1pts)|2 - -2 Magnitude, -2 Magnitude (2pts)|3 - -3 Magnitude, -3 Magnitude (3pts)|4 - -4 Magnitude, -4 Magnitude (4pts)|5 - -5 Magnitude, -5 Magnitude (5pts)|6 - -6 Magnitude, -6 Magnitude (6pts)|7 - -7 Magnitude, -7 Magnitude (7pts)|8 - -8 Magnitude, -8 Magnitude (8pts)|9 - -1 Magnitude, -9 Magnitude (9pts)|10 - -10 Magnitude, -10 Magnitude (10pts)}}}'}}" disabled>
+        <!-- Area -->
+        <input type="text" name="attr_component_area_linear_radius_metric" value="{{'{{^{area}=?{Area|0 - None, None (0pts)|1 - 1m Radius, 1m Radius (1pts)|3 - 2m Radius, 2m Radius (2pts)|3 - 3m Radius, 3m Radius (3pts)|4 - 4m Radius, 4m Radius (4pts)|5 - 5m Radius, 5m Radius (5pts)|6 - 6m Radius, 6m Radius (6pts)|7 - 7m Radius, 7m Radius (7pts)|8 - 8m Radius, 8m Radius (8pts)|9 - 9m Radius, 9m Radius (9pts)|10 - 10m Radius, 10m Radius (10pts)}}}'}}" disabled>
+        <input type="text" name="attr_component_area_nonlinear_radius_metric" value="{{'{{^{area}=?{Area|0 - None, None (0pts)|1 - 2m Radius, 2m Radius (1pts)|3 - 5m Radius, 5m Radius (2pts)|3 - 10m Radius, 10m Radius (3pts)|4 - 25m Radius, 25m Radius (4pts)|5 - 50m Radius, 50m Radius (5pts)|6 - 100m Radius, 100m Radius (6pts)|7 - 250m Radius, 250m Radius (7pts)|8 - 500m Radius, 500m Radius (8pts)|9 - 1km Radius, 1km Radius (9pts)|10 - 2km Radius, 2km Radius (10pts)}}}'}}" disabled>
+        <!-- Combine -->
+        <input type="text" name="attr_component_combine_1plus1" value="{{'{{^{combine}=?{Combine|0 - None, None (0pts)|1 - 2 effects, 2 effects (1pts)|2 - 3 effects, 3 effects (2pts)|3 - 4 effects, 4 effects (3pts)|4 - 5 effects, 5 effects (4pts)|5 - 6 effects, 6 effects (5pts)|6 - 7 effects, 7 effects (6pts)|7 - 8 effects, 8 effects (7pts)|8 - 9 effects, 9 effects (8pts)|9 - 10 effects, 10 effects (9pts)|10 - 11 effects, 11 effects (10pts)}}}'}}" disabled>
+        <input type="text" name="attr_component_combine_1plus2" value="{{'{{^{combine}=?{Combine|0 - None, None (0pts)|1 - 2 effects, 2 effects (1pts)|3 - 3 effects, 3 effects (3pts)|5 - 4 effects, 4 effects (5pts)|7 - 5 effects, 5 effects (7pts)|9 - 6 effects, 6 effects (9pts)|11 - 7 effects, 7 effects (11pts)|13 - 8 effects, 8 effects (13pts)|15 - 9 effects, 9 effects (15pts)|17 - 10 effects, 10 effects (17pts)|19 - 11 effects, 11 effects (19pts)}}}'}}" disabled>
+        <!-- Duration -->
+        <input type="text" name="attr_component_duration_standard" value="{{'{{^{duration}=?{Duration|0 - POW minutes, [[@{pow}]]mins (0pts)| 1 - 2&times;POW minutes, [[2*@{pow}]]mins (1pt)|2 - 3&times;POW minutes, 2 - [[3*@{pow}]]mins (2pts)|3 - 4&times;POW minutes, [[4*@{pow}]]mins (3pts)|4 - 5&times;POW minutes,  [[5*@{pow}]]mins (4pts)|5 - 6&times;POW minutes,  [[6*@{pow}]]mins (5pts)|6 - 7&times;POW minutes,  [[7*@{pow}]]mins (6pts)|7 - 8&times;POW minutes,  [[8*@{pow}]]mins (7pts)|8 - 9&times;POW minutes,  [[9*@{pow}]]mins (8pts)|9 - 10&times;POW minutes,  [[10*@{pow}]]mins (9pts)|10 - 11&times;POW minutes,  [[11*@{pow}]]mins (10pts)}}}'}}" disabled>
+        <input type="text" name="attr_component_duration_extended" value="{{'{{^{duration}=?{Duration|0 - POW turns, [[@{pow}*1]] Turns (0pts)|1 - POW Rounds, [[@{pow}*1]] Rounds (1pt)|2 - POW Minutes, *1]] Minutes (2pts)|3 - POW &times; 5 Minutes, [[@{pow}*5]] Minutes (3pts)|4 - POW &times; 15 Minutes, [[@{pow}*15]] Minutes (4pts)|5 - POW Hours, [[@{pow}*1]] Hours (5pts)|6 - POW &times; 6 Hours, [[@{pow}*6]] Hours (6pts)|7 - POW Days, [[@{pow}*1]] Days (7pts)|8 - POW Weeks, [[@{pow}*1]] Weeks (8pts)|9 - POW Months, [[@{pow}*1]] Months (9pts)|5 - POW Years, [[@{pow}*1]] Years (10pts)} }}'}}" disabled>
+        <!-- Focus -->
+        <input type="text" name="attr_component_focus_1plus1" value="{{'{{^{focus}=?{Focus|0 - None, None (0pts)|1 - Ignore 1 level of difficulty, 1 level (1pt)|2 - Ignore 2 levels of difficulty, 2 levels (2pt)|3 - Ignore 3 levels of difficulty, 3 levels (3pt)|4 - Ignore 4 levels of difficulty, 4 levels (4pt)|5 - Ignore 5 levels of difficulty, 5 levels (5pt)|6 - Ignore 6 levels of difficulty, 6 levels (6pt)}}}'}}" disabled>
+        <!-- Fortune -->
+        <input type="text" name="attr_component_fortune_1plus1" value="{{'{{^{fortune}=?{Fortune|0 - None, None (0pts)|1 - 2 rolls, 2 rolls (1pt)|2 - 3 rolls, 3 rolls (2pt)|3 - 4 rolls, 4 rolls (3pt)|4 - 5 rolls, 5 rolls (4pt)|5 - 6 rolls, 6 rolls (5pt)|6 - 7 rolls, 7 rolls (6pt)|7 - 8 rolls, 8 rolls (7pt)|8 - 9 rolls, 9 rolls (8pt)|9 - 10 rolls, 10 rolls (9pt)|10 - 11 rolls, 11 rolls (10pt)}}}'}}" disabled>
+        <input type="text" name="attr_component_fortune_1plus2plus3" value="{{'{{^{fortune}=?{Fortune|0 - None, None (0pts)|1 - 2 Rolls, 2 Rolls (1pt)|3 - 3 Rolls, 3 Rolls (3pt)|6 - 4 Rolls, 4 Rolls (6pt)|10 - 5 Rolls, 5 Rolls (10pt)|15 - 6 Rolls, 6 Rolls (15pt)|21 - 7 Rolls, 7 Rolls (21pt)}}}'}}" disabled>
+        <!-- Magnitude -->
+        <input type="text" name="attr_component_magnitude_0plus1" value="{{'{{^{magnitude}=?{Magnitude|0 - Magnitude 1, 1 (0pts)|1 - Magnitude 2, 2 (1pt)|2 - Magnitude 3, 3 (2pts)|3 - Magnitude 4, 4 (3pts)|4 - Magnitude 5, 5 (4pts)|5 - Magnitude 6, 6 (5pts)|6 - Magnitude 7, 7 (6pts)|7 - Magnitude 8, 8 (7pts)|8 - Magnitude 9, 9 (8pts)|9 - Magnitude 10, 10 (9pts)|10 - Magnitude 11, 11 (10pts)}}}'}}" disabled>
+        <!-- Precision -->
+        <input type="text" name="attr_component_precision_1plus1" value="{{'{{^{precision}=?{Precision|0 - None, None (0pts)|1 - Adjust roll by 1, Adjust roll by 1 (1pt)|2 - Adjust roll by 2, Adjust roll by 2 (2pts)|3 - Adjust roll by 3, Adjust roll by 3 (3pts)|4 - Adjust roll by 4, Adjust roll by 4 (4pts)|5 - Adjust roll by 5, Adjust roll by 5 (5pts)|6 - Adjust roll by 6, Adjust roll by 6 (6pts)|7 - Adjust roll by 7, Adjust roll by 7 (7pts)|8 - Adjust roll by 8, Adjust roll by 8 (8pts)|9 - Adjust roll by 9, Adjust roll by 9 (9pts)|10 - Adjust roll by 10, Adjust roll by 10 (10pts)}}}'}}" disabled>
+        <!-- Range -->
+        <input type="text" name="attr_component_range_standard_metric" value="{{'{{^{range}=?{Range|0 - Touch, Touch (0pts)|1 - 1m&times;POW,  [[@{pow}]]m (1pt)|2 - 5m&times;POW,  [[5*@{pow}]]m (2pts)|3 - 10m&times;POW,  [[10*@{pow}]]m (3pts)|4 - 50m&times;POW,  [[50*@{pow}]]m (4pts)|5 - 100m&times;POW,  [[100*@{pow}]]m (5pts)|6 - 500m&times;POW,  [[500*@{pow}]]m (6pts)|7 - 1km&times;POW,  [[1*@{pow}]]km (7pts)|8 - 5km&times;POW,  [[5*@{pow}]]km (8pts)|9 - 10km&times;POW,  [[10*@{pow}]]km (9pts)|10 - 15km&times;POW,  [[15*@{pow}]]km (10pts)}}}'}}" disabled>
+        <input type="text" name="attr_component_range_sympathetic" value="{{'{{^{range}=?{Range|0 - Touch, Touch (0pts)|1 - 2+ fragments of the target, 2+ fragments of the target (1pt)|2 - A fragments of the target, A fragments of the target (2pts)|3 - Any personal object that the target has worn or carried continuously for a year, Any personal object that the target has worn or carried continuously for a year (3pts)|4 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year (4pts)|5 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year (5pts)|6 - Any object the target has created or consumed, Any object the target has created or consumed (6pts)|7 - A live video of the target, A live video of the target (7pts)|8 - A recorded video of the target made within the last year, A recorded video of the target made within the last year (8pts)|9 - A clear photograph of the target made within the last year, A clear photograph of the target made within the last year (9pts)|10 - The caster has ever spent over an hour interacting with the target, The caster has ever spent over an hour interacting with the target (10pts)} }}'}}" disabled>
+        <!-- Services -->
+        <input type="text" name="attr_component_services_0plus3plus4" value="{{'{{^{services}=?{Services|0 - 1 Service, 1 (0pts)|3 - 2 Services, 2 (3pts)|7 - 3 Services, 3 (7pts)|12 - 4 Services, 4 (12pts)|18 - 5 Services, 5 (18pts)}}}'}}" disabled>
+        <!-- Swiftness -->
+        <input type="text" name="attr_component_swiftness_times1" value="{{'{{^{swiftness}=?{Swiftness|0 - None, None (0pts)|1 - -1 Casting time , -1 Casting time (1pt)|2 - -2 Casting time , -2 Casting time (2pts)|3 - -3 Casting time , -3 Casting time (3pts)|4 - -4 Casting time , -4 Casting time (4pts)|5 - -5 Casting time , -5 Casting time (5pts)|6 - -6 Casting time , -6 Casting time (6pts)|7 - -7 Casting time , -7 Casting time (7pts)|8 - -8 Casting time , -8 Casting time (8pts)|9 - -9 Casting time , -9 Casting time (9pts)|10 - -10 Casting time , -10 Casting time (10pts)}}}'}}" disabled>
+        <input type="text" name="attr_component_swiftness_times2" value="{{'{{^{swiftness}=?{Swiftness|0 - None, None (0pts)|1 - -2 Casting time , -2 Casting time  (1pt)|2 - -4 Casting time , -4 Casting time (2pts)|3 - -6 Casting time , -6 Casting time (3pts)|4 - -8 Casting time , -8 Casting time (4pts)|5 - -10 Casting time , -10 Casting time (5pts)|6 - -12 Casting time , -12 Casting time (6pts)|7 - -14 Casting time , -14 Casting time (7pts)|8 - -16 Casting time , -16 Casting time (8pts)|9 - -18 Casting time , -18 Casting time (9pts)|10 - -20 Casting time , -20 Casting time (10pts)}}}'}}" disabled>
+        <!-- Targets -->
+        <input type="text" name="attr_component_targets_0plus1" value="{{'{{^{targets}=?{Target|0 - 1 Target, 1 (0pts)|1 - 2 Targets, 2 (1pt)|2 - 3 Targets, 3 (2pts)|3 - 4 Targets, 4 (3pts)|4 - 5 Targets, 5 (4pts)|5 - 6 Targets, 6 (5pts)|6 - 7 Targets, 7 (6pts)|7 - 8 Targets, 8 (7pts)|8 - 9 Targets, 9 (8pts)|9 - 10 Targets, 10 (9pts)|10 - 11 Targets, 11 (10pts)}}}'}}" disabled>
+        <!-- Terms -->
+        <input type="text" name="attr_component_terms_times1" value="{{'{{^{terms}=?{Terms|0 - None, None (0pts)|1 - 1 Term , 1 Term (1pt)|2 - 2 Terms , 2 Terms (2pts)|3 - 3 Terms , 3 Terms (3pts)|4 - 4 Terms , 4 Terms (4pts)|5 - 5 Terms , 5 Terms (5pts)|6 - 6 Terms , 6 Terms (6pts)|7 - 7 Terms , 7 Terms (7pts)|8 - 8 Terms , 8 Terms (8pts)|9 - 9 Terms , 9 Terms (9pts)|10 - 10 Terms , 10 Terms (10pts)}}}'}}" disabled>
+    </div>
+
+    <!-- Abilities Configuration -->
+    <input type='hidden' class='sheet-toggle sheet-hidden' name='attr_abilities_config' value="1"/>
+    <div class="sheet-toggle sheet-edit">
+        <div class="sheet-flex">
+            <div class="sheet-rmargin sheet-bmargin sheet-theism-toggle">
+                <div class="sheet-flex">
+                    <div class="sheet-devotion-name sheet-th" data-i18n="devotional_pool">Devotional Pool</div>
+                    <div class="sheet-devotion-limit sheet-th" data-i18n="limit">Limit</div>
+                </div>
+                <fieldset class="repeating_devotion">
+                    <div class="sheet-flex">
+                        <div class="sheet-devotion-name sheet-td">
+                            <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
+                        </div>
+                        <div class="sheet-devotion-limit sheet-td">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" name="attr_rank_devotion_pool_limit">
+                                <option value="0" selected>0</option>
+                                <option value="ceil(@{pow}*.25)" data-i18n="1/4_pow-u">1/4 POW</option>
+                                <option value="ceil(@{pow}*.5)" data-i18n="1/2_pow-u">1/2 POW</option>
+                                <option value="ceil(@{pow}*.75)" data-i18n="3/4_pow-u">3/4 POW</option>
+                                <option value="@{pow}" data-i18n="pow-u">POW</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="sheet-grow sheet-bmargin sheet-sorcery-toggle">
+                <div class="sheet-flex"><div class="sheet-th sheet-full-width" data-i18n="casting_components">Casting Components</div></div>
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="ablation">
+                            <label class="sheet-left" data-i18n="ablation">Ablation</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_ablation">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_ablation_0plus1}">0/+1</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list="area">
+                            <label class="sheet-left" data-i18n="area">Area</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_area">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_area_linear_radius_metric}"  data-i18n="linear_radius">Linear Radius</option>
+                                <option value="@{component_area_nonlinear_radius_metric}"  data-i18n="non-linear_radius">Non-Linear Radius</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="combine">
+                            <label class="sheet-left" data-i18n="combine">Combine</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_combine">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_combine_1plus1}" selected>1/+1</option>
+                                <option value="@{component_combine_1plus2}">1/+2</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="duration">
+                            <label class="sheet-left" data-i18n="duration">Duration</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_duration">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_duration_standard}" data-i18n="standard" selected>Standard</option>
+                                <option value="@{component_duration_extended}" data-i18n="extended">Extended</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="focus">
+                            <label class="sheet-left" data-i18n="focus">Focus</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_focus">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_focus_1plus1}">1/+1</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="fortune">
+                            <label class="sheet-left" data-i18n="fortune">Fortune</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_fortune">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_fortune_1plus1}">1/+1</option>
+                                <option value="@{component_fortune_1plus2plus3}">1/+2/+3/...</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="magnitude">
+                            <label class="sheet-left" data-i18n="magnitude">Magnitude</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_magnitude">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_magnitude_0plus1}" selected>0/+1</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="precision">
+                            <label class="sheet-left" data-i18n="precision">Precision</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_precision">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_precision_1plus1}">1/+1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="range">
+                            <label class="sheet-left" data-i18n="range">Range</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_range">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_range_standard_metric}" data-i18n="standard" selected>Standard</option>
+                                <option value="@{component_range_sympathetic}" data-i18n="sympathetic">Sympathetic</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="services">
+                            <label class="sheet-left" data-i18n="services">Services</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_services">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_services_0plus3plus4}">0/+3/+4/...</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="swiftness">
+                            <label class="sheet-left" data-i18n="swiftness">Swiftness</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_swiftness">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_swiftness_times1}">&times;1</option>
+                                <option value="@{component_swiftness_times2}">&times;2</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="targets">
+                            <label class="sheet-left" data-i18n="targets">Targets</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_targets">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_targets_0plus1}" selected>0/+1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="terms">
+                            <label class="sheet-left" data-i18n="terms">Terms</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_terms">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_terms_times1}">&times;1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Abilities Filter -->
+    <div class="sheet-space-between sheet-bmargin">
+        <div data-i18n-list="ability-type-order">
+            <label class="sheet-left" data-i18n="type">Type</label>
+            <input type='hidden' class="sheet-abilities-type-filter" name='attr_abilities_type_filter' value='all'/>
+            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-all" name="act_abilities_type_filter_all" data-i18n="all">All</button>
+            <button type="action" data-i18n-list-item="alchemy" class="sheet-checkbtn sheet-alchemy-toggle sheet-abilities-type-filter-alchemy" name="act_abilities_type_filter_alchemy" data-i18n="alchemy">Alchemy</button>
+            <button type="action" data-i18n-list-item="animism" class="sheet-checkbtn sheet-animism-toggle sheet-abilities-type-filter-animism" name="act_abilities_type_filter_animism" data-i18n="animism">Animism</button>
+            <button type="action" data-i18n-list-item="arcane_magic" class="sheet-checkbtn sheet-arcane-magic-toggle sheet-abilities-type-filter-arcane-magic" name="act_abilities_type_filter_arcane_magic" data-i18n="arcane_magic">Arcane Magic</button>
+            <button type="action" data-i18n-list-item="artifice" class="sheet-checkbtn sheet-artifice-toggle sheet-abilities-type-filter-artifice" name="act_abilities_type_filter_artifice" data-i18n="artifice">Artifice</button>
+            <button type="action" data-i18n-list-item="divine_magic" class="sheet-checkbtn sheet-divine-magic-toggle sheet-abilities-type-filter-divine-magic" name="act_abilities_type_filter_divine_magic" data-i18n="divine_magic">Divine Mage</button>
+            <button type="action" data-i18n-list-item="fae_powers" class="sheet-checkbtn sheet-fae-powers-toggle sheet-abilities-type-filter-fae-powers" name="act_abilities_type_filter_fae_powers" data-i18n="fae_powers">Fae Powers</button>
+            <button type="action" data-i18n-list-item="folk_magic" class="sheet-checkbtn sheet-folk-magic-toggle sheet-abilities-type-filter-folk-magic" name="act_abilities_type_filter_folk_magic" data-i18n="folk_magic">Folk Magic</button>
+            <button type="action" data-i18n-list-item="magic" class="sheet-checkbtn sheet-magic-toggle sheet-abilities-type-filter-magic" name="act_abilities_type_filter_magic" data-i18n="magic">Magic</button>
+            <button type="action" data-i18n-list-item="mysticism" class="sheet-checkbtn sheet-mysticism-toggle sheet-abilities-type-filter-mysticism" name="act_abilities_type_filter_mysticism" data-i18n="mysticism">Mysticism</button>
+            <button type="action" data-i18n-list-item="psionics" class="sheet-checkbtn sheet-psionics-toggle sheet-abilities-type-filter-psionics" name="act_abilities_type_filter_psionics" data-i18n="psionics">Psionics</button>
+            <button type="action" data-i18n-list-item="psychic_powers" class="sheet-checkbtn sheet-psychicpowers-toggle sheet-abilities-type-filter-psychic-powers" name="act_abilities_type_filter_psychic_powers" data-i18n="psychic_powers">Psychic Powers</button>
+            <button type="action" data-i18n-list-item="sorcery" class="sheet-checkbtn sheet-sorcery-toggle sheet-abilities-type-filter-sorcery" name="act_abilities_type_filter_sorcery" data-i18n="sorcery">Sorcery</button>
+            <button type="action" data-i18n-list-item="super_powers" class="sheet-checkbtn sheet-superpowers-toggle sheet-abilities-type-filter-super-powers" name="act_abilities_type_filter_super_powers" data-i18n="super_powers">Super Powers</button>
+            <button type="action" data-i18n-list-item="theism" class="sheet-checkbtn sheet-theism-toggle sheet-abilities-type-filter-theism" name="act_abilities_type_filter_theism" data-i18n="theism">Theism</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-other" name="act_abilities_type_filter_other" data-i18n="other">Other</button>
+        </div>
+        <div style="white-space: nowrap;" class="sheet-rank-toggle">
+            <label class="sheet-left" data-i18n="rank">Rank</label>
+            <input type='hidden' class="sheet-abilities-rank-filter" name='attr_abilities_rank_filter' value='all'/>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-all" name="act_abilities_rank_filter_all" data-i18n="all">All</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-0" name="act_abilities_rank_filter_0">0</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-1" name="act_abilities_rank_filter_1">1</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-2" name="act_abilities_rank_filter_2">2</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-3" name="act_abilities_rank_filter_3">3</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-4" name="act_abilities_rank_filter_4">4</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-5" name="act_abilities_rank_filter_5">5</button>
+        </div>
+    </div>
+
+    <!-- Abilities Table -->
+    <input type="checkbox" class="sheet-toggle sheet-hidden" name="attr_abilities_section_toggle" value="1" checked>
+    <div class="sheet-toggle">
+        <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
+        <div class="sheet-bmargin">
+            <div class="sheet-flex">
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="when_collapsed_only_starred_abilities_are_shown">S</span></div>
+                <div class="sheet-grow sheet-th"><span data-i18n="ability">Ability</span></div>
+                <div class="sheet-play sheet-button-width sheet-th"></div>
+                <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
+                <div class="sheet-checkbox-width sheet-th sheet-abilities-armor-penalty-toggle"><span class="sheet-pictos" data-i18n-title="apply_armor_penalty">U</span></div>
+                <div class="sheet-number-width sheet-th sheet-rank-toggle"><span data-i18n="rank">Rank</span></div>
+                <div class="sheet-ability-skill sheet-th"><span data-i18n="skill1-rolled">Skill1 (Rolled)</span></div>
+                <div class="sheet-number-width-sm sheet-th"><span>%</span></div>
+                <div class="sheet-ability-skill sheet-th sheet-abilities-skill2-toggle"><span data-i18n="skill2">Skill2</span></div>
+                <div class="sheet-number-width-sm sheet-th sheet-abilities-skill2-toggle"><span>%</span></div>
+                <div class="sheet-ability-prompts sheet-th sheet-abilities-prompts-toggle"><span data-i18n="prompts">Prompts</span></div>
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="details-tooltip">E</span></div>
+            </div>
+            <fieldset class="repeating_ability">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_show" value="1" checked>
+                <div class="sheet-toggle">
+                    <div class="sheet-flex">
+                        <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
+                        <div class="sheet-td sheet-grow sheet-hover-btn">
+                            <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                            <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                            <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
+                        </div>
+                        <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"></button></div>
+                        <div class="sheet-td sheet-ability-type">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
+                                <option value="other" data-i18n="other" selected>Other</option>
+                                <option class="sheet-alchemy-toggle" value="alchemy" data-i18n-list-item="alchemy" data-i18n="alchemy">Alchemy</option>
+                                <option class="sheet-animism-toggle" value="animism" data-i18n-list-item="animism" data-i18n="animism">Animism</option>
+                                <option class="sheet-arcane-magic-toggle" value="arcane_magic" data-i18n-list-item="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
+                                <option class="sheet-artifice-toggle" value="artifice" data-i18n-list-item="artifice" data-i18n="artifice">Alchemy</option>
+                                <option class="sheet-divine-magic-toggle" value="divine_magic" data-i18n-list-item="divine_magic" data-i18n="divine_magic">Divine Magic</option>
+                                <option class="sheet-fae-powers-toggle" value="fae_powers" data-i18n-list-item="fae_powers" data-i18n="fae_powers">Fae Powers</option>
+                                <option class="sheet-folk-magic-toggle" value="folk_magic" data-i18n-list-item="folk_magic" data-i18n="folk_magic">Folk Magic</option>
+                                <option class="sheet-magic-toggle" value="magic" data-i18n-list-item="magic" data-i18n="magic">Magic</option>
+                                <option class="sheet-mysticism-toggle" value="mysticism" data-i18n-list-item="mysticism" data-i18n="mysticism">Mysticism</option>
+                                <option class="sheet-psionics-toggle" value="psionics" data-i18n-list-item="psionic" data-i18n="psionics">Psionics</option>
+                                <option class="sheet-psychicpowers-toggle" value="psychic_powers" data-i18n-list-item="psychic_powers" data-i18n="psychic_powers">Psychic Powers</option>
+                                <option class="sheet-sorcery-toggle" value="sorcery" data-i18n-list-item="sorcery" data-i18n="sorcery">Sorcery</option>
+                                <option class="sheet-superpowers-toggle" value="super_powers" data-i18n-list-item="super_powers" data-i18n="super_powers">Super Powers</option>
+                                <option class="sheet-theism-toggle" value="theism" data-i18n-list-item="theism" data-i18n="theism">Theism</option>
+                            </select>
+                        </div>
+                        <div class=" sheet-td sheet-checkbox-width sheet-abilities-armor-penalty-toggle"><input type="checkbox" title="@{$ID_apply_armor_penalty}" name="attr_apply_armor_penalty" value="{{'{{armor_penalty=[[@{armor_penalty}]]}}'}}"><span class="sheet-checkico">U</span></div>
+                        <div class="sheet-td sheet-number-width sheet-rank-toggle">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_rank}" name="attr_rank">
+                                <option value="" selected>-</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name_display" value="@{skill1name}" disabled></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total_display" value="@{skill1total}" disabled> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2}" name="attr_skill2_display" value="@{skill2name}" disabled></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total_display" value="@{skill2total}" disabled> </div>
+                        <div class="sheet-td sheet-ability-prompts sheet-abilities-prompts-toggle">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_prompts}" name="attr_prompts">
+                                <option value="" selected>-</option>
+                                <option value="@{prompt_intensity}" data-i18n="intensity">Intensity</option>
+                                <option value="@{casting_components}" data-i18n="components">Components</option>
+                                <option value="@{prompt_intensity} @{casting_components}'}}" data-i18n="both">Both</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span></div>
+                    </div>
+                    <input type="checkbox" class="sheet-hidden sheet-wide-toggle sheet-deep-toggle" name="attr_details" value="1" checked>
+                    <div class="sheet-wide-toggle">
+                        <div class="sheet-edit sheet-flex">
+                            <div class="sheet-flex sheet-rmargin sheet-half-col">
+                                <div><label class="sheet-left" data-i18n="skill1-rolled-id">Skill1 (Rolled) ID</label></div>
+                                <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_skill1_id}" name="attr_skill1_id" value=""></div>
+                            </div>
+                            <div class="sheet-flex sheet-half-col">
+                                <div><label class="sheet-left" data-i18n="skill2-id">Skill2 ID</label></div>
+                                <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_skill2_id}" name="attr_skill2_id" value=""></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sheet-wide-toggle">
+                        <div class="sheet-edit sheet-flex">
+                            <div class="sheet-third-col sheet-rmargin">
+                                <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
+                                <div class="sheet-auto-expand">
+                                    <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
+                                    <span name="attr_traits"></span>
+                                </div>
+                            </div>
+                            <div class="sheet-grow">
+                                <div><label class="sheet-left" data-i18n="description">Description</label></div>
+                                <div class="sheet-auto-expand">
+                                    <textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea>
+                                    <span name="attr_description"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sheet-play">
+                            <div><span class="sheet-usrnotes sheet-italic" name="attr_traits_display"></span></div>
+                            <div><span class="sheet-usrnotes" name="attr_description"></span></div>
+                        </div>
+                    </div>
+                    <div class="sheet-hidden">
+                        <input type="text" name="attr_skill1name" value="" readonly>
+                        <input type="text" name="attr_skill1total" value="" readonly>
+                        <input type="text" name="attr_skill1roll" value="" readonly>
+                        <input type="text" name="attr_skill2name" value="" readonly>
+                        <input type="text" name="attr_skill2total" value="" readonly>
+                        <!-- <input type="text" name="attr_traits_display" value="" readonly> -->
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<!-- Limitations -->
+<input type='checkbox' class="sheet-hidden sheet-toggle" name='attr_limitations_enabled' value="1"/>
+<div class="sheet-section sheet-toggle">
+    <input type="checkbox" class="sheet-accordion" name="attr_limitations_section_toggle" value="1" checked>
+    <h2 class="sheet-accordion" data-i18n="limitations">Limitations</h2>
+
+    <div class="sheet-accordion">
+        <div class="sheet-flex">
+            <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
+            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
+        </div>
+        <fieldset class="repeating_superpowerlimit">
+            <div class="sheet-flex">
+                <div class="sheet-td sheet-limitation-name sheet-hover-btn">
+                    <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                    <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
+                </div>
+                <div class="sheet-td sheet-grow">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
+                </div>
+            </div>
+        </fieldset>
     </div>
 </div>

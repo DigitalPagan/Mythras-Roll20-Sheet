@@ -1,7 +1,7 @@
 <div class="sheet-mythras-defaults">
     <!-- Header -->
     <div class="sheet-sticky-header">
-        <div class="sheet-space-between sheet-bmargin">
+        <div class="sheet-space-between">
             <div class="sheet-flex">
                 <!-- Roll Options -->
                 <div>
@@ -108,7 +108,7 @@
 <label class="sheet-left" data-i18n="sheet-type">Sheet Type</label>&nbsp;
 <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-usrinput" name="attr_type">
     <option  value="battle-unit" data-i18n-list-item="battle-unit" data-i18n="battle-unit">Battle Unit</option>
-    <option value="character" data-i18n-list-item="character" data-i18n="character" selected>Character</option>
+    <option value="character" data-i18n-list-item="character" data-i18n="character" selected><span data-i18n="character">Character</span>/<span data-i18n="creature">Creature</span></option>
     <option  value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
     <option  value="star_system" data-i18n-list-item="star-system" data-i18n="star-system">Star System</option>
     <option  value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>
@@ -155,6 +155,14 @@
                 <label class="sheet-checkbox">
                     <input type='checkbox' name='attr_social_conflict_enabled' value="1"/><span>3</span>
                     <span class="sheet-bold" data-i18n="social_conflict">Social Conflict</span>
+                </label>
+            </div>
+
+            <!-- Limitations -->
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_limitations_enabled' value="1"/><span>3</span>
+                    <span class="sheet-bold" data-i18n="limitations">Limitations</span>
                 </label>
             </div>
         </div>
@@ -344,9 +352,171 @@
         <!-- Abilities -->
         <div class="sheet-section sheet-rpad">
             <h2 data-i18n="abilities">Abilities</h2>
+
+            <div><label class="sheet-left" data-i18n="fields">Fields</label></div>
+            <div class="sheet-lpad">
+                <!-- Armor Penalty -->
+                <div>
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_abilities_armor_penalty_enabled' value="1"><span>3</span>
+                        <span data-i18n="armor_penalty">Armor Penalty</span>
+                    </label>
+                </div>
+                <!-- Prompts -->
+                <div>
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_abilities_prompts_enabled' value="1"><span>3</span>
+                        <span data-i18n="prompts">Prompts</span>
+                    </label>
+                </div>
+            </div>
+
+            <div><label class="sheet-left" data-i18n="types">Types</label></div>
+            <div class="sheet-lpad" data-i18n-list="ability-type-order">
+                <!-- Alchemy -->
+                <div data-i18n-list-item="alchemy">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_alchemy_enabled' value="1"><span>3</span>
+                        <span data-i18n="alchemy">Alchemy</span>
+                    </label>
+                </div>
+
+                <!-- Animism -->
+                <div data-i18n-list-item="animism">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_animism_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="animism">Animism</span>
+                    </label>
+                </div>
+
+                <!-- Arcane Magic -->
+                <div data-i18n-list-item="arcane_magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_arcane_magic_enabled' value="1"><span>3</span>
+                        <span data-i18n="arcane_magic">Arcane Magic</span>
+                        (<label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_arcane_magic_prompts_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="prompt_for_intensity">Prompt for intensity</span></label>)
+                    </label>
+                </div>
+
+                <!-- Artifice -->
+                <div data-i18n-list-item="artifice">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_artifice_enabled' value="1"><span>3</span>
+                        <span data-i18n="artifice">Artifice</span>
+                    </label>
+                </div>
+
+                <!-- Divine Magic -->
+                <div data-i18n-list-item="divine_magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_divine_magic_enabled' value="1"><span>3</span>
+                        <span data-i18n="divine_magic">Divine Magic</span>
+                        (<label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_divine_magic_prompts_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="prompt_for_intensity">Prompt for intensity</span></label>)
+                    </label>
+                </div>
+
+                <!-- Fae Powers -->
+                <div data-i18n-list-item="fae_powers">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_fae_powers_enabled' value="1"><span>3</span>
+                        <span data-i18n="fae_powers">Fae Powers</span>
+                    </label>
+                </div>
+
+                <!-- Folk Magic -->
+                <div data-i18n-list-item="folk_magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_folk_magic_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="folk_magic">Folk Magic</span>
+                    </label>
+                </div>
+
+                <!-- Magic -->
+                <div data-i18n-list-item="magic">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_magic_enabled' value="1"><span>3</span>
+                        <span data-i18n="magic">Magic</span>
+                    </label>
+                </div>
+
+                <!-- Mysticism -->
+                <div data-i18n-list-item="mysticism">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_mysticism_enabled' value="1" checked><span>3</span>
+                        <span data-i18n="mysticism">Mysticism</span>
+                        (<label class="sheet-checkbox">
+                            <input type='checkbox' name='attr_mysticism_prompts_enabled' value="1" checked><span>3</span>
+                            <span data-i18n="prompt_for_intensity">Prompt for intensity</span>
+                        </label>)
+                    </label>
+                </div>
+
+                <!-- Psionics -->
+                <div data-i18n-list-item="psionics">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_psionics_enabled' value="1"><span>3</span>
+                        <span data-i18n="psionics">Psionics</span>
+                    </label>
+                </div>
+
+                <!-- Psychic Powers -->
+                <div data-i18n-list-item="psychic_powers">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_psychic_powers_enabled' value="1"><span>3</span>
+                        <span data-i18n="psychic_powers">Psychic Powers</span>
+                    </label>
+                </div>
+
+                <!-- Sorcery -->
+                <div data-i18n-list-item="sorcery">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_sorcery_enabled' value="1"><span>3</span>
+                        <span data-i18n="sorcery">Sorcery</span>
+                    </label>
+                    (<label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_sorcery_prompts_enabled' value="1" checked><span>3</span>
+                    <span data-i18n="prompt_for_casting_components">Prompt for casting components</span>
+                </label>)
+                </div>
+
+                <!-- Super Powers -->
+                <div data-i18n-list-item="super_powers">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_superpowers_enabled' value="1"><span>3</span>
+                        <span data-i18n="super_powers">Super Powers</span>
+                    </label>
+                </div>
+
+                <!-- Theism -->
+                <div data-i18n-list-item="theism">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_theism_enabled' value="1"><span>3</span>
+                        <span data-i18n="theism">Theism</span>
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+        </div>
+
+        <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
+        <div class="sheet-character sheet-tmargin">
+            <hr>
+            <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
+            <div class="sheet-character-tabs">
+                <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>
+                <!--<button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>-->
+            </div>
         </div>
     </div>
 
@@ -357,6 +527,19 @@
     <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
     <div class="sheet-battle-unit">Battle Unit</div>
     <div class="sheet-character">
+    <!-- Character Sheet Tabs -->
+    <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
+
+    <!-- TODO: configs and help as pop-outs -->
+<!-- TODO: collapsing sections for compact views -->
+<!-- TODO: expand/collapse all buttons -->
+<!-- TODO: Special skill buttons -->
+<!-- TODO: Keep Combat style traits and weapons or move to desc -->
+<!-- TODO: Trim ENC and Fatigue down to condition entry -->
+<!-- TODO: Move avg size to chars -->
+
+<!-- Core Tab -->
+<div class='sheet-character-tab-core'>
     <!-- Character Header -->
     <div class="sheet-flex">
         <!-- Info Section -->
@@ -435,28 +618,52 @@
             </div>
         </div>
     </div>
+    <!-- Traits, Creature Abilities & Gifts -->
+    <!-- <div class="sheet-section">
+        <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
+        <h2 class="sheet-accordion" data-i18n="traits_creature_abilities_gifts_etc">Traits, Creature Abilities, Gifts, etc</h2>
 
-    <!-- Character Sheet Tabs -->
-    <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
-    <div class="sheet-character-tabs sheet-bmargin">
-        <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>|
-        <button type="action" class="sheet-checkbtn sheet-character-tab-compact" name="act_character_tab_compact" data-i18n="compact">Compact</button>
-        <button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>
-    </div>
+        <div class="sheet-accordion">
+            <div class="sheet-flex">
+                <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
+                <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
+                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
+            </div>
+            <fieldset class="repeating_trait">
+                <div class="sheet-flex">
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
+                    </div>
+                    <div class="sheet-td">
+                        <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
+                    </div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div> -->
 
-    <!-- Core Tab -->
-<!-- Spirit Toggle -->
-<div class='sheet-character-tab-core'>
     <!-- Top Stats -->
     <div class="sheet-flex">
         <!-- Characteristics -->
         <div class=" sheet-section sheet-rmargin">
-            <h2 data-i18n="characteristics">Characteristics</h2>
+            <div class="sheet-space-between">
+                <div><h2 data-i18n="characteristics">Characteristics</h2></div>
+                <div class="sheet-edit sheet-text-right">
+                    <input type="checkbox" title="@{int_config}" name="attr_int_config" value="1"><span class="sheet-checkico">y</span>
+                </div>
+            </div>
+
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_int_config" value="1">
+            <div class="sheet-toggle">
+                <label class="sheet-left sheet-lite" data-i18n="intellect">Intellect</label>
+                <select class="sheet-auto-width sheet-usrinput" name="attr_int_type">
+                    <option value="int-u" data-i18n="int-u" selected>INT</option>
+                    <option value="ins-u" data-i18n="ins-u">INS</option>
+                </select>
+            </div>
 
             <div class="sheet-table sheet-full-width">
                 <div class="sheet-tr sheet-hl">
@@ -532,7 +739,6 @@
                 <div class="sheet-th"><div class="sheet-number-width" data-i18n="max">Max</div></div>
                 <div class="sheet-th sheet-edit"><div class="sheet-checkbox-width sheet-help sheet-pictos" data-i18n-title="advanced_configuration">y</div></div>
             </div>
-            <input type="checkbox" class="sheet-spirit-toggle sheet-hidden" name="attr_spirit" value="1">
             <div data-i18n-list="attribute-order">
                 <!-- Action Points -->
                 <div class="sheet-flex sheet-hl" data-i18n-list-item="action_points">
@@ -676,15 +882,28 @@
                 </div>
                 <!-- Movement Rate -->
                 <div class="sheet-hl" data-i18n-list-item="move_rate">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="move_rate">Move Rate</label></div>
+                    <input type="hidden" class="sheet-movement-calc" name="attr_movement_rate_calc" value="standard">
+                    <div class="sheet-flex sheet-standard-movement">
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{movement}" name="roll_movement" value="@{roll_display}&{template:movement} @{name_display} {{name=^{movement}}} {{walk=@{movement_rate}^{meters-abrv}}} {{run=[[ceil((@{movement_rate}*3)+(floor(@{athletics_total}/25)/2)+@{armor_penalty})]]^{meters-abrv}}} {{sprint=[[(@{movement_rate}*5)+floor(@{athletics_total}/25)+@{armor_penalty}]]^{meters-abrv}}} {{climb_rough=[[ceil(@{movement_rate}+ceil(@{armor_penalty}/2))]]^{meters-abrv}}} {{climb_steep=[[@{movement_rate}+@{armor_penalty}]]^{meters-abrv}}} {{climb_sheer=[[@{movement_rate}+(@{armor_penalty}*2)]]^{meters-abrv}}} {{running_jump_horizontal=[[ceil(((@{height}/100)*2)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]]^{meters-abrv}}} {{running_jump_vertical=[[ceil((((@{height}/100)/2)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]]^{centimetres-short}}} {{standing_jump_horizontal=[[ceil((@{height}/100)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]]^{meters-abrv}}} {{standing_jump_vertical=[[ceil((((@{height}/100)/4)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]]^{centimetres-short}}} {{swim=[[@{movement_rate}+(floor(@{swim_total}/20))]]^{meters-abrv}}} {{sink=[[ceil((@{movement_rate}+(floor(@{swim_total}/20)))/2)+@{armor_penalty}]]}}" data-i18n="movement">Movement</button></div>
                         <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{movement_rate_species}" name="attr_movement_rate_species" value="6"></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{movement_rate_other}" name="attr_movement_rate_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{movement_rate_temp}" name="attr_movement_rate_temp" value="0"></div>
                         <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
                         <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
                         <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{movement_rate}" name="attr_movement_rate" value="6" readonly></div>
-                        <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                        <div class="sheet-td sheet-edit"><input type="checkbox" title="@{movement_rate_details}" name="attr_movement_rate_details" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <div class="sheet-flex sheet-custom-movement">
+                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="movement">Movement</label></div>
+                        <div class="sheet-td sheet-custom-movement-width sheet-text-left"><input type="text" class="sheet-full-width sheet-text-right sheet-usrinput" title="@{custom_movement}" name="attr_custom_movement"></div>
+                        <div class="sheet-td sheet-edit"><input type="checkbox" title="@{movement_rate_details}" name="attr_movement_rate_details" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_movement_rate_details" value="1">
+                    <div class="sheet-edit sheet-toggle">
+                        <select class="sheet-usrinput sheet-full-width" name="attr_movement_rate_calc">
+                            <option data-i18n="standard_with_calculations" value="standard" selected>Standard with calculations</option>
+                            <option data-i18n="custom" value="custom">Custom</option>
+                        </select>
                     </div>
                 </div>
                 <!-- Power Points -->
@@ -803,7 +1022,7 @@
             </div>
             <div class="sheet-table">
                 <div class="sheet-tr">
-                    <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_table_verbose}, %{hit_table}, %{hit_table_low}, %{hit_table_high}" name="roll_hit_location_verbose" value="@{roll_display}&{template:hit_location} {{name=^{hit_table}}} @{name_display} {{roll_low=[[1d10]]}} {{roll=[[1d20]]}} {{roll_high=[[1d10+10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}"><span data-i18n="roll">Roll</span></button></div>
+                    <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_location_verbose}, %{hit_location}, %{hit_location_low}, %{hit_location_high}" name="roll_hit_location_verbose" value="@{roll_display}&{template:hit_location} {{name=^{hit_table}}} @{name_display} {{roll_low=[[1d10]]}} {{roll=[[1d20]]}} {{roll_high=[[1d10+10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}"><span data-i18n="roll">Roll</span></button></div>
                     <div class="sheet-hidden">
                         <button type="roll" name="roll_hit_location" value="@{roll_display}&{template:hit_location} {{name=^{hit_table}(d20)}} @{name_display} {{roll=[[1d20]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}"></button>
                         <button type="roll" name="roll_hit_location_low" value="@{roll_display}&{template:hit_location} {{name=^{hit_table}(d10)}} @{name_display} {{roll=[[1d10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}"></button>
@@ -1129,18 +1348,6 @@
         </div>
     </div>
 
-    <!-- Movement -->
-    <div style="padding-bottom: 0;" class="sheet-section sheet-play sheet-flex-centered">
-        <h2 data-i18n="movement">Movement</h2>
-        <div class="sheet-grow sheet-space-evenly">
-            <button type="roll" class="sheet-nodie" title="%{run}" name="roll_run" value="@{roll_display}&{template:default} {{name=^{run}/^{sprint}}} @{name_display} {{^{run}=[[ceil((@{movement_rate}*3)+(floor(@{athletics_total}/25)/2)+@{armor_penalty})]] ^{meters}}} {{^{sprint}=[[(@{movement_rate}*5)+floor(@{athletics_total}/25)+@{armor_penalty}]] ^{meters}}}"><span data-i18n="run">Run</span>/<span data-i18n="sprint">Sprint</span></button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{swim}" name="roll_swim" data-i18n="swim" value="@{roll_display}&{template:default} {{name=^{swim}}} @{name_display} {{^{speed}=[[@{movement_rate}+(floor(@{swim_total}/20))]] ^{meters}}} {{^{swim}/^{float}/^{sink}=[[ceil((@{movement_rate}+(floor(@{swim_total}/20)))/2)+@{armor_penalty}]]}}  {{notes=^{sink-notes}}}">Swim</button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{running_jump}" name="roll_running_jump" data-i18n="running_jump" value="@{roll_display}&{template:default} {{name=^{running_jump}}} @{name_display} {{^{horizontal}=[[ceil(((@{height}/100)*2)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]] ^{meters}}} {{^{vertical}=[[ceil((((@{height}/100)/2)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]] ^{centimetres-short}}} {{notes=Minium one step}}">Running Jump</button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{standing_jump}" name="roll_standing_jump" data-i18n="standing_jump" value="@{roll_display}&{template:default} {{name=^{standing_jump}}} @{name_display} {{^{horizontal}=[[ceil((@{height}/100)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]] ^{meters}}} {{^{vertical}=[[ceil((((@{height}/100)/4)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]] ^{centimetres-short}}} {{notes=Minium one step}}">Standing Jump</button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{climb}" name="roll_climb" data-i18n="climb" value="@{roll_display}&{template:default} {{name=^{climb}}} @{name_display} {{^{rough}=[[ceil(@{movement_rate}+ceil(@{armor_penalty}/2))]] ^{meters}}} {{^{steep}=[[@{movement_rate}+@{armor_penalty}]] ^{meters}}} {{^{sheer}=[[@{movement_rate}+(@{armor_penalty}*2)]] ^{meters}}}">Climb</button>
-        </div>
-    </div>
-
     <!-- Conflict -->
     <div class="sheet-section">
         <div class="sheet-flex">
@@ -1161,7 +1368,8 @@
             <div class='sheet-conflict-mode-combat' data-i18n-list-item="combat">
                 <!-- TODO maybe move stuff above into combat section? -->
 
-                <div class="sheet-bmargin sheet-rmargin">
+                <!-- TODO: display_melee_weapons display_ranged_weapons when one to show? -->
+<div class="sheet-bmargin sheet-rmargin">
     <input type='checkbox' class="sheet-hidden sheet-deep-toggle" name='attr_reach_enabled' value="1" checked/>
     <div class="sheet-flex">
         <div class="sheet-th sheet-weapon-name" data-i18n="melee_weapon">Melee Weapon</div>
@@ -3081,7 +3289,7 @@
                                 <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0">
                             </div>
                             <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0" readonly>
+                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="22" readonly>
                             </div>
                             <div class="sheet-td">
                                 <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span>
@@ -3089,7 +3297,7 @@
                         </div>
                         <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1" checked>
                         <div class="sheet-toggle">
-                            <div class="sheet-flex">
+                            <!--<div class="sheet-flex">
                                 <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
                                 <div class="sheet-edit sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_traits}" name="attr_traits"></div>
                                 <div class="sheet-play"><span class="sheet-usrnotes" name="attr_traits"></span></div>
@@ -3098,7 +3306,7 @@
                                 <div><label class="sheet-left" data-i18n="weapons">Weapons</label></div>
                                 <div class="sheet-edit sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_weapons}" name="attr_weapons"></div>
                                 <div class="sheet-play"><span class="sheet-usrnotes" name="attr_weapons"></span></div>
-                            </div>
+                            </div>-->
                             <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
                             <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
                         </div>
@@ -3267,256 +3475,431 @@
 </div>
 
     <div class='sheet-character-tab-abilities'>
-        <!-- TODO Refine UI for abilities -->
-<!-- TODO Sorting for abilities -->
-<!-- TODO Toggles for ability types -->
-<!-- TODO Autocalc for abilities -->
-<!-- Traits, Creature Abilities & Gifts -->
-<div class="sheet-section">
-    <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
-    <h2 class="sheet-accordion" data-i18n="traits_creature_abilities_gifts_etc">Traits, Creature Abilities, Gifts, etc</h2>
-
-    <div class="sheet-accordion">
-        <div class="sheet-flex">
-            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
-            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
-            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-        </div>
-        <fieldset class="repeating_trait">
-            <div class="sheet-flex">
-                <div class="sheet-td sheet-hover-btn">
-                    <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
-                    <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
-                </div>
-                <div class="sheet-td">
-                    <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
-                </div>
-                <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
-            </div>
-        </fieldset>
-    </div>
-</div>
-
+        <!-- TODO: filter for starred on collapse -->
 <!-- Abilities -->
 <div class="sheet-section">
-    <h2 data-i18n="abilities">Abilities</h2>
+    <!-- Ability Toggles -->
+    <input type="checkbox" class="sheet-rank-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
+    <input type="checkbox" class="sheet-abilities-armor-penalty-toggle sheet-hidden" name="attr_abilities_armor_penalty_enabled" value="1">
+    <input type="checkbox" class="sheet-abilities-prompts-toggle sheet-hidden" name="attr_abilities_prompts_enabled" value="1">
+    <input type="checkbox" class="sheet-alchemy-toggle sheet-hidden" name="attr_alchemy_enabled" value="1">
+    <input type="checkbox" class="sheet-artifice-toggle sheet-hidden" name="attr_artifice_enabled" value="1">
+    <input type="checkbox" class="sheet-animism-toggle sheet-hidden" name="attr_animism_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-arcane-magic-toggle sheet-hidden" name="attr_arcane_magic_enabled" value="1">
+    <input type="checkbox" class="sheet-divine-magic-toggle sheet-hidden" name="attr_divine_magic_enabled" value="1">
+    <input type="checkbox" class="sheet-fae-powers-toggle sheet-hidden" name="attr_fae_powers_enabled" value="1">
+    <input type="checkbox" class="sheet-folk-magic-toggle sheet-hidden" name="attr_folk_magic_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-magic-toggle sheet-hidden" name="attr_magic_enabled" value="1">
+    <input type="checkbox" class="sheet-mysticism-toggle sheet-hidden" name="attr_mysticism_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-psionics-toggle sheet-hidden" name="attr_psionics_enabled" value="1">
+    <input type="checkbox" class="sheet-psychicpowers-toggle sheet-hidden" name="attr_psychic_powers_enabled" value="1">
+    <input type="checkbox" class="sheet-superpowers-toggle sheet-hidden" name="attr_superpowers_enabled" value="1">
+    <input type="checkbox" class="sheet-sorcery-toggle sheet-hidden" name="attr_sorcery_enabled" value="1" checked>
+    <input type="checkbox" class="sheet-theism-toggle sheet-hidden" name="attr_theism_enabled" value="1" checked>
 
-    <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
-    <div class="sheet-bmargin">
-        <div class="sheet-flex">
-            <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="memorized-tooltip">S</span></div>
-            <div class="sheet-ability-name sheet-th"><span data-i18n="ability">Ability</span></div>
-            <div class="sheet-play sheet-button-width sheet-th"></div>
-            <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
-            <div class="sheet-number-width sheet-th"><span data-i18n="rank">Rank</span></div>
-            <div class="sheet-ability-skill sheet-th"><span data-i18n="roll-skill">Roll Skill</span></div>
-            <div class="sheet-number-width-sm sheet-th"><span>%</span></div>
-            <div class="sheet-play sheet-button-width sheet-th"></div>
-            <div class="sheet-ability-skill sheet-th"><span data-i18n="other-skill">Other Skill</span></div>
-            <div class="sheet-number-width-sm sheet-th"><span>%</span></div>
-            <div class="sheet-grow sheet-th"><span data-i18n="page">Page</span></div>
-            <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="details-tooltip">E</span></div>
+    <!-- Abilities Title -->
+    <div class="sheet-flex-centered">
+        <div>
+            <input type="checkbox" class="sheet-accordion" name="attr_abilities_section_toggle" value="1" checked>
+            <h2 class="sheet-accordion" data-i18n="abilities">Abilities</h2>
         </div>
-        <fieldset class="repeating_ability">
-            <div class="sheet-flex">
-                <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_memorized}" name="attr_memorized" value="1" checked><span class="sheet-checkico">S</span></div>
-                <div class="sheet-td sheet-ability-name"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name"></div>
-                <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{intensity=@{intensity}}} {{magnitude=@{magnitude}}} {{traits=@{traits}}} @{shaping_traits} {{description=@{description}}} {{page=@{page}}}"></button></div>
-                <div class="sheet-td sheet-ability-type">
-                    <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
-                        <option value="ability" data-i18n-list-item="ability" data-i18n="ability" selected>Ability</option>
-                        <option value="animism_spirit" data-i18n-list-item="animism_spirit" data-i18n="animism-spirit">Animism Spirit</option>
-                        <option value="fae_mutation" data-i18n-list-item="fae_mutation" data-i18n="fae-mutation">Fae Mutation</option>
-                        <option value="fae_power" data-i18n-list-item="fae_power" data-i18n="fae-power">Fae Power</option>
-                        <option value="folk_spell" data-i18n-list-item="folk_spell" data-i18n="folk-spell">Folk Spell</option>
-                        <option value="gift" data-i18n-list-item="gift" data-i18n="gift">Gift</option>
-                        <option value="lycanthrope_power" data-i18n-list-item="lycanthrope_power" data-i18n="lycanthrope-power">Lycanthrope Power</option>
-                        <option value="mystic_talent" data-i18n-list-item="mystic_talent" data-i18n="mystic-talent">Mystic Talent</option>
-                        <option value="psionic_talent" data-i18n-list-item="psionic_talent" data-i18n="psionic-talent">Psionic Talent</option>
-                        <option value="shifter_power" data-i18n-list-item="shifter_power" data-i18n="shifter-power">Shifter Power</option>
-                        <option value="sorcery_spell" data-i18n-list-item="sorcery_spell" data-i18n="sorcery-spell">Sorcery Spell</option>
-                        <option value="super_power" data-i18n-list-item="super_power" data-i18n="super-power">Super Power</option>
-                        <option value="theism_miracle" data-i18n-list-item="theism_miracle" data-i18n="theism-miracle">Theism Miracle</option>
-                        <option value="trait" data-i18n-list-item="trait" data-i18n="trait">Trait</option>
-                        <option value="vampire_power" data-i18n-list-item="vampire_power" data-i18n="vampire-power">Vampire Power</option>
-                    </select>
-                </div>
-                <div class="sheet-td sheet-number-width">
-                    <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_rank}" name="attr_ability_rank">
-                        <option value="" selected>-</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_roll_skill_name}" name="attr_roll_skill_name_display" value="@{roll_skill_name}" disabled></div>
-                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_roll_skill_value}" name="attr_roll_skill_total_display" value="@{roll_skill_value}" disabled> </div>
-                <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-d100" title="%{$ID_skill}" name="roll_skill" value="@{roll_skill_roll}"></button></div>
-                <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_other_skill}" name="attr_other_skill_display" value="@{other_skill_name}" disabled></div>
-                <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_other_skill_value}" name="attr_other_skill_total_display" value="@{other_skill_value}" disabled> </div>
-                <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_notes}" name="attr_page"></div>
-                <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span></div>
+        <div class="sheet-grow sheet-flex-rev sheet-text-right">
+            <div class="sheet-edit">
+                <input type='checkbox' name='attr_abilities_config' value="1"><span class="sheet-checkico">y</span>
             </div>
-            <input type="checkbox" class="sheet-hidden sheet-wide-toggle sheet-deep-toggle" name="attr_details" value="1" checked>
-            <div class="sheet-wide-toggle">
-                <div class="sheet-edit sheet-flex">
-                    <div class="sheet-flex sheet-rmargin sheet-half-col">
-                        <div><label class="sheet-left" data-i18n="roll-skill-id">Roll Skill ID</label>:&nbsp;</div>
-                        <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_roll_skill_id}" name="attr_roll_skill_id" value=""></div>
+            <div class="sheet-play">
+                <fieldset class="repeating_devotion sheet-inline">
+                    <label class="sheet-left sheet-lmargin"><span name="attr_name"></span></label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{$ID_devotional_pool}" name="attr_devotional_pool" value="0">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{$ID_devotional_pool|max}" name="attr_devotional_pool_max" value="@{rank_devotion_pool_limit}" disabled>
+                    <div class="sheet-hidden">
+                        <input type="text" name="attr_name" value="">
+                        <input type="text" name="attr_rank_devotion_pool_limit" value="0">
                     </div>
-                    <div class="sheet-flex sheet-half-col">
-                        <div><label class="sheet-left" data-i18n="other-skill-id">Other Skill ID</label>:&nbsp;</div>
-                        <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_other_skill_id}" name="attr_other_skill_id" value=""></div>
+                </fieldset>
+            </div>
+            <div class="sheet-play">
+                <div data-i18n-list="magic-attribute-order">
+                    <div class="sheet-inline-block" data-i18n-list-item="magic_points">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_magic_points_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="magic_points">Magic Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{magic_points}" name="attr_magic_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
+                    </div>
+                    <div class="sheet-inline-block" data-i18n-list-item="power_points">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_power_points_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="power_points">Power Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{power_points}" name="attr_power_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{power_points|max}" name="attr_power_points_max" value="11" readonly></div>
+                    </div>
+                    <div class="sheet-inline-block" data-i18n-list-item="prana_points">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_prana_points_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="prana_points">Prana Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{prana_points}" name="attr_prana_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{prana_points|max}" name="attr_prana_points_max" value="11" readonly></div>
+                    </div>
+                    <div class="sheet-inline-block" data-i18n-list-item="tenacity">
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_tenacity_enabled' value="1" checked/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="tenacity">Tenacity</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{tenacity|max}" name="attr_tenacity_max" value="11" readonly></div>
                     </div>
                 </div>
             </div>
-            <div class="sheet-flex">
-                <div class="sheet-id sheet-flex sheet-third-col sheet-grow sheet-rmargin">
-                    <div><label class="sheet-left" data-i18n="ability-id">Ability ID</label>:&nbsp;</div>
-                    <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_id}" name="attr_id" readonly></div>
-                </div>
-                <div class="sheet-deep-toggle sheet-edit sheet-flex sheet-third-col sheet-grow sheet-rmargin">
-                    <div><label class="sheet-left" data-i18n="intensity">Intensity</label>:&nbsp;</div>
-                    <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_intensity}" name="attr_intensity" value=""></div>
-                </div>
-                <div class="sheet-deep-toggle sheet-edit sheet-flex sheet-third-col sheet-grow">
-                    <div><label class="sheet-left" data-i18n="magnitude">Magnitude</label>:&nbsp;</div>
-                    <div class="sheet-grow"><input type="text" class="sheet-value sheet-full-width sheet-text-left" title="@{$ID_magnitude}" name="attr_magnitude" value=""></div>
-                </div>
-            </div>
-            <div class="sheet-wide-toggle">
-                <div class="sheet-edit sheet-flex">
-                    <div class="sheet-third-col sheet-rmargin">
-                        <div><label class="sheet-left" data-i18n="traits">Traits</label>:</div>
-                        <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
-                    </div>
-                    <div class="sheet-grow">
-                        <div><label class="sheet-left" data-i18n="description">Description</label>:</div>
-                        <div><textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea></div>
-                    </div>
-                </div>
-                <div class="sheet-play">
-                    <div><span class="sheet-usrnotes sheet-italic" name="attr_traits_display"></span></div>
-                    <div><span class="sheet-usrnotes" name="attr_description"></span></div>
-                </div>
-                <input type="text" class="sheet-hidden" name="attr_shaping_traits" value="">
-                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_show_shaping" value="1">
-                <div class="sheet-toggle sheet-edit ">
-                    <div><label class="sheet-left" data-i18n="shaping-traits">Shaping Traits</label>:</div>
-                    <div class="sheet-flex sheet-space-between">
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="combine">Combine</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_combine}" name="attr_shaped_combine">
-                                <option data-i18n="disabled" value="0">Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_combine_query}" selected>Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="duration">Duration</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_duration}" name="attr_shaped_duration">
-                                <option data-i18n="disabled" value=" ">Disabled</option>
-                                <option data-i18n="standard" value="@{shaped_duration_formula}" selected>Standard</option>
-                                <option data-i18n="extended" value="@{shaped_duration_extended_formula}">Extended</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="magnitude">Magnitude</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_magnitude}" name="attr_shaped_magnitude">
-                                <option data-i18n="disabled" value="1">Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_magnitude_formula}" selected>Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="range">Range</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_range}" name="attr_shaped_range">
-                                <option data-i18n="disabled" value=" ">Disabled</option>
-                                <option data-i18n="standard" value="@{shaped_range_formula}" selected>Standard</option>
-                                <option data-i18n="sympathetic" value="@{shaped_range_sympathetic_formula}">Sympathetic</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex">
-                            <div><span data-i18n="targets">Targets</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_targets}" name="attr_shaped_targets">
-                                <option data-i18n="disabled" value=" ">Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_targets_formula}" selected>Enabled</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="sheet-flex sheet-space-between">
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="ablation">Ablation</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_ablation}" name="attr_shaped_ablation">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_ablation_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="focus">Focus</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_focus}" name="attr_shaped_focus">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_focus_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="fortune">Fortune</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_fortune}" name="attr_shaped_fortune">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_fortune_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex sheet-rmargin">
-                            <div><span data-i18n="precision">Precision</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_precision}" name="attr_shaped_precision">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_precision_query}">Enabled</option>
-                            </select>
-                        </div>
-                        <div class="sheet-flex">
-                            <div><span data-i18n="swiftness">Swiftness</span>:&nbsp;</div>
-                            <select class="sheet-shaping-trait" title="@{shaped_swiftness}" name="attr_shaped_swiftness">
-                                <option data-i18n="disabled" value="0" selected>Disabled</option>
-                                <option data-i18n="enabled" value="@{shaped_swiftness_query}">Enabled</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-hidden">
-                <input type="text" name="attr_roll_skill_name" value="" readonly>
-                <input type="text" name="attr_roll_skill_value" value="" readonly>
-                <input type="text" name="attr_roll_skill_roll" value="" readonly>
-                <input type="text" name="attr_other_skill_name" value="" readonly>
-                <input type="text" name="attr_other_skill_value" value="" readonly>
-                <input type="text" name="attr_traits_display" value="" readonly>
-            </div>
-        </fieldset>
+        </div>
     </div>
 
     <!-- Pre-made Formulas -->
     <div class="sheet-hidden">
-        <!-- Sorcery Shaping -->
-        <input type="text" name="attr_shaped_combine_formula" value="{{combine=[[ ?{Combine|0|1|2|3|4|5|6|7|8|9|10} ]]}}" disabled>
-        <input type="text" name="attr_shaped_combine_query" value="?{Combine|0|1|2|3|4|5|6|7|8|9|10}" disabled>
-        <input type="text" name="attr_shaped_duration_formula" value="{{duration=[[ ?{Duration|0 - POW, @{pow}|1 - 2&times;POW,  2*@{pow}|2 - 3&times;POW,  3*@{pow}|3 - 4&times;POW,  4*@{pow}|4 - 5&times;POW,  5*@{pow}|5 - 6&times;POW,  6*@{pow}|6 - 7&times;POW,  7*@{pow}|7 - 8&times;POW,  8*@{pow}|8 - 9&times;POW,  9*@{pow}|9 - 10&times;POW,  10*@{pow}|10 - 11&times;POW,  11*@{pow}}]] ^{minutes-u}}}" disabled>
-        <input type="text" name="attr_shaped_duration_extended_formula" value="{{duration=[[@{pow} ?{Extended Duration|0 - POW turns, *1]] turns|1 - POW rounds, *1]] rounds|2 - POW minutes, *1]] minutes|3 - POW &times; 5 minutes, *5]] minutes|4 - POW &times; 15 minutes, *15]] minutes|5 - POW hours, *1]] hours|6 - POW &times; 6 hours, *6]] hours|7 - POW days, *1]] days|8 - POW weeks, *1]] weeks|9 - POW months, *1]] months|5 - POW years, *1]] years} }}" disabled>
-        <input type="text" name="attr_shaped_magnitude_formula" value="[[ ?{Magnitude|0 - Magnitude 1, 1|1 - Magnitude 2, 2|2 - Magnitude 3, 3|3 - Magnitude 4, 4|4 - Magnitude 5, 5|5 - Magnitude 6, 6|6 - Magnitude 7, 7|7 - Magnitude 8, 8|8 - Magnitude 9, 9|9 - Magnitude 10, 10|10 - Magnitude 11, 11} ]]" disabled>
-        <input type="text" name="attr_shaped_range_formula" value="{{range=[[ ?{Range|0 - Touch, 0|1 - 1m&times;POW,  1*@{pow}|2 - 5m&times;POW,  5*@{pow}|3 - 10m&times;POW,  10*@{pow}|4 - 50m&times;POW,  50*@{pow}|5 - 100m&times;POW,  100*@{pow}|6 - 500m&times;POW,  500*@{pow}|7 - 1km&times;POW,  1000*@{pow}|8 - 5km&times;POW,  5000*@{pow}|9 - 10km&times;POW,  10000*@{pow}|10 - 15km&times;POW,  15000*@{pow}}]] ^{metres-u}}}" disabled>
-        <input type="text" name="attr_shaped_range_sympathetic_formula" value="{{range=?{Range|0 - Touch, Touch|1 - 2+ fragments of the target, 2+ fragments of the target|2 - A fragments of the target, A fragments of the target|3 - Any personal object that the target has worn or carried continuously for a year, Any personal object that the target has worn or carried continuously for a year|4 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year|5 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year|6 - Any object the target has created or consumed, Any object the target has created or consumed|7 - A live video of the target, A live video of the target|8 - A recorded video of the target made within the last year, A recorded video of the target made within the last year|9 - A clear photograph of the target made within the last year, A clear photograph of the target made within the last year|10 - The caster has ever spent over an hour interacting with the target, The caster has ever spent over an hour interacting with the target} }}" disabled>
-        <input type="text" name="attr_shaped_targets_formula" value="{{ targets=[[ ?{Target|0 - 1 Target, 1|1 - 2 Targets, 2|2 - 3 Targets, 3|3 - 4 Targets, 4|4 - 5 Targets, 5|5 - 6 Targets, 6|6 - 7 Targets, 7|7 - 8 Targets, 8|8 - 9 Targets, 9|9 - 10 Targets, 10|10 - 11 Targets, 11} ]]}}" disabled>
-        <input type="text" name="attr_shaped_ablation_formula" value="{{ablation=[[ ?{Ablation|0|1|2|3|4|5|6|7|8|9|10} ]]}}" disabled>
-        <input type="text" name="attr_shaped_ablation_query" value="?{Ablation|0|1|2|3|4|5|6|7|8|9|10}" disabled>
-        <input type="text" name="attr_shaped_focus_formula" value="{{focus=[[ ?{Focus|0|1|2|3|4|5|6|7|8|9|10} ]]}}" disabled>
-        <input type="text" name="attr_shaped_focus_query" value="?{Focus|0|1|2|3|4|5|6|7|8|9|10}" disabled>
-        <input type="text" name="attr_shaped_fortune_formula" value="{{fortune=[[ ?{Fortune|0|1|2|3|4|5|6|7|8|9|10} ]]}}" disabled>
-        <input type="text" name="attr_shaped_fortune_query" value="?{Fortune|0|1|2|3|4|5|6|7|8|9|10}" disabled>
-        <input type="text" name="attr_shaped_precision_formula" value="{{precision=[[ ?{Precision|0|1|2|3|4|5|6|7|8|9|10} ]]}}" disabled>
-        <input type="text" name="attr_shaped_precision_query" value="?{Precision|0|1|2|3|4|5|6|7|8|9|10}" disabled>
-        <input type="text" name="attr_shaped_swiftness_formula" value="{{swiftness=[[ ?{Swiftness|0|1|2|3|4|5|6|7|8|9|10} ]]}}" disabled>
-        <input type="text" name="attr_shaped_swiftness_query" value="?{Swiftness|0|1|2|3|4|5|6|7|8|9|10}" disabled>
+        <input type="text" name="attr_casting_components" value="@{component_ablation} @{component_area} @{component_combine} @{component_duration} @{component_focus} @{component_fortune} @{component_magnitude} @{component_precision} @{component_range} @{component_services} @{component_swiftness} @{component_targets} @{component_terms}" disabled>
+        <!-- Prompt Intensity -->
+        <input type="text" name="attr_prompt_intensity" value="{{^{intensity}=?{Intensity|1}}}" disabled>
+        <!-- Ablation -->
+        <input type="text" name="attr_component_ablation_0plus1" value="{{^{ablation}=?{Ablation|0 - None, None (0pts)|1 - -1 Magnitude, -1 Magnitude (1pts)|2 - -2 Magnitude, -2 Magnitude (2pts)|3 - -3 Magnitude, -3 Magnitude (3pts)|4 - -4 Magnitude, -4 Magnitude (4pts)|5 - -5 Magnitude, -5 Magnitude (5pts)|6 - -6 Magnitude, -6 Magnitude (6pts)|7 - -7 Magnitude, -7 Magnitude (7pts)|8 - -8 Magnitude, -8 Magnitude (8pts)|9 - -1 Magnitude, -9 Magnitude (9pts)|10 - -10 Magnitude, -10 Magnitude (10pts)}}}" disabled>
+        <!-- Area -->
+        <input type="text" name="attr_component_area_linear_radius_metric" value="{{^{area}=?{Area|0 - None, None (0pts)|1 - 1m Radius, 1m Radius (1pts)|3 - 2m Radius, 2m Radius (2pts)|3 - 3m Radius, 3m Radius (3pts)|4 - 4m Radius, 4m Radius (4pts)|5 - 5m Radius, 5m Radius (5pts)|6 - 6m Radius, 6m Radius (6pts)|7 - 7m Radius, 7m Radius (7pts)|8 - 8m Radius, 8m Radius (8pts)|9 - 9m Radius, 9m Radius (9pts)|10 - 10m Radius, 10m Radius (10pts)}}}" disabled>
+        <input type="text" name="attr_component_area_nonlinear_radius_metric" value="{{^{area}=?{Area|0 - None, None (0pts)|1 - 2m Radius, 2m Radius (1pts)|3 - 5m Radius, 5m Radius (2pts)|3 - 10m Radius, 10m Radius (3pts)|4 - 25m Radius, 25m Radius (4pts)|5 - 50m Radius, 50m Radius (5pts)|6 - 100m Radius, 100m Radius (6pts)|7 - 250m Radius, 250m Radius (7pts)|8 - 500m Radius, 500m Radius (8pts)|9 - 1km Radius, 1km Radius (9pts)|10 - 2km Radius, 2km Radius (10pts)}}}" disabled>
+        <!-- Combine -->
+        <input type="text" name="attr_component_combine_1plus1" value="{{^{combine}=?{Combine|0 - None, None (0pts)|1 - 2 effects, 2 effects (1pts)|2 - 3 effects, 3 effects (2pts)|3 - 4 effects, 4 effects (3pts)|4 - 5 effects, 5 effects (4pts)|5 - 6 effects, 6 effects (5pts)|6 - 7 effects, 7 effects (6pts)|7 - 8 effects, 8 effects (7pts)|8 - 9 effects, 9 effects (8pts)|9 - 10 effects, 10 effects (9pts)|10 - 11 effects, 11 effects (10pts)}}}" disabled>
+        <input type="text" name="attr_component_combine_1plus2" value="{{^{combine}=?{Combine|0 - None, None (0pts)|1 - 2 effects, 2 effects (1pts)|3 - 3 effects, 3 effects (3pts)|5 - 4 effects, 4 effects (5pts)|7 - 5 effects, 5 effects (7pts)|9 - 6 effects, 6 effects (9pts)|11 - 7 effects, 7 effects (11pts)|13 - 8 effects, 8 effects (13pts)|15 - 9 effects, 9 effects (15pts)|17 - 10 effects, 10 effects (17pts)|19 - 11 effects, 11 effects (19pts)}}}" disabled>
+        <!-- Duration -->
+        <input type="text" name="attr_component_duration_standard" value="{{^{duration}=?{Duration|0 - POW minutes, [[@{pow}]]mins (0pts)| 1 - 2&times;POW minutes, [[2*@{pow}]]mins (1pt)|2 - 3&times;POW minutes, 2 - [[3*@{pow}]]mins (2pts)|3 - 4&times;POW minutes, [[4*@{pow}]]mins (3pts)|4 - 5&times;POW minutes,  [[5*@{pow}]]mins (4pts)|5 - 6&times;POW minutes,  [[6*@{pow}]]mins (5pts)|6 - 7&times;POW minutes,  [[7*@{pow}]]mins (6pts)|7 - 8&times;POW minutes,  [[8*@{pow}]]mins (7pts)|8 - 9&times;POW minutes,  [[9*@{pow}]]mins (8pts)|9 - 10&times;POW minutes,  [[10*@{pow}]]mins (9pts)|10 - 11&times;POW minutes,  [[11*@{pow}]]mins (10pts)}}}" disabled>
+        <input type="text" name="attr_component_duration_extended" value="{{^{duration}=?{Duration|0 - POW turns, [[@{pow}*1]] Turns (0pts)|1 - POW Rounds, [[@{pow}*1]] Rounds (1pt)|2 - POW Minutes, *1]] Minutes (2pts)|3 - POW &times; 5 Minutes, [[@{pow}*5]] Minutes (3pts)|4 - POW &times; 15 Minutes, [[@{pow}*15]] Minutes (4pts)|5 - POW Hours, [[@{pow}*1]] Hours (5pts)|6 - POW &times; 6 Hours, [[@{pow}*6]] Hours (6pts)|7 - POW Days, [[@{pow}*1]] Days (7pts)|8 - POW Weeks, [[@{pow}*1]] Weeks (8pts)|9 - POW Months, [[@{pow}*1]] Months (9pts)|5 - POW Years, [[@{pow}*1]] Years (10pts)} }}" disabled>
+        <!-- Focus -->
+        <input type="text" name="attr_component_focus_1plus1" value="{{^{focus}=?{Focus|0 - None, None (0pts)|1 - Ignore 1 level of difficulty, 1 level (1pt)|2 - Ignore 2 levels of difficulty, 2 levels (2pt)|3 - Ignore 3 levels of difficulty, 3 levels (3pt)|4 - Ignore 4 levels of difficulty, 4 levels (4pt)|5 - Ignore 5 levels of difficulty, 5 levels (5pt)|6 - Ignore 6 levels of difficulty, 6 levels (6pt)}}}" disabled>
+        <!-- Fortune -->
+        <input type="text" name="attr_component_fortune_1plus1" value="{{^{fortune}=?{Fortune|0 - None, None (0pts)|1 - 2 rolls, 2 rolls (1pt)|2 - 3 rolls, 3 rolls (2pt)|3 - 4 rolls, 4 rolls (3pt)|4 - 5 rolls, 5 rolls (4pt)|5 - 6 rolls, 6 rolls (5pt)|6 - 7 rolls, 7 rolls (6pt)|7 - 8 rolls, 8 rolls (7pt)|8 - 9 rolls, 9 rolls (8pt)|9 - 10 rolls, 10 rolls (9pt)|10 - 11 rolls, 11 rolls (10pt)}}}" disabled>
+        <input type="text" name="attr_component_fortune_1plus2plus3" value="{{^{fortune}=?{Fortune|0 - None, None (0pts)|1 - 2 Rolls, 2 Rolls (1pt)|3 - 3 Rolls, 3 Rolls (3pt)|6 - 4 Rolls, 4 Rolls (6pt)|10 - 5 Rolls, 5 Rolls (10pt)|15 - 6 Rolls, 6 Rolls (15pt)|21 - 7 Rolls, 7 Rolls (21pt)}}}" disabled>
+        <!-- Magnitude -->
+        <input type="text" name="attr_component_magnitude_0plus1" value="{{^{magnitude}=?{Magnitude|0 - Magnitude 1, 1 (0pts)|1 - Magnitude 2, 2 (1pt)|2 - Magnitude 3, 3 (2pts)|3 - Magnitude 4, 4 (3pts)|4 - Magnitude 5, 5 (4pts)|5 - Magnitude 6, 6 (5pts)|6 - Magnitude 7, 7 (6pts)|7 - Magnitude 8, 8 (7pts)|8 - Magnitude 9, 9 (8pts)|9 - Magnitude 10, 10 (9pts)|10 - Magnitude 11, 11 (10pts)}}}" disabled>
+        <!-- Precision -->
+        <input type="text" name="attr_component_precision_1plus1" value="{{^{precision}=?{Precision|0 - None, None (0pts)|1 - Adjust roll by 1, Adjust roll by 1 (1pt)|2 - Adjust roll by 2, Adjust roll by 2 (2pts)|3 - Adjust roll by 3, Adjust roll by 3 (3pts)|4 - Adjust roll by 4, Adjust roll by 4 (4pts)|5 - Adjust roll by 5, Adjust roll by 5 (5pts)|6 - Adjust roll by 6, Adjust roll by 6 (6pts)|7 - Adjust roll by 7, Adjust roll by 7 (7pts)|8 - Adjust roll by 8, Adjust roll by 8 (8pts)|9 - Adjust roll by 9, Adjust roll by 9 (9pts)|10 - Adjust roll by 10, Adjust roll by 10 (10pts)}}}" disabled>
+        <!-- Range -->
+        <input type="text" name="attr_component_range_standard_metric" value="{{^{range}=?{Range|0 - Touch, Touch (0pts)|1 - 1m&times;POW,  [[@{pow}]]m (1pt)|2 - 5m&times;POW,  [[5*@{pow}]]m (2pts)|3 - 10m&times;POW,  [[10*@{pow}]]m (3pts)|4 - 50m&times;POW,  [[50*@{pow}]]m (4pts)|5 - 100m&times;POW,  [[100*@{pow}]]m (5pts)|6 - 500m&times;POW,  [[500*@{pow}]]m (6pts)|7 - 1km&times;POW,  [[1*@{pow}]]km (7pts)|8 - 5km&times;POW,  [[5*@{pow}]]km (8pts)|9 - 10km&times;POW,  [[10*@{pow}]]km (9pts)|10 - 15km&times;POW,  [[15*@{pow}]]km (10pts)}}}" disabled>
+        <input type="text" name="attr_component_range_sympathetic" value="{{^{range}=?{Range|0 - Touch, Touch (0pts)|1 - 2+ fragments of the target, 2+ fragments of the target (1pt)|2 - A fragments of the target, A fragments of the target (2pts)|3 - Any personal object that the target has worn or carried continuously for a year, Any personal object that the target has worn or carried continuously for a year (3pts)|4 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year (4pts)|5 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year (5pts)|6 - Any object the target has created or consumed, Any object the target has created or consumed (6pts)|7 - A live video of the target, A live video of the target (7pts)|8 - A recorded video of the target made within the last year, A recorded video of the target made within the last year (8pts)|9 - A clear photograph of the target made within the last year, A clear photograph of the target made within the last year (9pts)|10 - The caster has ever spent over an hour interacting with the target, The caster has ever spent over an hour interacting with the target (10pts)} }}" disabled>
+        <!-- Services -->
+        <input type="text" name="attr_component_services_0plus3plus4" value="{{^{services}=?{Services|0 - 1 Service, 1 (0pts)|3 - 2 Services, 2 (3pts)|7 - 3 Services, 3 (7pts)|12 - 4 Services, 4 (12pts)|18 - 5 Services, 5 (18pts)}}}" disabled>
+        <!-- Swiftness -->
+        <input type="text" name="attr_component_swiftness_times1" value="{{^{swiftness}=?{Swiftness|0 - None, None (0pts)|1 - -1 Casting time , -1 Casting time (1pt)|2 - -2 Casting time , -2 Casting time (2pts)|3 - -3 Casting time , -3 Casting time (3pts)|4 - -4 Casting time , -4 Casting time (4pts)|5 - -5 Casting time , -5 Casting time (5pts)|6 - -6 Casting time , -6 Casting time (6pts)|7 - -7 Casting time , -7 Casting time (7pts)|8 - -8 Casting time , -8 Casting time (8pts)|9 - -9 Casting time , -9 Casting time (9pts)|10 - -10 Casting time , -10 Casting time (10pts)}}}" disabled>
+        <input type="text" name="attr_component_swiftness_times2" value="{{^{swiftness}=?{Swiftness|0 - None, None (0pts)|1 - -2 Casting time , -2 Casting time  (1pt)|2 - -4 Casting time , -4 Casting time (2pts)|3 - -6 Casting time , -6 Casting time (3pts)|4 - -8 Casting time , -8 Casting time (4pts)|5 - -10 Casting time , -10 Casting time (5pts)|6 - -12 Casting time , -12 Casting time (6pts)|7 - -14 Casting time , -14 Casting time (7pts)|8 - -16 Casting time , -16 Casting time (8pts)|9 - -18 Casting time , -18 Casting time (9pts)|10 - -20 Casting time , -20 Casting time (10pts)}}}" disabled>
+        <!-- Targets -->
+        <input type="text" name="attr_component_targets_0plus1" value="{{^{targets}=?{Target|0 - 1 Target, 1 (0pts)|1 - 2 Targets, 2 (1pt)|2 - 3 Targets, 3 (2pts)|3 - 4 Targets, 4 (3pts)|4 - 5 Targets, 5 (4pts)|5 - 6 Targets, 6 (5pts)|6 - 7 Targets, 7 (6pts)|7 - 8 Targets, 8 (7pts)|8 - 9 Targets, 9 (8pts)|9 - 10 Targets, 10 (9pts)|10 - 11 Targets, 11 (10pts)}}}" disabled>
+        <!-- Terms -->
+        <input type="text" name="attr_component_terms_times1" value="{{^{terms}=?{Terms|0 - None, None (0pts)|1 - 1 Term , 1 Term (1pt)|2 - 2 Terms , 2 Terms (2pts)|3 - 3 Terms , 3 Terms (3pts)|4 - 4 Terms , 4 Terms (4pts)|5 - 5 Terms , 5 Terms (5pts)|6 - 6 Terms , 6 Terms (6pts)|7 - 7 Terms , 7 Terms (7pts)|8 - 8 Terms , 8 Terms (8pts)|9 - 9 Terms , 9 Terms (9pts)|10 - 10 Terms , 10 Terms (10pts)}}}" disabled>
+    </div>
+
+    <!-- Abilities Configuration -->
+    <input type='hidden' class='sheet-toggle sheet-hidden' name='attr_abilities_config' value="1"/>
+    <div class="sheet-toggle sheet-edit">
+        <div class="sheet-flex">
+            <div class="sheet-rmargin sheet-bmargin sheet-theism-toggle">
+                <div class="sheet-flex">
+                    <div class="sheet-devotion-name sheet-th" data-i18n="devotional_pool">Devotional Pool</div>
+                    <div class="sheet-devotion-limit sheet-th" data-i18n="limit">Limit</div>
+                </div>
+                <fieldset class="repeating_devotion">
+                    <div class="sheet-flex">
+                        <div class="sheet-devotion-name sheet-td">
+                            <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
+                        </div>
+                        <div class="sheet-devotion-limit sheet-td">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" name="attr_rank_devotion_pool_limit">
+                                <option value="0" selected>0</option>
+                                <option value="ceil(@{pow}*.25)" data-i18n="1/4_pow-u">1/4 POW</option>
+                                <option value="ceil(@{pow}*.5)" data-i18n="1/2_pow-u">1/2 POW</option>
+                                <option value="ceil(@{pow}*.75)" data-i18n="3/4_pow-u">3/4 POW</option>
+                                <option value="@{pow}" data-i18n="pow-u">POW</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="sheet-grow sheet-bmargin sheet-sorcery-toggle">
+                <div class="sheet-flex"><div class="sheet-th sheet-full-width" data-i18n="casting_components">Casting Components</div></div>
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="ablation">
+                            <label class="sheet-left" data-i18n="ablation">Ablation</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_ablation">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_ablation_0plus1}">0/+1</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list="area">
+                            <label class="sheet-left" data-i18n="area">Area</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_area">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_area_linear_radius_metric}"  data-i18n="linear_radius">Linear Radius</option>
+                                <option value="@{component_area_nonlinear_radius_metric}"  data-i18n="non-linear_radius">Non-Linear Radius</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="combine">
+                            <label class="sheet-left" data-i18n="combine">Combine</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_combine">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_combine_1plus1}" selected>1/+1</option>
+                                <option value="@{component_combine_1plus2}">1/+2</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="duration">
+                            <label class="sheet-left" data-i18n="duration">Duration</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_duration">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_duration_standard}" data-i18n="standard" selected>Standard</option>
+                                <option value="@{component_duration_extended}" data-i18n="extended">Extended</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="focus">
+                            <label class="sheet-left" data-i18n="focus">Focus</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_focus">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_focus_1plus1}">1/+1</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="fortune">
+                            <label class="sheet-left" data-i18n="fortune">Fortune</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_fortune">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_fortune_1plus1}">1/+1</option>
+                                <option value="@{component_fortune_1plus2plus3}">1/+2/+3/...</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="magnitude">
+                            <label class="sheet-left" data-i18n="magnitude">Magnitude</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_magnitude">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_magnitude_0plus1}" selected>0/+1</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="precision">
+                            <label class="sheet-left" data-i18n="precision">Precision</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_precision">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_precision_1plus1}">1/+1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="range">
+                            <label class="sheet-left" data-i18n="range">Range</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_range">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_range_standard_metric}" data-i18n="standard" selected>Standard</option>
+                                <option value="@{component_range_sympathetic}" data-i18n="sympathetic">Sympathetic</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="services">
+                            <label class="sheet-left" data-i18n="services">Services</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_services">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_services_0plus3plus4}">0/+3/+4/...</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="swiftness">
+                            <label class="sheet-left" data-i18n="swiftness">Swiftness</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_swiftness">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_swiftness_times1}">&times;1</option>
+                                <option value="@{component_swiftness_times2}">&times;2</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="targets">
+                            <label class="sheet-left" data-i18n="targets">Targets</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_targets">
+                                <option value=" " data-i18n="disabled">Disabled</option>
+                                <option value="@{component_targets_0plus1}" selected>0/+1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left" data-i18n-list-item="terms">
+                            <label class="sheet-left" data-i18n="terms">Terms</label>
+                            <select class="sheet-auto-width sheet-usrinput" name="attr_component_terms">
+                                <option value=" " data-i18n="disabled" selected>Disabled</option>
+                                <option value="@{component_terms_times1}">&times;1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Abilities Filter -->
+    <div class="sheet-space-between sheet-bmargin">
+        <div data-i18n-list="ability-type-order">
+            <label class="sheet-left" data-i18n="type">Type</label>
+            <input type='hidden' class="sheet-abilities-type-filter" name='attr_abilities_type_filter' value='all'/>
+            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-all" name="act_abilities_type_filter_all" data-i18n="all">All</button>
+            <button type="action" data-i18n-list-item="alchemy" class="sheet-checkbtn sheet-alchemy-toggle sheet-abilities-type-filter-alchemy" name="act_abilities_type_filter_alchemy" data-i18n="alchemy">Alchemy</button>
+            <button type="action" data-i18n-list-item="animism" class="sheet-checkbtn sheet-animism-toggle sheet-abilities-type-filter-animism" name="act_abilities_type_filter_animism" data-i18n="animism">Animism</button>
+            <button type="action" data-i18n-list-item="arcane_magic" class="sheet-checkbtn sheet-arcane-magic-toggle sheet-abilities-type-filter-arcane-magic" name="act_abilities_type_filter_arcane_magic" data-i18n="arcane_magic">Arcane Magic</button>
+            <button type="action" data-i18n-list-item="artifice" class="sheet-checkbtn sheet-artifice-toggle sheet-abilities-type-filter-artifice" name="act_abilities_type_filter_artifice" data-i18n="artifice">Artifice</button>
+            <button type="action" data-i18n-list-item="divine_magic" class="sheet-checkbtn sheet-divine-magic-toggle sheet-abilities-type-filter-divine-magic" name="act_abilities_type_filter_divine_magic" data-i18n="divine_magic">Divine Mage</button>
+            <button type="action" data-i18n-list-item="fae_powers" class="sheet-checkbtn sheet-fae-powers-toggle sheet-abilities-type-filter-fae-powers" name="act_abilities_type_filter_fae_powers" data-i18n="fae_powers">Fae Powers</button>
+            <button type="action" data-i18n-list-item="folk_magic" class="sheet-checkbtn sheet-folk-magic-toggle sheet-abilities-type-filter-folk-magic" name="act_abilities_type_filter_folk_magic" data-i18n="folk_magic">Folk Magic</button>
+            <button type="action" data-i18n-list-item="magic" class="sheet-checkbtn sheet-magic-toggle sheet-abilities-type-filter-magic" name="act_abilities_type_filter_magic" data-i18n="magic">Magic</button>
+            <button type="action" data-i18n-list-item="mysticism" class="sheet-checkbtn sheet-mysticism-toggle sheet-abilities-type-filter-mysticism" name="act_abilities_type_filter_mysticism" data-i18n="mysticism">Mysticism</button>
+            <button type="action" data-i18n-list-item="psionics" class="sheet-checkbtn sheet-psionics-toggle sheet-abilities-type-filter-psionics" name="act_abilities_type_filter_psionics" data-i18n="psionics">Psionics</button>
+            <button type="action" data-i18n-list-item="psychic_powers" class="sheet-checkbtn sheet-psychicpowers-toggle sheet-abilities-type-filter-psychic-powers" name="act_abilities_type_filter_psychic_powers" data-i18n="psychic_powers">Psychic Powers</button>
+            <button type="action" data-i18n-list-item="sorcery" class="sheet-checkbtn sheet-sorcery-toggle sheet-abilities-type-filter-sorcery" name="act_abilities_type_filter_sorcery" data-i18n="sorcery">Sorcery</button>
+            <button type="action" data-i18n-list-item="super_powers" class="sheet-checkbtn sheet-superpowers-toggle sheet-abilities-type-filter-super-powers" name="act_abilities_type_filter_super_powers" data-i18n="super_powers">Super Powers</button>
+            <button type="action" data-i18n-list-item="theism" class="sheet-checkbtn sheet-theism-toggle sheet-abilities-type-filter-theism" name="act_abilities_type_filter_theism" data-i18n="theism">Theism</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-other" name="act_abilities_type_filter_other" data-i18n="other">Other</button>
+        </div>
+        <div style="white-space: nowrap;" class="sheet-rank-toggle">
+            <label class="sheet-left" data-i18n="rank">Rank</label>
+            <input type='hidden' class="sheet-abilities-rank-filter" name='attr_abilities_rank_filter' value='all'/>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-all" name="act_abilities_rank_filter_all" data-i18n="all">All</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-0" name="act_abilities_rank_filter_0">0</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-1" name="act_abilities_rank_filter_1">1</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-2" name="act_abilities_rank_filter_2">2</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-3" name="act_abilities_rank_filter_3">3</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-4" name="act_abilities_rank_filter_4">4</button>
+            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-5" name="act_abilities_rank_filter_5">5</button>
+        </div>
+    </div>
+
+    <!-- Abilities Table -->
+    <input type="checkbox" class="sheet-toggle sheet-hidden" name="attr_abilities_section_toggle" value="1" checked>
+    <div class="sheet-toggle">
+        <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
+        <div class="sheet-bmargin">
+            <div class="sheet-flex">
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="when_collapsed_only_starred_abilities_are_shown">S</span></div>
+                <div class="sheet-grow sheet-th"><span data-i18n="ability">Ability</span></div>
+                <div class="sheet-play sheet-button-width sheet-th"></div>
+                <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
+                <div class="sheet-checkbox-width sheet-th sheet-abilities-armor-penalty-toggle"><span class="sheet-pictos" data-i18n-title="apply_armor_penalty">U</span></div>
+                <div class="sheet-number-width sheet-th sheet-rank-toggle"><span data-i18n="rank">Rank</span></div>
+                <div class="sheet-ability-skill sheet-th"><span data-i18n="skill1-rolled">Skill1 (Rolled)</span></div>
+                <div class="sheet-number-width-sm sheet-th"><span>%</span></div>
+                <div class="sheet-ability-skill sheet-th sheet-abilities-skill2-toggle"><span data-i18n="skill2">Skill2</span></div>
+                <div class="sheet-number-width-sm sheet-th sheet-abilities-skill2-toggle"><span>%</span></div>
+                <div class="sheet-ability-prompts sheet-th sheet-abilities-prompts-toggle"><span data-i18n="prompts">Prompts</span></div>
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="details-tooltip">E</span></div>
+            </div>
+            <fieldset class="repeating_ability">
+                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_show" value="1" checked>
+                <div class="sheet-toggle">
+                    <div class="sheet-flex">
+                        <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
+                        <div class="sheet-td sheet-grow sheet-hover-btn">
+                            <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                            <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                            <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
+                        </div>
+                        <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}"></button></div>
+                        <div class="sheet-td sheet-ability-type">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
+                                <option value="other" data-i18n="other" selected>Other</option>
+                                <option class="sheet-alchemy-toggle" value="alchemy" data-i18n-list-item="alchemy" data-i18n="alchemy">Alchemy</option>
+                                <option class="sheet-animism-toggle" value="animism" data-i18n-list-item="animism" data-i18n="animism">Animism</option>
+                                <option class="sheet-arcane-magic-toggle" value="arcane_magic" data-i18n-list-item="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
+                                <option class="sheet-artifice-toggle" value="artifice" data-i18n-list-item="artifice" data-i18n="artifice">Alchemy</option>
+                                <option class="sheet-divine-magic-toggle" value="divine_magic" data-i18n-list-item="divine_magic" data-i18n="divine_magic">Divine Magic</option>
+                                <option class="sheet-fae-powers-toggle" value="fae_powers" data-i18n-list-item="fae_powers" data-i18n="fae_powers">Fae Powers</option>
+                                <option class="sheet-folk-magic-toggle" value="folk_magic" data-i18n-list-item="folk_magic" data-i18n="folk_magic">Folk Magic</option>
+                                <option class="sheet-magic-toggle" value="magic" data-i18n-list-item="magic" data-i18n="magic">Magic</option>
+                                <option class="sheet-mysticism-toggle" value="mysticism" data-i18n-list-item="mysticism" data-i18n="mysticism">Mysticism</option>
+                                <option class="sheet-psionics-toggle" value="psionics" data-i18n-list-item="psionic" data-i18n="psionics">Psionics</option>
+                                <option class="sheet-psychicpowers-toggle" value="psychic_powers" data-i18n-list-item="psychic_powers" data-i18n="psychic_powers">Psychic Powers</option>
+                                <option class="sheet-sorcery-toggle" value="sorcery" data-i18n-list-item="sorcery" data-i18n="sorcery">Sorcery</option>
+                                <option class="sheet-superpowers-toggle" value="super_powers" data-i18n-list-item="super_powers" data-i18n="super_powers">Super Powers</option>
+                                <option class="sheet-theism-toggle" value="theism" data-i18n-list-item="theism" data-i18n="theism">Theism</option>
+                            </select>
+                        </div>
+                        <div class=" sheet-td sheet-checkbox-width sheet-abilities-armor-penalty-toggle"><input type="checkbox" title="@{$ID_apply_armor_penalty}" name="attr_apply_armor_penalty" value="{{armor_penalty=[[@{armor_penalty}]]}}"><span class="sheet-checkico">U</span></div>
+                        <div class="sheet-td sheet-number-width sheet-rank-toggle">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_rank}" name="attr_rank">
+                                <option value="" selected>-</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name_display" value="@{skill1name}" disabled></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total_display" value="@{skill1total}" disabled> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2}" name="attr_skill2_display" value="@{skill2name}" disabled></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total_display" value="@{skill2total}" disabled> </div>
+                        <div class="sheet-td sheet-ability-prompts sheet-abilities-prompts-toggle">
+                            <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_prompts}" name="attr_prompts">
+                                <option value="" selected>-</option>
+                                <option value="@{prompt_intensity}" data-i18n="intensity">Intensity</option>
+                                <option value="@{casting_components}" data-i18n="components">Components</option>
+                                <option value="@{prompt_intensity} @{casting_components}'}}" data-i18n="both">Both</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span></div>
+                    </div>
+                    <input type="checkbox" class="sheet-hidden sheet-wide-toggle sheet-deep-toggle" name="attr_details" value="1" checked>
+                    <div class="sheet-wide-toggle">
+                        <div class="sheet-edit sheet-flex">
+                            <div class="sheet-flex sheet-rmargin sheet-half-col">
+                                <div><label class="sheet-left" data-i18n="skill1-rolled-id">Skill1 (Rolled) ID</label></div>
+                                <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_skill1_id}" name="attr_skill1_id" value=""></div>
+                            </div>
+                            <div class="sheet-flex sheet-half-col">
+                                <div><label class="sheet-left" data-i18n="skill2-id">Skill2 ID</label></div>
+                                <div class="sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_skill2_id}" name="attr_skill2_id" value=""></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sheet-wide-toggle">
+                        <div class="sheet-edit sheet-flex">
+                            <div class="sheet-third-col sheet-rmargin">
+                                <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
+                                <div class="sheet-auto-expand">
+                                    <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
+                                    <span name="attr_traits"></span>
+                                </div>
+                            </div>
+                            <div class="sheet-grow">
+                                <div><label class="sheet-left" data-i18n="description">Description</label></div>
+                                <div class="sheet-auto-expand">
+                                    <textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea>
+                                    <span name="attr_description"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sheet-play">
+                            <div><span class="sheet-usrnotes sheet-italic" name="attr_traits_display"></span></div>
+                            <div><span class="sheet-usrnotes" name="attr_description"></span></div>
+                        </div>
+                    </div>
+                    <div class="sheet-hidden">
+                        <input type="text" name="attr_skill1name" value="" readonly>
+                        <input type="text" name="attr_skill1total" value="" readonly>
+                        <input type="text" name="attr_skill1roll" value="" readonly>
+                        <input type="text" name="attr_skill2name" value="" readonly>
+                        <input type="text" name="attr_skill2total" value="" readonly>
+                        <!-- <input type="text" name="attr_traits_display" value="" readonly> -->
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<!-- Limitations -->
+<input type='checkbox' class="sheet-hidden sheet-toggle" name='attr_limitations_enabled' value="1"/>
+<div class="sheet-section sheet-toggle">
+    <input type="checkbox" class="sheet-accordion" name="attr_limitations_section_toggle" value="1" checked>
+    <h2 class="sheet-accordion" data-i18n="limitations">Limitations</h2>
+
+    <div class="sheet-accordion">
+        <div class="sheet-flex">
+            <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
+            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
+        </div>
+        <fieldset class="repeating_superpowerlimit">
+            <div class="sheet-flex">
+                <div class="sheet-td sheet-limitation-name sheet-hover-btn">
+                    <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                    <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
+                </div>
+                <div class="sheet-td sheet-grow">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
+                </div>
+            </div>
+        </fieldset>
     </div>
 </div>
     </div>
@@ -3771,7 +4154,8 @@
 <div class="sheet-section">
     <h2 data-i18n="weapons">Weapons</h2>
 
-    <div class="sheet-bmargin sheet-rmargin">
+    <!-- TODO: display_melee_weapons display_ranged_weapons when one to show? -->
+<div class="sheet-bmargin sheet-rmargin">
     <input type='checkbox' class="sheet-hidden sheet-deep-toggle" name='attr_reach_enabled' value="1" checked/>
     <div class="sheet-flex">
         <div class="sheet-th sheet-weapon-name" data-i18n="melee_weapon">Melee Weapon</div>
@@ -4105,7 +4489,9 @@
     </div>
 
     <div class='sheet-character-tab-background'>
-        <div class="sheet-section">
+        <!-- TODO: auto expanded textareas -->
+
+<div class="sheet-section">
     <h2 data-i18n="background">Background</h2>
 
     <div class="sheet-flex sheet-bmargin">
@@ -4149,10 +4535,6 @@
 
     <textarea class="sheet-character-notes sheet-usrnotes" title="@{sheet_notes}" name="attr_sheet_notes"></textarea>
 </div>
-    </div>
-
-    <div class='sheet-character-tab-compact'>
-        
     </div>
 
     <div class='sheet-character-tab-import'>
@@ -4244,6 +4626,40 @@
         {{#notes}}
         <div class="sheet-listitem">{{notes}}</div>
         {{/notes}}
+    </div>
+</rolltemplate>
+<!-- Default Roll Template -->
+<!-- @{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{intensity=@{intensity}}} {{magnitude=@{magnitude}}} {{traits=@{traits}}} @{shaping_traits} {{description=@{description}}} {{page=@{page}}}-->
+<rolltemplate class="sheet-rolltemplate-effect">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{character}}</div>
+            <div class="sheet-name">{{name}}</div>
+        </div>
+        {{#skill1name}}
+        <div class="sheet-subheader">
+            <div>[{{skill1name}} {{skill1total}}%](~{{skill1roll}})</div>
+            {{#skill2name}}
+            <div class="sheet-lmargin sheet-text-right">{{skill2name}} {{skill2total}}%</div>
+            {{/skill2name}}
+        </div>
+        {{/skill1name}}
+        {{#armor_penalty}}
+        {{#^rollTotal() armor_penalty 0}}
+        <div class="sheet-subheader">
+            <div><span data-i18n="armor_penalty">Armor Penalty</span>: {{armor_penalty}}</div>
+        </div>
+        {{/^rollTotal() armor_penalty 0}}
+        {{/armor_penalty}}
+        {{#traits}}
+        <div class="sheet-traits">{{traits}}</div>
+        {{/traits}}
+        {{#allprops() character name skill1name skill1total skill1roll skill2name skill2total armor_penalty traits description}}
+        <div class="sheet-traits">{{key}}: {{value}}</div>
+        {{/allprops() character name skill1name skill1total skill1roll skill2name skill2total armor_penalty traits description}}
+        {{#description}}
+        <div class="sheet-description">{{description}}</div>
+        {{/description}}
     </div>
 </rolltemplate>
 <!-- Hit Table Roll Template -->
@@ -4528,6 +4944,65 @@
         {{/notes}}
     </div>
 </rolltemplate>
+<!-- Movement Roll Template -->
+<rolltemplate class="sheet-rolltemplate-movement">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{character}}</div>
+            <div class="sheet-name">{{name}}</div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="walk">Walk</div>
+                <div class="sheet-th" data-i18n="run">Run</div>
+                <div class="sheet-th" data-i18n="sprint">Sprint</div>
+                <div class="sheet-th" data-i18n="swim">Swim</div>
+            </div>
+            <div class="sheet-tr">
+                <div class="sheet-td">{{walk}}</div>
+                <div class="sheet-td">{{run}}</div>
+                <div class="sheet-td">{{sprint}}</div>
+                {{#rollLess() sink 0}}
+                <div class="sheet-td"><span data-i18n="sink">Sink</span></div>
+                {{/rollLess() sink 0}}
+                {{#rollTotal() sink 0}}
+                <div class="sheet-td"><span data-i18n="float">Float</span></div>
+                {{/rollTotal() sink 0}}
+                {{#rollGreater() sink 0}}
+                <div class="sheet-td">{{swim}}</div>
+                {{/rollGreater() sink 0}}
+            </div>
+        </div>
+
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="climb">Climb</div>
+            </div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="rough"><span class="sheet-pictos sheet-bold">Y</span>={{climb_rough}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="steep">/={{climb_steep}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="sheer">|={{climb_sheer}}</span></div>
+            </div>
+        </div>
+
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="running_jump">Running Jump</div>
+                <div class="sheet-th" data-i18n="standing_jump">Standing Jump</div>
+            </div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="horizontal">_={{running_jump_horizontal}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="vertical">|={{running_jump_vertical}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="horizontal">_={{standing_jump_horizontal}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="vertical">|={{standing_jump_vertical}}</span></div>
+            </div>
+        </div>
+    </div>
+</rolltemplate>
 <!-- Hit Table Roll Template -->
 <!-- @{roll_display}&{template:resolution_pool} {{name=@{name}}} @{name_display} {{roll=[[1d8]]}} -->
 <rolltemplate class="sheet-rolltemplate-resolution_pool">
@@ -4568,7 +5043,7 @@
     <div class="sheet-border">
         <div class="sheet-header">
             <div class="sheet-character">{{character}}</div>
-            <div class="sheet-name">{{name}}({{original}})</div>
+            <div class="sheet-name">{{name}} ({{original}}%)</div>
         </div>
 
         {{#rollGreater() fatigue_skills 0}}
@@ -4613,22 +5088,22 @@
             {{#rollGreater() very_easy_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() very_easy_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() very_easy_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() very_easy_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4636,17 +5111,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll very_easy}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll very_easy}}
             <!-- roll <= total -->
             {{#^rollGreater() roll very_easy}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll very_easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll very_easy_crit}}
             {{/^rollGreater() roll very_easy}}
             {{/rollBetween() roll 6 95}}
@@ -4654,11 +5129,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll very_easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll very_easy_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -4670,22 +5145,22 @@
             {{#rollGreater() easy_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() easy_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() easy_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() easy_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4693,17 +5168,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll easy}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll easy}}
             <!-- roll <= total -->
             {{#^rollGreater() roll easy}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll easy_crit}}
             {{/^rollGreater() roll easy}}
             {{/rollBetween() roll 6 95}}
@@ -4711,11 +5186,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll easy_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -4727,22 +5202,22 @@
             {{#rollGreater() standard_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() standard_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() standard_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() standard_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4750,17 +5225,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll standard}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll standard}}
             <!-- roll <= total -->
             {{#^rollGreater() roll standard}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll standard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll standard_crit}}
             {{/^rollGreater() roll standard}}
             {{/rollBetween() roll 6 95}}
@@ -4768,11 +5243,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll standard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll standard_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -4784,22 +5259,22 @@
             {{#rollGreater() hard_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() hard_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() hard_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() hard_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4807,17 +5282,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll hard}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll hard}}
             <!-- roll <= total -->
             {{#^rollGreater() roll hard}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll hard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll hard_crit}}
             {{/^rollGreater() roll hard}}
             {{/rollBetween() roll 6 95}}
@@ -4825,11 +5300,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll hard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll hard_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -4841,22 +5316,22 @@
             {{#rollGreater() formidable_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() formidable_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() formidable_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() formidable_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4864,17 +5339,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll formidable}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll formidable}}
             <!-- roll <= total -->
             {{#^rollGreater() roll formidable}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll formidable_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll formidable_crit}}
             {{/^rollGreater() roll formidable}}
             {{/rollBetween() roll 6 95}}
@@ -4882,11 +5357,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll formidable_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll formidable_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -4898,22 +5373,22 @@
             {{#rollGreater() herculean_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() herculean_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() herculean_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() herculean_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4921,17 +5396,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll herculean}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll herculean}}
             <!-- roll <= total -->
             {{#^rollGreater() roll herculean}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll herculean_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll herculean_crit}}
             {{/^rollGreater() roll herculean}}
             {{/rollBetween() roll 6 95}}
@@ -4939,11 +5414,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll herculean_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll herculean_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -4958,22 +5433,22 @@
             {{#rollGreater() very_easy_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() very_easy_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() very_easy_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() very_easy_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -4981,17 +5456,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll very_easy}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll very_easy}}
             <!-- roll <= total -->
             {{#^rollGreater() roll very_easy}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll very_easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll very_easy_crit}}
             {{/^rollGreater() roll very_easy}}
             {{/rollBetween() roll 6 95}}
@@ -4999,11 +5474,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll very_easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll very_easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll very_easy_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -5018,22 +5493,22 @@
             {{#rollGreater() easy_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() easy_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() easy_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() easy_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -5041,17 +5516,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll easy}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll easy}}
             <!-- roll <= total -->
             {{#^rollGreater() roll easy}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll easy_crit}}
             {{/^rollGreater() roll easy}}
             {{/rollBetween() roll 6 95}}
@@ -5059,11 +5534,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll easy_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll easy_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll easy_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -5078,22 +5553,22 @@
             {{#rollGreater() standard_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() standard_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() standard_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() standard_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -5101,17 +5576,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll standard}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll standard}}
             <!-- roll <= total -->
             {{#^rollGreater() roll standard}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll standard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll standard_crit}}
             {{/^rollGreater() roll standard}}
             {{/rollBetween() roll 6 95}}
@@ -5119,11 +5594,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll standard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll standard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll standard_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -5138,22 +5613,22 @@
             {{#rollGreater() hard_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() hard_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() hard_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() hard_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -5161,17 +5636,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll hard}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll hard}}
             <!-- roll <= total -->
             {{#^rollGreater() roll hard}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll hard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll hard_crit}}
             {{/^rollGreater() roll hard}}
             {{/rollBetween() roll 6 95}}
@@ -5179,11 +5654,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll hard_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll hard_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll hard_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -5198,22 +5673,22 @@
             {{#rollGreater() formidable_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() formidable_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() formidable_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() formidable_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -5221,17 +5696,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll formidable}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll formidable}}
             <!-- roll <= total -->
             {{#^rollGreater() roll formidable}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll formidable_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll formidable_crit}}
             {{/^rollGreater() roll formidable}}
             {{/rollBetween() roll 6 95}}
@@ -5239,11 +5714,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll formidable_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll formidable_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll formidable_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -5258,22 +5733,22 @@
             {{#rollGreater() herculean_fumble 100}}
             <!-- roll = 100 (fumble) -->
             {{#rollTotal() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollTotal() roll 100}}
             <!-- roll < 100 (fail) -->
             {{#rollLess() roll 100}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 100}}
             {{/rollGreater() herculean_fumble 100}}
             <!-- score <= 100 -->
             {{#rollLess() herculean_fumble 101}}
             <!-- roll 99 to 100 (fumble) -->
             {{#rollGreater() roll 98}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{/rollGreater() roll 98}}
             <!-- roll < 99 (fail) -->
             {{#rollLess() roll 99}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollLess() roll 99}}
             {{/rollLess() herculean_fumble 101}}
             {{/rollGreater() roll 95}}
@@ -5281,17 +5756,17 @@
             {{#rollBetween() roll 6 95}}
             <!-- roll > total (fail) -->
             {{#rollGreater() roll herculean}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="fail">Fail</span>)</div>
             {{/rollGreater() roll herculean}}
             <!-- roll <= total -->
             {{#^rollGreater() roll herculean}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll herculean_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll herculean_crit}}
             {{/^rollGreater() roll herculean}}
             {{/rollBetween() roll 6 95}}
@@ -5299,11 +5774,11 @@
             {{#rollLess() roll 6}}
             <!-- roll > crit (success) -->
             {{#rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="success">Success</span>)</div>
             {{/rollGreater() roll herculean_crit}}
             <!-- roll <= crit (crit) -->
             {{#^rollGreater() roll herculean_crit}}
-            <div class="sheet-value">{{roll}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{roll}} (<span data-i18n="critical">Critical</span>)</div>
             {{/^rollGreater() roll herculean_crit}}
             {{/rollLess() roll 6}}
         </div>
@@ -5342,6 +5817,23 @@ on(`clicked:name_display`, function() {
 });
 
 /* Sheet Type Specific Worker Scripts */
+
+/* TODO: Upgrade logic:
+    char_ageing & training -> other
+    conditions -> repeating_conditions
+    action_points_add_one -> other
+    movement_rate_species_fly -> custom_movement
+    combat_style traits and weapons -> notes
+    skillX_experience -> skillX_other
+    magic_skills, languages, affiliations, linguistics  -> professional
+    pecularities, deps -> passions + set types
+    linguistics_notes -> pro skill notes
+    magic -> abilities
+    locationX_block -> size value?
+    income_* -> income
+    TODO: recalc
+    TODO: hit_table update
+ */
 
 /* Common Autocalc Constants */
 const strGetAttrs = ['str_base', 'str_other', 'str_temp'];
@@ -7710,10 +8202,122 @@ on("change:fatigue", function() {
     });
 });
 
+/* Abilities */
+/* Abilities filter */
+const abilitytypes = ["all","alchemy","animism","arcane_magic","artifice","divine_magic","fae_powers","folk_magic","magic","mysticism","psionics","psychic_powers","sorcery","super_powers","theism","other"];
+abilitytypes.forEach(button => {
+    on(`clicked:abilities_type_filter_${button}`, function() {
+        setAttrs({
+            abilities_type_filter: button
+        });
+    });
+});
+
+const abilityranks = ["all","0","1","2","3","4","5"];
+abilityranks.forEach(button => {
+    on(`clicked:abilities_rank_filter_${button}`, function() {
+        setAttrs({
+            abilities_rank_filter: button
+        });
+    });
+});
+
+on("change:abilities_type_filter change:abilities_rank_filter", function(event) {
+    getSectionIDs("repeating_ability", function(abilityIds) {
+        let abilityGetAttrs = [];
+        abilityIds.forEach(id => {
+            abilityGetAttrs.push(`repeating_ability_${id}_favored`, `repeating_ability_${id}_rank`, `repeating_ability_${id}_type`)
+        });
+        getAttrs(['abilities_type_filter', 'abilities_rank_filter'].concat(abilityGetAttrs), function(v) {
+            let setFilterAttrs = {};
+            abilityIds.forEach(id => {
+                if (
+                    (v['abilities_type_filter'] === v[`repeating_ability_${id}_type`] || v['abilities_type_filter'] === 'all') &&
+                    (v['abilities_rank_filter'] == v[`repeating_ability_${id}_rank`] || v['abilities_rank_filter'] === 'all')
+                ) {
+                    setFilterAttrs[`repeating_ability_${id}_show`] = "1";
+                } else {
+                    setFilterAttrs[`repeating_ability_${id}_show`] = "0";
+                }
+            });
+
+            setAttrs(setFilterAttrs);
+        });
+    });
+});
+
+/* Create a single line formatted version of traits for display in play mode */
+on("change:repeating_ability:traits", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    setAttrs({[`repeating_ability_${id}_traits_display`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+});
+
+/* Automatically setting prompts for certain types */
+on("change:repeating_ability:type", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs(['mysticism_prompts_enabled', 'sorcery_prompts_enabled', 'arcane_magic_prompts_enabled', 'divine_magic_prompts_enabled'], function(v) {
+        console.log(event.newValue)
+        console.log(v['mysticism_prompts_enabled'])
+        console.log(v['sorcery_prompts_enabled'])
+        if (event.newValue === "mysticism" && v['mysticism_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{prompt_intensity}"});
+        } else if (event.newValue === "sorcery" && v['sorcery_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{casting_components}"});
+        } else if (event.newValue === "arcane_magic" && v['arcane_magic_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{prompt_intensity}"});
+        } else if (event.newValue === "divine_magic" && v['divine_magic_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{prompt_intensity}"});
+        } else {
+            setAttrs({[`repeating_ability_${id}_prompts`]: ""});
+        }
+    });
+    setAttrs({[`repeating_ability_${id}_traits_display`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+});
+/* Skill selection logic */
+on("change:repeating_ability:skill1_id", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    let skill1Name = '';
+    let skill1Total = `@{${event.newValue}_total}`;
+    if (!event.newValue) {
+        skill1Total = '';
+    } else if (event.newValue.startsWith('repeating_')) {
+        skill1Name = `@{${event.newValue}_name}`;
+    } else {
+        skill1Name = getTranslationByKey(`${event.newValue}`);
+    }
+    getAttrs(['character_name'], function(v) {
+        let skill1Roll = `${v.character_name}|${event.newValue}_roll`;
+        if (!event.newValue) {
+            skill1Roll = '';
+        }
+        setAttrs({
+            [`repeating_ability_${id}_skill1name`]: skill1Name,
+            [`repeating_ability_${id}_skill1total`]: skill1Total,
+            [`repeating_ability_${id}_skill1roll`]: skill1Roll
+        });
+    });
+});
+on("change:repeating_ability:skill2_id", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    let skill2Name = '';
+    let skill2Total = `@{${event.newValue}_total}`;
+    if (!event.newValue) {
+        skill2Total = '';
+    } else if (event.newValue.startsWith('repeating_')) {
+        skill2Name = `@{${event.newValue}_name}`;
+    } else {
+        skill2Name = getTranslationByKey(`${event.newValue}`);
+    }
+    setAttrs({
+        [`repeating_ability_${id}_skill2name`]: skill2Name,
+        [`repeating_ability_${id}_skill2total`]: skill2Total
+    });
+});
+
 /* Repeating IDs */
 on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
     "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +
-    "change:repeating_trait", function(event) {
+    "change:repeating_superpowerlimit change:repeating_ability", function(event) {
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     setAttrs({[`repeating_${type}_${id}_id`]: `repeating_${type}_${id}`});

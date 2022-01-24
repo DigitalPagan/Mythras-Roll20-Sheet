@@ -1,7 +1,7 @@
 <div class="sheet-mythras-defaults">
     <!-- Header -->
     <div class="sheet-sticky-header">
-        <div class="sheet-space-between sheet-bmargin">
+        <div class="sheet-space-between">
             <div class="sheet-flex">
                 <!-- Roll Options -->
                 <div>
@@ -106,6 +106,21 @@
             <!-- Sheet Settings -->
             {% include 'core/sheet_configurations.html' %}
         </div>
+
+        <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
+        <div class="sheet-character sheet-tmargin">
+            <hr>
+            <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
+            <div class="sheet-character-tabs">
+                <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
+                <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>
+                <!--<button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>-->
+            </div>
+        </div>
     </div>
 
     <!-- Edit Toogle -->
@@ -123,7 +138,9 @@
 
 <!-- Roll Templates -->
 {% include 'roll_templates/default.html' %}
+{% include 'roll_templates/effect.html' %}
 {% include 'roll_templates/hit_location.html' %}
 {% include 'roll_templates/improvement.html' %}
+{% include 'roll_templates/movement.html' %}
 {% include 'roll_templates/resolution_pool.html' %}
 {% include 'roll_templates/skill.html' %}

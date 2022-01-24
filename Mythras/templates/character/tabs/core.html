@@ -1,11 +1,137 @@
+<!-- TODO: configs and help as pop-outs -->
+<!-- TODO: collapsing sections for compact views -->
+<!-- TODO: expand/collapse all buttons -->
+<!-- TODO: Special skill buttons -->
+<!-- TODO: Keep Combat style traits and weapons or move to desc -->
+<!-- TODO: Trim ENC and Fatigue down to condition entry -->
+<!-- TODO: Move avg size to chars -->
+
 <!-- Core Tab -->
-<!-- Spirit Toggle -->
 <div class='sheet-character-tab-core'>
+    <!-- Character Header -->
+    <div class="sheet-flex">
+        <!-- Info Section -->
+        <div class="sheet-section sheet-info">
+            <!-- Info 1st Row -->
+            <div class="sheet-flex">
+                <div class="sheet-info-box sheet-info-name">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{character_name}" name="attr_character_name">
+                    <label class="sheet-under" data-i18n="name">Name</label>
+                </div>
+                <div class="sheet-info-box sheet-info-species">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{species}" name="attr_species">
+                    <label class="sheet-under" data-i18n="{{  species_name }}">Species</label>
+                </div>
+                <div class="sheet-info-box sheet-info-culture">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{culture}" name="attr_culture">
+                    <label class="sheet-under"><span data-i18n="culture">Culture</span></label>
+                </div>
+                <div class="sheet-info-box sheet-info-career">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{career}" name="attr_career">
+                    <label class="sheet-under" data-i18n="{{ career_name }}">Career</label>
+                </div>
+            </div>
+            <!-- Info 2nd Row -->
+            <div class="sheet-flex">
+                <div class="sheet-info-box sheet-info-homeland">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{homeland}" name="attr_homeland">
+                    <label class="sheet-under" data-i18n="homeland">Homeland</label>
+                </div>
+                <div class="sheet-info-box sheet-info-social-class">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{social_class}" name="attr_social_class">
+                    <label class="sheet-under" data-i18n="social-class">Name</label>
+                </div>
+                <div class="sheet-info-box sheet-info-age">
+                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{age}" name="attr_age" value="0">
+                    <label class="sheet-under" data-i18n="age">Age</label>
+                </div>
+                <div class="sheet-info-box sheet-info-gender">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{gender}" name="attr_gender">
+                    <label class="sheet-under" data-i18n="gender">Gender</label>
+                </div>
+                <div class="sheet-info-box sheet-info-frame">
+                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{frame}" name="attr_frame">
+                    <label class="sheet-under" data-i18n="frame">Gender</label>
+                </div>
+                <div class="sheet-info-box sheet-info-height">
+                    <input type="number" style="padding-right: 25px" class="sheet-usrinput sheet-full-width" title="@{height}" name="attr_height" value="178">
+                    <span class="sheet-input-unit" data-i18n="centimetres-short">cm</span>
+                    <label class="sheet-under" data-i18n="height-bugfix-id">Height</label>
+                </div>
+                <div class="sheet-info-box sheet-info-weight">
+                    <input type="number" style="padding-right: 20px" class="sheet-usrinput sheet-full-width" title="@{weight}" name="attr_weight" value="88">
+                    <span class="sheet-input-unit" data-i18n="kilograms-short">kg</span>
+                    <label class="sheet-under" data-i18n="weight">Weight</label>
+                </div>
+                <input type="checkbox" class="sheet-toggle sheet-hidden" name="attr_luck_points_rank" value="1">
+                <div class="sheet-info-box sheet-toggle sheet-info-rank">
+                    <input type="number" class="sheet-usrinput sheet-full-width" title="@{rank}" name="attr_rank" value="0">
+                    <label class="sheet-under" data-i18n="rank">Rank</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header 2nd Column -->
+        <div class="sheet-logo">
+            <!-- Logo -->
+            <div>
+                {% if display_name == 'Mythras' %}<img src="https://i.imgur.com/EzQDmms.png" alt="Mythras">{% endif %}
+                {% if display_name == 'M-Space' %}<img src="https://i.imgur.com/5uPy3QU.jpg" alt="M-space">{% endif %}
+                {% if display_name == 'Odd Soot' %}<img src="https://i.imgur.com/35dOQix.jpg" alt="Odd Soot">{% endif %}
+            </div>
+            <!-- Experience Rolls Section -->
+            <div class="sheet-space-between">
+                <label class="sheet-left" data-i18n="experience-rolls">Exp Rolls</label>
+                <input type="number" class="sheet-usrinput sheet-grow" title="@{experience_rolls}" name="attr_experience_rolls" value="0">
+            </div>
+        </div>
+    </div>
+    <!-- Traits, Creature Abilities & Gifts -->
+    <!-- <div class="sheet-section">
+        <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
+        <h2 class="sheet-accordion" data-i18n="traits_creature_abilities_gifts_etc">Traits, Creature Abilities, Gifts, etc</h2>
+
+        <div class="sheet-accordion">
+            <div class="sheet-flex">
+                <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
+                <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
+                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
+            </div>
+            <fieldset class="repeating_trait">
+                <div class="sheet-flex">
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
+                    </div>
+                    <div class="sheet-td">
+                        <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
+                    </div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div> -->
+
     <!-- Top Stats -->
     <div class="sheet-flex">
         <!-- Characteristics -->
         <div class=" sheet-section sheet-rmargin">
-            <h2 data-i18n="characteristics">Characteristics</h2>
+            <div class="sheet-space-between">
+                <div><h2 data-i18n="characteristics">Characteristics</h2></div>
+                <div class="sheet-edit sheet-text-right">
+                    <input type="checkbox" title="@{int_config}" name="attr_int_config" value="1"><span class="sheet-checkico">y</span>
+                </div>
+            </div>
+
+            <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_int_config" value="1">
+            <div class="sheet-toggle">
+                <label class="sheet-left sheet-lite" data-i18n="intellect">Intellect</label>
+                <select class="sheet-auto-width sheet-usrinput" name="attr_int_type">
+                    <option value="int-u" data-i18n="int-u" selected>INT</option>
+                    <option value="ins-u" data-i18n="ins-u">INS</option>
+                </select>
+            </div>
 
             <div class="sheet-table sheet-full-width">
                 <div class="sheet-tr sheet-hl">
@@ -81,7 +207,6 @@
                 <div class="sheet-th"><div class="sheet-number-width" data-i18n="max">Max</div></div>
                 <div class="sheet-th sheet-edit"><div class="sheet-checkbox-width sheet-help sheet-pictos" data-i18n-title="advanced_configuration">y</div></div>
             </div>
-            <input type="checkbox" class="sheet-spirit-toggle sheet-hidden" name="attr_spirit" value="1">
             <div data-i18n-list="attribute-order">
                 <!-- Action Points -->
                 <div class="sheet-flex sheet-hl" data-i18n-list-item="action_points">
@@ -225,15 +350,28 @@
                 </div>
                 <!-- Movement Rate -->
                 <div class="sheet-hl" data-i18n-list-item="move_rate">
-                    <div class="sheet-flex">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="move_rate">Move Rate</label></div>
+                    <input type="hidden" class="sheet-movement-calc" name="attr_movement_rate_calc" value="standard">
+                    <div class="sheet-flex sheet-standard-movement">
+                        <div class="sheet-td sheet-grow sheet-text-left"><button type="roll" class="sheet-link sheet-link-label sheet-link-label-left" title="%{movement}" name="roll_movement" value="{{'@{roll_display}&{template:movement} @{name_display} {{name=^{movement}}} {{walk=@{movement_rate}^{meters-abrv}}} {{run=[[ceil((@{movement_rate}*3)+(floor(@{athletics_total}/25)/2)+@{armor_penalty})]]^{meters-abrv}}} {{sprint=[[(@{movement_rate}*5)+floor(@{athletics_total}/25)+@{armor_penalty}]]^{meters-abrv}}} {{climb_rough=[[ceil(@{movement_rate}+ceil(@{armor_penalty}/2))]]^{meters-abrv}}} {{climb_steep=[[@{movement_rate}+@{armor_penalty}]]^{meters-abrv}}} {{climb_sheer=[[@{movement_rate}+(@{armor_penalty}*2)]]^{meters-abrv}}} {{running_jump_horizontal=[[ceil(((@{height}/100)*2)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]]^{meters-abrv}}} {{running_jump_vertical=[[ceil((((@{height}/100)/2)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]]^{centimetres-short}}} {{standing_jump_horizontal=[[ceil((@{height}/100)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]]^{meters-abrv}}} {{standing_jump_vertical=[[ceil((((@{height}/100)/4)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]]^{centimetres-short}}} {{swim=[[@{movement_rate}+(floor(@{swim_total}/20))]]^{meters-abrv}}} {{sink=[[ceil((@{movement_rate}+(floor(@{swim_total}/20)))/2)+@{armor_penalty}]]}}'}}" data-i18n="movement">Movement</button></div>
                         <div class="sheet-td sheet-edit"><input type="number" class=" sheet-number-width" title="@{movement_rate_species}" name="attr_movement_rate_species" value="6"></div>
                         <div class="sheet-td sheet-edit"><input type="number" class="sheet-usrinput sheet-number-width" title="@{movement_rate_other}" name="attr_movement_rate_other" value="0"></div>
                         <div class="sheet-td sheet-play"><input type="number" class="sheet-usrinput sheet-number-width" title="@{movement_rate_temp}" name="attr_movement_rate_temp" value="0"></div>
                         <div class="sheet-td sheet-play"><div class="sheet-number-width"></div></div>
                         <div class="sheet-td sheet-play"><span class="sheet-invisible">/</span></div>
                         <div class="sheet-td sheet-text-right"><input type="number" class="sheet-impvalue sheet-number-width" title="@{movement_rate}" name="attr_movement_rate" value="6" readonly></div>
-                        <div class="sheet-td sheet-edit"><div class="sheet-checkbox-width"></div></div>
+                        <div class="sheet-td sheet-edit"><input type="checkbox" title="@{movement_rate_details}" name="attr_movement_rate_details" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <div class="sheet-flex sheet-custom-movement">
+                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="movement">Movement</label></div>
+                        <div class="sheet-td sheet-custom-movement-width sheet-text-left"><input type="text" class="sheet-full-width sheet-text-right sheet-usrinput" title="@{custom_movement}" name="attr_custom_movement"></div>
+                        <div class="sheet-td sheet-edit"><input type="checkbox" title="@{movement_rate_details}" name="attr_movement_rate_details" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_movement_rate_details" value="1">
+                    <div class="sheet-edit sheet-toggle">
+                        <select class="sheet-usrinput sheet-full-width" name="attr_movement_rate_calc">
+                            <option data-i18n="standard_with_calculations" value="standard" selected>Standard with calculations</option>
+                            <option data-i18n="custom" value="custom">Custom</option>
+                        </select>
                     </div>
                 </div>
                 <!-- Power Points -->
@@ -352,7 +490,7 @@
             </div>
             <div class="sheet-table">
                 <div class="sheet-tr">
-                    <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_table_verbose}, %{hit_table}, %{hit_table_low}, %{hit_table_high}" name="roll_hit_location_verbose" value="{{'@{roll_display}&{template:hit_location} {{name=^{hit_table}}} @{name_display} {{roll_low=[[1d10]]}} {{roll=[[1d20]]}} {{roll_high=[[1d10+10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}"><span data-i18n="roll">Roll</span></button></div>
+                    <div class="sheet-th"><button type="roll" class="sheet-link sheet-link-label" title="%{hit_location_verbose}, %{hit_location}, %{hit_location_low}, %{hit_location_high}" name="roll_hit_location_verbose" value="{{'@{roll_display}&{template:hit_location} {{name=^{hit_table}}} @{name_display} {{roll_low=[[1d10]]}} {{roll=[[1d20]]}} {{roll_high=[[1d10+10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}"><span data-i18n="roll">Roll</span></button></div>
                     <div class="sheet-hidden">
                         <button type="roll" name="roll_hit_location" value="{{'@{roll_display}&{template:hit_location} {{name=^{hit_table}(d20)}} @{name_display} {{roll=[[1d20]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}"></button>
                         <button type="roll" name="roll_hit_location_low" value="{{'@{roll_display}&{template:hit_location} {{name=^{hit_table}(d10)}} @{name_display} {{roll=[[1d10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}"></button>
@@ -609,18 +747,6 @@
             </div>
 
             <input type="hidden" name="attr_fatigue_max" value="9">
-        </div>
-    </div>
-
-    <!-- Movement -->
-    <div style="padding-bottom: 0;" class="sheet-section sheet-play sheet-flex-centered">
-        <h2 data-i18n="movement">Movement</h2>
-        <div class="sheet-grow sheet-space-evenly">
-            <button type="roll" class="sheet-nodie" title="%{run}" name="roll_run" value="{{'@{roll_display}&{template:default} {{name=^{run}/^{sprint}}} @{name_display} {{^{run}=[[ceil((@{movement_rate}*3)+(floor(@{athletics_total}/25)/2)+@{armor_penalty})]] ^{meters}}} {{^{sprint}=[[(@{movement_rate}*5)+floor(@{athletics_total}/25)+@{armor_penalty}]] ^{meters}}}'}}"><span data-i18n="run">Run</span>/<span data-i18n="sprint">Sprint</span></button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{swim}" name="roll_swim" data-i18n="swim" value="{{'@{roll_display}&{template:default} {{name=^{swim}}} @{name_display} {{^{speed}=[[@{movement_rate}+(floor(@{swim_total}/20))]] ^{meters}}} {{^{swim}/^{float}/^{sink}=[[ceil((@{movement_rate}+(floor(@{swim_total}/20)))/2)+@{armor_penalty}]]}}  {{notes=^{swim-notes}}}'}}">Swim</button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{running_jump}" name="roll_running_jump" data-i18n="running_jump" value="{{'@{roll_display}&{template:default} {{name=^{running_jump}}} @{name_display} {{^{horizontal}=[[ceil(((@{height}/100)*2)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]] ^{meters}}} {{^{vertical}=[[ceil((((@{height}/100)/2)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]] ^{centimetres-short}}} {{notes=Minium one step}}'}}">Running Jump</button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{standing_jump}" name="roll_standing_jump" data-i18n="standing_jump" value="{{'@{roll_display}&{template:default} {{name=^{standing_jump}}} @{name_display} {{^{horizontal}=[[ceil((@{height}/100)+(floor(@{athletics_total}/20))+(@{armor_penalty}/2))]] ^{meters}}} {{^{vertical}=[[ceil((((@{height}/100)/4)+(floor(@{athletics_total}/20)*.2)+(@{armor_penalty}/2))*100)]] ^{centimetres-short}}} {{notes=Minium one step}}'}}">Standing Jump</button>&nbsp;
-            <button type="roll" class="sheet-nodie" title="%{climb}" name="roll_climb" data-i18n="climb" value="{{'@{roll_display}&{template:default} {{name=^{climb}}} @{name_display} {{^{rough}=[[ceil(@{movement_rate}+ceil(@{armor_penalty}/2))]] ^{meters}}} {{^{steep}=[[@{movement_rate}+@{armor_penalty}]] ^{meters}}} {{^{sheer}=[[@{movement_rate}+(@{armor_penalty}*2)]] ^{meters}}}'}}">Climb</button>
         </div>
     </div>
 
@@ -2435,7 +2561,7 @@
                                 <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0">
                             </div>
                             <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0" readonly>
+                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="22" readonly>
                             </div>
                             <div class="sheet-td">
                                 <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span>
@@ -2443,7 +2569,7 @@
                         </div>
                         <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_details" value="1" checked>
                         <div class="sheet-toggle">
-                            <div class="sheet-flex">
+                            <!--<div class="sheet-flex">
                                 <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
                                 <div class="sheet-edit sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_traits}" name="attr_traits"></div>
                                 <div class="sheet-play"><span class="sheet-usrnotes" name="attr_traits"></span></div>
@@ -2452,7 +2578,7 @@
                                 <div><label class="sheet-left" data-i18n="weapons">Weapons</label></div>
                                 <div class="sheet-edit sheet-grow"><input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_weapons}" name="attr_weapons"></div>
                                 <div class="sheet-play"><span class="sheet-usrnotes" name="attr_weapons"></span></div>
-                            </div>
+                            </div>-->
                             <div class="sheet-edit"><textarea class="sheet-full-width sheet-skillnotes" title="@{$ID_notes}" name="attr_notes"></textarea></div>
                             <div class="sheet-play"><span class="sheet-skillnotes" name="attr_notes"></span></div>
                         </div>

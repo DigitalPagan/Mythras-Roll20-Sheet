@@ -4,7 +4,7 @@
     <div class="sheet-border">
         <div class="sheet-header">
             <div class="sheet-character">{{'{{character}}'}}</div>
-            <div class="sheet-name">{{'{{name}}'}}({{'{{original}}'}})</div>
+            <div class="sheet-name">{{'{{name}}'}} ({{'{{original}}'}}%)</div>
         </div>
 
         {{'{{#rollGreater() fatigue_skills 0}}'}}
@@ -49,22 +49,22 @@
             {{'{{#rollGreater() very_easy_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() very_easy_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() very_easy_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() very_easy_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -72,17 +72,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll very_easy}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll very_easy}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll very_easy}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll very_easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll very_easy_crit}}'}}
             {{'{{/^rollGreater() roll very_easy}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -90,11 +90,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll very_easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll very_easy_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -106,22 +106,22 @@
             {{'{{#rollGreater() easy_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() easy_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() easy_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() easy_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -129,17 +129,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll easy}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll easy}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll easy}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll easy_crit}}'}}
             {{'{{/^rollGreater() roll easy}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -147,11 +147,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll easy_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -163,22 +163,22 @@
             {{'{{#rollGreater() standard_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() standard_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() standard_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() standard_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -186,17 +186,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll standard}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll standard}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll standard}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll standard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll standard_crit}}'}}
             {{'{{/^rollGreater() roll standard}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -204,11 +204,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll standard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll standard_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -220,22 +220,22 @@
             {{'{{#rollGreater() hard_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() hard_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() hard_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() hard_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -243,17 +243,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll hard}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll hard}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll hard}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll hard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll hard_crit}}'}}
             {{'{{/^rollGreater() roll hard}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -261,11 +261,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll hard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll hard_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -277,22 +277,22 @@
             {{'{{#rollGreater() formidable_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() formidable_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() formidable_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() formidable_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -300,17 +300,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll formidable}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll formidable}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll formidable}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll formidable_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll formidable_crit}}'}}
             {{'{{/^rollGreater() roll formidable}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -318,11 +318,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll formidable_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll formidable_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -334,22 +334,22 @@
             {{'{{#rollGreater() herculean_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() herculean_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() herculean_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() herculean_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -357,17 +357,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll herculean}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll herculean}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll herculean}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll herculean_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll herculean_crit}}'}}
             {{'{{/^rollGreater() roll herculean}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -375,11 +375,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll herculean_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll herculean_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -394,22 +394,22 @@
             {{'{{#rollGreater() very_easy_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() very_easy_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() very_easy_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() very_easy_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -417,17 +417,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll very_easy}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll very_easy}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll very_easy}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll very_easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll very_easy_crit}}'}}
             {{'{{/^rollGreater() roll very_easy}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -435,11 +435,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll very_easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll very_easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll very_easy_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -454,22 +454,22 @@
             {{'{{#rollGreater() easy_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() easy_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() easy_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() easy_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -477,17 +477,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll easy}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll easy}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll easy}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll easy_crit}}'}}
             {{'{{/^rollGreater() roll easy}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -495,11 +495,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll easy_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll easy_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll easy_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -514,22 +514,22 @@
             {{'{{#rollGreater() standard_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() standard_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() standard_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() standard_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -537,17 +537,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll standard}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll standard}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll standard}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll standard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll standard_crit}}'}}
             {{'{{/^rollGreater() roll standard}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -555,11 +555,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll standard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll standard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll standard_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -574,22 +574,22 @@
             {{'{{#rollGreater() hard_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() hard_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() hard_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() hard_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -597,17 +597,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll hard}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll hard}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll hard}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll hard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll hard_crit}}'}}
             {{'{{/^rollGreater() roll hard}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -615,11 +615,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll hard_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll hard_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll hard_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -634,22 +634,22 @@
             {{'{{#rollGreater() formidable_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() formidable_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() formidable_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() formidable_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -657,17 +657,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll formidable}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll formidable}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll formidable}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll formidable_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll formidable_crit}}'}}
             {{'{{/^rollGreater() roll formidable}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -675,11 +675,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll formidable_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll formidable_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll formidable_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>
@@ -694,22 +694,22 @@
             {{'{{#rollGreater() herculean_fumble 100}}'}}
             <!-- roll = 100 (fumble) -->
             {{'{{#rollTotal() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollTotal() roll 100}}'}}
             <!-- roll < 100 (fail) -->
             {{'{{#rollLess() roll 100}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 100}}'}}
             {{'{{/rollGreater() herculean_fumble 100}}'}}
             <!-- score <= 100 -->
             {{'{{#rollLess() herculean_fumble 101}}'}}
             <!-- roll 99 to 100 (fumble) -->
             {{'{{#rollGreater() roll 98}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fumble">Fumble</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fumble">Fumble</span>)</div>
             {{'{{/rollGreater() roll 98}}'}}
             <!-- roll < 99 (fail) -->
             {{'{{#rollLess() roll 99}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollLess() roll 99}}'}}
             {{'{{/rollLess() herculean_fumble 101}}'}}
             {{'{{/rollGreater() roll 95}}'}}
@@ -717,17 +717,17 @@
             {{'{{#rollBetween() roll 6 95}}'}}
             <!-- roll > total (fail) -->
             {{'{{#rollGreater() roll herculean}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="fail">Fail</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="fail">Fail</span>)</div>
             {{'{{/rollGreater() roll herculean}}'}}
             <!-- roll <= total -->
             {{'{{#^rollGreater() roll herculean}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll herculean_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll herculean_crit}}'}}
             {{'{{/^rollGreater() roll herculean}}'}}
             {{'{{/rollBetween() roll 6 95}}'}}
@@ -735,11 +735,11 @@
             {{'{{#rollLess() roll 6}}'}}
             <!-- roll > crit (success) -->
             {{'{{#rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="success">Success</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="success">Success</span>)</div>
             {{'{{/rollGreater() roll herculean_crit}}'}}
             <!-- roll <= crit (crit) -->
             {{'{{#^rollGreater() roll herculean_crit}}'}}
-            <div class="sheet-value">{{'{{roll}}'}}(<span data-i18n="critical">Critical</span>)</div>
+            <div class="sheet-value">{{'{{roll}}'}} (<span data-i18n="critical">Critical</span>)</div>
             {{'{{/^rollGreater() roll herculean_crit}}'}}
             {{'{{/rollLess() roll 6}}'}}
         </div>

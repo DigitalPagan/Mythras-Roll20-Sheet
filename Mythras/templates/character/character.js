@@ -1,3 +1,20 @@
+/* TODO: Upgrade logic:
+    char_ageing & training -> other
+    conditions -> repeating_conditions
+    action_points_add_one -> other
+    movement_rate_species_fly -> custom_movement
+    combat_style traits and weapons -> notes
+    skillX_experience -> skillX_other
+    magic_skills, languages, affiliations, linguistics  -> professional
+    pecularities, deps -> passions + set types
+    linguistics_notes -> pro skill notes
+    magic -> abilities
+    locationX_block -> size value?
+    income_* -> income
+    TODO: recalc
+    TODO: hit_table update
+ */
+
 /* Common Autocalc Constants */
 const strGetAttrs = ['str_base', 'str_other', 'str_temp'];
 const dexGetAttrs = ['dex_base', 'dex_other', 'dex_temp'];
@@ -2365,10 +2382,122 @@ on("change:fatigue", function() {
     });
 });
 
+/* Abilities */
+/* Abilities filter */
+const abilitytypes = ["all","alchemy","animism","arcane_magic","artifice","divine_magic","fae_powers","folk_magic","magic","mysticism","psionics","psychic_powers","sorcery","super_powers","theism","other"];
+abilitytypes.forEach(button => {
+    on(`clicked:abilities_type_filter_${button}`, function() {
+        setAttrs({
+            abilities_type_filter: button
+        });
+    });
+});
+
+const abilityranks = ["all","0","1","2","3","4","5"];
+abilityranks.forEach(button => {
+    on(`clicked:abilities_rank_filter_${button}`, function() {
+        setAttrs({
+            abilities_rank_filter: button
+        });
+    });
+});
+
+on("change:abilities_type_filter change:abilities_rank_filter", function(event) {
+    getSectionIDs("repeating_ability", function(abilityIds) {
+        let abilityGetAttrs = [];
+        abilityIds.forEach(id => {
+            abilityGetAttrs.push(`repeating_ability_${id}_favored`, `repeating_ability_${id}_rank`, `repeating_ability_${id}_type`)
+        });
+        getAttrs(['abilities_type_filter', 'abilities_rank_filter'].concat(abilityGetAttrs), function(v) {
+            let setFilterAttrs = {};
+            abilityIds.forEach(id => {
+                if (
+                    (v['abilities_type_filter'] === v[`repeating_ability_${id}_type`] || v['abilities_type_filter'] === 'all') &&
+                    (v['abilities_rank_filter'] == v[`repeating_ability_${id}_rank`] || v['abilities_rank_filter'] === 'all')
+                ) {
+                    setFilterAttrs[`repeating_ability_${id}_show`] = "1";
+                } else {
+                    setFilterAttrs[`repeating_ability_${id}_show`] = "0";
+                }
+            });
+
+            setAttrs(setFilterAttrs);
+        });
+    });
+});
+
+/* Create a single line formatted version of traits for display in play mode */
+on("change:repeating_ability:traits", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    setAttrs({[`repeating_ability_${id}_traits_display`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+});
+
+/* Automatically setting prompts for certain types */
+on("change:repeating_ability:type", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs(['mysticism_prompts_enabled', 'sorcery_prompts_enabled', 'arcane_magic_prompts_enabled', 'divine_magic_prompts_enabled'], function(v) {
+        console.log(event.newValue)
+        console.log(v['mysticism_prompts_enabled'])
+        console.log(v['sorcery_prompts_enabled'])
+        if (event.newValue === "mysticism" && v['mysticism_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{prompt_intensity}"});
+        } else if (event.newValue === "sorcery" && v['sorcery_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{casting_components}"});
+        } else if (event.newValue === "arcane_magic" && v['arcane_magic_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{prompt_intensity}"});
+        } else if (event.newValue === "divine_magic" && v['divine_magic_prompts_enabled'] === '1') {
+            setAttrs({[`repeating_ability_${id}_prompts`]: "@{prompt_intensity}"});
+        } else {
+            setAttrs({[`repeating_ability_${id}_prompts`]: ""});
+        }
+    });
+    setAttrs({[`repeating_ability_${id}_traits_display`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+});
+/* Skill selection logic */
+on("change:repeating_ability:skill1_id", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    let skill1Name = '';
+    let skill1Total = `@{${event.newValue}_total}`;
+    if (!event.newValue) {
+        skill1Total = '';
+    } else if (event.newValue.startsWith('repeating_')) {
+        skill1Name = `@{${event.newValue}_name}`;
+    } else {
+        skill1Name = getTranslationByKey(`${event.newValue}`);
+    }
+    getAttrs(['character_name'], function(v) {
+        let skill1Roll = `${v.character_name}|${event.newValue}_roll`;
+        if (!event.newValue) {
+            skill1Roll = '';
+        }
+        setAttrs({
+            [`repeating_ability_${id}_skill1name`]: skill1Name,
+            [`repeating_ability_${id}_skill1total`]: skill1Total,
+            [`repeating_ability_${id}_skill1roll`]: skill1Roll
+        });
+    });
+});
+on("change:repeating_ability:skill2_id", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    let skill2Name = '';
+    let skill2Total = `@{${event.newValue}_total}`;
+    if (!event.newValue) {
+        skill2Total = '';
+    } else if (event.newValue.startsWith('repeating_')) {
+        skill2Name = `@{${event.newValue}_name}`;
+    } else {
+        skill2Name = getTranslationByKey(`${event.newValue}`);
+    }
+    setAttrs({
+        [`repeating_ability_${id}_skill2name`]: skill2Name,
+        [`repeating_ability_${id}_skill2total`]: skill2Total
+    });
+});
+
 /* Repeating IDs */
 on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
     "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +
-    "change:repeating_trait", function(event) {
+    "change:repeating_superpowerlimit change:repeating_ability", function(event) {
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     setAttrs({[`repeating_${type}_${id}_id`]: `repeating_${type}_${id}`});

@@ -63,7 +63,7 @@ button.recontrol_edit {
 }
 
 /* Make repeating section inline-block for display modes */
-fieldset.sheet-inlined~.repcontainer[data-groupname^="repeating_"] > .repitem {
+fieldset.sheet-inline~.repcontainer > .repitem {
     display: inline-block;
 }
 
@@ -76,8 +76,16 @@ div.sheet-sticky-header {
     background: white;
     border-bottom: 2px solid black;
     margin-bottom: 5px;
+    width: 100%;
+    padding: 0 2px 5px;
+    /*padding: 2px;
+    background: black;
+    color: lightgray;*/
 }
 
+div.sheet-inline-block {
+    display: inline-block;
+}
 div.sheet-flex {
     display: flex;
 }
@@ -121,6 +129,7 @@ div.sheet-hl:hover {
 
 hr {
     margin: 5px 0;
+    border-top: 2px solid black;
 }
 
 /* Display Toggles */
@@ -179,6 +188,9 @@ div.sheet-flex-col {
 }
 .sheet-bmargin {
     margin-bottom: 5px;
+}
+.sheet-tmargin {
+    margin-top: 5px;
 }
 .sheet-rmargin {
     margin-right: 5px !important;
@@ -698,11 +710,45 @@ input[type="checkbox"]:checked + span.sheet-checkradio
     background-image: radial-gradient(black 0%, transparent 75%);
 }
 
-textarea {
+.sheet-auto-expand {
+    position: relative;
+    cursor: text;
+    word-wrap: break-word;
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 1.1em;
+}
+.sheet-auto-expand span {
+    visibility: hidden;
+    white-space: pre-wrap;
+    display: block;
+}
+.largedialog .sheet-auto-expand textarea {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin: 0;
+    overflow: auto;
+    resize: none;
+    min-height: 4em;
+    height: 100%;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    padding: inherit;
+    text-align: inherit;
+    text-transform: inherit;
+}
+
+.largedialog textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
+    height: 4em;
 }
 
 select {
@@ -884,5 +930,6 @@ input.sheet-firearms-toggle:not(:checked) + div .sheet-firearm-trait {
 {% include 'roll_templates/effect.css' %}
 {% include 'roll_templates/hit_location.css' %}
 {% include 'roll_templates/improvement.css' %}
+{% include 'roll_templates/movement.css' %}
 {% include 'roll_templates/resolution_pool.css' %}
 {% include 'roll_templates/skill.css' %}

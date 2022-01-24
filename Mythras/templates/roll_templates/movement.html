@@ -1,0 +1,59 @@
+<!-- Movement Roll Template -->
+<rolltemplate class="sheet-rolltemplate-movement">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}</div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="walk">Walk</div>
+                <div class="sheet-th" data-i18n="run">Run</div>
+                <div class="sheet-th" data-i18n="sprint">Sprint</div>
+                <div class="sheet-th" data-i18n="swim">Swim</div>
+            </div>
+            <div class="sheet-tr">
+                <div class="sheet-td">{{'{{walk}}'}}</div>
+                <div class="sheet-td">{{'{{run}}'}}</div>
+                <div class="sheet-td">{{'{{sprint}}'}}</div>
+                {{'{{#rollLess() sink 0}}'}}
+                <div class="sheet-td"><span data-i18n="sink">Sink</span></div>
+                {{'{{/rollLess() sink 0}}'}}
+                {{'{{#rollTotal() sink 0}}'}}
+                <div class="sheet-td"><span data-i18n="float">Float</span></div>
+                {{'{{/rollTotal() sink 0}}'}}
+                {{'{{#rollGreater() sink 0}}'}}
+                <div class="sheet-td">{{'{{swim}}'}}</div>
+                {{'{{/rollGreater() sink 0}}'}}
+            </div>
+        </div>
+
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="climb">Climb</div>
+            </div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="rough"><span class="sheet-pictos sheet-bold">Y</span>={{'{{climb_rough}}'}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="steep">/={{'{{climb_steep}}'}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="sheer">|={{'{{climb_sheer}}'}}</span></div>
+            </div>
+        </div>
+
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="running_jump">Running Jump</div>
+                <div class="sheet-th" data-i18n="standing_jump">Standing Jump</div>
+            </div>
+        </div>
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="horizontal">_={{'{{running_jump_horizontal}}'}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="vertical">|={{'{{running_jump_vertical}}'}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="horizontal">_={{'{{standing_jump_horizontal}}'}}</span></div>
+                <div class="sheet-td"><span class="sheet-help" data-i18n-title="vertical">|={{'{{standing_jump_vertical}}'}}</span></div>
+            </div>
+        </div>
+    </div>
+</rolltemplate>
