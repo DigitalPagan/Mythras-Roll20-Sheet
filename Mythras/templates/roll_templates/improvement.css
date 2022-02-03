@@ -2,6 +2,8 @@
 .sheet-rolltemplate-improvement div.sheet-border {
     border: 2px solid darkmagenta;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-improvement div.sheet-header {
     background: darkmagenta;
@@ -12,7 +14,7 @@
     text-align: center;
 }
 .sheet-rolltemplate-improvement div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }

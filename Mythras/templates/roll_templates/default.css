@@ -2,6 +2,8 @@
 .sheet-rolltemplate-default div.sheet-border {
     border: 2px solid black;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-default div.sheet-border.sheet-red {
     border: 2px solid firebrick;
@@ -54,7 +56,7 @@
     text-align: center;
 }
 .sheet-rolltemplate-default div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }

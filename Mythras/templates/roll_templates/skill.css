@@ -2,6 +2,8 @@
 .sheet-rolltemplate-skill div.sheet-border {
     border: 2px solid dimgray;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-skill div.sheet-header {
     background: dimgray;
@@ -12,7 +14,7 @@
     text-align: center;
 }
 .sheet-rolltemplate-skill div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -36,6 +38,10 @@
     padding: 2px 1px 0;
     background: black;
     color: lightgray;
+}
+.sheet-rolltemplate-skill span.sheet-result {
+    font-family: "Pictos";
+    cursor: help;
 }
 
 .sheet-rolltemplate-skill div.sheet-listitem {
@@ -94,6 +100,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-skill .inlinerollresult.fullcrit {
     border: none;
@@ -112,4 +119,22 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+}
+.sheet-rolltemplate-skill a {
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em !important;
+    border: solid 1px gray !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+    padding: 0 2px 0 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.sheet-rolltemplate-skill a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+    text-shadow: none;
 }

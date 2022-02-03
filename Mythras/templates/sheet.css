@@ -1,23 +1,25 @@
 /* =Generic Styles reused over the sheet= */
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Sorts+Mill+Goudy&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 /* Sheet Defaults*/
 div.sheet-mythras-defaults {
-    font-family: "Arial", sans-serif;
-    font-size: 1em;
+    font-family: 'Merriweather', serif;
+    font-size: .95em;
     line-height: 1.25em;
     box-sizing: border-box;
 }
 
 h1 {
-    font-size: 1.5em;
-    font-family: Palatino, serif;
+    font-size: 1.75em;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: bold;
     border-bottom: 1px solid black;
     margin-bottom: 5px;
 
 }
 h2 {
-    font-size: 1.25em;
-    font-family: Palatino, serif;
+    font-size: 1.5em;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: bold;
     padding: 0;
     margin: 0;
@@ -26,7 +28,7 @@ h2 {
 }
 h3 {
     font-size: 1.25em;
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: normal;
     padding: 0;
     margin: 0;
@@ -37,7 +39,7 @@ h3 {
 }
 h4 {
     font-size: 1em;
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: bold;
     padding: 0;
     margin: 0;
@@ -283,17 +285,19 @@ h2.sheet-accordion {
 }
 
 input[type="checkbox"].sheet-accordion + h4::after {
-    margin-right: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
     line-height: 14px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 4px;
     font-size: .75em;
-    content: " ►";
+    content: "►";
 }
 
 input[type="checkbox"].sheet-accordion + h2::after {
+    margin-left: 5px;
     margin-right: 5px;
     line-height: 1.25em;
     text-align: center;
@@ -304,10 +308,12 @@ input[type="checkbox"].sheet-accordion + h2::after {
 }
 
 input[type="checkbox"].sheet-accordion:checked + h4::after {
-    content: " ▼";
+    margin-left: 5px;
+    content: "▼";
 }
 
 input[type="checkbox"].sheet-accordion:checked + h2::after {
+    margin-left: 5px;
     content: "▼";
 }
 
@@ -366,7 +372,8 @@ a.repcontrol_move {
     margin: 0 !important;
 }
 .ui-dialog .charsheet button[type=roll].sheet-nodie::before {
-    font-family: "Arial", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     content: '';
 }
 .ui-dialog .charsheet button[type="roll"].sheet-nodie:hover {
@@ -443,7 +450,8 @@ a.repcontrol_move {
     height: inherit;
 }
 .ui-dialog .charsheet button[type=roll].sheet-link::before {
-    font-family: "Arial", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     content: '';
 }
 button[type=roll].sheet-id {
@@ -464,7 +472,8 @@ button[type=roll].sheet-id {
     right: 3px;
 }
 .ui-dialog .charsheet button[type=roll].sheet-id::before {
-    font-family: "Arial", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     content: '';
 }
 .ui-dialog .charsheet button.sheet-link-label {
@@ -496,22 +505,23 @@ div.sheet-hover-btn:hover button {
     padding: 0;
     height: 1.25em !important;
     line-height: 1.25em !important;
-    font-family: "Patrick Hand", sans-serif;
-    font-size: 1.1em !important;
+    font-family: "Merriweather", serif;
+    font-size: 1em !important;
     background: none!important;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid black;
 }
 .sheet-usrnotes {
-    font-family: "Patrick Hand", sans-serif;
-    font-size: 1.1em;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     white-space: pre-line;
 }
 .sheet-impusrinput {
     margin: 0;
     padding: 0;
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     text-align: center;
     font-weight: bold;
     border-color: black;
@@ -519,7 +529,7 @@ div.sheet-hover-btn:hover button {
 input {
     height: 1.25em !important;
     line-height: 1.25em !important;
-    font-size: 1.1em;
+    font-size: 1em;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -714,8 +724,8 @@ input[type="checkbox"]:checked + span.sheet-checkradio
     position: relative;
     cursor: text;
     word-wrap: break-word;
-    font-family: "Patrick Hand", sans-serif;
-    font-size: 1.1em;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
 }
 .sheet-auto-expand span {
     visibility: hidden;
@@ -756,14 +766,14 @@ select {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    font-size: 1.1em !important;
+    font-size: 1em !important;
 }
 select.sheet-disabled {
     margin: 0 !important;
     padding: 0 !important;
     height: 1.25em !important;
     line-height: 1.25em !important;
-    font-size: 1.1em !important;
+    font-size: 1em !important;
 }
 
 span.sheet-input-unit{
@@ -797,7 +807,7 @@ label.sheet-underlined {
 }
 label.sheet-under {
     text-align: center;
-    font-size: .85em;
+    font-size: .9em;
 }
 label.sheet-left {
     display: inline;

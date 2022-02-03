@@ -118,7 +118,7 @@ const stdSkillChars = {
 }
 
 const fatigueTable = {
-    9: ['0', '0', '0', '+0', 0],
+    9: ['0', '0', '0', '+0', '-'],
     8: ['1', '0', '0', '+0', .25],
     7: ['1', '0', '0', '-1', 3],
     6: ['2', '0', '-2', '-2', 6],
@@ -838,12 +838,12 @@ function calcEnc(str, v) {
 }
 
 function calcFatigueRecovery(fatigue, healing_rate) {
-    let recovery = '-';
+    let recovery = '∞';
     let recoveryUnit = "hours-l";
     if (fatigueTable[fatigue][4] !== '-') {
         recovery = parseFloat((fatigueTable[fatigue][4] / healing_rate).toFixed(2));
 
-        if (recovery < 1) {
+        if (recovery < 1 && recovery > 0) {
             recovery = Math.ceil(recovery * 60);
             recoveryUnit = "minutes-abrv-l";
         }

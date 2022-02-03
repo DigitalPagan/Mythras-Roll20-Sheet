@@ -1,38 +1,40 @@
 /* Hit Table Roll Template Styles */
-.sheet-rolltemplate-hittable div.sheet-border {
+.sheet-rolltemplate-hit-location div.sheet-border {
     border: 2px solid chocolate;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
-.sheet-rolltemplate-hittable div.sheet-header {
+.sheet-rolltemplate-hit-location div.sheet-header {
     background: chocolate;
     color: whitesmoke;
 }
-.sheet-rolltemplate-hittable div.sheet-subheader {
+.sheet-rolltemplate-hit-location div.sheet-subheader {
     background: dimgray;
     color: whitesmoke;
 }
-.sheet-rolltemplate-hittable div.sheet-character {
+.sheet-rolltemplate-hit-location div.sheet-character {
     font-size: .9em;
     text-align: center;
 }
-.sheet-rolltemplate-hittable div.sheet-name {
-    font-family: Palatino, serif;
+.sheet-rolltemplate-hit-location div.sheet-name {
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
 
 /* Tables */
-.sheet-rolltemplate-hittable div.sheet-table {
+.sheet-rolltemplate-hit-location div.sheet-table {
     display: table;
     width: 100%;
 }
-.sheet-rolltemplate-hittable div.sheet-tr {
+.sheet-rolltemplate-hit-location div.sheet-tr {
     display: table-row;
 }
-.sheet-rolltemplate-hittable div.sheet-tr:nth-child(odd) {
+.sheet-rolltemplate-hit-location div.sheet-tr:nth-child(odd) {
     background: linear-gradient(to right, gainsboro, white);
 }
-.sheet-rolltemplate-hittable div.sheet-th {
+.sheet-rolltemplate-hit-location div.sheet-th {
     display:table-cell;
     text-align: center;
     padding: 1px;
@@ -41,16 +43,16 @@
     vertical-align: middle;
     font-weight: bold;
 }
-.sheet-rolltemplate-hittable .sheet-help {
+.sheet-rolltemplate-hit-location .sheet-help {
     cursor: help;
 }
-.sheet-rolltemplate-hittable .sheet-pictos {
+.sheet-rolltemplate-hit-location .sheet-pictos {
     font-family: 'Pictos' !important;
 }
-.sheet-rolltemplate-hittable .sheet-pictos-three {
+.sheet-rolltemplate-hit-location .sheet-pictos-three {
     font-family: 'Pictos Three' !important;
 }
-.sheet-rolltemplate-hittable div.sheet-td {
+.sheet-rolltemplate-hit-location div.sheet-td {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -58,23 +60,23 @@
     white-space: nowrap;
 }
 
-.sheet-rolltemplate-hittable div.sheet-listitem {
+.sheet-rolltemplate-hit-location div.sheet-listitem {
     display: flex;
     padding: 2px 1px 0;
 }
-.sheet-rolltemplate-hittable div.sheet-listitem:nth-child(odd) {
+.sheet-rolltemplate-hit-location div.sheet-listitem:nth-child(odd) {
     background: linear-gradient(to right, gainsboro, white);
 }
-.sheet-rolltemplate-hittable div.sheet-key {
+.sheet-rolltemplate-hit-location div.sheet-key {
     font-weight: bold;
     text-align: left;
 }
-.sheet-rolltemplate-hittable div.sheet-value {
+.sheet-rolltemplate-hit-location div.sheet-value {
     text-align: right;
     flex-grow: 1;
 }
 
-.sheet-rolltemplate-hittable .inlinerollresult {
+.sheet-rolltemplate-hit-location .inlinerollresult {
     display: inline-block;
     text-align: center;
     padding: 0;
@@ -84,19 +86,19 @@
     background: inherit;
     font-weight: inherit;
 }
-.sheet-rolltemplate-hittable .inlinerollresult.fullcrit {
+.sheet-rolltemplate-hit-location .inlinerollresult.fullcrit {
     border: none;
     color: inherit;
     background: inherit;
     font-weight: inherit;
 }
-.sheet-rolltemplate-hittable .inlinerollresult.fullfail {
+.sheet-rolltemplate-hit-location .inlinerollresult.fullfail {
     border: none;
     color: inherit;
     background: inherit;
     font-weight: inherit;
 }
-.sheet-rolltemplate-hittable .inlinerollresult.importantroll {
+.sheet-rolltemplate-hit-location .inlinerollresult.importantroll {
     border: none;
     color: inherit;
     background: inherit;

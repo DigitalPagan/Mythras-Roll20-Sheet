@@ -1149,5 +1149,10 @@
     "when_collapsed_only_starred_abilities_are_shown": "When collapsed only starred abilities are shown",
     "ability-type-order": "alchemy,animism,arcane_magic,artifice,cursing,divine_magic,divination,exorcism,fae_powers,fairy_magic,folk_magic,incantations,liturgical_songs,magic,mysticism,necromancy,pharmacy,prayers_and_offerings,psionics,psychic_powers,sandestin_magic,shape_shifting,sorcery,super_powers,theism,theology,work_songs",
     "standard_with_calculations": "Standard with calculations",
-    "intellect": "Intellect"
+    "intellect": "Intellect",
+    "for": "for",
+    "special_effect": "Special Effect",
+    "special_effect-abrv": "SE",
+    "offensive_special_effect": "Offensive Special Effect",
+    "defensive_special_effect": "Defensive Special Effect"
 }

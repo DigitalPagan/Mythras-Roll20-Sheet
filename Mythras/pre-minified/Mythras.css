@@ -1,23 +1,25 @@
 /* =Generic Styles reused over the sheet= */
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Sorts+Mill+Goudy&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 /* Sheet Defaults*/
 div.sheet-mythras-defaults {
-    font-family: "Arial", sans-serif;
-    font-size: 1em;
+    font-family: 'Merriweather', serif;
+    font-size: .95em;
     line-height: 1.25em;
     box-sizing: border-box;
 }
 
 h1 {
-    font-size: 1.5em;
-    font-family: Palatino, serif;
+    font-size: 1.75em;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: bold;
     border-bottom: 1px solid black;
     margin-bottom: 5px;
 
 }
 h2 {
-    font-size: 1.25em;
-    font-family: Palatino, serif;
+    font-size: 1.5em;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: bold;
     padding: 0;
     margin: 0;
@@ -26,7 +28,7 @@ h2 {
 }
 h3 {
     font-size: 1.25em;
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: normal;
     padding: 0;
     margin: 0;
@@ -37,7 +39,7 @@ h3 {
 }
 h4 {
     font-size: 1em;
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     font-weight: bold;
     padding: 0;
     margin: 0;
@@ -283,17 +285,19 @@ h2.sheet-accordion {
 }
 
 input[type="checkbox"].sheet-accordion + h4::after {
-    margin-right: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
     line-height: 14px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 4px;
     font-size: .75em;
-    content: " ►";
+    content: "►";
 }
 
 input[type="checkbox"].sheet-accordion + h2::after {
+    margin-left: 5px;
     margin-right: 5px;
     line-height: 1.25em;
     text-align: center;
@@ -304,10 +308,12 @@ input[type="checkbox"].sheet-accordion + h2::after {
 }
 
 input[type="checkbox"].sheet-accordion:checked + h4::after {
-    content: " ▼";
+    margin-left: 5px;
+    content: "▼";
 }
 
 input[type="checkbox"].sheet-accordion:checked + h2::after {
+    margin-left: 5px;
     content: "▼";
 }
 
@@ -366,7 +372,8 @@ a.repcontrol_move {
     margin: 0 !important;
 }
 .ui-dialog .charsheet button[type=roll].sheet-nodie::before {
-    font-family: "Arial", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     content: '';
 }
 .ui-dialog .charsheet button[type="roll"].sheet-nodie:hover {
@@ -443,7 +450,8 @@ a.repcontrol_move {
     height: inherit;
 }
 .ui-dialog .charsheet button[type=roll].sheet-link::before {
-    font-family: "Arial", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     content: '';
 }
 button[type=roll].sheet-id {
@@ -464,7 +472,8 @@ button[type=roll].sheet-id {
     right: 3px;
 }
 .ui-dialog .charsheet button[type=roll].sheet-id::before {
-    font-family: "Arial", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     content: '';
 }
 .ui-dialog .charsheet button.sheet-link-label {
@@ -496,22 +505,23 @@ div.sheet-hover-btn:hover button {
     padding: 0;
     height: 1.25em !important;
     line-height: 1.25em !important;
-    font-family: "Patrick Hand", sans-serif;
-    font-size: 1.1em !important;
+    font-family: "Merriweather", serif;
+    font-size: 1em !important;
     background: none!important;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid black;
 }
 .sheet-usrnotes {
-    font-family: "Patrick Hand", sans-serif;
-    font-size: 1.1em;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     white-space: pre-line;
 }
 .sheet-impusrinput {
     margin: 0;
     padding: 0;
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
     text-align: center;
     font-weight: bold;
     border-color: black;
@@ -519,7 +529,7 @@ div.sheet-hover-btn:hover button {
 input {
     height: 1.25em !important;
     line-height: 1.25em !important;
-    font-size: 1.1em;
+    font-size: 1em;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -714,8 +724,8 @@ input[type="checkbox"]:checked + span.sheet-checkradio
     position: relative;
     cursor: text;
     word-wrap: break-word;
-    font-family: "Patrick Hand", sans-serif;
-    font-size: 1.1em;
+    font-family: "Merriweather", serif;
+    font-size: 1em;
 }
 .sheet-auto-expand span {
     visibility: hidden;
@@ -756,14 +766,14 @@ select {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    font-size: 1.1em !important;
+    font-size: 1em !important;
 }
 select.sheet-disabled {
     margin: 0 !important;
     padding: 0 !important;
     height: 1.25em !important;
     line-height: 1.25em !important;
-    font-size: 1.1em !important;
+    font-size: 1em !important;
 }
 
 span.sheet-input-unit{
@@ -797,7 +807,7 @@ label.sheet-underlined {
 }
 label.sheet-under {
     text-align: center;
-    font-size: .85em;
+    font-size: .9em;
 }
 label.sheet-left {
     display: inline;
@@ -1169,16 +1179,16 @@ div.sheet-skill-base {
     flex-shrink: 0;
 }
 textarea.sheet-skillnotes {
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
     height: 3em;
     line-height: 1em;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 span.sheet-skillnotes {
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
     line-height: 1em;
     white-space: pre-line;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 .sheet-passiontype {
     width: 105px;
@@ -1401,6 +1411,8 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-default div.sheet-border {
     border: 2px solid black;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-default div.sheet-border.sheet-red {
     border: 2px solid firebrick;
@@ -1453,7 +1465,7 @@ textarea.sheet-character-notes {
     text-align: center;
 }
 .sheet-rolltemplate-default div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -1506,7 +1518,8 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-effect div.sheet-border {
     border: 2px solid #5962A3;
     background: white;
-    font-size: 1em;
+    font-size: .9em;
+    font-family: 'Merriweather', serif;
 }
 .sheet-rolltemplate-effect div.sheet-header {
     background: #5962A3;
@@ -1525,7 +1538,7 @@ textarea.sheet-character-notes {
     text-align: center;
 }
 .sheet-rolltemplate-effect div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -1586,40 +1599,42 @@ textarea.sheet-character-notes {
     text-shadow: none;
 }
 /* Hit Table Roll Template Styles */
-.sheet-rolltemplate-hittable div.sheet-border {
+.sheet-rolltemplate-hit-location div.sheet-border {
     border: 2px solid chocolate;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
-.sheet-rolltemplate-hittable div.sheet-header {
+.sheet-rolltemplate-hit-location div.sheet-header {
     background: chocolate;
     color: whitesmoke;
 }
-.sheet-rolltemplate-hittable div.sheet-subheader {
+.sheet-rolltemplate-hit-location div.sheet-subheader {
     background: dimgray;
     color: whitesmoke;
 }
-.sheet-rolltemplate-hittable div.sheet-character {
+.sheet-rolltemplate-hit-location div.sheet-character {
     font-size: .9em;
     text-align: center;
 }
-.sheet-rolltemplate-hittable div.sheet-name {
-    font-family: Palatino, serif;
+.sheet-rolltemplate-hit-location div.sheet-name {
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
 
 /* Tables */
-.sheet-rolltemplate-hittable div.sheet-table {
+.sheet-rolltemplate-hit-location div.sheet-table {
     display: table;
     width: 100%;
 }
-.sheet-rolltemplate-hittable div.sheet-tr {
+.sheet-rolltemplate-hit-location div.sheet-tr {
     display: table-row;
 }
-.sheet-rolltemplate-hittable div.sheet-tr:nth-child(odd) {
+.sheet-rolltemplate-hit-location div.sheet-tr:nth-child(odd) {
     background: linear-gradient(to right, gainsboro, white);
 }
-.sheet-rolltemplate-hittable div.sheet-th {
+.sheet-rolltemplate-hit-location div.sheet-th {
     display:table-cell;
     text-align: center;
     padding: 1px;
@@ -1628,16 +1643,16 @@ textarea.sheet-character-notes {
     vertical-align: middle;
     font-weight: bold;
 }
-.sheet-rolltemplate-hittable .sheet-help {
+.sheet-rolltemplate-hit-location .sheet-help {
     cursor: help;
 }
-.sheet-rolltemplate-hittable .sheet-pictos {
+.sheet-rolltemplate-hit-location .sheet-pictos {
     font-family: 'Pictos' !important;
 }
-.sheet-rolltemplate-hittable .sheet-pictos-three {
+.sheet-rolltemplate-hit-location .sheet-pictos-three {
     font-family: 'Pictos Three' !important;
 }
-.sheet-rolltemplate-hittable div.sheet-td {
+.sheet-rolltemplate-hit-location div.sheet-td {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -1645,23 +1660,23 @@ textarea.sheet-character-notes {
     white-space: nowrap;
 }
 
-.sheet-rolltemplate-hittable div.sheet-listitem {
+.sheet-rolltemplate-hit-location div.sheet-listitem {
     display: flex;
     padding: 2px 1px 0;
 }
-.sheet-rolltemplate-hittable div.sheet-listitem:nth-child(odd) {
+.sheet-rolltemplate-hit-location div.sheet-listitem:nth-child(odd) {
     background: linear-gradient(to right, gainsboro, white);
 }
-.sheet-rolltemplate-hittable div.sheet-key {
+.sheet-rolltemplate-hit-location div.sheet-key {
     font-weight: bold;
     text-align: left;
 }
-.sheet-rolltemplate-hittable div.sheet-value {
+.sheet-rolltemplate-hit-location div.sheet-value {
     text-align: right;
     flex-grow: 1;
 }
 
-.sheet-rolltemplate-hittable .inlinerollresult {
+.sheet-rolltemplate-hit-location .inlinerollresult {
     display: inline-block;
     text-align: center;
     padding: 0;
@@ -1671,19 +1686,19 @@ textarea.sheet-character-notes {
     background: inherit;
     font-weight: inherit;
 }
-.sheet-rolltemplate-hittable .inlinerollresult.fullcrit {
+.sheet-rolltemplate-hit-location .inlinerollresult.fullcrit {
     border: none;
     color: inherit;
     background: inherit;
     font-weight: inherit;
 }
-.sheet-rolltemplate-hittable .inlinerollresult.fullfail {
+.sheet-rolltemplate-hit-location .inlinerollresult.fullfail {
     border: none;
     color: inherit;
     background: inherit;
     font-weight: inherit;
 }
-.sheet-rolltemplate-hittable .inlinerollresult.importantroll {
+.sheet-rolltemplate-hit-location .inlinerollresult.importantroll {
     border: none;
     color: inherit;
     background: inherit;
@@ -1693,6 +1708,8 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-improvement div.sheet-border {
     border: 2px solid darkmagenta;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-improvement div.sheet-header {
     background: darkmagenta;
@@ -1703,7 +1720,7 @@ textarea.sheet-character-notes {
     text-align: center;
 }
 .sheet-rolltemplate-improvement div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -1756,6 +1773,8 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-movement div.sheet-border {
     border: 2px solid black;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-movement div.sheet-header {
     background: black;
@@ -1789,7 +1808,7 @@ textarea.sheet-character-notes {
     text-align: center;
 }
 .sheet-rolltemplate-movement div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -1854,6 +1873,8 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-resolution_pool div.sheet-border {
     border: 2px solid chocolate;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-header {
     background: chocolate;
@@ -1868,7 +1889,7 @@ textarea.sheet-character-notes {
     text-align: center;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -1958,6 +1979,8 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-skill div.sheet-border {
     border: 2px solid dimgray;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-skill div.sheet-header {
     background: dimgray;
@@ -1968,7 +1991,7 @@ textarea.sheet-character-notes {
     text-align: center;
 }
 .sheet-rolltemplate-skill div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -1992,6 +2015,10 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
     background: black;
     color: lightgray;
+}
+.sheet-rolltemplate-skill span.sheet-result {
+    font-family: "Pictos";
+    cursor: help;
 }
 
 .sheet-rolltemplate-skill div.sheet-listitem {
@@ -2050,6 +2077,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-skill .inlinerollresult.fullcrit {
     border: none;
@@ -2068,4 +2096,22 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+}
+.sheet-rolltemplate-skill a {
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em !important;
+    border: solid 1px gray !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+    padding: 0 2px 0 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.sheet-rolltemplate-skill a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+    text-shadow: none;
 }

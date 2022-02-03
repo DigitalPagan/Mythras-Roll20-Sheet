@@ -248,16 +248,16 @@ div.sheet-skill-base {
     flex-shrink: 0;
 }
 textarea.sheet-skillnotes {
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
     height: 3em;
     line-height: 1em;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 span.sheet-skillnotes {
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
     line-height: 1em;
     white-space: pre-line;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 .sheet-passiontype {
     width: 105px;
