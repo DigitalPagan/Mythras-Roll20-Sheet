@@ -15,13 +15,13 @@ on(`clicked:roll_display`, function() {
     });
 });
 
-on(`clicked:name_display`, function() {
+/*on(`clicked:name_display`, function() {
     getAttrs(['name_display'], function(v) {
         setAttrs({
             ['name_display']: v['name_display'] !== "{{'{{character=@{character_name}}}'}}" ? "{{'{{character=@{character_name}}}'}}" : " "
         });
     });
-});
+});*/
 
 /* Sheet Type Specific Worker Scripts */
 {% if battle_units %}{% include 'mythras/battle_unit.js' %}{% endif %}

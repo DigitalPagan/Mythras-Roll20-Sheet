@@ -900,7 +900,7 @@
     "social-conflict-description": "Use social conflict rules from the Mythras Companion p. 14.",
     "social_conflict": "Social Conflict",
     "confidence": "Confidence",
-    "social-damage": "Social Damange",
+    "social_damage": "Social Damange",
     "social-initiative": "Social Initiative",
     "resolution_pool": "Resolution Pool",
     "composure": "Composure",
@@ -1154,5 +1154,10 @@
     "special_effect": "Special Effect",
     "special_effect-abrv": "SE",
     "offensive_special_effect": "Offensive Special Effect",
-    "defensive_special_effect": "Defensive Special Effect"
+    "defensive_special_effect": "Defensive Special Effect",
+    "social_special_effect-abrv": "Social SE",
+    "spirit_special_effect-abrv": "Spirit SE",
+    "social_special_effect": "Social Special Effect",
+    "spirit_special_effect": "Spirit Special Effect",
+    "include_in_combat_rolls": "Include in combat rolls"
 }

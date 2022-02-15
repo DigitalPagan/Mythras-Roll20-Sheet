@@ -3,7 +3,7 @@
 <rolltemplate class="sheet-rolltemplate-skill">
     <div class="sheet-border">
         <div class="sheet-header">
-            <div class="sheet-character">{{'{{character_name}}'}}</div>
+            <div class="sheet-character">{{'{{character}}'}}</div>
             <div class="sheet-name">{{'{{name}}'}} ({{'{{original}}'}}%)</div>
         </div>
 
@@ -752,17 +752,52 @@
         {{'{{#combatstyle}}'}}
         <div class="sheet-listitem">
             <div class="sheet-key"><span data-i18n="special_effect">Special Effect</span>:</div>
-            <div class="sheet-value">[Offensive](~{{'{{character_name}}'}}|offensive_combat_se) [Defensive](~{{'{{character_name}}'}}|defensive_combat_se)</div>
+            <div class="sheet-value">[Offensive](~{{'{{character}}'}}|offensive_combat_se) [Defensive](~{{'{{character}}'}}|defensive_combat_se)</div>
         </div>
         <div class="sheet-listitem">
             <div class="sheet-key"><span data-i18n="hit_location">Hit Location</span>:</div>
-            <div class="sheet-value">[Standard](~target|hit_location) [Low](~target|hit_location_low) [High](~target|hit_location_high)</div>
+            <div class="sheet-value">[Low](~target|hit_location_low) [Standard](~target|hit_location) [High](~target|hit_location_high)</div>
         </div>
+        {{'{{#weapon_buttons}}'}}
         <div class="sheet-listitem">
             <div class="sheet-key"><span data-i18n="weapon">Weapon</span>:</div>
-            <div class="sheet-value">[Melee](~{{'{{character_name}}'}}|close_combat_weapon) [Ranged](~{{'{{character_name}}'}}|ranged_weapon)</div>
+            <div class="sheet-value">{{'{{weapon_buttons}}'}}</div>
         </div>
+        {{'{{/weapon_buttons}}'}}
         {{'{{/combatstyle}}'}}
+
+        {{'{{#spiritcombat}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n-title="spirit_special_effect" data-i18n="spirit_special_effect-abrv">Social SE</span>:</div>
+            <div class="sheet-value">[Offensive](~{{'{{character}}'}}|offensive_spirit_se) [Defensive](~{{'{{character}}'}}|defensive_spirit_se)</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="damage">Damage</span>:</div>
+            <div class="sheet-value">[Spirit Damage](~{{'{{character}}'}}|spirit_damage)</div>
+        </div>
+        {{'{{/spiritcombat}}'}}
+
+        {{'{{#socialoffense}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n-title="social_special_effect" data-i18n="social_special_effect-abrv">Social SE</span>:</div>
+            <div class="sheet-value">[Offensive](~{{'{{character}}'}}|offensive_social_se)</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="hit_location">Hit Location</span>:</div>
+            <div class="sheet-value">[Resolution Pool](~{{'{{character}}'}}|resolution_pool)</div>
+        </div>
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="damage">Damage</span>:</div>
+            <div class="sheet-value">[Social Damage](~{{'{{character}}'}}|social_damage)</div>
+        </div>
+        {{'{{/socialoffense}}'}}
+
+        {{'{{#socialdefense}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n-title="social_special_effect" data-i18n="social_special_effect-abrv">Social SE</span>:</div>
+            <div class="sheet-value">[Defensive](~{{'{{character}}'}}|defensive_social_se)</div>
+        </div>
+        {{'{{/socialdefense}}'}}
     </div>
 </rolltemplate>
 

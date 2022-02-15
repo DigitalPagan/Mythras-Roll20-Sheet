@@ -2494,6 +2494,40 @@ on("change:repeating_ability:skill2_id", function(event) {
     });
 });
 
+/* Weapon Buttons */
+on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored", function() {
+    getSectionIDs("repeating_meleeweapon", function(meleeIds) {
+        getSectionIDs("repeating_rangedweapon", function(rangedIds) {
+            let meleeGetAttrs = [];
+            meleeIds.forEach(id => {
+                meleeGetAttrs.push(`repeating_meleeweapon_${id}_name`, `repeating_meleeweapon_${id}_favored`)
+            });
+
+            let rangedGetAttrs = [];
+            rangedIds.forEach(id => {
+                rangedGetAttrs.push(`repeating_rangedweapon_${id}_name`, `repeating_rangedweapon_${id}_favored`)
+            });
+
+            getAttrs(meleeGetAttrs.concat(rangedGetAttrs), function(v) {
+                let weaponButtons = ""
+                meleeIds.forEach(id => {
+                    if (v[`repeating_meleeweapon_${id}_favored`] === '1') {
+                        const name = v[`repeating_meleeweapon_${id}_name`];
+                        weaponButtons = weaponButtons + ` [${name}](~@{character_name}|repeating_meleeweapon_${id}_damage)`;
+                    }
+                });
+                rangedIds.forEach(id => {
+                    if (v[`repeating_rangedweapon_${id}_favored`] === '1') {
+                        const name = v[`repeating_rangedweapon_${id}_name`];
+                        weaponButtons = weaponButtons + ` [${name}](~@{character_name}|repeating_rangedweapon_${id}_damage)`;
+                    }
+                });
+                setAttrs({weapon_buttons: weaponButtons});
+            });
+        });
+    });
+});
+
 /* Repeating IDs */
 on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
     "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +

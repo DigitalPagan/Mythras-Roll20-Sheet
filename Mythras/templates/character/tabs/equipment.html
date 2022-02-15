@@ -283,7 +283,7 @@
                             <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                             <input type="hidden" name="attr_id" value="unset, please change any value in this item" readonly>
                         </div>
-                        <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{traits=@{traits}}} {{description=@{description}}} {{page=@{page}}}'}}"></button></div>
+                        <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{traits=@{traits}}} {{description=@{description}}}'}}"></button></div>
                         <div class="sheet-td sheet-number-width"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_enc}" name="attr_enc" value="0"></div>
                         <div class="sheet-td sheet-number-width"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_quantity}" name="attr_quantity" value="1"></div>
                         <div class="sheet-td sheet-equipment-location">

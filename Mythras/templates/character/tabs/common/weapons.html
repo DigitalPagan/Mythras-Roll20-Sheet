@@ -1,7 +1,9 @@
-<!-- TODO: display_melee_weapons display_ranged_weapons when one to show? -->
+<input type="hidden" name="attr_weapon_buttons" value="">
+
 <div class="sheet-bmargin sheet-rmargin">
     <input type='checkbox' class="sheet-hidden sheet-deep-toggle" name='attr_reach_enabled' value="1" checked/>
     <div class="sheet-flex">
+        <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="include_in_combat_rolls">S</span></div>
         <div class="sheet-th sheet-weapon-name" data-i18n="melee_weapon">Melee Weapon</div>
         <div class="sheet-th sheet-play sheet-button-width"></div>
         <div class="sheet-th sheet-weapon-damage" data-i18n="damage">Damage</div>
@@ -18,12 +20,13 @@
     </div>
     <fieldset class="repeating_meleeweapon">
         <div class="sheet-flex">
+            <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1"><span class="sheet-checkico">S</span></div>
             <div class="sheet-td sheet-weapon-name sheet-hover-btn">
                 <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
                 <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                 <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
             </div>
-            <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=@{name}}} @{name_display} {{^{damage}=[[@{damage}+@{damage_mod_toggle}]]}} {{^{size}=@{size}}} {{notes=@{notes}}}'}}"></button></div>
+            <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=@{name}}} {{character=@{character_name}}} {{^{damage}=[[@{damage}+@{damage_mod_toggle}]]}} {{^{size}=@{size}}} {{notes=@{notes}}}'}}"></button></div>
             <div class="sheet-td sheet-weapon-damage"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_damage}" name="attr_damage"></div>
             <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}" checked><span class="sheet-checkico">+</span></div>
             <div class="sheet-td sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_size}" name="attr_size"></div>
@@ -62,6 +65,7 @@
 <input type='checkbox' class="sheet-hidden sheet-deep-toggle" name='attr_fire_rate_enabled' value="1"/>
 <div class="sheet-bmargin sheet-rmargin">
     <div class="sheet-flex">
+        <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="include_in_combat_rolls">S</span></div>
         <div class="sheet-th sheet-weapon-name" data-i18n="ranged_weapon">Ranged Weapon</div>
         <div class="sheet-th sheet-play sheet-button-width"></div>
         <div class="sheet-th sheet-weapon-damage" data-i18n="damage">Damage</div>
@@ -79,12 +83,13 @@
     </div>
     <fieldset class="repeating_rangedweapon">
         <div class="sheet-flex">
+            <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1"><span class="sheet-checkico">S</span></div>
             <div class="sheet-td sheet-weapon-name sheet-hover-btn">
                 <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
                 <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                 <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
             </div>
-            <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=@{name}}} @{name_display} {{^{damage}=[[@{damage}+@{damage_mod_toggle}]]}} {{^{force}=@{force}}} {{^{impale_size}=@{impale_size}}} {{notes=@{notes}}}'}}"></button></div>
+            <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-d100" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:default} {{red=1}} {{name=@{name}}} {{character=@{character_name}}} {{^{damage}=[[@{damage}+@{damage_mod_toggle}]]}} {{^{force}=@{force}}} {{^{impale_size}=@{impale_size}}} {{notes=@{notes}}}'}}"></button></div>
             <div class="sheet-td sheet-weapon-damage"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_damage}" name="attr_damage"></div>
             <div class="sheet-td sheet-checkbox-width sheet-text-center"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}" checked><span class="sheet-checkico">+</span></div>
             <div class="sheet-td sheet-weapon-size"><input type="text" class="sheet-full-width sheet-usrinput" title="@{$ID_force}" name="attr_force"></div>

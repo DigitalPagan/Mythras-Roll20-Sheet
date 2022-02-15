@@ -282,7 +282,7 @@
         <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
         <div class="sheet-bmargin">
             <div class="sheet-flex">
-                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="when_collapsed_only_starred_abilities_are_shown">S</span></div>
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="when_collapsed_only_starred_abilities_are_shown">S</span></div>
                 <div class="sheet-grow sheet-th"><span data-i18n="ability">Ability</span></div>
                 <div class="sheet-play sheet-button-width sheet-th"></div>
                 <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
@@ -305,7 +305,7 @@
                             <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                             <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
                         </div>
-                        <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"></button></div>
+                        <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"></button></div>
                         <div class="sheet-td sheet-ability-type">
                             <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
                                 <option value="other" data-i18n="other" selected>Other</option>
