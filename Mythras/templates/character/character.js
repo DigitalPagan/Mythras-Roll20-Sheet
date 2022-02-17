@@ -15,6 +15,15 @@
     TODO: hit_table update
  */
 
+/* Compact Button */
+on(`clicked:compact`, function() {
+    getAttrs(['compact'], function(v) {
+        setAttrs({
+            ['compact']: v['compact'] !== "1" ? "1" : "0"
+        });
+    });
+});
+
 /* Common Autocalc Constants */
 const strGetAttrs = ['str_base', 'str_other', 'str_temp'];
 const dexGetAttrs = ['dex_base', 'dex_other', 'dex_temp'];
@@ -2402,24 +2411,39 @@ abilityranks.forEach(button => {
     });
 });
 
-on("change:abilities_type_filter change:abilities_rank_filter", function(event) {
+on("change:abilities_type_filter change:abilities_rank_filter change:compact change:edit", function(event) {
     getSectionIDs("repeating_ability", function(abilityIds) {
         let abilityGetAttrs = [];
         abilityIds.forEach(id => {
             abilityGetAttrs.push(`repeating_ability_${id}_favored`, `repeating_ability_${id}_rank`, `repeating_ability_${id}_type`)
         });
-        getAttrs(['abilities_type_filter', 'abilities_rank_filter'].concat(abilityGetAttrs), function(v) {
+        getAttrs(['abilities_type_filter', 'abilities_rank_filter', 'compact', 'edit'].concat(abilityGetAttrs), function(v) {
             let setFilterAttrs = {};
-            abilityIds.forEach(id => {
-                if (
-                    (v['abilities_type_filter'] === v[`repeating_ability_${id}_type`] || v['abilities_type_filter'] === 'all') &&
-                    (v['abilities_rank_filter'] == v[`repeating_ability_${id}_rank`] || v['abilities_rank_filter'] === 'all')
-                ) {
-                    setFilterAttrs[`repeating_ability_${id}_show`] = "1";
-                } else {
-                    setFilterAttrs[`repeating_ability_${id}_show`] = "0";
-                }
-            });
+            // Filter for favored only when in compact mode unless in edit mode
+            if (v['compact'] === '1' && v['edit'] === '0') {
+                abilityIds.forEach(id => {
+                    if (
+                        (v['abilities_type_filter'] === v[`repeating_ability_${id}_type`] || v['abilities_type_filter'] === 'all') &&
+                        (v['abilities_rank_filter'] === v[`repeating_ability_${id}_rank`] || v['abilities_rank_filter'] === 'all') &&
+                        (v[`repeating_ability_${id}_favored`] === '1')
+                    ) {
+                        setFilterAttrs[`repeating_ability_${id}_show`] = "1";
+                    } else {
+                        setFilterAttrs[`repeating_ability_${id}_show`] = "0";
+                    }
+                });
+            } else {
+                abilityIds.forEach(id => {
+                    if (
+                        (v['abilities_type_filter'] === v[`repeating_ability_${id}_type`] || v['abilities_type_filter'] === 'all') &&
+                        (v['abilities_rank_filter'] === v[`repeating_ability_${id}_rank`] || v['abilities_rank_filter'] === 'all')
+                    ) {
+                        setFilterAttrs[`repeating_ability_${id}_show`] = "1";
+                    } else {
+                        setFilterAttrs[`repeating_ability_${id}_show`] = "0";
+                    }
+                });
+            }
 
             setAttrs(setFilterAttrs);
         });

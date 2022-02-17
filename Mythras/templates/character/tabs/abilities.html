@@ -1,4 +1,5 @@
-<!-- TODO: filter for starred on collapse -->
+<!-- TODO: adjust roll buttons when chracter_name changes -->
+<!-- TODO: fix the overflow on the adjustable textareas -->
 <!-- Abilities -->
 <div class="sheet-section">
     <!-- Ability Toggles -->
@@ -281,8 +282,8 @@
     <div class="sheet-toggle">
         <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
         <div class="sheet-bmargin">
-            <div class="sheet-flex">
-                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="when_collapsed_only_starred_abilities_are_shown">S</span></div>
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="when_compact_only_starred_abilities_are_shown">S</span></div>
                 <div class="sheet-grow sheet-th"><span data-i18n="ability">Ability</span></div>
                 <div class="sheet-play sheet-button-width sheet-th"></div>
                 <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
@@ -295,9 +296,13 @@
                 <div class="sheet-ability-prompts sheet-th sheet-abilities-prompts-toggle"><span data-i18n="prompts">Prompts</span></div>
                 <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="details-tooltip">E</span></div>
             </div>
+            <div class="sheet-flex sheet-compact">
+                <div class="sheet-grow sheet-th"><span data-i18n="abilities">Abilities</span></div>
+            </div>
+            <div class="sheet-compactable-nomargin-fieldset-control"></div>
             <fieldset class="repeating_ability">
-                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_show" value="1" checked>
-                <div class="sheet-toggle">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_show" value="1" checked>
+                <div class="sheet-wide-toggle sheet-detailed">
                     <div class="sheet-flex">
                         <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
                         <div class="sheet-td sheet-grow sheet-hover-btn">
@@ -395,6 +400,9 @@
                         <!-- <input type="text" name="attr_traits_display" value="" readonly> -->
                     </div>
                 </div>
+                <div class="sheet-compact sheet-wide-toggle">
+                    <div class="sheet-compactable-rmargin"><button type="roll" class="sheet-nodie" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"><span name="attr_name"></span></button></div>
+                </div>
             </fieldset>
         </div>
     </div>
@@ -407,21 +415,27 @@
     <h2 class="sheet-accordion" data-i18n="limitations">Limitations</h2>
 
     <div class="sheet-accordion">
-        <div class="sheet-flex">
-            <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
-            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-        </div>
-        <fieldset class="repeating_superpowerlimit">
-            <div class="sheet-flex">
-                <div class="sheet-td sheet-limitation-name sheet-hover-btn">
-                    <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
-                    <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
-                </div>
-                <div class="sheet-td sheet-grow">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
-                </div>
+        <div class="sheet-bmargin">
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
+                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
             </div>
-        </fieldset>
+            <div class="sheet-compactable-fieldset-control"></div>
+            <fieldset class="repeating_superpowerlimit">
+                <div class="sheet-flex sheet-detailed">
+                    <div class="sheet-td sheet-limitation-name sheet-hover-btn">
+                        <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
+                    </div>
+                    <div class="sheet-td sheet-grow">
+                        <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
+                    </div>
+                </div>
+                <div class="sheet-compact">
+                    <button type="roll" class="sheet-nodie" title="%{$ID_limitation}" name="roll_limitation" value="{{'@{roll_display}&{template:default} {{name=@{name}}} {{character=@{character_name}}} {{notes=@{description}}}'}}"><span name="attr_name"></span></button>
+                </div>
+            </fieldset>
+        </div>
     </div>
 </div>

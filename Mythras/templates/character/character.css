@@ -126,7 +126,12 @@ input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-core,
 input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-abilities,
 input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-equipment,
 input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-background,
-input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-notes {
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-notes,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-core,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-abilities,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-equipment,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-background,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-notes {
     display: block;
 }
 
@@ -141,6 +146,28 @@ input.sheet-character-tab[value="import"] + div.sheet-character-tabs button.shee
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
     border: solid 1px black;
+}
+
+/* Compact */
+input.sheet-edit-toggle:checked ~ div input.sheet-compact:checked ~ div .sheet-compact,
+input.sheet-edit-toggle:checked ~ div input.sheet-compact:not(:checked) ~ div .sheet-compact,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div .sheet-detailed,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:not(:checked) ~ div .sheet-compact
+ {
+    display: none;
+}
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-fieldset-control + fieldset ~.repcontainer > .repitem,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-rmargin {
+    display: inline-block;
+    margin-right: 5px;
+}
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-nomargin-fieldset-control + fieldset ~.repcontainer > .repitem,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable {
+    display: inline-block;
+}
+div.sheet-compactable-fieldset-control,
+div.sheet-compactable-nomargin-fieldset-control {
+    display: none;
 }
 
 /* Core Tab */

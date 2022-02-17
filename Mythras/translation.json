@@ -179,7 +179,7 @@
     "characteristic-short": "Char",
     "base-value": "Base Value",
     "training-and-experience": "Training & Experience",
-    "standard-skills": "Standard Skills",
+    "standard_skills": "Standard Skills",
     "skill": "Skill",
     "skill-grade": "Skill Grade",
     "shield": "Shield",
@@ -235,7 +235,7 @@
     "score": "Score",
     "dependency": "Dependency",
     "passion": "Passion",
-    "professional-skills": "Professional Skills",
+    "professional_skills": "Professional Skills",
     "language": "Language",
     "resistance": "Resistance",
     "brawn": "Brawn",
@@ -1146,7 +1146,7 @@
     "favored": "Favored",
     "filter": "Filter",
     "filter_for_favored_only": "Filter for favored only",
-    "when_collapsed_only_starred_abilities_are_shown": "When collapsed only starred abilities are shown",
+    "when_compact_only_starred_abilities_are_shown": "When compact only starred abilities are shown",
     "ability-type-order": "alchemy,animism,arcane_magic,artifice,cursing,divine_magic,divination,exorcism,fae_powers,fairy_magic,folk_magic,incantations,liturgical_songs,magic,mysticism,necromancy,pharmacy,prayers_and_offerings,psionics,psychic_powers,sandestin_magic,shape_shifting,sorcery,super_powers,theism,theology,work_songs",
     "standard_with_calculations": "Standard with calculations",
     "intellect": "Intellect",
@@ -1159,5 +1159,6 @@
     "spirit_special_effect-abrv": "Spirit SE",
     "social_special_effect": "Social Special Effect",
     "spirit_special_effect": "Spirit Special Effect",
-    "include_in_combat_rolls": "Include in combat rolls"
+    "include_in_combat_rolls": "Include in combat rolls",
+    "resistance_skills": "Resistance Skills"
 }
