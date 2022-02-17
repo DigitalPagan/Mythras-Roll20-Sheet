@@ -1,4 +1,7 @@
-/* TODO: Upgrade logic:
+/*
+    TODO: recalc
+    TODO: import
+    TODO: Upgrade logic:
     char_ageing & training -> other
     conditions -> repeating_conditions
     action_points_add_one -> other
@@ -11,8 +14,6 @@
     magic -> abilities
     locationX_block -> size value?
     income_* -> income
-    TODO: recalc
-    TODO: hit_table update
  */
 
 /* Compact Button */
