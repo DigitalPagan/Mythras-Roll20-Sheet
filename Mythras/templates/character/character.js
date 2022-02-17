@@ -2518,6 +2518,29 @@ on("change:repeating_ability:skill2_id", function(event) {
     });
 });
 
+/* Reset ability rolls when character_name changes */
+/* Skill selection logic */
+on("change:character_name", function(event) {
+    getSectionIDs("repeating_ability", function(abilityIds) {
+        let skillIdAttrs = [];
+        abilityIds.forEach(id => {
+            skillIdAttrs.push(`repeating_ability_${id}_skill1_id`);
+        });
+
+        getAttrs(skillIdAttrs.concat(['character_name']), function(v) {
+            const characterName = v['character_name'];
+            let newAttrs = {};
+
+            abilityIds.forEach(id => {
+                const skillId = v[`repeating_ability_${id}_skill1_id`];
+                newAttrs[`repeating_ability_${id}_skill1roll`] = `${characterName}|${skillId}_roll`;
+            });
+
+            setAttrs(newAttrs);
+        });
+    });
+});
+
 /* Weapon Buttons */
 on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored", function() {
     getSectionIDs("repeating_meleeweapon", function(meleeIds) {

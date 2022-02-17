@@ -1,4 +1,3 @@
-<!-- TODO: adjust roll buttons when chracter_name changes -->
 <!-- TODO: fix the overflow on the adjustable textareas -->
 <!-- Abilities -->
 <div class="sheet-section">
@@ -242,45 +241,44 @@
         </div>
     </div>
 
-    <!-- Abilities Filter -->
-    <div class="sheet-space-between sheet-bmargin">
-        <div data-i18n-list="ability-type-order">
-            <label class="sheet-left" data-i18n="type">Type</label>
-            <input type='hidden' class="sheet-abilities-type-filter" name='attr_abilities_type_filter' value='all'/>
-            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-all" name="act_abilities_type_filter_all" data-i18n="all">All</button>
-            <button type="action" data-i18n-list-item="alchemy" class="sheet-checkbtn sheet-alchemy-toggle sheet-abilities-type-filter-alchemy" name="act_abilities_type_filter_alchemy" data-i18n="alchemy">Alchemy</button>
-            <button type="action" data-i18n-list-item="animism" class="sheet-checkbtn sheet-animism-toggle sheet-abilities-type-filter-animism" name="act_abilities_type_filter_animism" data-i18n="animism">Animism</button>
-            <button type="action" data-i18n-list-item="arcane_magic" class="sheet-checkbtn sheet-arcane-magic-toggle sheet-abilities-type-filter-arcane-magic" name="act_abilities_type_filter_arcane_magic" data-i18n="arcane_magic">Arcane Magic</button>
-            <button type="action" data-i18n-list-item="artifice" class="sheet-checkbtn sheet-artifice-toggle sheet-abilities-type-filter-artifice" name="act_abilities_type_filter_artifice" data-i18n="artifice">Artifice</button>
-            <button type="action" data-i18n-list-item="divine_magic" class="sheet-checkbtn sheet-divine-magic-toggle sheet-abilities-type-filter-divine-magic" name="act_abilities_type_filter_divine_magic" data-i18n="divine_magic">Divine Mage</button>
-            <button type="action" data-i18n-list-item="fae_powers" class="sheet-checkbtn sheet-fae-powers-toggle sheet-abilities-type-filter-fae-powers" name="act_abilities_type_filter_fae_powers" data-i18n="fae_powers">Fae Powers</button>
-            <button type="action" data-i18n-list-item="folk_magic" class="sheet-checkbtn sheet-folk-magic-toggle sheet-abilities-type-filter-folk-magic" name="act_abilities_type_filter_folk_magic" data-i18n="folk_magic">Folk Magic</button>
-            <button type="action" data-i18n-list-item="magic" class="sheet-checkbtn sheet-magic-toggle sheet-abilities-type-filter-magic" name="act_abilities_type_filter_magic" data-i18n="magic">Magic</button>
-            <button type="action" data-i18n-list-item="mysticism" class="sheet-checkbtn sheet-mysticism-toggle sheet-abilities-type-filter-mysticism" name="act_abilities_type_filter_mysticism" data-i18n="mysticism">Mysticism</button>
-            <button type="action" data-i18n-list-item="psionics" class="sheet-checkbtn sheet-psionics-toggle sheet-abilities-type-filter-psionics" name="act_abilities_type_filter_psionics" data-i18n="psionics">Psionics</button>
-            <button type="action" data-i18n-list-item="psychic_powers" class="sheet-checkbtn sheet-psychicpowers-toggle sheet-abilities-type-filter-psychic-powers" name="act_abilities_type_filter_psychic_powers" data-i18n="psychic_powers">Psychic Powers</button>
-            <button type="action" data-i18n-list-item="sorcery" class="sheet-checkbtn sheet-sorcery-toggle sheet-abilities-type-filter-sorcery" name="act_abilities_type_filter_sorcery" data-i18n="sorcery">Sorcery</button>
-            <button type="action" data-i18n-list-item="super_powers" class="sheet-checkbtn sheet-superpowers-toggle sheet-abilities-type-filter-super-powers" name="act_abilities_type_filter_super_powers" data-i18n="super_powers">Super Powers</button>
-            <button type="action" data-i18n-list-item="theism" class="sheet-checkbtn sheet-theism-toggle sheet-abilities-type-filter-theism" name="act_abilities_type_filter_theism" data-i18n="theism">Theism</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-other" name="act_abilities_type_filter_other" data-i18n="other">Other</button>
-        </div>
-        <div style="white-space: nowrap;" class="sheet-rank-toggle">
-            <label class="sheet-left" data-i18n="rank">Rank</label>
-            <input type='hidden' class="sheet-abilities-rank-filter" name='attr_abilities_rank_filter' value='all'/>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-all" name="act_abilities_rank_filter_all" data-i18n="all">All</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-0" name="act_abilities_rank_filter_0">0</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-1" name="act_abilities_rank_filter_1">1</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-2" name="act_abilities_rank_filter_2">2</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-3" name="act_abilities_rank_filter_3">3</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-4" name="act_abilities_rank_filter_4">4</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-5" name="act_abilities_rank_filter_5">5</button>
-        </div>
-    </div>
-
-    <!-- Abilities Table -->
     <input type="checkbox" class="sheet-toggle sheet-hidden" name="attr_abilities_section_toggle" value="1" checked>
     <div class="sheet-toggle">
-        <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
+        <!-- Abilities Filter -->
+        <div class="sheet-space-between sheet-bmargin">
+            <div data-i18n-list="ability-type-order">
+                <label class="sheet-left" data-i18n="type">Type</label>
+                <input type='hidden' class="sheet-abilities-type-filter" name='attr_abilities_type_filter' value='all'/>
+                <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-all" name="act_abilities_type_filter_all" data-i18n="all">All</button>
+                <button type="action" data-i18n-list-item="alchemy" class="sheet-checkbtn sheet-alchemy-toggle sheet-abilities-type-filter-alchemy" name="act_abilities_type_filter_alchemy" data-i18n="alchemy">Alchemy</button>
+                <button type="action" data-i18n-list-item="animism" class="sheet-checkbtn sheet-animism-toggle sheet-abilities-type-filter-animism" name="act_abilities_type_filter_animism" data-i18n="animism">Animism</button>
+                <button type="action" data-i18n-list-item="arcane_magic" class="sheet-checkbtn sheet-arcane-magic-toggle sheet-abilities-type-filter-arcane-magic" name="act_abilities_type_filter_arcane_magic" data-i18n="arcane_magic">Arcane Magic</button>
+                <button type="action" data-i18n-list-item="artifice" class="sheet-checkbtn sheet-artifice-toggle sheet-abilities-type-filter-artifice" name="act_abilities_type_filter_artifice" data-i18n="artifice">Artifice</button>
+                <button type="action" data-i18n-list-item="divine_magic" class="sheet-checkbtn sheet-divine-magic-toggle sheet-abilities-type-filter-divine-magic" name="act_abilities_type_filter_divine_magic" data-i18n="divine_magic">Divine Mage</button>
+                <button type="action" data-i18n-list-item="fae_powers" class="sheet-checkbtn sheet-fae-powers-toggle sheet-abilities-type-filter-fae-powers" name="act_abilities_type_filter_fae_powers" data-i18n="fae_powers">Fae Powers</button>
+                <button type="action" data-i18n-list-item="folk_magic" class="sheet-checkbtn sheet-folk-magic-toggle sheet-abilities-type-filter-folk-magic" name="act_abilities_type_filter_folk_magic" data-i18n="folk_magic">Folk Magic</button>
+                <button type="action" data-i18n-list-item="magic" class="sheet-checkbtn sheet-magic-toggle sheet-abilities-type-filter-magic" name="act_abilities_type_filter_magic" data-i18n="magic">Magic</button>
+                <button type="action" data-i18n-list-item="mysticism" class="sheet-checkbtn sheet-mysticism-toggle sheet-abilities-type-filter-mysticism" name="act_abilities_type_filter_mysticism" data-i18n="mysticism">Mysticism</button>
+                <button type="action" data-i18n-list-item="psionics" class="sheet-checkbtn sheet-psionics-toggle sheet-abilities-type-filter-psionics" name="act_abilities_type_filter_psionics" data-i18n="psionics">Psionics</button>
+                <button type="action" data-i18n-list-item="psychic_powers" class="sheet-checkbtn sheet-psychicpowers-toggle sheet-abilities-type-filter-psychic-powers" name="act_abilities_type_filter_psychic_powers" data-i18n="psychic_powers">Psychic Powers</button>
+                <button type="action" data-i18n-list-item="sorcery" class="sheet-checkbtn sheet-sorcery-toggle sheet-abilities-type-filter-sorcery" name="act_abilities_type_filter_sorcery" data-i18n="sorcery">Sorcery</button>
+                <button type="action" data-i18n-list-item="super_powers" class="sheet-checkbtn sheet-superpowers-toggle sheet-abilities-type-filter-super-powers" name="act_abilities_type_filter_super_powers" data-i18n="super_powers">Super Powers</button>
+                <button type="action" data-i18n-list-item="theism" class="sheet-checkbtn sheet-theism-toggle sheet-abilities-type-filter-theism" name="act_abilities_type_filter_theism" data-i18n="theism">Theism</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-other" name="act_abilities_type_filter_other" data-i18n="other">Other</button>
+            </div>
+            <div style="white-space: nowrap;" class="sheet-rank-toggle">
+                <label class="sheet-left" data-i18n="rank">Rank</label>
+                <input type='hidden' class="sheet-abilities-rank-filter" name='attr_abilities_rank_filter' value='all'/>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-all" name="act_abilities_rank_filter_all" data-i18n="all">All</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-0" name="act_abilities_rank_filter_0">0</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-1" name="act_abilities_rank_filter_1">1</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-2" name="act_abilities_rank_filter_2">2</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-3" name="act_abilities_rank_filter_3">3</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-4" name="act_abilities_rank_filter_4">4</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-5" name="act_abilities_rank_filter_5">5</button>
+            </div>
+        </div>
+
+        <!-- Abilities Table -->
         <div class="sheet-bmargin">
             <div class="sheet-flex sheet-detailed">
                 <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="when_compact_only_starred_abilities_are_shown">S</span></div>
