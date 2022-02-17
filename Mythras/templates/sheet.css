@@ -731,6 +731,7 @@ input[type="checkbox"]:checked + span.sheet-checkradio
     visibility: hidden;
     white-space: pre-wrap;
     display: block;
+    min-height: 4em;
 }
 .largedialog .sheet-auto-expand textarea {
     position: absolute;

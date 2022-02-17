@@ -421,6 +421,9 @@ div.sheet-ability-skillid {
     flex-shrink: 0;
     padding: 1px 1px 0;
 }
+textarea.sheet-ability-notes {
+    height: 4em;
+}
 
 /* Limitations */
 div.sheet-limitation-name {

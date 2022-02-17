@@ -195,7 +195,7 @@
     "force": "Force",
     "range": "Range",
     "load": "Load",
-    "impale-size-short": "IS",
+    "impale_size-abrv": "IS",
     "impale_size": "Impale Size",
     "display": "Display",
     "shields": "Shields",

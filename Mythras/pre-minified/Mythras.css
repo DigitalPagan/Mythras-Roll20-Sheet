@@ -731,6 +731,7 @@ input[type="checkbox"]:checked + span.sheet-checkradio
     visibility: hidden;
     white-space: pre-wrap;
     display: block;
+    min-height: 4em;
 }
 .largedialog .sheet-auto-expand textarea {
     position: absolute;
@@ -1351,6 +1352,9 @@ div.sheet-ability-skillid {
     width: 150px;
     flex-shrink: 0;
     padding: 1px 1px 0;
+}
+textarea.sheet-ability-notes {
+    height: 4em;
 }
 
 /* Limitations */

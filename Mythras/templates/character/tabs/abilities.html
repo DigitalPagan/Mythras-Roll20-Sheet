@@ -1,4 +1,5 @@
-<!-- TODO: fix the overflow on the adjustable textareas -->
+<!-- TODO: use sheet-workers for id refs -->
+
 <!-- Abilities -->
 <div class="sheet-section">
     <!-- Ability Toggles -->
@@ -371,17 +372,11 @@
                         <div class="sheet-edit sheet-flex">
                             <div class="sheet-third-col sheet-rmargin">
                                 <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
-                                <div class="sheet-auto-expand">
-                                    <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
-                                    <span name="attr_traits"></span>
-                                </div>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
                             </div>
                             <div class="sheet-grow">
                                 <div><label class="sheet-left" data-i18n="description">Description</label></div>
-                                <div class="sheet-auto-expand">
-                                    <textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea>
-                                    <span name="attr_description"></span>
-                                </div>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
                             </div>
                         </div>
                         <div class="sheet-play">
