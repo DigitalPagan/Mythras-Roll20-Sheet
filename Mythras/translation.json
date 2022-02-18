@@ -97,6 +97,7 @@
     "ap": "AP",
     "hp": "HP",
     "location": "Location",
+    "location-abrv": "Loc",
     "block": "Block?",
     "encumbrance": "Encumbrance",
     "right_leg": "Right Leg",
@@ -206,6 +207,7 @@
     "firearms": "Firearms",
     "firearm": "Firearm",
     "fire_rate": "Fire Rate",
+    "fire_rate-abrv": "FR",
     "ammunition": "Ammunition",
     "ammunition-abrv4": "Ammo",
     "money-and-wealth": "Money & Wealth",
@@ -1160,5 +1162,6 @@
     "social_special_effect": "Social Special Effect",
     "spirit_special_effect": "Spirit Special Effect",
     "include_in_combat_rolls": "Include in combat rolls",
-    "resistance_skills": "Resistance Skills"
+    "resistance_skills": "Resistance Skills",
+    "active_effects": "Active Effects"
 }

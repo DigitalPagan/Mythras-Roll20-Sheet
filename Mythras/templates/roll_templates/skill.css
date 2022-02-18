@@ -49,7 +49,7 @@
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-skill div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-skill div.sheet-very-easy {
     display: flex;

@@ -224,6 +224,10 @@ select.sheet-hit-location {
     width: 120px;
 }
 
+textarea.sheet-conditions-major {
+    height: 105px;
+}
+
 /* Wounds */
 textarea.sheet-hit-locations-note {
     height: 195px;

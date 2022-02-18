@@ -32,7 +32,7 @@
     display: table-row;
 }
 .sheet-rolltemplate-hit-location div.sheet-tr:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-hit-location div.sheet-th {
     display:table-cell;
@@ -65,7 +65,7 @@
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-hit-location div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-hit-location div.sheet-key {
     font-weight: bold;
@@ -74,6 +74,9 @@
 .sheet-rolltemplate-hit-location div.sheet-value {
     text-align: right;
     flex-grow: 1;
+}
+.sheet-rolltemplate-hit-location .sheet-bold {
+    font-weight: bold;
 }
 
 .sheet-rolltemplate-hit-location .inlinerollresult {
@@ -85,6 +88,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-hit-location .inlinerollresult.fullcrit {
     border: none;

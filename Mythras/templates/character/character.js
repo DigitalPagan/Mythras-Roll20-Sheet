@@ -3,7 +3,7 @@
     TODO: import
     TODO: Upgrade logic:
     char_ageing & training -> other
-    conditions -> repeating_conditions
+    conditions -> add wounds value
     action_points_add_one -> other
     movement_rate_species_fly -> custom_movement
     combat_style traits and weapons -> notes

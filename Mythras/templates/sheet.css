@@ -95,6 +95,10 @@ div.sheet-flex-rev {
     display: flex;
     flex-direction: row-reverse;
 }
+div.sheet-flex-column {
+    display: flex;
+    flex-direction: column;
+}
 div.sheet-space-evenly {
     display: flex;
     justify-content: space-evenly;
@@ -846,18 +850,12 @@ div.sheet-table .repcontainer {
     display: table-row-group;
 }
 
-/*div.sheet-th-tr {
-    display: flex;
-    align-items: center;
-    color: lightgray;
-    background: dimgray;
-}*/
 div.sheet-th {
     display:table-cell;
     text-align: center;
-    padding: 1px;
     background: dimgray;
     color: lightgray;
+    padding: 1px;
     vertical-align: middle;
     font-weight: normal;
 }

@@ -45,6 +45,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-effect .inlinerollresult.fullcrit {
     border: none;

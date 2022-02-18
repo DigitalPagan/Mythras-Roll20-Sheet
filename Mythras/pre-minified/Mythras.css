@@ -95,6 +95,10 @@ div.sheet-flex-rev {
     display: flex;
     flex-direction: row-reverse;
 }
+div.sheet-flex-column {
+    display: flex;
+    flex-direction: column;
+}
 div.sheet-space-evenly {
     display: flex;
     justify-content: space-evenly;
@@ -846,18 +850,12 @@ div.sheet-table .repcontainer {
     display: table-row-group;
 }
 
-/*div.sheet-th-tr {
-    display: flex;
-    align-items: center;
-    color: lightgray;
-    background: dimgray;
-}*/
 div.sheet-th {
     display:table-cell;
     text-align: center;
-    padding: 1px;
     background: dimgray;
     color: lightgray;
+    padding: 1px;
     vertical-align: middle;
     font-weight: normal;
 }
@@ -1154,6 +1152,10 @@ input.sheet-binding-toggle:not([value="binding"]) + .sheet-toggle {
 /* Hit Location select */
 select.sheet-hit-location {
     width: 120px;
+}
+
+textarea.sheet-conditions-major {
+    height: 105px;
 }
 
 /* Wounds */
@@ -1512,7 +1514,7 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-default div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-default div.sheet-key {
     font-weight: bold;
@@ -1532,6 +1534,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-default .inlinerollresult.fullcrit {
     border: none;
@@ -1598,6 +1601,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-effect .inlinerollresult.fullcrit {
     border: none;
@@ -1669,7 +1673,7 @@ textarea.sheet-character-notes {
     display: table-row;
 }
 .sheet-rolltemplate-hit-location div.sheet-tr:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-hit-location div.sheet-th {
     display:table-cell;
@@ -1702,7 +1706,7 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-hit-location div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-hit-location div.sheet-key {
     font-weight: bold;
@@ -1711,6 +1715,9 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-hit-location div.sheet-value {
     text-align: right;
     flex-grow: 1;
+}
+.sheet-rolltemplate-hit-location .sheet-bold {
+    font-weight: bold;
 }
 
 .sheet-rolltemplate-hit-location .inlinerollresult {
@@ -1722,6 +1729,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-hit-location .inlinerollresult.fullcrit {
     border: none;
@@ -1767,7 +1775,7 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-improvement div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-improvement div.sheet-key {
     font-weight: bold;
@@ -1787,6 +1795,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-improvement .inlinerollresult.fullcrit {
     border: none;
@@ -1867,7 +1876,7 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-movement div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-movement div.sheet-key {
     font-weight: bold;
@@ -1887,6 +1896,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-movement .inlinerollresult.fullcrit {
     border: none;
@@ -1940,7 +1950,7 @@ textarea.sheet-character-notes {
     display: table-row;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-tr:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-th {
     display:table-cell;
@@ -1973,7 +1983,7 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-key {
     font-weight: bold;
@@ -1993,6 +2003,7 @@ textarea.sheet-character-notes {
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-resolution_pool .inlinerollresult.fullcrit {
     border: none;
@@ -2063,7 +2074,7 @@ textarea.sheet-character-notes {
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-skill div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-skill div.sheet-very-easy {
     display: flex;

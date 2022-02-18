@@ -59,7 +59,7 @@
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-movement div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-movement div.sheet-key {
     font-weight: bold;
@@ -79,6 +79,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-movement .inlinerollresult.fullcrit {
     border: none;

@@ -32,7 +32,7 @@
     display: table-row;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-tr:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-th {
     display:table-cell;
@@ -65,7 +65,7 @@
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-resolution_pool div.sheet-key {
     font-weight: bold;
@@ -85,6 +85,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-resolution_pool .inlinerollresult.fullcrit {
     border: none;
