@@ -1,5 +1,3 @@
-<!-- TODO: use sheet-workers for id refs -->
-
 <!-- Abilities -->
 <div class="sheet-section">
     <!-- Ability Toggles -->
@@ -29,7 +27,7 @@
         </div>
         <div class="sheet-grow sheet-flex-rev sheet-text-right">
             <div class="sheet-edit">
-                <input type='checkbox' name='attr_abilities_config' value="1"><span class="sheet-checkico">y</span>
+                <input type='checkbox' name='attr_abilities_config' value="1" checked><span class="sheet-checkico">y</span>
             </div>
             <div class="sheet-play">
                 <fieldset class="repeating_devotion sheet-inline">
@@ -103,7 +101,7 @@
     </div>
 
     <!-- Abilities Configuration -->
-    <!--<input type='hidden' class='sheet-toggle sheet-hidden' name='attr_abilities_config' value="1"/>-->
+    <input type='hidden' class='sheet-toggle sheet-hidden' name='attr_abilities_config' value="1"/>
     <div class="sheet-toggle sheet-edit">
         <div class="sheet-flex">
             <div class="sheet-rmargin sheet-bmargin sheet-theism-toggle">
@@ -341,10 +339,10 @@
                                 <option value="5">5</option>
                             </select>
                         </div>
-                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name_display" value="@{skill1name}" disabled></div>
-                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total_display" value="@{skill1total}" disabled> </div>
-                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2}" name="attr_skill2_display" value="@{skill2name}" disabled></div>
-                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total_display" value="@{skill2total}" disabled> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name" value="" readonly></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total" value="0" readonly> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2name}" name="attr_skill2name" value="@{skill2name}" readonly></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total" value="@{skill2total}" readonly> </div>
                         <div class="sheet-td sheet-ability-prompts sheet-abilities-prompts-toggle">
                             <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_prompts}" name="attr_prompts">
                                 <option value="" selected>-</option>
@@ -385,12 +383,7 @@
                         </div>
                     </div>
                     <div class="sheet-hidden">
-                        <input type="text" name="attr_skill1name" value="" readonly>
-                        <input type="text" name="attr_skill1total" value="" readonly>
                         <input type="text" name="attr_skill1roll" value="" readonly>
-                        <input type="text" name="attr_skill2name" value="" readonly>
-                        <input type="text" name="attr_skill2total" value="" readonly>
-                        <!-- <input type="text" name="attr_traits_display" value="" readonly> -->
                     </div>
                 </div>
                 <div class="sheet-compact sheet-wide-toggle">

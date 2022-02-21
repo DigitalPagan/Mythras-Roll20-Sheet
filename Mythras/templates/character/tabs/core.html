@@ -552,7 +552,7 @@
             <!-- Conditions -->
             <div class="sheet-section">
                 <h2><span data-i18n="conditions">Conditions</span>/<span data-i18n="wounds">Wounds</span>/<span data-i18n="active_effects">Active Effects</span></h2>
-                <textarea class="sheet-full-width sheet-conditions-major" name="attr_conditions"></textarea>
+                <textarea class="sheet-full-width sheet-conditions-major" title="@{conditions}" name="attr_conditions"></textarea>
             </div>
 
         </div>
@@ -1175,14 +1175,10 @@
                             <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         </div>
                         <div class="sheet-flex">
-                            <input type="hidden" name="attr_spirit_combat_skill_encumbered" value="@{spirit_combat_skill_encumbered_value}" disabled>
-                            <input type="hidden" name="attr_spirit_combat_skill_encumbered_value" value="@{willpower_encumbered}" readonly>
-                            <input type="hidden" name="attr_spirit_combat_skill_notes" value="@{spirit_combat_skill_notes_value}" disabled>
-                            <input type="hidden" name="attr_spirit_combat_skill_notes_value" value="@{willpower_notes}" readonly>
-                            <input type="hidden" name="attr_spirit_combat_skill_name_value" value="Willpower" readonly>
-                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{spirit_combat_skill_name}" name="attr_spirit_combat_skill_name" value="@{spirit_combat_skill_name_value}" disabled></div>
-                            <input type="hidden" name="attr_spirit_combat_skill_total_value" value="@{spirit_combat_skill_total}" readonly>
-                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{spirit_combat_skill_total}" name="attr_spirit_combat_skill_total" value="@{spirit_combat_skill_total_value}" disabled></div>
+                            <input type="hidden" name="attr_spirit_combat_skill_encumbered" value="0" readonly>
+                            <input type="hidden" name="attr_spirit_combat_skill_notes" value="" readonly>
+                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{spirit_combat_skill_name}" name="attr_spirit_combat_skill_name" value="Willpower" readonly></div>
+                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{spirit_combat_skill_total}" name="attr_spirit_combat_skill_total" value="22" readonly></div>
                             <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{spirit_combat_skill_roll}" name="roll_spirit_combat_skill_roll" value="{{'@{roll_display}&{template:skill} {{spiritcombat=1}} {{character=@{character_name}}} {{name=@{spirit_combat_skill_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{spirit_combat_skill_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{spirit_combat_skill_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{spirit_combat_skill_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{spirit_combat_skill_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{spirit_combat_skill_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{spirit_combat_skill_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{spirit_combat_skill_total}*1.5)+@{penalty})]]}} {{standard=[[@{spirit_combat_skill_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{spirit_combat_skill_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{spirit_combat_skill_total}+@{penalty})]]}} {{hard=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{spirit_combat_skill_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{spirit_combat_skill_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{spirit_combat_skill_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{spirit_combat_skill_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{spirit_combat_skill_notes}}}'}}"></button></div>
                         </div>
                         <div class="sheet-edit sheet-flex">
