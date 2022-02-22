@@ -283,7 +283,7 @@
                             <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                             <input type="hidden" name="attr_id" value="unset, please change any value in this item" readonly>
                         </div>
-                        <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{traits=@{traits}}} {{description=@{description}}} {{page=@{page}}}'}}"></button></div>
+                        <div class="sheet-td sheet-play sheet-button-width sheet-text-center"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{traits=@{traits}}} {{description=@{description}}}'}}"></button></div>
                         <div class="sheet-td sheet-number-width"><input type="number" step="any" class="sheet-full-width sheet-usrinput" title="@{$ID_enc}" name="attr_enc" value="0"></div>
                         <div class="sheet-td sheet-number-width"><input type="number" step="1" class="sheet-full-width sheet-usrinput" title="@{$ID_quantity}" name="attr_quantity" value="1"></div>
                         <div class="sheet-td sheet-equipment-location">
@@ -321,7 +321,69 @@
             </div>
         </div>
 
-        {% include 'character/tabs/common/encumbrance.html' %}
+        <!-- Encumberance -->
+        <div class="sheet-section sheet-grow sheet-rmargin">
+            <div class="sheet-flex-centered">
+                <h2 data-i18n="encumbrance">Encumbrance</h2>
+                <div class="sheet-grow sheet-text-right">
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' title="@{pack_equipped}" name='attr_pack_equipped' value="1" checked/><span>3</span>
+                        <span class="sheet-bold" data-i18n="equip-pack">Equip Pack</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="sheet-table">
+                <div class="sheet-tr">
+                    <div class="sheet-th" data-i18n="temp">Temp</div>
+                    <div class="sheet-th" data-i18n="current">Current</div>
+                    <div class="sheet-th" data-i18n="carrying-load">Carrying Load</div>
+                    <div class="sheet-th" data-i18n="skills">Skills</div>
+                    <div class="sheet-th" data-i18n="move">Move</div>
+                </div>
+                <div class="sheet-tr">
+                    <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-usrinput" title="@{encumbrance_temp}" name="attr_encumbrance_temp" value="0"></div>
+                    <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-value" title="@{encumbrance_current}" name="attr_encumbrance_current" value="0" readonly></div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_load}" name="attr_encumbrance_load">
+                            <option value="0" data-i18n="normal" selected>Normal</option>
+                            <option value="1" data-i18n="medium">Medium</option>
+                            <option value="2" data-i18n="strenuous">Strenuous</option>
+                            <option value="3" data-i18n="impossible">Impossible</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{encumbrance_skills}" name="attr_encumbrance_skills">
+                            <option value="0" data-i18n="standard" selected>Standard</option>
+                            <option value="1" data-i18n="1_grade_harder">1 grade harder</option>
+                            <option value="2" data-i18n="2_grades_harder">2 grades harder</option>
+                            <option value="3" data-i18n="impossible">Impossible</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td">
+                        <select class="sheet-full-width sheet-disabled sheet-text-center" title="@{movement_rate_enc}" name="attr_movement_rate_enc">
+                            <option value="+0" data-i18n="normal">Normal</option>
+                            <option value="-2">-2</option>
+                            <option value="*.5" data-i18n="halved">Halved</option>
+                            <option value="*0" data-i18n="impossible">Impossible</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-hidden">
+                <input type="number" step="any" name="attr_armor_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_armor_penalty" value="0" readonly>
+                <input type="number" step="any" name="attr_melee_weapons_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_ranged_weapons_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_loadout_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_pack_enc" value="0" readonly>
+                <input type="number" step="any" name="attr_currency_enc" value="0" readonly>
+                <input type="number" name="attr_burdened_enc" value="22" readonly>
+                <input type="number" name="attr_overloaded_enc" value="33" readonly>
+                <input type="number" name="attr_encumbrance_current_max" value="44" readonly>
+            </div>
+        </div>
     </div>
     
     <!-- Wealth -->

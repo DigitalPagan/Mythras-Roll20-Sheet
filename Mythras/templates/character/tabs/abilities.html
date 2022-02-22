@@ -1,4 +1,3 @@
-<!-- TODO: filter for starred on collapse -->
 <!-- Abilities -->
 <div class="sheet-section">
     <!-- Ability Toggles -->
@@ -23,12 +22,12 @@
     <!-- Abilities Title -->
     <div class="sheet-flex-centered">
         <div>
-            <input type="checkbox" class="sheet-accordion" name="attr_abilities_section_toggle" value="1" checked>
-            <h2 class="sheet-accordion" data-i18n="abilities">Abilities</h2>
+            <!-- <input type="checkbox" class="sheet-accordion" name="attr_abilities_section_toggle" value="1" checked> -->
+            <h2 data-i18n="abilities">Abilities</h2>
         </div>
         <div class="sheet-grow sheet-flex-rev sheet-text-right">
             <div class="sheet-edit">
-                <input type='checkbox' name='attr_abilities_config' value="1"><span class="sheet-checkico">y</span>
+                <input type='checkbox' name='attr_abilities_config' value="1" checked><span class="sheet-checkico">y</span>
             </div>
             <div class="sheet-play">
                 <fieldset class="repeating_devotion sheet-inline">
@@ -241,48 +240,47 @@
         </div>
     </div>
 
-    <!-- Abilities Filter -->
-    <div class="sheet-space-between sheet-bmargin">
-        <div data-i18n-list="ability-type-order">
-            <label class="sheet-left" data-i18n="type">Type</label>
-            <input type='hidden' class="sheet-abilities-type-filter" name='attr_abilities_type_filter' value='all'/>
-            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-all" name="act_abilities_type_filter_all" data-i18n="all">All</button>
-            <button type="action" data-i18n-list-item="alchemy" class="sheet-checkbtn sheet-alchemy-toggle sheet-abilities-type-filter-alchemy" name="act_abilities_type_filter_alchemy" data-i18n="alchemy">Alchemy</button>
-            <button type="action" data-i18n-list-item="animism" class="sheet-checkbtn sheet-animism-toggle sheet-abilities-type-filter-animism" name="act_abilities_type_filter_animism" data-i18n="animism">Animism</button>
-            <button type="action" data-i18n-list-item="arcane_magic" class="sheet-checkbtn sheet-arcane-magic-toggle sheet-abilities-type-filter-arcane-magic" name="act_abilities_type_filter_arcane_magic" data-i18n="arcane_magic">Arcane Magic</button>
-            <button type="action" data-i18n-list-item="artifice" class="sheet-checkbtn sheet-artifice-toggle sheet-abilities-type-filter-artifice" name="act_abilities_type_filter_artifice" data-i18n="artifice">Artifice</button>
-            <button type="action" data-i18n-list-item="divine_magic" class="sheet-checkbtn sheet-divine-magic-toggle sheet-abilities-type-filter-divine-magic" name="act_abilities_type_filter_divine_magic" data-i18n="divine_magic">Divine Mage</button>
-            <button type="action" data-i18n-list-item="fae_powers" class="sheet-checkbtn sheet-fae-powers-toggle sheet-abilities-type-filter-fae-powers" name="act_abilities_type_filter_fae_powers" data-i18n="fae_powers">Fae Powers</button>
-            <button type="action" data-i18n-list-item="folk_magic" class="sheet-checkbtn sheet-folk-magic-toggle sheet-abilities-type-filter-folk-magic" name="act_abilities_type_filter_folk_magic" data-i18n="folk_magic">Folk Magic</button>
-            <button type="action" data-i18n-list-item="magic" class="sheet-checkbtn sheet-magic-toggle sheet-abilities-type-filter-magic" name="act_abilities_type_filter_magic" data-i18n="magic">Magic</button>
-            <button type="action" data-i18n-list-item="mysticism" class="sheet-checkbtn sheet-mysticism-toggle sheet-abilities-type-filter-mysticism" name="act_abilities_type_filter_mysticism" data-i18n="mysticism">Mysticism</button>
-            <button type="action" data-i18n-list-item="psionics" class="sheet-checkbtn sheet-psionics-toggle sheet-abilities-type-filter-psionics" name="act_abilities_type_filter_psionics" data-i18n="psionics">Psionics</button>
-            <button type="action" data-i18n-list-item="psychic_powers" class="sheet-checkbtn sheet-psychicpowers-toggle sheet-abilities-type-filter-psychic-powers" name="act_abilities_type_filter_psychic_powers" data-i18n="psychic_powers">Psychic Powers</button>
-            <button type="action" data-i18n-list-item="sorcery" class="sheet-checkbtn sheet-sorcery-toggle sheet-abilities-type-filter-sorcery" name="act_abilities_type_filter_sorcery" data-i18n="sorcery">Sorcery</button>
-            <button type="action" data-i18n-list-item="super_powers" class="sheet-checkbtn sheet-superpowers-toggle sheet-abilities-type-filter-super-powers" name="act_abilities_type_filter_super_powers" data-i18n="super_powers">Super Powers</button>
-            <button type="action" data-i18n-list-item="theism" class="sheet-checkbtn sheet-theism-toggle sheet-abilities-type-filter-theism" name="act_abilities_type_filter_theism" data-i18n="theism">Theism</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-other" name="act_abilities_type_filter_other" data-i18n="other">Other</button>
-        </div>
-        <div style="white-space: nowrap;" class="sheet-rank-toggle">
-            <label class="sheet-left" data-i18n="rank">Rank</label>
-            <input type='hidden' class="sheet-abilities-rank-filter" name='attr_abilities_rank_filter' value='all'/>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-all" name="act_abilities_rank_filter_all" data-i18n="all">All</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-0" name="act_abilities_rank_filter_0">0</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-1" name="act_abilities_rank_filter_1">1</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-2" name="act_abilities_rank_filter_2">2</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-3" name="act_abilities_rank_filter_3">3</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-4" name="act_abilities_rank_filter_4">4</button>
-            <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-5" name="act_abilities_rank_filter_5">5</button>
-        </div>
-    </div>
-
-    <!-- Abilities Table -->
     <input type="checkbox" class="sheet-toggle sheet-hidden" name="attr_abilities_section_toggle" value="1" checked>
     <div class="sheet-toggle">
-        <input type="checkbox" class="sheet-hidden sheet-id-toggle" name="attr_ability_ids" value="1">
+        <!-- Abilities Filter -->
+        <div class="sheet-space-between sheet-bmargin">
+            <div data-i18n-list="ability-type-order">
+                <label class="sheet-left" data-i18n="type">Type</label>
+                <input type='hidden' class="sheet-abilities-type-filter" name='attr_abilities_type_filter' value='all'/>
+                <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-all" name="act_abilities_type_filter_all" data-i18n="all">All</button>
+                <button type="action" data-i18n-list-item="alchemy" class="sheet-checkbtn sheet-alchemy-toggle sheet-abilities-type-filter-alchemy" name="act_abilities_type_filter_alchemy" data-i18n="alchemy">Alchemy</button>
+                <button type="action" data-i18n-list-item="animism" class="sheet-checkbtn sheet-animism-toggle sheet-abilities-type-filter-animism" name="act_abilities_type_filter_animism" data-i18n="animism">Animism</button>
+                <button type="action" data-i18n-list-item="arcane_magic" class="sheet-checkbtn sheet-arcane-magic-toggle sheet-abilities-type-filter-arcane-magic" name="act_abilities_type_filter_arcane_magic" data-i18n="arcane_magic">Arcane Magic</button>
+                <button type="action" data-i18n-list-item="artifice" class="sheet-checkbtn sheet-artifice-toggle sheet-abilities-type-filter-artifice" name="act_abilities_type_filter_artifice" data-i18n="artifice">Artifice</button>
+                <button type="action" data-i18n-list-item="divine_magic" class="sheet-checkbtn sheet-divine-magic-toggle sheet-abilities-type-filter-divine-magic" name="act_abilities_type_filter_divine_magic" data-i18n="divine_magic">Divine Mage</button>
+                <button type="action" data-i18n-list-item="fae_powers" class="sheet-checkbtn sheet-fae-powers-toggle sheet-abilities-type-filter-fae-powers" name="act_abilities_type_filter_fae_powers" data-i18n="fae_powers">Fae Powers</button>
+                <button type="action" data-i18n-list-item="folk_magic" class="sheet-checkbtn sheet-folk-magic-toggle sheet-abilities-type-filter-folk-magic" name="act_abilities_type_filter_folk_magic" data-i18n="folk_magic">Folk Magic</button>
+                <button type="action" data-i18n-list-item="magic" class="sheet-checkbtn sheet-magic-toggle sheet-abilities-type-filter-magic" name="act_abilities_type_filter_magic" data-i18n="magic">Magic</button>
+                <button type="action" data-i18n-list-item="mysticism" class="sheet-checkbtn sheet-mysticism-toggle sheet-abilities-type-filter-mysticism" name="act_abilities_type_filter_mysticism" data-i18n="mysticism">Mysticism</button>
+                <button type="action" data-i18n-list-item="psionics" class="sheet-checkbtn sheet-psionics-toggle sheet-abilities-type-filter-psionics" name="act_abilities_type_filter_psionics" data-i18n="psionics">Psionics</button>
+                <button type="action" data-i18n-list-item="psychic_powers" class="sheet-checkbtn sheet-psychicpowers-toggle sheet-abilities-type-filter-psychic-powers" name="act_abilities_type_filter_psychic_powers" data-i18n="psychic_powers">Psychic Powers</button>
+                <button type="action" data-i18n-list-item="sorcery" class="sheet-checkbtn sheet-sorcery-toggle sheet-abilities-type-filter-sorcery" name="act_abilities_type_filter_sorcery" data-i18n="sorcery">Sorcery</button>
+                <button type="action" data-i18n-list-item="super_powers" class="sheet-checkbtn sheet-superpowers-toggle sheet-abilities-type-filter-super-powers" name="act_abilities_type_filter_super_powers" data-i18n="super_powers">Super Powers</button>
+                <button type="action" data-i18n-list-item="theism" class="sheet-checkbtn sheet-theism-toggle sheet-abilities-type-filter-theism" name="act_abilities_type_filter_theism" data-i18n="theism">Theism</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-type-filter-other" name="act_abilities_type_filter_other" data-i18n="other">Other</button>
+            </div>
+            <div style="white-space: nowrap;" class="sheet-rank-toggle">
+                <label class="sheet-left" data-i18n="rank">Rank</label>
+                <input type='hidden' class="sheet-abilities-rank-filter" name='attr_abilities_rank_filter' value='all'/>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-all" name="act_abilities_rank_filter_all" data-i18n="all">All</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-0" name="act_abilities_rank_filter_0">0</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-1" name="act_abilities_rank_filter_1">1</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-2" name="act_abilities_rank_filter_2">2</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-3" name="act_abilities_rank_filter_3">3</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-4" name="act_abilities_rank_filter_4">4</button>
+                <button type="action" class="sheet-checkbtn sheet-abilities-rank-filter-5" name="act_abilities_rank_filter_5">5</button>
+            </div>
+        </div>
+
+        <!-- Abilities Table -->
         <div class="sheet-bmargin">
-            <div class="sheet-flex">
-                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="when_collapsed_only_starred_abilities_are_shown">S</span></div>
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos sheet-help" data-i18n-title="when_compact_only_starred_abilities_are_shown">S</span></div>
                 <div class="sheet-grow sheet-th"><span data-i18n="ability">Ability</span></div>
                 <div class="sheet-play sheet-button-width sheet-th"></div>
                 <div class="sheet-ability-type sheet-th"><span data-i18n="type">Type</span></div>
@@ -295,9 +293,13 @@
                 <div class="sheet-ability-prompts sheet-th sheet-abilities-prompts-toggle"><span data-i18n="prompts">Prompts</span></div>
                 <div class="sheet-checkbox-width sheet-th"><span class="sheet-pictos" data-i18n-title="details-tooltip">E</span></div>
             </div>
+            <div class="sheet-flex sheet-compact">
+                <div class="sheet-grow sheet-th"><span data-i18n="abilities">Abilities</span></div>
+            </div>
+            <div class="sheet-compactable-nomargin-fieldset-control"></div>
             <fieldset class="repeating_ability">
-                <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_show" value="1" checked>
-                <div class="sheet-toggle">
+                <input type="checkbox" class="sheet-hidden sheet-wide-toggle" name="attr_show" value="1" checked>
+                <div class="sheet-wide-toggle sheet-detailed">
                     <div class="sheet-flex">
                         <div class="sheet-td sheet-checkbox-width"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
                         <div class="sheet-td sheet-grow sheet-hover-btn">
@@ -305,7 +307,7 @@
                             <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                             <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
                         </div>
-                        <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} @{name_display} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"></button></div>
+                        <div class="sheet-td sheet-play sheet-button-width"><button type="roll" class="sheet-effect sheet-full-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"></button></div>
                         <div class="sheet-td sheet-ability-type">
                             <select class="sheet-full-width sheet-usrinput sheet-text-center" data-i18n-list="ability-type-order" title="@{$ID_type}" name="attr_type">
                                 <option value="other" data-i18n="other" selected>Other</option>
@@ -337,10 +339,10 @@
                                 <option value="5">5</option>
                             </select>
                         </div>
-                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name_display" value="@{skill1name}" disabled></div>
-                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total_display" value="@{skill1total}" disabled> </div>
-                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2}" name="attr_skill2_display" value="@{skill2name}" disabled></div>
-                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total_display" value="@{skill2total}" disabled> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name" value="" readonly></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total" value="0" readonly> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2name}" name="attr_skill2name" value="@{skill2name}" readonly></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total" value="@{skill2total}" readonly> </div>
                         <div class="sheet-td sheet-ability-prompts sheet-abilities-prompts-toggle">
                             <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_prompts}" name="attr_prompts">
                                 <option value="" selected>-</option>
@@ -368,17 +370,11 @@
                         <div class="sheet-edit sheet-flex">
                             <div class="sheet-third-col sheet-rmargin">
                                 <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
-                                <div class="sheet-auto-expand">
-                                    <textarea class="sheet-full-width" title="@{$ID_traits}" name="attr_traits"></textarea>
-                                    <span name="attr_traits"></span>
-                                </div>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
                             </div>
                             <div class="sheet-grow">
                                 <div><label class="sheet-left" data-i18n="description">Description</label></div>
-                                <div class="sheet-auto-expand">
-                                    <textarea class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea>
-                                    <span name="attr_description"></span>
-                                </div>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
                             </div>
                         </div>
                         <div class="sheet-play">
@@ -387,13 +383,11 @@
                         </div>
                     </div>
                     <div class="sheet-hidden">
-                        <input type="text" name="attr_skill1name" value="" readonly>
-                        <input type="text" name="attr_skill1total" value="" readonly>
                         <input type="text" name="attr_skill1roll" value="" readonly>
-                        <input type="text" name="attr_skill2name" value="" readonly>
-                        <input type="text" name="attr_skill2total" value="" readonly>
-                        <!-- <input type="text" name="attr_traits_display" value="" readonly> -->
                     </div>
+                </div>
+                <div class="sheet-compact sheet-wide-toggle">
+                    <div class="sheet-compactable-rmargin"><button type="roll" class="sheet-nodie" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"><span name="attr_name"></span></button></div>
                 </div>
             </fieldset>
         </div>
@@ -403,25 +397,31 @@
 <!-- Limitations -->
 <input type='checkbox' class="sheet-hidden sheet-toggle" name='attr_limitations_enabled' value="1"/>
 <div class="sheet-section sheet-toggle">
-    <input type="checkbox" class="sheet-accordion" name="attr_limitations_section_toggle" value="1" checked>
-    <h2 class="sheet-accordion" data-i18n="limitations">Limitations</h2>
+    <!--<input type="checkbox" class="sheet-accordion" name="attr_limitations_section_toggle" value="1" checked>-->
+    <h2 data-i18n="limitations">Limitations</h2>
 
     <div class="sheet-accordion">
-        <div class="sheet-flex">
-            <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
-            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-        </div>
-        <fieldset class="repeating_superpowerlimit">
-            <div class="sheet-flex">
-                <div class="sheet-td sheet-limitation-name sheet-hover-btn">
-                    <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
-                    <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
-                </div>
-                <div class="sheet-td sheet-grow">
-                    <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
-                </div>
+        <div class="sheet-bmargin">
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
+                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
             </div>
-        </fieldset>
+            <div class="sheet-compactable-fieldset-control"></div>
+            <fieldset class="repeating_superpowerlimit">
+                <div class="sheet-flex sheet-detailed">
+                    <div class="sheet-td sheet-limitation-name sheet-hover-btn">
+                        <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
+                    </div>
+                    <div class="sheet-td sheet-grow">
+                        <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
+                    </div>
+                </div>
+                <div class="sheet-compact">
+                    <button type="roll" class="sheet-nodie" title="%{$ID_limitation}" name="roll_limitation" value="{{'@{roll_display}&{template:default} {{name=@{name}}} {{character=@{character_name}}} {{notes=@{description}}}'}}"><span name="attr_name"></span></button>
+                </div>
+            </fieldset>
+        </div>
     </div>
 </div>

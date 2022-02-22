@@ -1,4 +1,8 @@
+
 <div class="sheet-mythras-defaults">
+    <!-- Edit Toogle -->
+    <input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit' value="1" checked>
+
     <!-- Header -->
     <div class="sheet-sticky-header">
         <div class="sheet-space-between">
@@ -9,10 +13,10 @@
                     <button type="action" class="sheet-inverted-checkbtn" name="act_roll_display" data-i18n="whisper">Whisper</button>
                 </div>
 
-                <div>
-                    <input type='hidden' class='sheet-checkbtn' name='attr_name_display' value="{{'{{character=@{character_name}}}'}}"/>
-                    <button type="action" class="sheet-inverted-checkbtn" name="act_name_display" data-i18n="show-name">Show Name</button>
-                </div>
+                <!-- <div>
+                    <input type='hidden' class='sheet-checkbtn' name='attr_name_display' value="1" checked/>
+                    <button type="action" class="sheet-checkbtn" name="act_name_display" data-i18n="show-name">Show Name</button>
+                </div> -->
 
                 <div class="sheet-rmargin"><label class="sheet-left" data-i18n="difficulty">Difficulty</label></div>
                 <div class="sheet-rmargin">
@@ -110,21 +114,25 @@
         <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />
         <div class="sheet-character sheet-tmargin">
             <hr>
-            <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
-            <div class="sheet-character-tabs">
-                <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
-                <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
-                <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
-                <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
-                <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
-                <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>
-                <!--<button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>-->
+            <div class="sheet-space-between">
+                <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
+                <div class="sheet-character-tabs">
+                    <button type="action" class="sheet-checkbtn sheet-character-tab-all" name="act_character_tab_all" data-i18n="all">All</button>
+                    <button type="action" class="sheet-checkbtn sheet-character-tab-core" name="act_character_tab_core" data-i18n="core">Core</button>
+                    <button type="action" class="sheet-checkbtn sheet-character-tab-abilities" name="act_character_tab_abilities" data-i18n="abilities">Abilities</button>
+                    <button type="action" class="sheet-checkbtn sheet-character-tab-equipment" name="act_character_tab_equipment" data-i18n="equipment">Equipment</button>
+                    <button type="action" class="sheet-checkbtn sheet-character-tab-background" name="act_character_tab_background" data-i18n="background">Background</button>
+                    <button type="action" class="sheet-checkbtn sheet-character-tab-notes" name="act_character_tab_notes" data-i18n="notes">Notes</button>
+                    <!--<button type="action" class="sheet-checkbtn sheet-character-tab-import sheet-edit" name="act_character_tab_import" data-i18n="json-importer">JSON Importer</button>-->
+                </div>
+                <div class="sheet-play">
+                    <input type='hidden' class='sheet-checkbtn' name='attr_compact' value="0"/>
+                    <button type="action" class="sheet-checkbtn" name="act_compact" data-i18n="compact">Compact</button>
+                </div>
             </div>
+
         </div>
     </div>
-
-    <!-- Edit Toogle -->
-    <input class="sheet-hidden sheet-edit-toggle" type="checkbox" name='attr_edit' value="1" checked>
 
     <!-- Sheet Types -->
     <input type="hidden" class="sheet-typetoggle" name="attr_type" value="character" />

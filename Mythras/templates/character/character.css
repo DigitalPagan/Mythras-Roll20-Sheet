@@ -126,7 +126,12 @@ input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-core,
 input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-abilities,
 input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-equipment,
 input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-background,
-input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-notes {
+input.sheet-character-tab[value="all"] ~ div.sheet-character-tab-notes,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-core,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-abilities,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-equipment,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-background,
+input.sheet-character-tab[value="compact"] ~ div.sheet-character-tab-notes {
     display: block;
 }
 
@@ -143,6 +148,28 @@ input.sheet-character-tab[value="import"] + div.sheet-character-tabs button.shee
     border: solid 1px black;
 }
 
+/* Compact */
+input.sheet-edit-toggle:checked ~ div input.sheet-compact:checked ~ div .sheet-compact,
+input.sheet-edit-toggle:checked ~ div input.sheet-compact:not(:checked) ~ div .sheet-compact,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div .sheet-detailed,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:not(:checked) ~ div .sheet-compact
+ {
+    display: none;
+}
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-fieldset-control + fieldset ~.repcontainer > .repitem,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-rmargin {
+    display: inline-block;
+    margin-right: 5px;
+}
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-nomargin-fieldset-control + fieldset ~.repcontainer > .repitem,
+input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable {
+    display: inline-block;
+}
+div.sheet-compactable-fieldset-control,
+div.sheet-compactable-nomargin-fieldset-control {
+    display: none;
+}
+
 /* Core Tab */
 /* Characteristics */
 div.sheet-char-label {
@@ -151,6 +178,12 @@ div.sheet-char-label {
     width: 100%;
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     text-align: left;
+}
+input.sheet-char-die-short {
+    width: 85px;
+}
+input.sheet-char-die-long {
+    width: 125px;
 }
 
 /* Attributes */
@@ -189,6 +222,10 @@ input.sheet-binding-toggle:not([value="binding"]) + .sheet-toggle {
 /* Hit Location select */
 select.sheet-hit-location {
     width: 120px;
+}
+
+textarea.sheet-conditions-major {
+    height: 105px;
 }
 
 /* Wounds */
@@ -248,16 +285,16 @@ div.sheet-skill-base {
     flex-shrink: 0;
 }
 textarea.sheet-skillnotes {
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
     height: 3em;
     line-height: 1em;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 span.sheet-skillnotes {
-    font-family: "Patrick Hand", sans-serif;
+    font-family: "Merriweather", serif;
     line-height: 1em;
     white-space: pre-line;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 .sheet-passiontype {
     width: 105px;
@@ -393,6 +430,9 @@ div.sheet-ability-skillid {
     width: 150px;
     flex-shrink: 0;
     padding: 1px 1px 0;
+}
+textarea.sheet-ability-notes {
+    height: 4em;
 }
 
 /* Limitations */

@@ -2,6 +2,8 @@
 .sheet-rolltemplate-skill div.sheet-border {
     border: 2px solid dimgray;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-skill div.sheet-header {
     background: dimgray;
@@ -12,7 +14,7 @@
     text-align: center;
 }
 .sheet-rolltemplate-skill div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -37,42 +39,100 @@
     background: black;
     color: lightgray;
 }
+.sheet-rolltemplate-skill span.sheet-result {
+    font-family: "Pictos";
+    cursor: help;
+}
+
+.sheet-rolltemplate-skill div.sheet-table {
+    display: table;
+    width: 100%;
+}
+
+.sheet-rolltemplate-skill div.sheet-tr {
+    display: table-row;
+    width: 100%;
+}
+.sheet-rolltemplate-skill div.sheet-th {
+    display: table-cell;
+    text-align: center;
+    background: dimgray;
+    color: lightgray;
+    padding: 1px;
+    vertical-align: middle;
+    font-weight: normal;
+}
+.sheet-rolltemplate-skill div.sheet-td {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.sheet-rolltemplate-skill .sheet-pictos {
+    font-family: Pictos;
+}
+
+.sheet-rolltemplate-skill .sheet-help {
+    cursor: help;
+}
+
+.sheet-rolltemplate-skill .sheet-flex {
+    display: flex;
+}
+.sheet-rolltemplate-skill .sheet-grow {
+    flex-grow: 1;
+}
+
 
 .sheet-rolltemplate-skill div.sheet-listitem {
     display: flex;
     padding: 2px 1px 0;
 }
-.sheet-rolltemplate-skill div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+.sheet-rolltemplate-skill div.sheet-listitem:nth-child(even) {
+    background: gainsboro;
 }
 .sheet-rolltemplate-skill div.sheet-very-easy {
-    display: flex;
-    padding: 2px 1px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1px 2px 0;
+    padding: 0 5px 0;
     background: #DFF0D8;
 }
 .sheet-rolltemplate-skill div.sheet-easy {
-    display: flex;
-    padding: 2px 1px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1px 2px 0;
+    padding: 0 5px 0;
     background: #D9EDF7;
 }
 .sheet-rolltemplate-skill div.sheet-standard {
-    display: flex;
-    padding: 2px 1px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1px 2px 0;
+    padding: 0 5px 0;
     background: gainsboro;
 }
 .sheet-rolltemplate-skill div.sheet-hard {
-    display: flex;
-    padding: 2px 1px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1px 2px 0;
+    padding: 0 5px 0;
     background: #fcf8e3;
 }
 .sheet-rolltemplate-skill div.sheet-formidable {
-    display: flex;
-    padding: 2px 1px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1px 2px 0;
+    padding: 0 5px 0;
     background: #FFEBCC;
 }
 .sheet-rolltemplate-skill div.sheet-herculean {
-    display: flex;
-    padding: 2px 1px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1px 2px 0;
+    padding: 0 5px 0;
     background: #f2dede;
 }
 
@@ -94,6 +154,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-skill .inlinerollresult.fullcrit {
     border: none;
@@ -112,4 +173,22 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+}
+.sheet-rolltemplate-skill a {
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em !important;
+    border: solid 1px gray !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+    padding: 0 2px 0 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+.sheet-rolltemplate-skill a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+    text-shadow: none;
 }

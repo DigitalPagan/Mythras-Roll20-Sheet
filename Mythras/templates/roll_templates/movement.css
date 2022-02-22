@@ -2,6 +2,8 @@
 .sheet-rolltemplate-movement div.sheet-border {
     border: 2px solid black;
     background: white;
+    font-family: 'Merriweather', serif;
+    font-size: .9em;
 }
 .sheet-rolltemplate-movement div.sheet-header {
     background: black;
@@ -35,7 +37,7 @@
     text-align: center;
 }
 .sheet-rolltemplate-movement div.sheet-name {
-    font-family: Palatino, serif;
+    font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 1.25em;
 }
@@ -57,7 +59,7 @@
     padding: 2px 1px 0;
 }
 .sheet-rolltemplate-movement div.sheet-listitem:nth-child(odd) {
-    background: linear-gradient(to right, gainsboro, white);
+    background: gainsboro;
 }
 .sheet-rolltemplate-movement div.sheet-key {
     font-weight: bold;
@@ -77,6 +79,7 @@
     color: inherit;
     background: inherit;
     font-weight: inherit;
+    font-size: .95em;
 }
 .sheet-rolltemplate-movement .inlinerollresult.fullcrit {
     border: none;
