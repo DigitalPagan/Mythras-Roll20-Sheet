@@ -604,15 +604,14 @@ function getStdSkillGetAttrs(ids) {
  */
 function calcStdSkills(ids, charObj, abilityIds, v) {
     let skillVals = {};
-    let newRefIdVals = {};
-    let socialDamageVals = {};
+    let socialVals = {};
     let spiritDamageVals = {};
     let newRefVals = {}
     ids.forEach(id => {
         const skillValue = charObj[stdSkillChars[`${id}`][0]] + charObj[stdSkillChars[`${id}`][1]] + parseInt(v[`${id}_other`]);
         newRefVals = {...newRefVals,...calcReferencedIdTotals(id, skillValue, abilityIds, v)}
         if (v['social_attack_id_value'] === id) {
-            socialDamageVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillValue)
+            socialVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillValue)
         }
         if (v['spirit_combat_skill_id'] === id) {
             spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], skillValue)
@@ -621,7 +620,7 @@ function calcStdSkills(ids, charObj, abilityIds, v) {
     });
     return {
         ...skillVals,
-        ...socialDamageVals,
+        ...socialVals,
         ...spiritDamageVals,
         ...newRefVals
     };
@@ -702,6 +701,14 @@ function calcReferencedIdTotals(skillId, skillTotal, abilityIds, v) {
 
     if (skillId === v['spirit_combat_skill_id']) {
         newAttrs[`spirit_combat_skill_total`] = skillTotal;
+    }
+
+    if (skillId === v['social_attack_id_value']) {
+        newAttrs[`social_attack_total`] = skillTotal;
+    }
+
+    if (skillId === v['social_defense_id_value']) {
+        newAttrs[`social_defense_total`] = skillTotal;
     }
 
     return newAttrs;
@@ -1250,7 +1257,10 @@ function calcAugmentation(sourceAttr, combatStyleIds, proSkillIds, passionIds) {
     return newVals;
 }
 
-function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, social_attack_id, social_damage_other, social_damage_temp) {
+function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, v) {
+    const social_attack_id = v['social_attack_id'];
+    const social_damage_other = v['social_damage_other'];
+    const social_damage_temp = v['social_damage_temp'];
     let newVals = {};
     passionIds.forEach(id => {
         newVals[`repeating_passion_${id}_social_attack`] = 0;
@@ -1264,20 +1274,20 @@ function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, s
     let socialDamageVals;
     if (sourceAttr.startsWith('repeating_')) {
         targetVal = sourceAttr.replace('_social_attack', '');
-        newVals['social_attack_id'] = '@{social_attack_id_value}';
-        newVals[sourceAttr] = '1';
+        newVals['social_attack_id'] = '${social_attack_id_value}';
         newVals['social_attack_id_value'] = `${targetVal}`;
-        newVals['social_attack_name_value'] = `@{${targetVal}_name}`;
-        newVals['social_attack_total_value'] = `@{${targetVal}_total}`;
-        newVals['social_attack_encumbered_value'] = `@{${targetVal}_encumbered}`;
-        newVals['social_attack_notes_value'] = `@{${targetVal}_notes}`;
+        newVals[sourceAttr] = '1';
+        newVals['social_attack_name'] = v[`${targetVal}_name`];
+        newVals['social_attack_total'] = v[`${targetVal}_total`];
+        newVals['social_attack_encumbered'] = v[`${targetVal}_encumbered`];
+        newVals['social_attack_notes'] = v[`${targetVal}_notes`];
         socialDamageVals = calcSocialDamage(social_damage_other, social_damage_temp, `${targetVal}`);
     } else {
         newVals['social_attack_id_value'] = `${social_attack_id}`;
-        newVals['social_attack_name_value'] = getTranslationByKey(`${social_attack_id}`);
-        newVals['social_attack_total_value'] = `@{${social_attack_id}_total}`;
-        newVals['social_attack_encumbered_value'] = `@{${social_attack_id}_encumbered}`;
-        newVals['social_attack_notes_value'] = `@{${social_attack_id}_notes}`;
+        newVals['social_attack_name'] = getTranslationByKey(`${social_attack_id}`);
+        newVals['social_attack_total'] = v[`${social_attack_id}_total`];
+        newVals['social_attack_encumbered'] = v[`${social_attack_id}_encumbered`];
+        newVals['social_attack_notes'] = v[`${social_attack_id}_notes`];
         socialDamageVals = calcSocialDamage(social_damage_other, social_damage_temp, social_attack_id);
     }
 
@@ -1287,7 +1297,8 @@ function calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, s
     };
 }
 
-function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, social_defense_id) {
+function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, v) {
+    const social_defense_id = v['social_defense_id'];
     let newVals = {};
     passionIds.forEach(id => {
         newVals[`repeating_passion_${id}_social_defense`] = 0;
@@ -1300,19 +1311,19 @@ function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, 
     });
     if (sourceAttr.startsWith('repeating_')) {
         targetVal = sourceAttr.replace('_social_defense', '');
-        newVals['social_defense_id'] = '@{social_defense_id_value}';
-        newVals[sourceAttr] = '1';
+        newVals['social_defense_id'] = '${social_defense_id_value}';
         newVals['social_defense_id_value'] = `${targetVal}`;
-        newVals['social_defense_name_value'] = `@{${targetVal}_name}`;
-        newVals['social_defense_total_value'] = `@{${targetVal}_total}`;
-        newVals['social_defense_encumbered_value'] = `@{${targetVal}_encumbered}`;
-        newVals['social_defense_notes_value'] = `@{${targetVal}_notes}`;
+        newVals[sourceAttr] = '1';
+        newVals['social_defense_name'] = v[`${targetVal}_name`];
+        newVals['social_defense_total'] = v[`${targetVal}_total`];
+        newVals['social_defense_encumbered'] = v[`${targetVal}_encumbered`];
+        newVals['social_defense_notes'] = v[`${targetVal}_notes`];
     } else {
         newVals['social_defense_id_value'] = `${social_defense_id}`;
-        newVals['social_defense_name_value'] = getTranslationByKey(`${social_defense_id}`);
-        newVals['social_defense_total_value'] = `@{${social_defense_id}_total}`;
-        newVals['social_defense_encumbered_value'] = `@{${social_defense_id}_encumbered}`;
-        newVals['social_defense_notes_value'] = `@{${social_defense_id}_notes}`;
+        newVals['social_defense_name'] = getTranslationByKey(`${social_defense_id}`);
+        newVals['social_defense_total'] = v[`${social_defense_id}_total`];
+        newVals['social_defense_encumbered'] = v[`${social_defense_id}_encumbered`];
+        newVals['social_defense_notes'] = v[`${social_defense_id}_notes`];
     }
 
     return newVals;
@@ -1345,7 +1356,7 @@ on('change:str_base change:str_other change:str_temp', function() {
                         'initiative_add_one_tenth_athletics'],
                     ['movement_rate_species', 'movement_rate_other', 'movement_rate_temp', 'movement_rate_fatigue'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function(v) {
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
                     const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, abilityIds, v);
                     const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
@@ -1421,7 +1432,7 @@ on('change:con_base change:con_other change:con_temp', function() {
                     ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
                     ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function (v) {
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function (v) {
                     const charObj = buildCharObj(v);
                     const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                         v['hp_calc'], v['simplified_combat_enabled']);
@@ -1494,7 +1505,7 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
                     ['action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue'],
                     ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function(v) {
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
                     const standardSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, abilityIds, v);
                     const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
@@ -1539,7 +1550,7 @@ on('change:siz_base change:siz_other change:siz_temp', function() {
                 getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, abilityGetAttrs,
                     ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function(v) {
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
                     const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                         v['hp_calc'], v['simplified_combat_enabled']);
@@ -1611,7 +1622,7 @@ on('change:int_base change:int_other change:int_temp', function() {
                     ['spirit_ap_other', 'spirit_ap_temp', 'spirit_ap', 'spirit_ap_max'], ['spirit_ib_other', 'spirit_ib_temp'],
                     ['social_initiative_other', 'social_initiative_temp'], ['resolve_other', 'resolve_temp', 'resolve', 'resolve_max'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function(v) {
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
                     const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
@@ -1669,7 +1680,7 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
                     ['social_initiative_other', 'social_initiative_temp'], ['confidence_other', 'confidence_temp'],
                     ['composure_other', 'composure_temp', 'composure', 'composure_max'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value'],
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value'],
                     ['tenacity_other', 'tenacity_temp', 'tenacity_dependencies', 'tenacity', 'tenacity_max']), function(v) {
                     const charObj = buildCharObj(v);
                     const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
@@ -1755,7 +1766,7 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
                     ['spirit_ib_other', 'spirit_ib_temp'], ['social_initiative_other', 'social_initiative_temp'],
                     ['integrity_other', 'integrity_temp', 'integrity', 'integrity_max'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value']), function(v) {
+                    ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
 
                     setAttrs({
@@ -2108,7 +2119,7 @@ allStdSkillIds.forEach(skillId => {
             getAttrs(allCharGetAttrs.concat([`${skillId}_other`], ['initiative_bonus_other', 'initiative_bonus_temp',
                 'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue'], abilityGetAttrs,
             ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-            ['confidence_other', 'confidence_temp', 'social_damage_other', 'social_damage_temp', 'social_attack_id_value']), function(v) {
+            ['confidence_other', 'confidence_temp', 'social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                 let charObj = buildCharObj(v);
                 let char1 = charObj[stdSkillChars[`${skillId}`][0]];
                 let char2 = charObj[stdSkillChars[`${skillId}`][1]];
@@ -2162,11 +2173,21 @@ allStdSkillIds.forEach(skillId => {
 /* Standard Skill Notes */
 allStdSkillIds.forEach(skillId => {
     on(`change:${skillId}_notes`, function() {
-        getAttrs([`${skillId}_notes`, 'spirit_combat_skill_id'], function(v) {
-                        let spiritValues = {};
+        getAttrs([`${skillId}_notes`, 'spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value'], function(v) {
+            let newValues = {};
             if (`${skillId}` === v['spirit_combat_skill_id']) {
-                setAttrs({spirit_combat_skill_notes: v[`${skillId}_notes`]});
+                newValues['spirit_combat_skill_notes'] = v[`${skillId}_notes`];
             }
+
+            if (`${skillId}` === v['social_attack_id_value']) {
+                newValues['social_attack_notes'] = v[`${skillId}_notes`];
+            }
+
+            if (`${skillId}` === v['social_attack_id_value']) {
+                newValues['social_defense_notes'] = v[`${skillId}_notes`];
+            }
+
+            setAttrs(newValues);
         });
     });
 });
@@ -2188,7 +2209,7 @@ on("change:repeating_passion:total change:repeating_passion:type", function(even
 
             getAttrs(passionGetAttrs.concat(abilityGetAttrs,
                 ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-                ['social_damage_other', 'social_damage_temp', 'social_attack_id_value'],
+                ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'],
                 ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies']), function(v) {
                 const passionTotal = parseInt(v[`repeating_passion_${sourceId}_total`]);
 
@@ -2208,9 +2229,13 @@ on("change:repeating_passion:total change:repeating_passion:type", function(even
                     newSpiritRefAttrs['spirit_combat_skill_total'] = v[`repeating_passion_${sourceId}_total`];
                 }
 
-                let socialDamageVals = {};
+                let socialVals = {};
                 if (`repeating_passion_${sourceId}` === v['social_attack_id_value']) {
-                    socialDamageVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], passionTotal);
+                    socialVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], passionTotal);
+                    socialVals['social_attack_total'] = v[`repeating_passion_${sourceId}_total`];
+                }
+                if (`repeating_passion_${sourceId}` === v['social_defense_id_value']) {
+                    socialVals['social_defense_total'] = v[`repeating_passion_${sourceId}_total`];
                 }
 
                 let spiritDamageVals = {};
@@ -2231,7 +2256,7 @@ on("change:repeating_passion:total change:repeating_passion:type", function(even
                     ...calcTenacity(parseInt(v['pow']), v['tenacity_other'], v['tenacity_temp'], v['tenacity'], v['tenacity_max'], tenacityPenalty),
                     tenacity_dependencies: tenacityPenalty,
                     ...spiritDamageVals,
-                    ...socialDamageVals,
+                    ...socialVals,
                     ...newAbilityAttrs,
                     ...newSpiritRefAttrs
                 });
@@ -2250,7 +2275,7 @@ on("change:repeating_professionalskill:name change:repeating_combatstyle:name ch
         abilityIds.forEach(abilityId => {
             abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
         });
-        getAttrs(abilityGetAttrs.concat(['spirit_combat_skill_id']), function(v) {
+        getAttrs(abilityGetAttrs.concat(['spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
             let newAttrs = {};
             abilityIds.forEach(abilityId => {
                 if (`repeating_${type}_${id}` === v[`repeating_ability_${abilityId}_skill1_id`]) {
@@ -2266,6 +2291,14 @@ on("change:repeating_professionalskill:name change:repeating_combatstyle:name ch
                 newAttrs['spirit_combat_skill_name'] = event.newValue;
             }
 
+            if (`repeating_${type}_${id}` === v['social_attack_id_value']) {
+                newAttrs['social_attack_name'] = event.newValue;
+            }
+
+            if (`repeating_${type}_${id}` === v['social_defense_id_value']) {
+                newAttrs['social_defense_name'] = event.newValue;
+            }
+
             setAttrs(newAttrs);
         });
     });
@@ -2277,11 +2310,19 @@ on("change:repeating_professionalskill:notes change:repeating_combatstyle:notes 
     const id = event.sourceAttribute.split('_')[2];
 
     getSectionIDs("repeating_ability", function(abilityIds) {
-        getAttrs(['spirit_combat_skill_id'], function(v) {
+        getAttrs(['spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value'], function(v) {
             let newAttrs = {};
 
             if (`repeating_${type}_${id}` === v['spirit_combat_skill_id']) {
                 newAttrs['spirit_combat_skill_notes'] = event.newValue;
+            }
+
+            if (`repeating_${type}_${id}` === v['social_attack_id_value']) {
+                newAttrs['social_attack_notes'] = event.newValue;
+            }
+
+            if (`repeating_${type}_${id}` === v['social_defense_id_value']) {
+                newAttrs['social_defense_notes'] = event.newValue;
             }
 
             setAttrs(newAttrs);
@@ -2306,15 +2347,21 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
 
         getAttrs(allCharGetAttrs.concat([`repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`, `repeating_${type}_${id}_other`],
             ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-            ['social_damage_other', 'social_damage_temp', 'social_attack_id_value'], abilityGetAttrs), function(v) {
+            ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'], abilityGetAttrs), function(v) {
             const charObj = buildCharObj(v);
             const skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
             const referencedIdTotals = calcReferencedIdTotals(skillId, skillTotal, abilityIds, v)
             const skillEncumbered = calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`]);
 
-            let socialDamageVals = {};
+            let socialVals = {};
             if (`repeating_${type}_${id}` === v['social_attack_id_value']) {
-                socialDamageVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillTotal);
+                socialVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillTotal);
+                socialVals['social_attack_encumbered'] = skillEncumbered;
+                socialVals['social_attack_total'] = skillTotal;
+            }
+            if (`repeating_${type}_${id}` === v['social_defense_id_value']) {
+                socialVals['social_defense_encumbered'] = skillEncumbered;
+                socialVals['social_defense_total'] = skillTotal;
             }
 
             let spiritDamageVals = {};
@@ -2331,7 +2378,7 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
                 ...newSpiritRefValues,
                 ...referencedIdTotals,
                 ...spiritDamageVals,
-                ...socialDamageVals
+                ...socialVals
             });
         });
     });
@@ -2359,8 +2406,12 @@ on("change:social_attack_id change:repeating_passion:social_attack change:repeat
         getSectionIDs("repeating_passion", function(passionIds) {
             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
                 getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-                    getAttrs(['social_attack_id', 'social_damage_other', 'social_damage_temp'], function(v) {
-                        setAttrs(calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, v['social_attack_id'], v['social_damage_other'], v['social_damage_temp']));
+                    let targetVal = event.newValue;
+                    if (sourceAttr.startsWith('repeating_')) {
+                        targetVal = sourceAttr.replace('_social_attack', '');
+                    }
+                    getAttrs(['social_attack_id', 'social_damage_other', 'social_damage_temp', `${targetVal}_name`, `${targetVal}_encumbered`, `${targetVal}_total`,`${targetVal}_notes`], function (v) {
+                        setAttrs(calcSocialAttack(sourceAttr, combatStyleIds, proSkillIds, passionIds, v));
                     });
                 });
             });
@@ -2377,7 +2428,13 @@ on("change:social_defense_id change:repeating_passion:social_defense change:repe
             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
                 getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
                     getAttrs(['social_defense_id'], function(v) {
-                        setAttrs(calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, v['social_defense_id']));
+                        let targetVal = event.newValue;
+                        if (sourceAttr.startsWith('repeating_')) {
+                            targetVal = sourceAttr.replace('_social_defense', '');
+                        }
+                        getAttrs(['social_defense_id', `${targetVal}_name`, `${targetVal}_encumbered`, `${targetVal}_total`,`${targetVal}_notes`], function (v) {
+                            setAttrs(calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, v));
+                        });
                     });
                 });
             });

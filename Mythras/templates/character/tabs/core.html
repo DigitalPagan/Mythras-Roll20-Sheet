@@ -1,4 +1,3 @@
-<!-- TODO: sheet-workers for id refs -->
 <!-- TODO: minor character types -->
 <!-- TODO: Add armor editing to hit locations for minor character -->
 
@@ -1039,14 +1038,10 @@
                             <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         </div>
                         <div class="sheet-flex">
-                            <input type="hidden" name="attr_social_attack_encumbered" value="@{social_attack_encumbered_value}" disabled>
-                            <input type="hidden" name="attr_social_attack_encumbered_value" value="@{influence_encumbered}" readonly>
-                            <input type="hidden" name="attr_social_attack_notes" value="@{social_attack_notes_value}" disabled>
-                            <input type="hidden" name="attr_social_attack_notes_value" value="@{influence_notes}" readonly>
-                            <input type="hidden" name="attr_social_attack_name_value" value="Influence" readonly>
-                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{social_attack_name}" name="attr_social_attack_name" value="@{social_attack_name_value}" disabled></div>
-                            <input type="hidden" name="attr_social_attack_total_value" value="@{influence_total}" readonly>
-                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{social_attack_total}" name="attr_social_attack_total" value="@{social_attack_total_value}" disabled></div>
+                            <input type="hidden" name="attr_social_attack_encumbered" value="1" readonly>
+                            <input type="hidden" name="attr_social_attack_notes" value="" readonly>
+                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{social_attack_name}" name="attr_social_attack_name" value="Influence" readonly></div>
+                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{social_attack_total}" name="attr_social_attack_total" value="22" readonly></div>
                             <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{social_attack_roll}" name="roll_social_attack_roll" value="{{'@{roll_display}&{template:skill} {{socialoffense=1}} {{character=@{character_name}}} {{name=@{social_attack_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{social_attack_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{social_attack_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_attack_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_attack_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_attack_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_attack_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_attack_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_attack_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_attack_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_attack_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_attack_total}+@{penalty})]]}} {{hard=[[ceil((@{social_attack_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_attack_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_attack_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_attack_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_attack_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_attack_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_attack_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_attack_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_attack_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_attack_notes}}}'}}"></button></div>
                         </div>
                         <!-- Social Defense Skill -->
@@ -1056,14 +1051,13 @@
                             <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         </div>
                         <div class="sheet-flex">
-                            <input type="hidden" name="attr_social_defense_encumbered" value="@{social_defense_encumbered_value}" disabled>
-                            <input type="hidden" name="attr_social_defense_encumbered_value" value="@{deceit_encumbered}" readonly>
-                            <input type="hidden" name="attr_social_defense_notes" value="@{social_defense_notes_value}" disabled>
-                            <input type="hidden" name="attr_social_defense_notes_value" value="@{deceit_notes}" readonly>
+                            <input type="hidden" name="attr_social_defense_encumbered" value="0" readonly>
+                            <input type="hidden" name="attr_social_defense_encumbered" value="0" readonly>
+                            <input type="hidden" name="attr_social_defense_encumbered" value="0" readonly>
+                            <input type="hidden" name="attr_social_defense_notes" value="" readonly>
                             <input type="hidden" name="attr_social_defense_name_value" value="Deceit" readonly>
-                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{social_defense_name}" name="attr_social_defense_name" value="@{social_defense_name_value}" disabled></div>
-                            <input type="hidden" name="attr_social_defense_total_value" value="@{deceit_total}" readonly>
-                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{social_defense_total}" name="attr_social_defense_total" value="@{social_defense_total_value}" disabled></div>
+                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{social_defense_name}" name="attr_social_defense_name" value="Deceit" readonly></div>
+                            <div class="sheet-td"><input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{social_defense_total}" name="attr_social_defense_total" value="24" readonly></div>
                             <div class="sheet-td"><button type="roll" class="sheet-d100 sheet-button-width" title="%{social_defense_roll}" name="roll_social_defense_roll" value="{{'@{roll_display}&{template:skill} {{socialdefense=1}} {{character=@{character_name}}} {{name=@{social_defense_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{social_defense_encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{social_defense_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_defense_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_defense_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_defense_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_defense_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_defense_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_defense_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_defense_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_defense_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_defense_total}+@{penalty})]]}} {{hard=[[ceil((@{social_defense_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_defense_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_defense_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_defense_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_defense_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_defense_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_defense_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_defense_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_defense_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_defense_notes}}}'}}"></button></div>
                         </div>
                     </div>
