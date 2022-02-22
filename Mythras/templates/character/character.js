@@ -626,6 +626,67 @@ function calcStdSkills(ids, charObj, abilityIds, v) {
     };
 }
 
+function calcProSkillOther(charObj, char1, char2, total) {
+    let char1Val;
+    let char2Val;
+    switch(char1) {
+        case '@{str}':
+            char1Val = charObj['str'];
+            break;
+        case '@{dex}':
+            char1Val = charObj['dex'];
+            break;
+        case '@{siz}':
+            char1Val = charObj['siz'];
+            break;
+        case '@{con}':
+            char1Val = charObj['con'];
+            break;
+        case '@{pow}':
+            char1Val = charObj['pow'];
+            break;
+        case '@{int}':
+            char1Val = charObj['int'];
+            break;
+        case '@{cha}':
+            char1Val = charObj['cha'];
+            break;
+        case '(21-@{int})':
+            char1Val = 21 - charObj['int'];
+            break;
+        default:
+            char1Val = 0;
+    }
+
+    switch(char2) {
+        case '@{str}':
+            char2Val = charObj['str'];
+            break;
+        case '@{dex}':
+            char2Val = charObj['dex'];
+            break;
+        case '@{siz}':
+            char2Val = charObj['siz'];
+            break;
+        case '@{con}':
+            char2Val = charObj['con'];
+            break;
+        case '@{pow}':
+            char2Val = charObj['pow'];
+            break;
+        case '@{int}':
+            char2Val = charObj['int'];
+            break;
+        case '@{cha}':
+            char2Val = charObj['cha'];
+            break;
+        default:
+            char2Val = 0;
+    }
+
+    return total - char1Val - char2Val;
+}
+
 function calcProSkillTotal(charObj, char1, char2, other) {
     let char1Val;
     let char2Val;
@@ -2109,7 +2170,11 @@ on('change:all_armor_temp', function() {
 /* Skill Triggers */
 /* Standard Skill Totals */
 allStdSkillIds.forEach(skillId => {
-    on(`change:${skillId}_other`, function() {
+    on(`change:${skillId}_other change:${skillId}_total`, function(event) {
+        // Only players should be allowed to trigger reverse calculation to avoid running this function multiple times
+        if (event.sourceAttribute.endsWith("_total") && event.sourceType === 'sheetworker') {
+            return;
+        }
         getSectionIDs("repeating_ability", function(abilityIds) {
             let abilityGetAttrs = []
             abilityIds.forEach(abilityId => {
@@ -2123,7 +2188,16 @@ allStdSkillIds.forEach(skillId => {
                 let charObj = buildCharObj(v);
                 let char1 = charObj[stdSkillChars[`${skillId}`][0]];
                 let char2 = charObj[stdSkillChars[`${skillId}`][1]];
-                const skillValue = char1 + char2 + parseInt(v[`${skillId}_other`]);
+
+                let skillValue = 0;
+                let primaryNewValue = {};
+                if (event.sourceAttribute.endsWith("_total")) {
+                    skillValue = parseInt(event.newValue);
+                    primaryNewValue[`${skillId}_other`] = skillValue - char1 - char2;
+                } else {
+                    skillValue = char1 + char2 + parseInt(v[`${skillId}_other`]);
+                    primaryNewValue[`${skillId}_total`] = skillValue;
+                }
 
                 let socialDamageValues = {};
                 if (`${skillId}` === v['social_attack_id']) {
@@ -2159,7 +2233,7 @@ allStdSkillIds.forEach(skillId => {
                 }
 
                 setAttrs({
-                    [`${skillId}_total`]: skillValue,
+                    ...primaryNewValue,
                     ...socialDamageValues,
                     ...spiritValues,
                     ...specialValues,
@@ -2332,9 +2406,13 @@ on("change:repeating_professionalskill:notes change:repeating_combatstyle:notes 
 
 /* Professional Skill & Combat Style Total and Encumbered */
 on("change:repeating_professionalskill:char1 change:repeating_professionalskill:char2 " +
-    "change:repeating_professionalskill:other change:repeating_professionalskill:encumbered " +
+    "change:repeating_professionalskill:other change:repeating_professionalskill:total change:repeating_professionalskill:encumbered " +
     "change:repeating_combatstyle:char1 change:repeating_combatstyle:char2 " +
-    "change:repeating_combatstyle:other change:repeating_combatstyle:encumbered", function(event) {
+    "change:repeating_combatstyle:other change:repeating_combatstyle:total change:repeating_combatstyle:encumbered", function(event) {
+    // Only players should be allowed to trigger reverse calculation to avoid running this function multiple times
+    if (event.sourceAttribute.endsWith("_total") && event.sourceType === 'sheetworker') {
+        return;
+    }
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     const skillId = `repeating_${type}_${id}`
@@ -2349,7 +2427,15 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
             ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
             ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'], abilityGetAttrs), function(v) {
             const charObj = buildCharObj(v);
-            const skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
+            let skillTotal = 0;
+            let primaryNewValue = {};
+            if (event.sourceAttribute.endsWith("_total")) {
+                skillTotal = parseInt(event.newValue);
+                primaryNewValue[`${skillId}_other`] = calcProSkillOther(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], skillTotal);
+            } else {
+                skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
+                primaryNewValue[`${skillId}_total`] = skillTotal;
+            }
             const referencedIdTotals = calcReferencedIdTotals(skillId, skillTotal, abilityIds, v)
             const skillEncumbered = calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`]);
 
@@ -2373,7 +2459,7 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
             }
 
             setAttrs({
-                [`${skillId}_total`]: skillTotal,
+                ...primaryNewValue,
                 [`repeating_${type}_${id}_encumbered`]: skillEncumbered,
                 ...newSpiritRefValues,
                 ...referencedIdTotals,

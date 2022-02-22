@@ -541,7 +541,8 @@
     <!-- Character Sheet Tabs -->
     <input type='hidden' class='sheet-character-tab' name='attr_character_tab' value='all'/>
 
-    <!-- TODO: sheet-workers for id refs -->
+    <!-- TODO: reverse calc skills -->
+<!-- TODO: fix up skill template -->
 <!-- TODO: minor character types -->
 <!-- TODO: Add armor editing to hit locations for minor character -->
 
@@ -1887,7 +1888,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{brawn_other}" name="attr_brawn_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{brawn_total}" name="attr_brawn_total" value="24" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{brawn_total}" name="attr_brawn_total" value="24">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{brawn_details}" name="attr_brawn_details" value="1"><span class="sheet-checkico">E</span>
@@ -1941,7 +1942,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{endurance_other}" name="attr_endurance_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{endurance_total}" name="attr_endurance_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{endurance_total}" name="attr_endurance_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{endurance_details}" name="attr_endurance_details" value="1"><span class="sheet-checkico">E</span>
@@ -1995,7 +1996,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{evade_other}" name="attr_evade_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{evade_total}" name="attr_evade_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{evade_total}" name="attr_evade_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{evade_details}" name="attr_evade_details" value="1"><span class="sheet-checkico">E</span>
@@ -2049,7 +2050,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{willpower_other}" name="attr_willpower_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{willpower_total}" name="attr_willpower_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{willpower_total}" name="attr_willpower_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{willpower_details}" name="attr_willpower_details" value="1"><span class="sheet-checkico">E</span>
@@ -2127,7 +2128,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{athletics_other}" name="attr_athletics_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{athletics_total}" name="attr_athletics_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{athletics_total}" name="attr_athletics_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{athletics_details}" name="attr_athletics_details" value="1"><span class="sheet-checkico">E</span>
@@ -2182,7 +2183,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{boating_other}" name="attr_boating_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{boating_total}" name="attr_boating_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{boating_total}" name="attr_boating_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{boating_details}" name="attr_boating_details" value="1"><span class="sheet-checkico">E</span>
@@ -2236,7 +2237,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{conceal_other}" name="attr_conceal_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{conceal_total}" name="attr_conceal_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{conceal_total}" name="attr_conceal_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{conceal_details}" name="attr_conceal_details" value="1"><span class="sheet-checkico">E</span>
@@ -2290,7 +2291,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{customs_other}" name="attr_customs_other" value="40">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{customs_total}" name="attr_customs_total" value="66" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{customs_total}" name="attr_customs_total" value="66">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{customs_details}" name="attr_customs_details" value="1"><span class="sheet-checkico">E</span>
@@ -2344,7 +2345,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{dance_other}" name="attr_dance_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{dance_total}" name="attr_dance_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{dance_total}" name="attr_dance_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{dance_details}" name="attr_dance_details" value="1"><span class="sheet-checkico">E</span>
@@ -2398,7 +2399,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{deceit_other}" name="attr_deceit_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{deceit_total}" name="attr_deceit_total" value="24" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{deceit_total}" name="attr_deceit_total" value="24">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{deceit_details}" name="attr_deceit_details" value="1"><span class="sheet-checkico">E</span>
@@ -2453,7 +2454,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{drive_other}" name="attr_drive_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{drive_total}" name="attr_drive_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{drive_total}" name="attr_drive_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{drive_details}" name="attr_drive_details" value="1"><span class="sheet-checkico">E</span>
@@ -2507,7 +2508,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{first_aid_other}" name="attr_first_aid_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{first_aid_total}" name="attr_first_aid_total" value="24" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{first_aid_total}" name="attr_first_aid_total" value="24">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{first_aid_details}" name="attr_first_aid_details" value="1"><span class="sheet-checkico">E</span>
@@ -2562,7 +2563,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{home_parallel_other}" name="attr_home_parallel_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{home_parallel_total}" name="attr_home_parallel_total" value="26" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{home_parallel_total}" name="attr_home_parallel_total" value="26">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{home_parallel_details}" name="attr_home_parallel_details" value="1"><span class="sheet-checkico">E</span>
@@ -2616,7 +2617,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{influence_other}" name="attr_influence_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{influence_total}" name="attr_influence_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{influence_total}" name="attr_influence_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{influence_details}" name="attr_influence_details" value="1"><span class="sheet-checkico">E</span>
@@ -2670,7 +2671,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{insight_other}" name="attr_insight_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{insight_total}" name="attr_insight_total" value="24" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{insight_total}" name="attr_insight_total" value="24">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{insight_details}" name="attr_insight_details" value="1"><span class="sheet-checkico">E</span>
@@ -2725,7 +2726,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{locale_other}" name="attr_locale_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{locale_total}" name="attr_locale_total" value="26" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{locale_total}" name="attr_locale_total" value="26">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{locale_details}" name="attr_locale_details" value="1"><span class="sheet-checkico">E</span>
@@ -2779,7 +2780,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{native_tongue_other}" name="attr_native_tongue_other" value="40">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{native_tongue_total}" name="attr_native_tongue_total" value="64" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{native_tongue_total}" name="attr_native_tongue_total" value="64">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{native_tongue_details}" name="attr_native_tongue_details" value="1"><span class="sheet-checkico">E</span>
@@ -2833,7 +2834,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{perception_other}" name="attr_perception_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{perception_total}" name="attr_perception_total" value="24" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{perception_total}" name="attr_perception_total" value="24">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{perception_details}" name="attr_perception_details" value="1"><span class="sheet-checkico">E</span>
@@ -2888,7 +2889,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{ride_other}" name="attr_ride_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{ride_total}" name="attr_ride_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{ride_total}" name="attr_ride_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{ride_details}" name="attr_ride_details" value="1"><span class="sheet-checkico">E</span>
@@ -2942,7 +2943,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{sing_other}" name="attr_sing_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{sing_total}" name="attr_sing_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{sing_total}" name="attr_sing_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{sing_details}" name="attr_sing_details" value="1"><span class="sheet-checkico">E</span>
@@ -2997,7 +2998,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{status_other}" name="attr_status_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{status_total}" name="attr_status_total" value="0" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{status_total}" name="attr_status_total" value="0">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{status_details}" name="attr_status_details" value="1"><span class="sheet-checkico">E</span>
@@ -3051,7 +3052,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{stealth_other}" name="attr_stealth_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{stealth_total}" name="attr_stealth_total" value="24" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{stealth_total}" name="attr_stealth_total" value="24">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{stealth_details}" name="attr_stealth_details" value="1"><span class="sheet-checkico">E</span>
@@ -3106,7 +3107,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{strangeness_other}" name="attr_strangeness_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{strangeness_total}" name="attr_strangeness_total" value="0" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{strangeness_total}" name="attr_strangeness_total" value="0">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{strangeness_details}" name="attr_strangeness_details" value="1"><span class="sheet-checkico">E</span>
@@ -3161,7 +3162,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{superstition_other}" name="attr_superstition_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{superstition_total}" name="attr_superstition_total" value="19" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{superstition_total}" name="attr_superstition_total" value="19">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{superstition_details}" name="attr_superstition_details" value="1"><span class="sheet-checkico">E</span>
@@ -3215,7 +3216,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{swim_other}" name="attr_swim_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{swim_total}" name="attr_swim_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{swim_total}" name="attr_swim_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{swim_details}" name="attr_swim_details" value="1"><span class="sheet-checkico">E</span>
@@ -3270,7 +3271,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{the_soot_other}" name="attr_the_soot_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{the_soot_total}" name="attr_the_soot_total" value="0" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{the_soot_total}" name="attr_the_soot_total" value="0">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{the_soot_details}" name="attr_the_soot_details" value="1"><span class="sheet-checkico">E</span>
@@ -3324,7 +3325,7 @@
                                     <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{unarmed_other}" name="attr_unarmed_other" value="0">
                                 </div>
                                 <div class="sheet-td">
-                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{unarmed_total}" name="attr_unarmed_total" value="22" readonly>
+                                    <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{unarmed_total}" name="attr_unarmed_total" value="22">
                                 </div>
                                 <div class="sheet-td">
                                     <input type="checkbox" title="@{unarmed_details}" name="attr_unarmed_details" value="1"><span class="sheet-checkico">E</span>
@@ -3421,7 +3422,7 @@
                                 <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0">
                             </div>
                             <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="22" readonly>
+                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="22">
                             </div>
                             <div class="sheet-td">
                                 <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">E</span>
@@ -3523,7 +3524,7 @@
                                 <input type="number" step="1" class="sheet-number-width sheet-usrinput" title="@{$ID_other}" name="attr_other" value="0">
                             </div>
                             <div class="sheet-td">
-                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0" readonly>
+                                <input type="number" step="1" class="sheet-number-width sheet-impvalue" title="@{$ID_total}" name="attr_total" value="0">
                             </div>
                             <div class="sheet-td">
                                 <input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span>
@@ -6480,6 +6481,67 @@ function calcStdSkills(ids, charObj, abilityIds, v) {
     };
 }
 
+function calcProSkillOther(charObj, char1, char2, total) {
+    let char1Val;
+    let char2Val;
+    switch(char1) {
+        case '@{str}':
+            char1Val = charObj['str'];
+            break;
+        case '@{dex}':
+            char1Val = charObj['dex'];
+            break;
+        case '@{siz}':
+            char1Val = charObj['siz'];
+            break;
+        case '@{con}':
+            char1Val = charObj['con'];
+            break;
+        case '@{pow}':
+            char1Val = charObj['pow'];
+            break;
+        case '@{int}':
+            char1Val = charObj['int'];
+            break;
+        case '@{cha}':
+            char1Val = charObj['cha'];
+            break;
+        case '(21-@{int})':
+            char1Val = 21 - charObj['int'];
+            break;
+        default:
+            char1Val = 0;
+    }
+
+    switch(char2) {
+        case '@{str}':
+            char2Val = charObj['str'];
+            break;
+        case '@{dex}':
+            char2Val = charObj['dex'];
+            break;
+        case '@{siz}':
+            char2Val = charObj['siz'];
+            break;
+        case '@{con}':
+            char2Val = charObj['con'];
+            break;
+        case '@{pow}':
+            char2Val = charObj['pow'];
+            break;
+        case '@{int}':
+            char2Val = charObj['int'];
+            break;
+        case '@{cha}':
+            char2Val = charObj['cha'];
+            break;
+        default:
+            char2Val = 0;
+    }
+
+    return total - char1Val - char2Val;
+}
+
 function calcProSkillTotal(charObj, char1, char2, other) {
     let char1Val;
     let char2Val;
@@ -7963,7 +8025,11 @@ on('change:all_armor_temp', function() {
 /* Skill Triggers */
 /* Standard Skill Totals */
 allStdSkillIds.forEach(skillId => {
-    on(`change:${skillId}_other`, function() {
+    on(`change:${skillId}_other change:${skillId}_total`, function(event) {
+        // Only players should be allowed to trigger reverse calculation to avoid running this function multiple times
+        if (event.sourceAttribute.endsWith("_total") && event.sourceType === 'sheetworker') {
+            return;
+        }
         getSectionIDs("repeating_ability", function(abilityIds) {
             let abilityGetAttrs = []
             abilityIds.forEach(abilityId => {
@@ -7977,7 +8043,16 @@ allStdSkillIds.forEach(skillId => {
                 let charObj = buildCharObj(v);
                 let char1 = charObj[stdSkillChars[`${skillId}`][0]];
                 let char2 = charObj[stdSkillChars[`${skillId}`][1]];
-                const skillValue = char1 + char2 + parseInt(v[`${skillId}_other`]);
+
+                let skillValue = 0;
+                let primaryNewValue = {};
+                if (event.sourceAttribute.endsWith("_total")) {
+                    skillValue = parseInt(event.newValue);
+                    primaryNewValue[`${skillId}_other`] = skillValue - char1 - char2;
+                } else {
+                    skillValue = char1 + char2 + parseInt(v[`${skillId}_other`]);
+                    primaryNewValue[`${skillId}_total`] = skillValue;
+                }
 
                 let socialDamageValues = {};
                 if (`${skillId}` === v['social_attack_id']) {
@@ -8013,7 +8088,7 @@ allStdSkillIds.forEach(skillId => {
                 }
 
                 setAttrs({
-                    [`${skillId}_total`]: skillValue,
+                    ...primaryNewValue,
                     ...socialDamageValues,
                     ...spiritValues,
                     ...specialValues,
@@ -8186,9 +8261,13 @@ on("change:repeating_professionalskill:notes change:repeating_combatstyle:notes 
 
 /* Professional Skill & Combat Style Total and Encumbered */
 on("change:repeating_professionalskill:char1 change:repeating_professionalskill:char2 " +
-    "change:repeating_professionalskill:other change:repeating_professionalskill:encumbered " +
+    "change:repeating_professionalskill:other change:repeating_professionalskill:total change:repeating_professionalskill:encumbered " +
     "change:repeating_combatstyle:char1 change:repeating_combatstyle:char2 " +
-    "change:repeating_combatstyle:other change:repeating_combatstyle:encumbered", function(event) {
+    "change:repeating_combatstyle:other change:repeating_combatstyle:total change:repeating_combatstyle:encumbered", function(event) {
+    // Only players should be allowed to trigger reverse calculation to avoid running this function multiple times
+    if (event.sourceAttribute.endsWith("_total") && event.sourceType === 'sheetworker') {
+        return;
+    }
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     const skillId = `repeating_${type}_${id}`
@@ -8203,7 +8282,15 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
             ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
             ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'], abilityGetAttrs), function(v) {
             const charObj = buildCharObj(v);
-            const skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
+            let skillTotal = 0;
+            let primaryNewValue = {};
+            if (event.sourceAttribute.endsWith("_total")) {
+                skillTotal = parseInt(event.newValue);
+                primaryNewValue[`${skillId}_other`] = calcProSkillOther(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], skillTotal);
+            } else {
+                skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
+                primaryNewValue[`${skillId}_total`] = skillTotal;
+            }
             const referencedIdTotals = calcReferencedIdTotals(skillId, skillTotal, abilityIds, v)
             const skillEncumbered = calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`]);
 
@@ -8227,7 +8314,7 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
             }
 
             setAttrs({
-                [`${skillId}_total`]: skillTotal,
+                ...primaryNewValue,
                 [`repeating_${type}_${id}_encumbered`]: skillEncumbered,
                 ...newSpiritRefValues,
                 ...referencedIdTotals,
