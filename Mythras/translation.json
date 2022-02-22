@@ -1,5 +1,5 @@
 {
-    "sheet-type-order": "battle-unit,character,ship,star-system,vehicle",
+    "sheet-type-order": "battle_unit,major_character,ship,star_system,vehicle",
     "setting-order": "default,atvw,agony_and_ecstasy,classic_fantasy,luther_arkwright,mspace,monster_island,mythic_britain,mythic_constantinople,mythic_rome,odd_soot,thennla,worlds_united",
     "type-order": "battle_unit,creature,spirit,frostbyte_vehicle,mythras_vehicle,ship,star-system",
     "vehicle-type-order": "default,disabled,mythras,mspace,ships",
@@ -1163,5 +1163,6 @@
     "spirit_special_effect": "Spirit Special Effect",
     "include_in_combat_rolls": "Include in combat rolls",
     "resistance_skills": "Resistance Skills",
-    "active_effects": "Active Effects"
+    "active_effects": "Active Effects",
+    "major_character": "Major Character"
 }
