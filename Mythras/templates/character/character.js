@@ -1200,6 +1200,10 @@ function calcSpiritAP(pow, int, spirit_ap_other, spirit_ap_temp, action_points_c
     };
 }
 
+function calcSpiritIntensity(pow) {
+    return {spirit_intensity: Math.ceil(parseInt(pow)/6)}
+}
+
 function calcSpiritDamage(spirit_damage_other, spirit_damage_temp, spirit_damage_calc, spirit_combat_skill_id, spirit_combat_skill_total) {
     if (spirit_combat_skill_id === '') {
         return {
@@ -1777,6 +1781,7 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
 
                     setAttrs({
                         pow: charObj['pow'],
+                        ...calcSpiritIntensity(charObj['pow']),
                         ...standardSkillVals,
                         ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
                         ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
@@ -2554,7 +2559,7 @@ on("change:social_defense_id change:repeating_passion:social_defense change:repe
 
 /* Encumbrance Triggers */
 /* Armor ENC and Armor Penalty*/
-on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
+on("change:location12_armor_enc change:location11_armor_enc change:location10_armor_enc change:half_effective_armor_enc change:location9_armor_enc change:location8_armor_enc change:location7_armor_enc change:location6_armor_enc change:location5_armor_enc change:location4_armor_enc change:location3_armor_enc change:location2_armor_enc change:location1_armor_enc change:half_effective_armor_enc", function() {
     getAttrs(armorEncGetAttrs.concat(encGetAttrs, ['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty',
         'athletics_total', 'initiative_add_one_tenth_athletics', 'fatigue'],
         ['str', 'movement_rate_species', 'movement_rate_other', 'movement_rate_temp']), function(v) {
@@ -2965,6 +2970,72 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored",
                 setAttrs({weapon_buttons: weaponButtons});
             });
         });
+    });
+});
+
+/* Novice Skill */
+on("change:novice_char1 change:novice_char2", function(event) {
+    getAttrs(allCharGetAttrs.concat(['novice_char1', 'novice_char2']), function(v) {
+        let char1Val;
+        let char2Val;
+
+        const charObj = buildCharObj(v);
+        switch(v['novice_char1']) {
+            case '@{str}':
+                char1Val = charObj['str'];
+                break;
+            case '@{dex}':
+                char1Val = charObj['dex'];
+                break;
+            case '@{siz}':
+                char1Val = charObj['siz'];
+                break;
+            case '@{con}':
+                char1Val = charObj['con'];
+                break;
+            case '@{pow}':
+                char1Val = charObj['pow'];
+                break;
+            case '@{int}':
+                char1Val = charObj['int'];
+                break;
+            case '@{cha}':
+                char1Val = charObj['cha'];
+                break;
+            case '(21-@{int})':
+                char1Val = 21 - charObj['int'];
+                break;
+            default:
+                char1Val = 0;
+        }
+
+        switch(v['novice_char2']) {
+            case '@{str}':
+                char2Val = charObj['str'];
+                break;
+            case '@{dex}':
+                char2Val = charObj['dex'];
+                break;
+            case '@{siz}':
+                char2Val = charObj['siz'];
+                break;
+            case '@{con}':
+                char2Val = charObj['con'];
+                break;
+            case '@{pow}':
+                char2Val = charObj['pow'];
+                break;
+            case '@{int}':
+                char2Val = charObj['int'];
+                break;
+            case '@{cha}':
+                char2Val = charObj['cha'];
+                break;
+            default:
+                char2Val = 0;
+        }
+
+        setAttrs({novice_total: char1Val + char2Val});
     });
 });
 

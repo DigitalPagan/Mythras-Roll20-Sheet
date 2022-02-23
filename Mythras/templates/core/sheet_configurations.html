@@ -3,6 +3,8 @@
 <select data-i18n-list="sheet-type-order" title="{{'@{type}'}}" class="sheet-usrinput" name="attr_type">
     <option {% if not battle_units %}class="sheet-hidden"{% endif %} value="battle-unit" data-i18n-list-item="battle_unit" data-i18n="battle-unit">Battle Unit</option>
     <option value="character" data-i18n-list-item="major_character" data-i18n="major_character" data-i18n="major_character" selected>Major Character</option>
+    <option value="creature" data-i18n-list-item="major_character_creature" data-i18n="minor_character_creature" data-i18n="minor_character_creature">Minor Character (Creature)</option>
+    <option value="spirit" data-i18n-list-item="major_character_spirit" data-i18n="minor_character_spirit" data-i18n="minor_character_spirit">Minor Character (Spirit)</option>
     <option {% if not ships %}class="sheet-hidden"{% endif %} value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
     <option {% if not star_systems %}class="sheet-hidden"{% endif %} value="star_system" data-i18n-list-item="star_system" data-i18n="star-system">Star System</option>
     <option {% if not vehicles %}class="sheet-hidden"{% endif %} value="vehicle" data-i18n-list-item="vehicle"><span data-i18n="vehicle">Vehicle</span>/<span data-i18n="spaceship">Spaceship</span></option>

@@ -262,6 +262,9 @@ div.sheet-flex-col {
 .sheet-help {
     cursor: help;
 }
+summary {
+    cursor: pointer;
+}
 
 /* Section Accordion */
 input[type="checkbox"].sheet-accordion
@@ -914,7 +917,11 @@ input.sheet-edit-toggle:not(:checked) ~ div fieldset:not(.sheet-editinplay) ~ .r
 
 /* Type Toggles */
 .sheet-typetoggle:not([value="battle_unit"]) ~ div.sheet-battle-unit,
-.sheet-typetoggle:not([value="character"]) ~ div.sheet-character,
+.sheet-typetoggle:not([value="character"], [value="creature"], [value="spirit"]) ~ div.sheet-character,
+.sheet-typetoggle:not([value="character"]) ~ div .sheet-major,
+.sheet-typetoggle:not([value="creature"], [value="spirit"]) ~ div .sheet-minor,
+.sheet-typetoggle:not([value="spirit"]) ~ div .sheet-spirit,
+.sheet-typetoggle:not([value="character"], [value="creature"]) ~ div .sheet-corporal,
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-ship,
 .sheet-typetoggle:not([value="star_system"]) ~ div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-vehicle {
@@ -935,7 +942,7 @@ div.sheet-character {
 /* Character Header Styles */
 div.sheet-info {
     display: inline-block;
-    width: 673px;
+    flex-grow: 1;
     margin-right: 5px;
 }
 div.sheet-info-box {
@@ -1154,7 +1161,7 @@ select.sheet-hit-location {
     width: 120px;
 }
 
-textarea.sheet-conditions-major {
+textarea.sheet-conditions {
     height: 105px;
 }
 
