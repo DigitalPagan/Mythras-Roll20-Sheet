@@ -1,3 +1,73 @@
+<!-- TODO: remove display traits and switch to span in play mode -->
+<!-- TODO: fix abilitys trigger luck calcs -->
+<!-- TODO: reduce configs for prompts -->
+<!-- TODO: relabel skill1 and skill2 with rolled skill and other skill -->
+
+<!-- Features -->
+<div class="sheet-flex">
+    <!-- Traits -->
+    <div class="sheet-section sheet-grow">
+        <h2 data-i18n="abilities_gifts_traits_etc">Abilities, Gifts, Traits, etc</h2>
+    </div>
+
+    <!-- Limitations -->
+    <input type='checkbox' class="sheet-hidden sheet-toggle" name='attr_limitations_enabled' value="1"/>
+    <div class="sheet-section sheet-toggle sheet-lmargin sheet-grow">
+        <!--<input type="checkbox" class="sheet-accordion" name="attr_limitations_section_toggle" value="1" checked>-->
+        <h2 data-i18n="limitations">Limitations</h2>
+
+        <div class="sheet-bmargin">
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
+                <div class="sheet-th sheet-grow"><div data-i18n="description">Description</div></div>
+            </div>
+            <div class="sheet-compactable-fieldset-control"></div>
+            <fieldset class="repeating_superpowerlimit">
+                <div class="sheet-flex sheet-detailed">
+                    <div class="sheet-td sheet-limitation-name sheet-hover-btn">
+                        <input type="text" class="sheet-usrinput sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
+                    </div>
+                    <div class="sheet-td sheet-grow">
+                        <textarea style="height: 3em" class="sheet-full-width" title="@{$ID_description}" name="attr_description"></textarea>
+                    </div>
+                </div>
+                <div class="sheet-compact">
+                    <button type="roll" class="sheet-nodie" title="%{$ID_limitation}" name="roll_limitation" value="{{'@{roll_display}&{template:default} {{name=@{name}}} {{character=@{character_name}}} {{notes=@{description}}}'}}"><span name="attr_name"></span></button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<!--
+<div class="sheet-section">
+    <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
+    <h2 class="sheet-accordion" data-i18n="abilities_gifts_traits_etc">Abilities, Gifts, Traits, etc</h2>
+
+    <div class="sheet-accordion">
+        <div class="sheet-flex">
+            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
+            <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
+            <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
+        </div>
+        <fieldset class="repeating_trait">
+            <div class="sheet-flex">
+                <div class="sheet-td sheet-hover-btn">
+                    <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                    <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                    <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
+                </div>
+                <div class="sheet-td">
+                    <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
+                </div>
+                <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+-->
+
 <!-- Abilities -->
 <div class="sheet-section">
     <!-- Ability Toggles -->
@@ -45,15 +115,15 @@
                         <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="magic_points">Magic Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{magic_points}" name="attr_magic_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
                     </div>
                     <div class="sheet-inline-block" data-i18n-list-item="power_points">
-                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_power_points_enabled' value="1" checked/>
-                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="power_points">Power Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{power_points}" name="attr_power_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{power_points|max}" name="attr_power_points_max" value="11" readonly></div>
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_power_points_enabled' value="1"/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="power_points">Power Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{magic_points}" name="attr_magic_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
                     </div>
                     <div class="sheet-inline-block" data-i18n-list-item="prana_points">
-                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_prana_points_enabled' value="1" checked/>
-                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="prana_points">Prana Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{prana_points}" name="attr_prana_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{prana_points|max}" name="attr_prana_points_max" value="11" readonly></div>
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_prana_points_enabled' value="1"/>
+                        <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="prana_points">Prana Points</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{magic_points}" name="attr_magic_points" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div>
                     </div>
                     <div class="sheet-inline-block" data-i18n-list-item="tenacity">
-                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_tenacity_enabled' value="1" checked/>
+                        <input type='checkbox' class='sheet-hidden sheet-toggle' name='attr_tenacity_enabled' value="1"/>
                         <div class="sheet-toggle sheet-inline-block sheet-lmargin"><label class="sheet-left" data-i18n="tenacity">Tenacity</label><input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-impvalue sheet-number-width-sm" title="@{tenacity|max}" name="attr_tenacity_max" value="11" readonly></div>
                     </div>
                 </div>
@@ -341,8 +411,8 @@
                         </div>
                         <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill1name}" name="attr_skill1name" value="" readonly></div>
                         <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill1total}" name="attr_skill1total" value="0" readonly> </div>
-                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2name}" name="attr_skill2name" value="@{skill2name}" readonly></div>
-                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total" value="@{skill2total}" readonly> </div>
+                        <div class="sheet-td sheet-ability-skill"><input type="text" class="sheet-full-width sheet-value" title="@{$ID_skill2name}" name="attr_skill2name" value="" readonly></div>
+                        <div class="sheet-td sheet-number-width-sm"><input type="number" class="sheet-full-width sheet-value" title="%{$ID_skill2total}" name="attr_skill2total" value="0" readonly> </div>
                         <div class="sheet-td sheet-ability-prompts sheet-abilities-prompts-toggle">
                             <select class="sheet-full-width sheet-usrinput sheet-text-center" title="@{$ID_prompts}" name="attr_prompts">
                                 <option value="" selected>-</option>
@@ -388,38 +458,6 @@
                 </div>
                 <div class="sheet-compact sheet-wide-toggle">
                     <div class="sheet-compactable-rmargin"><button type="roll" class="sheet-nodie" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{skill1name=@{skill1name}}} {{skill1total=@{skill1total}}} {{skill1roll=@{skill1roll}}} {{skill2name=@{skill2name}}} {{skill2total=@{skill2total}}} @{apply_armor_penalty} {{traits=@{traits}}} @{prompts} {{description=@{description}}}'}}"><span name="attr_name"></span></button></div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-</div>
-
-<!-- Limitations -->
-<input type='checkbox' class="sheet-hidden sheet-toggle" name='attr_limitations_enabled' value="1"/>
-<div class="sheet-section sheet-toggle">
-    <!--<input type="checkbox" class="sheet-accordion" name="attr_limitations_section_toggle" value="1" checked>-->
-    <h2 data-i18n="limitations">Limitations</h2>
-
-    <div class="sheet-accordion">
-        <div class="sheet-bmargin">
-            <div class="sheet-flex sheet-detailed">
-                <div class="sheet-th"><div class="sheet-limitation-name" data-i18n="name">Name</div></div>
-                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-            </div>
-            <div class="sheet-compactable-fieldset-control"></div>
-            <fieldset class="repeating_superpowerlimit">
-                <div class="sheet-flex sheet-detailed">
-                    <div class="sheet-td sheet-limitation-name sheet-hover-btn">
-                        <input type="text" class="sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
-                        <input type="hidden" name="attr_id" value="unset, please change any value in this limitation" readonly>
-                    </div>
-                    <div class="sheet-td sheet-grow">
-                        <input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_description}" name="attr_description">
-                    </div>
-                </div>
-                <div class="sheet-compact">
-                    <button type="roll" class="sheet-nodie" title="%{$ID_limitation}" name="roll_limitation" value="{{'@{roll_display}&{template:default} {{name=@{name}}} {{character=@{character_name}}} {{notes=@{description}}}'}}"><span name="attr_name"></span></button>
                 </div>
             </fieldset>
         </div>

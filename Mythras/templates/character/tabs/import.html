@@ -1,0 +1,65 @@
+<div class="sheet-section">
+    <h2 data-i18n="import">Import</h2>
+
+    <div class="sheet-flex">
+        <div class="sheet-half-col sheet-rmargin">
+            <div class="sheet-flex"><div class="sheet-th sheet-grow sheet-full-width" data-i18n="import_data">Import Data</div></div>
+            <div class="sheet-bmargin">
+                <textarea class="sheet-import-data sheet-bmargin" name="attr_import_json_data"></textarea>
+            </div>
+
+            <div class="sheet-flex sheet-bmargin">
+                <div class="sheet-rmargin">
+                    <label class="sheet-left sheet-help" title="Character to import from data">#</label>
+                    <input type="number" class="sheet-usrinput sheet-number-width-sm" title="@{import_character}" name="attr_import_character" value="1" min="1">
+                </div>
+                <button type="action" name="act_import_as_minor" class="sheet-action-btn sheet-grow sheet-text-center" data-i18n="import_as_minor_character">Import as Minor Character</button>
+                <button type="action" name="act_import_as_major" class="sheet-action-btn sheet-grow sheet-text-center" data-i18n="import_as_major_character">Import as Major Character</button>
+            </div>
+
+            <span style="color: red" name="attr_import_errors"></span>
+
+            <div class="sheet-flex"><div class="sheet-th sheet-grow sheet-full-width" data-i18n="imported_spirit_data">Imported Spirit Data</div></div>
+            <fieldset class="repeating_fetish">
+                <input type="hidden" name="attr_name" value=""/>
+                <label><span name="attr_name"></span></label>
+                <div class="sheet-bmargin">
+                    <textarea name="attr_fetish_json" readonly></textarea>
+                </div>
+            </fieldset>
+        </div>
+        <div class="sheet-half-col">
+            <div class="sheet-flex"><div class="sheet-th sheet-full-width" data-i18n="instructions">Instructions</div></div>
+
+            <ol>
+                <li><span data-i18n="import_step_one">Visit the Encounter Generator</span>: <button type="roll" class="sheet-link" name="roll_meg_link" value="/w gm http://skoll.xyz/mythras_eg/">http://skoll.xyz/mythras_eg/</button></li>
+                <li data-i18n="import_step_two">Find your desired enemy and click to visit the template page.</li>
+                <li data-i18n="import_step_three">Note the number at the end of the URL.  This is the enemy ID.  For example, if the template URL is "https://mythras.skoll.xyz/enemy_template/195/" the ID is "195".</li>
+                <li><span data-i18n="import_step_fourA">Enter the ID here</span>: <input type="number" class="sheet-usrinput sheet-number-width" name="attr_meg_enemy_id"/></li>
+                <li><span data-i18n="import_step_fourB">Enter the number desired here</span>: <input type="number" class="sheet-usrinput sheet-number-width" name="attr_meg_enemy_amount" value="6"/></li>
+                <li><span data-i18n="import_step_fourC">Then click this to get and follow a link to the enemies json data</span>: <button type="roll" class="sheet-link" name="roll_meg_link" value="/w gm http://skoll.xyz/mythras_eg/generate_enemies_json/?id=@{meg_enemy_id}&amount=@{meg_enemy_amount}" data-i18n="generate_data_link">Generate Data Link</button></li>
+                <li data-i18n="import_step_five">Paste the contents of the data page into "Import Data" and set # to the character you wish to import.</li>
+                <li data-i18n="import_step_six">Click "Import as Minor Character" or "Import as Major Character"</li>
+            </ol>
+
+            <div class="sheet-infomsg">
+                <ul>
+                    <li data-i18n="import_infomsg1">To import another character from the same data, simply add a new character, re-use the same import data and select a different character number to import.</li>
+                    <li data-i18n="import_infomsg2">Only the first character found in the data will be imported.  Spirits associated with that character will be parsed out under "Imported Spirit Data" so they may be imported as individual roll20 characters.</li>
+                    <li data-i18n="import_infomsg3">The import will determine if the character is a creature or spirit and set the sheet appropriately.</li>
+                </ul>
+            </div>
+
+            <div class="sheet-noticemsg">
+                <ul>
+                    <li data-i18n="import_noticemsg1">Some browsers may display the import data in a user-friendly way, but for this we need the raw text data.  There will likely be a tab for the raw data and/or a button to copy it.</li>
+                    <li data-i18n="import_spirit_noticemsg1">It is recommended to delete imported spirit data after use.  This will help minimize the amount of data retained in this sheet.</li>
+                </ul>
+            </div>
+
+            <div class="sheet-warnmsg">
+                <span data-i18n="import_warnmsg1">It is always recommended to import with a fresh character.  Importing on an existing character will overwrite data and may have unexpected results.</span>
+            </div>
+        </div>
+    </div>
+</div>

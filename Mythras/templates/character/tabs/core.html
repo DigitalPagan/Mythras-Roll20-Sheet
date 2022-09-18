@@ -1,5 +1,7 @@
-<!-- TODO: minor character types -->
-
+<!-- TODO: Mooks -->
+<!-- TODO: DRY the char1 v char2 code -->
+<!-- TODO: end buttons in movement display -->
+<!-- TODO: make a generic se button -->
 <!-- Core Tab -->
 <div class='sheet-character-tab-core'>
     <!-- Character Header -->
@@ -96,33 +98,6 @@
         </div>
     </div>
 
-    <!-- Traits, Creature Abilities & Gifts -->
-    <!-- <div class="sheet-section">
-        <input type="checkbox" class="sheet-accordion" name="attr_traits_accordion" value="1" checked>
-        <h2 class="sheet-accordion" data-i18n="traits_creature_abilities_gifts_etc">Traits, Creature Abilities, Gifts, etc</h2>
-
-        <div class="sheet-accordion">
-            <div class="sheet-flex">
-                <div class="sheet-th"><div class="sheet-trait-field" data-i18n="name">Name</div></div>
-                <div class="sheet-th"><div class="sheet-trait-field" data-i18n="type">Type</div></div>
-                <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="description">Description</div></div>
-            </div>
-            <fieldset class="repeating_trait">
-                <div class="sheet-flex">
-                    <div class="sheet-td sheet-hover-btn">
-                        <input type="text" class="sheet-trait-field sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
-                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
-                        <input type="hidden" name="attr_id" value="unset, please change any value in this trait" readonly>
-                    </div>
-                    <div class="sheet-td">
-                        <input type="text" class="sheet-usrinput sheet-trait-field" title="@{$ID_type}" name="attr_type">
-                    </div>
-                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-usrinput sheet-full-width" title="@{$ID_trait}" name="attr_trait"></div>
-                </div>
-            </fieldset>
-        </div>
-    </div> -->
-
     <!-- Top Stats -->
     <div class="sheet-flex">
         <!-- Characteristics -->
@@ -165,10 +140,10 @@
                 <div class="sheet-td sheet-edit sheet-number-width"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_other}" name="attr_siz_other" value="0"></div>
                 <div class="sheet-td sheet-play sheet-number-width"><input type="number" class="sheet-usrinput sheet-number-width" title="@{siz_temp}" name="attr_siz_temp" value="0"></div>
                 <div class="sheet-td sheet-number-width"><input type="number" class="sheet-impvalue sheet-number-width" title="@{siz}" name="attr_siz" value="13" readonly></div>
-                <div class="sheet-td sheet-edit sheet-checkbox-width"><input type="checkbox" title="@{siz_details}" name="attr_siz_details" value="1" checked><span class="sheet-checkico">y</span></div>
+                <div class="sheet-td sheet-edit sheet-checkbox-width"><input type="checkbox" class="sheet-major" title="@{siz_details}" name="attr_siz_details" value="1" checked><span class="sheet-checkico sheet-major">y</span></div>
             </div>
             <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_siz_details" value="1" checked>
-            <div class="sheet-toggle sheet-edit sheet-corporal">
+            <div class="sheet-toggle sheet-edit sheet-major sheet-corporal">
                 <label class="sheet-left" data-18n="avg-species-siz">Average Species SIZ</label>
                 <input type="number" class="sheet-number-width-sm sheet-usrinput" title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
             </div>
