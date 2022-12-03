@@ -1,0 +1,30 @@
+/* =Generic Styles reused over the sheet= */
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Sorts+Mill+Goudy&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* Setting Display Toggles */
+.sheet-setting-option {
+    display: none;
+}
+.sheet-setting-control[value="custom"] + div .sheet-setting-custom,
+.sheet-setting-control[value="default"] + div .sheet-setting-default,
+.sheet-setting-control[value="after_the_vampire_wars"] + div .sheet-setting-atvw,
+.sheet-setting-control[value="classic_fantasy"] + div .sheet-setting-cf,
+.sheet-setting-control[value="destined"] + div .sheet-setting-destined,
+.sheet-setting-control[value="fioracitta"] + div .sheet-setting-fioracitta,
+.sheet-setting-control[value="luther_arkwright"] + div .sheet-setting-la,
+.sheet-setting-control[value="lyonesse"] + div .sheet-setting-lyonesse,
+.sheet-setting-control[value="m-space"] + div .sheet-setting-ms,
+.sheet-setting-control[value="monster_island"] + div .sheet-setting-mi,
+.sheet-setting-control[value="mythic_babylon"] + div .sheet-setting-mba,
+.sheet-setting-control[value="mythic_britain"] + div .sheet-setting-mb,
+.sheet-setting-control[value="mythic_constantinople"] + div .sheet-setting-mc,
+.sheet-setting-control[value="mythic_rome"] + div .sheet-setting-mr,
+.sheet-setting-control[value="mythras_imperative"] + div .sheet-setting-mi,
+.sheet-setting-control[value="odd_soot"] + div .sheet-setting-os,
+.sheet-setting-control[value="perceforest"] + div .sheet-setting-perceforest,
+.sheet-setting-control[value="thennla"] + div .sheet-setting-thennla,
+.sheet-setting-control[value="worlds_united"] + div .sheet-setting-wu
+{
+    display: initial;
+}
