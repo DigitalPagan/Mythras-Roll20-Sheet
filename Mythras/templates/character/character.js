@@ -1,6 +1,7 @@
 /*
     TODO: recalc
     TODO: Upgrade logic:
+    sanitize names
     char_ageing & training -> other
     conditions -> add wounds value
     action_points_add_one -> other
@@ -38,7 +39,7 @@ const cultRankMap = {
     'acolyte': 3,
     'shaman': 3,
     'overseer': 4,
-    'preist': 4,
+    'priest': 4,
     'high shaman': 4,
     'leader': 5,
     'high priest': 5,
@@ -700,23 +701,23 @@ function getStdSkillGetAttrs(ids) {
  *
  * @param {Array}   ids         List of standard skill ids to calculate values for.
  * @param {Object}  charObj     Pre-parsed char values.
- * @param {Array}  abilityIds   List of ability ids to calculate referenced values for.
+ * @param {Array}  traditionIds   List of tradition ids to calculate referenced values for.
  * @param {Object}  v           Values from trigger's getAttrs.
  *
  * @return {Object} The calculated skill values.
  */
-function calcStdSkills(ids, charObj, abilityIds, v) {
+function calcStdSkills(ids, charObj, traditionIds, v) {
     let skillVals = {};
     let socialVals = {};
     let spiritDamageVals = {};
     let newRefVals = {}
     ids.forEach(id => {
         const skillValue = charObj[stdSkillChars[`${id}`][0]] + charObj[stdSkillChars[`${id}`][1]] + parseInt(v[`${id}_other`]);
-        newRefVals = {...newRefVals,...calcReferencedIdTotals(id, skillValue, abilityIds, v)}
-        if (v['social_attack_id_value'] === id) {
+        newRefVals = {...newRefVals,...calcReferencedIdTotals(id, skillValue, traditionIds, charObj['int'], charObj['pow'], charObj['cha'], v)}
+        if (v['social_attack_id_value'].toUpperCase() === id.toUpperCase()) {
             socialVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillValue)
         }
-        if (v['spirit_combat_skill_id'] === id) {
+        if (v['spirit_combat_skill_id'].toUpperCase() === id.toUpperCase()) {
             spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], skillValue)
         }
         skillVals[`${id}_total`] = skillValue;
@@ -851,15 +852,24 @@ function calcProSkillTotal(charObj, char1, char2, other) {
     return char1Val + char2Val + parseInt(other);
 }
 
-function calcReferencedIdTotals(skillId, skillTotal, abilityIds, v) {
+function calcReferencedIdTotals(skillId, skillTotal, traditionIds, int, pow, cha, v) {
     let newAttrs = {};
-    abilityIds.forEach(abilityId => {
-        if (skillId.toUpperCase() === v[`repeating_ability_${abilityId}_skill1_id`].toUpperCase()) {
-            newAttrs[`repeating_ability_${abilityId}_skill1total`] = skillTotal;
+    let fullTraditionId = '';
+    traditionIds.forEach(traditionId => {
+        fullTraditionId = `repeating_tradition_${traditionId}`;
+        if (skillId.toUpperCase() === v[`${fullTraditionId}_rolled_skill_id`].toUpperCase()) {
+            newAttrs[`${fullTraditionId}_rolled_skill_total`] = skillTotal;
+            newAttrs[`${fullTraditionId}_summary`] = calcTraditionSummary(traditionId, v[`${fullTraditionId}_type`],
+                parseInt(v[`${fullTraditionId}_tradition_rank`]), v[`${fullTraditionId}_rolled_skill_name`], skillTotal,
+                v[`${fullTraditionId}_other_skill_name`], parseInt(v[`${fullTraditionId}_other_skill_total`]), int, pow, cha);
         }
 
-        if (skillId.toUpperCase() === v[`repeating_ability_${abilityId}_skill2_id`].toUpperCase()) {
-            newAttrs[`repeating_ability_${abilityId}_skill2total`] = skillTotal;
+        if (skillId.toUpperCase() === v[`${fullTraditionId}_other_skill_id`].toUpperCase()) {
+            newAttrs[`${fullTraditionId}_other_skill_total`] = skillTotal;
+            newAttrs[`${fullTraditionId}_summary`] = calcTraditionSummary(traditionId, v[`${fullTraditionId}_type`],
+                parseInt(v[`${fullTraditionId}_tradition_rank`]), v[`${fullTraditionId}_rolled_skill_name`],
+                parseInt(v[`${fullTraditionId}_rolled_skill_total`]), v[`${fullTraditionId}_other_skill_name`], skillTotal, int,
+                pow, cha);
         }
     });
 
@@ -896,7 +906,7 @@ function calcProSkillEncumbered(char1, char2) {
     }
 }
 
-function calcProSkills(type, ids, charObj, abilityIds, v) {
+function calcProSkills(type, ids, charObj, traditionIds, v) {
     let skillVals = {};
     let socialDamageVals = {};
     let spiritDamageVals = {};
@@ -905,13 +915,13 @@ function calcProSkills(type, ids, charObj, abilityIds, v) {
         const skillId = `repeating_${type}_${id}`;
         const skillValue = calcProSkillTotal(charObj, v[`${skillId}_char1`], v[`${skillId}_char2`], v[`${skillId}_other`]);
 
-        newRefVals = calcReferencedIdTotals(skillId, skillValue, abilityIds, v);
+        newRefVals = calcReferencedIdTotals(skillId, skillValue, traditionIds, charObj['int'], charObj['pow'], charObj['cha'], v);
 
-        if (v['social_attack_id_value'] === id) {
+        if (v['social_attack_id_value'].toUpperCase() === id.toUpperCase()) {
             socialDamageVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillValue)
         }
 
-        if (v['spirit_combat_skill_id'] === id) {
+        if (v['spirit_combat_skill_id'].toUpperCase() === id.toUpperCase()) {
             spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], skillValue)
         }
 
@@ -1522,6 +1532,581 @@ function calcSocialDefense(sourceAttr, combatStyleIds, proSkillIds, passionIds, 
     return newVals;
 }
 
+/* # Traditions */
+/* ## Tradition Constants */
+const traditionTypeSettings = {
+    "alchemy_assabian": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": {
+                "conditions": "standard",
+                "combine": "standard",
+                "doses": "standard",
+                "magnitude": "standard",
+                "shelf_life": "standard"
+            }
+        }
+    },
+    "alchemy_sorandib": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "animism": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "arcane_magic_bard": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": true,
+            "armor_penalty": true,
+            "components": false
+        }
+    },
+    "arcane_magic_high": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": true,
+            "armor_penalty": true,
+            "components": false
+        }
+    },
+    "artifice": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": {
+                "combine": "standard",
+                "duration": "standard",
+                "magnitude": "standard",
+                "range": "standard",
+                "targets": "standard"
+            }
+        }
+    },
+    "divine_magic_bard": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": true,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "divine_magic_high": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": true,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "divine_magic_low": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": true,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "fae_powers": {
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "fairy_magic": {
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "folk_magic": {
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "incantations": {
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "mysticism": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": true,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "psychic_powers": {
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "sandestin_magic": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": {
+                "area": "sandestin",
+                "combine": "sandestin",
+                "fortune": "sandestin",
+                "range": "standard",
+                "services": "sandestin",
+                "swiftness": "sandestin",
+                "terms": "sandestin"
+            }
+        }
+    },
+    "sorcery": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": {
+                "combine": "standard",
+                "duration": "standard",
+                "magnitude": "standard",
+                "range": "standard",
+                "targets": "standard"
+            }
+        },
+        "after_the_vampire_wars": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": {
+                "combine": "standard",
+                "duration": "both",
+                "magnitude": "standard",
+                "range": "both",
+                "targets": "standard"
+            }
+        },
+        "perceforest": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": {
+                "combine": "standard",
+                "duration": "standard",
+                "magnitude": "standard",
+                "range": "standard",
+                "targets": "standard",
+                "wonders": "standard"
+            }
+        }
+    },
+    "sorcery_mythic_babylon":{
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "theism": {
+        "DEFAULT": {
+            "other_skill": true,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+    "work_songs": {
+        "DEFAULT": {
+            "other_skill": false,
+            "dynamic_intensity": false,
+            "armor_penalty": false,
+            "components": false
+        }
+    },
+}
+/* ## Tradition Functions */
+function calcTraditionTypeSettings(traditionId, type, magicSystems) {
+    if (type === "custom") { return {}; }
+
+    /* set everything to the default values */
+    let newAttrs = {
+        [`${traditionId}_other_skill_enabled`]: "",
+        [`${traditionId}_dynamic_intensity_enabled`]: "",
+        [`${traditionId}_armor_penalty_enabled`]: "",
+        [`${traditionId}_components_enabled`]: ""
+    };
+    /* Make sure all components are disabled by default */
+    ['ablation', 'area', 'combine', 'conditions', 'doses', 'duration', 'focus', 'focus', 'magnitude', 'precision',
+        'range', 'services', 'shelf_life', 'swiftness', 'targets', 'terms', 'wonders'].forEach(component => {
+        newAttrs[`${traditionId}_${component}_component`] = '';
+    })
+    /* Determine if we should use the DEFAULT or a setting variant of the rules */
+    let systems = "DEFAULT";
+    if (magicSystems in traditionTypeSettings[type]) {
+        systems = magicSystems;
+    }
+    /* assign tradition type settings from the lookup table */
+    if (!traditionTypeSettings[type][systems]["other_skill"]) { newAttrs[`${traditionId}_other_skill_enabled`] = 0 }
+    if (traditionTypeSettings[type][systems]["dynamic_intensity"]) { newAttrs[`${traditionId}_dynamic_intensity_enabled`]
+        = "@{dynamic_intensity_trait}" }
+    if (traditionTypeSettings[type][systems]["armor_penalty"]) { newAttrs[`${traditionId}_armor_penalty_enabled`]
+        = "@{armor_penalty_trait}" }
+    if (traditionTypeSettings[type][systems]["components"] &&
+        Object.keys(traditionTypeSettings[type][systems]["components"]).length > 0) {
+        newAttrs[`${traditionId}_components_enabled`] = 1;
+        for (const [key, value] of Object.entries(traditionTypeSettings[type][systems]["components"])) {
+            if (key === "area" || key === "range") {
+                newAttrs[`${traditionId}_${key}_component`] = `@{${key}_component_${value}_metric_trait}`;
+            } else {
+                newAttrs[`${traditionId}_${key}_component`] = `@{${key}_component_${value}_trait}`;
+            }
+        }
+    }
+
+    return newAttrs;
+}
+
+function calcTraditionPool(traditionId, traditionType, traditionRank) {
+    if (traditionType === "custom") { return {}; }
+
+    let poolLimit = '';
+    if (traditionType === "theism") {
+        if (traditionRank === 2) {
+            poolLimit = "ceil(@{pow}*.25)";
+        } else if (traditionRank === 3) {
+            poolLimit = "ceil(@{pow}*.5)";
+        } else if (traditionRank === 4) {
+            poolLimit = "ceil(@{pow}*.75)";
+        } else if (traditionRank === 5) {
+            poolLimit = "@{pow}";
+        } else {
+            poolLimit = ""; /* set to pool default of none */
+        }
+    }
+    return { [`${traditionId}_pool_limit`]: poolLimit};
+}
+
+function calcTraditionRolledAttrs(traditionId, skillId, v) {
+    let skillMacro = `${skillId}_roll`;
+    let skillName = '';
+    let skillTotal = 0;
+
+    if (skillId && !skillId.startsWith('repeating_')) {
+        skillName = getTranslationByKey(`${skillId}`);
+    } else if (v[`${skillId}_name`]) {
+        skillName = v[`${skillId}_name`];
+    }
+
+    if (v[`${skillId}_total`]) {
+        skillTotal = v[`${skillId}_total`]
+    }
+
+    return {
+        [`${traditionId}_rolled_skill_name`]: skillName,
+        [`${traditionId}_rolled_skill_total`]: skillTotal,
+        [`${traditionId}_rolled_skill_macro`]: skillMacro
+    }
+}
+
+function calcTraditionSummary(traditionId, traditionType, traditionRank, rolledSkillName, rolledSkillTotal, otherSkillName, otherSkillTotal, int, pow, cha) {
+    let summary = "-";
+    let maxSpellBase = 0;
+
+    switch(traditionType) {
+        case 'alchemy_assabian':
+            summary = `${getTranslationByKey('intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('shaping_points')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            break;
+        case 'alchemy_sorandib':
+            summary = `${getTranslationByKey('intensity')}: ${Math.ceil(otherSkillTotal / 10)}, ${getTranslationByKey('mundane_intensity')}: ${Math.ceil(otherSkillTotal / 20)}`;
+            break;
+        case 'animism':
+            let max_spirits = cha;
+            if (traditionRank < 4) {
+                max_spirits = Math.ceil(cha * (traditionRank * .25));
+            }
+            summary = `${getTranslationByKey('max_spirits')}: ${max_spirits}, ${getTranslationByKey('max_spirit_pow')}: ${Math.ceil((rolledSkillTotal / 10) * 3)}, ${getTranslationByKey('spirit_attributes')}: ${getTranslationByKey('see_spirit_combat')}`;
+            if (traditionRank === 1) {
+                summary = summary + `\r\n ${getTranslationByKey('trance_time')} (${getTranslationByKey('observe')}: 1 ${getTranslationByKey('hour-l')})`;
+            } else if (traditionRank === 2) {
+                summary = summary + `\r\n ${getTranslationByKey('trance_time')} (${getTranslationByKey('observe')}: 1 ${getTranslationByKey('minute-l')}, ${getTranslationByKey('converse')}: 1 ${getTranslationByKey('hour-l')})`;
+            } else if (traditionRank === 3) {
+                summary = summary + `\r\n ${getTranslationByKey('trance_time')} (${getTranslationByKey('observe')}: 1 ${getTranslationByKey('round-l')}, ${getTranslationByKey('converse')}: 1 ${getTranslationByKey('minute-l')}, ${getTranslationByKey('project_or_draw')}: 1 ${getTranslationByKey('hour-l')})`;
+            } else if (traditionRank >= 4) {
+                summary = summary + `\r\n ${getTranslationByKey('trance_time')} (${getTranslationByKey('observe')}: 1 ${getTranslationByKey('action-l')}, ${getTranslationByKey('converse')}: 1 ${getTranslationByKey('round-l')}, ${getTranslationByKey('project_or_draw')}: 1 ${getTranslationByKey('minute-l')}, ${getTranslationByKey('drag')}: 1 ${getTranslationByKey('hour-l')})`;
+            }
+            break;
+        case 'arcane_magic_bard':
+            maxSpellBase = Math.ceil(int/6);
+            summary = `${getTranslationByKey('max_intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('magnitude')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('cantrips_known')}: ${Math.ceil(otherSkillTotal / 5)}`;
+            if (traditionRank === 1) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 2) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+1}, ${getTranslationByKey('cost_reduction')}: -1)`;
+            } else if (traditionRank === 3) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 4) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+3}, ${getTranslationByKey('cost_reduction')}: -3)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+1}, ${getTranslationByKey('cost_reduction')}: -1)`;
+            } else if (traditionRank === 5) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            }
+            break;
+        case 'arcane_magic_high':
+            maxSpellBase = Math.ceil(int/4);
+            summary = `${getTranslationByKey('max_intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('magnitude')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('cantrips_known')}: ${Math.ceil(otherSkillTotal / 5)}`;
+            if (traditionRank === 1) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 2) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 3) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 4) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+6}, ${getTranslationByKey('cost_reduction')}: -6)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_4_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase}, ${getTranslationByKey('difficulty')}: ${getTranslationByKey('hard')})`;
+            } else if (traditionRank === 5) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+8}, ${getTranslationByKey('cost_reduction')}: -8)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+6}, ${getTranslationByKey('cost_reduction')}: -6)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_4_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2, ${getTranslationByKey('difficulty')}: ${getTranslationByKey('hard')})`;
+                summary = summary + `\r\n${getTranslationByKey('rank_5_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase}, ${getTranslationByKey('difficulty')}: ${getTranslationByKey('formidable')})`;
+            }
+            break;
+        case 'artifice':
+            summary = `${getTranslationByKey('max_complexity')}: ${Math.ceil(rolledSkillTotal / 20)}, ${getTranslationByKey('task_rounds')}: ${Math.ceil(otherSkillTotal / 10)}, ${getTranslationByKey('intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('shaping_points')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            break;
+        case 'divine_magic_bard':
+            maxSpellBase = Math.ceil(int/6);
+            summary = `${getTranslationByKey('max_intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('magnitude')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            if (traditionRank === 1) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 2) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+1}, ${getTranslationByKey('cost_reduction')}: -1)`;
+            } else if (traditionRank === 3) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 4) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+3}, ${getTranslationByKey('cost_reduction')}: -3)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+1}, ${getTranslationByKey('cost_reduction')}: -1)`;
+            } else if (traditionRank === 5) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            }
+            break;
+        case 'divine_magic_high':
+            maxSpellBase = Math.ceil(int/4);
+            summary = `${getTranslationByKey('max_intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('magnitude')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            if (traditionRank === 1) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 2) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 3) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 4) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+6}, ${getTranslationByKey('cost_reduction')}: -6)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_4_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase}, ${getTranslationByKey('difficulty')}: ${getTranslationByKey('hard')})`;
+            } else if (traditionRank === 5) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+8}, ${getTranslationByKey('cost_reduction')}: -8)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+6}, ${getTranslationByKey('cost_reduction')}: -6)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+4}, ${getTranslationByKey('cost_reduction')}: -4)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_4_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2, ${getTranslationByKey('difficulty')}: ${getTranslationByKey('hard')})`;
+                summary = summary + `\r\n${getTranslationByKey('rank_5_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase}, ${getTranslationByKey('difficulty')}: ${getTranslationByKey('formidable')})`;
+            }
+            break;
+        case 'divine_magic_low':
+            maxSpellBase = Math.ceil(int/6);
+            summary = `${getTranslationByKey('max_intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('magnitude')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            if (traditionRank === 3) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 4) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+1}, ${getTranslationByKey('cost_reduction')}: -1)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            } else if (traditionRank === 5) {
+                summary = summary + `\r\n${getTranslationByKey('rank_1_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+2}, ${getTranslationByKey('cost_reduction')}: -2)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_2_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase+1}, ${getTranslationByKey('cost_reduction')}: -1)`;
+                summary = summary + `\r\n${getTranslationByKey('rank_3_spells')} (${getTranslationByKey('max_known')}: ${maxSpellBase})`;
+            }
+            break;
+        case 'fae_powers':
+            summary = `${getTranslationByKey('intensity')}: ${Math.ceil(rolledSkillTotal / 20)}, ${getTranslationByKey('max_active_powers')}: ${Math.ceil(rolledSkillTotal / 40)}`;
+            break;
+        case 'folk_magic':
+            summary = `${getTranslationByKey('intensity')}: 1, ${getTranslationByKey('magnitude')}: 1, ${rolledSkillName}: ${rolledSkillTotal}%`;
+            break;
+        case 'mysticism':
+            summary = `${getTranslationByKey('max_intensity')}: ${Math.ceil(rolledSkillTotal / 20)}, ${getTranslationByKey('max_cumulative_intensity')}: ${Math.ceil(otherSkillTotal / 10)}, ${getTranslationByKey('max_practiced_talents')}: ${Math.ceil(pow / 2)}`;
+            break;
+        case 'psychic_powers':
+            summary = `${getTranslationByKey('intensity')}: ${Math.ceil(rolledSkillTotal / 20)}, ${getTranslationByKey('max_active_talents')}: ${Math.ceil(rolledSkillTotal / 40)}`;
+            break;
+        case 'sandestin_magic':
+            summary = `${getTranslationByKey('coercion_points')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            break;
+        case 'sorcery':
+            summary = `${getTranslationByKey('intensity')}: ${Math.ceil(rolledSkillTotal / 10)}, ${getTranslationByKey('shaping_points')}: ${Math.ceil(otherSkillTotal / 10)}, ${getTranslationByKey('max_memorized_spells')}: ${int}`;
+            break;
+        case 'theism':
+            summary = `${getTranslationByKey('intensity')}: ${Math.ceil(otherSkillTotal / 10)}, ${getTranslationByKey('magnitude')}: ${Math.ceil(otherSkillTotal / 10)}`;
+            break;
+        case 'work_songs':
+            summary = `${getTranslationByKey('intensity')}: 1, ${getTranslationByKey('magnitude')}: 1`;
+            break;
+        default:
+            if (otherSkillTotal > 0) {
+                summary = `${rolledSkillName} ${rolledSkillTotal}%, ${otherSkillName} ${otherSkillTotal}%`;
+            } else {
+                summary = `${rolledSkillName} ${rolledSkillTotal}%`;
+            }
+    }
+
+    return summary;
+}
+
+/* ## Tradition Triggers */
+on("change:repeating_tradition:type", function(event) {
+    const traditionId = "repeating_tradition_" + event.sourceAttribute.split('_')[2];
+
+    getAttrs([`${traditionId}_type`, `${traditionId}_tradition_rank`, `${traditionId}_rolled_skill_name`,
+        `${traditionId}_rolled_skill_total`, `${traditionId}_other_skill_name`, `${traditionId}_other_skill_total`,
+        'int', 'pow', 'cha', 'magic_systems'], function(v) {
+        const traditionRank = parseInt(v[`${traditionId}_tradition_rank`]);
+        setAttrs({
+            ...calcTraditionTypeSettings(traditionId, v[`${traditionId}_type`], v['magic_systems']),
+            ...calcTraditionPool(traditionId, v[`${traditionId}_type`], traditionRank),
+            [`${traditionId}_summary`]: calcTraditionSummary(traditionId, v[`${traditionId}_type`], traditionRank,
+                v[`${traditionId}_rolled_skill_name`], parseInt(v[`${traditionId}_rolled_skill_total`]),
+                v[`${traditionId}_other_skill_name`], parseInt(v[`${traditionId}_other_skill_total`]),
+                parseInt(v['int']), parseInt(v['pow']), parseInt(v['cha']))
+        });
+    });
+});
+
+on("change:repeating_tradition:tradition_rank", function(event) {
+    const traditionId = "repeating_tradition_" + event.sourceAttribute.split('_')[2];
+
+    getAttrs([`${traditionId}_type`, `${traditionId}_tradition_rank`, `${traditionId}_rolled_skill_name`,
+        `${traditionId}_rolled_skill_total`, `${traditionId}_other_skill_name`, `${traditionId}_other_skill_total`,
+        'int', 'pow', 'cha'], function(v) {
+        const traditionRank = parseInt(v[`${traditionId}_tradition_rank`]);
+        setAttrs({
+            ...calcTraditionPool(traditionId, v[`${traditionId}_type`], traditionRank),
+            [`${traditionId}_summary`]: calcTraditionSummary(traditionId, v[`${traditionId}_type`], traditionRank,
+                v[`${traditionId}_rolled_skill_name`], parseInt(v[`${traditionId}_rolled_skill_total`]),
+                v[`${traditionId}_other_skill_name`], parseInt(v[`${traditionId}_other_skill_total`]),
+                parseInt(v['int']), parseInt(v['pow']), parseInt(v['cha']))
+        });
+    });
+});
+
+on("change:repeating_tradition:rolled_skill_id", function(event) {
+    const traditionId = "repeating_tradition_" + event.sourceAttribute.split('_')[2];
+    let skillGetAttrs = [];
+    if (!event.newValue) {
+    } else if (event.newValue && event.newValue.startsWith('repeating_')) {
+        skillGetAttrs.push(`${event.newValue}_name`, `${event.newValue}_total`);
+    } else {
+        skillGetAttrs.push(`${event.newValue}_total`);
+    }
+    getAttrs(skillGetAttrs.concat([`${traditionId}_type`, `${traditionId}_rank`]), function(v) {
+        console.log(`Setting attrs for tradition ${traditionId} rolled_skill_id trigger`);
+        setAttrs(calcTraditionRolledAttrs(traditionId, event.newValue, v));
+    });
+});
+
+on("change:repeating_tradition:other_skill_id", function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    let skillGetAttrs = [];
+    if (!event.newValue) {
+    } else if (event.newValue && event.newValue.startsWith('repeating_')) {
+        skillGetAttrs.push(`${event.newValue}_name`, `${event.newValue}_total`);
+    } else {
+        skillGetAttrs.push(`${event.newValue}_total`);
+    }
+    getAttrs(skillGetAttrs, function(v) {
+        let skillName = '';
+        let skillTotal = 0;
+        if (event.newValue && !event.newValue.startsWith('repeating_')) {
+            skillName = getTranslationByKey(`${event.newValue}`);
+        } else if (v[`${event.newValue}_name`]) {
+            skillName = v[`${event.newValue}_name`];
+        }
+
+        if (v[`${event.newValue}_total`]) {
+            skillTotal = v[`${event.newValue}_total`]
+        }
+
+        console.log(`Setting attrs for tradition ${id} other_skill_id trigger`);
+        setAttrs({
+            [`repeating_tradition_${id}_other_skill_name`]: skillName,
+            [`repeating_tradition_${id}_other_skill_total`]: skillTotal
+        });
+    });
+});
+
+/* Reset tradition rolls when character_name changes */
+/*
+on("change:character_name", function(event) {
+    getSectionIDs("repeating_tradition", function(traditionIds) {
+        let skillIdAttrs = [];
+        traditionIds.forEach(id => {
+            skillIdAttrs.push(`repeating_tradition_${id}_rolled_skill_id`);
+        });
+
+        getAttrs(skillIdAttrs.concat(['character_name']), function(v) {
+            const characterName = v['character_name'];
+            let newAttrs = {};
+
+            traditionIds.forEach(id => {
+                // Don't set for tradition with no skill id set
+                if (v[`repeating_tradition_${id}_rolled_skill_id`]) {
+                    const skillId = v[`repeating_tradition_${id}_rolled_skill_id`];
+                    newAttrs[`repeating_tradition_${id}_rolled_skill_macro`] = `${characterName}|${skillId}_roll`;
+                }
+            });
+
+            console.log(`Setting attrs for character_name trigger`);
+            setAttrs(newAttrs);
+        });
+    });
+});
+ */
+
 
 /* Import  Functions */
 /**
@@ -1550,7 +2135,7 @@ function getImportName(importName, importType) {
  * @param v, data collected from the sheet
  * @param import_type, either 'major' or 'minor' denoting the type of character to import
  */
-function importCharacter(v, import_type) {
+function importCharacter(v, import_type, luck_points_rank) {
     try {
         console.log("json data = " + v['import_json_data']);
         const jsonData = JSON.parse(v['import_json_data']);
@@ -1601,9 +2186,9 @@ function importCharacter(v, import_type) {
             }
         }
 
-        if (typeof characterData["cult_rank"] !== 'undefined') {
-            if (characterData["cult_rank"] in cultRankMap) {
-                newAttrs['rank'] = cult_rank_map[characterData["cult_rank"].toLowerCase()];
+        if (typeof characterData["cult_rank"] !== 'undefined' && luck_points_rank === '1') {
+            if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                newAttrs['rank'] = cultRankMap[characterData["cult_rank"].toLowerCase()];
             }
         }
 
@@ -1746,14 +2331,14 @@ function importCharacter(v, import_type) {
         /* Import Combat Styles and Weapons */
         if (typeof characterData["combat_styles"] !== 'undefined') {
             characterData["combat_styles"].forEach(combat_style => {
-                const combatstyleid = generateRowID().toLowerCase();
+                const combatstyleid = generateRowID();
                 const base_combatstyle = newAttrs['str_base'] + newAttrs['dex_base'];
                 newAttrs["repeating_combatstyle_" + combatstyleid + "_name"] = combat_style["name"];
                 newAttrs["repeating_combatstyle_" + combatstyleid + "_other"] = combat_style["value"] - base_combatstyle;
                 newAttrs["repeating_combatstyle_" + combatstyleid + "_details"] = 0;
 
                     combat_style["weapons"].forEach(weapon => {
-                    const weaponid = generateRowID().toLowerCase();
+                    const weaponid = generateRowID();
 
                     if (weapon["type"] === "ranged") {
                         newAttrs["repeating_rangedweapon_" + weaponid + "_name"] = weapon["name"];
@@ -1825,7 +2410,7 @@ function importCharacter(v, import_type) {
                     }
                 } else if (newAttrs['type'] !== 'character' && allStdSkillIds.includes(skillSearchableKey)) {
                     /* if a minor character import remaining standard skills as professional skills instead */
-                    const skillid = generateRowID().toLowerCase();
+                    const skillid = generateRowID();
                     const char1name = stdSkillChars[skillSearchableKey][0];
                     const char1 = charObj[char1name];
                     const char2name = stdSkillChars[skillSearchableKey][1];
@@ -1837,7 +2422,7 @@ function importCharacter(v, import_type) {
                     newAttrs[`repeating_professionalskill_${skillid}_other`] = skillValue - char1 - char2;
                 } else if (allNonSpecialtyProSkillIds.includes(skillSearchableKey)) {
                     /* Import known professional skills as such */
-                    const skillid = generateRowID().toLowerCase();
+                    const skillid = generateRowID();
                     const char1name = nonSpecialtyProSkillChars[skillSearchableKey][0];
                     const char1 = charObj[char1name];
                     const char2name = nonSpecialtyProSkillChars[skillSearchableKey][1];
@@ -1868,7 +2453,7 @@ function importCharacter(v, import_type) {
                     newAttrs[`repeating_passion_${skillid}_type`] = 'peculiarity';
                     newAttrs[`repeating_passion_${skillid}_total`] = skillValue;
                 } else {
-                    const skillid = generateRowID().toLowerCase();
+                    const skillid = generateRowID();
 
                     // Try to identify it as a known specialty skill, else treat as unknown skill
                     let knownSpecialtySkill = false;
@@ -1906,120 +2491,55 @@ function importCharacter(v, import_type) {
             });
         }
 
-
-        console.log("Set abilities_config");
-        /* Set Ability Configs */
-        newAttrs['abilities_config'] = 0;
-
         console.log("Importing Folk Magic");
-        /* Import Folk Magic Abilities */
+        /* Import Folk Magic */
+        const folkMagicTraditionId = 'repeating_tradition_' + generateRowID();
+        if (magicSkillIds.hasOwnProperty('folk_magic')) {
+            newAttrs[`${folkMagicTraditionId}_name`] = getTranslationByKey('folk_magic');
+            newAttrs[`${folkMagicTraditionId}_type`] = "folk_magic";
+            if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                newAttrs[`${folkMagicTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+            }
+            newAttrs[`${folkMagicTraditionId}_rolled_skill_id`] = magicSkillIds['folk_magic']['id'];
+            newAttrs[`${folkMagicTraditionId}_rolled_skill_name`] = magicSkillIds['folk_magic']['name'];
+            newAttrs[`${folkMagicTraditionId}_rolled_skill_value`] = magicSkillIds['folk_magic']['value'];
+            newAttrs[`${folkMagicTraditionId}_rolled_skill_macro`] = `${magicSkillIds['folk_magic']['id']}_roll`;
+            newAttrs[`${folkMagicTraditionId}_details`] = 0;
+        }
+
         if (typeof characterData["folk_spells"] !== 'undefined') {
             characterData["folk_spells"].forEach(spellName => {
-                const abilityId = generateRowID().toLowerCase();
-                newAttrs[`repeating_ability_${abilityId}_name`] = spellName;
-                newAttrs[`repeating_ability_${abilityId}_type`] = "folk_magic";
-                if (magicSkillIds.hasOwnProperty('folk_magic')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill1_id`] = magicSkillIds['folk_magic']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['folk_magic']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['folk_magic']['value'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1roll`] = `${newAttrs['character_name']}|${magicSkillIds['folk_magic']['id']}_roll`;
-                }
-
-                newAttrs[`repeating_ability_${abilityId}_details`] = 0;
+                const spellId = 'repeating_power_' + generateRowID();
+                newAttrs[`${spellId}_name`] = spellName;
+                newAttrs[`${spellId}_type`] = getTranslationByKey('folk_magic');
+                newAttrs[`${spellId}_tradition_id`] = folkMagicTraditionId;
+                newAttrs[`${spellId}_details`] = 0;
             });
         }
 
-        console.log("Importing Mysticism");
-        /* Import Mysticism Abilities */
-        if (typeof characterData["mysticism_spells"] !== 'undefined') {
-            characterData["mysticism_spells"].forEach(talentName => {
-                const abilityId = generateRowID().toLowerCase();
-                newAttrs[`repeating_ability_${abilityId}_name`] = talentName;
-                newAttrs[`repeating_ability_${abilityId}_type`] = "mysticism";
-                if (magicSkillIds.hasOwnProperty('path')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill1_id`] = magicSkillIds['path']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['path']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['path']['value'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1roll`] = `${newAttrs['character_name']}|${magicSkillIds['path']['id']}_roll`;
-                }
-                if (magicSkillIds.hasOwnProperty('meditation')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill2_id`] = magicSkillIds['meditation']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['meditation']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['meditation']['value'];
-                }
-                newAttrs[`repeating_ability_${abilityId}_details`] = 0;
-            });
-        }
-
-        console.log("Importing Sorcery");
-        /* Import Sorcery Abilities */
-        if (typeof characterData["sorcery_spells"] !== 'undefined') {
-            characterData["sorcery_spells"].forEach(spellName => {
-                const abilityId = generateRowID().toLowerCase();
-                newAttrs[`repeating_ability_${abilityId}_name`] = spellName;
-                newAttrs[`repeating_ability_${abilityId}_type`] = "sorcery";
-                if (magicSkillIds.hasOwnProperty('invocation')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill1_id`] = magicSkillIds['invocation']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['invocation']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['invocation']['value'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1roll`] = `${newAttrs['character_name']}|${magicSkillIds['invocation']['id']}_roll`;
-                }
-                if (magicSkillIds.hasOwnProperty('shaping')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill2_id`] = magicSkillIds['shaping']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['shaping']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['shaping']['value'];
-                }
-                newAttrs[`repeating_ability_${abilityId}_details`] = 0;
-            });
-        }
-
-        console.log("Importing Theism");
-        /* Import Theism Abilities */
-        if (typeof characterData["theism_spells"] !== 'undefined') {
-            characterData["theism_spells"].forEach(miracleName => {
-                const abilityId = generateRowID().toLowerCase();
-                newAttrs[`repeating_ability_${abilityId}_name`] = miracleName;
-                newAttrs[`repeating_ability_${abilityId}_type`] = "theism";
-                if (magicSkillIds.hasOwnProperty('exhort')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill1_id`] = magicSkillIds['exhort']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['exhort']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['exhort']['value'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1roll`] = `${newAttrs['character_name']}|${magicSkillIds['exhort']['id']}_roll`;
-                }
-                if (magicSkillIds.hasOwnProperty('devotion')) {
-                    newAttrs[`repeating_ability_${abilityId}_skill2_id`] = magicSkillIds['devotion']['id'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = magicSkillIds['devotion']['name'];
-                    newAttrs[`repeating_ability_${abilityId}_skill1total`] = magicSkillIds['devotion']['value'];
-                }
-                newAttrs[`repeating_ability_${abilityId}_details`] = 0;
-            });
-        }
-
-        console.log("Importing Devotional Pool")
-        /* Import Devotional Pool */
-        if (typeof characterData["attributes"]["devotional_pool"] === 'number') {
-            const poolValue = parseInt(characterData["attributes"]["devotional_pool"]);
-            let poolLimit = "0";
-            if (poolValue >= newAttrs['pow_base']) {
-                poolLimit = "@{pow}";
-            } else if (poolValue >= (newAttrs['pow_base'] * .75)) {
-                poolLimit = "ceil(@{pow}*.75)";
-            } else if (poolValue >= (newAttrs['pow_base'] * .5)) {
-                poolLimit = "ceil(@{pow}*.5)";
-            } else if (poolValue >= (newAttrs['pow_base'] * .25)) {
-                poolLimit = "ceil(@{pow}*.25)";
+        console.log("Importing Animism");
+        /* Import Animism */
+        const animismTraditionId = 'repeating_tradition_' + generateRowID();
+        if (magicSkillIds.hasOwnProperty('binding') && magicSkillIds.hasOwnProperty('trance')) {
+            newAttrs[`${animismTraditionId}_name`] = getTranslationByKey('animism');
+            newAttrs[`${animismTraditionId}_type`] = "animism";
+            if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                newAttrs[`${animismTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
             }
-
-            const devotionId = generateRowID().toLowerCase();
-            newAttrs[`repeating_devotion_${devotionId}_name`] = "Devotional Pool";
-            newAttrs[`repeating_devotion_${devotionId}_rank_devotion_pool_limit`] = poolLimit;
+            newAttrs[`${animismTraditionId}_rolled_skill_id`] = magicSkillIds['binding']['id'];
+            newAttrs[`${animismTraditionId}_rolled_skill_name`] = magicSkillIds['binding']['name'];
+            newAttrs[`${animismTraditionId}_rolled_skill_value`] = magicSkillIds['binding']['value'];
+            newAttrs[`${animismTraditionId}_rolled_skill_macro`] = `${magicSkillIds['binding']['id']}_roll`;
+            newAttrs[`${animismTraditionId}_other_skill_id`] = magicSkillIds['trance']['id'];
+            newAttrs[`${animismTraditionId}_other_skill_name`] = magicSkillIds['trance']['name'];
+            newAttrs[`${animismTraditionId}_other_skill_value`] = magicSkillIds['trance']['value'];
+            newAttrs[`${animismTraditionId}_details`] = 0;
         }
 
-        console.log("Importing Spirits");
-        /* Import Spirits */
+        /* Import Spirits TODO: enhance with in sheet spirits*/
         if (typeof characterData["spirits"] !== 'undefined') {
             characterData["spirits"].forEach(spirit => {
-                const spiritId = generateRowID().toLowerCase();
+                const spiritId = generateRowID();
                 newAttrs[`repeating_fetish_${spiritId}_name`] = spirit["name"];
                 newAttrs[`repeating_fetish_${spiritId}_fetish_json`] = JSON.stringify([spirit]);
             });
@@ -2058,6 +2578,94 @@ function importCharacter(v, import_type) {
             /* willpower is the default so no else required */
         }
 
+        console.log("Importing Mysticism");
+        /* Import Mysticism */
+        const mysticismTraditionId = 'repeating_tradition_' + generateRowID();
+        if (magicSkillIds.hasOwnProperty('meditation') && magicSkillIds.hasOwnProperty('path')) {
+            newAttrs[`${mysticismTraditionId}_name`] = getTranslationByKey('mysticism');
+            newAttrs[`${mysticismTraditionId}_type`] = "mysticism";
+            if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                newAttrs[`${mysticismTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+            }
+            newAttrs[`${mysticismTraditionId}_rolled_skill_id`] = magicSkillIds['path']['id'];
+            newAttrs[`${mysticismTraditionId}_rolled_skill_name`] = magicSkillIds['path']['name'];
+            newAttrs[`${mysticismTraditionId}_rolled_skill_value`] = magicSkillIds['path']['value'];
+            newAttrs[`${mysticismTraditionId}_rolled_skill_macro`] = `${magicSkillIds['path']['id']}_roll`;
+            newAttrs[`${mysticismTraditionId}_other_skill_id`] = magicSkillIds['meditation']['id'];
+            newAttrs[`${mysticismTraditionId}_other_skill_name`] = magicSkillIds['meditation']['name'];
+            newAttrs[`${mysticismTraditionId}_other_skill_value`] = magicSkillIds['meditation']['value'];
+            newAttrs[`${mysticismTraditionId}_details`] = 0;
+        }
+
+
+        if (typeof characterData["mysticism_spells"] !== 'undefined') {
+            characterData["mysticism_spells"].forEach(talentName => {
+                const talentId = 'repeating_power_' + generateRowID();
+                newAttrs[`${talentId}_name`] = talentName;
+                newAttrs[`${talentId}_type`] = getTranslationByKey('mysticism');
+                newAttrs[`${talentId}_tradition_id`] = mysticismTraditionId;
+                newAttrs[`${talentId}_details`] = 0;
+            });
+        }
+
+        console.log("Importing Sorcery");
+        /* Import Sorcery */
+        const sorceryTraditionId = 'repeating_tradition_' + generateRowID();
+        if (magicSkillIds.hasOwnProperty('invocation') && magicSkillIds.hasOwnProperty('shaping')) {
+            newAttrs[`${sorceryTraditionId}_name`] = getTranslationByKey('sorcery');
+            newAttrs[`${sorceryTraditionId}_type`] = "sorcery";
+            if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                newAttrs[`${sorceryTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+            }
+            newAttrs[`${sorceryTraditionId}_rolled_skill_id`] = magicSkillIds['invocation']['id'];
+            newAttrs[`${sorceryTraditionId}_rolled_skill_name`] = magicSkillIds['invocation']['name'];
+            newAttrs[`${sorceryTraditionId}_rolled_skill_value`] = magicSkillIds['invocation']['value'];
+            newAttrs[`${sorceryTraditionId}_rolled_skill_macro`] = `${magicSkillIds['invocation']['id']}_roll`;
+            newAttrs[`${sorceryTraditionId}_other_skill_id`] = magicSkillIds['shaping']['id'];
+            newAttrs[`${sorceryTraditionId}_other_skill_name`] = magicSkillIds['shaping']['name'];
+            newAttrs[`${sorceryTraditionId}_other_skill_value`] = magicSkillIds['shaping']['value'];
+            newAttrs[`${sorceryTraditionId}_details`] = 0;
+        }
+
+        if (typeof characterData["sorcery_spells"] !== 'undefined') {
+            characterData["sorcery_spells"].forEach(spellName => {
+                const spellId = 'repeating_power_' + generateRowID();
+                newAttrs[`${spellId}_name`] = spellName;
+                newAttrs[`${spellId}_type`] = getTranslationByKey('sorcery');
+                newAttrs[`${spellId}_tradition_id`] = sorceryTraditionId;
+                newAttrs[`${spellId}_details`] = 0;
+            });
+        }
+
+        console.log("Importing Theism");
+        /* Import Theism */
+        const theismTraditionId = 'repeating_tradition_' + generateRowID();
+        if (magicSkillIds.hasOwnProperty('exhort') && magicSkillIds.hasOwnProperty('devotion')) {
+            newAttrs[`${theismTraditionId}_name`] = getTranslationByKey('theism');
+            newAttrs[`${theismTraditionId}_type`] = "theism";
+            if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                newAttrs[`${theismTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+            }
+            newAttrs[`${theismTraditionId}_rolled_skill_id`] = magicSkillIds['exhort']['id'];
+            newAttrs[`${theismTraditionId}_rolled_skill_name`] = magicSkillIds['exhort']['name'];
+            newAttrs[`${theismTraditionId}_rolled_skill_value`] = magicSkillIds['exhort']['value'];
+            newAttrs[`${theismTraditionId}_rolled_skill_macro`] = `${magicSkillIds['exhort']['id']}_roll`;
+            newAttrs[`${theismTraditionId}_other_skill_id`] = magicSkillIds['devotion']['id'];
+            newAttrs[`${theismTraditionId}_other_skill_name`] = magicSkillIds['devotion']['name'];
+            newAttrs[`${theismTraditionId}_other_skill_value`] = magicSkillIds['devotion']['value'];
+            newAttrs[`${theismTraditionId}_details`] = 0;
+        }
+
+        if (typeof characterData["theism_spells"] !== 'undefined') {
+            characterData["theism_spells"].forEach(miracleName => {
+                const miracleId = 'repeating_power_' + generateRowID();
+                newAttrs[`${miracleId}_name`] = miracleName;
+                newAttrs[`${miracleId}_type`] = getTranslationByKey('theism');
+                newAttrs[`${miracleId}_tradition_id`] = theismTraditionId;
+                newAttrs[`${miracleId}_details`] = 0;
+            });
+        }
+
         console.log("Importing Features");
         /* Import Features */
         if (typeof characterData["features"] !== 'undefined') {
@@ -2086,7 +2694,7 @@ on('change:str_base change:str_other change:str_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2095,12 +2703,18 @@ on('change:str_base change:str_other change:str_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = [];
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = [];
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, encGetAttrs, hitPointGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, encGetAttrs, hitPointGetAttrs, traditionGetAttrs,
                     ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
                     ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total',
                         'initiative_add_one_tenth_athletics'],
@@ -2108,7 +2722,7 @@ on('change:str_base change:str_other change:str_temp', function() {
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
                     ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
-                    const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, abilityIds, v);
+                    const standardSkillVals = calcStdSkills(charStdSkillIds['str'], charObj, traditionIds, v);
                     const hp_max_base = calcBaseHP(charObj['con'], charObj['siz'], charObj['pow'], charObj['str'],
                         v['hp_calc'], v['simplified_combat_enabled']);
                     const all_hp_temp = parseInt(v['all_hp_temp']);
@@ -2119,8 +2733,8 @@ on('change:str_base change:str_other change:str_temp', function() {
                     setAttrs({
                         str: charObj['str'],
                         ...standardSkillVals,
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...newEncVals,
                         ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
                             v['initiative_bonus_temp'], parseInt(v['armor_penalty']), initiative_bonus_fatigue, standardSkillVals['athletics_total'],
@@ -2165,7 +2779,7 @@ on('change:con_base change:con_other change:con_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2174,12 +2788,18 @@ on('change:con_base change:con_other change:con_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = []
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = []
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, traditionGetAttrs,
                     ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
                     ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
@@ -2194,9 +2814,9 @@ on('change:con_base change:con_other change:con_temp', function() {
                     console.log("Setting attrs for con trigger");
                     setAttrs({
                         con: charObj['con'],
-                        ...calcStdSkills(charStdSkillIds['con'], charObj, abilityIds, v),
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcStdSkills(charStdSkillIds['con'], charObj, traditionIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                             v['damage_mod_other'], v['damage_mod_temp']),
                         ...healingRateVals,
@@ -2239,7 +2859,7 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2248,26 +2868,32 @@ on('change:dex_base change:dex_other change:dex_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = []
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = []
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, traditionGetAttrs,
                     ['action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue'],
                     ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
                     ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
                     const charObj = buildCharObj(v);
-                    const standardSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, abilityIds, v);
+                    const standardSkillVals = calcStdSkills(charStdSkillIds['dex'], charObj, traditionIds, v);
                     const initiative_bonus_fatigue = parseInt(fatigueTable[v['fatigue']][2]);
 
                     console.log("Setting attrs for dex trigger");
                     setAttrs({
                         dex: charObj['dex'],
                         ...standardSkillVals,
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
                             v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
                         ...calcInitiativeBonus(charObj['int'], charObj['dex'], v['initiative_bonus_other'],
@@ -2286,7 +2912,7 @@ on('change:siz_base change:siz_other change:siz_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2295,12 +2921,18 @@ on('change:siz_base change:siz_other change:siz_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = []
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = []
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, traditionGetAttrs,
                     ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp'],
                     ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
                     ['social_damage_temp', 'social_damage_other', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
@@ -2312,9 +2944,9 @@ on('change:siz_base change:siz_other change:siz_temp', function() {
                     console.log("Setting attrs for size trigger");
                     setAttrs({
                         siz: charObj['siz'],
-                        ...calcStdSkills(charStdSkillIds['siz'], charObj, abilityIds, v),
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcStdSkills(charStdSkillIds['siz'], charObj, traditionIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                             v['damage_mod_other'], v['damage_mod_temp']),
                         hp_max_base: hp_max_base,
@@ -2355,7 +2987,7 @@ on('change:int_base change:int_other change:int_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2364,12 +2996,18 @@ on('change:int_base change:int_other change:int_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = []
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = []
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, traditionGetAttrs,
                     ['action_points_other', 'action_points_temp', 'action_points_calc', 'fatigue', 'action_points', 'action_points_max'],
                     ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
                     ['initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'athletics_total', 'initiative_add_one_tenth_athletics'],
@@ -2383,9 +3021,9 @@ on('change:int_base change:int_other change:int_temp', function() {
                     console.log("Setting attrs for int trigger");
                     setAttrs({
                         int: charObj['int'],
-                        ...calcStdSkills(charStdSkillIds['int'], charObj, abilityIds, v),
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcStdSkills(charStdSkillIds['int'], charObj, traditionIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...calcActionPoints(charObj['dex'], charObj['int'], v['action_points_other'], v['action_points_temp'],
                             v['action_points_calc'], v['fatigue'], v['action_points'], v['action_points_max']),
                         ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
@@ -2411,7 +3049,7 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2420,12 +3058,18 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = []
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = []
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, hitPointGetAttrs, traditionGetAttrs,
                     ['damage_mod_calc', 'damage_mod_other', 'damage_mod_temp', 'fatigue'],
                     ['healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'],
                     ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points',
@@ -2443,15 +3087,15 @@ on('change:pow_base change:pow_other change:pow_temp', function() {
                     const all_hp_temp = parseInt(v['all_hp_temp']);
                     const healingRateVals = calcHealingRate(charObj['con'], charObj['pow'], v['healing_rate_calc'], v['healing_rate_other'],
                         v['healing_rate_temp'], v['healing_rate_double']);
-                    const standardSkillVals = calcStdSkills(charStdSkillIds['pow'], charObj, abilityIds, v);
+                    const standardSkillVals = calcStdSkills(charStdSkillIds['pow'], charObj, traditionIds, v);
 
                     console.log("Setting attrs for pow trigger");
                     setAttrs({
                         pow: charObj['pow'],
                         ...calcSpiritIntensity(charObj['pow']),
                         ...standardSkillVals,
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...calcDamageMod(charObj['str'], charObj['siz'], charObj['con'], charObj['pow'], v['damage_mod_calc'],
                             v['damage_mod_other'], v['damage_mod_temp']),
                         ...healingRateVals,
@@ -2503,7 +3147,7 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
 
     getSectionIDs("repeating_professionalskill", function(proSkillIds) {
         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
-            getSectionIDs("repeating_ability", function(abilityIds) {
+            getSectionIDs("repeating_tradition", function(traditionIds) {
                 let proSkillGetAttrs = [];
                 proSkillIds.forEach(id => {
                     proSkillGetAttrs.push(`repeating_professionalskill_${id}_char1`, `repeating_professionalskill_${id}_char2`, `repeating_professionalskill_${id}_other`)
@@ -2512,12 +3156,18 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
                 combatStyleIds.forEach(id => {
                     combatStyleGetAttrs.push(`repeating_combatstyle_${id}_char1`, `repeating_combatstyle_${id}_char2`, `repeating_combatstyle_${id}_other`)
                 });
-                let abilityGetAttrs = []
-                abilityIds.forEach(abilityId => {
-                    abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+                let traditionGetAttrs = []
+                traditionIds.forEach(traditionId => {
+                    traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                        `repeating_tradition_${traditionId}_other_skill_id`,
+                        `repeating_tradition_${traditionId}_rolled_skill_total`,
+                        `repeating_tradition_${traditionId}_other_skill_total`,
+                        `repeating_tradition_${traditionId}_rolled_skill_name`,
+                        `repeating_tradition_${traditionId}_other_skill_name`,
+                        `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
                 });
 
-                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, abilityGetAttrs,
+                getAttrs(allCharGetAttrs.concat(stdSkillGetAttrs, proSkillGetAttrs, combatStyleGetAttrs, traditionGetAttrs,
                     ['experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'],
                     ['luck_points_other', 'luck_points_temp', 'luck_points_calc', 'luck_points_rank', 'rank', 'luck_points', 'luck_points_max'],
                     ['spirit_ib_other', 'spirit_ib_temp'], ['social_initiative_other', 'social_initiative_temp'],
@@ -2529,9 +3179,9 @@ on('change:cha_base change:cha_other change:cha_temp', function() {
                     console.log("Setting attrs for cha trigger");
                     setAttrs({
                         cha: charObj['cha'],
-                        ...calcStdSkills(charStdSkillIds['cha'], charObj, abilityIds, v),
-                        ...calcProSkills("professionalskill", proSkillIds, charObj, abilityIds, v),
-                        ...calcProSkills("combatstyle", combatStyleIds, charObj, abilityIds, v),
+                        ...calcStdSkills(charStdSkillIds['cha'], charObj, traditionIds, v),
+                        ...calcProSkills("professionalskill", proSkillIds, charObj, traditionIds, v),
+                        ...calcProSkills("combatstyle", combatStyleIds, charObj, traditionIds, v),
                         ...calcExpMod(charObj['cha'], charObj['int'], v['experience_mod_calc'], v['experience_mod_other'],
                             v['experience_mod_temp']),
                         ...calcLuckPoints(charObj['pow'], charObj['cha'], v['luck_points_calc'], v['luck_points_other'],
@@ -2896,16 +3546,23 @@ allStdSkillIds.forEach(skillId => {
         if (event.sourceAttribute.endsWith("_total") && event.sourceType === 'sheetworker') {
             return;
         }
-        getSectionIDs("repeating_ability", function(abilityIds) {
-            let abilityGetAttrs = []
-            abilityIds.forEach(abilityId => {
-                abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+        getSectionIDs("repeating_tradition", function(traditionIds) {
+            let traditionGetAttrs = []
+            traditionIds.forEach(traditionId => {
+                traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                    `repeating_tradition_${traditionId}_other_skill_id`,
+                    `repeating_tradition_${traditionId}_rolled_skill_total`,
+                    `repeating_tradition_${traditionId}_other_skill_total`,
+                    `repeating_tradition_${traditionId}_rolled_skill_name`,
+                    `repeating_tradition_${traditionId}_other_skill_name`,
+                    `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
             });
 
             getAttrs(allCharGetAttrs.concat([`${skillId}_other`], ['initiative_bonus_other', 'initiative_bonus_temp',
-                'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue'], abilityGetAttrs,
+                'armor_penalty', 'initiative_add_one_tenth_athletics', 'fatigue'], traditionGetAttrs,
             ['spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-            ['confidence_other', 'confidence_temp', 'social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
+            ['confidence_other', 'confidence_temp', 'social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'],
+            ['int', 'pow', 'cha']), function(v) {
                 let charObj = buildCharObj(v);
                 let char1 = charObj[stdSkillChars[`${skillId}`][0]];
                 let char2 = charObj[stdSkillChars[`${skillId}`][1]];
@@ -2921,7 +3578,8 @@ allStdSkillIds.forEach(skillId => {
                 }
 
                 let socialDamageValues = {};
-                if (`${skillId}` === v['social_attack_id']) {
+                console.log(v['social_attack_id_value'] + '&' + skillId);
+                if (`${skillId}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                     const socialAttackTotal = char1 + char2 + parseInt(v[`${skillId}_other`]);
                     socialDamageValues = {
                         ...calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], socialAttackTotal)
@@ -2929,7 +3587,7 @@ allStdSkillIds.forEach(skillId => {
                 }
 
                 let spiritValues = {};
-                if (`${skillId}` === v['spirit_combat_skill_id']) {
+                if (`${skillId}`.toUpperCase() === v['spirit_combat_skill_id'].toUpperCase()) {
                     spiritValues = {
                         ...calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_other'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], skillValue)
                     };
@@ -2959,7 +3617,7 @@ allStdSkillIds.forEach(skillId => {
                     ...socialDamageValues,
                     ...spiritValues,
                     ...specialValues,
-                    ...calcReferencedIdTotals(skillId, skillValue, abilityIds, v)
+                    ...calcReferencedIdTotals(skillId, skillValue, traditionIds, parseInt(v['int']), parseInt(v['pow']), parseInt(v['cha']), v)
                 });
             });
         });
@@ -2971,15 +3629,15 @@ allStdSkillIds.forEach(skillId => {
     on(`change:${skillId}_notes`, function() {
         getAttrs([`${skillId}_notes`, 'spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value'], function(v) {
             let newValues = {};
-            if (`${skillId}` === v['spirit_combat_skill_id']) {
+            if (`${skillId}`.toUpperCase() === v['spirit_combat_skill_id'].toUpperCase()) {
                 newValues['spirit_combat_skill_notes'] = v[`${skillId}_notes`];
             }
 
-            if (`${skillId}` === v['social_attack_id_value']) {
+            if (`${skillId}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                 newValues['social_attack_notes'] = v[`${skillId}_notes`];
             }
 
-            if (`${skillId}` === v['social_attack_id_value']) {
+            if (`${skillId}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                 newValues['social_defense_notes'] = v[`${skillId}_notes`];
             }
 
@@ -2994,49 +3652,37 @@ on("change:repeating_passion:total change:repeating_passion:type", function(even
     const sourceId = event.sourceAttribute.split('_')[2];
 
     getSectionIDs("repeating_passion", function(passionIds) {
-        getSectionIDs("repeating_ability", function(abilityIds) {
+        getSectionIDs("repeating_tradition", function(traditionIds) {
             let passionGetAttrs = [];
             passionIds.forEach(id => {
                 passionGetAttrs.push(`repeating_passion_${id}_total`, `repeating_passion_${id}_type`)
             });
-            let abilityGetAttrs = []
-            abilityIds.forEach(abilityId => {
-                abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+            let traditionGetAttrs = []
+            traditionIds.forEach(traditionId => {
+                traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                    `repeating_tradition_${traditionId}_other_skill_id`,
+                    `repeating_tradition_${traditionId}_rolled_skill_total`,
+                    `repeating_tradition_${traditionId}_other_skill_total`,
+                    `repeating_tradition_${traditionId}_rolled_skill_name`,
+                    `repeating_tradition_${traditionId}_other_skill_name`,
+                    `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
             });
 
-            getAttrs(passionGetAttrs.concat(abilityGetAttrs,
+            getAttrs(passionGetAttrs.concat(traditionGetAttrs,
                 ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
                 ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'],
-                ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies']), function(v) {
+                ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies', 'int', 'pow', 'cha']), function(v) {
                 const passionTotal = parseInt(v[`repeating_passion_${sourceId}_total`]);
 
-                let newAbilityAttrs = {};
-                abilityIds.forEach(abilityId => {
-                    if (`repeating_passion_${sourceId}` === v[`repeating_ability_${abilityId}_skill1_id`]) {
-                        newAbilityAttrs[`repeating_ability_${abilityId}_skill1total`] = v[`repeating_passion_${sourceId}_total`];
-                    }
-
-                    if (`repeating_passion_${sourceId}` === v[`repeating_ability_${abilityId}_skill2_id`]) {
-                        newAbilityAttrs[`repeating_ability_${abilityId}_skill2total`] = v[`repeating_passion_${sourceId}_total`];
-                    }
-                });
-
-                let newSpiritRefAttrs = {};
-                if (`repeating_passion_${sourceId}` === v['spirit_combat_skill_id']) {
-                    newSpiritRefAttrs['spirit_combat_skill_total'] = v[`repeating_passion_${sourceId}_total`];
-                }
+                const referencedIdTotals = calcReferencedIdTotals(`repeating_passion_${sourceId}`, parseInt(v[`repeating_passion_${sourceId}_total`]), traditionIds, parseInt(v['int']), parseInt(v['pow']), parseInt(v['cha']), v)
 
                 let socialVals = {};
-                if (`repeating_passion_${sourceId}` === v['social_attack_id_value']) {
+                if (`repeating_passion_${sourceId}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                     socialVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], passionTotal);
-                    socialVals['social_attack_total'] = v[`repeating_passion_${sourceId}_total`];
-                }
-                if (`repeating_passion_${sourceId}` === v['social_defense_id_value']) {
-                    socialVals['social_defense_total'] = v[`repeating_passion_${sourceId}_total`];
                 }
 
                 let spiritDamageVals = {};
-                if (`repeating_passion_${sourceId}` === v['spirit_combat_skill_id']) {
+                if (`repeating_passion_${sourceId}`.toUpperCase() === v['spirit_combat_skill_id'].toUpperCase()) {
                     spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], passionTotal);
                 }
 
@@ -3055,8 +3701,7 @@ on("change:repeating_passion:total change:repeating_passion:type", function(even
                     tenacity_dependencies: tenacityPenalty,
                     ...spiritDamageVals,
                     ...socialVals,
-                    ...newAbilityAttrs,
-                    ...newSpiritRefAttrs
+                    ...referencedIdTotals
                 });
             });
         });
@@ -3068,32 +3713,38 @@ on("change:repeating_professionalskill:name change:repeating_combatstyle:name ch
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
 
-    getSectionIDs("repeating_ability", function(abilityIds) {
-        let abilityGetAttrs = []
-        abilityIds.forEach(abilityId => {
-            abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+    getSectionIDs("repeating_tradition", function(traditionIds) {
+        let traditionGetAttrs = []
+        traditionIds.forEach(traditionId => {
+            traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                `repeating_tradition_${traditionId}_other_skill_id`,
+                `repeating_tradition_${traditionId}_rolled_skill_total`,
+                `repeating_tradition_${traditionId}_other_skill_total`,
+                `repeating_tradition_${traditionId}_rolled_skill_name`,
+                `repeating_tradition_${traditionId}_other_skill_name`,
+                `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
         });
-        getAttrs(abilityGetAttrs.concat(['spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
+        getAttrs(traditionGetAttrs.concat(['spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value']), function(v) {
             let newAttrs = {};
-            abilityIds.forEach(abilityId => {
-                if (`repeating_${type}_${id}` === v[`repeating_ability_${abilityId}_skill1_id`]) {
-                    newAttrs[`repeating_ability_${abilityId}_skill1name`] = event.newValue;
+            traditionIds.forEach(traditionId => {
+                if (`repeating_${type}_${id}`.toUpperCase() === v[`repeating_tradition_${traditionId}_rolled_skill_id`].toUpperCase()) {
+                    newAttrs[`repeating_tradition_${traditionId}_rolled_skill_name`] = event.newValue;
                 }
 
-                if (`repeating_${type}_${id}` === v[`repeating_ability_${abilityId}_skill2_id`]) {
-                    newAttrs[`repeating_ability_${abilityId}_skill2name`] = event.newValue;
+                if (`repeating_${type}_${id}`.toUpperCase() === v[`repeating_tradition_${traditionId}_other_skill_id`].toUpperCase()) {
+                    newAttrs[`repeating_tradition_${traditionId}_other_skill_name`] = event.newValue;
                 }
             });
 
-            if (`repeating_${type}_${id}` === v['spirit_combat_skill_id']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['spirit_combat_skill_id'].toUpperCase()) {
                 newAttrs['spirit_combat_skill_name'] = event.newValue;
             }
 
-            if (`repeating_${type}_${id}` === v['social_attack_id_value']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                 newAttrs['social_attack_name'] = event.newValue;
             }
 
-            if (`repeating_${type}_${id}` === v['social_defense_id_value']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['social_defense_id_value'].toUpperCase()) {
                 newAttrs['social_defense_name'] = event.newValue;
             }
 
@@ -3108,19 +3759,19 @@ on("change:repeating_professionalskill:notes change:repeating_combatstyle:notes 
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
 
-    getSectionIDs("repeating_ability", function(abilityIds) {
+    getSectionIDs("repeating_tradition", function(traditionIds) {
         getAttrs(['spirit_combat_skill_id', 'social_attack_id_value', 'social_defense_id_value'], function(v) {
             let newAttrs = {};
 
-            if (`repeating_${type}_${id}` === v['spirit_combat_skill_id']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['spirit_combat_skill_id'].toUpperCase()) {
                 newAttrs['spirit_combat_skill_notes'] = event.newValue;
             }
 
-            if (`repeating_${type}_${id}` === v['social_attack_id_value']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                 newAttrs['social_attack_notes'] = event.newValue;
             }
 
-            if (`repeating_${type}_${id}` === v['social_defense_id_value']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['social_defense_id_value'].toUpperCase()) {
                 newAttrs['social_defense_notes'] = event.newValue;
             }
 
@@ -3143,15 +3794,21 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
     const id = event.sourceAttribute.split('_')[2];
     const skillId = `repeating_${type}_${id}`
 
-    getSectionIDs("repeating_ability", function(abilityIds) {
-        let abilityGetAttrs = []
-        abilityIds.forEach(abilityId => {
-            abilityGetAttrs.push(`repeating_ability_${abilityId}_skill1_id`, `repeating_ability_${abilityId}_skill2_id`)
+    getSectionIDs("repeating_tradition", function(traditionIds) {
+        let traditionGetAttrs = []
+        traditionIds.forEach(traditionId => {
+            traditionGetAttrs.push(`repeating_tradition_${traditionId}_rolled_skill_id`,
+                `repeating_tradition_${traditionId}_other_skill_id`,
+                `repeating_tradition_${traditionId}_rolled_skill_total`,
+                `repeating_tradition_${traditionId}_other_skill_total`,
+                `repeating_tradition_${traditionId}_rolled_skill_name`,
+                `repeating_tradition_${traditionId}_other_skill_name`,
+                `repeating_tradition_${traditionId}_type`, `repeating_tradition_${traditionId}_tradition_rank`)
         });
 
         getAttrs(allCharGetAttrs.concat([`repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`, `repeating_${type}_${id}_other`],
             ['willpower_total', 'spirit_damage_other', 'spirit_damage_temp', 'spirit_damage_calc', 'spirit_combat_skill_id'],
-            ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value'], abilityGetAttrs), function(v) {
+            ['social_damage_other', 'social_damage_temp', 'social_attack_id_value', 'social_defense_id_value', 'int', 'pow', 'cha'], traditionGetAttrs), function(v) {
             const charObj = buildCharObj(v);
             let skillTotal = 0;
             let primaryNewValue = {};
@@ -3162,23 +3819,23 @@ on("change:repeating_professionalskill:char1 change:repeating_professionalskill:
                 skillTotal = calcProSkillTotal(charObj, v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`], v[`repeating_${type}_${id}_other`]);
                 primaryNewValue[`${skillId}_total`] = skillTotal;
             }
-            const referencedIdTotals = calcReferencedIdTotals(skillId, skillTotal, abilityIds, v)
+            const referencedIdTotals = calcReferencedIdTotals(skillId, skillTotal, traditionIds, parseInt(v['int']), parseInt(v['pow']), parseInt(v['cha']), v)
             const skillEncumbered = calcProSkillEncumbered(v[`repeating_${type}_${id}_char1`], v[`repeating_${type}_${id}_char2`]);
 
             let socialVals = {};
-            if (`repeating_${type}_${id}` === v['social_attack_id_value']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['social_attack_id_value'].toUpperCase()) {
                 socialVals = calcSocialDamage(v['social_damage_other'], v['social_damage_temp'], v['social_attack_id_value'], skillTotal);
                 socialVals['social_attack_encumbered'] = skillEncumbered;
                 socialVals['social_attack_total'] = skillTotal;
             }
-            if (`repeating_${type}_${id}` === v['social_defense_id_value']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['social_defense_id_value'].toUpperCase()) {
                 socialVals['social_defense_encumbered'] = skillEncumbered;
                 socialVals['social_defense_total'] = skillTotal;
             }
 
             let spiritDamageVals = {};
             let newSpiritRefValues = {};
-            if (`repeating_${type}_${id}` === v['spirit_combat_skill_id']) {
+            if (`repeating_${type}_${id}`.toUpperCase() === v['spirit_combat_skill_id'].toUpperCase()) {
                 spiritDamageVals = calcSpiritDamage(v['spirit_damage_other'], v['spirit_damage_temp'], v['spirit_damage_calc'], v['spirit_combat_skill_id'], skillTotal);
                 newSpiritRefValues['spirit_combat_skill_encumbered'] = skillEncumbered;
                 newSpiritRefValues['spirit_combat_skill_total'] = skillTotal;
@@ -3478,8 +4135,8 @@ on("change:fatigue", function() {
     });
 });
 
-/* Abilities */
-/* Abilities filter */
+/* Magic */
+/* Abilities filter
 const abilitytypes = ["all","alchemy","animism","arcane_magic","artifice","divine_magic","fae_powers","folk_magic","magic","mysticism","psionics","psychic_powers","sorcery","super_powers","theism","other"];
 abilitytypes.forEach(button => {
     on(`clicked:abilities_type_filter_${button}`, function() {
@@ -3539,15 +4196,9 @@ on("change:abilities_type_filter change:abilities_rank_filter change:compact cha
         });
     });
 });
+ */
 
-/* Create a single line formatted version of traits for display in play mode */
-on("change:repeating_ability:traits", function(event) {
-    const id = event.sourceAttribute.split('_')[2];
-    console.log(`Setting attrs for ability ${id} traits trigger`);
-    setAttrs({[`repeating_ability_${id}_traits_display`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
-});
-
-/* Automatically setting prompts for certain types */
+/* Automatically setting prompts for certain types
 on("change:repeating_ability:type", function(event) {
     const id = event.sourceAttribute.split('_')[2];
     console.log(`Setting attrs for ability ${id} type trigger`);
@@ -3565,93 +4216,51 @@ on("change:repeating_ability:type", function(event) {
         }
     });
 });
-/* Skill selection logic */
-on("change:repeating_ability:skill1_id", function(event) {
+*/
+
+
+
+
+/* Power Traits Summary */
+on("change:repeating_power:traits", function(event) {
     const id = event.sourceAttribute.split('_')[2];
-    let skillGetAttrs = [];
-    if (!event.newValue) {
-    } else if (event.newValue && event.newValue.startsWith('repeating_')) {
-        skillGetAttrs.push(`${event.newValue}_name`, `${event.newValue}_total`);
+    console.log(`Setting attrs for power ${id} traits trigger, newValue=` + event.newValue);
+    if (event.newValue === undefined) {
+        setAttrs({[`repeating_power_${id}_traits_summary`]: "-"});
     } else {
-        skillGetAttrs.push(`${event.newValue}_total`);
+        setAttrs({[`repeating_power_${id}_traits_summary`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
     }
-    getAttrs(skillGetAttrs.concat(['character_name']), function(v) {
-        let skill1Roll = `${v.character_name}|${event.newValue}_roll`;
-        let skill1Name = '';
-        let skill1Total = 0;
-        if (event.newValue && !event.newValue.startsWith('repeating_')) {
-            skill1Name = getTranslationByKey(`${event.newValue}`);
-        } else if (v[`${event.newValue}_name`]) {
-            skill1Name = v[`${event.newValue}_name`];
-        }
-
-        if (v[`${event.newValue}_total`]) {
-            skill1Total = v[`${event.newValue}_total`]
-        }
-
-        console.log(`Setting attrs for ability ${id} skill1_id trigger`);
-        setAttrs({
-            [`repeating_ability_${id}_skill1name`]: skill1Name,
-            [`repeating_ability_${id}_skill1total`]: skill1Total,
-            [`repeating_ability_${id}_skill1roll`]: skill1Roll
-        });
-    });
-});
-on("change:repeating_ability:skill2_id", function(event) {
-    const id = event.sourceAttribute.split('_')[2];
-    let skillGetAttrs = [];
-    if (!event.newValue) {
-    } else if (event.newValue && event.newValue.startsWith('repeating_')) {
-        skillGetAttrs.push(`${event.newValue}_name`, `${event.newValue}_total`);
-    } else {
-        skillGetAttrs.push(`${event.newValue}_total`);
-    }
-    getAttrs(skillGetAttrs, function(v) {
-        let skill2Name = '';
-        let skill2Total = 0;
-        if (event.newValue && !event.newValue.startsWith('repeating_')) {
-            skill2Name = getTranslationByKey(`${event.newValue}`);
-        } else if (v[`${event.newValue}_name`]) {
-            skill2Name = v[`${event.newValue}_name`];
-        }
-
-        if (v[`${event.newValue}_total`]) {
-            skill2Total = v[`${event.newValue}_total`]
-        }
-
-        console.log(`Setting attrs for ability ${id} skill2_id trigger`);
-        setAttrs({
-            [`repeating_ability_${id}_skill2name`]: skill2Name,
-            [`repeating_ability_${id}_skill2total`]: skill2Total
-        });
-    });
 });
 
-/* Reset ability rolls when character_name changes */
-/* Skill selection logic */
-on("change:character_name", function(event) {
-    getSectionIDs("repeating_ability", function(abilityIds) {
-        let skillIdAttrs = [];
-        abilityIds.forEach(id => {
-            skillIdAttrs.push(`repeating_ability_${id}_skill1_id`);
-        });
+/* Power Tradition ID Trigger */
+on("change:repeating_power:tradition_id", function(event) {
+    const powerId = event.sourceAttribute.split('_')[2];
+    /* Default referenced value to sanitized defaults */
+    let newAttrs = {
+        [`repeating_power_${powerId}_tradition_name`]: "",
+        [`repeating_power_${powerId}_tradition_traits`]: "",
+        [`repeating_power_${powerId}_rolled_skill_name`]: "",
+        [`repeating_power_${powerId}_rolled_skill_total`]: 0,
+        [`repeating_power_${powerId}_rolled_skill_macro`]: "",
+        [`repeating_power_${powerId}_other_skill_name`]: "",
+        [`repeating_power_${powerId}_other_skill_total`]: 0
+    };
 
-        getAttrs(skillIdAttrs.concat(['character_name']), function(v) {
-            const characterName = v['character_name'];
-            let newAttrs = {};
+    /* If ID is valid set reference values */
+    if (event.newValue && event.newValue.startsWith('repeating_tradition_')) {
+        newAttrs = {
+            [`repeating_power_${powerId}_tradition_name`]: `@{${event.newValue}_name}`,
+            [`repeating_power_${powerId}_tradition_traits`]: `@{${event.newValue}_advanced_traits}`,
+            [`repeating_power_${powerId}_rolled_skill_name`]: `@{${event.newValue}_rolled_skill_name}`,
+            [`repeating_power_${powerId}_rolled_skill_total`]: `@{${event.newValue}_rolled_skill_total}`,
+            [`repeating_power_${powerId}_rolled_skill_macro`]: `@{${event.newValue}_rolled_skill_macro}`,
+            [`repeating_power_${powerId}_other_skill_name`]: `@{${event.newValue}_other_skill_name}`,
+            [`repeating_power_${powerId}_other_skill_total`]: `@{${event.newValue}_other_skill_total}`
+        }
+    }
 
-            abilityIds.forEach(id => {
-                // Don't set for ability with no skill id set
-                if (v[`repeating_ability_${id}_skill1_id`]) {
-                    const skillId = v[`repeating_ability_${id}_skill1_id`];
-                    newAttrs[`repeating_ability_${id}_skill1roll`] = `${characterName}|${skillId}_roll`;
-                }
-            });
-
-            console.log(`Setting attrs for character_name trigger`);
-            setAttrs(newAttrs);
-        });
-    });
+    console.log(`Setting attrs for new tradition ID`);
+    setAttrs(newAttrs);
 });
 
 /* Weapon Buttons */
@@ -3759,7 +4368,7 @@ on("change:novice_char1 change:novice_char2", function(event) {
 /* Repeating IDs */
 on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
     "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +
-    "change:repeating_superpowerlimit change:repeating_ability", function(event) {
+    "change:repeating_superpowerlimit change:repeating_tradition change:repeating_power change:repeating_feature", function(event) {
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
 
@@ -3771,14 +4380,14 @@ on("change:repeating_combatstyle change:repeating_professionalskill change:repea
 
 /* Import Triggers */
 on("clicked:import_as_minor", function() {
-    getAttrs(['import_json_data', 'import_character', 'simplified_combat_enabled'], function(v) {
-        importCharacter(v, "minor");
+    getAttrs(['import_json_data', 'import_character', 'simplified_combat_enabled', 'luck_points_rank'], function(v) {
+        importCharacter(v, "minor", v['luck_points_rank']);
     });
 });
 
 on("clicked:import_as_major", function() {
-    getAttrs(['import_json_data', 'import_character', 'simplified_combat_enabled'], function(v) {
-        importCharacter(v, "major");
+    getAttrs(['import_json_data', 'import_character', 'simplified_combat_enabled', 'luck_points_rank'], function(v) {
+        importCharacter(v, "major", v['luck_points_rank']);
     });
 });
 

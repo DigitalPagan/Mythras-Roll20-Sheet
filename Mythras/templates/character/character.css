@@ -101,7 +101,6 @@ input.sheet-simplified-combat-toggle:checked + div.sheet-complex-combat {
 
 div.sheet-character-tab-core,
 div.sheet-character-tab-abilities,
-div.sheet-character-tab-features,
 div.sheet-character-tab-equipment,
 div.sheet-character-tab-background,
 div.sheet-character-tab-notes,
@@ -155,6 +154,9 @@ input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div di
 input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-rmargin {
     display: inline-block;
     margin-right: 5px;
+}
+input.sheet-compactable-toggle:not(:checked) + div.sheet-compactable-rmargin {
+    display: none !important;
 }
 input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-nomargin-fieldset-control + fieldset ~.repcontainer > .repitem,
 input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable {
@@ -299,6 +301,23 @@ span.sheet-skillnotes {
 input.sheet-dependencies-toggle:not(:checked) ~ div .sheet-dependencies-toggle,
 input.sheet-corruptions-toggle:not(:checked) ~ div .sheet-corruptions-toggle,
 input.sheet-peculiarities-toggle:not(:checked) ~ div .sheet-peculiarities-toggle {
+    display: none;
+}
+
+/* Magic & Features Tab */
+/* Traditions */
+div.sheet-tradition-name {
+    width: 200px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-tradition-pool {
+    width: 60px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+input.sheet-pool-toggle[value="0"] ~ .sheet-pool-toggle-exist,
+input.sheet-pool-toggle:not([value="0"]) ~ .sheet-pool-toggle-none {
     display: none;
 }
 

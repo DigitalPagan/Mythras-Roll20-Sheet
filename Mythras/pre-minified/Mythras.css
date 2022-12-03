@@ -138,7 +138,58 @@ hr {
     border-top: 2px solid black;
 }
 
-/* Display Toggles */
+/* Setting Display Toggles */
+.sheet-setting-option {
+    display: none;
+}
+.sheet-setting-control[value="custom"] + div .sheet-setting-default,
+.sheet-setting-control[value="default"] + div .sheet-setting-default,
+.sheet-setting-control[value="after_the_vampire_wars"] + div .sheet-setting-atvw,
+.sheet-setting-control[value="classic_fantasy"] + div .sheet-setting-cf,
+.sheet-setting-control[value="destined"] + div .sheet-setting-destined,
+.sheet-setting-control[value="fioracitta"] + div .sheet-setting-fioracitta,
+.sheet-setting-control[value="luther_arkwright"] + div .sheet-setting-la,
+.sheet-setting-control[value="lyonesse"] + div .sheet-setting-lyonesse,
+.sheet-setting-control[value="m-space"] + div .sheet-setting-ms,
+.sheet-setting-control[value="monster_island"] + div .sheet-setting-mi,
+.sheet-setting-control[value="mythic_babylon"] + div .sheet-setting-mba,
+.sheet-setting-control[value="mythic_britain"] + div .sheet-setting-mb,
+.sheet-setting-control[value="mythic_constantinople"] + div .sheet-setting-mc,
+.sheet-setting-control[value="mythic_rome"] + div .sheet-setting-mr,
+.sheet-setting-control[value="mythras_imperative"] + div .sheet-setting-mi,
+.sheet-setting-control[value="odd_soot"] + div .sheet-setting-os,
+.sheet-setting-control[value="perceforest"] + div .sheet-setting-perceforest,
+.sheet-setting-control[value="thennla"] + div .sheet-setting-thennla,
+.sheet-setting-control[value="worlds_united"] + div .sheet-setting-wu,
+.sheet-setting-control[value="all"] + div .sheet-setting-default,
+.sheet-setting-control[value="all"] + div .sheet-setting-atvw,
+.sheet-setting-control[value="all"] + div .sheet-setting-cf,
+.sheet-setting-control[value="all"] + div .sheet-setting-destined,
+.sheet-setting-control[value="all"] + div .sheet-setting-fioracitta,
+.sheet-setting-control[value="all"] + div .sheet-setting-la,
+.sheet-setting-control[value="all"] + div .sheet-setting-lyonesse,
+.sheet-setting-control[value="all"] + div .sheet-setting-ms,
+.sheet-setting-control[value="all"] + div .sheet-setting-mi,
+.sheet-setting-control[value="all"] + div .sheet-setting-mba,
+.sheet-setting-control[value="all"] + div .sheet-setting-mb,
+.sheet-setting-control[value="all"] + div .sheet-setting-mb,
+.sheet-setting-control[value="all"] + div .sheet-setting-mc,
+.sheet-setting-control[value="all"] + div .sheet-setting-mr,
+.sheet-setting-control[value="all"] + div .sheet-setting-mi,
+.sheet-setting-control[value="all"] + div .sheet-setting-os,
+.sheet-setting-control[value="all"] + div .sheet-setting-perceforest,
+.sheet-setting-control[value="all"] + div .sheet-setting-thennla,
+.sheet-setting-control[value="all"] + div .sheet-setting-wu
+{
+    display: initial;
+}
+
+.sheet-setting-control[value="none"] + div.sheet-setting-hide-if-none
+{
+    display: none;
+}
+
+/* Generic Display Toggles */
 input.sheet-toggle:not([value="1"]) + .sheet-toggle,
 input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle {
     display: none;
@@ -155,6 +206,12 @@ input.sheet-set-toggle:not([value^="@{set_"]) + .sheet-toggle {
     display: none;
 }
 input.sheet-augment-toggle:not([value^="@{skill_"]) + div .sheet-augment-toggle {
+    display: none;
+}
+input[type="checkbox"].sheet-divider-toggle:not(:checked) ~ div.sheet-divider {
+    display: none;
+}
+input[type="checkbox"].sheet-divider-toggle:checked ~ div.sheet-non-divider {
     display: none;
 }
 
@@ -330,6 +387,9 @@ input[type="checkbox"].sheet-accordion:not(:checked) ~ div.sheet-accordion {
 
 
 /* Font */
+.sheet-font-normal {
+    font-family: inherit !important;
+}
 .sheet-pictos {
     font-family: 'Pictos';
 }
@@ -519,6 +579,20 @@ div.sheet-hover-btn:hover button {
     border-radius: 0;
     border-bottom: 1px solid black;
 }
+.sheet-dividerusrinput {
+    margin: 0 !important;
+    padding: 0;
+    height: 1.25em !important;
+    line-height: 1.25em !important;
+    font-family: "Merriweather", serif;
+    font-size: 1em !important;
+    background: none!important;
+    border: none;
+    border-radius: 0;
+    font-weight: bold;
+    color: black;
+    border-bottom: 2px solid black;
+}
 .sheet-usrnotes {
     font-family: "Merriweather", serif;
     font-size: 1em;
@@ -531,6 +605,7 @@ div.sheet-hover-btn:hover button {
     font-size: 1em;
     text-align: center;
     font-weight: bold;
+    background: inherit;
     border-color: black;
 }
 input {
@@ -791,6 +866,12 @@ span.sheet-italic {
     font-style: italic;
 }
 
+span.sheet-divider {
+    font-weight: bold;
+    color: black;
+    border-bottom: 2px solid black;
+}
+
 /* Labels */
 label {
     font-size: 1em !important;
@@ -1038,7 +1119,6 @@ input.sheet-simplified-combat-toggle:checked + div.sheet-complex-combat {
 
 div.sheet-character-tab-core,
 div.sheet-character-tab-abilities,
-div.sheet-character-tab-features,
 div.sheet-character-tab-equipment,
 div.sheet-character-tab-background,
 div.sheet-character-tab-notes,
@@ -1092,6 +1172,9 @@ input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div di
 input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-rmargin {
     display: inline-block;
     margin-right: 5px;
+}
+input.sheet-compactable-toggle:not(:checked) + div.sheet-compactable-rmargin {
+    display: none !important;
 }
 input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable-nomargin-fieldset-control + fieldset ~.repcontainer > .repitem,
 input.sheet-edit-toggle:not(:checked) ~ div input.sheet-compact:checked ~ div div.sheet-compactable {
@@ -1236,6 +1319,23 @@ span.sheet-skillnotes {
 input.sheet-dependencies-toggle:not(:checked) ~ div .sheet-dependencies-toggle,
 input.sheet-corruptions-toggle:not(:checked) ~ div .sheet-corruptions-toggle,
 input.sheet-peculiarities-toggle:not(:checked) ~ div .sheet-peculiarities-toggle {
+    display: none;
+}
+
+/* Magic & Features Tab */
+/* Traditions */
+div.sheet-tradition-name {
+    width: 200px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+div.sheet-tradition-pool {
+    width: 60px;
+    flex-shrink: 0;
+    padding: 1px 1px 0;
+}
+input.sheet-pool-toggle[value="0"] ~ .sheet-pool-toggle-exist,
+input.sheet-pool-toggle:not([value="0"]) ~ .sheet-pool-toggle-none {
     display: none;
 }
 
@@ -1594,9 +1694,26 @@ textarea.sheet-import-data {
     font-style: italic;
     padding: 2px 1px 0;
 }
-.sheet-rolltemplate-effect div.sheet-description {
+.sheet-rolltemplate-effect div.sheet-summary {
     padding: 2px 1px 0;
 }
+
+.sheet-rolltemplate-effect div.sheet-listitem {
+    display: flex;
+    padding: 2px 1px 0;
+}
+.sheet-rolltemplate-effect div.sheet-listitem:nth-child(odd) {
+    background: gainsboro;
+}
+.sheet-rolltemplate-effect div.sheet-key {
+    font-weight: bold;
+    text-align: left;
+}
+.sheet-rolltemplate-effect div.sheet-value {
+    text-align: right;
+    flex-grow: 1;
+}
+
 .sheet-rolltemplate-effect .inlinerollresult  {
     display: inline-block;
     text-align: center;
@@ -1626,22 +1743,17 @@ textarea.sheet-import-data {
     font-weight: inherit;
 }
 .sheet-rolltemplate-effect a {
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1em !important;
-    border: solid 1px gray !important;
-    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
-    color: black !important;
-    padding: 0 2px 0 !important;
-    margin: 0 !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-}
-.sheet-rolltemplate-effect a:hover {
-    border: solid 1px black !important;
-    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
-    color: whitesmoke !important;
+    padding: 0!important;
+    margin: 0!important;
+    background: none!important;
+    box-shadow: none!important;
+    border: none !important;
+    cursor: pointer;
+    text-decoration: underline;
+    color: inherit !important;
     text-shadow: none;
+    line-height: inherit;
+    height: inherit;
 }
 /* Hit Table Roll Template Styles */
 .sheet-rolltemplate-hit-location div.sheet-border {

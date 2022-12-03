@@ -34,9 +34,26 @@
     font-style: italic;
     padding: 2px 1px 0;
 }
-.sheet-rolltemplate-effect div.sheet-description {
+.sheet-rolltemplate-effect div.sheet-summary {
     padding: 2px 1px 0;
 }
+
+.sheet-rolltemplate-effect div.sheet-listitem {
+    display: flex;
+    padding: 2px 1px 0;
+}
+.sheet-rolltemplate-effect div.sheet-listitem:nth-child(odd) {
+    background: gainsboro;
+}
+.sheet-rolltemplate-effect div.sheet-key {
+    font-weight: bold;
+    text-align: left;
+}
+.sheet-rolltemplate-effect div.sheet-value {
+    text-align: right;
+    flex-grow: 1;
+}
+
 .sheet-rolltemplate-effect .inlinerollresult  {
     display: inline-block;
     text-align: center;
@@ -66,20 +83,15 @@
     font-weight: inherit;
 }
 .sheet-rolltemplate-effect a {
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1em !important;
-    border: solid 1px gray !important;
-    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
-    color: black !important;
-    padding: 0 2px 0 !important;
-    margin: 0 !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-}
-.sheet-rolltemplate-effect a:hover {
-    border: solid 1px black !important;
-    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
-    color: whitesmoke !important;
+    padding: 0!important;
+    margin: 0!important;
+    background: none!important;
+    box-shadow: none!important;
+    border: none !important;
+    cursor: pointer;
+    text-decoration: underline;
+    color: inherit !important;
     text-shadow: none;
+    line-height: inherit;
+    height: inherit;
 }

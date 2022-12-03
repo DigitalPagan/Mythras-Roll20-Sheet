@@ -1,7 +1,8 @@
 <!-- TODO: Mooks -->
 <!-- TODO: DRY the char1 v char2 code -->
-<!-- TODO: end buttons in movement display -->
-<!-- TODO: make a generic se button -->
+<!-- TODO: Divider pattern -->
+<!-- TODO: Custom passion type -->
+
 <!-- Core Tab -->
 <div class='sheet-character-tab-core'>
     <!-- Character Header -->
@@ -558,7 +559,7 @@
         </div>
     </div>
 
-    <!-- Conflict -->
+    <!-- Conflict TODO: move spirit configs and health configs into generic conflict configs-->
     <div class="sheet-section">
         <div class="sheet-flex-centered">
             <h2><span data-i18n="conflict">Conflict</span>:&nbsp;</h2>
@@ -583,16 +584,16 @@
             </div>
         </div>
 
+        <!-- Special Effects Roll -->
+        <div class="sheet-hidden">
+            <button type="roll" name="roll_special_effects" value="{{'@{roll_display}&{template:default} {{name=^{special_effects}}} {{character=@{character_name}}} {{notes=?{Special Effects}}}'}}"></button>
+        </div>
+
         <div data-i18n-list="combat_mode_order">
             <input type='hidden' class='sheet-conflict-mode' name='attr_conflict_mode' value='combat'>
 
             <!-- Combat -->
             <div class='sheet-conflict-mode-combat' data-i18n-list-item="combat">
-                <div class="sheet-hidden">
-                    <button type="roll" name="roll_offensive_combat_se" value="{{'@{roll_display}&{template:default} {{name=^{offensive_special_effect}}} {{character=@{character_name}}} {{^{special_effect}=?{Special Effect|Bash (Bludgeoning Weapons), Bash|Bleed (Cutting Weapons), Bleed|Bypass Armor (Attacker Criticals), Bypass Armor|Choose Location (Special), Choose Location|Circumvent Cover (Ranged Weapons), Circumvent Cover|Circumvent Parry (Attacker Criticals), Circumvent Parry|Close Range|Compel Surrender|Damage Weapon|Disarm Opponent|Drop Foe (Seige Weapons & Firearms), Drop Foe|Duck Back (Ranged Weapons), Duck Back|Entangle (Entangling Weapons), Entangle|FLurry (Unarmed / Stackable), Flurry|Force Failure (Opponent Fumbles), Force Failure|Grip (Unarmed), Grip|Impale (Impaling Weapons), Impale|Kill Silently (Small Weapons / Special), Kill Silently|Marksman (Ranged Weapons), Marksman|Maximise Damage (Attacker Criticals / Stackable), Maximise Damage|Overpenetration (Ranged Weapons / Critical Only), Overpenetration|Pin Down (Ranged Weapons / Stackable), Pin Down|Pin Weapon (Critical Only), Pin Weapon|Press Advantage|Rapid Relaod (Stackable), Rapid Reload|Remise (Small Weapons), Remise|Scar Foe|Spoil Spell|Stun Location (Bludgeoning Weapons), Stun Location|Sunder (Axes & Two-Handed Weapons), Sunder|Take Weapon (Unarmed), Take Weapon|Trip Opponent|Weapon Malfunction (Ranged Weapons / Attacker Fumbles), Weapon Malfunction}}}'}}"></button>
-                    <button type="roll" name="roll_defensive_combat_se" value="{{'@{roll_display}&{template:default} {{name=^{defensive_special_effect}}} {{character=@{character_name}}} {{^{special_effect}=?{Special Effect|Accidental Injury (Attacker Fumbles), Accidental Injury|Arise|Blind Opponent (Defender Criticals), Blind Opponent|Close Range|Compel Surrender|Damage Weapon|Disarm Opponent|Enhance Parry (Defender Criticals), Enhance Parry|Entangle (Entangling Weapons), Entangle|Force Failure (Opponent Fumbles), Force Failure|Open Range|Overextend Opponent (Stackable), Overextend Opponent|Pin Weapon (Critical Only), Pin Weapon|Prepare Counter (Stackable), Prepare Counter|Scar Foe|Select Target (Attacker Fumbles), Select Target|Slip Free (Defender Criticals), Slip Free|Stand Fast|Take Weapon (Unarmed), Take Weapon|Trip Opponent|Withdraw}}}'}}"></button>
-                </div>
-
                 <input type="checkbox" class="sheet-hidden sheet-toggle" name="attr_health_config" value="1" checked>
                 <div class="sheet-toggle sheet-edit sheet-flex sheet-corporal">
                     <input type='checkbox' class="sheet-hidden sheet-simplified-combat-toggle" name='attr_simplified_combat_enabled' value="1"/>
@@ -1006,14 +1007,7 @@
             </div>
 
             <!-- Social Conflict -->
-            <div class='sheet-conflict-mode-social-conflict'  data-i18n-list-item="social_conflict">
-                <div class="sheet-hidden">
-                    <input type="text" name="attr_offensive_social_se_prompt" value="{{'?{Special Effect|Choose Resolution Pool|Circumvent Defence (Critical), Circumvent Defence|Compel Capitulation (Critical), Compel Capitulation|Disarm Opponent|Emotional Impale|Entangling Argument|Expose Flaws|Force Failure (Fumble), Force Failure|Ignore Confidence (Critical), Ignore Confidence|Maximise Damage (Critical), Maximise Damage|Shake Confidence|Stun|Trip Opponent}'}}" readonly>
-                    <button type="roll" name="roll_offensive_social_se" value="{{'@{roll_display}&{template:default} {{name=^{offensive_special_effect}}} {{character=@{character_name}}} {{^{special_effect}=@{offensive_social_se_prompt}}}'}}"></button>
-
-                    <input type="text" name="attr_defensive_social_se_prompt" value="{{'?{Special Effect|Accidental Humiliation|Choose Resolution Pool|Disarm Opponent|Entangling Argument|Force Failure (Fumble), Force Failure|Obfuscate Opponent|Prepare Counter|Shake Confidence|Sow Doubt (Critical), Sow Doubt|Trip Opponent|Withdraw}'}}" readonly>
-                    <button type="roll" name="roll_defensive_social_se" value="{{'@{roll_display}&{template:default} {{name=^{defensive_special_effect}}} {{character=@{character_name}}} {{^{special_effect}=@{defensive_social_se_prompt}}}'}}"></button>
-                </div>
+            <div class="sheet-conflict-mode-social-conflict"  data-i18n-list-item="social_conflict">
                 <div class="sheet-flex">
                     <!-- Social Skills -->
                     <div class="sheet-grow sheet-rmargin">
@@ -1138,14 +1132,7 @@
             </div>
 
             <!-- Spirit Combat Conflict Mode -->
-            <div class='sheet-conflict-mode-spirit-combat' data-i18n-list-item="spirit_combat">
-                <div class="sheet-hidden">
-                    <input type="text" name="attr_offensive_spirit_se_prompt" value="{{'?{Special Effect|Bleed Essence (Critical), Bleed Essence|Compel Bargain|Drive Off (Mortals), Drive Off|Leech Strength (Critical), Leech Strength|Possess (Spirits), Possess|Psychic Stun|Restrain (Mortals), Restrain|Spirit Lance|Sunder Binding (Spirit Fumbles), Sunder Binding|Suppress Ability (Mortals), Suppress Ability}'}}" readonly>
-                    <button type="roll" name="roll_offensive_spirit_se" value="{{'@{roll_display}&{template:default} {{name=^{offensive_special_effect}}} {{character=@{character_name}}} {{^{special_effect}=@{offensive_spirit_se_prompt}}}'}}"></button>
-
-                    <input type="text" name="attr_defensive_spirit_se_prompt" value="{{'?{Special Effect|Bleed Essence (Critical), Bleed Essence|Obscure (Critical), Obscure|Psychic Stun|Restrain (Mortals), Restrain|Sunder Binding (Spirit Fumbles), Sunder Binding|Suppress Ability (Mortals), Suppress Ability|Turn Back|Withdraw}'}}" readonly>
-                    <button type="roll" name="roll_defensive_spirit_se" value="{{'@{roll_display}&{template:default} {{name=^{defensive_special_effect}}} {{character=@{character_name}}} {{^{special_effect}=@{defensive_spirit_se_prompt}}}'}}"></button>
-                </div>
+            <div class="sheet-conflict-mode-spirit-combat" data-i18n-list-item="spirit_combat">
                 <div class="sheet-flex">
                     <!-- Spirit Combat Skill -->
                     <div class="sheet-grow sheet-rmargin">

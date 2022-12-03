@@ -4,16 +4,21 @@
     <div class="sheet-border">
         <div class="sheet-header">
             <div class="sheet-character">{{'{{character}}'}}</div>
+            {{'{{^description}}'}}
             <div class="sheet-name">{{'{{name}}'}}</div>
+            {{'{{/description}}'}}
+            {{'{{#description}}'}}
+            <div class="sheet-name">[{{'{{name}}'}}](~{{'{{character}}'}}|{{'{{effectid}}'}}_description)</div>
+            {{'{{/description}}'}}
         </div>
-        {{'{{#skill1name}}'}}
+        {{'{{#rolled_skill_name}}'}}
         <div class="sheet-subheader">
-            <div>[{{'{{skill1name}}'}} {{'{{skill1total}}'}}%](~{{'{{skill1roll}}'}})</div>
-            {{'{{#skill2name}}'}}
-            <div class="sheet-lmargin sheet-text-right">{{'{{skill2name}}'}} {{'{{skill2total}}'}}%</div>
-            {{'{{/skill2name}}'}}
+            <div>[{{'{{rolled_skill_name}}'}} {{'{{rolled_skill_total}}'}}%](~{{'{{character}}'}}|{{'{{rolled_skill_macro}}'}})</div>
+            {{'{{#other_skill_name}}'}}
+            <div class="sheet-lmargin sheet-text-right">{{'{{other_skill_name}}'}} {{'{{other_skill_total}}'}}%</div>
+            {{'{{/other_skill_name}}'}}
         </div>
-        {{'{{/skill1name}}'}}
+        {{'{{/rolled_skill_name}}'}}
         {{'{{#armor_penalty}}'}}
         {{'{{#^rollTotal() armor_penalty 0}}'}}
         <div class="sheet-subheader">
@@ -24,11 +29,30 @@
         {{'{{#traits}}'}}
         <div class="sheet-traits">{{'{{traits}}'}}</div>
         {{'{{/traits}}'}}
-        {{'{{#allprops() character name skill1name skill1total skill1roll skill2name skill2total armor_penalty traits description}}'}}
+        {{'{{#allprops() character name rolled_skill_name rolled_skill_total rolled_skill_macro other_skill_name other_skill_total armor_penalty effectid traits summary description buttons special_effects_button hit_location_buttons generic_button initiative_button skill_button damage_button}}'}}
         <div class="sheet-traits">{{'{{key}}'}}: {{'{{value}}'}}</div>
-        {{'{{/allprops() character name skill1name skill1total skill1roll skill2name skill2total armor_penalty traits description}}'}}
-        {{'{{#description}}'}}
-        <div class="sheet-description">{{'{{description}}'}}</div>
-        {{'{{/description}}'}}
+        {{'{{/allprops() character name rolled_skill_name rolled_skill_total rolled_skill_macro other_skill_name other_skill_total armor_penalty effectid traits summary description buttons special_effects_button hit_location_buttons generic_button initiative_button skill_button damage_button}}'}}
+        {{'{{#summary}}'}}
+        <div class="sheet-summary">{{'{{summary}}'}}</div>
+        {{'{{/summary}}'}}
+
+        {{'{{#buttons}}'}}
+        {{'{{#special_effects_button}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n-title="special_effects" data-i18n="special_effects">Special Effects</span>:</div>
+            <div class="sheet-value">[Choose](~{{'{{character}}'}}|{{'{{effectid}}'}}_special_effects)</div>
+        </div>
+        {{'{{/special_effects_button}}'}}
+        {{'{{#hit_location_buttons}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="hit_location">Hit Location</span>:</div>
+            <div class="sheet-value">[Low](~target|hit_location_low) [Standard](~target|hit_location) [High](~target|hit_location_high)</div>
+        </div>
+        {{'{{/hit_location_buttons}}'}}
+        <div class="sheet-listitem">
+            <div class="sheet-key"><span data-i18n="roll">Roll</span>:</div>
+            <div class="sheet-value">{{'{{#generic_button}}'}}[Generic](~{{'{{character}}'}}|{{'{{effectid}}'}}_generic){{'{{/generic_button}}'}} {{'{{#initiative_button}}'}}[Initiative](~{{'{{character}}'}}|{{'{{effectid}}'}}_initiative){{'{{/initiative_button}}'}} {{'{{#skill_button}}'}}[Skill](~{{'{{character}}'}}|{{'{{effectid}}'}}_skill){{'{{/skill_button}}'}} {{'{{#damage_button}}'}}[Damage](~{{'{{character}}'}}|{{'{{effectid}}'}}_damage){{'{{/damage_button}}'}}</div>
+        </div>
+        {{'{{/buttons}}'}}
     </div>
 </rolltemplate>
