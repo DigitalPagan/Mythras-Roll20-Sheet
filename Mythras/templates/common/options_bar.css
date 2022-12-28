@@ -1,0 +1,20 @@
+div.sheet-option-bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: fit-content;
+    background: #1f1f1f;
+    color: whitesmoke;
+    padding: 0 2px 0;
+    margin-bottom: 5px;
+}
+body.sheet-darkmode div.sheet-option-bar {
+    background: whitesmoke;
+    color: black;
+}
+
+input.sheet-set-toggle:not([value^="@{set_"]) + .sheet-toggle {
+    display: none;
+}

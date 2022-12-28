@@ -1,0 +1,25 @@
+<div id="import" class="sheet-overlay">
+    <div class="sheet-popup">
+        <a class="close" href="#">×</a>
+        <h1 data-i18n="import">Import</h1>
+
+        <div><label class="sheet-left" data-i18n="import_data">Import Data</label></div>
+        <div><textarea class="sheet-full-width" name="attr_import_json_data"></textarea></div>
+        <div class="sheet-flex sheet-gap">
+            <div>
+                <label class="sheet-left sheet-help" title="Character to import from data">#</label>
+                <input type="number" class="sheet-number-width-sm" title="@{import_character}" name="attr_import_character" value="1" min="1">
+            </div>
+            <div>
+                <label class="sheet-checkbox">
+                    <input type='checkbox' name='attr_import_type' value="major"><span>3</span>
+                    <span data-i18n="import_as_player_character">Import as Player Character</span>
+                </label>
+            </div>
+        </div>
+
+        <button type="action" name="act_import" class="sheet-full-width sheet-text-center" data-i18n="import">Import</button>
+
+        <span style="color: red" name="attr_import_errors"></span>
+    </div>
+</div>

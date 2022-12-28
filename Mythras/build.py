@@ -10,7 +10,6 @@ import getpass
 import sys
 import requests
 
-REPOPATH = Path(__file__).resolve().parent.parent
 SRCPATH = Path(__file__).resolve().parent
 
 template_file_loader = FileSystemLoader(Path(SRCPATH, 'templates'))
@@ -21,34 +20,20 @@ parser = argparse.ArgumentParser(description='Build Mythras based character shee
 parser.add_argument("-u", "--username", action="store", help='Username to authenticate to Roll20 with')
 parser.add_argument("-k", "--keyring", action="store_true", help="Use the desktop's keyring service to store the Roll20 password for future use")
 parser.add_argument("--reset-keyring", action="store_true", dest="reset_keyring", help='Will replace the existing keyring password with the one provided at the prompt, should be used with --keyring')
-parser.add_argument('--sheet-name', action='store', metavar='sheet_name', help='Name of the Roll20 sheet')
-parser.add_argument('--upload', action='store', metavar='campaign_id', help='Takes the Roll20 campaign ID to upload to')
+parser.add_argument('--sheet', action='store', help='Name of the Roll20 sheet')
+parser.add_argument('--campaign', action='store', help='Takes the Roll20 campaign ID to upload to')
 args = parser.parse_args()
 
-# Load sheet configs from configs/sheet-configs.json
-# For the most part these are a series of options with the values; 'enabled', 'disabled', 'option-on', or 'option-off'
-# These set whether the sheet module should be enabled/disabled or made optional for that sheet.
-# 'option-on' indicates the option should be enabled by default while 'option-off' indicated disabled by default
-'''
-with open(Path(SRCPATH, 'configs', "sheet-configs.json")) as sheet_configs_f:
-    sheet_configs = json.load(sheet_configs_f)
-
-for sheet, config in sheet_configs.items():
-  
-# Set filename config to the sheet name, this is used to resolve paths
-config['filename'] = args.sheet_name
-'''
-
 # Resolve destination paths
-html_js_premin_path = Path(SRCPATH, "pre-minified", "{}.html".format(args.sheet_name))
-css_premin_path = Path(SRCPATH, "pre-minified", "{}.css".format(args.sheet_name))
-html_js_min_path = Path(SRCPATH, "{}.min.html".format(args.sheet_name))
-css_min_path = Path(SRCPATH, "{}.min.css".format(args.sheet_name))
+html_js_premin_path = Path(SRCPATH, "pre-minified", "{}.html".format(args.sheet))
+css_premin_path = Path(SRCPATH, "pre-minified", "{}.css".format(args.sheet))
+html_js_min_path = Path(SRCPATH, "{}.min.html".format(args.sheet))
+css_min_path = Path(SRCPATH, "{}.min.css".format(args.sheet))
 
 # Render pre-minified content from templates
-html_premin_content = template_env.get_template('sheet.html')
-js_premin_content = template_env.get_template('workers.js')
-css_premin_content = template_env.get_template('sheet.css')
+html_premin_content = template_env.get_template('sheet.html').render()
+js_premin_content = template_env.get_template('sheet.js').render()
+css_premin_content = template_env.get_template('sheet.css').render()
 html_js_premin_content = html_premin_content + "<script type=\"text/worker\">\n" + js_premin_content + "\n</script>"
 
 # Write the pre-minified files
@@ -82,7 +67,7 @@ with open(html_js_min_path, "w", encoding="utf-8") as html_js_min_f:
 with open(css_min_path, "w", encoding="utf-8") as css_min_f:
     css_min_f.write(css_min_content)
 
-if args.upload:
+if args.campaign:
     if args.username:
         roll20_user = args.username
     else:
@@ -97,8 +82,8 @@ if args.upload:
         roll20_pass = getpass.getpass("Roll20 password: ")
 
 
-    html_js_min_path = Path(SRCPATH, "{}.min.html".format(args.sheet_name))
-    css_min_path = Path(SRCPATH, "{}.min.css".format(args.sheet_name))
+    html_js_min_path = Path(SRCPATH, "{}.min.html".format(args.sheet))
+    css_min_path = Path(SRCPATH, "{}.min.css".format(args.sheet))
 
     login_data = {'email': roll20_user, 'password': roll20_pass}
     roll20session = requests.Session()
@@ -134,10 +119,10 @@ if args.upload:
         'customcharsheet_style': css_src,
         'customcharsheet_translation': translation_src
     }
-    upload_result = roll20session.post("https://app.roll20.net/campaigns/savesettings/{}".format(args.campaign_id),
+    upload_result = roll20session.post("https://app.roll20.net/campaigns/savesettings/{}".format(args.campaign),
                                        sheet_data)
     if upload_result:
-        print("{} uploaded successfully to campaign {}.".format(args.sheet_name, args.campaign_id))
+        print("{} uploaded successfully to campaign {}.".format(args.sheet, args.campaign))
     else:
-        print("Error uploading {} to campaign {}!".format(args.sheet_name, args.campaign_id))
+        print("Error uploading {} to campaign {}!".format(args.sheet, args.campaign))
         exit(2)

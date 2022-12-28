@@ -3,7 +3,10 @@
 
 # Style Guidelines
 ## Translation Keys
-- should be all lowercase with - for spaces conversion of the english text. Some advanced logic depends on this. Coder discretion for non translation keys like list orders. The assumption is that Title case is used by default.  Use the following suffixes for these use cases:
+- Please try to keep the translation.json keys sorted to make it easy to find translations.
+- Should be all lowercase with - for spaces conversion of the english text. Some advanced logic depends on this. Coder discretion for non translation keys like list orders.
+- The assumption is that Title case is used by default.
+- Use the following suffixes for these use cases:
   - **-u**: For all upper case
   - **-l**: For all lower case
   - **-abrv**: For shorthand abbreviations. Eg. `attribute-abrv` for `attr`
@@ -20,4 +23,7 @@
 ## Adding a new setting
 - Add setting class to templates/sheet.css Under `Setting Display Toggles`
 - Find any instance of sheet-setting-option class in the HTML and ensure the new setting is added where needed and/or a new option is added.
+
+# Known Issues
+- Inputs sit lower than selects at times for reasons I don't understand.  Putting them into a flexbox div seem to align things nicely.
 

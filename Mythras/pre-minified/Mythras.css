@@ -664,20 +664,84 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 }
 
 /* Common Segments CSS */
-{% include 'common/options_bar.css' %}
+div.sheet-option-bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: fit-content;
+    background: #1f1f1f;
+    color: whitesmoke;
+    padding: 0 2px 0;
+    margin-bottom: 5px;
+}
+body.sheet-darkmode div.sheet-option-bar {
+    background: whitesmoke;
+    color: black;
+}
+
+input.sheet-set-toggle:not([value^="@{set_"]) + .sheet-toggle {
+    display: none;
+}
 
 /* Sheet Type Specific CSS */
-{% include 'sheet_types/battle_unit/battle_unit.css' %}
-{% include 'sheet_types/character/character.css' %}
-{% include 'sheet_types/ship/ship.css' %}
-{% include 'sheet_types/vehicle/vehicle.css' %}
-{% include 'sheet_types/vehicle_frostbyte/vehicle_frostbyte.css' %}
+
+/* Character Header Styles */
+div.sheet-info-age{
+    width: 40px;
+}
+div.sheet-info-gender{
+    width: 70px;
+}
+div.sheet-info-frame{
+    width: 70px;
+}
+div.sheet-info-weight{
+    width: 60px;
+}
+div.sheet-info-height{
+    width: 60px;
+}
+div.sheet-info-rank {
+    width: 50px;
+}
+div.sheet-info-the-soot {
+    width: 70px;
+}
+
+div.sheet-logo {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+/* Characteristics */
+div.sheet-char-label {
+    background: black;
+    color: lightgray;
+    font-family: "Sorts Mill Goudy", serif;
+    text-align: left;
+}
+body.sheet-darkmode div.sheet-char-label {
+    background: lightgray;
+    color: black;
+}
+
+/* Attributes */
+div.sheet-custom-movement {
+    width: 88px;
+}
+
+
+
 
 /* Roll Templates */
-{% include 'roll_templates/default.css' %}
-{% include 'roll_templates/effect.css' %}
-{% include 'roll_templates/hit_location.css' %}
-{% include 'roll_templates/resolution_pool.css' %}
-{% include 'roll_templates/skill.css' %}
-{% include 'roll_templates/system.css' %}
-{% include 'roll_templates/weapon.css' %}
+
+
+
+
+
+

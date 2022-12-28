@@ -1,0 +1,47 @@
+/* Character Header Styles */
+div.sheet-info-age{
+    width: 40px;
+}
+div.sheet-info-gender{
+    width: 70px;
+}
+div.sheet-info-frame{
+    width: 70px;
+}
+div.sheet-info-weight{
+    width: 60px;
+}
+div.sheet-info-height{
+    width: 60px;
+}
+div.sheet-info-rank {
+    width: 50px;
+}
+div.sheet-info-the-soot {
+    width: 70px;
+}
+
+div.sheet-logo {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+/* Characteristics */
+div.sheet-char-label {
+    background: black;
+    color: lightgray;
+    font-family: "Sorts Mill Goudy", serif;
+    text-align: left;
+}
+body.sheet-darkmode div.sheet-char-label {
+    background: lightgray;
+    color: black;
+}
+
+/* Attributes */
+div.sheet-custom-movement {
+    width: 88px;
+}

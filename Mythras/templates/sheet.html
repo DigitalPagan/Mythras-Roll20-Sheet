@@ -1,5 +1,29 @@
 <!-- Sheet type at very top to influence the rest -->
-<input class="sheet-hidden" type="text" name="attr_type" value="">
+<input class="sheet-typetoggle" type="hidden" name="attr_type" value="pc">
+<input class="sheet-setting-control" type="hidden" name="attr_setting" value="default">
+<input class="sheet-compact-control" type="hidden" name="attr_compact" value="0">
 <div class="sheet-wrapper">
+    <!-- Floating Option Bar -->
+    {% include 'common/options_bar.html' %}
 
+    <!-- Sheet Types -->
+    {% include 'sheet_types/battle_unit/battle_unit.html' %}
+    {% include 'sheet_types/character/character.html' %}
+    {% include 'sheet_types/ship/ship.html' %}
+    {% include 'sheet_types/vehicle/vehicle.html' %}
+    {% include 'sheet_types/vehicle_frostbyte/vehicle_frostbyte.html' %}
+
+    <!-- Popup Windows -->
+    {% include 'common/help.html' %}
+    {% include 'common/import.html' %}
+    {% include 'common/configuration.html' %}
 </div>
+
+<!-- Roll Templates -->
+{% include 'roll_templates/default.html' %}
+{% include 'roll_templates/effect.html' %}
+{% include 'roll_templates/hit_location.html' %}
+{% include 'roll_templates/resolution_pool.html' %}
+{% include 'roll_templates/skill.html' %}
+{% include 'roll_templates/system.html' %}
+{% include 'roll_templates/weapon.html' %}
