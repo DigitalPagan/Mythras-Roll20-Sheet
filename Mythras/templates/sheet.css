@@ -8,20 +8,17 @@
 }
 div.repcontrol { /* Give repeating fieldset repcontrol a height so it doesn't overflow in edit_mode */
     display: block;
-    height: 1.25rem !important; /* TODO: revisit height and important */
+    height: 18px !important;
 }
 
 button.recontrol_edit { /* Prevent done button from overflowing */
-    height: 1.25rem !important; /* TODO: revisit height and important */
+    height: 18px !important;
     display: inline-block;
 }
 
 /* Defaults */
 *, *::before, *::after {
     box-sizing: border-box;
-}
-.ui-dialog .charsheet button {
-    all: initial;
 }
 .ui-dialog .charsheet textarea,
 .ui-dialog .charsheet input,
@@ -350,6 +347,18 @@ a.sheet-label-left {
 a.sheet-label-left:after {
     content: ':'
 }
+a.repcontrol_move {
+    height: 18px;
+    padding: 0 5px 0;
+    border-color: gray;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+}
+body.sheet-darkmode a.repcontrol_move {
+    border-color: black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
 
 /* Inputs */
 .ui-dialog .charsheet input {
@@ -533,40 +542,79 @@ body.sheet-darkmode .ui-dialog .charsheet input[type="checkbox"] + span {
 
 /* Buttons */
 .ui-dialog .charsheet button {
-    padding: 0 !important;
-    margin: 0 !important;
-    background: none;
-    box-shadow: none;
-    border: none;
-    text-decoration: underline;
-    color: inherit;
-    text-shadow: none;
-    line-height: inherit;
+    border-radius: 5px;
+    overflow: hidden;
+    line-height: 0;
     height: 18px;
     vertical-align: middle;
     font-family: 'Merriweather', serif;
     font-size: 12px;
     box-sizing: border-box;
+    border: solid 1px gray;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+    margin: 0;
+    padding: 0 2px 0;
+    text-shadow: none;
 }
 .ui-dialog .charsheet button:hover {
-    color: royalblue;
+    text-decoration: underline;
+}
+.ui-dialog .charsheet button:active {
+    border-color: black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
+body.sheet-darkmode .ui-dialog .charsheet button {
+    border-color: black;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke;
+}
+body.sheet-darkmode .ui-dialog .charsheet button:active {
+    border-color: gray;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black;
+}
+.ui-dialog .charsheet button.repcontrol_del,
+body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
+    font-family: "Pictos";
+    background: linear-gradient(rgb(238, 95, 91), rgb(189, 54, 47));
+    color: whitesmoke;
+    border-color: rgb(172, 41, 37);
+    padding: 0 5px 0;
 }
 .ui-dialog .charsheet button[type=roll]:before {
     content: '';
 }
+.ui-dialog .charsheet button.sheet-label-left,
+.ui-dialog .charsheet button.sheet-link {
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0;
+}
 .ui-dialog .charsheet button.sheet-label-left {
     font-weight: bold;
-    font-size: 12px;
+}
+.ui-dialog .charsheet button.sheet-link:hover,
+.ui-dialog .charsheet button.sheet-label-left:hover {
+    color: royalblue;
 }
 .ui-dialog .charsheet button.sheet-label-left:after {
     content: ':'
 }
 .ui-dialog .charsheet button.sheet-die {
     text-decoration: unset;
+    margin: 0;
+    padding: 1px 2px;
 }
 .ui-dialog .charsheet button.sheet-die:hover {
     text-decoration: underline;
 }
+
 /*.ui-dialog .charsheet button[type=roll].sheet-d6::before {
     font-family: 'dicefontd6';
     content: 'f';

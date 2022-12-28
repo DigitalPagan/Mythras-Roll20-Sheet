@@ -455,7 +455,11 @@
             </div>
         </div>
 
-        <button type="action" name="act_import" class="sheet-full-width sheet-text-center" data-i18n="import">Import</button>
+        <button type="action" name="act_import" class="sheet-full-width sheet-btn-style" data-i18n="import">Import</button>
+
+        <fieldset class="repeating_systemspecies">
+            <input type="text" name="attr_test">
+        </fieldset>
 
         <span style="color: red" name="attr_import_errors"></span>
     </div>
@@ -733,11 +737,8 @@ on("clicked:import", function() {
                 console.log("Importing Characteristics");
             }
             characterData["stats"].forEach(stat => {
-                console.log(stat);
                 const charKey = Object.keys(stat)[0];
                 const char = charKey.toLowerCase();
-                console.log(char);
-                console.log(stat[charKey]);
                 newAttrs[`${char}_base`] = stat[charKey];
                 newAttrs[`${char}`] = stat[charKey];
             });
@@ -761,7 +762,6 @@ on("clicked:import", function() {
             /* Clear the import data */
             newAttrs['import_json_data'] = '';
 
-            console.log(newAttrs);
             setAttrs(newAttrs);
         } catch (error) {
             setAttrs({import_errors: error});
