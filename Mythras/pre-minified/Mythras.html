@@ -400,6 +400,14 @@
                         <div class="sheet-td sheet-custom-movement"><input type="text" class="sheet-full-width sheet-text-right" title="@{custom_movement}" name="attr_custom_movement"></div>
                     </div>
                 </div>
+
+                <!-- Tenacity -->
+                <input type="hidden" class="sheet-toggle" name="attr_tenacity_enabled" value="0">
+                <div data-i18n-list-item="tenacity" class="sheet-flex sheet-hl sheet-toggle">
+                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="tenacity">Tenacity</label></div>
+                    <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-rval" title="@{tenacity|max}" name="attr_tenacity_max" value="11"></div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -578,6 +586,17 @@
                     <option value="0" data-i18n="disabled">Disabled</option>
                 </select>
                 <br>
+
+                <!-- Attributes -->
+                <h3 data-i18n="attributes">Attributes</h3>
+                <!-- Tenacity Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="tenacity">Tenacity</label>
+                <select name="attr_tenacity_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
             </details>
         </div>
     </div>
@@ -595,10 +614,14 @@
 const debug=1
 
 /* Campaign Options */
-const campaignSettings = ["extended_conflict_enabled"]
+const campaignSettings = ["extended_conflict_enabled", "tenacity_enabled"]
 const campaginSettingDefaults = {
     "default": {
-        "extended_conflict_enabled": 0
+        "extended_conflict_enabled": 0,
+        "tenacity_enabled": 0
+    },
+    "luther_arkwright": {
+        "tenacity_enabled": 1
     },
     "m-space": {
         "extended_conflict_enabled": 1
@@ -616,10 +639,10 @@ const campaginSettingDefaults = {
  */
 function calcCampaignSetting(campaignSetting, campaignSettingOption, setting) {
     if (campaignSettingOption === 'default') {
-        if ((setting in campaginSettingOverrides) && (`${campaignSetting}` in campaginSettingOverrides[setting])) {
-            return campaginSettingOverrides[setting][`${campaignSetting}`];
+        if ((setting in campaginSettingDefaults) && (campaignSetting in campaginSettingDefaults[setting])) {
+            return {[`${campaignSetting}`]: campaginSettingDefaults[setting][campaignSetting]};
         } else {
-            return campaginSettingDefaults[`${campaignSetting}`];
+            return {[`${campaignSetting}`]: campaginSettingDefaults['default'][campaignSetting]};
         }
     } else {
         return {[`${campaignSetting}`]: campaignSettingOption};

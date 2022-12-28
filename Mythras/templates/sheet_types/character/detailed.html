@@ -321,6 +321,14 @@
                         <div class="sheet-td sheet-custom-movement"><input type="text" class="sheet-full-width sheet-text-right" title="@{custom_movement}" name="attr_custom_movement"></div>
                     </div>
                 </div>
+
+                <!-- Tenacity -->
+                <input type="hidden" class="sheet-toggle" name="attr_tenacity_enabled" value="0">
+                <div data-i18n-list-item="tenacity" class="sheet-flex sheet-hl sheet-toggle">
+                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="tenacity">Tenacity</label></div>
+                    <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-rval" title="@{tenacity|max}" name="attr_tenacity_max" value="11"></div></div>
+                </div>
             </div>
         </div>
     </div>

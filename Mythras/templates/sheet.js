@@ -1,16 +1,23 @@
 const debug=1
 
 /* Campaign Options */
-const campaignSettings = ["extended_conflict_enabled"]
+const campaignSettings = ["extended_conflict_enabled", "tenacity_enabled"]
 const campaginSettingDefaults = {
     "default": {
-        "extended_conflict_enabled": 0
+        "extended_conflict_enabled": 0,
+        "tenacity_enabled": 0
+    },
+    "luther_arkwright": {
+        "tenacity_enabled": 1
     },
     "m-space": {
         "extended_conflict_enabled": 1
     },
     "odd_soot": {
         "extended_conflict_enabled": 1
+    },
+    "worlds_united": {
+        "tenacity_enabled": 1
     }
 }
 /**
@@ -22,10 +29,10 @@ const campaginSettingDefaults = {
  */
 function calcCampaignSetting(campaignSetting, campaignSettingOption, setting) {
     if (campaignSettingOption === 'default') {
-        if ((setting in campaginSettingOverrides) && (`${campaignSetting}` in campaginSettingOverrides[setting])) {
-            return campaginSettingOverrides[setting][`${campaignSetting}`];
+        if ((setting in campaginSettingDefaults) && (campaignSetting in campaginSettingDefaults[setting])) {
+            return {[`${campaignSetting}`]: campaginSettingDefaults[setting][campaignSetting]};
         } else {
-            return campaginSettingDefaults[`${campaignSetting}`];
+            return {[`${campaignSetting}`]: campaginSettingDefaults['default'][campaignSetting]};
         }
     } else {
         return {[`${campaignSetting}`]: campaignSettingOption};
