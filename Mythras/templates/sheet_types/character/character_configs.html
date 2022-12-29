@@ -10,11 +10,44 @@
                 <div class="sheet-th"><div data-i18n="other">Other</div></div>
                 <div class="sheet-th"><div data-i18n="base">Base</div></div>
             </div>
-            <div data-i18n-list-item="action_points" class="sheet-tr">
+            <div data-i18n-list-item="action_points" class="sheet-tr sheet-creature">
                 <div class="sheet-td"><label class="sheet-left" data-i18n="action_points">Action Points</label></div>
                 <div class="sheet-td sheet-full-width"></div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{action_points_other}" name="attr_action_points_other" value="0"></div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{action_points_base}" name="attr_action_points_base" value="2"></div>
+            </div>
+            <div data-i18n-list-item="damage_modifier" class="sheet-tr sheet-creature">
+                <div class="sheet-td"><label class="sheet-left" data-i18n="damage_modifier-abrv">Damage Mod</label></div>
+                <div class="sheet-td sheet-full-width">
+                    <div class="sheet-flex">
+                        <div><span data-i18n="calculate_with">Calculate with</span>:</div>
+                        <div class="sheet-grow">
+                            <select class="sheet-full-width sheet-text-center" name="attr_damage_mod_calc">
+                                <option data-i18n="str+siz" value="0" selected>STR+SIZ</option>
+                                <option data-i18n="str+siz+pow" value="1">STR+SIZ+POW</option>
+                                <option data-i18n="str+siz+con" value="2">STR+SIZ+CON</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{damage_mod_other}" name="attr_damage_mod_other" value="0"></div>
+                <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{damage_mod_base}" name="attr_damage_mod_base" value="0"></div>
+            </div>
+            <div data-i18n-list-item="damage_modifier" class="sheet-tr sheet-major">
+                <div class="sheet-td"><label class="sheet-left" data-i18n="experience-abrv_modifier">Exp Modifier</label></div>
+                <div class="sheet-td sheet-full-width">
+                    <div class="sheet-flex">
+                        <div><span data-i18n="calculate_with">Calculate with</span>:</div>
+                        <div class="sheet-grow">
+                            <select class="sheet-full-width sheet-text-center" name="attr_experience_mod_calc">
+                                <option data-i18n="cha-u" value="0" selected>CHA</option>
+                                <option data-i18n="int-u" value="1">INT</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{experience_mod_other}" name="attr_experience_mod_other" value="0"></div>
+                <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{experience_mod_base}" name="attr_experience_mod_base" value="0"></div>
             </div>
         </div>
     </div>

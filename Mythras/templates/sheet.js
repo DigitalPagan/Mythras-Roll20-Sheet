@@ -69,6 +69,54 @@ campaignSettings.forEach(campaignSetting => {
     });
 });
 
+/* Utility Functions */
+function damageTable(step, damage_mod=false) {
+    const stepAbs = Math.abs(step);
+    const die_steps = [0, '1d2','1d4','1d6','1d8'];
+    const d10s = Math.floor(stepAbs/5);
+    const damageModd10s = Math.floor((stepAbs-1)/5);
+    const notd10s = stepAbs % 5; // % calculates remainder after division.
+    const notDamageModd10s = (stepAbs-1) % 5; // % calculates remainder after division.
+    let mod;
+    if (damage_mod) {
+        // Damage mod table has an extra step with 1d12 others don't have for some reason
+        if (stepAbs <= 5) {
+            mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+        } else if (stepAbs === 6) {
+            mod = '1d12';
+        } else if (stepAbs === 7) {
+            mod = '2d6';
+        } else if (stepAbs === 8) {
+            mod = '1d8+1d6';
+        } else if (stepAbs === 9) {
+            mod = '2d8';
+        } else if (stepAbs === 10) {
+            mod = '1d10+1d8';
+        } else {
+            mod = (damageModd10s ? `${damageModd10s}d10` : '') + (damageModd10s && notDamageModd10s ? '+' : '') + (notDamageModd10s ? die_steps[notDamageModd10s] : (damageModd10s ? '' : 0));
+        }
+    } else {
+        // Damage table for spirit damage, wrack and other things which skip the 1d12
+        if (stepAbs === 6) {
+            mod = '2d6';
+        } else if (stepAbs === 7) {
+            mod = '1d8+1d6';
+        } else if (stepAbs === 8) {
+            mod = '2d8';
+        } else if (stepAbs === 9) {
+            mod = '1d10+1d8';
+        } else {
+            mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+        }
+    }
+
+    if (step >= 0) {
+        return mod;
+    } else {
+        return '-' + mod;
+    }
+}
+
 /* Type Specific Scripts */
 {% include 'sheet_types/character/character.js' %}
 

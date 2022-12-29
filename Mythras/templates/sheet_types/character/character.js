@@ -5,20 +5,17 @@ characteristicAttrs.forEach(char => {
         if (event.sourceType === "sheetworker") {return;}
 
         let newAttrs = {}
-        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs), function(v) {
+        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs, expModGetAttrs), function(v) {
             const baseCharVal = parseInt(v[`${char}_base`]) || 0;
             const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
             newAttrs[`${char}`] = baseCharVal + tempCharVal;
             v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
 
-            let actionPointAttrs = {}
-            if (char === 'dex' || char === 'int') {
-                actionPointAttrs = calcActionPoints(v);
-            }
-
             setAttrs({
                 ...newAttrs,
-                ...actionPointAttrs
+                ...calcActionPoints(v),
+                ...calcDamageMod(v),
+                ...calcExpMod(v)
             });
         });
     });
@@ -56,7 +53,6 @@ function calcActionPoints(v) {
         action_points: action_points + diff_action_points_max
     };
 }
-/* TODO Trigger for fatigue */
 on('change:action_points_other change:action_points_temp', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(actionPointGetAttrs, function(v) {
@@ -67,6 +63,74 @@ on('change:action_points_calc', function(event) {
     /* Don't exit on sheetworker cause humans will modify the option not the setting itself */
     getAttrs(actionPointGetAttrs, function(v) {
         setAttrs(calcActionPoints(v));
+    });
+});
+
+/* Damage Modifier */
+const damageModGetAttrs = ['str', 'siz', 'con', 'pow', 'damage_mod_calc', 'damage_mod_other', 'damage_mod_temp'];
+/**
+ * Calculate the damage modifier
+ * @param v attrs needed for calc; str, siz, con, pow, damage_mod_calc, damage_mod_other, damage_mod_temp
+ * @returns {}
+ */
+function calcDamageMod(v) {
+    let damage_mod_table_value;
+    const str = parseInt(v['str']) || 0;
+    const siz = parseInt(v['siz']) || 0;
+    const damageModOther = parseInt(v['damage_mod_other']) || 0;
+    const damageModTemp = parseInt(v['damage_mod_temp']) || 0;
+    if (v['damage_mod_calc'] === '1') {
+        const pow = parseInt(v['pow']) || 0;
+        damage_mod_table_value = str + siz + pow;
+    } else if (v['damage_mod_calc'] === '2') {
+        const con = parseInt(v['con']) || 0;
+        damage_mod_table_value = str + siz + con;
+    } else {
+        damage_mod_table_value = str + siz;
+    }
+
+    const base_damage_mod_step = Math.ceil(damage_mod_table_value / 5) - 5 + damageModOther;
+
+    return {
+        damage_mod_base: damageTable(base_damage_mod_step, true),
+        damage_mod: damageTable(base_damage_mod_step + damageModTemp, true)
+    };
+}
+on('change:damage_mod_other change:damage_mod_temp change:damage_mod_calc', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(damageModGetAttrs, function(v) {
+        setAttrs(calcDamageMod(v));
+    });
+});
+
+/* Experience Modifier */
+const expModGetAttrs = ['cha', 'int', 'experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'];
+/**
+ * Calculate Experience Modifier
+ * @param v attributes needed for calc, expModGetAttrs
+ * @returns {}
+ */
+function calcExpMod(v) {
+    let base_value;
+    const expModOther = parseInt(v['experience_mod_other']) || 0;
+    const expModTemp = parseInt(v['experience_mod_temp']) || 0;
+    if(v['experience_mod_calc'] === '1') {
+        const int = parseInt(v['int']) || 0;
+        base_value = Math.ceil(int/6)-2 + expModOther;
+    } else {
+        const cha = parseInt(v['cha']) || 0;
+        base_value = Math.ceil(cha/6)-2 + expModOther;
+    }
+
+    return {
+        experience_mod_base: base_value,
+        experience_mod: base_value + expModTemp
+    };
+}
+on('change:experience_mod_other change:experience_mod_temp change:experience_mod_calc', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(expModGetAttrs, function(v) {
+        setAttrs(calcExpMod(v));
     });
 });
 
@@ -177,6 +241,7 @@ function getImportName(importName, importType) {
  */
 on("clicked:import", function() {
     getAttrs(['import_json_data', 'import_character', 'import_type', 'simplified_combat_enabled', 'luck_points_rank', 'action_points_calc'], function(v) {
+        console.log(v['action_points_calc']);
         try {
             const jsonData = JSON.parse(v['import_json_data']);
             const import_character = parseInt(v['import_character']);
@@ -202,6 +267,8 @@ on("clicked:import", function() {
                 cha_base: 0, cha: 0,
                 characteristics_details: 0,
                 action_points_other: 0, action_points_temp: 0, action_points_calc: v['action_points_calc'], action_points: 2, action_points_max: 2,
+                damage_mod_calc: '0', damage_mod_other: 0, damage_mod_temp: 0,
+                experience_mod_calc: '0', experience_mod_other: 0, experience_mod_temp: 0,
                 fatigue: '9'
             };
 
@@ -235,17 +302,16 @@ on("clicked:import", function() {
                     newAttrs['type'] = 'creature';
                 }
             }
-            newAttrs['character_name'] = getImportName(characterData['name'], v['import_type'])
-
-            /* Import Action Points */
-            const actionPointNewAttrs = calcActionPoints(newAttrs)
+            newAttrs['character_name'] = getImportName(characterData['name'], v['import_type']);
 
             /* Clear the import data */
             newAttrs['import_json_data'] = '';
 
             setAttrs({
                 ...newAttrs,
-                ...actionPointNewAttrs
+                ...calcActionPoints(newAttrs),
+                ...calcDamageMod(newAttrs),
+                ...calcExpMod(newAttrs)
             });
         } catch (error) {
             setAttrs({import_errors: error});
@@ -261,7 +327,7 @@ function upgradeCharacter3Dot0() {
     if (debug) {console.log("Upgrading character to 3.0");}
     let charGetAttrs = [];
     characteristicAttrs.forEach(char => { charGetAttrs.push(`${char}`, `${char}_temp`); });
-    getAttrs(charGetAttrs.concat(['action_points_add_one']), function(v) {
+    getAttrs(charGetAttrs.concat(['action_points_other', 'action_points_add_one']), function(v) {
         let newAttrs = {'version': '3.0'};
 
         /* Convert Characteristics base values */
@@ -271,9 +337,10 @@ function upgradeCharacter3Dot0() {
             newAttrs[`${char}_base`] = charCurr - charTemp;
         });
 
-        /* Convert Action Points */
+        /* Convert action_points_add_one to just +1 in other */
         if (v['action_points_add_one'] === '1') {
-            newAttrs['action_points_other'] = 1;
+            const actionPointsOther = parseInt(v['action_points_other']) || 0;
+            newAttrs['action_points_other'] = actionPointsOther + 1;
         }
 
         /* Delete json import data due to size and not needing it anymore, v3 does this for us after import */
