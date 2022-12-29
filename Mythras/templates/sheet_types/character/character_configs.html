@@ -49,6 +49,28 @@
                 <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{experience_mod_other}" name="attr_experience_mod_other" value="0"></div>
                 <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{experience_mod_base}" name="attr_experience_mod_base" value="0"></div>
             </div>
+            <div data-i18n-list-item="healing_rate" class="sheet-tr sheet-creature">
+                <div style="vertical-align: top" class="sheet-td"><label class="sheet-left" data-i18n="healing_rate">Healing Rate</label></div>
+                <div style="vertical-align: top" class="sheet-td sheet-full-width sheet-text-left">
+                    <div class="sheet-flex">
+                        <div><span data-i18n="calculate_with">Calculate with</span>:</div>
+                        <div class="sheet-grow">
+                            <select class="sheet-full-width sheet-text-center" name="attr_healing_rate_calc">
+                                <option data-i18n="con-u" value="0" selected>CON</option>
+                                <option data-i18n="con+1/2_pow" value="1">CON + 1/2 POW</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="sheet-checkbox">
+                            <input type='checkbox' name='attr_healing_rate_double' value="1"/><span>3</span>
+                            <span data-i18n="double_base_healing_rate">Double Base healing Rate</span>
+                        </label>
+                    </div>
+                </div>
+                <div style="vertical-align: top" class="sheet-td"><input type="number" class="sheet-number-width" title="@{healing_rate_other}" name="attr_healing_rate_other" value="0"></div>
+                <div style="vertical-align: top" class="sheet-td"><input type="text" class="sheet-number-width" title="@{healing_rate_base}" name="attr_healing_rate_base" value="2"></div>
+            </div>
         </div>
     </div>
 </div>

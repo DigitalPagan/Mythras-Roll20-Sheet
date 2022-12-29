@@ -5,7 +5,8 @@ characteristicAttrs.forEach(char => {
         if (event.sourceType === "sheetworker") {return;}
 
         let newAttrs = {}
-        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs, expModGetAttrs), function(v) {
+        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs,
+            expModGetAttrs, healingRateGetAttrs), function(v) {
             const baseCharVal = parseInt(v[`${char}_base`]) || 0;
             const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
             newAttrs[`${char}`] = baseCharVal + tempCharVal;
@@ -15,7 +16,8 @@ characteristicAttrs.forEach(char => {
                 ...newAttrs,
                 ...calcActionPoints(v),
                 ...calcDamageMod(v),
-                ...calcExpMod(v)
+                ...calcExpMod(v),
+                ...calcHealingRate(v)
             });
         });
     });
@@ -131,6 +133,44 @@ on('change:experience_mod_other change:experience_mod_temp change:experience_mod
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(expModGetAttrs, function(v) {
         setAttrs(calcExpMod(v));
+    });
+});
+
+/* Experience Modifier */
+const healingRateGetAttrs = ['con', 'pow', 'healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'];
+/**
+ * Calculate Healing Rate
+ * @param v attributes needed for calc, healingRateGetAttrs
+ * @returns {}
+ */
+function calcHealingRate(v) {
+    let base_multiplier;
+    let base_value;
+    const con = parseInt(v['con']) || 0;
+    const healingRateOther = parseInt(v['healing_rate_other']) || 0;
+    const healingRateTemp = parseInt(v['healing_rate_temp']) || 0;
+    if (v['healing_rate_double'] === '1') {
+        base_multiplier = 2;
+    } else {
+        base_multiplier = 1;
+    }
+
+    if (v['healing_rate_calc'] === '1') {
+        const pow = parseInt(v['pow']) || 0;
+        base_value = (Math.ceil(Math.ceil(con+(pow/2))/6) * base_multiplier)+healingRateOther;
+    } else {
+        base_value = (Math.ceil(con/6) * base_multiplier)+healingRateOther;
+    }
+
+    return {
+        healing_rate_base: base_value,
+        healing_rate: base_value + healingRateTemp
+    };
+}
+on('change:healing_rate_other change:healing_rate_temp change:healing_rate_calc change:healing_rate_double', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(healingRateGetAttrs, function(v) {
+        setAttrs(calcHealingRate(v));
     });
 });
 
@@ -269,6 +309,7 @@ on("clicked:import", function() {
                 action_points_other: 0, action_points_temp: 0, action_points_calc: v['action_points_calc'], action_points: 2, action_points_max: 2,
                 damage_mod_calc: '0', damage_mod_other: 0, damage_mod_temp: 0,
                 experience_mod_calc: '0', experience_mod_other: 0, experience_mod_temp: 0,
+                healing_rate_calc: '0', healing_rate_other: 0, healing_rate_temp: 0, healing_rate_double: '0',
                 fatigue: '9'
             };
 
@@ -311,7 +352,8 @@ on("clicked:import", function() {
                 ...newAttrs,
                 ...calcActionPoints(newAttrs),
                 ...calcDamageMod(newAttrs),
-                ...calcExpMod(newAttrs)
+                ...calcExpMod(newAttrs),
+                ...calcHealingRate(newAttrs)
             });
         } catch (error) {
             setAttrs({import_errors: error});
