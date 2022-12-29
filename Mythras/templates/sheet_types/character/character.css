@@ -45,3 +45,8 @@ body.sheet-darkmode div.sheet-char-label {
 div.sheet-custom-movement {
     width: 88px;
 }
+
+/* Hit Locations */
+input.sheet-location-name {
+    width: 145px;
+}

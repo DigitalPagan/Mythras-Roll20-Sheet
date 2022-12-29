@@ -3,5 +3,27 @@
     <div class="sheet-popup">
         <a class="close" href="#">×</a>
         <h1 data-i18n="attributes">Attributes</h1>
+        <div data-i18n-list="attribute-order" class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="attribute">Attribute</div>
+                <div class="sheet-th sheet-full-width"><div data-i18n="special">Special</div></div>
+                <div class="sheet-th"><div data-i18n="other">Other</div></div>
+                <div class="sheet-th"><div data-i18n="base">Base</div></div>
+            </div>
+            <div data-i18n-list-item="action_points" class="sheet-tr">
+                <div class="sheet-td"><label class="sheet-left" data-i18n="action_points">Action Points</label></div>
+                <div class="sheet-td sheet-full-width"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{action_points_other}" name="attr_action_points_other" value="0"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{action_points_base}" name="attr_action_points_base" value="2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hit Locations Configuration -->
+<div id="hit-locations-configuration" class="sheet-overlay">
+    <div class="sheet-popup">
+        <a class="close" href="#">×</a>
+        <h1 data-i18n="hit_locations">Hit Loctions</h1>
     </div>
 </div>

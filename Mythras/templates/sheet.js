@@ -1,9 +1,10 @@
 const debug=1
 
 /* Campaign Options */
-const campaignSettings = ["extended_conflict_enabled", "tenacity_enabled"]
+const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "tenacity_enabled"]
 const campaginSettingDefaults = {
     "default": {
+        "action_points_calc": "calculate",
         "extended_conflict_enabled": 0,
         "tenacity_enabled": 0
     },
@@ -11,9 +12,14 @@ const campaginSettingDefaults = {
         "tenacity_enabled": 1
     },
     "m-space": {
+        "action_points_calc": "set_2",
         "extended_conflict_enabled": 1
     },
+    "mythras_imperative": {
+        "action_points_calc": "set_2"
+    },
     "odd_soot": {
+        "action_points_calc": "set_2",
         "extended_conflict_enabled": 1
     },
     "worlds_united": {
