@@ -1,6 +1,7 @@
 <div class="sheet-detailed">
+    <input type="hidden" class="sheet-conflict-toggle" name="attr_conflict_mode" value="combat">
     <!-- Character Header -->
-    <div class="sheet-flex sheet-gap">
+    <div id="core" class="sheet-flex sheet-gap sheet-anchor-adjust-x2">
         <!-- Info Section -->
         <div class="sheet-section sheet-grow">
             <!-- Info 1st Row -->
@@ -85,7 +86,7 @@
     </div>
 
     <!-- Core Section -->
-    <div class="sheet-flex sheet-gap">
+    <div class="sheet-flex sheet-gap sheet-anchor-adjust-x2">
         <!-- Characteristics -->
         <div class="sheet-section">
             <div class="sheet-space-between">
@@ -218,7 +219,8 @@
                 </div>
 
                 <!-- Magic Points -->
-                <div data-i18n-list-item="magic_points" class="sheet-flex sheet-hl">
+                <input type="hidden" class="sheet-toggle" name="attr_magic_points_enabled" value="1">
+                <div data-i18n-list-item="magic_points" class="sheet-flex sheet-hl sheet-toggle">
                     <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="magic_points">Magic Points</label></div>
                     <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{magic_points_temp}" name="attr_magic_points_temp" value="0"></div>
                     <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{magic_points}" name="attr_magic_points" value="11">/<input type="number" class="sheet-rval" title="@{magic_points|max}" name="attr_magic_points_max" value="11" readonly></div></div>
@@ -234,9 +236,25 @@
                     </div>
                     <!-- Custom Movement Alternative -->
                     <div class="sheet-flex sheet-toggle sheet-full-width">
-                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="movement">Movement</label></div>
-                        <div class="sheet-td sheet-custom-movement"><input type="text" class="sheet-full-width sheet-text-right" title="@{custom_movement}" name="attr_custom_movement"></div>
+                        <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="movement">Movement</label></div>
+                        <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width sheet-text-right" title="@{custom_movement}" name="attr_custom_movement"></div>
                     </div>
+                </div>
+
+                <!-- Prana Points -->
+                <input type="hidden" class="sheet-toggle" name="attr_prana_points_enabled" value="0">
+                <div data-i18n-list-item="prana_points" class="sheet-flex sheet-hl sheet-toggle">
+                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="prana_points">Prana Points</label></div>
+                    <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{prana_points_temp}" name="attr_prana_points_temp" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{prana_points}" name="attr_prana_points" value="11">/<input type="number" class="sheet-rval" title="@{prana_points|max}" name="attr_prana_points_max" value="11" readonly></div></div>
+                </div>
+
+                <!-- Power Points -->
+                <input type="hidden" class="sheet-toggle" name="attr_power_points_enabled" value="0">
+                <div data-i18n-list-item="power_points" class="sheet-flex sheet-hl sheet-toggle">
+                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="power_points">Power Points</label></div>
+                    <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{power_points_temp}" name="attr_power_points_temp" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{power_points}" name="attr_power_points" value="11">/<input type="number" class="sheet-rval" title="@{power_points|max}" name="attr_power_points_max" value="11" readonly></div></div>
                 </div>
 
                 <!-- Tenacity -->
@@ -250,10 +268,43 @@
         </div>
 
         <!-- Hit Locations -->
-        <div class="sheet-section">
-            <div class="sheet-space-between">
+        <div class="sheet-section sheet-combat">
+            <div class="sheet-space-between sheet-gap">
                 <h2 data-i18n="hit_locations">Hit Locations</h2>
-                <a class="sheet-pictos" data-i18n-title="show_hit_locations_popup" href="#hit-locations-configuration">y</a>
+                <div class="sheet-flex sheet-gap">
+                    <input type="hidden" class="sheet-toggle" name="attr_simplified_combat_enabled" value="0">
+                    <select class="sheet-auto-width sheet-text-center sheet-anti-toggle" title="@{hit_locations}" name="attr_hit_locations" data-i18n-list="hit-location-order">
+                        <option value="custom1" data-i18n="custom_1_location" data-i18n-list-item="custom_1_location">Custom(1 Location)</option>
+                        <option value="custom7" data-i18n="custom_7_locations" data-i18n-list-item="custom_7_locations" selected >Custom(7 Locations)</option>
+                        <option value="custom8" data-i18n="custom_8_locations" data-i18n-list-item="custom_8_locations">Custom(8 Locations)</option>
+                        <option value="custom9" data-i18n="custom_9_locations" data-i18n-list-item="custom_9_locations">Custom(9 Locations)</option>
+                        <option value="custom10" data-i18n="custom_10_locations" data-i18n-list-item="custom_10_locations">Custom(10 Locations)</option>
+                        <option value="custom11" data-i18n="custom_11_locations" data-i18n-list-item="custom_11_locations">Custom(11 Locations)</option>
+                        <option value="custom" data-i18n="custom_12_locations" data-i18n-list-item="custom_12_locations">Custom(12 Locations)</option>
+                        <option value="rabble" data-i18n="rabble/underling" data-i18n-list-item="rabble">Rabble/Underling</option>
+                        <option class="sheet-hidden" value="simplified" data-i18n="simplified-combat">Simplified Combat</option>
+                        <option data-i18n-list-item="spacer" disabled>──────────</option>
+                        <option value="arachnid" data-i18n="arachnid" data-i18n-list-item="arachnid">Arachnid</option>
+                        <option value="humanoid" data-i18n="biped" data-i18n-list-item="biped">Biped</option>
+                        <option value="centaurid" data-i18n="centaurid" data-i18n-list-item="centaurid">Centaurid</option>
+                        <option value="decapoda" data-i18n="decapoda" data-i18n-list-item="decapoda">Decapoda</option>
+                        <option value="decapodiform" data-i18n="decapodiform" data-i18n-list-item="decapodiform">Decapodiform</option>
+                        <option value="dorsal_finned_aquatic" data-i18n="dorsal_finned_aquatic" data-i18n-list-item="dorsal_finned_aquatic">Dorsal Finned Aquatic</option>
+                        <option value="draconic" data-i18n="draconic" data-i18n-list-item="draconic">Draconic</option>
+                        <option value="insect" data-i18n="insect" data-i18n-list-item="insect">Insect</option>
+                        <option value="octopodiform" data-i18n="octopodiform" data-i18n-list-item="octopodiform">Octopodiform</option>
+                        <option value="pachyderm" data-i18n="pachyderm" data-i18n-list-item="pachyderm">Pachyderm</option>
+                        <option value="quadruped" data-i18n="quadruped" data-i18n-list-item="quadruped">Quadruped</option>
+                        <option value="serpentine" data-i18n="serpentine" data-i18n-list-item="serpentine">Serpentine</option>
+                        <option value="tailed_arachnid" data-i18n="tailed_arachnid" data-i18n-list-item="tailed_arachnid">Tailed Arachnid</option>
+                        <option value="tailed_biped" data-i18n="tailed_biped" data-i18n-list-item="tailed_biped">Tailed Biped</option>
+                        <option value="tailed_quadruped" data-i18n="tailed_quadruped" data-i18n-list-item="tailed_quadruped">Tailed Quadruped</option>
+                        <option value="winged_biped" data-i18n="winged_biped" data-i18n-list-item="winged_biped">Winged Biped</option>
+                        <option value="winged_insect" data-i18n="winged_insect" data-i18n-list-item="winged_insect">Winged Insect</option>
+                        <option value="winged_quadruped" data-i18n="winged_quadruped" data-i18n-list-item="winged_quadruped">Winged Quadruped</option>
+                    </select>
+                    <a class="sheet-pictos" data-i18n-title="show_hit_locations_popup" href="#hit-locations-configuration">y</a>
+                </div>
             </div>
 
             <div class="sheet-table">
@@ -263,17 +314,123 @@
                     <div class="sheet-th sheet-help sheet-pictos-three" data-i18n-title="passive_block_size">b</div>
                     <div class="sheet-th sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div>
                     <div class="sheet-th sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div>
-                    <div class="sheet-th sheet-minor" data-i18n="enc">ENC</div>
                 </div>
-                <div class="sheet-tr">
-                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location1_table_start}" name="attr_location1_table_start" value="0">-<input type="number" class="sheet-number-width-xs" title="@{location1_table_end}" name="attr_location1_table_end" value="0"></div>
-                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location1_name}" name="attr_location1_name" value=""></div>
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location1_table_start}" name="attr_location1_table_start" value="1">-<input type="number" class="sheet-number-width-xs" title="@{location1_table_end}" name="attr_location1_table_end" value="3"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location1_name}" name="attr_location1_name" value="Right Leg"></div>
                     <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location1_block}" name="attr_location1_block" value=""></div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location1_ap}" name="attr_location1_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location1_hp}" name="attr_location1_hp" value="5">/<input type="number" class="sheet-rval" title="@{location1_hp|max}" name="attr_location1_hp_max" value="5" readonly></div></div>
-                    <div class="sheet-td sheet-minor"><input type="number" class="sheet-number-width-sm" title="@{location1_armor_enc}" name="attr_location1_armor_enc" step="1" min="0" value="0"></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location2_table_start}" name="attr_location2_table_start" value="4">-<input type="number" class="sheet-number-width-xs" title="@{location2_table_end}" name="attr_location2_table_end" value="6"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location2_name}" name="attr_location2_name" value="Left Leg"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location2_block}" name="attr_location2_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location2_ap}" name="attr_location2_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location2_hp}" name="attr_location2_hp" value="5">/<input type="number" class="sheet-rval" title="@{location2_hp|max}" name="attr_location2_hp_max" value="5" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location3_table_start}" name="attr_location3_table_start" value="7">-<input type="number" class="sheet-number-width-xs" title="@{location3_table_end}" name="attr_location3_table_end" value="9"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location3_name}" name="attr_location3_name" value="Abdomen"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location3_block}" name="attr_location3_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location3_ap}" name="attr_location3_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location3_hp}" name="attr_location3_hp" value="6">/<input type="number" class="sheet-rval" title="@{location3_hp|max}" name="attr_location3_hp_max" value="7" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location4_table_start}" name="attr_location4_table_start" value="10">-<input type="number" class="sheet-number-width-xs" title="@{location4_table_end}" name="attr_location4_table_end" value="12"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location4_name}" name="attr_location4_name" value="Chest"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location4_block}" name="attr_location4_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location4_ap}" name="attr_location4_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location4_hp}" name="attr_location4_hp" value="7">/<input type="number" class="sheet-rval" title="@{location4_hp|max}" name="attr_location4_hp_max" value="7" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location5_table_start}" name="attr_location5_table_start" value="13">-<input type="number" class="sheet-number-width-xs" title="@{location5_table_end}" name="attr_location5_table_end" value="15"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location5_name}" name="attr_location5_name" value="Right Arm"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location5_block}" name="attr_location5_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location5_ap}" name="attr_location5_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location5_hp}" name="attr_location5_hp" value="4">/<input type="number" class="sheet-rval" title="@{location5_hp|max}" name="attr_location5_hp_max" value="4" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location6_table_start}" name="attr_location6_table_start" value="16">-<input type="number" class="sheet-number-width-xs" title="@{location6_table_end}" name="attr_location6_table_end" value="18"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location6_name}" name="attr_location6_name" value="Left Arm"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location6_block}" name="attr_location6_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location6_ap}" name="attr_location6_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location6_hp}" name="attr_location6_hp" value="4">/<input type="number" class="sheet-rval" title="@{location6_hp|max}" name="attr_location6_hp_max" value="4" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location7_table_start}" name="attr_location7_table_start" value="19">-<input type="number" class="sheet-number-width-xs" title="@{location7_table_end}" name="attr_location7_table_end" value="20"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location7_name}" name="attr_location7_name" value="Head"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location7_block}" name="attr_location7_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location7_ap}" name="attr_location7_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location7_hp}" name="attr_location7_hp" value="5">/<input type="number" class="sheet-rval" title="@{location7_hp|max}" name="attr_location7_hp_max" value="5" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location8_display" value="0">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location8_table_start}" name="attr_location8_table_start" value="0">-<input type="number" class="sheet-number-width-xs" title="@{location8_table_end}" name="attr_location8_table_end" value="0"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location8_name}" name="attr_location8_name" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location8_block}" name="attr_location8_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location8_ap}" name="attr_location8_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location8_hp}" name="attr_location8_hp" value="5">/<input type="number" class="sheet-rval" title="@{location8_hp|max}" name="attr_location8_hp_max" value="5" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location9_display" value="0">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location9_table_start}" name="attr_location9_table_start" value="0">-<input type="number" class="sheet-number-width-xs" title="@{location9_table_end}" name="attr_location9_table_end" value="0"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location9_name}" name="attr_location9_name" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location9_block}" name="attr_location9_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location9_ap}" name="attr_location9_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location9_hp}" name="attr_location9_hp" value="5">/<input type="number" class="sheet-rval" title="@{location9_hp|max}" name="attr_location9_hp_max" value="5" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location10_display" value="0">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location10_table_start}" name="attr_location10_table_start" value="0">-<input type="number" class="sheet-number-width-xs" title="@{location10_table_end}" name="attr_location10_table_end" value="0"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location10_name}" name="attr_location10_name" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location10_block}" name="attr_location10_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location10_ap}" name="attr_location10_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location10_hp}" name="attr_location10_hp" value="5">/<input type="number" class="sheet-rval" title="@{location10_hp|max}" name="attr_location10_hp_max" value="5" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location11_display" value="0">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location11_table_start}" name="attr_location11_table_start" value="0">-<input type="number" class="sheet-number-width-xs" title="@{location11_table_end}" name="attr_location11_table_end" value="0"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location11_name}" name="attr_location11_name" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location11_block}" name="attr_location11_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location11_ap}" name="attr_location11_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location11_hp}" name="attr_location11_hp" value="5">/<input type="number" class="sheet-rval" title="@{location11_hp|max}" name="attr_location11_hp_max" value="5" readonly></div></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_location12_display" value="0">
+                <div class="sheet-tr sheet-toggle">
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-xs" title="@{location12_table_start}" name="attr_location12_table_start" value="0">-<input type="number" class="sheet-number-width-xs" title="@{location12_table_end}" name="attr_location12_table_end" value="0"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-location-name sheet-text-center" title="@{location12_name}" name="attr_location12_name" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{location12_block}" name="attr_location12_block" value=""></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-impval" title="@{location12_ap}" name="attr_location12_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td"><div class="sheet-impval sheet-number-width"><input type="number" class="sheet-lval" title="@{location12_hp}" name="attr_location12_hp" value="5">/<input type="number" class="sheet-rval" title="@{location12_hp|max}" name="attr_location12_hp_max" value="5" readonly></div></div>
                 </div>
             </div>
+            <!-- Wounds -->
+            <div class="sheet-flex sheet-gap">
+                <div><label class="sheet-left" data-i18n="wounds">Wounds</label></div>
+                <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_wounds"></div>
+            </div>
+        </div>
+
+        <!-- Extended Conflict -->
+        <div class="sheet-section sheet-extended-conflict">
+            <h2 data-i18n="extended_conflict">Extended Conflict</h2>
+        </div>
+
+        <!-- Social Conflict -->
+        <div class="sheet-section sheet-social-conflict">
+            <h2 data-i18n="social_conflict">Social Conflict</h2>
+        </div>
+
+        <!-- Spirit Combat -->
+        <div class="sheet-section sheet-spirit-combat">
+            <h2 data-i18n="spirit_combat">Spirit Combat</h2>
         </div>
 
         <!-- Conditions -->
@@ -316,5 +473,56 @@
                 <textarea style="height: 100%" name="attr_conditions"></textarea>
             </div>
         </div>
+    </div>
+
+    <!-- Temporary -->
+    <label class="sheet-left">Armor Penalty</label>:<input type="number" name="attr_armor_penalty" value="0"><br>
+    <label class="sheet-left">Athletics</label>:<input type="number" name="attr_athletics_total" value="22"><br>
+    <label class="sheet-left">Swim</label>:<input type="number" name="attr_swim_total" value="22"><br>
+    <label class="sheet-left">Tenacity Penalty</label>:<input type="number" name="attr_tenacity_dependencies" value="0"><br>
+
+    <!-- Background -->
+    <div id="character-background" class="sheet-section sheet-anchor-adjust-x2 sheet-major">
+        <h2 data-i18n="background">Background</h2>
+
+        <div class="sheet-flex sheet-gap sheet-bmargin">
+            <div class="sheet-half-col">
+                <label class="sheet-left" data-i18n="organizations">Organizations</label>
+                <textarea class="sheet-background-notes" title="@{cults_notes}" name="attr_cults_notes"></textarea>
+            </div>
+            <div class="sheet-half-col">
+                <label class="sheet-left" data-i18n="contacts">Contacts</label>
+                <textarea class="sheet-background-notes" title="@{contacts_notes}" name="attr_contacts_notes"></textarea>
+            </div>
+        </div>
+
+        <div class="sheet-flex sheet-gap sheet-bmargin">
+            <div class="sheet-half-col">
+                <label class="sheet-left" data-i18n="community">Community</label>
+                <textarea class="sheet-background-notes" title="@{community_notes}" name="attr_community_notes"></textarea>
+            </div>
+            <div class="sheet-half-col">
+                <label class="sheet-left" data-i18n="allies">Allies</label>
+                <textarea class="sheet-background-notes" title="@{allies_notes}" name="attr_allies_notes"></textarea>
+            </div>
+        </div>
+
+        <div class="sheet-flex sheet-gap sheet-bmargin">
+            <div class="sheet-half-col">
+                <label class="sheet-left" data-i18n="family">Family</label>
+                <textarea class="sheet-background-notes" title="@{family_notes}" name="attr_family_notes"></textarea>
+            </div>
+            <div class="sheet-half-col">
+                <label class="sheet-left" data-i18n="enemies">Enemies</label>
+                <textarea class="sheet-background-notes" title="@{enemies_notes}" name="attr_enemies_notes"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div id="notes" class="sheet-section sheet-anchor-adjust-x2">
+        <h2 data-i18n="notes">Notes</h2>
+
+        <textarea class="sheet-character-notes" title="@{sheet_notes}" name="attr_sheet_notes"></textarea>
     </div>
 </div>

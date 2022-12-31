@@ -118,6 +118,9 @@ div.sheet-space-between {
     display: flex;
     justify-content: space-between;
 }
+div.sheet-half-col {
+    width: 50%;
+}
 div.sheet-grow {
     flex-grow: 1;
 }
@@ -300,7 +303,9 @@ div.sheet-impval {
 
 /* Generic Display Toggles */
 input.sheet-toggle:not([value="1"]) + .sheet-toggle,
-input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle {
+input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle,
+input.sheet-toggle[value="1"] + .sheet-anti-toggle,
+input[type="checkbox"].sheet-toggle:checked + .sheet-anti-toggle {
     display: none;
 }
 

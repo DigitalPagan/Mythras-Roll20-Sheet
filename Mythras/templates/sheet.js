@@ -1,19 +1,36 @@
 const debug=1
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "tenacity_enabled"]
+const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "luck_points_rank", "magic_points_enabled",
+    "prana_points_enabled", "power_points_enabled", "simplified_combat_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "action_points_calc": "calculate",
         "extended_conflict_enabled": 0,
+        "luck_points_rank": 0,
+        "magic_points_enabled": 1,
+        "prana_points_enabled": 0,
+        "power_points_enabled": 0,
+        "simplified_combat_enabled": 0,
         "tenacity_enabled": 0
     },
+    "classic_fantasy": {
+        "luck_points_rank": 1
+    },
+    "destined": {
+        "magic_points_enabled": 0,
+        "power_points_enabled": 1
+    },
     "luther_arkwright": {
-        "tenacity_enabled": 1
+        "tenacity_enabled": 1,
+        "magic_points_enabled": 0,
+        "prana_points_enabled": 1
     },
     "m-space": {
         "action_points_calc": "set_2",
-        "extended_conflict_enabled": 1
+        "extended_conflict_enabled": 1,
+        "magic_points_enabled": 0,
+        "power_points_enabled": 1
     },
     "mythras_imperative": {
         "action_points_calc": "set_2"
@@ -23,6 +40,7 @@ const campaginSettingDefaults = {
         "extended_conflict_enabled": 1
     },
     "worlds_united": {
+        "magic_points_enabled": 0,
         "tenacity_enabled": 1
     }
 }

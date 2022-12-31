@@ -6,7 +6,7 @@
         <div class="sheet-bmargin">
             <!-- Sheet Type -->
             <label class="sheet-left sheet-rmargin" data-i18n="sheet_type">Sheet Type</label>
-            <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-undrln sheet-auto-width" name="attr_type">
+            <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-auto-width" name="attr_type">
                 <option value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
                 <option value="creature" data-i18n-list-item="creature" data-i18n="creature">Creature</option>
                 <option value="pc" data-i18n-list-item="player_character" data-i18n="player_character" selected>Player Character</option>
@@ -17,8 +17,6 @@
             </select>
             <br>
 
-            <!-- TODO Include species move rate / custom movement in essential configurations -->
-
             <!-- Intellect -->
             <div class="sheet-minor">
                 <label class="sheet-left sheet-rmargin" data-18n="intellect">Intellect</label>
@@ -28,46 +26,7 @@
                 </select>
             </div>
 
-            <!-- Form -->
-            <div class="sheet-creature">
-                <label class="sheet-left sheet-rmargin" data-18n="form">Form</label>
-                <select class="sheet-undrln sheet-auto-width" title="@{hit_locations}" name="attr_hit_locations" data-i18n-list="hit-location-order">
-                    <option value="custom1" data-i18n="custom(1_location)" data-i18n-list-item="custom(1_location)">Custom(1 Location)</option>
-                    <option value="custom7" data-i18n="custom(7_locations)" data-i18n-list-item="custom(7_locations)" selected >Custom(7 Locations)</option>
-                    <option value="custom8" data-i18n="custom(8_locations)" data-i18n-list-item="custom(8_locations)">Custom(8 Locations)</option>
-                    <option value="custom9" data-i18n="custom(9_locations)" data-i18n-list-item="custom(9_locations)">Custom(9 Locations)</option>
-                    <option value="custom10" data-i18n="custom(10_locations)" data-i18n-list-item="custom(10_locations)">Custom(10 Locations)</option>
-                    <option value="custom11" data-i18n="custom(11_locations)" data-i18n-list-item="custom(11_locations)">Custom(11 Locations)</option>
-                    <option value="custom" data-i18n="custom(12_locations)" data-i18n-list-item="custom(12_locations)">Custom(12 Locations)</option>
-                    <option value="rabble" data-i18n="rabble/underling" data-i18n-list-item="rabble">Rabble/Underling</option>
-                    <option class="sheet-hidden" value="simplified" data-i18n="simplified_combat">Simplified Combat</option>
-                    <option data-i18n-list-item="spacer" disabled>──────────</option>
-                    <option value="arachnid" data-i18n="arachnid" data-i18n-list-item="arachnid">Arachnid</option>
-                    <option value="humanoid" data-i18n="biped" data-i18n-list-item="biped">Biped</option>
-                    <option value="centaurid" data-i18n="centaurid" data-i18n-list-item="centaurid">Centaurid</option>
-                    <option value="decapoda" data-i18n="decapoda" data-i18n-list-item="decapoda">Decapoda</option>
-                    <option value="decapodiform" data-i18n="decapodiform" data-i18n-list-item="decapodiform">Decapodiform</option>
-                    <option value="dorsal_finned_aquatic" data-i18n="dorsal_finned_aquatic" data-i18n-list-item="dorsal_finned_aquatic">Dorsal Finned Aquatic</option>
-                    <option value="draconic" data-i18n="draconic" data-i18n-list-item="draconic">Draconic</option>
-                    <option value="insect" data-i18n="insect" data-i18n-list-item="insect">Insect</option>
-                    <option value="octopodiform" data-i18n="octopodiform" data-i18n-list-item="octopodiform">Octopodiform</option>
-                    <option value="pachyderm" data-i18n="pachyderm" data-i18n-list-item="pachyderm">Pachyderm</option>
-                    <option value="quadruped" data-i18n="quadruped" data-i18n-list-item="quadruped">Quadruped</option>
-                    <option value="serpentine" data-i18n="serpentine" data-i18n-list-item="serpentine">Serpentine</option>
-                    <option value="tailed_arachnid" data-i18n="tailed_arachnid" data-i18n-list-item="tailed_arachnid">Tailed Arachnid</option>
-                    <option value="tailed_biped" data-i18n="tailed_biped" data-i18n-list-item="tailed_biped">Tailed Biped</option>
-                    <option value="tailed_quadruped" data-i18n="tailed_quadruped" data-i18n-list-item="tailed_quadruped">Tailed Quadruped</option>
-                    <option value="winged_biped" data-i18n="winged_biped" data-i18n-list-item="winged_biped">Winged Biped</option>
-                    <option value="winged_insect" data-i18n="winged_insect" data-i18n-list-item="winged_insect">Winged Insect</option>
-                    <option value="winged_quadruped" data-i18n="winged_quadruped" data-i18n-list-item="winged_quadruped">Winged Quadruped</option>
-                </select>
-            </div>
-
-            <!-- Average Species SIZ -->
-            <div class="sheet-major">
-                <label class="sheet-left sheet-rmargin" data-18n="avg-species-siz">Average Species SIZ</label>
-                <input type="number" class="sheet-number-width-sm sheet-undrln" title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
-            </div>
+            <!-- TODO Include species move rate / custom movement in essential configurations -->
         </div>
 
         <!-- Campaign Settings -->
@@ -112,6 +71,14 @@
                     <option value="0" data-i18n="disabled">Disabled</option>
                 </select>
                 <br>
+                <!-- Simplified Combat Enabled Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="simplified_combat">Simplified Combat</label>
+                <select name="attr_simplified_combat_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
 
                 <!-- Attributes -->
                 <h3 data-i18n="attributes">Attributes</h3>
@@ -124,6 +91,39 @@
                     <option value="set_3">3</option>
                 </select>
                 <input type="hidden" name="attr_action_points_calc" value="calculate">
+                <br>
+                <!-- Luck Points Rank Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="add_rank_to_luck">Add Rank to Luck</label>
+                <select name="attr_luck_points_rank_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <input type="hidden" name="attr_luck_points_rank" value="0">
+                <br>
+                <!-- Magic Points Enabled Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="magic_points">Magic Points</label>
+                <select name="attr_magic_points_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
+                <!-- Prana Points Enabled Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="prana_points">Prana Points</label>
+                <select name="attr_prana_points_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
+                <!-- Power Points Enabled Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="power_points">Power Points</label>
+                <select name="attr_power_points_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
                 <br>
                 <!-- Tenacity Option -->
                 <label class="sheet-left sheet-rmargin" data-i18n="tenacity">Tenacity</label>

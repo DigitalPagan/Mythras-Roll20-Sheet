@@ -118,6 +118,9 @@ div.sheet-space-between {
     display: flex;
     justify-content: space-between;
 }
+div.sheet-half-col {
+    width: 50%;
+}
 div.sheet-grow {
     flex-grow: 1;
 }
@@ -300,7 +303,9 @@ div.sheet-impval {
 
 /* Generic Display Toggles */
 input.sheet-toggle:not([value="1"]) + .sheet-toggle,
-input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle {
+input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle,
+input.sheet-toggle[value="1"] + .sheet-anti-toggle,
+input[type="checkbox"].sheet-toggle:checked + .sheet-anti-toggle {
     display: none;
 }
 
@@ -737,6 +742,14 @@ input.sheet-set-toggle:not([value^="@{set_"]) + .sheet-toggle {
 
 /* Sheet Type Specific CSS */
 
+/* Conflict Mode Toggles */
+input.sheet-conflict-toggle:not([value="combat"]) ~ div .sheet-combat,
+input.sheet-conflict-toggle:not([value="extended_conflict"]) ~ div .sheet-extended-conflict,
+input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-conflict,
+input.sheet-conflict-toggle:not([value="spirit_combat"]) ~ div .sheet-spirit-combat {
+    display: none;
+}
+
 /* Character Header Styles */
 div.sheet-info-age{
     width: 40px;
@@ -788,6 +801,18 @@ div.sheet-custom-movement {
 /* Hit Locations */
 input.sheet-location-name {
     width: 145px;
+}
+
+/* Background */
+textarea.sheet-background-notes {
+    width: 100%;
+    height: 7.5em;
+}
+
+/* Notes */
+textarea.sheet-character-notes {
+    width: 100%;
+    height: 30em;
 }
 
 

@@ -1,9 +1,31 @@
 <div class="sheet-detailed">
-    <div class="sheet-flex sheet-gap">
-        <a href="#core">Core</a>
-        -
-        <a href="#abilities">Abilities</a>
-        -
-        <a href="#other">other</a>
+    <div class="sheet-space-between sheet-gap">
+        <div>
+            <a href="#core">Core</a>
+            - <a href="#equipment">Skills</a></span>
+            - <a href="#equipment">Magic</a></span>
+            - <a href="#equipment" data-i18n="abilities">Abilities</a>
+            <span class="sheet-major"> - <a href="#equipment">Armor</a></span>
+            <span class="sheet-major"> - <a href="#equipment">Weapons</a></span>
+            <span class="sheet-major"> - <a href="#equipment">Gear</a></span>
+            <span class="sheet-major"> - <a href="#character-background" data-i18n="background">Background</a></span>
+            - <a href="#notes" data-i18n="notes">Notes</a>
+        </div>
+
+        <div class="sheet-space-between sheet-gap">
+
+            <div>
+                <span data-i18n="conflict">Conflict</span>:
+                <select class="sheet-auto-width sheet-text-center sheet-inverted" name="attr_conflict_mode" value="combat">
+                    <option value="combat" data-i18n="combat" selected>Combat</option>
+                    <option value="extended_conflict" data-i18n="extended_conflict">Extended Conflict</option>
+                    <option value="social_conflict" data-i18n="social_conflict">Social Conflict</option>
+                    <option value="spirit_combat" data-i18n="spirit_combat">Spirit Combat</option>
+                </select>
+            </div>
+            <div><input type='checkbox' data-i18n-title="compact_mode" name='attr_compact' value="1"><span class="sheet-checkico">J</span></div>
+        </div>
     </div>
+
+
 </div>
