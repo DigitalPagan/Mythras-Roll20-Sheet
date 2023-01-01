@@ -180,6 +180,7 @@ div.sheet-th {
     padding: 1px 2px;
     vertical-align: middle;
     font-weight: normal;
+    white-space: nowrap;
 }
 div.sheet-td {
     display: table-cell;
@@ -261,20 +262,27 @@ div.sheet-impval {
 .sheet-hidden {
     display: none;
 }
+.sheet-checkbox-width {
+    width: 16px !important;
+    flex-shrink: 0;
+}
+.sheet-button-width {
+    width: 27px !important;
+    flex-shrink: 0;
+}
 .sheet-full-width {
     width: 100% !important;
 }
 .sheet-auto-width {
     width: auto; /* check important */
 }
-.sheet-d6 {
-    font-family: "dicefontd6";
-    font-size: 19px;
-}
+/*.sheet-d6 {
+    font-family: "dicefontd6" !important;
+    font-size: 19px !important;
+}*/
 .sheet-d10 {
-    font-family: "dicefontd10";
-    font-size: 19px;
-    text-decoration: unset;
+    font-family: "dicefontd10" !important;
+    font-size: 22px !important;
 }
 .sheet-pictos {
     font-family: "Pictos";
@@ -465,7 +473,9 @@ input.sheet-dullval {
     border-bottom-color: inherit;
     border-radius: 0;
 }
-
+.ui-dialog .charsheet select.sheet-no-border {
+    border: none;
+}
 .ui-dialog .charsheet select.sheet-readonly {
     pointer-events: none;
     cursor: not-allowed;
@@ -614,12 +624,40 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
     content: ':'
 }
 .ui-dialog .charsheet button.sheet-die {
-    text-decoration: unset;
     margin: 0;
+    width: 27px;
     padding: 1px 2px;
+    line-height: 0;
 }
 .ui-dialog .charsheet button.sheet-die:hover {
     text-decoration: underline;
+}
+button[type=roll].sheet-id {
+    font-size: 12px !important;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    color: inherit;
+    line-height: inherit;
+    height: inherit;
+    font-family: "Pictos";
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 3px;
+}
+.ui-dialog .charsheet button.sheet-id:hover {
+    color: #069;
+    text-decoration: underline;
+}
+div.sheet-hover-btn {
+    position: relative;
+}
+div.sheet-hover-btn:hover button {
+    display: inline;
 }
 
 /*.ui-dialog .charsheet button[type=roll].sheet-d6::before {

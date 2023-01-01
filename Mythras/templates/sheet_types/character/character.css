@@ -1,5 +1,6 @@
 /* Conflict Mode Toggles */
 input.sheet-conflict-toggle:not([value="combat"]) ~ div .sheet-combat,
+input.sheet-conflict-toggle:not([value="combat"]) ~ div.sheet-combat,
 input.sheet-conflict-toggle:not([value="extended_conflict"]) ~ div .sheet-extended-conflict,
 input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-conflict,
 input.sheet-conflict-toggle:not([value="spirit_combat"]) ~ div .sheet-spirit-combat {
@@ -57,6 +58,24 @@ div.sheet-custom-movement {
 /* Hit Locations */
 input.sheet-location-name {
     width: 145px;
+}
+
+/* Weapons */
+.sheet-weapon-name {
+    width: 140px;
+    text-align: center;
+}
+.sheet-weapon-damage {
+    width: 64px;
+    text-align: center;
+}
+.sheet-weapon-size {
+    width: 38px;
+    text-align: center;
+}
+.sheet-weapon-reach {
+    width: 72px;
+    text-align: center;
 }
 
 /* Background */

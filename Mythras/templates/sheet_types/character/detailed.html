@@ -309,6 +309,7 @@
 
             <div class="sheet-table">
                 <div class="sheet-tr">
+                    <!-- TODO setup the hit loction button with sheet type switching -->
                     <div class="sheet-th">d20</div>
                     <div class="sheet-th" data-i18n="hit_location">Hit Location</div>
                     <div class="sheet-th sheet-help sheet-pictos-three" data-i18n-title="passive_block_size">b</div>
@@ -438,7 +439,7 @@
             <h2 data-i18n="conditions">Conditions</h2>
 
             <div class="sheet-bmargin sheet-creature">
-                <div class="sheet-flex">
+                <div class="sheet-flex sheet-gap sheet-hl">
                     <div><a class="sheet-label-left" data-i18n-title="show_fatigue_popup" data-i18n="fatigue" href="#fatigue-details">Fatigue</a></div>
                     <div class="sheet-grow">
                         <select class="sheet-full-width sheet-text-right" title="@{fatigue}" name="attr_fatigue">
@@ -456,16 +457,22 @@
                     </div>
                 </div>
 
-                <div class="sheet-flex sheet-major">
+                <div class="sheet-flex sheet-gap sheet-hl sheet-major">
                     <div><label class="sheet-left" data-i18n="load">Load</label></div>
+                    <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
                     <div class="sheet-grow">
-                        <select class="sheet-full-width sheet-text-right sheet-readonly" title="@{encumbrance_load}" name="attr_encumbrance_load">
+                        <select class="sheet-full-width sheet-text-right sheet-no-border sheet-readonly" title="@{encumbrance_load}" name="attr_encumbrance_load">
                             <option value="0" data-i18n="normal" selected>Normal</option>
                             <option value="1" data-i18n="medium">Medium</option>
                             <option value="2" data-i18n="strenuous">Strenuous</option>
                             <option value="3" data-i18n="impossible">Impossible</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="sheet-flex sheet-gap sheet-hl">
+                    <div><label class="sheet-left" data-i18n="armor_penalty">Armor Penalty</label></div>
+                    <div class="sheet-grow sheet-text-right"><span name="attr_armor_penalty"></span></div>
                 </div>
             </div>
 
@@ -476,10 +483,488 @@
     </div>
 
     <!-- Temporary -->
-    <label class="sheet-left">Armor Penalty</label>:<input type="number" name="attr_armor_penalty" value="0"><br>
     <label class="sheet-left">Athletics</label>:<input type="number" name="attr_athletics_total" value="22"><br>
     <label class="sheet-left">Swim</label>:<input type="number" name="attr_swim_total" value="22"><br>
     <label class="sheet-left">Tenacity Penalty</label>:<input type="number" name="attr_tenacity_dependencies" value="0"><br>
+
+    <!-- Weapons -->
+    <div id="weapons" class="sheet-section sheet-anchor-adjust-x2 sheet-combat">
+        <div class="sheet-space-between sheet-gap">
+            <div class="sheet-grow"><h2 data-i18n="weapons">Weapons</h2></div>
+            <div class="sheet-flex sheet-gap">
+                <div>
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_display_melee_weapons' value="1" checked><span>3</span>
+                        <span data-i18n="melee_weapons">Melee Weapons</span>
+                    </label>
+                </div>
+                <div>
+                    <label class="sheet-checkbox">
+                        <input type='checkbox' name='attr_display_ranged_weapons' value="1" checked><span>3</span>
+                        <span data-i18n="ranged_weapons">Ranged Weapons</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="attr_weapon_buttons" value="">
+
+        <!-- Melee Weapons -->
+        <input type="hidden" class="sheet-toggle" name="attr_display_melee_weapons" value="1">
+        <div class="sheet-toggle">
+            <input type='hidden' class="sheet-deep-toggle" name='attr_reach_enabled' value="1">
+            <div class="sheet-flex">
+                <div class="sheet-th"><div class="sheet-checkbox-width"><span class="sheet-pictos sheet-help" data-i18n-title="include_in_combat_rolls">S</span></div></div>
+                <div class="sheet-th"><div class="sheet-weapon-name" data-i18n="melee_weapon">Melee Weapon</div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-weapon-damage" data-i18n="damage">Damage</div></div>
+                <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="damage_modifier">+</div></div>
+                <div class="sheet-th"><div class="sheet-weapon-size" data-i18n="size">Size</div></div>
+                <div class="sheet-th"><div class="sheet-deep-toggle sheet-weapon-reach" data-i18n="reach">Reach</div></div>
+                <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
+                <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div></div>
+                <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div></div>
+                <div class="sheet-th"><div class="sheet-number-width-sm" data-i18n="enc">ENC</div></div>
+            </div>
+            <fieldset class="repeating_meleeweapon">
+                <div class="sheet-flex">
+                    <div class="sheet-td"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1"><span class="sheet-checkico">S</span></div>
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
+                    </div>
+                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d10" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{^{damage}=[[@{damage}+@{damage_mod_toggle}]]}} {{^{size}=@{size}}} {{notes=@{notes}}}'}}">t</button></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
+                    <div class="sheet-td"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}" checked><span class="sheet-checkico">+</span></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-size" title="@{$ID_size}" name="attr_size"></div>
+                    <div class="sheet-td sheet-deep-toggle"><input type="text" class="sheet-weapon-reach" title="@{$ID_reach}" name="attr_reach"></div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_ap}" name="attr_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td">
+                        <div class="sheet-number-width sheet-text-center">
+                            <input type="number" class="sheet-number-width-xs" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_hp|max}" name="attr_hp_max" step="1" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_enc}" name="attr_enc" step="1" min="0" value="0"></div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Ranged Weapons -->
+        <input type="hidden" class="sheet-toggle" name="attr_display_ranged_weapons" value="1">
+        <div class="sheet-toggle">
+            <input type='hidden' class="sheet-deep-toggle" name='attr_fire_rate_enabled' value="1">
+            <div class="sheet-flex">
+                <div class="sheet-th"><div class="sheet-checkbox-width"><span class="sheet-pictos sheet-help" data-i18n-title="include_in_combat_rolls">S</span></div></div>
+                <div class="sheet-th"><div class="sheet-weapon-name" data-i18n="ranged_weapon">Ranged Weapon</div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-weapon-damage" data-i18n="damage">Damage</div></div>
+                <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="damage_modifier">+</div></div>
+                <div class="sheet-th"><div class="sheet-weapon-size" data-i18n="force">Force</div></div>
+                <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
+
+                <div class="sheet-th"><div class="sheet-number-width-xs" data-i18n-title="impale_size" data-i18n="impale_size-abrv">IS</div></div>
+                <div class="sheet-th"><div class="sheet-deep-toggle sheet-weapon-reach" data-i18n="fire_rate">Fire Rate</div></div>
+                <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="ammunition" data-i18n="ammunition-abrv">Ammo</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="load">Load</div></div>
+
+                <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
+                <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div></div>
+                <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div></div>
+                <div class="sheet-th"><div class="sheet-number-width-sm" data-i18n="enc">ENC</div></div>
+            </div>
+            <fieldset class="repeating_rangedweapon">
+                <div class="sheet-flex">
+                    <div class="sheet-td"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1"><span class="sheet-checkico">S</span></div>
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
+                    </div>
+                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d10" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{^{damage}=[[@{damage}+@{damage_mod_toggle}]]}} {{^{size}=@{size}}} {{notes=@{notes}}}'}}">t</button></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
+                    <div class="sheet-td"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}"><span class="sheet-checkico">+</span></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-size" title="@{$ID_force}" name="attr_force"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{$ID_impale_size}" name="attr_impale_size"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_rate}" name="attr_rate"></div>
+                    <div class="sheet-td">
+                        <div class="sheet-number-width sheet-text-center">
+                            <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load"></div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_ap}" name="attr_ap" step="1" min="0" value="0"></div>
+                    <div class="sheet-td">
+                        <div class="sheet-number-width sheet-text-center">
+                            <input type="number" class="sheet-number-width-xs" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_hp|max}" name="attr_hp_max" step="1" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_enc}" name="attr_enc" step="1" min="0" value="0"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div id="equipment" class="sheet-anchor-adjust-x2"></div>
+    <!-- Armor -->
+    <div id="armor" class="sheet-section sheet-anchor-adjust-x2">
+        <div class="sheet-flex">
+            <h2 data-i18n="armor">Armor</h2>
+            <div class="sheet-grow sheet-text-right">
+                <label class="sheet-left sheet-rmargin" data-i18n="worn_armor_enc">Worn Armor ENC</label>
+                <select class="sheet-auto-width sheet-rmargin" name="attr_half_effective_armor_enc">
+                    <option value="0" selected>1/2</option>
+                    <option value="1">1/4</option>
+                </select>
+                <label class="sheet-left sheet-rmargin" data-i18n="armor_penalty">Armor Penalty</label>
+                <input type="number" class="sheet-number-width-sm" title="@{armor_penalty}" name="attr_armor_penalty" value="0" readonly>
+            </div>
+        </div>
+
+        <div class="sheet-table">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="hit_location">Hit Location</div>
+                <div class="sheet-th" data-i18n="type">Type</div>
+                <div class="sheet-th sheet-help" data-i18n-title="armor_points" data-i18n="ap">AP</div>
+                <div class="sheet-th" data-i18n="enc">ENC</div>
+                <div class="sheet-th sheet-full-width" data-i18n="notes">Notes</div>
+                <div class="sheet-th" data-i18n="location">Location</div>
+            </div>
+            <div class="sheet-tr">
+                <div class="sheet-td sheet-text-center"><span name="attr_location1_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location1_armor_type}" name="attr_location1_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location1_ap}" name="attr_location1_ap" value="0">/<input type="number" class="sheet-rval" title="@{location1_ap|max}" name="attr_location1_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location1_armor_enc}" step="any" name="attr_location1_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location1_armor_notes}" name="attr_location1_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location1_armor_equipped}" name="attr_location1_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location2_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location2_armor_type}" name="attr_location2_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location2_ap}" name="attr_location2_ap" value="0">/<input type="number" class="sheet-rval" title="@{location2_ap|max}" name="attr_location2_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location2_armor_equipped}" name="attr_location2_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location3_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location3_armor_type}" name="attr_location3_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location3_ap}" name="attr_location3_ap" value="0">/<input type="number" class="sheet-rval" title="@{location3_ap|max}" name="attr_location3_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location3_armor_enc}" step="any" name="attr_location3_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location3_armor_notes}" name="attr_location3_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location3_armor_equipped}" name="attr_location3_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location4_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location4_armor_type}" name="attr_location4_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location4_ap}" name="attr_location4_ap" value="0">/<input type="number" class="sheet-rval" title="@{location4_ap|max}" name="attr_location4_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location4_armor_enc}" step="any" name="attr_location4_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location4_armor_notes}" name="attr_location4_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location4_armor_equipped}" name="attr_location4_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location5_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location5_armor_type}" name="attr_location5_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location5_ap}" name="attr_location5_ap" value="0">/<input type="number" class="sheet-rval" title="@{location5_ap|max}" name="attr_location5_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location5_armor_enc}" step="any" name="attr_location5_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location5_armor_notes}" name="attr_location5_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location5_armor_equipped}" name="attr_location5_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location6_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location6_armor_type}" name="attr_location6_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location6_ap}" name="attr_location6_ap" value="0">/<input type="number" class="sheet-rval" title="@{location6_ap|max}" name="attr_location6_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location6_armor_enc}" step="any" name="attr_location6_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location6_armor_notes}" name="attr_location6_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location6_armor_equipped}" name="attr_location6_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location2to7_display" value="1">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location7_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location7_armor_type}" name="attr_location7_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location7_ap}" name="attr_location7_ap" value="0">/<input type="number" class="sheet-rval" title="@{location7_ap|max}" name="attr_location7_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location7_armor_enc}" step="any" name="attr_location7_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location7_armor_notes}" name="attr_location7_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location7_armor_equipped}" name="attr_location7_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location8_display" value="0">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location2_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location2_armor_type}" name="attr_location2_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location2_ap}" name="attr_location2_ap" value="0">/<input type="number" class="sheet-rval" title="@{location2_ap|max}" name="attr_location2_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location2_armor_equipped}" name="attr_location2_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location9_display" value="0">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location9_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location9_armor_type}" name="attr_location9_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location9_ap}" name="attr_location9_ap" value="0">/<input type="number" class="sheet-rval" title="@{location9_ap|max}" name="attr_location9_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location9_armor_enc}" step="any" name="attr_location9_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location9_armor_notes}" name="attr_location9_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location9_armor_equipped}" name="attr_location9_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location10_display" value="0">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location10_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location10_armor_type}" name="attr_location10_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location10_ap}" name="attr_location10_ap" value="0">/<input type="number" class="sheet-rval" title="@{location10_ap|max}" name="attr_location10_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location10_armor_enc}" step="any" name="attr_location10_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location10_armor_notes}" name="attr_location10_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location10_armor_equipped}" name="attr_location10_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location11_display" value="0">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location11_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location11_armor_type}" name="attr_location11_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location11_ap}" name="attr_location11_ap" value="0">/<input type="number" class="sheet-rval" title="@{location11_ap|max}" name="attr_location11_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location11_armor_enc}" step="any" name="attr_location11_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location11_armor_notes}" name="attr_location11_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location11_armor_equipped}" name="attr_location11_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="sheet-toggle" name="attr_location12_display" value="0">
+            <div class="sheet-tr sheet-toggle">
+                <div class="sheet-td sheet-text-center"><span name="attr_location12_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location12_armor_type}" name="attr_location12_armor_type" value=""></div>
+                <div class="sheet-td">
+                    <div class="sheet-impval sheet-number-width">
+                        <input type="number" class="sheet-lval" title="@{location12_ap}" name="attr_location12_ap" value="0">/<input type="number" class="sheet-rval" title="@{location12_ap|max}" name="attr_location12_ap_max" value="0">
+                    </div>
+                </div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location12_armor_enc}" step="any" name="attr_location12_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location12_armor_notes}" name="attr_location12_armor_notes"></div>
+                <div class="sheet-td">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location12_armor_equipped}" name="attr_location12_armor_equipped">
+                        <option value="1" data-i18n="worn" selected>Worn</option>
+                        <option value="0" data-i18n="pack">Pack</option>
+                        <option value="mount" data-i18n="transport">Transport</option>
+                        <option value="camp" data-i18n="camp">Camp</option>
+                        <option value="stash" data-i18n="stash">Stash</option>
+                        <option value="homebase" data-i18n="homebase">Homebase</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gear, ENC & Wealth -->
+    <div class="sheet-flex sheet-gap">
+        <!-- Gear -->
+        <div class="sheet-section sheet-half-col">
+            <h2 data-i18n="gear">Gear</h2>
+        </div>
+
+        <!-- Wealth & ENC -->
+        <div class="sheet-half-col">
+            <!-- Wealth -->
+            <div class="sheet-section sheet-full-width">
+                <h2 data-i18n="wealth">Wealth</h2>
+            </div>
+
+            <!-- ENC -->
+            <div class="sheet-section sheet-full-width">
+                <div class="sheet-space-between sheet-gap">
+                    <div class="sheet-grow"><h2 data-i18n="encumbrance">Encumbrance</h2></div>
+                    <div>
+                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
+                        <input type="number" class="sheet-number-width-sm" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                    </div>
+                    <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
+                </div>
+
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-th" data-i18n="temporary-abrv">Temp</div>
+                        <div class="sheet-th" data-i18n="current">Current</div>
+                        <div class="sheet-th" data-i18n="carrying_load">Carrying Load</div>
+                        <div class="sheet-th" data-i18n="skills">Skills</div>
+                        <div class="sheet-th" data-i18n="move">Move</div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td"><input type="number" step="any" class="sheet-number-width" title="@{encumbrance_temp}" name="attr_encumbrance_temp" value="0"></div>
+                        <div class="sheet-td"><input type="number" step="any" class="sheet-number-width sheet-value" title="@{encumbrance_current}" name="attr_encumbrance_current" value="0" readonly></div>
+                        <div class="sheet-td">
+                            <select class="sheet-full-width sheet-readonly sheet-text-center" title="@{encumbrance_load}" name="attr_encumbrance_load">
+                                <option value="0" data-i18n="normal" selected>Normal</option>
+                                <option value="1" data-i18n="medium">Medium</option>
+                                <option value="2" data-i18n="strenuous">Strenuous</option>
+                                <option value="3" data-i18n="impossible">Impossible</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td">
+                            <select class="sheet-full-width sheet-readonly sheet-text-center" title="@{encumbrance_skills}" name="attr_encumbrance_skills">
+                                <option value="0" data-i18n="standard" selected>Standard</option>
+                                <option value="1" data-i18n="1_grade_harder">1 grade harder</option>
+                                <option value="2" data-i18n="2_grades_harder">2 grades harder</option>
+                                <option value="3" data-i18n="impossible">Impossible</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td">
+                            <select class="sheet-full-width sheet-readonly sheet-text-center" title="@{movement_rate_enc}" name="attr_movement_rate_enc">
+                                <option value="+0" data-i18n="normal">Normal</option>
+                                <option value="-2">-2</option>
+                                <option value="*.5" data-i18n="halved">Halved</option>
+                                <option value="*0" data-i18n="impossible">Impossible</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Background -->
     <div id="character-background" class="sheet-section sheet-anchor-adjust-x2 sheet-major">

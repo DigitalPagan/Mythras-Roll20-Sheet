@@ -947,6 +947,42 @@ on('change:fatigue', function(event) {
     });
 });
 
+/* Weapons */
+/* When a favored weapon is selected it is added to the weapons_buttons attr which is how we add it to combat rolls */
+on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored", function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getSectionIDs("repeating_meleeweapon", function(meleeIds) {
+        getSectionIDs("repeating_rangedweapon", function(rangedIds) {
+            let meleeGetAttrs = [];
+            meleeIds.forEach(id => {
+                meleeGetAttrs.push(`repeating_meleeweapon_${id}_name`, `repeating_meleeweapon_${id}_favored`)
+            });
+
+            let rangedGetAttrs = [];
+            rangedIds.forEach(id => {
+                rangedGetAttrs.push(`repeating_rangedweapon_${id}_name`, `repeating_rangedweapon_${id}_favored`)
+            });
+
+            getAttrs(meleeGetAttrs.concat(rangedGetAttrs), function(v) {
+                let weaponButtons = ""
+                meleeIds.forEach(id => {
+                    if (v[`repeating_meleeweapon_${id}_favored`] === '1') {
+                        const name = v[`repeating_meleeweapon_${id}_name`];
+                        weaponButtons = weaponButtons + ` [${name}](~@{character_name}|repeating_meleeweapon_${id}_damage)`;
+                    }
+                });
+                rangedIds.forEach(id => {
+                    if (v[`repeating_rangedweapon_${id}_favored`] === '1') {
+                        const name = v[`repeating_rangedweapon_${id}_name`];
+                        weaponButtons = weaponButtons + ` [${name}](~@{character_name}|repeating_rangedweapon_${id}_damage)`;
+                    }
+                });
+                setAttrs({weapon_buttons: weaponButtons});
+            });
+        });
+    });
+});
+
 /* Encumbrance */
 const loadTable = {
     /* Normal */ '0': {"skills": '0', "movement": '+0'},
@@ -954,6 +990,20 @@ const loadTable = {
     /* Overloaded */ '2': {"skills": '2', "movement": '*.5'},
     /* Max */ '3': {"skills": '3', "movement": '*0'}
 }
+
+/* Repeating IDs */
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
+    "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +
+    "change:repeating_superpowerlimit change:repeating_tradition change:repeating_power change:repeating_feature", function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+
+    /* seems we can get change that aren't for a particular item this checks to ensure we have an id to parse */
+    if (id.startsWith("-")) {
+        setAttrs({[`repeating_${type}_${id}_id`]: `repeating_${type}_${id}`});
+    }
+});
 
 /* Character Import */
 const cultRankMap = {
@@ -993,7 +1043,6 @@ function getImportName(importName, importType) {
         return importName.replace(/[()]/g, '').trim();
     }
 }
-
 /**
  * Imports JSON data from the Mythras Encounter Generator or other sources which use the same data format
  */
@@ -1012,17 +1061,16 @@ on("clicked:import", function() {
             }
             const characterData = jsonData[parseInt(v['import_character']) - 1];
 
-            let calc_armor_penalty = false;
             /* We assume defaults and fill in what the import doesn't provide */
             let newAttrs = {
                 rank: 0,
-                str_base: 0, str: 0,
-                con_base: 0, con: 0,
-                siz_base: 0, siz: 0,
-                dex_base: 0, dex: 0,
-                int_base: 0, int: 0,
-                pow_base: 0, pow: 0,
-                cha_base: 0, cha: 0,
+                str_base: 0, str_temp: 0, str: 0,
+                con_base: 0, con_temp: 0, con: 0,
+                siz_base: 0, siz_temp: 0, siz: 0,
+                dex_base: 0, dex_temp: 0, dex: 0,
+                int_base: 0, int_temp: 0, int: 0,
+                pow_base: 0, pow_temp: 0, pow: 0,
+                cha_base: 0, cha_temp: 0, cha: 0,
                 characteristics_details: 0,
                 action_points_other: 0, action_points_temp: 0, action_points_calc: v['action_points_calc'], action_points: 2, action_points_max: 2,
                 damage_mod_calc: '0', damage_mod_other: 0, damage_mod_temp: 0,
@@ -1040,12 +1088,27 @@ on("clicked:import", function() {
             /* Import Info */
             if (debug) {console.log('Importing Info');}
             /* Due to differences in parsing we will import name and species after sheet type */
-            /* TODO: import cults & notes */
+
+            if (characterData["cults"]) {
+                if (characterData["cults"][0] !== []) {
+                    if (characterData["cults"][0]) {
+                        let cults = "";
+                        for (let i=0; i < characterData["cults"].length; i++) {
+                            cults = cults + " * " + characterData["cults"][i] + "\r\n";
+                        }
+                        newAttrs['cult_notes'] = cults;
+                    }
+                }
+            }
 
             if (characterData["cult_rank"] && v['luck_points_rank'] === '1') {
                 if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
                     newAttrs['rank'] = cultRankMap[characterData["cult_rank"].toLowerCase()];
                 }
+            }
+
+            if (characterData["notes"]) {
+                newAttrs['sheet_notes'] = characterData["notes"];
             }
 
             /* Import Characteristics */
@@ -1145,6 +1208,8 @@ on("clicked:import", function() {
                     newAttrs[`location${location}_hp`] = newLocHP;
                 }
             }
+
+            /* TODO Import weapons & combat style */
 
             /* Import Notes TODO import misc features as notes*/
 
