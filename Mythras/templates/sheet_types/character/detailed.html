@@ -488,6 +488,7 @@
     <label class="sheet-left">Tenacity Penalty</label>:<input type="number" name="attr_tenacity_dependencies" value="0"><br>
 
     <!-- Weapons -->
+    <!-- TODO add location fields -->
     <div id="weapons" class="sheet-section sheet-anchor-adjust-x2 sheet-combat">
         <div class="sheet-space-between sheet-gap">
             <div class="sheet-grow"><h2 data-i18n="weapons">Weapons</h2></div>
@@ -525,6 +526,7 @@
                 <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width-sm" data-i18n="enc">ENC</div></div>
+                <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
             </div>
             <fieldset class="repeating_meleeweapon">
                 <div class="sheet-flex">
@@ -547,6 +549,16 @@
                         </div>
                     </div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_enc}" name="attr_enc" step="1" min="0" value="0"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-equipment-location sheet-text-center" title="@{$ID_location}" name="attr_location">
+                            <option value="loadout" data-i18n="worn" selected>Worn</option>
+                            <option value="pack" data-i18n="pack">Pack</option>
+                            <option value="mount" data-i18n="transport">Transport</option>
+                            <option value="camp" data-i18n="camp">Camp</option>
+                            <option value="stash" data-i18n="stash">Stash</option>
+                            <option value="homebase" data-i18n="homebase">Homebase</option>
+                        </select>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -563,16 +575,14 @@
                 <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="damage_modifier">+</div></div>
                 <div class="sheet-th"><div class="sheet-weapon-size" data-i18n="force">Force</div></div>
                 <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
-
                 <div class="sheet-th"><div class="sheet-number-width-xs" data-i18n-title="impale_size" data-i18n="impale_size-abrv">IS</div></div>
-                <div class="sheet-th"><div class="sheet-deep-toggle sheet-weapon-reach" data-i18n="fire_rate">Fire Rate</div></div>
                 <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="ammunition" data-i18n="ammunition-abrv">Ammo</div></div>
                 <div class="sheet-th"><div class="sheet-number-width" data-i18n="load">Load</div></div>
-
                 <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
                 <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width-sm" data-i18n="enc">ENC</div></div>
+                <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
             </div>
             <fieldset class="repeating_rangedweapon">
                 <div class="sheet-flex">
@@ -588,7 +598,6 @@
                     <div class="sheet-td"><input type="text" class="sheet-weapon-size" title="@{$ID_force}" name="attr_force"></div>
                     <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
                     <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{$ID_impale_size}" name="attr_impale_size"></div>
-                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_rate}" name="attr_rate"></div>
                     <div class="sheet-td">
                         <div class="sheet-number-width sheet-text-center">
                             <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
@@ -603,6 +612,16 @@
                         </div>
                     </div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_enc}" name="attr_enc" step="1" min="0" value="0"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-equipment-location sheet-text-center" title="@{$ID_location}" name="attr_location">
+                            <option value="loadout" data-i18n="worn" selected>Worn</option>
+                            <option value="pack" data-i18n="pack">Pack</option>
+                            <option value="mount" data-i18n="transport">Transport</option>
+                            <option value="camp" data-i18n="camp">Camp</option>
+                            <option value="stash" data-i18n="stash">Stash</option>
+                            <option value="homebase" data-i18n="homebase">Homebase</option>
+                        </select>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -612,8 +631,8 @@
     <!-- Armor -->
     <div id="armor" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-flex">
-            <h2 data-i18n="armor">Armor</h2>
-            <div class="sheet-grow sheet-text-right">
+            <div class="sheet-grow"><h2 data-i18n="armor">Armor</h2></div>
+            <div>
                 <label class="sheet-left sheet-rmargin" data-i18n="worn_armor_enc">Worn Armor ENC</label>
                 <select class="sheet-auto-width sheet-rmargin" name="attr_half_effective_armor_enc">
                     <option value="0" selected>1/2</option>
@@ -904,6 +923,49 @@
         <!-- Gear -->
         <div class="sheet-section sheet-half-col">
             <h2 data-i18n="gear">Gear</h2>
+
+            <div class="sheet-flex">
+                <div class="sheet-th sheet-grow"><span data-i18n="item">Item</span></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="enc">ENC</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n-title="quantity" title="Quantity">#</div></div>
+                <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
+                <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos" data-i18n-title="details-tooltip">E</div></div>
+            </div>
+            <fieldset class="repeating_equipment">
+                <div class="sheet-flex">
+                    <div class="sheet-td sheet-grow sheet-hover-btn">
+                        <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this item" readonly>
+                    </div>
+                    <div class="sheet-td"><button type="roll" class="sheet-button-width sheet-die sheet-pictos" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{traits=@{traits}}} {{description=@{description}}}'}}">e</button></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_enc}" name="attr_enc" value="0" min="0" step="any"></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_quantity}" name="attr_quantity" value="1" min="0" step="1"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-equipment-location sheet-text-center" title="@{$ID_location}" name="attr_location">
+                            <option value="loadout" data-i18n="worn" selected>Worn</option>
+                            <option value="pack" data-i18n="pack">Pack</option>
+                            <option value="mount" data-i18n="transport">Transport</option>
+                            <option value="camp" data-i18n="camp">Camp</option>
+                            <option value="stash" data-i18n="stash">Stash</option>
+                            <option value="homebase" data-i18n="homebase">Homebase</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_details" value="0">
+                <div class="sheet-toggle sheet-flex sheet-gap">
+                    <div>
+                        <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
+                        <textarea class="sheet-gear-note" name="attr_traits"></textarea>
+                    </div>
+                    <div class="sheet-grow">
+                        <div><label class="sheet-left" data-i18n="description">Description</label></div>
+                        <textarea class="sheet-gear-note" name="attr_description"></textarea>
+                    </div>
+                </div>
+            </fieldset>
         </div>
 
         <!-- Wealth & ENC -->
@@ -911,17 +973,63 @@
             <!-- Wealth -->
             <div class="sheet-section sheet-full-width">
                 <h2 data-i18n="wealth">Wealth</h2>
+
+                <div class="sheet-bmargin">
+                    <div class="sheet-flex sheet-full-width">
+                        <div class="sheet-th sheet-grow"><span data-i18n="currency">Currency</span></div>
+                        <div class="sheet-th"><div class="sheet-number-width" data-i18n="value">Value</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width" data-i18n="enc">ENC</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width" data-i18n-title="quantity">#</div></div>
+                        <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
+                    </div>
+                    <fieldset class="repeating_currency">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-hover-btn">
+                                <input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name">
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this currency" readonly>
+                            </div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_value}" name="attr_value" value="1"></div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_enc}" name="attr_enc" value="0" min="0" step=".01"></div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_quantity}" name="attr_quantity" value="1" min="0"></div>
+                            <div class="sheet-td">
+                                <select class="sheet-equipment-location" title="@{$ID_location}" name="attr_location">
+                                    <option value="loadout" data-i18n="worn" selected>Worn</option>
+                                    <option value="pack" data-i18n="pack">Pack</option>
+                                    <option value="mount" data-i18n="transport">Transport</option>
+                                    <option value="camp" data-i18n="camp">Camp</option>
+                                    <option value="stash" data-i18n="stash">Stash</option>
+                                    <option value="homebase" data-i18n="homebase">Homebase</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="income">Income</label></div>
+                        <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-left" title="@{income}" name="attr_income" value=""></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="expenses">Expenses</label></div>
+                        <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-left" title="@{expenses}" name="attr_expenses" value=""></div>
+                    </div>
+                </div>
+
+                <label class="sheet-left" data-i18n="other">Other</label>
+                <textarea class="sheet-wealth-notes" name="attr_wealth_other"></textarea>
             </div>
 
             <!-- ENC -->
             <div class="sheet-section sheet-full-width">
                 <div class="sheet-space-between sheet-gap">
-                    <div class="sheet-grow"><h2 data-i18n="encumbrance">Encumbrance</h2></div>
-                    <div>
-                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
-                        <input type="number" class="sheet-number-width-sm" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
-                    </div>
+                    <div><h2 data-i18n="encumbrance">Encumbrance</h2></div>
                     <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
+                    <div class="sheet-grow sheet-text-right">
+                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
+                        <input type="number" class="sheet-number-width-sm sheet-text-center" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                    </div>
                 </div>
 
                 <div class="sheet-table">

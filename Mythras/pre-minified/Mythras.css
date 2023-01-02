@@ -130,6 +130,12 @@ div.sheet-grow {
 .sheet-rmargin {
     margin-right: 5px !important;
 }
+.sheet-lmargin {
+    margin-right: 5px !important;
+}
+.sheet-lmargin-x3 {
+    margin-right: 15px !important;
+}
 div.sheet-warnmsg {
     border: 1px solid darkred;
     color: darkred;
@@ -285,10 +291,10 @@ div.sheet-impval {
     font-size: 22px !important;
 }
 .sheet-pictos {
-    font-family: "Pictos";
+    font-family: "Pictos" !important;
 }
 .sheet-pictos-three {
-    font-family: "Pictos Three";
+    font-family: "Pictos Three" !important;
 }
 .sheet-text-center {
     text-align: center;
@@ -842,7 +848,7 @@ input.sheet-location-name {
     width: 145px;
 }
 
-/* Weapons */
+/* Equipment */
 .sheet-weapon-name {
     width: 140px;
     text-align: center;
@@ -858,6 +864,16 @@ input.sheet-location-name {
 .sheet-weapon-reach {
     width: 72px;
     text-align: center;
+}
+.sheet-equipment-location {
+    width: 80px;
+    text-align: center;
+}
+textarea.sheet-gear-note {
+    height: 54px;
+}
+textarea.sheet-wealth-notes {
+    height: 36px;
 }
 
 /* Background */

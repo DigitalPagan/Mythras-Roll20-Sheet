@@ -60,7 +60,7 @@ input.sheet-location-name {
     width: 145px;
 }
 
-/* Weapons */
+/* Equipment */
 .sheet-weapon-name {
     width: 140px;
     text-align: center;
@@ -76,6 +76,16 @@ input.sheet-location-name {
 .sheet-weapon-reach {
     width: 72px;
     text-align: center;
+}
+.sheet-equipment-location {
+    width: 80px;
+    text-align: center;
+}
+textarea.sheet-gear-note {
+    height: 54px;
+}
+textarea.sheet-wealth-notes {
+    height: 36px;
 }
 
 /* Background */

@@ -583,6 +583,7 @@
     <label class="sheet-left">Tenacity Penalty</label>:<input type="number" name="attr_tenacity_dependencies" value="0"><br>
 
     <!-- Weapons -->
+    <!-- TODO add location fields -->
     <div id="weapons" class="sheet-section sheet-anchor-adjust-x2 sheet-combat">
         <div class="sheet-space-between sheet-gap">
             <div class="sheet-grow"><h2 data-i18n="weapons">Weapons</h2></div>
@@ -620,6 +621,7 @@
                 <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width-sm" data-i18n="enc">ENC</div></div>
+                <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
             </div>
             <fieldset class="repeating_meleeweapon">
                 <div class="sheet-flex">
@@ -642,6 +644,16 @@
                         </div>
                     </div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_enc}" name="attr_enc" step="1" min="0" value="0"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-equipment-location sheet-text-center" title="@{$ID_location}" name="attr_location">
+                            <option value="loadout" data-i18n="worn" selected>Worn</option>
+                            <option value="pack" data-i18n="pack">Pack</option>
+                            <option value="mount" data-i18n="transport">Transport</option>
+                            <option value="camp" data-i18n="camp">Camp</option>
+                            <option value="stash" data-i18n="stash">Stash</option>
+                            <option value="homebase" data-i18n="homebase">Homebase</option>
+                        </select>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -658,16 +670,14 @@
                 <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="damage_modifier">+</div></div>
                 <div class="sheet-th"><div class="sheet-weapon-size" data-i18n="force">Force</div></div>
                 <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
-
                 <div class="sheet-th"><div class="sheet-number-width-xs" data-i18n-title="impale_size" data-i18n="impale_size-abrv">IS</div></div>
-                <div class="sheet-th"><div class="sheet-deep-toggle sheet-weapon-reach" data-i18n="fire_rate">Fire Rate</div></div>
                 <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="ammunition" data-i18n="ammunition-abrv">Ammo</div></div>
                 <div class="sheet-th"><div class="sheet-number-width" data-i18n="load">Load</div></div>
-
                 <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
                 <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-abrv">AP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-abrv">HP</div></div>
                 <div class="sheet-th"><div class="sheet-number-width-sm" data-i18n="enc">ENC</div></div>
+                <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
             </div>
             <fieldset class="repeating_rangedweapon">
                 <div class="sheet-flex">
@@ -683,7 +693,6 @@
                     <div class="sheet-td"><input type="text" class="sheet-weapon-size" title="@{$ID_force}" name="attr_force"></div>
                     <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
                     <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{$ID_impale_size}" name="attr_impale_size"></div>
-                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_rate}" name="attr_rate"></div>
                     <div class="sheet-td">
                         <div class="sheet-number-width sheet-text-center">
                             <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
@@ -698,6 +707,16 @@
                         </div>
                     </div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_enc}" name="attr_enc" step="1" min="0" value="0"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-equipment-location sheet-text-center" title="@{$ID_location}" name="attr_location">
+                            <option value="loadout" data-i18n="worn" selected>Worn</option>
+                            <option value="pack" data-i18n="pack">Pack</option>
+                            <option value="mount" data-i18n="transport">Transport</option>
+                            <option value="camp" data-i18n="camp">Camp</option>
+                            <option value="stash" data-i18n="stash">Stash</option>
+                            <option value="homebase" data-i18n="homebase">Homebase</option>
+                        </select>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -707,8 +726,8 @@
     <!-- Armor -->
     <div id="armor" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-flex">
-            <h2 data-i18n="armor">Armor</h2>
-            <div class="sheet-grow sheet-text-right">
+            <div class="sheet-grow"><h2 data-i18n="armor">Armor</h2></div>
+            <div>
                 <label class="sheet-left sheet-rmargin" data-i18n="worn_armor_enc">Worn Armor ENC</label>
                 <select class="sheet-auto-width sheet-rmargin" name="attr_half_effective_armor_enc">
                     <option value="0" selected>1/2</option>
@@ -999,6 +1018,49 @@
         <!-- Gear -->
         <div class="sheet-section sheet-half-col">
             <h2 data-i18n="gear">Gear</h2>
+
+            <div class="sheet-flex">
+                <div class="sheet-th sheet-grow"><span data-i18n="item">Item</span></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="enc">ENC</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n-title="quantity" title="Quantity">#</div></div>
+                <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
+                <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos" data-i18n-title="details-tooltip">E</div></div>
+            </div>
+            <fieldset class="repeating_equipment">
+                <div class="sheet-flex">
+                    <div class="sheet-td sheet-grow sheet-hover-btn">
+                        <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this item" readonly>
+                    </div>
+                    <div class="sheet-td"><button type="roll" class="sheet-button-width sheet-die sheet-pictos" title="%{$ID_effect}" name="roll_effect" value="@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{traits=@{traits}}} {{description=@{description}}}">e</button></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_enc}" name="attr_enc" value="0" min="0" step="any"></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_quantity}" name="attr_quantity" value="1" min="0" step="1"></div>
+                    <div class="sheet-td">
+                        <select class="sheet-equipment-location sheet-text-center" title="@{$ID_location}" name="attr_location">
+                            <option value="loadout" data-i18n="worn" selected>Worn</option>
+                            <option value="pack" data-i18n="pack">Pack</option>
+                            <option value="mount" data-i18n="transport">Transport</option>
+                            <option value="camp" data-i18n="camp">Camp</option>
+                            <option value="stash" data-i18n="stash">Stash</option>
+                            <option value="homebase" data-i18n="homebase">Homebase</option>
+                        </select>
+                    </div>
+                    <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span></div>
+                </div>
+                <input type="hidden" class="sheet-toggle" name="attr_details" value="0">
+                <div class="sheet-toggle sheet-flex sheet-gap">
+                    <div>
+                        <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
+                        <textarea class="sheet-gear-note" name="attr_traits"></textarea>
+                    </div>
+                    <div class="sheet-grow">
+                        <div><label class="sheet-left" data-i18n="description">Description</label></div>
+                        <textarea class="sheet-gear-note" name="attr_description"></textarea>
+                    </div>
+                </div>
+            </fieldset>
         </div>
 
         <!-- Wealth & ENC -->
@@ -1006,17 +1068,63 @@
             <!-- Wealth -->
             <div class="sheet-section sheet-full-width">
                 <h2 data-i18n="wealth">Wealth</h2>
+
+                <div class="sheet-bmargin">
+                    <div class="sheet-flex sheet-full-width">
+                        <div class="sheet-th sheet-grow"><span data-i18n="currency">Currency</span></div>
+                        <div class="sheet-th"><div class="sheet-number-width" data-i18n="value">Value</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width" data-i18n="enc">ENC</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width" data-i18n-title="quantity">#</div></div>
+                        <div class="sheet-th"><div class="sheet-equipment-location" data-i18n="location">Location</div></div>
+                    </div>
+                    <fieldset class="repeating_currency">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-hover-btn">
+                                <input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name">
+                                <button type="roll" class="sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this currency" readonly>
+                            </div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_value}" name="attr_value" value="1"></div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_enc}" name="attr_enc" value="0" min="0" step=".01"></div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_quantity}" name="attr_quantity" value="1" min="0"></div>
+                            <div class="sheet-td">
+                                <select class="sheet-equipment-location" title="@{$ID_location}" name="attr_location">
+                                    <option value="loadout" data-i18n="worn" selected>Worn</option>
+                                    <option value="pack" data-i18n="pack">Pack</option>
+                                    <option value="mount" data-i18n="transport">Transport</option>
+                                    <option value="camp" data-i18n="camp">Camp</option>
+                                    <option value="stash" data-i18n="stash">Stash</option>
+                                    <option value="homebase" data-i18n="homebase">Homebase</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="income">Income</label></div>
+                        <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-left" title="@{income}" name="attr_income" value=""></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="expenses">Expenses</label></div>
+                        <div class="sheet-td sheet-full-width"><input type="text" class="sheet-full-width sheet-text-left" title="@{expenses}" name="attr_expenses" value=""></div>
+                    </div>
+                </div>
+
+                <label class="sheet-left" data-i18n="other">Other</label>
+                <textarea class="sheet-wealth-notes" name="attr_wealth_other"></textarea>
             </div>
 
             <!-- ENC -->
             <div class="sheet-section sheet-full-width">
                 <div class="sheet-space-between sheet-gap">
-                    <div class="sheet-grow"><h2 data-i18n="encumbrance">Encumbrance</h2></div>
-                    <div>
-                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
-                        <input type="number" class="sheet-number-width-sm" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
-                    </div>
+                    <div><h2 data-i18n="encumbrance">Encumbrance</h2></div>
                     <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
+                    <div class="sheet-grow sheet-text-right">
+                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
+                        <input type="number" class="sheet-number-width-sm sheet-text-center" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                    </div>
                 </div>
 
                 <div class="sheet-table">
@@ -1779,28 +1887,47 @@ characteristicAttrs.forEach(char => {
     on(`change:${char}_base change:${char}_temp`, function(event) {
         if (event.sourceType === "sheetworker") {return;}
 
-        let newAttrs = {}
-        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs,
-            expModGetAttrs, healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs, 
-            pranaPointsGetAttrs, powerPointsGetAttrs, tenacityGetAttrs, hpGetAttrs), function(v) {
-            const baseCharVal = parseInt(v[`${char}_base`]) || 0;
-            const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
-            newAttrs[`${char}`] = baseCharVal + tempCharVal;
-            v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
+        let repeatingIds = {}
+        getSectionIDs("repeating_meleeweapon", function(meleeWeaponIds) {
+            repeatingIds['meleeWeaponIds'] = meleeWeaponIds;
+            getSectionIDs("repeating_rangedweapon", function(rangedWeaponIds) {
+                repeatingIds['rangedWeaponIds'] = rangedWeaponIds;
+                getSectionIDs("repeating_equipment", function(gearIds) {
+                    repeatingIds['gearIds'] = gearIds;
+                    getSectionIDs("repeating_currency", function(currencyIds) {
+                        repeatingIds['currencyIds'] = currencyIds;
+                        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs,
+                            expModGetAttrs, healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs,
+                            pranaPointsGetAttrs, powerPointsGetAttrs, tenacityGetAttrs, hpGetAttrs, moveRateGetAttrs,
+                            encGetAttrs(repeatingIds)), function(v) {
+                            let newAttrs = {};
+                            const baseCharVal = parseInt(v[`${char}_base`]) || 0;
+                            const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
+                            newAttrs[`${char}`] = baseCharVal + tempCharVal;
+                            v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
 
-            setAttrs({
-                ...newAttrs,
-                ...calcActionPoints(v),
-                ...calcDamageMod(v),
-                ...calcExpMod(v),
-                ...calcHealingRate(v),
-                ...calcInitiativeBonus(v),
-                ...calcLuckPoints(v),
-                ...calcMagicPoints(v),
-                ...calcPranaPoints(v),
-                ...calcPowerPoints(v),
-                ...calcTenacity(v),
-                ...calcAllHP(v)
+                            let newEncAttrs = calcEncAndArmorPenalty(repeatingIds, v);
+                            /* Update v with new values need for attribute calculations */
+                            v = {...v, ...newEncAttrs};
+                            setAttrs({
+                                ...newAttrs,
+                                ...newEncAttrs,
+                                ...calcActionPoints(v),
+                                ...calcDamageMod(v),
+                                ...calcExpMod(v),
+                                ...calcHealingRate(v),
+                                ...calcInitiativeBonus(v),
+                                ...calcLuckPoints(v),
+                                ...calcMagicPoints(v),
+                                ...calcMoveRate(v),
+                                ...calcPranaPoints(v),
+                                ...calcPowerPoints(v),
+                                ...calcTenacity(v),
+                                ...calcAllHP(v)
+                            });
+                        });
+                    });
+                });
             });
         });
     });
@@ -2724,7 +2851,7 @@ on('change:fatigue', function(event) {
 
 /* Weapons */
 /* When a favored weapon is selected it is added to the weapons_buttons attr which is how we add it to combat rolls */
-on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored", function(event) {
+on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored change:_reporder:meleeweapon change:_reporder:rangedweapon remove:repeating_meleeweapon remove:repeating_rangedweapon", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getSectionIDs("repeating_meleeweapon", function(meleeIds) {
         getSectionIDs("repeating_rangedweapon", function(rangedIds) {
@@ -2765,6 +2892,160 @@ const loadTable = {
     /* Overloaded */ '2': {"skills": '2', "movement": '*.5'},
     /* Max */ '3': {"skills": '3', "movement": '*0'}
 }
+/**
+ * Will return an object of all the attrs needed to perform enc calculations along with the repeating IDs of equipment
+ * repeatingIds object containing the repeatingIds of meleeweapon rangedweapon equipment and currency
+ * return []
+ */
+function encGetAttrs(repeatingIds) {
+    let repeatingGetAttrs = [];
+    repeatingIds['meleeWeaponIds'].forEach(meleeWeaponId => {
+        repeatingGetAttrs.push(`repeating_meleeweapon_${meleeWeaponId}_enc`, `repeating_meleeweapon_${meleeWeaponId}_location`);
+    });
+    repeatingIds['rangedWeaponIds'].forEach(rangedWeaponId => {
+        repeatingGetAttrs.push(`repeating_rangedweapon_${rangedWeaponId}_enc`, `repeating_rangedweapon_${rangedWeaponId}_location`);
+    });
+    repeatingIds['gearIds'].forEach(gearId => {
+        repeatingGetAttrs.push(`repeating_equipment_${gearId}_enc`, `repeating_equipment_${gearId}_quantity`, `repeating_equipment_${gearId}_location`);
+    });
+    repeatingIds['currencyIds'].forEach(currencyId => {
+        repeatingGetAttrs.push(`repeating_currency_${currencyId}_enc`, `repeating_currency_${currencyId}_quantity`, `repeating_currency_${currencyId}_location`);
+    });
+
+    return ['str', 'pack_equipped', 'half_effective_armor_enc', 'avg_species_siz', 'encumbrance_temp',
+        'location1_armor_enc', 'location1_armor_equipped',
+        'location2_armor_enc', 'location2_armor_equipped',
+        'location3_armor_enc', 'location3_armor_equipped',
+        'location4_armor_enc', 'location4_armor_equipped',
+        'location5_armor_enc', 'location5_armor_equipped',
+        'location6_armor_enc', 'location6_armor_equipped',
+        'location7_armor_enc', 'location7_armor_equipped',
+        'location8_armor_enc', 'location8_armor_equipped',
+        'location9_armor_enc', 'location9_armor_equipped',
+        'location10_armor_enc', 'location10_armor_equipped',
+        'location11_armor_enc', 'location11_armor_equipped',
+        'location12_armor_enc', 'location12_armor_equipped'].concat(repeatingGetAttrs);
+}
+function calcEncAndArmorPenalty(repeatingIds, v) {
+    let newAttrs = {};
+
+    /* Calculate Armor Enc */
+    let wornArmorEnc = 0;
+    let packArmorEnc = 0;
+    let effectiveWornArmorEnc;
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].forEach(location => {
+        const locationEnc = parseFloat(v[`location${location}_armor_enc`]) || 0;
+        if (v[`location${location}_armor_equipped`] === '1') {
+            wornArmorEnc = wornArmorEnc + locationEnc;
+        } else if (v[`location${location}_armor_equipped`] === '0') {
+            packArmorEnc = packArmorEnc + locationEnc;
+        }
+    });
+    if (v['half_effective_armor_enc'] === '1') {
+        effectiveWornArmorEnc = Math.ceil(wornArmorEnc/4);
+    } else {
+        effectiveWornArmorEnc = Math.ceil(wornArmorEnc/2);
+    }
+    newAttrs['armor_penalty'] = 0 - Math.ceil(wornArmorEnc/5);
+    let wornEnc = effectiveWornArmorEnc;
+    let packEnc = packArmorEnc;
+
+    /* Add up all the rest of the ENC */
+    repeatingIds['meleeWeaponIds'].forEach(meleeWeaponId => {
+        const weaponEnc = parseFloat(v[`repeating_meleeweapon_${meleeWeaponId}_enc`]) || 0;
+        if (v[`repeating_meleeweapon_${meleeWeaponId}_location`] === 'loadout') {
+            wornEnc = wornEnc + weaponEnc;
+        } else if (v[`repeating_meleeweapon_${meleeWeaponId}_location`] === 'pack') {
+            packEnc = packEnc + weaponEnc;
+        }
+    });
+    repeatingIds['rangedWeaponIds'].forEach(rangedWeaponId => {
+        const weaponEnc = parseFloat(v[`repeating_rangedweapon_${rangedWeaponId}_enc`]) || 0;
+        if (v[`repeating_rangedweapon_${rangedWeaponId}_location`] === 'loadout') {
+            wornEnc = wornEnc + weaponEnc;
+        } else if (v[`repeating_rangedweapon_${rangedWeaponId}_location`] === 'pack') {
+            packEnc = packEnc + weaponEnc;
+        }
+    });
+    repeatingIds['gearIds'].forEach(gearId => {
+        const gearEnc = parseFloat(v[`repeating_equipment_${gearId}_enc`]) || 0;
+        const gearQty = parseInt(v[`repeating_equipment_${gearId}_quantity`]) || 0;
+        if (v[`repeating_equipment_${gearId}_location`] === 'loadout') {
+            wornEnc = wornEnc + (gearEnc * gearQty);
+        } else if (v[`repeating_equipment_${gearId}_location`] === 'pack') {
+            packEnc = packEnc + (gearEnc * gearQty);
+        }
+    });
+    repeatingIds['currencyIds'].forEach(currencyId => {
+        const currencyEnc = parseFloat(v[`repeating_currency_${currencyId}_enc`]) || 0;
+        const currencyQty = parseInt(v[`repeating_currency_${currencyId}_quantity`]) || 0;
+        if (v[`repeating_currency_${currencyId}_location`] === 'loadout') {
+            wornEnc = wornEnc + (currencyEnc * currencyQty);
+        } else if (v[`repeating_currency_${currencyId}_location`] === 'pack') {
+            packEnc = packEnc + (currencyEnc * currencyQty);
+        }
+    });
+
+    /* Find the total enc to apply for effect with avg species siz factored in */
+    let enc = 0;
+    const avgSpeciesSiz = parseInt(v['avg_species_siz']) || 0;
+    const encTemp = parseInt(v['encumbrance_temp']) || 0;
+    if (v['pack_equipped'] === '1') {
+        enc = Math.ceil((wornEnc + packEnc + encTemp) * (avgSpeciesSiz/13));
+    } else {
+        enc = Math.ceil((wornEnc + encTemp) * (avgSpeciesSiz/13));
+    }
+    newAttrs['encumbrance_current'] = enc.toFixed(2);
+
+    /* Set load and related effects */
+    const str = parseInt(v['str']) || 0;
+    if (enc >= (str * 4)) {
+        newAttrs['encumbrance_load'] = '3';
+        newAttrs['encumbrance_skills'] = loadTable['3']['skills'];
+        newAttrs['movement_rate_enc'] = loadTable['3']['movement'];
+    } else if (enc > (str * 3)) {
+        newAttrs['encumbrance_load'] = '2';
+        newAttrs['encumbrance_skills'] = loadTable['2']['skills'];
+        newAttrs['movement_rate_enc'] = loadTable['2']['movement'];
+    } else if (enc > (str * 2)) {
+        newAttrs['encumbrance_load'] = '1';
+        newAttrs['encumbrance_skills'] = loadTable['1']['skills'];
+        newAttrs['movement_rate_enc'] = loadTable['1']['movement'];
+    } else {
+        newAttrs['encumbrance_load'] = '0';
+        newAttrs['encumbrance_skills'] = loadTable['0']['skills'];
+        newAttrs['movement_rate_enc'] = loadTable['0']['movement'];
+    }
+
+    return newAttrs;
+}
+on("change:location1_armor_enc change:location1_armor_equipped change:location2_armor_enc change:location2_armor_equipped change:location3_armor_enc change:location3_armor_equipped change:location4_armor_enc change:location4_armor_equipped change:location5_armor_enc change:location5_armor_equipped change:location6_armor_enc change:location6_armor_equipped change:location7_armor_enc change:location7_armor_equipped change:location8_armor_enc change:location8_armor_equipped change:location9_armor_enc change:location9_armor_equipped change:location10_armor_enc change:location10_armor_equipped change:location11_armor_enc change:location11_armor_equipped change:location12_armor_enc change:location12_armor_equipped change:half_effective_armor_enc change:pack_equipped change:avg_species_siz change:encumbrance_temp change:repeating_meleeweapon:enc change:repeating_meleeweapon:location change:repeating_rangedweapon:enc change:repeating_rangedweapon:location change:repeating_equipment:enc change:repeating_equipment:location change:repeating_equipment:quantity change:repeating_currency:enc change:repeating_currency:location change:repeating_currency:quantity remove:repeating_meleeweapon remove:repeating_rangedweapon remove:repeating_equipment remove:repeating_currency", function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+
+    let repeatingIds = {}
+    getSectionIDs("repeating_meleeweapon", function(meleeWeaponIds) {
+        repeatingIds['meleeWeaponIds'] = meleeWeaponIds;
+        getSectionIDs("repeating_rangedweapon", function(rangedWeaponIds) {
+            repeatingIds['rangedWeaponIds'] = rangedWeaponIds;
+            getSectionIDs("repeating_equipment", function(gearIds) {
+                repeatingIds['gearIds'] = gearIds;
+                getSectionIDs("repeating_currency", function(currencyIds) {
+                    repeatingIds['currencyIds'] = currencyIds;
+                    getAttrs(encGetAttrs(repeatingIds).concat(initGetAttrs, moveRateGetAttrs), function(v) {
+                        let newAttrs = calcEncAndArmorPenalty(repeatingIds, v);
+                        /* Update v with new values need for attribute calculations */
+                        v = {...v, ...newAttrs};
+                        setAttrs({
+                            ...newAttrs,
+                            ...calcInitiativeBonus(v),
+                            ...calcMoveRate(v)
+                        });
+                    });
+                });
+            });
+        });
+    });
+});
 
 /* Repeating IDs */
 on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
@@ -3050,6 +3331,9 @@ function upgradeCharacter3Dot0() {
                 ...calcLocationHP('1', {...v, ...hitLocationTable['simplified']})
             };
         }
+
+        /* Convert income */
+        /* TODO convert income */
 
         /* Convert Notes */
         if (v['notes']) {
