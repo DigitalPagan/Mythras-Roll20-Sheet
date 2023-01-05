@@ -1,5 +1,5 @@
 /* Default Roll Template Styles */
-.sheet-rolltemplate-weapon {
+.sheet-rolltemplate-hit-location {
     background: white;
     font-family: 'Merriweather', serif;
     font-size: 12px;
@@ -10,35 +10,35 @@
     background: #1f1f1f;
     color: whitesmoke;
 }
-.sheet-rolltemplate-weapon div.sheet-border {
-    border: 2px solid #811818;
+.sheet-rolltemplate-hit-location div.sheet-border {
+    border: 2px solid #992600;
     font-family: 'Merriweather', serif;
     font-size: 12px;
     line-height: 18px;
     border-radius: 5px;
 }
-.sheet-rolltemplate-weapon div.sheet-header {
-    background: #811818;
+.sheet-rolltemplate-hit-location div.sheet-header {
+    background: #992600;
     color: whitesmoke;
 }
-.sheet-rolltemplate-weapon div.sheet-character {
+.sheet-rolltemplate-hit-location div.sheet-character {
     font-size: 11px;
     text-align: center;
 }
-.sheet-rolltemplate-weapon div.sheet-name {
+.sheet-rolltemplate-hit-location div.sheet-name {
     font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 15px;
 }
 
-.sheet-rolltemplate-weapon div.sheet-table {
+.sheet-rolltemplate-hit-location div.sheet-table {
     display: table;
     width: 100%;
 }
-.sheet-rolltemplate-weapon div.sheet-tr {
+.sheet-rolltemplate-hit-location div.sheet-tr {
     display: table-row;
 }
-.sheet-rolltemplate-weapon div.sheet-th {
+.sheet-rolltemplate-hit-location div.sheet-th {
     display:table-cell;
     text-align: center;
     background: dimgray;
@@ -48,21 +48,33 @@
     font-weight: normal;
     white-space: nowrap;
 }
-.sheet-rolltemplate-weapon div.sheet-td {
+.sheet-rolltemplate-hit-location div.sheet-td {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
     padding: 1px 2px;
     white-space: nowrap;
 }
-.sheet-rolltemplate-weapon div.sheet-help {
+.sheet-rolltemplate-hit-location div.sheet-help {
     cursor: help;
 }
-.sheet-rolltemplate-weapon div.sheet-bold {
-    font-weight: bold;
+.sheet-rolltemplate-hit-location div.sheet-pictos {
+    font-family: "Pictos";
+}
+.sheet-rolltemplate-hit-location div.sheet-pictos-three {
+    font-family: "Pictos Three";
+}
+.sheet-rolltemplate-hit-location div.sheet-full-width {
+    width: 100%;
+}
+.sheet-rolltemplate-hit-location div.sheet-checkbox-width {
+    width: 16px;
+}
+.sheet-rolltemplate-hit-location div.sheet-number-width-sm {
+    width: 25px;
 }
 
-.sheet-rolltemplate-weapon .inlinerollresult,
+.sheet-rolltemplate-hit-location .inlinerollresult,
 .sheet-rolltemplate-darkmode .inlinerollresult {
     display: inline-block;
     text-align: center;
@@ -76,21 +88,21 @@
     font-size: 12px;
     font-family: 'Merriweather', serif;
 }
-.sheet-rolltemplate-weapon .inlinerollresult.fullcrit,
+.sheet-rolltemplate-hit-location .inlinerollresult.fullcrit,
 .sheet-rolltemplate-darkmode .inlinerollresult.fullcrit {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
-.sheet-rolltemplate-weapon .inlinerollresult.fullfail,
+.sheet-rolltemplate-hit-location .inlinerollresult.fullfail,
 .sheet-rolltemplate-darkmode .inlinerollresult.fullfail {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
-.sheet-rolltemplate-weapon .inlinerollresult.importantroll,
+.sheet-rolltemplate-hit-location .inlinerollresult.importantroll,
 .sheet-rolltemplate-darkmode .inlinerollresult.importantroll {
     border: none !important;
     color: inherit;

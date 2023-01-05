@@ -60,6 +60,30 @@ input.sheet-location-name {
     width: 145px;
 }
 
+/* SKills */
+input.sheet-skill-details:not([value="1"]) ~ div .sheet-skill-details {
+    display: none;
+}
+textarea.sheet-skill-notes {
+    height: 36px;
+}
+button[type=roll].sheet-improve {
+    font-family: "Pictos";
+    right: 29px;
+    top: 0;
+}
+button[type=action].sheet-social-defense {
+    font-family: "Pictos";
+    right: 44px;
+    top: 1px;
+}
+button[type=action].sheet-social-attack {
+    font-family: "Pictos";
+    right: 58px;
+    top: 1px;
+}
+
+
 /* Equipment */
 .sheet-weapon-name {
     width: 140px;

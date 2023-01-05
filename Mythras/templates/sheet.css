@@ -182,7 +182,7 @@ div.sheet-th {
     display:table-cell;
     text-align: center;
     background: dimgray;
-    color: lightgray;
+    color: whitesmoke;
     padding: 1px 2px;
     vertical-align: middle;
     font-weight: normal;
@@ -286,6 +286,10 @@ div.sheet-impval {
     font-family: "dicefontd6" !important;
     font-size: 19px !important;
 }*/
+.sheet-d8 {
+    font-family: "dicefontd8" !important;
+    font-size: 18px !important;
+}
 .sheet-d10 {
     font-family: "dicefontd10" !important;
     font-size: 22px !important;
@@ -295,6 +299,9 @@ div.sheet-impval {
 }
 .sheet-pictos-three {
     font-family: "Pictos Three" !important;
+}
+.sheet-pictos-custom {
+    font-family: "Pictos Custom" !important;
 }
 .sheet-text-center {
     text-align: center;
@@ -363,6 +370,13 @@ input[type="checkbox"].sheet-deep-toggle:checked ~ div .sheet-anti-toggle {
 /* Add some space between the stylized span and the label span*/
 .ui-dialog .charsheet label.sheet-checkbox span:nth-of-type(2) {
     margin-left: 5px;
+}
+.ui-dialog .charsheet label.sheet-skill {
+    text-align: left;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    font-weight: normal;
 }
 
 
@@ -562,6 +576,16 @@ body.sheet-darkmode .ui-dialog .charsheet input[type="checkbox"] + span {
     background-image: none;
     color: inherit;
 }
+.ui-dialog .charsheet input[type="checkbox"] + span.sheet-checkico-reverse {
+    border: none;
+    opacity: 0.6;
+    color: inherit;
+}
+.ui-dialog .charsheet input[type="checkbox"]:not(:checked) + span.sheet-checkico-reverse {
+    opacity: 1;
+    background-image: none;
+    color: inherit;
+}
 
 /* Buttons */
 .ui-dialog .charsheet button {
@@ -582,6 +606,7 @@ body.sheet-darkmode .ui-dialog .charsheet input[type="checkbox"] + span {
 }
 .ui-dialog .charsheet button:hover {
     text-decoration: underline;
+    color: royalblue;
 }
 .ui-dialog .charsheet button:active {
     border-color: black;
@@ -592,6 +617,9 @@ body.sheet-darkmode .ui-dialog .charsheet button {
     border-color: black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+}
+body.sheet-darkmode .ui-dialog .charsheet button:hover {
+    color: royalblue;
 }
 body.sheet-darkmode .ui-dialog .charsheet button:active {
     border-color: gray;
@@ -612,12 +640,14 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
 .ui-dialog .charsheet button.sheet-label-left,
 .ui-dialog .charsheet button.sheet-link {
     font-size: 12px;
-    background: transparent;
-    border: none;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
     text-align: left;
     text-decoration: underline;
     padding: 0;
     margin: 0;
+    color: inherit;
 }
 .ui-dialog .charsheet button.sheet-label-left {
     font-weight: bold;
@@ -638,32 +668,40 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
 .ui-dialog .charsheet button.sheet-die:hover {
     text-decoration: underline;
 }
-button[type=roll].sheet-id {
+div.sheet-hover-btn {
+    position: relative;
+}
+div.sheet-hover-btn:hover button {
+    display: inline;
+}
+button[type=roll].sheet-hover,
+button[type=action].sheet-hover {
     font-size: 12px !important;
-    background: transparent;
-    border: none;
+    background: transparent !important;
+    border: none !important;
     text-align: left;
     padding: 0 !important;
     margin: 0 !important;
     cursor: pointer;
     color: inherit;
     line-height: inherit;
-    height: inherit;
-    font-family: "Pictos";
     display: none;
     position: absolute;
-    top: 0;
-    right: 3px;
+    height: 18px;
 }
-.ui-dialog .charsheet button.sheet-id:hover {
+.ui-dialog .charsheet button.sheet-hover:hover {
     color: #069;
     text-decoration: underline;
 }
-div.sheet-hover-btn {
-    position: relative;
+button[type=roll].sheet-id {
+    font-family: "Pictos";
+    right: 3px;
+    top: 0;
 }
-div.sheet-hover-btn:hover button {
-    display: inline;
+button[type=action].sheet-augment {
+    font-family: "Pictos";
+    right: 18px;
+    top: 1px;
 }
 
 /*.ui-dialog .charsheet button[type=roll].sheet-d6::before {
@@ -740,13 +778,9 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 }
 
 /* Compact Toggle */
-.sheet-detailed,
-.sheet-compact {
+.sheet-compact-control[value="1"] + div.sheet-wrapper .sheet-detailed,
+.sheet-compact-control[value="0"] + div.sheet-wrapper .sheet-compact {
     display: none;
-}
-.sheet-compact-control[value="0"] + div.sheet-wrapper .sheet-detailed,
-.sheet-compact-control[value="1"] + div.sheet-wrapper .sheet-compact {
-    display: initial;
 }
 .sheet-compact-control[value="0"] + div.sheet-wrapper {
     min-width: 860px;
@@ -775,7 +809,8 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 /* Roll Templates */
 {% include 'roll_templates/default.css' %}
 {% include 'roll_templates/effect.css' %}
-{% include 'roll_templates/hit_location.css' %}
+{% include 'roll_templates/hit-location.css' %}
+{% include 'roll_templates/improvement.css' %}
 {% include 'roll_templates/resolution_pool.css' %}
 {% include 'roll_templates/skill.css' %}
 {% include 'roll_templates/system.css' %}

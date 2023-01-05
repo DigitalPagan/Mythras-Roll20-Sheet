@@ -1420,8 +1420,13 @@ function upgradeCharacter3Dot0() {
     let charGetAttrs = [];
     characteristicAttrs.forEach(char => { charGetAttrs.push(`${char}`, `${char}_temp`); });
     getAttrs(charGetAttrs.concat(hpGetAttrs,
-        ['action_points_other', 'action_points_add_one', 'notes', "location2_display"]), function(v) {
+        ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day", "income_month", "income_season", "income_year"]), function(v) {
         let newAttrs = {'version': '3.0'};
+
+        /* If a spirit set the conflict mode to spirit combat */
+        if (v['spirit'] === '1') {
+            newAttrs['conflict_mode'] = 'spirit_combat';
+        }
 
         /* Convert Characteristics base values */
         characteristicAttrs.forEach(char => {
@@ -1450,7 +1455,16 @@ function upgradeCharacter3Dot0() {
         }
 
         /* Convert income */
-        /* TODO convert income */
+        let newIncome = "";
+        const incomeDay = parseFloat(v['income_day']) || 0;
+        const incomeMonth = parseFloat(v['income_month']) || 0;
+        const incomeSeason = parseFloat(v['income_season']) || 0;
+        const incomeYear = parseFloat(v['income_year']) || 0;
+        if (v['income_day']) {newIncome = newIncome + getTranslationByKey('day') + ':' + incomeDay.toFixed(2) + ' ';}
+        if (v['income_month']) {newIncome = newIncome + getTranslationByKey('month') + ':' + incomeMonth.toFixed(2) + ' ';}
+        if (v['income_season']) {newIncome = newIncome + getTranslationByKey('season') + ':' + incomeSeason.toFixed(2) + ' ';}
+        if (v['income_year']) {newIncome = newIncome + getTranslationByKey('year') + ':' + incomeYear.toFixed(2);}
+        newAttrs['income'] = newIncome;
 
         /* Convert Notes */
         if (v['notes']) {

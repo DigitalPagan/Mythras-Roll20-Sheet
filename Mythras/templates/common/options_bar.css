@@ -11,7 +11,7 @@ div.sheet-option-bar {
     margin-bottom: 5px;
 }
 body.sheet-darkmode div.sheet-option-bar {
-    background: whitesmoke;
+    background: lightgray;
     color: black;
 }
 

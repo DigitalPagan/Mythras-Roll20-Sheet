@@ -1,5 +1,5 @@
 /* Default Roll Template Styles */
-.sheet-rolltemplate-default {
+.sheet-rolltemplate-improvement {
     background: white;
     font-family: 'Merriweather', serif;
     font-size: 12px;
@@ -10,60 +10,44 @@
     background: #1f1f1f;
     color: whitesmoke;
 }
-.sheet-rolltemplate-default div.sheet-border {
-    border: 2px solid #595959;
+.sheet-rolltemplate-improvement div.sheet-border {
+    border: 2px solid #572d6c;
     font-family: 'Merriweather', serif;
     font-size: 12px;
     line-height: 18px;
     border-radius: 5px;
 }
-.sheet-rolltemplate-default div.sheet-border.sheet-initiative,
-.sheet-rolltemplate-darkmode div.sheet-border.sheet-initiative {
-    border: 2px solid #004d00;
-}
-.sheet-rolltemplate-default div.sheet-header {
-    background: #595959;
+.sheet-rolltemplate-improvement div.sheet-header {
+    background: #572d6c;
     color: whitesmoke;
 }
-.sheet-rolltemplate-default div.sheet-header.sheet-initiative,
-.sheet-rolltemplate-darkmode div.sheet-header.sheet-initiative {
-    background: #004d00;
-    color: whitesmoke;
-}
-
-.sheet-rolltemplate-default div.sheet-character {
+.sheet-rolltemplate-improvement div.sheet-character {
     font-size: 11px;
     text-align: center;
 }
-.sheet-rolltemplate-default div.sheet-name {
+.sheet-rolltemplate-improvement div.sheet-name {
     font-family: "Sorts Mill Goudy", serif;
     text-align: center;
     font-size: 15px;
 }
 
-.sheet-rolltemplate-default div.sheet-listitem {
-    display: flex;
+.sheet-rolltemplate-improvement div.sheet-table {
+    display: table;
+    width: 100%;
+}
+.sheet-rolltemplate-improvement div.sheet-tr {
+    display: table-row;
+}
+.sheet-rolltemplate-improvement div.sheet-td {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     padding: 1px 2px;
-}
-.sheet-rolltemplate-default div.sheet-listitem:nth-child(odd) {
-    background: gainsboro;
-}
-.sheet-rolltemplate-darkmode div.sheet-listitem:nth-child(odd) {
-    background: #333333;
-}
-.sheet-rolltemplate-default div.sheet-key {
-    font-weight: bold;
-    text-align: left;
-}
-.sheet-rolltemplate-default div.sheet-key:after {
-    content: ':';
-}
-.sheet-rolltemplate-default div.sheet-value {
-    text-align: right;
-    flex-grow: 1;
+    white-space: nowrap;
+    width: 33.33%;
 }
 
-.sheet-rolltemplate-default .inlinerollresult,
+.sheet-rolltemplate-improvement .inlinerollresult,
 .sheet-rolltemplate-darkmode .inlinerollresult {
     display: inline-block;
     text-align: center;
@@ -77,21 +61,21 @@
     font-size: 12px;
     font-family: 'Merriweather', serif;
 }
-.sheet-rolltemplate-default .inlinerollresult.fullcrit,
+.sheet-rolltemplate-improvement .inlinerollresult.fullcrit,
 .sheet-rolltemplate-darkmode .inlinerollresult.fullcrit {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
-.sheet-rolltemplate-default .inlinerollresult.fullfail,
+.sheet-rolltemplate-improvement .inlinerollresult.fullfail,
 .sheet-rolltemplate-darkmode .inlinerollresult.fullfail {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
-.sheet-rolltemplate-default .inlinerollresult.importantroll,
+.sheet-rolltemplate-improvement .inlinerollresult.importantroll,
 .sheet-rolltemplate-darkmode .inlinerollresult.importantroll {
     border: none !important;
     color: inherit;
