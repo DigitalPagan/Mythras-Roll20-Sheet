@@ -19,7 +19,7 @@
 }
 .sheet-rolltemplate-default div.sheet-border.sheet-initiative,
 .sheet-rolltemplate-darkmode div.sheet-border.sheet-initiative {
-    border: 2px solid #004d00;
+    border: 2px solid #29491d;
 }
 .sheet-rolltemplate-default div.sheet-header {
     background: #595959;
@@ -27,7 +27,7 @@
 }
 .sheet-rolltemplate-default div.sheet-header.sheet-initiative,
 .sheet-rolltemplate-darkmode div.sheet-header.sheet-initiative {
-    background: #004d00;
+    background: #29491d;
     color: whitesmoke;
 }
 

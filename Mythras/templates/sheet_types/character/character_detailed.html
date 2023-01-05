@@ -30,7 +30,7 @@
                 </div>
             </div>
             <!-- Info 2nd Row -->
-            <div class="sheet-flex sheet-gap">
+            <div class="sheet-flex sheet-gap sheet-major">
                 <div class="sheet-grow">
                     <input type="text" class="sheet-full-width" title="@{homeland}" name="attr_homeland">
                     <label data-i18n="homeland">Homeland</label>
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Header 2nd Column -->
-        <div class="sheet-logo">
+        <div class="sheet-logo sheet-major">
             <!-- Logo -->
             <div>
                 <img class="sheet-setting-option sheet-default sheet-atvw sheet-cf sheet-destined sheet-fioracitta sheet-la sheet-lyonesse sheet-mi sheet-mba sheet-mb sheet-mc sheet-mr sheet-imperative sheet-perceforest sheet-thennla sheet-wu" src="https://i.imgur.com/EzQDmms.png" alt="Mythras">
@@ -159,6 +159,14 @@
                     <div class="sheet-td"><input type="number" class="sheet-impval sheet-number-width" title="@{cha}" name="attr_cha" value="11" readonly></div>
                 </div>
             </div>
+
+            <!-- Strangeness -->
+            <div class="sheet-setting-option sheet-ms sheet-os">
+                <div class="sheet-space-between">
+                    <div class="sheet-td"><label class="sheet-left" data-i18n="strangeness">Strangeness</label></div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" name="attr_strangeness" value="1"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Attributes -->
@@ -230,7 +238,8 @@
                 <div data-i18n-list-item="movement" class="sheet-hl">
                     <input type="hidden" class="sheet-wide-toggle" name="attr_custom_movement_enabled" value="0">
                     <div class="sheet-flex sheet-anti-toggle">
-                        <div class="sheet-td sheet-grow sheet-text-left"><a class="sheet-label-left" data-i18n-title="show_movement_popup" data-i18n="movement" href="#movement-details">Movement</a></div>
+                        <div class="sheet-td sheet-grow sheet-text-left sheet-major"><a class="sheet-label-left" data-i18n-title="show_movement_popup" data-i18n="movement" href="#movement-details">Movement</a></div>
+                        <div class="sheet-td sheet-grow sheet-text-left sheet-minor"><label class="sheet-left" data-i18n="movement">Movement</label></div>
                         <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{movement_rate_temp}" name="attr_movement_rate_temp" value="0"></div>
                         <div class="sheet-td"><input type="number" class="sheet-impval sheet-number-width" title="@{movement_rate}" name="attr_movement_rate" value="6" readonly></div>
                     </div>
@@ -282,7 +291,7 @@
                         <option value="custom11" data-i18n="custom_11_locations" data-i18n-list-item="custom_11_locations">Custom(11 Locations)</option>
                         <option value="custom" data-i18n="custom_12_locations" data-i18n-list-item="custom_12_locations">Custom(12 Locations)</option>
                         <option value="rabble" data-i18n="rabble/underling" data-i18n-list-item="rabble">Rabble/Underling</option>
-                        <option class="sheet-hidden" value="simplified" data-i18n="simplified-combat">Simplified Combat</option>
+                        <option value="simplified" data-i18n="simplified-combat" hidden>Simplified Combat</option>
                         <option data-i18n-list-item="spacer" disabled>──────────</option>
                         <option value="arachnid" data-i18n="arachnid" data-i18n-list-item="arachnid">Arachnid</option>
                         <option value="humanoid" data-i18n="biped" data-i18n-list-item="biped">Biped</option>
@@ -663,10 +672,10 @@
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
                                     <label class="sheet-skill" data-i18n="athletics">Athletics</label>
-                                    <button type="action" class="sheet-hover sheet-social-attack" title="%{athletics_augment}" name="act_athletics_augment" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">w</button>
-                                    <button type="action" class="sheet-hover sheet-social-defense" title="%{athletics_augment}" name="act_athletics_augment" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">q</button>
+                                    <button type="action" class="sheet-hover sheet-social-attack" name="act_athletics-socialattack">w</button>
+                                    <button type="action" class="sheet-hover sheet-social-defense" name="act_athletics-socialdefense">q</button>
                                     <button type="roll" class="sheet-hover sheet-improve" title="%{athletics_improve}" name="roll_athletics_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{athletics}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{athletics_total}]]}}'}}">{</button>
-                                    <button type="action" class="sheet-hover sheet-augment" title="%{athletics_augment}" name="act_athletics_augment" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">&</button>
+                                    <button type="action" class="sheet-hover sheet-augment" name="act_athletics-augment">&</button>
                                     <button type="roll" class="sheet-hover sheet-id" title="%{athletics_id}" name="roll_athletics_id" value="/w gm {{'&{template:default} {{name=@{athletics_name}}} {{^{id}=athletics}}'}}">i</button>
                                     <input type="hidden" name="attr_athletics_name" value="^{athletics}">
                                 </div>
@@ -691,6 +700,9 @@
                         <input type="hidden" class="sheet-toggle" name="attr_athletics_details" value="0">
                         <div class="sheet-toggle">
                             <textarea class="sheet-skill-notes" title="@{athletics_notes}" name="attr_athletics_notes"></textarea>
+                        </div>
+                        <div hidden>
+                            <input type="hidden" name="attr_athletics_encumbered" value="1" readonly>
                         </div>
                     </div>
 

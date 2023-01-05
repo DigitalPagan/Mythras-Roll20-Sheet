@@ -265,9 +265,9 @@ div.sheet-impval {
     height: 18px;
     box-sizing: border-box;
 }
-.sheet-hidden {
+/*.sheet-hidden {
     display: none;
-}
+}*/
 .sheet-checkbox-width {
     width: 16px !important;
     flex-shrink: 0;
@@ -359,7 +359,8 @@ input[type="checkbox"].sheet-deep-toggle:checked ~ div .sheet-anti-toggle {
     text-align: left;
 }
 .ui-dialog .charsheet label.sheet-left::after {
-    content: ':'
+    content: ':';
+    font-family: 'Merriweather', serif;
 }
 .ui-dialog .charsheet label.sheet-checkbox {
     display: inline;
@@ -648,6 +649,9 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
     padding: 0;
     margin: 0;
     color: inherit;
+}
+.ui-dialog .charsheet button.sheet-no-underline {
+    text-decoration: none !important;
 }
 .ui-dialog .charsheet button.sheet-label-left {
     font-weight: bold;

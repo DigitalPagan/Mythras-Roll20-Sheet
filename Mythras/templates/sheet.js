@@ -3,12 +3,12 @@ const debug=1
 /* TODO changing sheet type sets hit table rolls */
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "luck_points_rank", "magic_points_enabled",
-    "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "tenacity_enabled"];
+const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "magic_points_enabled", "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "action_points_calc": "calculate",
         "extended_conflict_enabled": 0,
+        "herculean_mod": ".1",
         "luck_points_rank": 0,
         "magic_points_enabled": 1,
         "prana_points_enabled": 0,
@@ -32,17 +32,20 @@ const campaginSettingDefaults = {
     "m-space": {
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
+        "herculean_mod": ".2",
         "magic_points_enabled": 0,
         "power_points_enabled": 1,
         "reach_enabled": 0
     },
     "mythras_imperative": {
         "action_points_calc": "set_2",
+        "herculean_mod": ".2",
         "reach_enabled": 0
     },
     "odd_soot": {
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
+        "herculean_mod": ".2",
         "reach_enabled": 0
     },
     "worlds_united": {
@@ -91,6 +94,14 @@ campaignSettings.forEach(campaignSetting => {
             setAttrs(calcCampaignSetting(`${campaignSetting}`, event.newValue, v['setting']));
         });
     });
+});
+
+/* Option Bar Action Buttons */
+on('clicked:reset-augmentation', function(event) {
+    setAttrs({set_augmentation: 0});
+});
+on('clicked:reset-penalty', function(event) {
+    setAttrs({set_penalty: 0});
 });
 
 /* Utility Functions */

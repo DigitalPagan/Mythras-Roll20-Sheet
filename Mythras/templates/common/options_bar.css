@@ -15,6 +15,6 @@ body.sheet-darkmode div.sheet-option-bar {
     color: black;
 }
 
-input.sheet-set-toggle:not([value^="@{set_"]) + .sheet-toggle {
+.sheet-set-toggle-control:not([value^="@{set_"]) ~ .sheet-set-toggle {
     display: none;
 }

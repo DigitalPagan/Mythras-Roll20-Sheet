@@ -1002,6 +1002,26 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored c
     });
 });
 
+/* Skills */
+const standardSkills = ['athletics'];
+
+/* Action Buttons */
+standardSkills.forEach(skill => {
+    on(`clicked:${skill}-augment`, function(event) {
+        getAttrs([`${skill}_total`], function(v) {
+            const skillValue = parseInt(v[`${skill}_total`]) || 0;
+            const augmentValue = Math.ceil(skillValue / 5);
+
+            setAttrs({
+                augmentation: "@{set_augmentation}",
+                set_augmentation: augmentValue
+            });
+        });
+    });
+});
+
+
+
 /* Encumbrance */
 const loadTable = {
     /* Normal */ '0': {"skills": '0', "movement": '+0'},

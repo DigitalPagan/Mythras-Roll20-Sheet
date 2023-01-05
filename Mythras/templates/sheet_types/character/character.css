@@ -74,7 +74,7 @@ button[type=roll].sheet-improve {
 }
 button[type=action].sheet-social-defense {
     font-family: "Pictos";
-    right: 44px;
+    right: 43px;
     top: 1px;
 }
 button[type=action].sheet-social-attack {
@@ -82,6 +82,11 @@ button[type=action].sheet-social-attack {
     right: 58px;
     top: 1px;
 }
+input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-defense,
+input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-attack {
+    display: none;
+}
+
 
 
 /* Equipment */
