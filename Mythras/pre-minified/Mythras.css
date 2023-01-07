@@ -121,7 +121,7 @@ div.sheet-space-between {
 div.sheet-half-col {
     width: 50%;
 }
-div.sheet-grow {
+.sheet-grow {
     flex-grow: 1;
 }
 .sheet-bmargin {
@@ -286,6 +286,10 @@ div.sheet-impval {
     font-family: "dicefontd6" !important;
     font-size: 19px !important;
 }*/
+.sheet-d6 {
+    font-family: "dicefontd6" !important;
+    font-size: 19px !important;
+}
 .sheet-d8 {
     font-family: "dicefontd8" !important;
     font-size: 18px !important;
@@ -446,12 +450,14 @@ body.sheet-darkmode a.repcontrol_move {
 }
 .ui-dialog .charsheet input.sheet-lval {
     border: none;
-    width: 16px;
+    flex-grow: 1;
+    width: 14px;
 }
 .ui-dialog .charsheet input.sheet-rval {
     border: none;
     font-weight: bold;
-    width: 16px;
+    flex-grow: 1;
+    width: 14px;
 }
 .ui-dialog .charsheet input[type="number"]:disabled::-webkit-inner-spin-button,
 .ui-dialog .charsheet input[type="number"]:disabled::-webkit-outer-spin-button {
@@ -832,6 +838,11 @@ input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-c
 input.sheet-conflict-toggle:not([value="spirit_combat"]) ~ div .sheet-spirit-combat {
     display: none;
 }
+input.sheet-extended-conflict-enabled-toggle:not([value="1"]) ~ select option.sheet-extended-conflict-enabled,
+input.sheet-social-conflict-enabled-toggle:not([value="1"]) ~ select option.sheet-social-conflict-enabled,
+input.sheet-spirits-enabled-toggle:not([value="1"]) ~ select option.sheet-spirits-enabled {
+    display: none;
+}
 
 /* Character Header Styles */
 div.sheet-info-age{
@@ -982,6 +993,10 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-darkmode div.sheet-border.sheet-initiative {
     border: 2px solid #29491d;
 }
+.sheet-rolltemplate-default div.sheet-border.sheet-damage,
+.sheet-rolltemplate-darkmode div.sheet-border.sheet-damage {
+    border: 2px solid #811818;
+}
 .sheet-rolltemplate-default div.sheet-header {
     background: #595959;
     color: whitesmoke;
@@ -989,6 +1004,11 @@ textarea.sheet-character-notes {
 .sheet-rolltemplate-default div.sheet-header.sheet-initiative,
 .sheet-rolltemplate-darkmode div.sheet-header.sheet-initiative {
     background: #29491d;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-damage,
+.sheet-rolltemplate-darkmode div.sheet-header.sheet-damage {
+    background: #811818;
     color: whitesmoke;
 }
 

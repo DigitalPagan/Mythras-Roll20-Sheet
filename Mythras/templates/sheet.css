@@ -121,7 +121,7 @@ div.sheet-space-between {
 div.sheet-half-col {
     width: 50%;
 }
-div.sheet-grow {
+.sheet-grow {
     flex-grow: 1;
 }
 .sheet-bmargin {
@@ -286,6 +286,10 @@ div.sheet-impval {
     font-family: "dicefontd6" !important;
     font-size: 19px !important;
 }*/
+.sheet-d6 {
+    font-family: "dicefontd6" !important;
+    font-size: 19px !important;
+}
 .sheet-d8 {
     font-family: "dicefontd8" !important;
     font-size: 18px !important;
@@ -446,12 +450,14 @@ body.sheet-darkmode a.repcontrol_move {
 }
 .ui-dialog .charsheet input.sheet-lval {
     border: none;
-    width: 16px;
+    flex-grow: 1;
+    width: 14px;
 }
 .ui-dialog .charsheet input.sheet-rval {
     border: none;
     font-weight: bold;
-    width: 16px;
+    flex-grow: 1;
+    width: 14px;
 }
 .ui-dialog .charsheet input[type="number"]:disabled::-webkit-inner-spin-button,
 .ui-dialog .charsheet input[type="number"]:disabled::-webkit-outer-spin-button {

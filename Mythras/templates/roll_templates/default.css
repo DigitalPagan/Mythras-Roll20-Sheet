@@ -21,6 +21,10 @@
 .sheet-rolltemplate-darkmode div.sheet-border.sheet-initiative {
     border: 2px solid #29491d;
 }
+.sheet-rolltemplate-default div.sheet-border.sheet-damage,
+.sheet-rolltemplate-darkmode div.sheet-border.sheet-damage {
+    border: 2px solid #811818;
+}
 .sheet-rolltemplate-default div.sheet-header {
     background: #595959;
     color: whitesmoke;
@@ -28,6 +32,11 @@
 .sheet-rolltemplate-default div.sheet-header.sheet-initiative,
 .sheet-rolltemplate-darkmode div.sheet-header.sheet-initiative {
     background: #29491d;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-damage,
+.sheet-rolltemplate-darkmode div.sheet-header.sheet-damage {
+    background: #811818;
     color: whitesmoke;
 }
 

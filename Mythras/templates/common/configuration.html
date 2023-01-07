@@ -5,6 +5,7 @@
 
         <div class="sheet-bmargin">
             <!-- Sheet Type -->
+            <input type="hidden" class="sheet-spirits-enabled-toggle" name="attr_spirits_enabled" value="1">
             <label class="sheet-left sheet-rmargin" data-i18n="sheet_type">Sheet Type</label>
             <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-auto-width" name="attr_type">
                 <option value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
@@ -12,7 +13,7 @@
                 <option value="pc" data-i18n-list-item="player_character" data-i18n="player_character" selected>Player Character</option>
                 <option value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
                 <option value="solar_system" data-i18n-list-item="star_system" data-i18n="star_system">Star System</option>
-                <option value="spirit" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
+                <option value="spirit" class="sheet-spirits-enabled" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
                 <option value="vehicle" data-i18n-list-item="vehicle" data-i18n="vehicle">Vehicle</option>
             </select>
             <br>
@@ -74,6 +75,22 @@
                 <!-- Simplified Combat Enabled Option -->
                 <label class="sheet-left sheet-rmargin" data-i18n="simplified_combat">Simplified Combat</label>
                 <select name="attr_simplified_combat_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
+                <!-- Social Conflict Enabled Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="social_conflict">Social Conflict</label>
+                <select name="attr_social_conflict_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
+                <!-- Spirits Enabled Option -->
+                <label class="sheet-left sheet-rmargin" data-i18n="spirits">Spirits</label>
+                <select name="attr_spirits_enabled_option">
                     <option value="default" data-i18n="setting_default" selected>Setting Default</option>
                     <option value="1" data-i18n="enabled">Enabled</option>
                     <option value="0" data-i18n="disabled">Disabled</option>

@@ -3,7 +3,7 @@ const debug=1
 /* TODO changing sheet type sets hit table rolls */
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "magic_points_enabled", "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "tenacity_enabled"];
+const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "magic_points_enabled", "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "action_points_calc": "calculate",
@@ -15,42 +15,63 @@ const campaginSettingDefaults = {
         "power_points_enabled": 0,
         "reach_enabled": 1,
         "simplified_combat_enabled": 0,
+        "spirits_enabled": 1,
+        "social_conflict_enabled": 1,
         "tenacity_enabled": 0
     },
+    "after_the_vampire_wars": {},
     "classic_fantasy": {
         "luck_points_rank": 1
     },
     "destined": {
         "magic_points_enabled": 0,
-        "power_points_enabled": 1
+        "power_points_enabled": 1,
+        "spirits_enabled": 0
     },
+    "fioracitta": {},
     "luther_arkwright": {
         "tenacity_enabled": 1,
         "magic_points_enabled": 0,
-        "prana_points_enabled": 1
+        "prana_points_enabled": 1,
+        "spirits_enabled": 0
     },
+    "lyonesse": {},
     "m-space": {
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
         "magic_points_enabled": 0,
         "power_points_enabled": 1,
-        "reach_enabled": 0
+        "reach_enabled": 0,
+        "spirits_enabled": 0
     },
+    "monster_island": {},
+    "mythic_babylon": {},
+    "mythic_britain": {},
+    "mythic_constantinople": {},
     "mythras_imperative": {
         "action_points_calc": "set_2",
         "herculean_mod": ".2",
-        "reach_enabled": 0
+        "reach_enabled": 0,
+        "spirits_enabled": 0
+    },
+    "mythic_rome": {
+        "spirits_enabled": 0
     },
     "odd_soot": {
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
-        "reach_enabled": 0
+        "reach_enabled": 0,
+        "spirits_enabled": 0
     },
+    "perceforest": {
+    },
+    "thennla": {},
     "worlds_united": {
         "magic_points_enabled": 0,
-        "tenacity_enabled": 1
+        "tenacity_enabled": 1,
+        "spirits_enabled": 0
     }
 }
 /**

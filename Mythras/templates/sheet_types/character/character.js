@@ -13,14 +13,19 @@ characteristicAttrs.forEach(char => {
                     repeatingIds['gearIds'] = gearIds;
                     getSectionIDs("repeating_currency", function(currencyIds) {
                         repeatingIds['currencyIds'] = currencyIds;
-                        getAttrs([`${char}_base`, `${char}_temp`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs,
+                        getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, `${char}`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs,
                             expModGetAttrs, healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs,
                             pranaPointsGetAttrs, powerPointsGetAttrs, tenacityGetAttrs, hpGetAttrs, moveRateGetAttrs,
-                            encGetAttrs(repeatingIds)), function(v) {
+                            encGetAttrs(repeatingIds), spiritActionPointGetAttrs, spiritInitGetAttrs, socialInitGetAttrs), function(v) {
                             let newAttrs = {};
                             const baseCharVal = parseInt(v[`${char}_base`]) || 0;
                             const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
+                            const currCharVal = parseInt(v[`${char}`]) || 0;
+                            const currPoolVal = parseInt(v[`${char}_pool`]) || 0;
                             newAttrs[`${char}`] = baseCharVal + tempCharVal;
+                            const diffVal = newAttrs[`${char}`] - currCharVal;
+                            newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+
                             v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
 
                             let newEncAttrs = calcEncAndArmorPenalty(repeatingIds, v);
@@ -30,10 +35,13 @@ characteristicAttrs.forEach(char => {
                                 ...newAttrs,
                                 ...newEncAttrs,
                                 ...calcActionPoints(v),
+                                ...calcSpiritActionPoints(v),
                                 ...calcDamageMod(v),
                                 ...calcExpMod(v),
                                 ...calcHealingRate(v),
                                 ...calcInitiativeBonus(v),
+                                ...calcSpiritInitiativeBonus(v),
+                                ...calcSocialInitiativeBonus(v),
                                 ...calcLuckPoints(v),
                                 ...calcMagicPoints(v),
                                 ...calcMoveRate(v),
@@ -82,6 +90,30 @@ function calcActionPoints(v) {
         action_points: action_points + diff_action_points_max
     };
 }
+/* Spirit Action Points */
+const spiritActionPointGetAttrs = ['pow', 'int', 'action_points_calc', 'spirit_ap', 'spirit_ap_max']
+function calcSpiritActionPoints(v) {
+    let base_value;
+    const pow = parseInt(v['pow']) || 0;
+    const int = parseInt(v['int']) || 0;
+    const spirit_ap_max = parseInt(v['spirit_ap_max']) || 0;
+    const spirit_ap = parseInt(v['spirit_ap']) || 0;
+
+    if (v['action_points_calc'] === "set_2") {
+        base_value = 2;
+    } else if (v['action_points_calc'] === "set_3") {
+        base_value = 3;
+    } else {
+        base_value = Math.ceil((int + pow) / 12);
+    }
+
+    const diff_spirt_ap = base_value - spirit_ap_max;
+
+    return {
+        spirit_ap_max: base_value,
+        spirit_ap: spirit_ap + diff_spirt_ap
+    };
+}
 on('change:action_points_other change:action_points_temp', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(actionPointGetAttrs, function(v) {
@@ -90,8 +122,11 @@ on('change:action_points_other change:action_points_temp', function(event) {
 });
 on('change:action_points_calc', function(event) {
     /* Don't exit on sheetworker cause humans will modify the option not the setting itself */
-    getAttrs(actionPointGetAttrs, function(v) {
-        setAttrs(calcActionPoints(v));
+    getAttrs(actionPointGetAttrs.concat(spiritActionPointGetAttrs), function(v) {
+        setAttrs({
+            ...calcActionPoints(v),
+            ...calcSpiritActionPoints(v)
+        });
     });
 });
 
@@ -225,6 +260,34 @@ function calcInitiativeBonus(v) {
     return {
         initiative_bonus_base: base_value,
         initiative_bonus: base_value + initTemp + armor_penalty + fatiguePenalty
+    };
+}
+const socialInitGetAttrs=['int', 'cha']
+/**
+ * Calculate Social Initiative Bonus
+ * @param v attrs needed for calculation, spiritInitGetAttrs
+ * @returns {}
+ */
+function calcSocialInitiativeBonus(v) {
+    const int = parseInt(v['int']) || 0;
+    const cha = parseInt(v['cha']) || 0;
+
+    return {
+        social_initiative: Math.ceil((int + cha) / 2),
+    };
+}
+const spiritInitGetAttrs=['int', 'cha']
+/**
+ * Calculate Spirit Initiative Bonus
+ * @param v attrs needed for calculation, spiritInitGetAttrs
+ * @returns {}
+ */
+function calcSpiritInitiativeBonus(v) {
+    const int = parseInt(v['int']) || 0;
+    const cha = parseInt(v['cha']) || 0;
+
+    return {
+        spirit_ib: Math.ceil((int + cha) / 2),
     };
 }
 on('change:initiative_bonus_other change:initiative_bonus_temp change:initiative_add_one_tenth_athletics', function(event) {
@@ -420,6 +483,7 @@ on('change:movement_rate_species change:movement_rate_other change:movement_rate
     });
 });
 /* TODO trigger on enc for move
+ */
 
 /* Tenacity Points */
 const tenacityGetAttrs = ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies'];
@@ -1004,7 +1068,13 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored c
 
 /* Skills */
 const standardSkills = ['athletics'];
+/* Standard Skills */
+standardSkills.forEach(skillId => {
+    on(`change:${skillId}_char1 change:${skillId}_char2 change:${skillId}_total`, function(event) {
+        if (event.sourceType === "sheetworker") {return;}
 
+    });
+});
 /* Action Buttons */
 standardSkills.forEach(skill => {
     on(`clicked:${skill}-augment`, function(event) {

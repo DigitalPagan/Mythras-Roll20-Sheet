@@ -1,4 +1,4 @@
-<div class="sheet-detailed sheet-space-between sheet-gap">
+<div class="sheet-character sheet-space-between sheet-gap">
     <div>
         <a href="#core">Core</a>
         - <a href="#magic">Magic</a></span>
@@ -11,11 +11,14 @@
     <div class="sheet-space-between sheet-gap">
         <div>
             <span data-i18n="conflict">Conflict</span>:
+            <input type="hidden" class="sheet-extended-conflict-enabled-toggle" name="attr_extended_conflict_enabled" value="0">
+            <input type="hidden" class="sheet-social-conflict-enabled-toggle" name="attr_social_conflict_enabled" value="1">
+            <input type="hidden" class="sheet-spirits-enabled-toggle" name="attr_spirits_enabled" value="1">
             <select class="sheet-auto-width sheet-text-center sheet-inverted" name="attr_conflict_mode" value="combat">
-                <option value="combat" data-i18n="combat" selected>Combat</option>
-                <option value="extended_conflict" data-i18n="extended_conflict">Extended Conflict</option>
-                <option value="social_conflict" data-i18n="social_conflict">Social Conflict</option>
-                <option value="spirit_combat" data-i18n="spirit_combat">Spirit Combat</option>
+                <option class="sheet-creature" value="combat" data-i18n="combat" selected>Combat</option>
+                <option class="sheet-extended-conflict-enabled" value="extended_conflict" data-i18n="extended_conflict">Extended Conflict</option>
+                <option class="sheet-social-conflict-enabled" value="social_conflict" data-i18n="social_conflict">Social Conflict</option>
+                <option class="sheet-spirits-enabled" value="spirit_combat" data-i18n="spirit_combat">Spirit Combat</option>
             </select>
         </div>
     </div>
