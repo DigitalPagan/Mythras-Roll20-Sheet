@@ -100,9 +100,14 @@ div.sheet-wrapper { /* Sets default size of the sheet */
     min-width: 430px;
     max-width: 860px;
 }
-
+div.sheet-inline-flex {
+    display: inline-flex;
+}
 div.sheet-flex {
     display: flex;
+}
+div.sheet-flex-wrap {
+    flex-wrap: wrap;
 }
 div.sheet-flex-column {
     display: flex;
@@ -118,11 +123,18 @@ div.sheet-space-between {
     display: flex;
     justify-content: space-between;
 }
+div.sheet-space-around {
+    display: flex;
+    justify-content: space-around;
+}
 div.sheet-half-col {
     width: 50%;
 }
 .sheet-grow {
     flex-grow: 1;
+}
+.sheet-bpad {
+    padding-bottom: 5px;
 }
 .sheet-bmargin {
     margin-bottom: 5px;
@@ -131,10 +143,10 @@ div.sheet-half-col {
     margin-right: 5px !important;
 }
 .sheet-lmargin {
-    margin-right: 5px !important;
+    margin-left: 5px !important;
 }
 .sheet-lmargin-x3 {
-    margin-right: 15px !important;
+    margin-left: 15px !important;
 }
 div.sheet-warnmsg {
     border: 1px solid darkred;
@@ -279,8 +291,14 @@ div.sheet-impval {
 .sheet-full-width {
     width: 100% !important;
 }
+.sheet-half-width {
+    width: 50% !important;
+}
 .sheet-auto-width {
     width: auto; /* check important */
+}
+.sheet-full-height {
+    height: 100% !important;
 }
 /*.sheet-d6 {
     font-family: "dicefontd6" !important;
@@ -312,8 +330,8 @@ div.sheet-impval {
     text-align-last:center;
 }
 .sheet-text-left {
-    text-align: left;
-    text-align-last: left;
+    text-align: left !important;
+    text-align-last: left !important;
 }
 .sheet-text-right {
     text-align: right;
@@ -345,6 +363,11 @@ input.sheet-deep-toggle:not([value="1"]) ~ div .sheet-toggle,
 input[type="checkbox"].sheet-deep-toggle:not(:checked) ~ div .sheet-toggle,
 input.sheet-deep-toggle[value="1"] ~ div .sheet-anti-toggle,
 input[type="checkbox"].sheet-deep-toggle:checked ~ div .sheet-anti-toggle {
+    display: none;
+}
+
+input.sheet-details-toggle:not([value="1"]) ~ div .sheet-details-toggle,
+input.sheet-details-toggle:not([value="1"]) ~ .sheet-details-toggle {
     display: none;
 }
 
@@ -611,6 +634,11 @@ body.sheet-darkmode .ui-dialog .charsheet input[type="checkbox"] + span {
     padding: 0 2px 0;
     text-shadow: none;
 }
+.ui-dialog .charsheet button[type=roll] {
+    font-size: 12px;
+    margin: 0;
+    padding: 0 2px 0;
+}
 .ui-dialog .charsheet button:hover {
     text-decoration: underline;
     color: royalblue;
@@ -709,6 +737,11 @@ button[type=roll].sheet-id {
     top: 0;
 }
 button[type=action].sheet-augment {
+    font-family: "Pictos";
+    right: 31px;
+    top: 1px;
+}
+button[type=action].sheet-penalty {
     font-family: "Pictos";
     right: 18px;
     top: 1px;

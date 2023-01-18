@@ -1,7 +1,7 @@
 /* Characteristics */
 const characteristicAttrs = ['str', 'con', 'siz', 'dex', 'int', 'pow', 'cha'];
 characteristicAttrs.forEach(char => {
-    on(`change:${char}_base change:${char}_temp`, function(event) {
+    on(`change:${char}_base change:${char}`, function(event) {
         if (event.sourceType === "sheetworker") {return;}
 
         let repeatingIds = {}
@@ -13,20 +13,27 @@ characteristicAttrs.forEach(char => {
                     repeatingIds['gearIds'] = gearIds;
                     getSectionIDs("repeating_currency", function(currencyIds) {
                         repeatingIds['currencyIds'] = currencyIds;
-                        getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, `${char}`].concat(characteristicAttrs, actionPointGetAttrs, damageModGetAttrs,
-                            expModGetAttrs, healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs,
-                            pranaPointsGetAttrs, powerPointsGetAttrs, tenacityGetAttrs, hpGetAttrs, moveRateGetAttrs,
-                            encGetAttrs(repeatingIds), spiritActionPointGetAttrs, spiritInitGetAttrs, socialInitGetAttrs), function(v) {
+                        getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, `${char}`].concat(characteristicAttrs,
+                            encGetAttrs(repeatingIds), actionPointGetAttrs, confidenceGetAttrs, damageModGetAttrs, expModGetAttrs,
+                            healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs, tenacityGetAttrs, hpGetAttrs,
+                            moveRateGetAttrs, spiritIntensityGetAttrs, composureGetAttrs, integrityGetAttrs, resolveGetAttrs,
+                            spiritDamageGetAttrs, socialDamageGetAttrs), function(v) {
                             let newAttrs = {};
                             const baseCharVal = parseInt(v[`${char}_base`]) || 0;
                             const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
                             const currCharVal = parseInt(v[`${char}`]) || 0;
                             const currPoolVal = parseInt(v[`${char}_pool`]) || 0;
-                            newAttrs[`${char}`] = baseCharVal + tempCharVal;
-                            const diffVal = newAttrs[`${char}`] - currCharVal;
-                            newAttrs[`${char}_pool`] = currPoolVal + diffVal;
 
-                            v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
+                            if (event.sourceAttribute === `${char}`) {
+                                newAttrs[`${char}_temp`] = currCharVal - baseCharVal;
+                                const diffVal = newAttrs[`${char}_temp`] - tempCharVal;
+                                newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+                            } else if (event.sourceAttribute === `${char}_base`) {
+                                newAttrs[`${char}`] = baseCharVal + tempCharVal;
+                                const diffVal = newAttrs[`${char}`] - currCharVal;
+                                newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+                                v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
+                            }
 
                             let newEncAttrs = calcEncAndArmorPenalty(repeatingIds, v);
                             /* Update v with new values need for attribute calculations */
@@ -34,21 +41,22 @@ characteristicAttrs.forEach(char => {
                             setAttrs({
                                 ...newAttrs,
                                 ...newEncAttrs,
-                                ...calcActionPoints(v),
-                                ...calcSpiritActionPoints(v),
+                                ...calcActionPoints(v, event.sourceAttribute),
+                                ...calcConfidence(v),
                                 ...calcDamageMod(v),
                                 ...calcExpMod(v),
                                 ...calcHealingRate(v),
                                 ...calcInitiativeBonus(v),
-                                ...calcSpiritInitiativeBonus(v),
-                                ...calcSocialInitiativeBonus(v),
-                                ...calcLuckPoints(v),
-                                ...calcMagicPoints(v),
+                                ...calcLuckPoints(v, event.sourceAttribute),
+                                ...calcMagicPoints(v, event.sourceAttribute),
                                 ...calcMoveRate(v),
-                                ...calcPranaPoints(v),
-                                ...calcPowerPoints(v),
-                                ...calcTenacity(v),
-                                ...calcAllHP(v)
+                                ...calcSpiritIntensity(v),
+                                ...calcTenacity(v, event.sourceAttribute),
+                                ...calcAllHP(v),
+                                ...calcComposure(v),
+                                ...calcIntegrity(v),
+                                ...calcResolve(v)
+                                /* No need for teh social and spirit damage here since it would have been done via skills */
                             });
                         });
                     });
@@ -59,10 +67,9 @@ characteristicAttrs.forEach(char => {
 });
 
 /* Action Points */
-const actionPointGetAttrs = ['dex', 'int', 'action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue']
-function calcActionPoints(v) {
-    let base_value;
-    const dex = parseInt(v['dex']) || 0;
+const actionPointGetAttrs = ['dex', 'int', 'pow', 'action_points_other', 'action_points_temp', 'action_points_calc', 'action_points', 'action_points_max', 'fatigue', 'attribute_mode']
+function calcActionPoints(v, sourceAttribute) {
+    let newAttrs = {};
     const int = parseInt(v['int']) || 0;
     const action_points_other = parseInt(v['action_points_other']) || 0;
     const action_points_temp = parseInt(v['action_points_temp']) || 0;
@@ -71,70 +78,155 @@ function calcActionPoints(v) {
     const fatigueMod = parseInt(fatigueTable[v['fatigue']]['action_points']) || 0;
 
     if (v['action_points_calc'] === "set_2") {
-        base_value = 2 + action_points_other;
+        newAttrs['action_points_base'] = 2 + action_points_other;
     } else if (v['action_points_calc'] === "set_3") {
-        base_value = 3 + action_points_other;
+        newAttrs['action_points_base'] = 3 + action_points_other;
     } else {
-        base_value = Math.ceil((int + dex) / 12) + action_points_other;
+        if (v['attribute_mode'] === 'physical') {
+            const dex = parseInt(v['dex']) || 0;
+            newAttrs['action_points_base'] = Math.ceil((int + dex) / 12) + action_points_other + fatigueMod;
+        } else if (v['attribute_mode'] === 'spiritual') {
+            const pow = parseInt(v['pow']) || 0;
+            newAttrs['action_points_base'] = Math.ceil((int + pow) / 12) + action_points_other; /* I assume fatigue doesn't affect spirit */
+        } else {
+            newAttrs['action_points_base'] = 3 + fatigueMod;
+        }
     }
 
-    let new_action_points_max = base_value + action_points_temp + fatigueMod;
-    if (new_action_points_max < 0) {
-        new_action_points_max = 0;
-    }
-    const diff_action_points_max = new_action_points_max - action_points_max;
-
-    return {
-        action_points_base: base_value,
-        action_points_max: new_action_points_max,
-        action_points: action_points + diff_action_points_max
-    };
-}
-/* Spirit Action Points */
-const spiritActionPointGetAttrs = ['pow', 'int', 'action_points_calc', 'spirit_ap', 'spirit_ap_max']
-function calcSpiritActionPoints(v) {
-    let base_value;
-    const pow = parseInt(v['pow']) || 0;
-    const int = parseInt(v['int']) || 0;
-    const spirit_ap_max = parseInt(v['spirit_ap_max']) || 0;
-    const spirit_ap = parseInt(v['spirit_ap']) || 0;
-
-    if (v['action_points_calc'] === "set_2") {
-        base_value = 2;
-    } else if (v['action_points_calc'] === "set_3") {
-        base_value = 3;
+    let diffVal;
+    if (sourceAttribute === 'action_points_max') {
+        newAttrs['action_points_temp'] = action_points_max - newAttrs['action_points_base'];
+        diffVal = newAttrs['action_points_temp'] - action_points_temp;
     } else {
-        base_value = Math.ceil((int + pow) / 12);
+        newAttrs['action_points_max'] = newAttrs['action_points_base'] + action_points_temp;
+        diffVal = newAttrs['action_points_max'] - action_points_max;
     }
 
-    const diff_spirt_ap = base_value - spirit_ap_max;
-
-    return {
-        spirit_ap_max: base_value,
-        spirit_ap: spirit_ap + diff_spirt_ap
-    };
+    newAttrs['action_points'] = action_points + diffVal;
+    return newAttrs;
 }
-on('change:action_points_other change:action_points_temp', function(event) {
+on('change:action_points_other change:action_points_max', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(actionPointGetAttrs, function(v) {
-        setAttrs(calcActionPoints(v));
+        setAttrs(calcActionPoints(v, event.sourceAttribute));
     });
 });
 on('change:action_points_calc', function(event) {
     /* Don't exit on sheetworker cause humans will modify the option not the setting itself */
-    getAttrs(actionPointGetAttrs.concat(spiritActionPointGetAttrs), function(v) {
+    getAttrs(actionPointGetAttrs, function(v) {
         setAttrs({
-            ...calcActionPoints(v),
-            ...calcSpiritActionPoints(v)
+            ...calcActionPoints(v, event.sourceAttribute)
         });
     });
 });
 
+/* Confidence */
+const confidenceGetAttrs = ['confidence_other', 'confidence_base', 'confidence', 'willpower']
+function calcConfidence(v) {
+    let newAttrs = {};
+    const confidenceOther = parseInt(v['confidence_other']) || 0;
+    const confidenceBase = parseInt(v['confidence_base']) || 0;
+    const confidence = parseInt(v['confidence']) || 0;
+    const willpower = parseInt(v['willpower']) || 0;
+    newAttrs['confidence_base'] = Math.floor(willpower/20) + confidenceOther;
+    const diffVal = newAttrs['confidence_base'] - confidenceBase;
+    newAttrs['confidence'] = confidence + diffVal;
+
+    return newAttrs;
+}
+on('change:confidence_other', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(confidenceGetAttrs, function(v) {
+        setAttrs(calcConfidence(v));
+    });
+});
+
+/* Social Damage */
+const socialDamageGetAttrs = ['social_offense_id', 'social_offense_total', 'social_damage_other', 'social_damage_base', 'social_damage'];
+/**
+ * Calculate the social damage value
+ * @param v attrs needed for calc; socialDamageGetAttrs
+ * @returns {}
+ */
+function calcSocialDamage(v) {
+    let newAttrs = {};
+    let socialOffenseSkill = parseInt(v['social_offense_total']) || 0;
+    const socialOffenseOther = parseInt(v['social_offense_other']) || 0;
+    const newSocialDamageStep = Math.ceil(socialOffenseSkill/20) + socialOffenseOther - 1;
+    newAttrs['social_damage_base'] = damageTable(newSocialDamageStep);
+    const socialDamageBaseStep = damageTableReverse(v['social_damage_base']);
+    const socialDamageStep = damageTableReverse(v['social_damage']);
+    const diffVal = socialDamageStep - socialDamageBaseStep;
+    newAttrs['social_damage'] = damageTable(newSocialDamageStep + diffVal);
+
+    return newAttrs;
+}
+on('change:social_damage_other', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(socialDamageGetAttrs, function(v) {
+        setAttrs(calcSocialDamage(v));
+    });
+});
+
+/* Spirit Damage */
+const spiritDamageGetAttrs = ['spirit_combat_skill_id', 'spirit_combat_skill_total', 'spirit_damage_other', 'spirit_damage_base', 'spirit_damage'];
+/**
+ * Calculate the spirt damage value
+ * @param v attrs needed for calc; spiritDamageGetAttrs
+ * @returns {}
+ */
+function calcSpiritDamage(v) {
+    let newAttrs = {};
+    let spiritCombatSkill = parseInt(v['spirit_combat_skill_total']) || 0;
+    if (v['spirit_combat_skill_id'] === 'willpower') {
+        spiritCombatSkill = Math.ceil(spiritCombatSkill/2);
+    }
+    const spiritDamageOther = parseInt(v['spirit_damage_other']) || 0;
+    const newSpiritDamageStep = Math.ceil(spiritCombatSkill/20) + spiritDamageOther - 1;
+    newAttrs['spirit_damage_base'] = damageTable(newSpiritDamageStep);
+    const spiritDamageBaseStep = damageTableReverse(v['spirit_damage_base']);
+    const spiritDamageStep = damageTableReverse(v['spirit_damage']);
+    const diffVal = spiritDamageStep - spiritDamageBaseStep;
+    newAttrs['spirit_damage'] = damageTable(newSpiritDamageStep + diffVal);
+
+    return newAttrs;
+}
+on('change:spirit_damage_other', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(spiritDamageGetAttrs, function(v) {
+        setAttrs(calcSpiritDamage(v));
+    });
+});
+
 /* Damage Modifier */
-const damageModGetAttrs = ['str', 'siz', 'con', 'pow', 'damage_mod_calc', 'damage_mod_other', 'damage_mod_temp'];
+const damageModGetAttrs = ['str', 'siz', 'con', 'pow', 'damage_mod_calc', 'damage_mod_base', 'damage_mod_other', 'damage_mod'];
+const damageModSteps = ['-1d8','-1d6','-1d4','-1d2','0','1d2','1d4','1d6','1d8','1d10','1d12','2d6','1d8+1d6','2d8',
+    '1d10+1d8','2d10','2d10+1d2','2d10+1d4','2d10+1d6','2d10+1d8','3d10','3d10+1d2','3d10+1d4']
+function damageModTable(step) {
+    if (step < 0) {
+        return damageModSteps[0];
+    } else if (step > 22) {
+        return damageModSteps[22];
+    } else {
+        return damageModSteps[step];
+    }
+}
+const damageModStepsReverse = {'-1d8': 0, '-1d6': 1, '-1d4': 2, '-1d2': 3, '0': 4, '1d2': 5, '1d4': 6, '1d6': 7,
+    '1d8': 8, '1d10': 9, '1d12': 10, '2d6': 11, '1d8+1d6': 12, '2d8': 13, '1d10+1d8': 14, '2d10': 15, '2d10+1d2': 16,
+    '2d10+1d4': 17, '2d10+1d6': 18, '2d10+1d8': 19, '3d10': 20, '3d10+1d2': 21, '3d10+1d4': 22
+}
+function damageModTableReverse(value) {
+    if (!(value in damageModStepsReverse) && value.startsWith('-')) {
+        return 0;
+    } else if (!(value in damageModStepsReverse) && !value.startsWith('-')) {
+        return 22;
+    } else {
+        return damageModStepsReverse[value];
+    }
+}
 /**
  * Calculate the damage modifier
- * @param v attrs needed for calc; str, siz, con, pow, damage_mod_calc, damage_mod_other, damage_mod_temp
+ * @param v attrs needed for calc; damageModGetAttrs
  * @returns {}
  */
 function calcDamageMod(v) {
@@ -142,7 +234,6 @@ function calcDamageMod(v) {
     const str = parseInt(v['str']) || 0;
     const siz = parseInt(v['siz']) || 0;
     const damageModOther = parseInt(v['damage_mod_other']) || 0;
-    const damageModTemp = parseInt(v['damage_mod_temp']) || 0;
     if (v['damage_mod_calc'] === '1') {
         const pow = parseInt(v['pow']) || 0;
         damage_mod_table_value = str + siz + pow;
@@ -153,14 +244,17 @@ function calcDamageMod(v) {
         damage_mod_table_value = str + siz;
     }
 
-    const base_damage_mod_step = Math.ceil(damage_mod_table_value / 5) - 5 + damageModOther;
+    const base_damage_mod_step = Math.ceil(damage_mod_table_value / 5) - 1 + damageModOther;
+    const currentDamageModBaseStep = damageModTableReverse(v['damage_mod_base']);
+    const currentDamageModStep = damageModTableReverse(v['damage_mod']);
+    const diffVal = currentDamageModStep - currentDamageModBaseStep;
 
     return {
-        damage_mod_base: damageTable(base_damage_mod_step, true),
-        damage_mod: damageTable(base_damage_mod_step + damageModTemp, true)
+        damage_mod_base: damageModTable(base_damage_mod_step),
+        damage_mod: damageModTable(base_damage_mod_step + diffVal)
     };
 }
-on('change:damage_mod_other change:damage_mod_temp change:damage_mod_calc', function(event) {
+on('change:damage_mod_other change:damage_mod_calc', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(damageModGetAttrs, function(v) {
         setAttrs(calcDamageMod(v));
@@ -168,30 +262,30 @@ on('change:damage_mod_other change:damage_mod_temp change:damage_mod_calc', func
 });
 
 /* Experience Modifier */
-const expModGetAttrs = ['cha', 'int', 'experience_mod_calc', 'experience_mod_other', 'experience_mod_temp'];
+const expModGetAttrs = ['cha', 'int', 'experience_mod_calc', 'experience_mod_other', 'experience_mod_base', 'experience_mod'];
 /**
  * Calculate Experience Modifier
  * @param v attributes needed for calc, expModGetAttrs
  * @returns {}
  */
 function calcExpMod(v) {
-    let base_value;
+    let newAttrs = {};
     const expModOther = parseInt(v['experience_mod_other']) || 0;
-    const expModTemp = parseInt(v['experience_mod_temp']) || 0;
+    const expModBase = parseInt(v['experience_mod_base']) || 0;
+    const expMod = parseInt(v['experience_mod']) || 0;
     if(v['experience_mod_calc'] === '1') {
         const int = parseInt(v['int']) || 0;
-        base_value = Math.ceil(int/6)-2 + expModOther;
+        newAttrs['experience_mod_base'] = Math.ceil(int/6)-2 + expModOther;
     } else {
         const cha = parseInt(v['cha']) || 0;
-        base_value = Math.ceil(cha/6)-2 + expModOther;
+        newAttrs['experience_mod_base'] = Math.ceil(cha/6)-2 + expModOther;
     }
+    const diffVal = newAttrs['experience_mod_base'] - expModBase;
+    newAttrs['experience_mod'] = expMod + diffVal;
 
-    return {
-        experience_mod_base: base_value,
-        experience_mod: base_value + expModTemp
-    };
+    return newAttrs;
 }
-on('change:experience_mod_other change:experience_mod_temp change:experience_mod_calc', function(event) {
+on('change:experience_mod_other change:experience_mod_calc', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(expModGetAttrs, function(v) {
         setAttrs(calcExpMod(v));
@@ -199,7 +293,7 @@ on('change:experience_mod_other change:experience_mod_temp change:experience_mod
 });
 
 /* Experience Modifier */
-const healingRateGetAttrs = ['con', 'pow', 'healing_rate_calc', 'healing_rate_other', 'healing_rate_temp', 'healing_rate_double'];
+const healingRateGetAttrs = ['con', 'pow', 'healing_rate_calc', 'healing_rate_other', 'healing_rate_base', 'healing_rate', 'healing_rate_double'];
 /**
  * Calculate Healing Rate
  * @param v attributes needed for calc, healingRateGetAttrs
@@ -207,10 +301,11 @@ const healingRateGetAttrs = ['con', 'pow', 'healing_rate_calc', 'healing_rate_ot
  */
 function calcHealingRate(v) {
     let base_multiplier;
-    let base_value;
+    let newAttrs = {};
     const con = parseInt(v['con']) || 0;
     const healingRateOther = parseInt(v['healing_rate_other']) || 0;
-    const healingRateTemp = parseInt(v['healing_rate_temp']) || 0;
+    const healingRateBase = parseInt(v['healing_rate_base']) || 0;
+    const healingRate = parseInt(v['healing_rate']) || 0;
     if (v['healing_rate_double'] === '1') {
         base_multiplier = 2;
     } else {
@@ -219,17 +314,16 @@ function calcHealingRate(v) {
 
     if (v['healing_rate_calc'] === '1') {
         const pow = parseInt(v['pow']) || 0;
-        base_value = (Math.ceil(Math.ceil(con+(pow/2))/6) * base_multiplier)+healingRateOther;
+        newAttrs['healing_rate_base'] = (Math.ceil(Math.ceil(con+(pow/2))/6) * base_multiplier)+healingRateOther;
     } else {
-        base_value = (Math.ceil(con/6) * base_multiplier)+healingRateOther;
+        newAttrs['healing_rate_base'] = (Math.ceil(con/6) * base_multiplier)+healingRateOther;
     }
+    const diffVal = newAttrs['healing_rate_base'] - healingRateBase;
+    newAttrs['healing_rate'] = healingRate + diffVal;
 
-    return {
-        healing_rate_base: base_value,
-        healing_rate: base_value + healingRateTemp
-    };
+    return newAttrs;
 }
-on('change:healing_rate_other change:healing_rate_temp change:healing_rate_calc change:healing_rate_double', function(event) {
+on('change:healing_rate_other change:healing_rate_calc change:healing_rate_double', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(healingRateGetAttrs, function(v) {
         setAttrs(calcHealingRate(v));
@@ -237,60 +331,40 @@ on('change:healing_rate_other change:healing_rate_temp change:healing_rate_calc 
 });
 
 /* Initiative */
-const initGetAttrs=['int', 'dex', 'initiative_bonus_other', 'initiative_bonus_temp', 'armor_penalty', 'fatigue', 'athletics_total', 'initiative_add_one_tenth_athletics']
+const initGetAttrs=['int', 'dex', 'cha', 'initiative_bonus_other', 'initiative_bonus_base', 'initiative_bonus',
+    'armor_penalty', 'fatigue', 'athletics_total', 'initiative_add_one_tenth_athletics', 'attribute_mode']
 /**
  * Calculate Initiative Bonus
  * @param v attrs needed for calculation, initGetAttrs
  * @returns {}
  */
 function calcInitiativeBonus(v) {
-    let athletics_bonus = 0;
-    if (v['initiative_add_one_tenth_athletics'] === '1') {
-        const athletics = parseInt(v['athletics_total']) || 0;
-        athletics_bonus = Math.ceil(athletics/10);
-    }
+    let newAttrs = {};
     const int = parseInt(v['int']) || 0;
-    const dex = parseInt(v['dex']) || 0;
     const initOther = parseInt(v['initiative_bonus_other']) || 0;
-    const initTemp = parseInt(v['initiative_bonus_temp']) || 0;
-    const base_value = Math.ceil((int + dex) / 2) + initOther + athletics_bonus;
-
-    const armor_penalty = parseInt(v['armor_penalty']) || 0;
+    const initBase = parseInt(v['initiative_bonus_base']) || 0;
+    const init = parseInt(v['initiative_bonus']) || 0;
     const fatiguePenalty = parseInt(fatigueTable[v['fatigue']]['initiative']) || 0;
-    return {
-        initiative_bonus_base: base_value,
-        initiative_bonus: base_value + initTemp + armor_penalty + fatiguePenalty
-    };
-}
-const socialInitGetAttrs=['int', 'cha']
-/**
- * Calculate Social Initiative Bonus
- * @param v attrs needed for calculation, spiritInitGetAttrs
- * @returns {}
- */
-function calcSocialInitiativeBonus(v) {
-    const int = parseInt(v['int']) || 0;
-    const cha = parseInt(v['cha']) || 0;
+    if (v['attribute_mode'] === 'physical') {
+        const dex = parseInt(v['dex']) || 0;
+        const armor_penalty = parseInt(v['armor_penalty']) || 0;
+        let athletics_bonus = 0;
+        if (v['initiative_add_one_tenth_athletics'] === '1') {
+            const athletics = parseInt(v['athletics_total']) || 0;
+            athletics_bonus = Math.ceil(athletics/10);
+        }
+        newAttrs['initiative_bonus_base'] = Math.ceil((int + dex) / 2) + initOther + athletics_bonus + fatiguePenalty + armor_penalty;
+    } else { /* Social and spirit initiative are the same */
+        const cha = parseInt(v['cha']) || 0;
+        newAttrs['initiative_bonus_base'] = Math.ceil((int + cha) / 2) + initOther;
+    }
 
-    return {
-        social_initiative: Math.ceil((int + cha) / 2),
-    };
-}
-const spiritInitGetAttrs=['int', 'cha']
-/**
- * Calculate Spirit Initiative Bonus
- * @param v attrs needed for calculation, spiritInitGetAttrs
- * @returns {}
- */
-function calcSpiritInitiativeBonus(v) {
-    const int = parseInt(v['int']) || 0;
-    const cha = parseInt(v['cha']) || 0;
+    const diffVal = newAttrs['initiative_bonus_base'] - initBase;
+    newAttrs['initiative_bonus'] = init + diffVal;
 
-    return {
-        spirit_ib: Math.ceil((int + cha) / 2),
-    };
+    return newAttrs;
 }
-on('change:initiative_bonus_other change:initiative_bonus_temp change:initiative_add_one_tenth_athletics', function(event) {
+on('change:initiative_bonus_other change:initiative_add_one_tenth_athletics', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(initGetAttrs, function(v) {
         setAttrs(calcInitiativeBonus(v));
@@ -302,10 +376,11 @@ const luckPointsGetAttrs=['pow', 'cha', 'luck_points_calc', 'luck_points_other',
 /**
  * Calculate Luck Points
  * @param v attrs needed for calculation, luckPointsGetAttrs
+ * @param sourceAttribute the attr the triggered the change
  * @returns {}
  */
-function calcLuckPoints(v) {
-    let base_value;
+function calcLuckPoints(v, sourceAttribute) {
+    let newAttrs = {};
     const pow = parseInt(v['pow']) || 0;
     const rank = parseInt(v['rank']) || 0;
     const luckPointsRank = parseInt(v['luck_points_rank']) || 0;
@@ -315,30 +390,33 @@ function calcLuckPoints(v) {
     const luckPointsCurr = parseInt(v['luck_points']) || 0;
     if (v['luck_points_calc'] === '1') {
         const cha = parseInt(v['cha']) || 0;
-        base_value = Math.ceil(Math.ceil(cha+(pow/2))/6) + luckPointsOther + (luckPointsRank * rank);
+        newAttrs['luck_points_base'] = Math.ceil(Math.ceil(cha+(pow/2))/6) + luckPointsOther + (luckPointsRank * rank);
     } else {
-        base_value = Math.ceil(pow/6) + luckPointsOther + (luckPointsRank * rank);
+        newAttrs['luck_points_base'] = Math.ceil(pow/6) + luckPointsOther + (luckPointsRank * rank);
     }
 
-    const new_luck_points_max = base_value + luckPointsTemp;
-    const diff_luck_points_max = new_luck_points_max - luckPointsMax;
+    let diffVal;
+    if (sourceAttribute === 'luck_points_max') {
+        newAttrs['luck_points_temp'] = luckPointsMax - newAttrs['luck_points_base'];
+        diffVal = newAttrs['luck_points_temp'] - luckPointsTemp;
+    } else {
+        newAttrs['luck_points_max'] = newAttrs['luck_points_base'] + luckPointsTemp;
+        diffVal = newAttrs['luck_points_max'] - luckPointsMax;
+    }
 
-    return {
-        luck_points_base: base_value,
-        luck_points_max: new_luck_points_max,
-        luck_points: luckPointsCurr + diff_luck_points_max
-    };
+    newAttrs['luck_points'] = luckPointsCurr + diffVal;
+    return newAttrs;
 }
-on('change:luck_points_other change:luck_points_temp change:luck_points_calc change:rank', function(event) {
+on('change:luck_points_other change:luck_points_max change:luck_points_calc change:rank', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(luckPointsGetAttrs, function(v) {
-        setAttrs(calcLuckPoints(v));
+        setAttrs(calcLuckPoints(v, event.sourceAttribute));
     });
 });
 on('change:luck_points_rank', function(event) {
     /* Don't exit on sheetworker cause humans will modify the option not the setting itself */
     getAttrs(luckPointsGetAttrs, function(v) {
-        setAttrs(calcLuckPoints(v));
+        setAttrs(calcLuckPoints(v, event.sourceAttribute));
     });
 });
 
@@ -347,93 +425,39 @@ const magicPointsGetAttrs = ['pow', 'magic_points_other', 'magic_points_temp', '
 /**
  * Calculate Magic points
  * @param v attrs needed for calculation, magicPointsGetAttrs
+ * @param sourceAttribute the attr the triggered the change
  * @returns {}
  */
-function calcMagicPoints(v) {
+function calcMagicPoints(v, sourceAttribute) {
+    let newAttrs = {};
     const pow = parseInt(v['pow']) || 0;
     const magicPointsOther = parseInt(v['magic_points_other']) || 0;
     const magicPointsTemp = parseInt(v['magic_points_temp']) || 0;
     const magicPointsCurr = parseInt(v['magic_points']) || 0;
     const magicPointsMax = parseInt(v['magic_points_max']) || 0;
-    const base_value = pow + magicPointsOther;
-    const new_magic_points_max = base_value + magicPointsTemp;
-    const diff_magic_points_max = new_magic_points_max - magicPointsMax;
+    newAttrs['magic_points_base'] = pow + magicPointsOther;
 
-    return {
-        magic_points_base: base_value,
-        magic_points_max: new_magic_points_max,
-        magic_points: magicPointsCurr + diff_magic_points_max
-    };
+    let diffVal;
+    if (sourceAttribute === 'magic_points_max') {
+        newAttrs['magic_points_temp'] = magicPointsMax - newAttrs['magic_points_base'];
+        diffVal = newAttrs['magic_points_temp'] - magicPointsTemp;
+    } else {
+        newAttrs['magic_points_max'] = newAttrs['magic_points_base'] + magicPointsTemp;
+        diffVal = newAttrs['magic_points_max'] - magicPointsMax;
+    }
+
+    newAttrs['magic_points'] = magicPointsCurr + diffVal;
+    return newAttrs;
 }
-on('change:magic_points_other change:magic_points_temp', function(event) {
+on('change:magic_points_other change:magic_points_max', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(magicPointsGetAttrs, function(v) {
-        setAttrs(calcMagicPoints(v));
-    });
-});
-
-/* Prana Points */
-const pranaPointsGetAttrs = ['pow', 'prana_points_other', 'prana_points_temp', 'prana_points', 'prana_points_max'];
-/**
- * Calculate Prana points
- * @param v attrs needed for calculation, pranaPointsGetAttrs
- * @returns {}
- */
-function calcPranaPoints(v) {
-    const pow = parseInt(v['pow']) || 0;
-    const pranaPointsOther = parseInt(v['prana_points_other']) || 0;
-    const pranaPointsTemp = parseInt(v['prana_points_temp']) || 0;
-    const pranaPointsCurr = parseInt(v['prana_points']) || 0;
-    const pranaPointsMax = parseInt(v['prana_points_max']) || 0;
-    const base_value = pow + pranaPointsOther;
-    const new_prana_points_max = base_value + pranaPointsTemp;
-    const diff_prana_points_max = new_prana_points_max - pranaPointsMax;
-
-    return {
-        prana_points_base: base_value,
-        prana_points_max: new_prana_points_max,
-        prana_points: pranaPointsCurr + diff_prana_points_max
-    };
-}
-on('change:prana_points_other change:prana_points_temp', function(event) {
-    if (event.sourceType === "sheetworker") {return;}
-    getAttrs(pranaPointsGetAttrs, function(v) {
-        setAttrs(calcPranaPoints(v));
-    });
-});
-
-/* Power Points */
-const powerPointsGetAttrs = ['pow', 'power_points_other', 'power_points_temp', 'power_points', 'power_points_max'];
-/**
- * Calculate Power points
- * @param v attrs needed for calculation, powerPointsGetAttrs
- * @returns {}
- */
-function calcPowerPoints(v) {
-    const pow = parseInt(v['pow']) || 0;
-    const powerPointsOther = parseInt(v['power_points_other']) || 0;
-    const powerPointsTemp = parseInt(v['power_points_temp']) || 0;
-    const powerPointsCurr = parseInt(v['power_points']) || 0;
-    const powerPointsMax = parseInt(v['power_points_max']) || 0;
-    const base_value = pow + powerPointsOther;
-    const new_power_points_max = base_value + powerPointsTemp;
-    const diff_power_points_max = new_power_points_max - powerPointsMax;
-
-    return {
-        power_points_base: base_value,
-        power_points_max: new_power_points_max,
-        power_points: powerPointsCurr + diff_power_points_max
-    };
-}
-on('change:power_points_other change:power_points_temp', function(event) {
-    if (event.sourceType === "sheetworker") {return;}
-    getAttrs(powerPointsGetAttrs, function(v) {
-        setAttrs(calcPowerPoints(v));
+        setAttrs(calcMagicPoints(v, event.sourceAttribute));
     });
 });
 
 /* Movement Rate */
-const moveRateGetAttrs = ['movement_rate_species', 'movement_rate_other', 'movement_rate_temp', 'fatigue', 'encumbrance_load'];
+const moveRateGetAttrs = ['movement_rate_species', 'movement_rate_other', 'movement_rate', 'movement_rate_base', 'fatigue', 'encumbrance_load'];
 /**
  *
  * @param value
@@ -459,60 +483,70 @@ function applyMovementMod(value, modifier) {
  * @returns {}
  */
 function calcMoveRate(v) {
+    let newAttrs = {};
     const moveRateSpecies = parseInt(v['movement_rate_species']) || 0;
     const moveRateOther = parseInt(v['movement_rate_other']) || 0;
-    const moveRateTemp = parseInt(v['movement_rate_temp']) || 0;
-    const base_value = moveRateSpecies + moveRateOther;
-    const moveAfterTemp = base_value + moveRateTemp;
-    const moveAfterFatigue = applyMovementMod(moveAfterTemp, fatigueTable[v['fatigue']]['movement']);
-    let moveAfterEnc = applyMovementMod(moveAfterFatigue, loadTable[v['encumbrance_load']]['movement']);
+    const moveRateBase = parseInt(v['movement_rate_base']) || 0;
+    const moveRate = parseInt(v['movement_rate']) || 0;
+    const core_value = moveRateSpecies + moveRateOther;
+    const moveAfterFatigue = applyMovementMod(core_value, fatigueTable[v['fatigue']]['movement']);
+    newAttrs['movement_rate_base'] = applyMovementMod(moveAfterFatigue, loadTable[v['encumbrance_load']]['movement']);
 
-    if (moveAfterEnc < 0) {
-        moveAfterEnc = 0;
-    }
+    const diffVal = newAttrs['movement_rate_base'] - moveRateBase;
+    newAttrs['movement_rate'] = moveRate + diffVal;
 
-    return {
-        movement_rate_base: base_value,
-        movement_rate: moveAfterEnc
-    };
+    /* TODO calculate advance movement */
+
+    return newAttrs;
 }
-on('change:movement_rate_species change:movement_rate_other change:movement_rate_temp', function(event) {
+on('change:movement_rate_species change:movement_rate_other', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(moveRateGetAttrs, function(v) {
         setAttrs(calcMoveRate(v));
     });
 });
-/* TODO trigger on enc for move
- */
+
+/* Spirit Intensity */
+const spiritIntensityGetAttrs = ['pow']
+function calcSpiritIntensity(v) {
+    const pow = parseInt(v['pow']) || 0;
+    return {'spirit_intensity': Math.floor(pow/6)};
+}
 
 /* Tenacity Points */
 const tenacityGetAttrs = ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies'];
 /**
  * Calculate Tenacity points
  * @param v attrs needed for calculation, tenacityPointsGetAttrs
+ * @param sourceAttribute the attr the triggered the change
  * @returns {}
  */
-function calcTenacity(v) {
+function calcTenacity(v, sourceAttribute) {
+    let newAttrs = {};
     const pow = parseInt(v['pow']) || 0;
     const tenacityOther = parseInt(v['tenacity_other']) || 0;
     const tenacityTemp = parseInt(v['tenacity_temp']) || 0;
     const tenacityCurr = parseInt(v['tenacity']) || 0;
     const tenacityMax = parseInt(v['tenacity_max']) || 0;
     const tenacityDeps = parseInt(v['tenacity_dependencies']) || 0;
-    const base_value = pow + tenacityOther;
-    const new_tenacity_max = base_value + tenacityTemp + tenacityDeps;
-    const diff_tenacity_max = new_tenacity_max - tenacityMax;
+    newAttrs['tenacity_base'] = pow + tenacityOther;
 
-    return {
-        tenacity_base: base_value,
-        tenacity_max: new_tenacity_max,
-        tenacity: tenacityCurr + diff_tenacity_max
-    };
+    let diffVal;
+    if (sourceAttribute === 'tenacity_max') {
+        newAttrs['tenacity_temp'] = tenacityMax - newAttrs['tenacity_base'];
+        diffVal = newAttrs['tenacity_temp'] - tenacityTemp;
+    } else {
+        newAttrs['tenacity_max'] = newAttrs['tenacity_base'] + tenacityTemp + tenacityDeps;
+        diffVal = newAttrs['tenacity_max'] - tenacityMax;
+    }
+
+    newAttrs['tenacity'] = tenacityCurr + diffVal;
+    return newAttrs;
 }
-on('change:tenacity_other change:tenacity_temp', function(event) {
+on('change:tenacity_other change:tenacity_max', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(tenacityGetAttrs, function(v) {
-        setAttrs(calcTenacity(v));
+        setAttrs(calcTenacity(v, event.sourceAttribute));
     });
 });
 /* TODO Trigger on dependencies change */
@@ -937,16 +971,86 @@ on(`change:hit_locations change:simplified_combat_enabled`, function(event) {
         setAttrs({
             ...newAttrs,
             ...calcAllHP(v)
-        })
+        });
     });
 });
 on('change:hp_calc', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(hpGetAttrs, function(v) {
-        setAttrs({...calcAllHP(v)})
+        setAttrs({...calcAllHP(v)});
     });
 });
 
+/* Composure */
+const composureGetAttrs = ['composure', 'composure_other', 'composure_max', 'pow']
+function calcComposure(v) {
+    const pow = parseInt(v['pow']) || 0;
+    console.log(`${v['composure']}, ${v['composure_other']}, ${v['composure_max']}`);
+    const composureOther = parseInt(v['composure_other']) || 0;
+    const composureMax = parseInt(v['composure_max']) || 0;
+    const composureCurr = parseInt(v['composure']) || 0;
+    const newMax = Math.ceil(pow/3) + composureOther;
+    const diff = composureCurr - composureMax;
+    console.log(composureOther + " " + composureMax + " " + composureCurr + " " + newMax + " " + diff);
+    return {['composure']: newMax + diff, composure_max: newMax};
+}
+on('change:composure_other', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(composureGetAttrs, function(v) {
+        setAttrs(calcComposure(v));
+    });
+});
+
+/* Integrity */
+const integrityGetAttrs = ['integrity', 'integrity_other', 'integrity_max', 'cha']
+function calcIntegrity(v) {
+    let newAttrs = {};
+    const cha = parseInt(v['cha']) || 0;
+    const integrityOther = parseInt(v['integrity_other']) || 0;
+    const integrityMax = parseInt(v['integrity_max']) || 0;
+    const integrityCurr = parseInt(v['integrity']) || 0;
+    newAttrs['integrity_max'] = Math.ceil(cha/3) + integrityOther;
+    const diffVal = newAttrs['integrity_max'] - integrityMax;
+    newAttrs['integrity'] = integrityCurr + diffVal;
+    return newAttrs;
+}
+on('change:integrity_other', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(integrityGetAttrs, function(v) {
+        setAttrs(calcIntegrity(v));
+    });
+});
+
+/* Resolve */
+const resolveGetAttrs = ['resolve', 'resolve_other', 'resolve_max', 'int']
+function calcResolve(v) {
+    let newAttrs = {};
+    const int = parseInt(v['int']) || 0;
+    const resolveOther = parseInt(v['resolve_other']) || 0;
+    const resolveMax = parseInt(v['resolve_max']) || 0;
+    const resolveCurr = parseInt(v['resolve']) || 0;
+    newAttrs['resolve_max'] = Math.ceil(int/3) + resolveOther;
+    const diffVal = newAttrs['resolve_max'] - resolveMax;
+    newAttrs['resolve'] = resolveCurr + diffVal;
+    return newAttrs;
+}
+on('change:resolve_other', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(resolveGetAttrs, function(v) {
+        setAttrs(calcResolve(v));
+    });
+});
+
+/* Attribute Mode */
+on('change:attribute_mode', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    getAttrs(actionPointGetAttrs.concat(initGetAttrs), function(v) {
+        setAttrs({
+            ...calcActionPoints(v, event.sourceAttribute),
+            ...calcInitiativeBonus(v),
+        });
+    });
+});
 
 /* Fatigue */
 const fatigueTable = {
@@ -1067,19 +1171,99 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored c
 });
 
 /* Skills */
-const standardSkills = ['athletics'];
 /* Standard Skills */
-standardSkills.forEach(skillId => {
-    on(`change:${skillId}_char1 change:${skillId}_char2 change:${skillId}_total`, function(event) {
+const stdSkillChars = {
+    /* standard skill chrs */
+    'athletics': ['str', 'dex'],
+    'brawn': ['str', 'siz'],
+    'boating': ['str', 'con'],
+    'conceal': ['dex', 'pow'],
+    'customs': ['int', 'int'],
+    'dance': ['dex', 'cha'],
+    'deceit': ['int', 'cha'],
+    'drive': ['dex', 'pow'],
+    'endurance': ['con', 'con'],
+    'evade': ['dex', 'dex'],
+    'first_aid': ['dex', 'int'],
+    'home_parallel': ['int', 'int'],
+    'influence': ['cha', 'cha'],
+    'insight': ['int', 'pow'],
+    'locale': ['int', 'int'],
+    'native_tongue': ['int', 'cha'],
+    'perception': ['int', 'pow'],
+    'ride': ['dex', 'pow'],
+    'sing': ['pow', 'cha'],
+    'spectral_combat': ['pow', 'cha'],
+    'status': [0, 0],
+    'stealth': ['dex', 'int'],
+    'superstition': ['21-int', 'pow'],
+    'swim': ['str', 'con'],
+    'unarmed': ['str', 'dex'],
+    'willpower': ['pow', 'pow']
+}
+const stdSkillIds = Object.keys(stdSkillChars);
+function calcStdSkill(skillId, v, sourceAttribute) {
+    let newAttrs = {};
+    const int = parseInt(v['int']) || 0;
+    v['21-int'] = 21 - int;
+    const char1 = parseInt(v[stdSkillChars[`${skillId}`][0]]) || 0;
+    const char2 = parseInt(v[stdSkillChars[`${skillId}`][1]]) || 0;
+
+    if (sourceAttribute === skillId) {
+        const skill = parseInt(v[`${skillId}`]) || 0;
+        newAttrs[`${skillId}_other`] = skill - char1 - char2;
+    } else {
+        const skillOther = parseInt(v[`${skillId}_other`]) || 0;
+        newAttrs[`${skillId}`] = char1 + char2 + skillOther;
+        /* for spirit and social skills we set the new value in v so those calcs may use the new value */
+        v[`${skillId}`] = newAttrs[`${skillId}`];
+    }
+
+    let newSpiritDamageAttrs = {};
+    if (v['spirit_combat_skill_id'] === skillId) {
+        newAttrs['spirit_combat_skill_name'] =  getTranslationByKey(skillId);
+        newAttrs['spirit_combat_skill_total'] = v[`${skillId}`];
+        newAttrs['spirit_combat_skill_notes'] = v[`${skillId}_notes`];
+
+        newSpiritDamageAttrs = calcSpiritDamage({...v, ...newAttrs});
+    }
+
+    let newSocialDamageAttrs = {};
+    if (v['social_offense_id'] === skillId) {
+        newAttrs['social_offense_name'] =  getTranslationByKey(skillId);
+        newAttrs['social_offense_total'] = v[`${skillId}`];
+        newAttrs['social_offense_notes'] = v[`${skillId}_notes`];
+
+        newSocialDamageAttrs = calcSocialDamage({...v, ...newAttrs});
+    }
+
+    if (v['social_defense_id'] === skillId) {
+        newAttrs['social_defense_name'] =  getTranslationByKey(skillId);
+        newAttrs['social_defense_total'] = v[`${skillId}`];
+        newAttrs['social_defense_notes'] = v[`${skillId}_notes`];
+    }
+
+    return {
+        ...newAttrs,
+        ...newSpiritDamageAttrs,
+        ...newSocialDamageAttrs
+    }
+}
+stdSkillIds.forEach(skillId => {
+    on(`change:${skillId} change:${skillId}_notes`, function(event) {
         if (event.sourceType === "sheetworker") {return;}
 
+        getAttrs([`${skillId}`, `${skillId}_other`, `${skillId}_notes`, 'social_defense_id'].concat(characteristicAttrs,
+            initGetAttrs, moveRateGetAttrs, spiritDamageGetAttrs, socialDamageGetAttrs), function(v) {
+            setAttrs(calcStdSkill(`${skillId}`, v, event.sourceAttribute));
+        });
     });
 });
-/* Action Buttons */
-standardSkills.forEach(skill => {
-    on(`clicked:${skill}-augment`, function(event) {
-        getAttrs([`${skill}_total`], function(v) {
-            const skillValue = parseInt(v[`${skill}_total`]) || 0;
+/* Standard Skill Action Buttons */
+stdSkillIds.forEach(skillId => {
+    on(`clicked:${skillId}-augment`, function(event) {
+        getAttrs([`${skillId}`], function(v) {
+            const skillValue = parseInt(v[`${skillId}`]) || 0;
             const augmentValue = Math.ceil(skillValue / 5);
 
             setAttrs({
@@ -1088,7 +1272,114 @@ standardSkills.forEach(skill => {
             });
         });
     });
+    on(`clicked:${skillId}-set-social-offense`, function(event) {
+        getAttrs([`${skillId}`, `${skillId}_notes`].concat(socialDamageGetAttrs), function(v) {
+            const newAttrs = {
+                social_offense_id: skillId,
+                social_offense_name: getTranslationByKey(skillId),
+                social_offense_total: v[skillId],
+                social_offense_notes: v[`${skillId}_notes`]
+            };
+
+            setAttrs({
+                ...newAttrs,
+                ...calcSocialDamage({...v, ...newAttrs})
+            });
+        });
+    });
+    on(`clicked:${skillId}-set-social-defense`, function(event) {
+        getAttrs([`${skillId}`, `${skillId}_notes`], function(v) {
+            const newAttrs = {
+                social_defense_id: skillId,
+                social_defense_name: getTranslationByKey(skillId),
+                social_defense_total: v[skillId],
+                social_defense_notes: v[`${skillId}_notes`]
+            };
+
+            setAttrs(newAttrs);
+        });
+    });
 });
+on(`clicked:willpower-set-spirit-combat`, function(event) {
+    getAttrs(['willpower', 'willpower_notes'].concat(spiritDamageGetAttrs), function(v) {
+        const newAttrs = {
+            spirit_combat_skill_id: 'willpower',
+            spirit_combat_skill_name: getTranslationByKey('willpower'),
+            spirit_combat_skill_total: v['willpower'],
+            spirit_combat_skill_notes: v['willpower_notes']
+        };
+
+        setAttrs({
+            ...newAttrs,
+            ...calcSpiritDamage({...v, ...newAttrs})
+        });
+    });
+});
+
+/* Professional Skills, Combat Styles & Passions */
+/* TODO trigger skill calculation */
+on('clicked:repeating_combatstyle:augment clicked:repeating_professionalskill:augment clicked:repeating_passion:augment', function(event) {
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_${type}_${id}_total`], function(v) {
+        const skillValue = parseInt(v[`repeating_${type}_${id}_total`]) || 0;
+        const augmentValue = Math.ceil(skillValue / 5);
+
+        setAttrs({
+            augmentation: "@{set_augmentation}",
+            set_augmentation: augmentValue
+        });
+    });
+});
+on('clicked:repeating_combatstyle:set-social-offense clicked:repeating_professionalskill:set-social-offense clicked:repeating_passion:set-social-offense', function(event) {
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_${type}_${id}_name`, `repeating_${type}_${id}_total`, `repeating_${type}_${id}_notes`].concat(socialDamageGetAttrs), function(v) {
+        const newAttrs = {
+            social_offense_id: `repeating_${type}_${id}`,
+            social_offense_name: v[`repeating_${type}_${id}_name`],
+            social_offense_total: v[`repeating_${type}_${id}_total`],
+            social_offense_notes: v[`repeating_${type}_${id}_notes`],
+        };
+
+        setAttrs({
+            ...newAttrs,
+            ...calcSocialDamage({...v, ...newAttrs})
+        });
+    });
+});
+on('clicked:repeating_combatstyle:set-social-defense clicked:repeating_professionalskill:set-social-defense clicked:repeating_passion:set-social-defense', function(event) {
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_${type}_${id}_name`, `repeating_${type}_${id}_total`, `repeating_${type}_${id}_notes`], function(v) {
+        const newAttrs = {
+            social_defense_id: `repeating_${type}_${id}`,
+            social_defense_name: v[`repeating_${type}_${id}_name`],
+            social_defense_total: v[`repeating_${type}_${id}_total`],
+            social_defense_notes: v[`repeating_${type}_${id}_notes`]
+        };
+
+        setAttrs(newAttrs);
+    });
+});
+on(`clicked:repeating_professionalskill:set-spirit-combat`, function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_professionalskill_${id}_name`, `repeating_professionalskill_${id}_total`,
+        `repeating_professionalskill_${id}_notes`].concat(spiritDamageGetAttrs), function(v) {
+        const newAttrs = {
+            spirit_combat_skill_id: `repeating_professionalskill_${id}`,
+            spirit_combat_skill_name: v[`repeating_professionalskill_${id}_name`],
+            spirit_combat_skill_total: v[`repeating_professionalskill_${id}_total`],
+            spirit_combat_skill_notes: v[`repeating_professionalskill_${id}_notes`]
+        };
+
+        setAttrs({
+            ...newAttrs,
+            ...calcSpiritDamage({...v, ...newAttrs})
+        });
+    });
+});
+
 
 
 
@@ -1513,9 +1804,10 @@ function upgradeCharacter3Dot0() {
         ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day", "income_month", "income_season", "income_year"]), function(v) {
         let newAttrs = {'version': '3.0'};
 
-        /* If a spirit set the conflict mode to spirit combat */
+        /* If a spirit set the attribute mode to spiritual and sheet type to spirit */
         if (v['spirit'] === '1') {
-            newAttrs['conflict_mode'] = 'spirit_combat';
+            newAttrs['attribute_mode'] = 'spiritual'; /* init and ap will already be spirit calc so no need to force it */
+            newAttrs['type'] ='spirit';
         }
 
         /* Convert Characteristics base values */

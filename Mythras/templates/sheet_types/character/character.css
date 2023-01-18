@@ -1,14 +1,19 @@
-/* Conflict Mode Toggles */
-input.sheet-conflict-toggle:not([value="combat"]) ~ div .sheet-combat,
-input.sheet-conflict-toggle:not([value="combat"]) ~ div.sheet-combat,
-input.sheet-conflict-toggle:not([value="extended_conflict"]) ~ div .sheet-extended-conflict,
-input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-conflict,
-input.sheet-conflict-toggle:not([value="spirit_combat"]) ~ div .sheet-spirit-combat {
+/* Attribute Toggles */
+input.sheet-attr-toggle:not([value="physical"]) ~ div .sheet-physical,
+input.sheet-attr-toggle:not([value="physical"]) ~ div.sheet-physical,
+input.sheet-attr-toggle:not([value="social"]) ~ div .sheet-social,
+input.sheet-attr-toggle:not([value="social"]) ~ div.sheet-social,
+input.sheet-attr-toggle:not([value="spiritual"]) ~ div .sheet-spiritual,
+input.sheet-attr-toggle:not([value="spiritual"]) ~ div.sheet-spiritual,
+input.sheet-attr-toggle[value="social"] ~ div.sheet-not-social,
+input.sheet-attr-toggle[value="social"] ~ div .sheet-not-social {
     display: none;
 }
-input.sheet-extended-conflict-enabled-toggle:not([value="1"]) ~ select option.sheet-extended-conflict-enabled,
-input.sheet-social-conflict-enabled-toggle:not([value="1"]) ~ select option.sheet-social-conflict-enabled,
-input.sheet-spirits-enabled-toggle:not([value="1"]) ~ select option.sheet-spirits-enabled {
+input.sheet-attr-toggle[value="spiritual"] ~ div.sheet-not-social input.sheet-hit-locations-spirit[value="spirit"] + div.sheet-hit-locations-toggle {
+    display: none;
+}
+input.sheet-social-conflict-toggle:not([value="1"]) ~ div .sheet-social-conflict,
+input.sheet-spirits-toggle:not([value="1"]) ~ div .sheet-spirits {
     display: none;
 }
 
@@ -66,8 +71,8 @@ input.sheet-location-name {
 }
 
 /* SKills */
-input.sheet-skill-details:not([value="1"]) ~ div .sheet-skill-details {
-    display: none;
+input.sheet-opaque-toggle:not([value="1"]) ~ div.sheet-opaque {
+    opacity: 40% !important;
 }
 textarea.sheet-skill-notes {
     height: 36px;
@@ -76,20 +81,6 @@ button[type=roll].sheet-improve {
     font-family: "Pictos";
     right: 29px;
     top: 0;
-}
-button[type=action].sheet-social-defense {
-    font-family: "Pictos";
-    right: 43px;
-    top: 1px;
-}
-button[type=action].sheet-social-attack {
-    font-family: "Pictos";
-    right: 58px;
-    top: 1px;
-}
-input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-defense,
-input.sheet-conflict-toggle:not([value="social_conflict"]) ~ div .sheet-social-attack {
-    display: none;
 }
 
 

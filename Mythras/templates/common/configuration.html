@@ -5,18 +5,19 @@
 
         <div class="sheet-bmargin">
             <!-- Sheet Type -->
-            <input type="hidden" class="sheet-spirits-enabled-toggle" name="attr_spirits_enabled" value="1">
-            <label class="sheet-left sheet-rmargin" data-i18n="sheet_type">Sheet Type</label>
-            <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-auto-width" name="attr_type">
-                <option value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
-                <option value="creature" data-i18n-list-item="creature" data-i18n="creature">Creature</option>
-                <option value="pc" data-i18n-list-item="player_character" data-i18n="player_character" selected>Player Character</option>
-                <option value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
-                <option value="solar_system" data-i18n-list-item="star_system" data-i18n="star_system">Star System</option>
-                <option value="spirit" class="sheet-spirits-enabled" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
-                <option value="vehicle" data-i18n-list-item="vehicle" data-i18n="vehicle">Vehicle</option>
-            </select>
-            <br>
+            <input type="hidden" class="sheet-spirits-toggle" name="attr_spirits_enabled" value="1">
+            <div>
+                <label class="sheet-left sheet-rmargin" data-i18n="sheet_type">Sheet Type</label>
+                <select data-i18n-list="sheet-type-order" title="@{type}" class="sheet-auto-width" name="attr_type">
+                    <option value="battle_unit" data-i18n-list-item="battle_unit" data-i18n="battle_unit">Battle Unit</option>
+                    <option value="creature" data-i18n-list-item="creature" data-i18n="creature">Creature</option>
+                    <option value="pc" data-i18n-list-item="major_character" data-i18n="major_character" selected></option>
+                    <option value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
+                    <option value="solar_system" data-i18n-list-item="star_system" data-i18n="star_system">Star System</option>
+                    <option value="spirit" class="sheet-spirits" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
+                    <option value="vehicle" data-i18n-list-item="vehicle" data-i18n="vehicle">Vehicle></option>
+                </select>
+            </div>
 
             <!-- Intellect -->
             <div class="sheet-minor">
