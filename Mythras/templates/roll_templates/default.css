@@ -17,6 +17,10 @@
     line-height: 18px;
     border-radius: 5px;
 }
+.sheet-rolltemplate-default div.sheet-border.sheet-improve,
+.sheet-rolltemplate-darkmode div.sheet-border.sheet-improve {
+    border: 2px solid #572d6c;
+}
 .sheet-rolltemplate-default div.sheet-border.sheet-initiative,
 .sheet-rolltemplate-darkmode div.sheet-border.sheet-initiative {
     border: 2px solid #29491d;
@@ -27,6 +31,11 @@
 }
 .sheet-rolltemplate-default div.sheet-header {
     background: #595959;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-improve,
+.sheet-rolltemplate-darkmode div.sheet-header.sheet-improve {
+    background: #572d6c;
     color: whitesmoke;
 }
 .sheet-rolltemplate-default div.sheet-header.sheet-initiative,

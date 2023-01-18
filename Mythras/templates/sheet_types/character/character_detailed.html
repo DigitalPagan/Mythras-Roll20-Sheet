@@ -529,6 +529,7 @@
                 </div>
 
                 <!-- Magic Points -->
+                <!-- TODO switch magic points to a setting option -->
                 <input type="hidden" class="sheet-toggle" name="attr_magic_points_enabled" value="1">
                 <div data-i18n-list-item="magic_points" class="sheet-flex sheet-hl sheet-toggle">
                     <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="magic_points">Magic Points</label></div>
@@ -594,12 +595,21 @@
 
                 <!-- Tenacity -->
                 <input type="hidden" class="sheet-toggle" name="attr_tenacity_enabled" value="0">
-                <div data-i18n-list-item="tenacity" class="sheet-flex sheet-hl sheet-toggle">
-                    <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="tenacity">Tenacity</label></div>
-                    <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-dullval sheet-number-width" title="@{tenacity_other}" name="attr_tenacity_other" value="0"></div>
-                    <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></div>
-                    <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-rval" title="@{tenacity|max}" name="attr_tenacity_max" value="11"></div></div>
-                    <input type="hidden" name="attr_tenacity_temp" value="0">
+                <div data-i18n-list-item="tenacity" class="sheet-hl sheet-toggle">
+                    <div class="sheet-flex">
+                        <div class="sheet-td sheet-grow sheet-text-left"><label class="sheet-left" data-i18n="tenacity">Tenacity</label></div>
+                        <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-dullval sheet-number-width" title="@{tenacity_other}" name="attr_tenacity_other" value="0"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{tenacity_base}" name="attr_tenacity_base" value="11" readonly></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-rval" title="@{tenacity|max}" name="attr_tenacity_max" value="11"></div></div>
+                        <input type="hidden" name="attr_tenacity_temp" value="0">
+                    </div>
+                    <div class="sheet-details-toggle sheet-lmargin-x3">
+                        <input type="hidden" class="sheet-toggle" name="attr_dependencies_enabled" value="0">
+                        <label class="sheet-checkbox sheet-toggle">
+                            <input type='checkbox' name='attr_apply_dependencies_penalty' value="1" checked/><span>3</span>
+                            <span data-i18n="apply_dependencies_penalty">Apply Dependencies Penalty</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -857,7 +867,7 @@
                 <div class="sheet-tr">
                     <div class="sheet-td"><input type="text" class="sheet-full-width" name="attr_social_offense_name" value="Influence" readonly></div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width" name="attr_social_offense_total" value="22" readonly></div>
-                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d10" title="%{social_offense}" name="roll_social_offense" value="{{'@{roll_display}&{template:skill} {{socialoffense=1}} {{character=@{character_name}}} {{name=@{social_offense_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{social_offense_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_offense_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_offense_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_offense_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_offense_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_offense_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_offense_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_offense_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_offense_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_offense_total}+@{penalty})]]}} {{hard=[[ceil((@{social_offense_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_offense_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_offense_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_offense_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_offense_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_offense_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_offense_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_offense_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_offense_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_offense_notes}}}'}}">t</button></div>
+                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d10" title="%{social_offense}" name="roll_social_offense" value="{{'@{roll_display}&{template:skill} {{socialoffense=1}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=@{social_offense_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{social_offense_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_offense_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_offense_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_offense_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_offense_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_offense_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_offense_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_offense_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_offense_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_offense_total}+@{penalty})]]}} {{hard=[[ceil((@{social_offense_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_offense_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_offense_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_offense_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_offense_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_offense_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_offense_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_offense_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_offense_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_offense_notes}}}'}}">t</button></div>
                     <input type="hidden" name="attr_social_offense_notes" value="">
                     <input type="hidden" name="attr_social_offense_id" value="influence">
                 </div>
@@ -869,7 +879,7 @@
                 <div class="sheet-tr">
                     <div class="sheet-td"><input type="text" class="sheet-full-width" name="attr_social_defense_name" value="Deceit" readonly></div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width" name="attr_social_defense_total" value="24" readonly></div>
-                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d10" title="%{social_defense}" name="roll_social_defense" value="{{'@{roll_display}&{template:skill} {{socialdefense=1}} {{character=@{character_name}}} {{name=@{social_defense_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{social_defense_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_defense_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_defense_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_defense_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_defense_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_defense_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_defense_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_defense_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_defense_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_defense_total}+@{penalty})]]}} {{hard=[[ceil((@{social_defense_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_defense_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_defense_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_defense_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_defense_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_defense_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_defense_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_defense_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_defense_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_defense_notes}}}'}}">t</button></div>
+                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d10" title="%{social_defense}" name="roll_social_defense" value="{{'@{roll_display}&{template:skill} {{socialdefense=1}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=@{social_defense_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{social_defense_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{social_defense_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{social_defense_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{social_defense_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{social_defense_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{social_defense_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{social_defense_total}*1.5)+@{penalty})]]}} {{standard=[[@{social_defense_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{social_defense_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{social_defense_total}+@{penalty})]]}} {{hard=[[ceil((@{social_defense_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{social_defense_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{social_defense_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{social_defense_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{social_defense_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{social_defense_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{social_defense_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{social_defense_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{social_defense_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{social_defense_notes}}}'}}">t</button></div>
                     <input type="hidden" name="attr_social_defense_notes" value="">
                     <input type="hidden" name="attr_social_defense_id" value="deceit">
                 </div>
@@ -916,6 +926,18 @@
                     <div><label class="sheet-left" data-i18n="armor_penalty">Armor Penalty</label></div>
                     <div class="sheet-grow sheet-text-right"><span name="attr_armor_penalty"></span></div>
                 </div>
+
+                <input type="hidden" class="sheet-toggle" name="attr_tenacity_enabled" value="0">
+                <div class="sheet-toggle">
+                    <input type="hidden" class="sheet-toggle" name="attr_dependencies_enabled" value="0">
+                    <div class="sheet-toggle">
+                        <input type="hidden" class="sheet-toggle" name="attr_apply_dependencies_penalty" value="1">
+                        <div class="sheet-flex sheet-gap sheet-hl sheet-toggle">
+                            <div><label class="sheet-left" data-i18n="tenacity_penalty">Tenacity Penalty</label></div>
+                            <div class="sheet-grow sheet-text-right"><span name="attr_tenacity_dependencies"></span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="sheet-grow">
@@ -933,7 +955,7 @@
             <!-- Spirit Combat -->
             <div>
                 <label class="sheet-left sheet-rmargin" data-i18n="spirit_combat_skill">Spirit Combat Skill</label>
-                <button type="roll" title="%{spirit_combat_skill}" name="roll_spirit_combat_skill" value="{{'@{roll_display}&{template:skill} {{spiritcombat=1}} {{character=@{character_name}}} {{name=@{spirit_combat_skill_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{spirit_combat_skill_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{spirit_combat_skill_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{spirit_combat_skill_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{spirit_combat_skill_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{spirit_combat_skill_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{spirit_combat_skill_total}*1.5)+@{penalty})]]}} {{standard=[[@{spirit_combat_skill_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{spirit_combat_skill_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{spirit_combat_skill_total}+@{penalty})]]}} {{hard=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{spirit_combat_skill_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{spirit_combat_skill_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{spirit_combat_skill_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{spirit_combat_skill_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{spirit_combat_skill_notes}}}'}}"><span class="sheet-bold" name="attr_spirit_combat_skill_name"></span> <span name="attr_spirit_combat_skill_total"></span>%</button>
+                <button type="roll" title="%{spirit_combat_skill}" name="roll_spirit_combat_skill" value="{{'@{roll_display}&{template:skill} {{spiritcombat=1}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=@{spirit_combat_skill_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{spirit_combat_skill_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{spirit_combat_skill_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{spirit_combat_skill_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{spirit_combat_skill_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{spirit_combat_skill_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{spirit_combat_skill_total}*1.5)+@{penalty})]]}} {{standard=[[@{spirit_combat_skill_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{spirit_combat_skill_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{spirit_combat_skill_total}+@{penalty})]]}} {{hard=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{spirit_combat_skill_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{spirit_combat_skill_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{spirit_combat_skill_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{spirit_combat_skill_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{spirit_combat_skill_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{spirit_combat_skill_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{spirit_combat_skill_notes}}}'}}"><span class="sheet-bold" name="attr_spirit_combat_skill_name"></span> <span name="attr_spirit_combat_skill_total"></span>%</button>
                 <input type="hidden" name="attr_spirit_combat_skill_id" value="willpower" readonly>
                 <input type="hidden" name="attr_spirit_combat_skill_name" value="Willpower" readonly>
                 <input type="hidden" name="attr_spirit_combat_skill_total" value="22" readonly>
@@ -946,9 +968,9 @@
 
         <div class="sheet-flex sheet-gap">
             <!-- Column 1 -->
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <!-- Resistance Skills -->
-                <div data-i18n-list="resistence_skills-order">
+                <div data-i18n-list="resistence_skills-order" class="sheet-bmargin">
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-minor"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="skill_possessed">S</div></div>
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="resistance_skill">Resistence Skill</div></div>
@@ -1071,20 +1093,80 @@
             </div>
 
             <!-- Column 2 -->
-            <div class="sheet-half-col">
+            <div class="sheet-half-width sheet-flex-column sheet-gap">
                 <!-- Combat Styles -->
                 <div>
                     <div class="sheet-flex">
                         <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="combat_style">Combat Style</div></div>
+                        <div class="sheet-th"><div class="sheet-checkbox-width"></div></div>
                         <div class="sheet-th"><div class="sheet-button-width"></div></div>
                         <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
                         <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="trained">3</div></div>
                         <div class="sheet-th"><div class="sheet-number-width" data-i18n="base">Base</div></div>
                         <div class="sheet-th"><div class="sheet-number-width" data-i18n="base">Base</div></div>
-                        <div class="sheet-th sheet-skill-details"><div class="sheet-number-width" data-i18n="other">Other</div></div>
+                        <div class="sheet-th sheet-details-toggle"><div class="sheet-number-width" data-i18n="other">Other</div></div>
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
-                        <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="show_details">E</div></div>
+                        <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
                     </div>
+                    <fieldset class="repeating_combatstyle">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow">
+                                <div class="sheet-full-width sheet-hover-btn">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                                    <input type="hidden" name="attr_id" value="unset">
+                                </div>
+                            </div>
+                            <div class="sheet-td"><button type="action" class="sheet-pictos" data-i18n-title="set_augmentation" name="act_augment">&</button></div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{$ID_combatstyle}" name="roll_combatstyle" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}">t</button>
+                            </div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_fumbled}" name="attr_fumbled" value="1"><span class="sheet-checkico">!</span></div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span></div>
+                            <div class="sheet-td">
+                                <select class="sheet-number-width sheet-text-center" title="@{$ID_char1}" name="attr_char1">
+                                    <option value="0">-</option>
+                                    <option value="@{str}" data-i18n="str-u" selected>STR</option>
+                                    <option value="@{con}" data-i18n="con-u">CON</option>
+                                    <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                    <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                    <option value="@{int}" data-i18n="int-u">INT</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                </select>
+                            </div>
+                            <div class="sheet-td">
+                                <select class="sheet-number-width sheet-text-center" title="@{$ID_char2}" name="attr_char2">
+                                    <option value="0">-</option>
+                                    <option value="@{str}" data-i18n="str-u">STR</option>
+                                    <option value="@{con}" data-i18n="con-u">CON</option>
+                                    <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                    <option value="@{dex}" data-i18n="dex-u" selected>DEX</option>
+                                    <option value="@{int}" data-i18n="int-u">INT</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                                </select>
+                            </div>
+                            <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{$ID_other}" name="attr_other" value="0" readonly></div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{$ID_total}" name="attr_total" value="0" step="1"  min="0"></div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">y</span></div>
+                        </div>
+                        <input type="hidden" class="sheet-wide-toggle" name="attr_details" value="0">
+                        <div class="sheet-anti-toggle">
+                            <span class="sheet-details-toggle" name="attr_notes"></span>
+                        </div>
+                        <div class="sheet-toggle">
+                            <div class="sheet-flex sheet-flex-wrap sheet-gap">
+                                <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
+                                <div class="sheet-grow sheet-flex">
+                                    <div><label class="sheet-left sheet-rmargin" data-i18n="weapon_tags">Weapons Tags</label></div>
+                                    <div class="sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_tags}" name="attr_tags" value="weapon"></div>
+                                </div>
+                            </div>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <input type="hidden" name="attr_encumbered" value="0">
+                        </div>
+                    </fieldset>
                 </div>
 
                 <!-- Professional Skills -->
@@ -1101,7 +1183,6 @@
                         <div class="sheet-th"><div class="sheet-number-width">%</div></div>
                         <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
                     </div>
-
                     <fieldset class="repeating_professionalskill">
                         <div class="sheet-flex">
                             <div class="sheet-td sheet-grow">
@@ -1119,7 +1200,7 @@
                             <div class="sheet-td"><input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span></div>
                             <div class="sheet-td">
                                 <select class="sheet-number-width sheet-text-center" title="@{$ID_char1}" name="attr_char1">
-                                    <option value="0">-</option>
+                                    <option value="0" selected>-</option>
                                     <option value="@{str}" data-i18n="str-u">STR</option>
                                     <option value="@{con}" data-i18n="con-u">CON</option>
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
@@ -1130,8 +1211,8 @@
                                 </select>
                             </div>
                             <div class="sheet-td">
-                                <select class="sheet-number-width sheet-text-center" title="@{$ID_char2}" name="attr_char1">
-                                    <option value="0">-</option>
+                                <select class="sheet-number-width sheet-text-center" title="@{$ID_char2}" name="attr_char2">
+                                    <option value="0" selected>-</option>
                                     <option value="@{str}" data-i18n="str-u">STR</option>
                                     <option value="@{con}" data-i18n="con-u">CON</option>
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
@@ -1162,6 +1243,130 @@
                             </div>
                             <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
                             <input type="hidden" name="attr_encumbered" value="0">
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <!-- Passions -->
+                <div>
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="passion">Passions</div></div>
+                        <div class="sheet-th"><div class="sheet-checkbox-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                        <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
+                    </div>
+                    <fieldset class="repeating_passion">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow">
+                                <div class="sheet-full-width sheet-hover-btn">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                                    <input type="hidden" name="attr_id" value="unset">
+                                </div>
+                            </div>
+                            <div class="sheet-td"><button type="action" class="sheet-pictos" data-i18n-title="set_augmentation" name="act_augment">&</button></div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{$ID_passion}" name="roll_passion" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}">t</button>
+                            </div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{$ID_total}" name="attr_total" value="0" step="1"  min="0"></div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">y</span></div>
+                        </div>
+                        <input type="hidden" class="sheet-wide-toggle" name="attr_details" value="0">
+                        <div class="sheet-anti-toggle">
+                            <span class="sheet-details-toggle" name="attr_notes"></span>
+                        </div>
+                        <div class="sheet-toggle">
+                            <div class="sheet-flex sheet-flex-wrap sheet-gap">
+                                <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
+                                <button type="roll" title="%{$ID_waxorwane}" name="roll_waxorwane" value="{{'@{roll_display}&{template:default} {{improvestyle=1}} {{name=@{name}}} {{character=@{character_name}}} {{^{weak}=+/-[[1d10]]%}} {{^{moderate}=+/-[[1d10+5]]%}} {{^{strong}=+/-[[1d10+10]]%}}'}}" data-i18n="wax_or_wane">Wax or Wane</button>
+                                <button type="action" class="sheet-social-conflict" name="act_set-social-offense" data-i18n="set_social_offense">Set Social Offense</button>
+                                <button type="action" class="sheet-social-conflict" name="act_set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
+                                <button type="action" class="sheet-spirits" name="act_set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
+                                <div class="sheet-grow sheet-flex">
+                                    <div><label class="sheet-left sheet-rmargin" data-i18n="tags">Tags</label></div>
+                                    <div class="sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_tags}" name="attr_tags"></div>
+                                </div>
+                            </div>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Dependencies -->
+                <input type="hidden" class="sheet-toggle" name="attr_dependencies_enabled" value="0">
+                <div class="sheet-toggle">
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="dependency">Dependency</div></div>
+                        <div class="sheet-th"><div class="sheet-checkbox-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="increased_for_xp">3</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                        <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
+                    </div>
+                    <fieldset class="repeating_dependency">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow">
+                                <div class="sheet-full-width sheet-hover-btn">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                                    <input type="hidden" name="attr_id" value="unset">
+                                </div>
+                            </div>
+                            <div class="sheet-td"><button type="action" class="sheet-pictos" data-i18n-title="set_augmentation" name="act_augment">&</button></div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{$ID_passion}" name="roll_dependency" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}">t</button>
+                            </div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span></div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{$ID_total}" name="attr_total" value="0" step="1"  min="0"></div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">y</span></div>
+                        </div>
+                        <input type="hidden" class="sheet-wide-toggle" name="attr_details" value="0">
+                        <div class="sheet-anti-toggle">
+                            <span class="sheet-details-toggle" name="attr_notes"></span>
+                        </div>
+                        <div class="sheet-toggle">
+                            <div class="sheet-flex sheet-flex-wrap sheet-gap">
+                                <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
+                            </div>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                        </div>
+                    </fieldset>
+                    <input type="hidden" name="attr_tenacity_dependencies" value="0">
+                </div>
+
+                <!-- Peculiarities -->
+                <div class="sheet-setting-option sheet-os">
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-grow"><div class="sheet-full-width" data-i18n="peculiarities">Peculiarities</div></div>
+                        <div class="sheet-th"><div class="sheet-checkbox-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                        <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
+                    </div>
+                    <fieldset class="repeating_peculiarity">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow">
+                                <div class="sheet-full-width sheet-hover-btn">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                                    <input type="hidden" name="attr_id" value="unset">
+                                </div>
+                            </div>
+                            <div class="sheet-td"><button type="action" class="sheet-pictos" data-i18n-title="set_augmentation" name="act_augment">&</button></div>
+                            <div class="sheet-td">
+                                <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{$ID_passion}" name="roll_peculiarity" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}">t</button>
+                            </div>
+                            <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{$ID_total}" name="attr_total" value="0" step="1"  min="0"></div>
+                            <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">y</span></div>
+                        </div>
+                        <input type="hidden" class="sheet-wide-toggle" name="attr_details" value="0">
+                        <div class="sheet-anti-toggle">
+                            <span class="sheet-details-toggle" name="attr_notes"></span>
+                        </div>
+                        <div class="sheet-toggle">
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
                         </div>
                     </fieldset>
                 </div>
@@ -1583,7 +1788,7 @@
     <!-- Gear, ENC & Wealth -->
     <div id="gear" class="sheet-flex sheet-gap sheet-anchor-adjust-x2 sheet-creature">
         <!-- Gear -->
-        <div class="sheet-section sheet-half-col">
+        <div class="sheet-section sheet-half-width">
             <h2 data-i18n="gear">Gear</h2>
 
             <div class="sheet-flex">
@@ -1631,7 +1836,7 @@
         </div>
 
         <!-- Wealth & ENC -->
-        <div class="sheet-half-col">
+        <div class="sheet-half-width">
             <!-- Wealth -->
             <div class="sheet-section sheet-full-width sheet-creature">
                 <h2 data-i18n="wealth">Wealth</h2>
@@ -1741,33 +1946,33 @@
         <h2 data-i18n="background">Background</h2>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="organizations">Organizations</label>
                 <textarea class="sheet-background-notes" title="@{cults_notes}" name="attr_cults_notes"></textarea>
             </div>
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="contacts">Contacts</label>
                 <textarea class="sheet-background-notes" title="@{contacts_notes}" name="attr_contacts_notes"></textarea>
             </div>
         </div>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="community">Community</label>
                 <textarea class="sheet-background-notes" title="@{community_notes}" name="attr_community_notes"></textarea>
             </div>
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="allies">Allies</label>
                 <textarea class="sheet-background-notes" title="@{allies_notes}" name="attr_allies_notes"></textarea>
             </div>
         </div>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="family">Family</label>
                 <textarea class="sheet-background-notes" title="@{family_notes}" name="attr_family_notes"></textarea>
             </div>
-            <div class="sheet-half-col">
+            <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="enemies">Enemies</label>
                 <textarea class="sheet-background-notes" title="@{enemies_notes}" name="attr_enemies_notes"></textarea>
             </div>

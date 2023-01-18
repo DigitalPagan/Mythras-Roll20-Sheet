@@ -119,30 +119,6 @@
                 </select>
                 <input type="hidden" name="attr_luck_points_rank" value="0">
                 <br>
-                <!-- Magic Points Enabled Option -->
-                <label class="sheet-left sheet-rmargin" data-i18n="magic_points">Magic Points</label>
-                <select name="attr_magic_points_enabled_option">
-                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
-                    <option value="1" data-i18n="enabled">Enabled</option>
-                    <option value="0" data-i18n="disabled">Disabled</option>
-                </select>
-                <br>
-                <!-- Prana Points Enabled Option -->
-                <label class="sheet-left sheet-rmargin" data-i18n="prana_points">Prana Points</label>
-                <select name="attr_prana_points_enabled_option">
-                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
-                    <option value="1" data-i18n="enabled">Enabled</option>
-                    <option value="0" data-i18n="disabled">Disabled</option>
-                </select>
-                <br>
-                <!-- Power Points Enabled Option -->
-                <label class="sheet-left sheet-rmargin" data-i18n="power_points">Power Points</label>
-                <select name="attr_power_points_enabled_option">
-                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
-                    <option value="1" data-i18n="enabled">Enabled</option>
-                    <option value="0" data-i18n="disabled">Disabled</option>
-                </select>
-                <br>
                 <!-- Tenacity Option -->
                 <label class="sheet-left sheet-rmargin" data-i18n="tenacity">Tenacity</label>
                 <select name="attr_tenacity_enabled_option">
@@ -153,7 +129,15 @@
                 <br>
 
                 <!-- Skills -->
-                <h3 data-i18n="skills">Skills</h3>
+                <h3><span data-i18n="skills">Skills</span>/<span data-i18n="passions">Passions</span></h3>
+                <label class="sheet-left sheet-rmargin" data-i18n="dependencies">Dependencies</label>
+                <select name="attr_dependencies_enabled_option">
+                    <option value="default" data-i18n="setting_default" selected>Setting Default</option>
+                    <option value="1" data-i18n="enabled">Enabled</option>
+                    <option value="0" data-i18n="disabled">Disabled</option>
+                </select>
+                <br>
+                <!-- Herculan Modifier Option -->
                 <label class="sheet-left sheet-rmargin" data-i18n="herculean_modifier">Herculean Modifier</label>
                 <select name="attr_herculean_mod_option">
                     <option value="default" data-i18n="setting_default" selected>Setting Default</option>

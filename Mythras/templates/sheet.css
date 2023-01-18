@@ -127,9 +127,6 @@ div.sheet-space-around {
     display: flex;
     justify-content: space-around;
 }
-div.sheet-half-col {
-    width: 50%;
-}
 .sheet-grow {
     flex-grow: 1;
 }
@@ -349,7 +346,7 @@ input.sheet-toggle:not([value="1"]) + .sheet-toggle,
 input[type="checkbox"].sheet-toggle:not(:checked) + .sheet-toggle,
 input.sheet-toggle[value="1"] + .sheet-anti-toggle,
 input[type="checkbox"].sheet-toggle:checked + .sheet-anti-toggle {
-    display: none;
+    display: none !important;
 }
 
 input.sheet-wide-toggle:not([value="1"]) ~ .sheet-toggle,

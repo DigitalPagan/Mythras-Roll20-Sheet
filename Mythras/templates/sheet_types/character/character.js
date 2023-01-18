@@ -35,6 +35,8 @@ characteristicAttrs.forEach(char => {
                                 v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
                             }
 
+                            /* TODO calc allstdskills & proskills & combat styles */
+
                             let newEncAttrs = calcEncAndArmorPenalty(repeatingIds, v);
                             /* Update v with new values need for attribute calculations */
                             v = {...v, ...newEncAttrs};
@@ -514,7 +516,7 @@ function calcSpiritIntensity(v) {
 }
 
 /* Tenacity Points */
-const tenacityGetAttrs = ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies'];
+const tenacityGetAttrs = ['pow', 'tenacity_other', 'tenacity_temp', 'tenacity', 'tenacity_max', 'tenacity_dependencies', 'apply_dependencies_penalty'];
 /**
  * Calculate Tenacity points
  * @param v attrs needed for calculation, tenacityPointsGetAttrs
@@ -528,28 +530,30 @@ function calcTenacity(v, sourceAttribute) {
     const tenacityTemp = parseInt(v['tenacity_temp']) || 0;
     const tenacityCurr = parseInt(v['tenacity']) || 0;
     const tenacityMax = parseInt(v['tenacity_max']) || 0;
-    const tenacityDeps = parseInt(v['tenacity_dependencies']) || 0;
-    newAttrs['tenacity_base'] = pow + tenacityOther;
+    let tenacityDeps = 0;
+    if (v['apply_dependencies_penalty'] === '1') {
+        tenacityDeps = parseInt(v['tenacity_dependencies']) || 0;
+    }
+    newAttrs['tenacity_base'] = pow + tenacityOther + tenacityDeps;
 
     let diffVal;
     if (sourceAttribute === 'tenacity_max') {
         newAttrs['tenacity_temp'] = tenacityMax - newAttrs['tenacity_base'];
         diffVal = newAttrs['tenacity_temp'] - tenacityTemp;
     } else {
-        newAttrs['tenacity_max'] = newAttrs['tenacity_base'] + tenacityTemp + tenacityDeps;
+        newAttrs['tenacity_max'] = newAttrs['tenacity_base'] + tenacityTemp;
         diffVal = newAttrs['tenacity_max'] - tenacityMax;
     }
 
     newAttrs['tenacity'] = tenacityCurr + diffVal;
     return newAttrs;
 }
-on('change:tenacity_other change:tenacity_max', function(event) {
+on('change:tenacity_other change:tenacity_max change:apply_dependencies_penalty', function(event) {
     if (event.sourceType === "sheetworker") {return;}
     getAttrs(tenacityGetAttrs, function(v) {
         setAttrs(calcTenacity(v, event.sourceAttribute));
     });
 });
-/* TODO Trigger on dependencies change */
 
 /* Hit Locations */
 const hitLocationTable = {
@@ -1317,8 +1321,135 @@ on(`clicked:willpower-set-spirit-combat`, function(event) {
 });
 
 /* Professional Skills, Combat Styles & Passions */
-/* TODO trigger skill calculation */
-on('clicked:repeating_combatstyle:augment clicked:repeating_professionalskill:augment clicked:repeating_passion:augment', function(event) {
+/**
+ * Will read the base char value selected for a skill and parse it into a value
+ * @param charOption the char value still in autocalc format for historical compatibility
+ * @param v the got attributes needed, characteristicAttrs
+ * @returns {number|number|number}
+ */
+function parseBaseChar(charOption, v) {
+    if (charOption === '@{str}') {
+        return parseInt(v['str']) || 0;
+    } else if (charOption === '@{con}') {
+        return parseInt(v['con']) || 0;
+    } else if (charOption === '@{siz}') {
+        return parseInt(v['siz']) || 0;
+    } else if (charOption === '@{dex}') {
+        return parseInt(v['dex']) || 0;
+    } else if (charOption === '@{int}') {
+        return parseInt(v['int']) || 0;
+    } else if (charOption === '@{pow}') {
+        return parseInt(v['pow']) || 0;
+    } else if (charOption === '@{cha}') {
+        return parseInt(v['cha']) || 0;
+    } else {
+        return 0;
+    }
+}
+function calcProSkill(skillId, v, sourceAttribute) {
+    let newAttrs = {};
+    /* If a str or dex skill then it is affected by encumbrance */
+    if (v['${skillId}_char1'] === '@{str}' || v['${skillId}_char1'] === '@{dex}' ||
+    v['${skillId}_char2'] === '@{str}' || v['${skillId}_char2'] === '@{dex}') {
+        newAttrs[`${skillId}_encumbered`] = 1;
+    } else {
+        newAttrs[`${skillId}_encumbered`] = 0;
+    }
+    const char1 = parseBaseChar(v[`${skillId}_char1`], v);
+    const char2 = parseBaseChar(v[`${skillId}_char2`], v);
+    if (sourceAttribute === `${skillId}_total`) {
+        const skill = parseInt(v[`${skillId}_total`]) || 0;
+        newAttrs[`${skillId}_other`] = skill - char1 - char2;
+    } else {
+        const skillOther = parseInt(v[`${skillId}_other`]) || 0;
+        newAttrs[`${skillId}_total`] = char1 + char2 + skillOther;
+        /* for spirit and social skills we set the new value in v so those calcs may use the new value */
+        v[`${skillId}_total`] = newAttrs[`${skillId}_total`];
+    }
+
+    let newSpiritDamageAttrs = {};
+    /* We loose case as we copy skillIds into the spirit/social associated fields, so we need to normalize the checks */
+    if (v['spirit_combat_skill_id'].toLowerCase() === skillId.toLowerCase()) {
+        newAttrs['spirit_combat_skill_name'] = v[`${skillId}_name`];
+        newAttrs['spirit_combat_skill_total'] = v[`${skillId}_total`];
+        newAttrs['spirit_combat_skill_notes'] = v[`${skillId}_notes`];
+
+        newSpiritDamageAttrs = calcSpiritDamage({...v, ...newAttrs});
+    }
+
+    let newSocialDamageAttrs = {};
+    if (v['social_offense_id'].toLowerCase() === skillId.toLowerCase()) {
+        newAttrs['social_offense_name'] =  v[`${skillId}_name`];
+        newAttrs['social_offense_total'] = v[`${skillId}_total`];
+        newAttrs['social_offense_notes'] = v[`${skillId}_notes`];
+
+        newSocialDamageAttrs = calcSocialDamage({...v, ...newAttrs});
+    }
+
+    if (v['social_defense_id'].toLowerCase() === skillId.toLowerCase()) {
+        newAttrs['social_defense_name'] =  v[`${skillId}_name`];
+        newAttrs['social_defense_total'] = v[`${skillId}_total`];
+        newAttrs['social_defense_notes'] = v[`${skillId}_notes`];
+    }
+
+    return {
+        ...newAttrs,
+        ...newSpiritDamageAttrs,
+        ...newSocialDamageAttrs
+    }
+}
+on('change:repeating_professionalskill:total change:repeating_professionalskill:notes change:repeating_professionalskill:name change:repeating_professionalskill:char1 change:repeating_professionalskill:char2 change:repeating_combatstyle:total change:repeating_combatstyle:notes change:repeating_combatstyle:name change:repeating_combatstyle:char1 change:repeating_combatstyle:char2', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_${type}_${id}_total`, `repeating_${type}_${id}_other`, `repeating_${type}_${id}_notes`, `repeating_${type}_${id}_name`,
+        `repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`,  'social_defense_id'].concat(
+            characteristicAttrs, spiritDamageGetAttrs, socialDamageGetAttrs), function(v) {
+        setAttrs(calcProSkill(`repeating_${type}_${id}`, v, event.sourceAttribute));
+    });
+});
+function calcPassion(skillId, v) {
+    let newAttrs = {};
+    let newSpiritDamageAttrs = {};
+    /* We loose case as we copy skillIds into the spirit/social associated fields, so we need to normalize the checks */
+    if (v['spirit_combat_skill_id'].toLowerCase() === skillId.toLowerCase()) {
+        newAttrs['spirit_combat_skill_name'] = v[`${skillId}_name`];
+        newAttrs['spirit_combat_skill_total'] = v[`${skillId}_total`];
+        newAttrs['spirit_combat_skill_notes'] = v[`${skillId}_notes`];
+
+        newSpiritDamageAttrs = calcSpiritDamage({...v, ...newAttrs});
+    }
+
+    let newSocialDamageAttrs = {};
+    if (v['social_offense_id'].toLowerCase() === skillId.toLowerCase()) {
+        newAttrs['social_offense_name'] =  v[`${skillId}_name`];
+        newAttrs['social_offense_total'] = v[`${skillId}_total`];
+        newAttrs['social_offense_notes'] = v[`${skillId}_notes`];
+
+        newSocialDamageAttrs = calcSocialDamage({...v, ...newAttrs});
+    }
+
+    if (v['social_defense_id'].toLowerCase() === skillId.toLowerCase()) {
+        newAttrs['social_defense_name'] =  v[`${skillId}_name`];
+        newAttrs['social_defense_total'] = v[`${skillId}_total`];
+        newAttrs['social_defense_notes'] = v[`${skillId}_notes`];
+    }
+
+    return {
+        ...newAttrs,
+        ...newSpiritDamageAttrs,
+        ...newSocialDamageAttrs
+    }
+}
+on('change:repeating_passion:total change:repeating_passion:notes change:repeating_passion:name', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_passion_${id}_total`, `repeating_passion_${id}_notes`, `repeating_passion_${id}_name`,
+        'social_defense_id'].concat(spiritDamageGetAttrs, socialDamageGetAttrs), function(v) {
+        setAttrs(calcPassion(`repeating_passion_${id}`, v));
+    });
+});
+on('clicked:repeating_combatstyle:augment clicked:repeating_professionalskill:augment clicked:repeating_passion:augment clicked:repeating_dependency:augment clicked:repeating_peculiarity:augment', function(event) {
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     getAttrs([`repeating_${type}_${id}_total`], function(v) {
@@ -1331,7 +1462,7 @@ on('clicked:repeating_combatstyle:augment clicked:repeating_professionalskill:au
         });
     });
 });
-on('clicked:repeating_combatstyle:set-social-offense clicked:repeating_professionalskill:set-social-offense clicked:repeating_passion:set-social-offense', function(event) {
+on('clicked:repeating_professionalskill:set-social-offense clicked:repeating_passion:set-social-offense', function(event) {
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     getAttrs([`repeating_${type}_${id}_name`, `repeating_${type}_${id}_total`, `repeating_${type}_${id}_notes`].concat(socialDamageGetAttrs), function(v) {
@@ -1348,7 +1479,7 @@ on('clicked:repeating_combatstyle:set-social-offense clicked:repeating_professio
         });
     });
 });
-on('clicked:repeating_combatstyle:set-social-defense clicked:repeating_professionalskill:set-social-defense clicked:repeating_passion:set-social-defense', function(event) {
+on('clicked:repeating_professionalskill:set-social-defense clicked:repeating_passion:set-social-defense', function(event) {
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
     getAttrs([`repeating_${type}_${id}_name`, `repeating_${type}_${id}_total`, `repeating_${type}_${id}_notes`], function(v) {
@@ -1362,20 +1493,43 @@ on('clicked:repeating_combatstyle:set-social-defense clicked:repeating_professio
         setAttrs(newAttrs);
     });
 });
-on(`clicked:repeating_professionalskill:set-spirit-combat`, function(event) {
+on(`clicked:repeating_professionalskill:set-spirit-combat clicked:repeating_passion:set-spirit-combat`, function(event) {
+    const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
-    getAttrs([`repeating_professionalskill_${id}_name`, `repeating_professionalskill_${id}_total`,
-        `repeating_professionalskill_${id}_notes`].concat(spiritDamageGetAttrs), function(v) {
+    getAttrs([`repeating_${type}_${id}_name`, `repeating_${type}_${id}_total`,
+        `repeating_${type}_${id}_notes`].concat(spiritDamageGetAttrs), function(v) {
         const newAttrs = {
-            spirit_combat_skill_id: `repeating_professionalskill_${id}`,
-            spirit_combat_skill_name: v[`repeating_professionalskill_${id}_name`],
-            spirit_combat_skill_total: v[`repeating_professionalskill_${id}_total`],
-            spirit_combat_skill_notes: v[`repeating_professionalskill_${id}_notes`]
+            spirit_combat_skill_id: `repeating_${type}_${id}`,
+            spirit_combat_skill_name: v[`repeating_${type}_${id}_name`],
+            spirit_combat_skill_total: v[`repeating_${type}_${id}_total`],
+            spirit_combat_skill_notes: v[`repeating_${type}_${id}_notes`]
         };
 
         setAttrs({
             ...newAttrs,
             ...calcSpiritDamage({...v, ...newAttrs})
+        });
+    });
+});
+
+/* Dependency Penalty to Tenacity */
+on(`change:repeating_dependency:total remove:repeating_dependency`, function(event) {
+    getSectionIDs("repeating_dependency", function(dependencyIds) {
+        let fetchAttrs = [];
+        dependencyIds.forEach(id => {
+            fetchAttrs.push(`repeating_dependency_${id}_total`);
+        });
+        getAttrs(fetchAttrs.concat(tenacityGetAttrs), function(v) {
+            let newAttrs = {tenacity_dependencies: 0};
+            dependencyIds.forEach(id => {
+                const depTotal = parseInt(v[`repeating_dependency_${id}_total`]) || 0;
+                const depPenalty = Math.floor(depTotal/20);
+                newAttrs['tenacity_dependencies'] = newAttrs['tenacity_dependencies'] - depPenalty;
+            });
+            setAttrs({
+                ...newAttrs,
+                ...calcTenacity({...v, ...newAttrs}, event.sourceAttribute)
+            });
         });
     });
 });
@@ -1546,9 +1700,7 @@ on("change:location1_armor_enc change:location1_armor_equipped change:location2_
 });
 
 /* Repeating IDs */
-on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_meleeweapon " +
-    "change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_condition " +
-    "change:repeating_superpowerlimit change:repeating_tradition change:repeating_power change:repeating_feature", function(event) {
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_ability change:repeating_superpowerlimit", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
@@ -1577,26 +1729,6 @@ const cultRankMap = {
     'high priest': 5,
     'spirit lord': 5
 };
-/**
- * Sanitizes a name from import data to avoid bugs with buttons and macros in the sheet (removes parenthesis) and will
- * set the name to the character's actual name if a major character import or type if minor character import
- * @param importName
- * @param importType
- * @returns {string}
- */
-function getImportName(importName, importType) {
-    if (importName.includes('(')) {
-        if (importType === 'major') {
-            return importName.split('(')[0].replace(/[()]/g, '').trim();
-        } else {
-            let [start, ...end] = importName.split('(');
-            end = end.join("(");
-            return end.replace(/[()]/g, '').trim();
-        }
-    } else {
-        return importName.replace(/[()]/g, '').trim();
-    }
-}
 /**
  * Imports JSON data from the Mythras Encounter Generator or other sources which use the same data format
  */
@@ -1641,7 +1773,7 @@ on("clicked:import", function() {
 
             /* Import Info */
             if (debug) {console.log('Importing Info');}
-            /* Due to differences in parsing we will import name and species after sheet type */
+            newAttrs['character_name'] = characterData['name'];
 
             if (characterData["cults"]) {
                 if (characterData["cults"][0] !== []) {
@@ -1690,7 +1822,6 @@ on("clicked:import", function() {
                     newAttrs['type'] = 'creature';
                 }
             }
-            newAttrs['character_name'] = getImportName(characterData['name'], v['import_type']);
 
             /* Import Attributes */
             if (debug) {console.log("Importing attributes");}
@@ -1817,6 +1948,9 @@ function upgradeCharacter3Dot0() {
             newAttrs[`${char}_base`] = charCurr - charTemp;
         });
 
+        /* TODO fix base values */
+        /* TODO Copy prana/power to magic points */
+
         /* Convert action_points_add_one to just +1 in other */
         if (v['action_points_add_one'] === '1') {
             const actionPointsOther = parseInt(v['action_points_other']) || 0;
@@ -1835,6 +1969,14 @@ function upgradeCharacter3Dot0() {
                 ...calcLocationHP('1', {...v, ...hitLocationTable['simplified']})
             };
         }
+
+        /* TODO combat style traits moved into notes */
+
+        /* TODO remove augment and penalty form the skill/passion totals */
+
+        /* TODO merge languages into professional skill */
+
+        /* TODO merge magic skills into professional skills with tags */
 
         /* Convert income */
         let newIncome = "";

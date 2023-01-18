@@ -1,12 +1,14 @@
 const debug=1
 
 /* TODO changing sheet type sets hit table rolls */
+/* TODO changing sheet type sets standard skills display */
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "magic_points_enabled", "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "spirits_enabled", "tenacity_enabled"];
+const campaignSettings = ["action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "magic_points_enabled", "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "action_points_calc": "calculate",
+        "dependencies_enabled": 0,
         "extended_conflict_enabled": 0,
         "herculean_mod": ".1",
         "luck_points_rank": 0,
@@ -30,10 +32,11 @@ const campaginSettingDefaults = {
     },
     "fioracitta": {},
     "luther_arkwright": {
-        "tenacity_enabled": 1,
+        "dependencies_enabled": 1,
         "magic_points_enabled": 0,
         "prana_points_enabled": 1,
-        "spirits_enabled": 0
+        "spirits_enabled": 0,
+        "tenacity_enabled": 1,
     },
     "lyonesse": {},
     "m-space": {
