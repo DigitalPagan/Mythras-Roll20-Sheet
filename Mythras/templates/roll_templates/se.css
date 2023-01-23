@@ -1,0 +1,35 @@
+/* SE Roll Template Styles */
+.sheet-rolltemplate-se {
+    background: white;
+    font-family: 'Merriweather', serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: black;
+}
+.sheet-rolltemplate-darkmode {
+    background: #1f1f1f;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-se div.sheet-border {
+    border: 2px solid black;
+    font-family: 'Merriweather', serif;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 5px;
+}
+.sheet-rolltemplate-darkmode div.sheet-border {
+    border: 2px solid gray;
+}
+.sheet-rolltemplate-se div.sheet-header {
+    background: black;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-se div.sheet-character {
+    font-size: 11px;
+    text-align: center;
+}
+.sheet-rolltemplate-se div.sheet-name {
+    font-family: "Sorts Mill Goudy", serif;
+    text-align: center;
+    font-size: 15px;
+}

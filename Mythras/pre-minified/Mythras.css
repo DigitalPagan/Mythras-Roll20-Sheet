@@ -637,13 +637,13 @@ body.sheet-darkmode .ui-dialog .charsheet input[type="checkbox"] + span {
     padding: 0 2px 0;
 }
 .ui-dialog .charsheet button:hover {
-    text-decoration: underline;
-    color: royalblue;
-}
-.ui-dialog .charsheet button:active {
-    border-color: black;
+    border: solid 1px black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+    text-shadow: none;
+}
+.ui-dialog .charsheet button:active {
+    color: royalblue;
 }
 body.sheet-darkmode .ui-dialog .charsheet button {
     border-color: black;
@@ -651,10 +651,6 @@ body.sheet-darkmode .ui-dialog .charsheet button {
     color: whitesmoke;
 }
 body.sheet-darkmode .ui-dialog .charsheet button:hover {
-    color: royalblue;
-}
-body.sheet-darkmode .ui-dialog .charsheet button:active {
-    border-color: gray;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black;
 }
@@ -1306,6 +1302,91 @@ textarea.sheet-character-notes {
     font-weight: inherit;
 }
 
+/* SE Menu Roll Template Styles */
+.sheet-rolltemplate-se-menu {
+    background: white;
+    font-family: 'Merriweather', serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: black;
+}
+.sheet-rolltemplate-darkmode {
+    background: #1f1f1f;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-se-menu div.sheet-border {
+    border: 2px solid black;
+    font-family: 'Merriweather', serif;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 5px;
+}
+.sheet-rolltemplate-darkmode div.sheet-border {
+    border: 2px solid gray;
+}
+.sheet-rolltemplate-se-menu div.sheet-header {
+    background: black;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-se-menu div.sheet-character {
+    font-size: 11px;
+    text-align: center;
+}
+.sheet-rolltemplate-se-menu div.sheet-name {
+    font-family: "Sorts Mill Goudy", serif;
+    text-align: center;
+    font-size: 15px;
+}
+
+.sheet-rolltemplate-se-menu div.sheet-table {
+    display: table;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+}
+.sheet-rolltemplate-se-menu div.sheet-tr {
+    display: table-row;
+}
+.sheet-rolltemplate-se-menu  div.sheet-tr:nth-child(odd) {
+    background: gainsboro;
+}
+.sheet-rolltemplate-darkmode  div.sheet-tr:nth-child(odd) {
+    background: #333333;
+}
+.sheet-rolltemplate-se-menu div.sheet-th {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px 2px;
+    white-space: nowrap;
+    background: dimgray;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-se-menu div.sheet-td {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px 2px;
+    white-space: nowrap;
+}
+
+.sheet-rolltemplate-se-menu a {
+    font-size: 12px;
+    font-family: 'Merriweather', serif;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: black !important;
+    text-decoration: none !important;
+}
+.sheet-rolltemplate-se-menu a:hover {
+    text-decoration: underline !important;
+}
+.sheet-rolltemplate-darkmode a {
+    color: whitesmoke !important;
+}
 /* Skill Roll Template Styles */
 .sheet-rolltemplate-skill {
     background: white;
@@ -1391,6 +1472,17 @@ textarea.sheet-character-notes {
     vertical-align: middle;
     padding: 0;
     white-space: nowrap;
+}
+.sheet-rolltemplate-skill div.sheet-special-header {
+    background: dimgray;
+    color: whitesmoke;
+    text-align: center;
+ }
+
+.sheet-rolltemplate-skill div.sheet-space-between {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px;
 }
 
 .sheet-rolltemplate-skill .sheet-pictos {
@@ -1504,11 +1596,11 @@ textarea.sheet-character-notes {
     flex-grow: 1;
 }
 
-/*.sheet-rolltemplate-skill a {
+.sheet-rolltemplate-skill a {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 1em !important;
-    border: solid 1px gray !important;
+    border: solid 1px black !important;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black !important;
     padding: 0 2px 0 !important;
@@ -1521,7 +1613,17 @@ textarea.sheet-character-notes {
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke !important;
     text-shadow: none;
-}*/
+}
+.sheet-rolltemplate-darkmode a {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+}
+.sheet-rolltemplate-darkmode a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+}
 
 .sheet-rolltemplate-skill .inlinerollresult,
 .sheet-rolltemplate-darkmode .inlinerollresult {

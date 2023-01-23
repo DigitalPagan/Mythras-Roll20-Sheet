@@ -941,52 +941,62 @@
         {{'{{/notes}}'}}
 
         {{'{{#combatstyle}}'}}
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n-title="special_effects" data-i18n="special_effects">Special Effects</span>:</div>
-            <div class="sheet-value">[Choose](~{{'{{character_id}}'}}|special_effects)</div>
+        <div class="sheet-special-header" data-i18n="combat">Combat</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
+            <div>
+                [<span data-i18n="offensive">Offensive</span>](~{{'{{character_id}}'}}|offensive_combat_se_menu)
+                [<span data-i18n="defensive">Defensive</span>](~{{'{{character_id}}'}}|defensive_combat_se_menu)
+            </div>
         </div>
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="hit_location">Hit Location</span>:</div>
-            <div class="sheet-value">[Low](~target|hit_location_low) [Standard](~target|hit_location) [High](~target|hit_location_high)</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="hit_location">Hit Location</span>:</div>
+            <div>
+                [<span data-i18n="low">Low</span>](~target|hit_location_low)
+                [<span data-i18n="standard">Standard</span>](~target|hit_location)
+                [<span data-i18n="high">High</span>](~target|hit_location_high)
+            </div>
         </div>
         {{'{{#weapon_buttons}}'}}
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="weapon">Weapon</span>:</div>
-            <div class="sheet-value">{{'{{weapon_buttons}}'}}</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="weapons">Weapons</span>:</div>
+            <div>{{'{{weapon_buttons}}'}}</div>
         </div>
         {{'{{/weapon_buttons}}'}}
         {{'{{/combatstyle}}'}}
 
         {{'{{#spiritcombat}}'}}
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n-title="special_effects" data-i18n="special_effects">Special Effects</span>:</div>
-            <div class="sheet-value">[Choose](~{{'{{character_id}}'}}|special_effects)</div>
+        <div class="sheet-special-header" data-i18n="spirit_combat">Spirit Combat</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
+            <div>
+                [<span data-i18n="offensive">Offensive</span>](~{{'{{character_id}}'}}|offensive_spirit_se_menu)
+                [<span data-i18n="defensive">Defensive</span>](~{{'{{character_id}}'}}|defensive_spirit_se_menu)
+            </div>
         </div>
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="damage">Damage</span>:</div>
-            <div class="sheet-value">[Spirit Damage](~{{'{{character_id}}'}}|spirit_damage)</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="damage">Damage</span>:</div>
+            <div>[<span data-i18n="spirit_damage">Spirit Damage</span>](~{{'{{character_id}}'}}|spirit_damage)</div>
         </div>
         {{'{{/spiritcombat}}'}}
 
         {{'{{#socialoffense}}'}}
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n-title="special_effects" data-i18n="special_effects">Special Effects</span>:</div>
-            <div class="sheet-value">[Choose](~{{'{{character_id}}'}}|special_effects)</div>
+        <div class="sheet-special-header" data-i18n="social_conflict">Social Conflict</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
+            <div>[<span data-i18n="offensive">Offensive</span>](~{{'{{character_id}}'}}|offensive_social_se_menu)</div>
         </div>
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="hit_location">Hit Location</span>:</div>
-            <div class="sheet-value">[Resolution Pool](~{{'{{character_id}}'}}|resolution_pool)</div>
-        </div>
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n="damage">Damage</span>:</div>
-            <div class="sheet-value">[Social Damage](~{{'{{character_id}}'}}|social_damage)</div>
+        <div class="sheet-space-between">
+            [<span data-i18n="resolution_pool">Resolution Pool</span>](~{{'{{character_id}}'}}|resolution_pool)
+            [<span data-i18n="social_damage">Social Damage</span>](~{{'{{character_id}}'}}|social_damage)
         </div>
         {{'{{/socialoffense}}'}}
 
         {{'{{#socialdefense}}'}}
-        <div class="sheet-listitem">
-            <div class="sheet-key"><span data-i18n-title="special_effects" data-i18n="special_effects">Special Effects</span>:</div>
-            <div class="sheet-value">[Choose](~{{'{{character_id}}'}}|special_effects)</div>
+        <div class="sheet-special-header" data-i18n="social_conflict">Social Conflict</div>
+        <div class="sheet-space-between">
+            <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
+            <div>[<span data-i18n="defensive">Defensive</span>](~{{'{{character_id}}'}}|defensive_social_se_menu)</div>
         </div>
         {{'{{/socialdefense}}'}}
     </div>

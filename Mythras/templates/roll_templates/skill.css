@@ -84,6 +84,17 @@
     padding: 0;
     white-space: nowrap;
 }
+.sheet-rolltemplate-skill div.sheet-special-header {
+    background: dimgray;
+    color: whitesmoke;
+    text-align: center;
+ }
+
+.sheet-rolltemplate-skill div.sheet-space-between {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px;
+}
 
 .sheet-rolltemplate-skill .sheet-pictos {
     font-family: Pictos;
@@ -196,11 +207,11 @@
     flex-grow: 1;
 }
 
-/*.sheet-rolltemplate-skill a {
+.sheet-rolltemplate-skill a {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 1em !important;
-    border: solid 1px gray !important;
+    border: solid 1px black !important;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black !important;
     padding: 0 2px 0 !important;
@@ -213,7 +224,17 @@
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke !important;
     text-shadow: none;
-}*/
+}
+.sheet-rolltemplate-darkmode a {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
+    color: whitesmoke !important;
+}
+.sheet-rolltemplate-darkmode a:hover {
+    border: solid 1px black !important;
+    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
+    color: black !important;
+}
 
 .sheet-rolltemplate-skill .inlinerollresult,
 .sheet-rolltemplate-darkmode .inlinerollresult {

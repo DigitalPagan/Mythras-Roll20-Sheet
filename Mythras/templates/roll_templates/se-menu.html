@@ -1,0 +1,98 @@
+<!-- SE Menu Roll Template -->
+<!-- {{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=@{name}}} {{combat=1}} {{spiritcombat=1}} {{socialconflict=1}} {{offense=[[1]]}}'}} -->
+<rolltemplate class="sheet-rolltemplate-se-menu">
+    <div class="sheet-border">
+        <div class="sheet-header">
+            <div class="sheet-character">{{'{{character}}'}}</div>
+            <div class="sheet-name">{{'{{name}}'}}</div>
+        </div>
+
+        {{'{{#combat}}'}}
+        <div style="max-height: 200px; overflow: auto;">
+
+        </div>
+        {{'{{/combat}}'}}
+
+        {{'{{#spiritcombat}}'}}
+        <div class="sheet-table" data-i18n-list="spirit-se-order">
+            <div class="sheet-tr">
+                <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
+                <div class="sheet-th" data-i18n="conditions">Conditions</div>
+            </div>
+            <div class="sheet-tr" data-i18n-list-itme="bleed_essence">
+                <div class="sheet-td">[<span data-i18n="bleed_essence">Bleed Essence</span>](~{{'{{character_id}}'}}|bleed_essence_se)</div>
+                <div class="sheet-td" data-i18n="critical_only">Critical Only</div>
+            </div>
+            {{'{{#rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="compel_bargain">
+                <div class="sheet-td">[<span data-i18n="compel_bargain">Compel Bargain</span>](~{{'{{character_id}}'}}|compel_bargain_se)</div>
+                <div class="sheet-td"></div>
+            </div>
+            {{'{{/rollTotal() offense 1}}'}}
+            {{'{{#rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="drive_off">
+                <div class="sheet-td">[<span data-i18n="drive_off">Drive Off</span>](~{{'{{character_id}}'}}|drive_off_se)</div>
+                <div class="sheet-td" data-i18n="mortals_only">Mortals Only</div>
+            </div>
+            {{'{{/rollTotal() offense 1}}'}}
+            {{'{{#rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="leech_strength">
+                <div class="sheet-td">[<span data-i18n="leech_strength">Leech Strength</span>](~{{'{{character_id}}'}}|leech_strength_se)</div>
+                <div class="sheet-td" data-i18n="critical_only">Critical Only</div>
+            </div>
+            {{'{{/rollTotal() offense 1}}'}}
+            {{'{{#rollTotal() offense 0}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="obscure">
+                <div class="sheet-td">[<span data-i18n="obscure">Obscure</span>](~{{'{{character_id}}'}}|obscure_se)</div>
+                <div class="sheet-td" data-i18n="critical_only">Critical Only</div>
+            </div>
+            {{'{{/rollTotal() offense 0}}'}}
+            {{'{{#rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="possess">
+                <div class="sheet-td">[<span data-i18n="possess">Possess</span>](~{{'{{character_id}}'}}|possess_se)</div>
+                <div class="sheet-td" data-i18n="spirits_only">Spirits Only</div>
+            </div>
+            {{'{{/rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="psychic_stun">
+                <div class="sheet-td">[<span data-i18n="psychic_stun">Psychic Stun</span>](~{{'{{character_id}}'}}|psychic_stun_se)</div>
+                <div class="sheet-td"></div>
+            </div>
+            <div class="sheet-tr" data-i18n-list-itme="restrain">
+                <div class="sheet-td">[<span data-i18n="restrain">Restrain</span>](~{{'{{character_id}}'}}|restrain_se)</div>
+                <div class="sheet-td" data-i18n="mortals_only">Mortals Only</div>
+            </div>
+            {{'{{#rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="spirit_lance">
+                <div class="sheet-td">[<span data-i18n="spirit_lance">Spirit Lance</span>](~{{'{{character_id}}'}}|spirit_lance_se)</div>
+                <div class="sheet-td"></div>
+            </div>
+            {{'{{/rollTotal() offense 1}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="sunder_binding">
+                <div class="sheet-td">[<span data-i18n="sunder_binding">Sunder Binding</span>](~{{'{{character_id}}'}}|sunder_binding_se)</div>
+                <div class="sheet-td" data-i18n="spirit_fumbles">Spirit Fumbles</div>
+            </div>
+            <div class="sheet-tr" data-i18n-list-itme="supress_ability">
+                <div class="sheet-td">[<span data-i18n="supress_ability">Supress Ability</span>](~{{'{{character_id}}'}}|supress_ability_se)</div>
+                <div class="sheet-td" data-i18n="mortals_only">Mortals Only</div>
+            </div>
+            {{'{{#rollTotal() offense 0}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="turn_back">
+                <div class="sheet-td">[<span data-i18n="turn_back">Turn Back</span>](~{{'{{character_id}}'}}|turn_back_se)</div>
+                <div class="sheet-td"></div>
+            </div>
+            {{'{{/rollTotal() offense 0}}'}}
+            {{'{{#rollTotal() offense 0}}'}}
+            <div class="sheet-tr" data-i18n-list-itme="withdraw">
+                <div class="sheet-td">[<span data-i18n="withdraw">Withdraw</span>](~{{'{{character_id}}'}}|withdraw_se)</div>
+                <div class="sheet-td"></div>
+            </div>
+            {{'{{/rollTotal() offense 0}}'}}
+        </div>
+        {{'{{/spiritcombat}}'}}
+
+        {{'{{#socialconflict}}'}}
+        {{'{{/socialconflict}}'}}
+    </div>
+</rolltemplate>
+
+

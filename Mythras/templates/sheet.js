@@ -4,7 +4,7 @@ const debug=1
 /* TODO changing sheet type sets standard skills display */
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "magic_points_enabled", "prana_points_enabled", "power_points_enabled", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "spirits_enabled", "tenacity_enabled"];
+const campaignSettings = ["action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "action_points_calc": "calculate",
@@ -12,12 +12,10 @@ const campaginSettingDefaults = {
         "extended_conflict_enabled": 0,
         "herculean_mod": ".1",
         "luck_points_rank": 0,
-        "magic_points_enabled": 1,
-        "prana_points_enabled": 0,
-        "power_points_enabled": 0,
         "reach_enabled": 1,
         "simplified_combat_enabled": 0,
         "spirits_enabled": 1,
+        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
         "social_conflict_enabled": 1,
         "tenacity_enabled": 0
     },
@@ -26,9 +24,8 @@ const campaginSettingDefaults = {
         "luck_points_rank": 1
     },
     "destined": {
-        "magic_points_enabled": 0,
-        "power_points_enabled": 1,
-        "spirits_enabled": 0
+        "spirits_enabled": 0,
+        "standard_skills": ['athletics','brawn','conceal','deceit','drive','endurance','evade','first_aid','influence','insight','perception','research','stealth','streetwise','unarmed','willpower']
     },
     "fioracitta": {},
     "luther_arkwright": {
@@ -36,21 +33,26 @@ const campaginSettingDefaults = {
         "magic_points_enabled": 0,
         "prana_points_enabled": 1,
         "spirits_enabled": 0,
+        "standard_skills": ['athletics','brawn','conceal','customs','dance','deceit','endurance','evade','first_aid','home_parallel','influence','insight','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
         "tenacity_enabled": 1,
     },
-    "lyonesse": {},
+    "lyonesse": {
+        "standard_skills": ['athletics','boating','brawn','common_tongue','conceal','customs','dance','deceit','drive','eloquence','endurance','evade','first_aid','folk_lore','influence','insight','perception','ride','sing','stealth','swim','unarmed','willpower']
+    },
     "m-space": {
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
-        "magic_points_enabled": 0,
-        "power_points_enabled": 1,
         "reach_enabled": 0,
         "spirits_enabled": 0
     },
     "monster_island": {},
-    "mythic_babylon": {},
-    "mythic_britain": {},
+    "mythic_babylon": {
+        "standard_skills": ['athletics','boating','brawn','commerce','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','gaming','influence','insight','locale','native_tongue','perception','purity','ride','sing','stealth','swim','unarmed','willpower']
+    },
+    "mythic_britain": {
+        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','superstition','swim','unarmed','willpower']
+    },
     "mythic_constantinople": {},
     "mythras_imperative": {
         "action_points_calc": "set_2",
@@ -59,7 +61,8 @@ const campaginSettingDefaults = {
         "spirits_enabled": 0
     },
     "mythic_rome": {
-        "spirits_enabled": 0
+        "spirits_enabled": 0,
+        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','status','sing','stealth','swim','unarmed','willpower']
     },
     "odd_soot": {
         "action_points_calc": "set_2",
@@ -68,11 +71,9 @@ const campaginSettingDefaults = {
         "reach_enabled": 0,
         "spirits_enabled": 0
     },
-    "perceforest": {
-    },
+    "perceforest": {},
     "thennla": {},
     "worlds_united": {
-        "magic_points_enabled": 0,
         "tenacity_enabled": 1,
         "spirits_enabled": 0
     }
