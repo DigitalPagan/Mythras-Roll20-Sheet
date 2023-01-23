@@ -884,6 +884,31 @@
                     <input type="hidden" name="attr_social_defense_id" value="deceit">
                 </div>
             </div>
+
+            <div hidden>
+                <button type="roll" name="roll_REPLACE_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{REPLACE}}} {{^{conditions}=^{REPLACE}}}'}}"></button>
+                <!-- Social SE Buttons -->
+                <button type="roll" name="roll_offensive_social_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{socialconflict=1}} {{offense=[[1]]}}'}}"></button>
+                <button type="roll" name="roll_defensive_social_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{socialconflict=1}} {{offense=[[0]]}}'}}"></button>
+                <button type="roll" name="roll_accidental_humiliation_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{accidental_humiliation}}}'}}"></button>
+                <button type="roll" name="roll_choose_resolution_pool_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{choose_resolution_pool}}}'}}"></button>
+                <button type="roll" name="roll_circumvent_defense_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{circumvent_defense}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <button type="roll" name="roll_compel_capitulation_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_capitulation}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <button type="roll" name="roll_disarm_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{disarm_opponent}}}'}}"></button>
+                <button type="roll" name="roll_emotional_impale_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{emotional_impale}}}'}}"></button>
+                <button type="roll" name="roll_entangling_argument_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{entangling_argument}}}'}}"></button>
+                <button type="roll" name="roll_expose_flaws_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{expose_flaws}}}'}}"></button>
+                <button type="roll" name="roll_force_failure_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{force_failure}}} {{^{conditions}=^{fumble}}}'}}"></button>
+                <button type="roll" name="roll_ignore_confidence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{ignore_confidence}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <button type="roll" name="roll_maximise_damage_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{maximise_damage}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <button type="roll" name="roll_obfuscate_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{obfuscate_opponent}}}'}}"></button>
+                <button type="roll" name="roll_prepare_counter_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{prepare_counter}}}'}}"></button>
+                <button type="roll" name="roll_shake_confidence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{shake_confidence}}}'}}"></button>
+                <button type="roll" name="roll_sow_doubt_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sow_doubt}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <button type="roll" name="roll_stun_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{stun}}}'}}"></button>
+                <button type="roll" name="roll_trip_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}'}}"></button>
+                <button type="roll" name="roll_trip_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}'}}"></button>
+            </div>
         </div>
 
         <!-- Conditions -->
@@ -961,19 +986,20 @@
                 <input type="hidden" name="attr_spirit_combat_skill_total" value="22" readonly>
                 <input type="hidden" name="attr_spirit_combat_skill_notes" value="" readonly>
                 <div hidden>
+                    <!-- Spirit SE Buttons -->
                     <button type="roll" name="roll_offensive_spirit_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{spiritcombat=1}} {{offense=[[1]]}}'}}"></button>
                     <button type="roll" name="roll_defensive_spirit_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{spiritcombat=1}} {{offense=[[0]]}}'}}"></button>
-                    <button type="roll" name="roll_bleed_essence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bleed_essence}}} {{^{conditions}=^{critical_only}}}'}}"></button>
+                    <button type="roll" name="roll_bleed_essence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bleed_essence}}} {{^{conditions}=^{critical}}}'}}"></button>
                     <button type="roll" name="roll_compel_bargain_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_bargain}}}'}}"></button>
-                    <button type="roll" name="roll_drive_off_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{drive_off}}} {{^{conditions}=^{mortals_only}}}'}}"></button>
-                    <button type="roll" name="roll_leech_strength_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{leech_strength}}} {{^{conditions}=^{critical_only}}}'}}"></button>
-                    <button type="roll" name="roll_obscure_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{obscure}}} {{^{conditions}=^{critical_only}}}'}}"></button>
-                    <button type="roll" name="roll_possess_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{possess}}} {{^{conditions}=^{spirits_only}}}'}}"></button>
+                    <button type="roll" name="roll_drive_off_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{drive_off}}} {{^{conditions}=^{mortal}}}'}}"></button>
+                    <button type="roll" name="roll_leech_strength_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{leech_strength}}} {{^{conditions}=^{critical}}}'}}"></button>
+                    <button type="roll" name="roll_obscure_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{obscure}}} {{^{conditions}=^{critical}}}'}}"></button>
+                    <button type="roll" name="roll_possess_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{possess}}} {{^{conditions}=^{spirit}}}'}}"></button>
                     <button type="roll" name="roll_psychic_stun_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{psychic_stun}}}'}}"></button>
-                    <button type="roll" name="roll_restrain_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{restrain}}} {{^{conditions}=^{mortals_only}}}'}}"></button>
+                    <button type="roll" name="roll_restrain_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{restrain}}} {{^{conditions}=^{mortal}}}'}}"></button>
                     <button type="roll" name="roll_spirit_lance_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{spirit_lance}}}'}}"></button>
-                    <button type="roll" name="roll_sunder_binding_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sunder_binding}}} {{^{conditions}=^{spirit_fumbles}}}'}}"></button>
-                    <button type="roll" name="roll_supress_ability_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{supress_ability}}} {{^{conditions}=^{mortals_only}}}'}}"></button>
+                    <button type="roll" name="roll_sunder_binding_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sunder_binding}}} {{^{conditions}=^{fumble}}}'}}"></button>
+                    <button type="roll" name="roll_supress_ability_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{supress_ability}}} {{^{conditions}=^{mortal}}}'}}"></button>
                     <button type="roll" name="roll_turn_back_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{turn_back}}}'}}"></button>
                     <button type="roll" name="roll_withdraw_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{withdraw}}}'}}"></button>
                 </div>

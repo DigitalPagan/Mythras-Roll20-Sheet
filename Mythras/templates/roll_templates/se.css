@@ -6,7 +6,7 @@
     line-height: 18px;
     color: black;
 }
-.sheet-rolltemplate-darkmode {
+.sheet-rolltemplate-se.sheet-rolltemplate-darkmode {
     background: #1f1f1f;
     color: whitesmoke;
 }
@@ -17,7 +17,7 @@
     line-height: 18px;
     border-radius: 5px;
 }
-.sheet-rolltemplate-darkmode div.sheet-border {
+.sheet-rolltemplate-se.sheet-rolltemplate-darkmode div.sheet-border {
     border: 2px solid gray;
 }
 .sheet-rolltemplate-se div.sheet-header {

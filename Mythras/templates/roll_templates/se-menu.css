@@ -6,7 +6,7 @@
     line-height: 18px;
     color: black;
 }
-.sheet-rolltemplate-darkmode {
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode {
     background: #1f1f1f;
     color: whitesmoke;
 }
@@ -17,7 +17,7 @@
     line-height: 18px;
     border-radius: 5px;
 }
-.sheet-rolltemplate-darkmode div.sheet-border {
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode div.sheet-border {
     border: 2px solid gray;
 }
 .sheet-rolltemplate-se-menu div.sheet-header {
@@ -46,7 +46,7 @@
 .sheet-rolltemplate-se-menu  div.sheet-tr:nth-child(odd) {
     background: gainsboro;
 }
-.sheet-rolltemplate-darkmode  div.sheet-tr:nth-child(odd) {
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode  div.sheet-tr:nth-child(odd) {
     background: #333333;
 }
 .sheet-rolltemplate-se-menu div.sheet-th {
@@ -77,9 +77,17 @@
     color: black !important;
     text-decoration: none !important;
 }
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode a {
+    border: none !important;
+}
 .sheet-rolltemplate-se-menu a:hover {
+    color: black !important;
     text-decoration: underline !important;
 }
-.sheet-rolltemplate-darkmode a {
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode a:hover {
+    color: whitesmoke !important;
+    text-decoration: underline !important;
+}
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode a {
     color: whitesmoke !important;
 }

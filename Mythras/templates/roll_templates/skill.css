@@ -6,7 +6,7 @@
     line-height: 18px;
     color: black;
 }
-.sheet-rolltemplate-darkmode {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode {
     background: #1f1f1f;
     color: whitesmoke;
 }
@@ -17,7 +17,7 @@
     line-height: 18px;
     border-radius: 5px;
 }
-.sheet-rolltemplate-darkmode div.sheet-border {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-border {
     border: 2px solid gray;
 }
 .sheet-rolltemplate-skill div.sheet-header {
@@ -122,7 +122,7 @@
 .sheet-rolltemplate-skill div.sheet-listitem:nth-child(even) {
     background: gainsboro;
 }
-.sheet-rolltemplate-darkmode div.sheet-listitem:nth-child(even) {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-listitem:nth-child(even) {
     background: #1f1f1f;
 }
 .sheet-rolltemplate-skill div.sheet-very-easy {
@@ -132,7 +132,7 @@
     padding: 0 5px 0;
     background: #D9EDF7;
 }
-.sheet-rolltemplate-darkmode div.sheet-very-easy {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-very-easy {
     border: 1px solid gray;
     background: #123e54;
     color: whitesmoke;
@@ -144,7 +144,7 @@
     padding: 0 5px 0;
     background: #DFF0D8;
 }
-.sheet-rolltemplate-darkmode div.sheet-easy {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-easy {
     border: 1px solid gray;
     background: #29491d;
     color: whitesmoke;
@@ -156,7 +156,7 @@
     padding: 0 5px 0;
     background: gainsboro;
 }
-.sheet-rolltemplate-darkmode div.sheet-standard {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-standard {
     border: 1px solid gray;
     background: #595959;
     color: whitesmoke;
@@ -168,7 +168,7 @@
     padding: 0 5px 0;
     background: #fcf8e3;
 }
-.sheet-rolltemplate-darkmode div.sheet-hard {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-hard {
     border: 1px solid gray;
     background: #5c4f0a;
     color: whitesmoke;
@@ -180,7 +180,7 @@
     padding: 0 5px 0;
     background: #FFEBCC;
 }
-.sheet-rolltemplate-darkmode div.sheet-formidable {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-formidable {
     border: 1px solid gray;
     background: #992600;
     color: whitesmoke;
@@ -192,7 +192,7 @@
     padding: 0 5px 0;
     background: #f2dede;
 }
-.sheet-rolltemplate-darkmode div.sheet-herculean {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode div.sheet-herculean {
     border: 1px solid gray;
     background: #811818;
     color: whitesmoke;
@@ -225,19 +225,19 @@
     color: whitesmoke !important;
     text-shadow: none;
 }
-.sheet-rolltemplate-darkmode a {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode a {
     border: solid 1px black !important;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke !important;
 }
-.sheet-rolltemplate-darkmode a:hover {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode a:hover {
     border: solid 1px black !important;
     background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
     color: black !important;
 }
 
 .sheet-rolltemplate-skill .inlinerollresult,
-.sheet-rolltemplate-darkmode .inlinerollresult {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode .inlinerollresult {
     display: inline-block;
     text-align: center;
     padding: 0;
@@ -251,21 +251,21 @@
     font-family: 'Merriweather', serif;
 }
 .sheet-rolltemplate-skill .inlinerollresult.fullcrit,
-.sheet-rolltemplate-darkmode .inlinerollresult.fullcrit {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode .inlinerollresult.fullcrit {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
 .sheet-rolltemplate-skill .inlinerollresult.fullfail,
-.sheet-rolltemplate-darkmode .inlinerollresult.fullfail {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode .inlinerollresult.fullfail {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
 .sheet-rolltemplate-skill .inlinerollresult.importantroll,
-.sheet-rolltemplate-darkmode .inlinerollresult.importantroll {
+.sheet-rolltemplate-skill.sheet-rolltemplate-darkmode .inlinerollresult.importantroll {
     border: none !important;
     color: inherit;
     background: transparent !important;

@@ -6,7 +6,7 @@
     line-height: 18px;
     color: black;
 }
-.sheet-rolltemplate-darkmode {
+.sheet-rolltemplate-improvement.sheet-rolltemplate-darkmode {
     background: #1f1f1f;
     color: whitesmoke;
 }
@@ -48,7 +48,7 @@
 }
 
 .sheet-rolltemplate-improvement .inlinerollresult,
-.sheet-rolltemplate-darkmode .inlinerollresult {
+.sheet-rolltemplate-improvement.sheet-rolltemplate-darkmode .inlinerollresult {
     display: inline-block;
     text-align: center;
     padding: 0;
@@ -62,21 +62,21 @@
     font-family: 'Merriweather', serif;
 }
 .sheet-rolltemplate-improvement .inlinerollresult.fullcrit,
-.sheet-rolltemplate-darkmode .inlinerollresult.fullcrit {
+.sheet-rolltemplate-improvement.sheet-rolltemplate-darkmode .inlinerollresult.fullcrit {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
 .sheet-rolltemplate-improvement .inlinerollresult.fullfail,
-.sheet-rolltemplate-darkmode .inlinerollresult.fullfail {
+.sheet-rolltemplate-improvement.sheet-rolltemplate-darkmode .inlinerollresult.fullfail {
     border: none !important;
     color: inherit;
     background: transparent !important;
     font-weight: inherit;
 }
 .sheet-rolltemplate-improvement .inlinerollresult.importantroll,
-.sheet-rolltemplate-darkmode .inlinerollresult.importantroll {
+.sheet-rolltemplate-improvement.sheet-rolltemplate-darkmode .inlinerollresult.importantroll {
     border: none !important;
     color: inherit;
     background: transparent !important;
