@@ -1324,5 +1324,16 @@
     "shake_confidence": "Shake Confidence",
     "sow_doubt": "Sow Doubt",
     "stun": "Stun",
-    "trip_opponent": "Trip Opponent"
+    "trip_opponent": "Trip Opponent",
+    "cutting": "Cutting",
+    "siege_weapons": "Siege weapons",
+    "entangling": "Entangling",
+    "impaling": "Impaling",
+    "small_weapons": "Small weapons",
+    "bludgeoning": "Bludgeoning",
+    "axes": "Axes",
+    "two_handed": "Two Handed",
+    "combat_se-order": "accidental_injury,arise,bash,bleed,blind_opponent,bypass_armour,choose_location,circumvent_cover,circumvent_defense,circumvent_parry,close_range,compel_retreat,compel_surrender,damage_item,damage_weapon,disarm_opponent,distract,drop_foe,duck_back,enhance_defense,enhance_parry,entangle,flurry,force_failure,grip,impact,impale,kill_silently,marksman,maximise_damage,open_range,overextend_opponent,overpenetration,pin_down,pin_weapon,prepare_counter,press_advantage,rapid_reload,remise,scar_foe,select_target,silent_takedown,slip_free,spoil_spell,stand_fast,stun_location,sunder,take_weapon,trip_opponent,weapon_malfunction,withdraw",
+    "social_se-order": "accidental_humiliation,choose_resolution_pool,circumvent_defense,compel_capitulation,disarm_opponent,emotional_impale,entangling_argument,expose_flaws,force_failure,ignore_confidence,maximise_damage,obfuscate_opponent,prepare_counter,shake_confidence,sow_doubt,stun,trip_opponent,withdraw",
+    "spirit_se-order": "bleed_essence,compel_bargain,drive_off,leech_strength,obscure,possess,psychic_stun,restrain,spirit_lance,sunder_binding,supress_ability,turn_back,withdraw"
 }

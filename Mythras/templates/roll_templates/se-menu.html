@@ -9,12 +9,99 @@
 
         {{'{{#combat}}'}}
         <div style="max-height: 200px; overflow: auto;">
-
+            <div class="sheet-table" data-i18n-list="combat_se-order">
+                <div class="sheet-tr">
+                    <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
+                    <div class="sheet-th" data-i18n="conditions">Conditions</div>
+                </div>
+                {{'{{#rollTotal() offense 0}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="arise">
+                    <div class="sheet-td">[<span data-i18n="arise">Arise</span>](~{{'{{character_id}}'}}|arise_se)</div>
+                    <div class="sheet-td"></div>
+                </div>
+                {{'{{/rollTotal() offense 0}}'}}
+                {{'{{#rollTotal() offense 0}}'}}
+                <div class="sheet-tr sheet-se-option sheet-default sheet-imperative sheet-lyonesse" data-i18n-list-itme="blind_opponent">
+                    <div class="sheet-td">[<span data-i18n="blind_opponent">Blind Opponent</span>](~{{'{{character_id}}'}}|blind_opponent_se)</div>
+                    <div class="sheet-td" data-i18n="critical">Critical</div>
+                </div>
+                {{'{{/rollTotal() offense 0}}'}}
+                {{'{{#rollTotal() reach_enabled 1}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="close_range">
+                    <div class="sheet-td">[<span data-i18n="close_range">Close Range</span>](~{{'{{character_id}}'}}|close_range_se)</div>
+                    <div class="sheet-td"></div>
+                </div>
+                {{'{{/rollTotal() reach_enabled 1}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="disarm">
+                    <div class="sheet-td">[<span data-i18n="disarm">Disarm</span>](~{{'{{character_id}}'}}|disarm_se)</div>
+                    <div class="sheet-td" data-i18n="critical">Critical</div>
+                </div>
+                {{'{{#rollTotal() offense 1}}'}}
+                <div class="sheet-tr sheet-se-option sheet-default sheet-imperative" data-i18n-list-itme="drop_foe">
+                    <div class="sheet-td">[<span data-i18n="drop_foe">Drop Foe</span>](~{{'{{character_id}}'}}|drop_foe_se)</div>
+                    <div class="sheet-td"><span data-i18n="siege_weapons">Siege Weapons</span>, <span data-i18n="firearms">Firearms</span></div>
+                </div>
+                {{'{{/rollTotal() offense 1}}'}}
+                {{'{{#rollTotal() offense 1}}'}}
+                <div class="sheet-tr sheet-se-option sheet-default sheet-imperative" data-i18n-list-itme="duck_back">
+                    <div class="sheet-td">[<span data-i18n="duck_back">Duck Back</span>](~{{'{{character_id}}'}}|duck_back_se)</div>
+                    <div class="sheet-td" data-i18n="ranged">Ranged</div>
+                </div>
+                {{'{{/rollTotal() offense 1}}'}}
+                {{'{{#rollTotal() offense 1}}'}}
+                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="impact">
+                    <div class="sheet-td">[<span data-i18n="impact">Impact</span>](~{{'{{character_id}}'}}|impact_se)</div>
+                    <div class="sheet-td"></div>
+                </div>
+                {{'{{/rollTotal() offense 1}}'}}
+                {{'{{#rollTotal() offense 1}}'}}
+                <div class="sheet-tr sheet-se-option sheet-default sheet-imperative sheet-lyonesse" data-i18n-list-itme="impale">
+                    <div class="sheet-td">[<span data-i18n="impale">Impale</span>](~{{'{{character_id}}'}}|impale_se)</div>
+                    <div class="sheet-td" data-i18n="impaling">Impaling</div>
+                </div>
+                {{'{{/rollTotal() offense 1}}'}}
+                {{'{{#rollTotal() offense 1}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="maximize_damage">
+                    <div class="sheet-td">[<span data-i18n="maximize_damage">Maximize Damage</span>](~{{'{{character_id}}'}}|maximize_damage_se)</div>
+                    <div class="sheet-td" data-i18n="critical">Critical</div>
+                </div>
+                {{'{{/rollTotal() offense 1}}'}}
+                {{'{{#rollTotal() reach_enabled 1}}'}}
+                {{'{{#rollTotal() offense 0}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="open_range">
+                    <div class="sheet-td">[<span data-i18n="open_range">Open Range</span>](~{{'{{character_id}}'}}|open_range_se)</div>
+                    <div class="sheet-td"></div>
+                </div>
+                {{'{{/rollTotal() offense 0}}'}}
+                {{'{{/rollTotal() reach_enabled 1}}'}}
+                {{'{{#rollTotal() offense 1}}'}}
+                <div class="sheet-tr sheet-se-option sheet-default sheet-destined sheet-imperative" data-i18n-list-itme="pin_down">
+                    <div class="sheet-td">[<span data-i18n="pin_down">Pin Down</span>](~{{'{{character_id}}'}}|pin_down_se)</div>
+                    <div class="sheet-td" data-i18n="ranged">Ranged</div>
+                </div>
+                {{'{{/rollTotal() offense 1}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="trip_opponent">
+                    <div class="sheet-td">[<span data-i18n="trip_opponent">Trip Opponent</span>](~{{'{{character_id}}'}}|trip_opponent_se)</div>
+                    <div class="sheet-td"></div>
+                </div>
+                {{'{{#rollTotal() offense 0}}'}}
+                <div class="sheet-tr sheet-se-option sheet-default sheet-imperative" data-i18n-list-itme="weapon_malfunction">
+                    <div class="sheet-td">[<span data-i18n="weapon_malfunction">Weapon Malfunction</span>](~{{'{{character_id}}'}}|weapon_malfunction_se)</div>
+                    <div class="sheet-td" data-i18n="ranged">Ranged</div>
+                </div>
+                {{'{{/rollTotal() offense 0}}'}}
+                {{'{{#rollTotal() offense 0}}'}}
+                <div class="sheet-tr" data-i18n-list-itme="withdraw">
+                    <div class="sheet-td">[<span data-i18n="withdraw">Withdraw</span>](~{{'{{character_id}}'}}|withdraw_se)</div>
+                    <div class="sheet-td"></div>
+                </div>
+                {{'{{/rollTotal() offense 0}}'}}
+            </div>
         </div>
         {{'{{/combat}}'}}
 
         {{'{{#spiritcombat}}'}}
-        <div class="sheet-table" data-i18n-list="spirit-se-order">
+        <div class="sheet-table" data-i18n-list="spirit_se-order">
             <div class="sheet-tr">
                 <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
                 <div class="sheet-th" data-i18n="conditions">Conditions</div>
@@ -91,7 +178,7 @@
         {{'{{/spiritcombat}}'}}
 
         {{'{{#socialconflict}}'}}
-        <div class="sheet-table" data-i18n-list="social-se-order">
+        <div class="sheet-table" data-i18n-list="social_se-order">
             <div class="sheet-tr">
                 <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
                 <div class="sheet-th" data-i18n="conditions">Conditions</div>

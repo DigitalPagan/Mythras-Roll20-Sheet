@@ -886,28 +886,27 @@
             </div>
 
             <div hidden>
-                <button type="roll" name="roll_REPLACE_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{REPLACE}}} {{^{conditions}=^{REPLACE}}}'}}"></button>
                 <!-- Social SE Buttons -->
                 <button type="roll" name="roll_offensive_social_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{socialconflict=1}} {{offense=[[1]]}}'}}"></button>
                 <button type="roll" name="roll_defensive_social_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{socialconflict=1}} {{offense=[[0]]}}'}}"></button>
                 <button type="roll" name="roll_accidental_humiliation_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{accidental_humiliation}}}'}}"></button>
                 <button type="roll" name="roll_choose_resolution_pool_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{choose_resolution_pool}}}'}}"></button>
-                <button type="roll" name="roll_circumvent_defense_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{circumvent_defense}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <!-- Circumvent Defense in combat SEs -->
                 <button type="roll" name="roll_compel_capitulation_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_capitulation}}} {{^{conditions}=^{critical}}}'}}"></button>
                 <button type="roll" name="roll_disarm_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{disarm_opponent}}}'}}"></button>
                 <button type="roll" name="roll_emotional_impale_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{emotional_impale}}}'}}"></button>
                 <button type="roll" name="roll_entangling_argument_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{entangling_argument}}}'}}"></button>
                 <button type="roll" name="roll_expose_flaws_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{expose_flaws}}}'}}"></button>
-                <button type="roll" name="roll_force_failure_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{force_failure}}} {{^{conditions}=^{fumble}}}'}}"></button>
+                <!-- Force Failure in combat SEs -->
                 <button type="roll" name="roll_ignore_confidence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{ignore_confidence}}} {{^{conditions}=^{critical}}}'}}"></button>
-                <button type="roll" name="roll_maximise_damage_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{maximise_damage}}} {{^{conditions}=^{critical}}}'}}"></button>
+                <!-- Maximise Damage in combat SEs -->
                 <button type="roll" name="roll_obfuscate_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{obfuscate_opponent}}}'}}"></button>
-                <button type="roll" name="roll_prepare_counter_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{prepare_counter}}}'}}"></button>
+                <!-- Prepare COunter in combat SEs -->
                 <button type="roll" name="roll_shake_confidence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{shake_confidence}}}'}}"></button>
                 <button type="roll" name="roll_sow_doubt_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sow_doubt}}} {{^{conditions}=^{critical}}}'}}"></button>
                 <button type="roll" name="roll_stun_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{stun}}}'}}"></button>
-                <button type="roll" name="roll_trip_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}'}}"></button>
-                <button type="roll" name="roll_trip_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}'}}"></button>
+                <!-- Trip Opponent in combat SEs-->
+                <!-- Withdraw in combat SEs-->
             </div>
         </div>
 
@@ -1001,7 +1000,7 @@
                     <button type="roll" name="roll_sunder_binding_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sunder_binding}}} {{^{conditions}=^{fumble}}}'}}"></button>
                     <button type="roll" name="roll_supress_ability_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{supress_ability}}} {{^{conditions}=^{mortal}}}'}}"></button>
                     <button type="roll" name="roll_turn_back_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{turn_back}}}'}}"></button>
-                    <button type="roll" name="roll_withdraw_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{withdraw}}}'}}"></button>
+                    <!-- Withdraw in combat SEs-->
                 </div>
             </div>
             <div><input type='checkbox' data-i18n-title="show_details" name='attr_skill_details' value="1" checked><span class="sheet-checkico">E</span></div>
@@ -2574,6 +2573,65 @@
                             <input type="hidden" name="attr_encumbered" value="0">
                         </div>
                     </fieldset>
+                    <div hidden>
+                        <input type="hidden" name="attr_combat_se_list" value="default">
+                        <!-- Combat SE buttons TODO complete combat SE buttons-->
+                        <button type="roll" name="roll_offensive_combat_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{combat=1}} {{offense=[[1]]}} {{se_list=@{combat_se_list}}} {{simplified_combat_enabled=[[@{simplified_combat_enabled}]]}} {{reach_enabled=[[@{reach_enabled}]]}}'}}"></button>
+                        <button type="roll" name="roll_defensive_combat_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{combat=1}} {{offense=[[0]]}} {{se_list=@{combat_se_list}}} {{simplified_combat_enabled=[[@{simplified_combat_enabled}]]}} {{reach_enabled=[[@{reach_enabled}]]}}'}}"></button>
+
+                        <button type="roll" name="roll_accidental_injury_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{accidental_injury}}} {{^{conditions}=^{fumble}}}'}}"></button>
+                        <button type="roll" name="roll_arise_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{arise}}}'}}"></button>
+                        <button type="roll" name="roll_bash_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bash}}} {{^{conditions}=^{shields}, ^{bludgeoning}}}'}}"></button>
+                        <button type="roll" name="roll_bleed_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bleed}}} {{^{conditions}=^{cutting}}}'}}"></button>
+                        <button type="roll" name="roll_blind_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{blind_opponent}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_bypass_armour_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bypass_armour}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_choose_location_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{choose_location}}}'}}"></button>
+                        <button type="roll" name="roll_circumvent_cover_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{circumvent_cover}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_circumvent_defense_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{circumvent_defense}}} {{^{conditions}=^{critical}}'}}"></button>
+                        <button type="roll" name="roll_circumvent_parry_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{circumvent_parry}}} {{^{conditions}=^{critical}}'}}"></button>
+                        <button type="roll" name="roll_close_range_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{close_range}}}'}}"></button>
+                        <button type="roll" name="roll_compel_retreat_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_retreat}}}'}}"></button>
+                        <button type="roll" name="roll_compel_surrender_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_surrender}}}'}}"></button>
+                        <button type="roll" name="roll_damage_item_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{damage_item}}}'}}"></button>
+                        <button type="roll" name="roll_damage_weapon_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{damage_weapon}}}'}}"></button>
+                        <button type="roll" name="roll_disarm_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{disarm_opponent}}}'}}"></button>
+                        <button type="roll" name="roll_distract_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{distract}}}'}}"></button>
+                        <button type="roll" name="roll_drop_foe_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{drop_foe}}} {{^{conditions}=^{siege_weapons}, ^{firearms}}'}}"></button>
+                        <button type="roll" name="roll_duck_back_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{duck_back}}} {{^{conditions}=^{ranged}}'}}"></button>
+                        <button type="roll" name="roll_enhance_defense_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{enhance_defense}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_enhance_parry_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{enhance_parry}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_entangle_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{entangle}}} {{^{conditions}=^{entangling}}'}}"></button>
+                        <button type="roll" name="roll_flurry_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{flurry}}} {{^{conditions}=^{unarmed}}'}}"></button>
+                        <button type="roll" name="roll_force_failure_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{force_failure}}} {{^{conditions}=^{fumble}}}'}}"></button>
+                        <button type="roll" name="roll_grip_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{grip}}} {{^{conditions}=^{unarmed}}'}}"></button>
+                        <button type="roll" name="roll_impact_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{impact}}}'}}"></button>
+                        <button type="roll" name="roll_impale_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{impale}}} {{^{conditions}=^{impaling}}'}}"></button>
+                        <button type="roll" name="roll_kill_silently_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{kill_silently}}} {{^{conditions}=^{small_weapons}, ^{surprise}}}'}}"></button>
+                        <button type="roll" name="roll_marksman_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{marksman}}} {{^{conditions}=^{ranged}}'}}"></button>
+                        <button type="roll" name="roll_maximise_damage_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{maximise_damage}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_open_range_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{open_range}}}'}}"></button>
+                        <button type="roll" name="roll_overextend_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{overextend_opponent}}}'}}"></button>
+                        <button type="roll" name="roll_overpenetration_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{overpenetration}}} {{^{conditions}=^{ranged}, ^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_pin_down_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{pin_down}}} {{^{conditions}=^{ranged}}}'}}"></button>
+                        <button type="roll" name="roll_pin_weapon_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{pin_weapon}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_prepare_counter_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{prepare_counter}}}'}}"></button>
+                        <button type="roll" name="roll_press_advantage_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{press_advantage}}}'}}"></button>
+                        <button type="roll" name="roll_rapid_reload_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{rapid_reload}}}'}}"></button>
+                        <button type="roll" name="roll_remise_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{remise}}} {{^{conditions}=^{small_weapons}}}'}}"></button>
+                        <button type="roll" name="roll_scar_foe_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{scar_foe}}}'}}"></button>
+                        <button type="roll" name="roll_select_target_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{select_target}}} {{^{conditions}=^{fumble}}}'}}"></button>
+                        silent_takedown
+                        <button type="roll" name="roll_silent_takedown_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{silent_takedown}}} {{^{conditions}=^{surprise}}}'}}"></button>
+                        <button type="roll" name="roll_slip_free_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{slip_free}}} {{^{conditions}=^{critical}}}'}}"></button>
+                        <button type="roll" name="roll_spoil_spell_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{spoil_spell}}}'}}"></button>
+                        <button type="roll" name="roll_stand_fast_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{stand_fast}}}'}}"></button>
+                        <button type="roll" name="roll_stun_location_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{stun_location}}} {{^{conditions}=^{bludgeoning}}}'}}"></button>
+                        <button type="roll" name="roll_sunder_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sunder}}} {{^{conditions}=^{axes}, ^{two_handed}}}'}}"></button>
+                        <button type="roll" name="roll_take_weapon_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{take_weapon}}} {{^{conditions}=^{unarmed}}}'}}"></button>
+                        <button type="roll" name="roll_trip_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}'}}"></button>
+                        <button type="roll" name="roll_weapon_malfunction_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{weapon_malfunction}}} {{^{conditions}=^{ranged}, ^{fumble}}}'}}"></button>
+                        <button type="roll" name="roll_withdraw_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{withdraw}}}'}}"></button>
+                    </div>
                 </div>
 
                 <!-- Professional Skills -->
