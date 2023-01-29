@@ -43,11 +43,11 @@
 .sheet-rolltemplate-se-menu div.sheet-tr {
     display: table-row;
 }
-.sheet-rolltemplate-se-menu  div.sheet-tr:nth-child(odd) {
-    background: gainsboro;
+.sheet-rolltemplate-se-menu div.sheet-tr:hover {
+    background: #fcf8e3;
 }
-.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode  div.sheet-tr:nth-child(odd) {
-    background: #333333;
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode div.sheet-tr:hover {
+    background: darkgoldenrod;
 }
 .sheet-rolltemplate-se-menu div.sheet-th {
     display: table-cell;
@@ -90,4 +90,15 @@
 }
 .sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode a {
     color: whitesmoke !important;
+}
+
+.sheet-rolltemplate-se-menu .sheet-se-option {
+    display: none !important;
+}
+.sheet-rolltemplate-se-menu div.sheet-se-option-control-core ~ div .sheet-core,
+.sheet-rolltemplate-se-menu div.sheet-se-option-control-imperative ~ div .sheet-imperative,
+.sheet-rolltemplate-se-menu div.sheet-se-option-control-destined ~ div .sheet-destined,
+.sheet-rolltemplate-se-menu div.sheet-se-option-control-lyonesse ~ div .sheet-lyonesse,
+.sheet-rolltemplate-se-menu div.sheet-se-option-control-lyonesse ~ div .sheet-mba {
+    display: table-row !important;
 }

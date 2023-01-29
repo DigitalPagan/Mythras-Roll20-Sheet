@@ -4,7 +4,7 @@ const debug=1
 /* TODO changing sheet type sets standard skills display */
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "spirits_enabled", "tenacity_enabled"];
+const campaignSettings = ["action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "action_points_calc": "calculate",
@@ -17,6 +17,7 @@ const campaginSettingDefaults = {
         "spirits_enabled": 1,
         "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
         "social_conflict_enabled": 1,
+        "special_effects": "core",
         "tenacity_enabled": 0
     },
     "after_the_vampire_wars": {},
@@ -25,6 +26,7 @@ const campaginSettingDefaults = {
     },
     "destined": {
         "spirits_enabled": 0,
+        "special_effects": "destined",
         "standard_skills": ['athletics','brawn','conceal','deceit','drive','endurance','evade','first_aid','influence','insight','perception','research','stealth','streetwise','unarmed','willpower']
     },
     "fioracitta": {},
@@ -37,6 +39,7 @@ const campaginSettingDefaults = {
         "tenacity_enabled": 1,
     },
     "lyonesse": {
+        "special_effects": "lyonesse",
         "standard_skills": ['athletics','boating','brawn','common_tongue','conceal','customs','dance','deceit','drive','eloquence','endurance','evade','first_aid','folk_lore','influence','insight','perception','ride','sing','stealth','swim','unarmed','willpower']
     },
     "m-space": {
@@ -44,6 +47,7 @@ const campaginSettingDefaults = {
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
         "reach_enabled": 0,
+        "special_effects": "imperative",
         "spirits_enabled": 0
     },
     "monster_island": {},
@@ -58,6 +62,7 @@ const campaginSettingDefaults = {
         "action_points_calc": "set_2",
         "herculean_mod": ".2",
         "reach_enabled": 0,
+        "special_effects": "imperative",
         "spirits_enabled": 0
     },
     "mythic_rome": {
@@ -69,6 +74,7 @@ const campaginSettingDefaults = {
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
         "reach_enabled": 0,
+        "special_effects": "imperative",
         "spirits_enabled": 0
     },
     "perceforest": {},
