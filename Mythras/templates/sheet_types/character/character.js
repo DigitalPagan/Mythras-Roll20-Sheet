@@ -492,7 +492,7 @@ on('change:magic_points_other change:magic_points_max', function(event) {
 });
 
 /* Movement Rate */
-const moveRateGetAttrs = ['movement_rate_species', 'movement_rate_other', 'movement_rate', 'movement_rate_base', 'fatigue', 'encumbrance_load', 'athletics', 'swim'];
+const moveRateGetAttrs = ['movement_rate_species', 'movement_rate_other', 'movement_rate', 'movement_rate_base', 'fatigue', 'encumbrance_load', 'athletics'];
 /**
  *
  * @param value
@@ -529,8 +529,6 @@ function calcMoveRate(v) {
 
     const diffVal = newAttrs['movement_rate_base'] - moveRateBase;
     newAttrs['movement_rate'] = moveRate + diffVal;
-
-    /* TODO calculate advance movement */
 
     return newAttrs;
 }
@@ -1190,13 +1188,13 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored c
                 meleeIds.forEach(id => {
                     if (v[`repeating_meleeweapon_${id}_favored`] === '1') {
                         const name = v[`repeating_meleeweapon_${id}_name`];
-                        weaponButtons = weaponButtons + ` [${name}](~@{character_name}|repeating_meleeweapon_${id}_damage)`;
+                        weaponButtons = weaponButtons + ` [${name}](~@{character_id}|repeating_meleeweapon_${id}_damage)`;
                     }
                 });
                 rangedIds.forEach(id => {
                     if (v[`repeating_rangedweapon_${id}_favored`] === '1') {
                         const name = v[`repeating_rangedweapon_${id}_name`];
-                        weaponButtons = weaponButtons + ` [${name}](~@{character_name}|repeating_rangedweapon_${id}_damage)`;
+                        weaponButtons = weaponButtons + ` [${name}](~@{character_id}|repeating_rangedweapon_${id}_damage)`;
                     }
                 });
                 setAttrs({weapon_buttons: weaponButtons});
@@ -1260,9 +1258,6 @@ function calcStdSkill(skillId, v, sourceAttribute) {
         if (v['initiative_add_one_tenth_athletics'] === '1') {
             newInitAttrs = calcInitiativeBonus(v);
         }
-        newMoveAttrs = calcMoveRate(v);
-    }
-    if ('swim' === skillId) {
         newMoveAttrs = calcMoveRate(v);
     }
 
@@ -1876,7 +1871,6 @@ on("clicked:import", function() {
                     newAttrs['movement_rate_species'] = moveInt;
                     newAttrs['movement_rate_base'] = moveInt;
                     newAttrs['movement_rate'] = moveInt;
-                    /* TODO calculate advanced movement */
                 } else {
                     newAttrs['custom_movement_enabled'] = '1';
                     newAttrs['custom_movement'] = characterData["attributes"]["movement"];

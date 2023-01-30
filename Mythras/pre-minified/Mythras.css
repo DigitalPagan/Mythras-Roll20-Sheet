@@ -100,11 +100,11 @@ div.sheet-wrapper { /* Sets default size of the sheet */
     min-width: 430px;
     max-width: 860px;
 }
-div.sheet-inline-flex {
-    display: inline-flex;
-}
 div.sheet-flex {
     display: flex;
+}
+div.sheet-inline-flex {
+    display: inline-flex;
 }
 div.sheet-flex-wrap {
     flex-wrap: wrap;
@@ -291,6 +291,9 @@ div.sheet-impval {
 .sheet-half-width {
     width: 50% !important;
 }
+.sheet-third-width {
+    width: 33.33% !important;
+}
 .sheet-auto-width {
     width: auto; /* check important */
 }
@@ -339,6 +342,21 @@ div.sheet-impval {
 }
 .sheet-bold {
     font-weight: bold;
+}
+.sheet-nowrap {
+    white-space: nowrap;
+}
+
+
+/* Light and Dark Mode Toggles */
+div.sheet-darkmode {
+    display: none;
+}
+body.sheet-darkmode div.sheet-lightmode {
+    display: none;
+}
+body.sheet-darkmode div.sheet-darkmode {
+    display: initial;
 }
 
 /* Generic Display Toggles */
@@ -430,6 +448,20 @@ body.sheet-darkmode a.repcontrol_move {
     border-color: black;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke;
+}
+
+/* Fieldsets */
+/* Make repeating section inline for display modes */
+fieldset.sheet-inline-display ~ .repcontainer {
+    display: inline-flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+fieldset.sheet-inline-display ~ .repcontainer > .repitem {
+    display: inline-block;
+}
+fieldset.sheet-inline-display ~ .repcontrol {
+    display: none;
 }
 
 /* Inputs */
@@ -788,7 +820,7 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 
 /* Setting Display Toggles */
 .sheet-setting-option {
-    display: none;
+    display: none !important;
 }
 .sheet-setting-control[value="default"] ~ div.sheet-wrapper .sheet-default,
 .sheet-setting-control[value="after_the_vampire_wars"] ~ div.sheet-wrapper .sheet-atvw,
@@ -810,7 +842,7 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-setting-control[value="thennla"] ~ div.sheet-wrapper .sheet-thennla,
 .sheet-setting-control[value="worlds_united"] ~ div.sheet-wrapper .sheet-wu,
 .sheet-setting-control:not([value="classic_fantasy"]) ~ div.sheet-wrapper .sheet-not-cf {
-    display: initial;
+    display: initial !important;
 }
 
 /* Compact Toggle */
@@ -941,7 +973,22 @@ button[type=roll].sheet-improve {
     top: 0;
 }
 
-
+/* Abilities */
+div.sheet-devotion-name {
+    width: 150px;
+}
+div.sheet-devotion-limit {
+    width: 50px;
+}
+.sheet-ability-name {
+    width: 150px;
+}
+.sheet-ability-type {
+    width: 100px;
+}
+textarea.sheet-ability-notes {
+    height: 90px;
+}
 
 /* Equipment */
 .sheet-weapon-name {

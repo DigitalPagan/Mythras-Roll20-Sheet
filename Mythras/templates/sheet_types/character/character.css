@@ -83,7 +83,22 @@ button[type=roll].sheet-improve {
     top: 0;
 }
 
-
+/* Abilities */
+div.sheet-devotion-name {
+    width: 150px;
+}
+div.sheet-devotion-limit {
+    width: 50px;
+}
+.sheet-ability-name {
+    width: 150px;
+}
+.sheet-ability-type {
+    width: 100px;
+}
+textarea.sheet-ability-notes {
+    height: 90px;
+}
 
 /* Equipment */
 .sheet-weapon-name {
