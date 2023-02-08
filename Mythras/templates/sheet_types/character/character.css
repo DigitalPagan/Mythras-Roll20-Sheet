@@ -83,6 +83,18 @@ button[type=roll].sheet-improve {
     top: 0;
 }
 
+/* Magic */
+.sheet-tradition-name {
+    width: 200px;
+}
+input.sheet-pool-toggle[value="0"] ~ .sheet-pool-toggle-exist,
+input.sheet-pool-toggle:not([value="0"]) + .sheet-pool-toggle-none {
+    display: none !important;
+}
+textarea.sheet-tradition-notes {
+    height: 36px;
+}
+
 /* Abilities */
 div.sheet-devotion-name {
     width: 150px;

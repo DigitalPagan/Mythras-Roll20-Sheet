@@ -29,6 +29,10 @@
 .sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-border.sheet-damage {
     border: 2px solid #811818;
 }
+.sheet-rolltemplate-default div.sheet-border.sheet-effect,
+.sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-border.sheet-effect {
+    border: 2px solid #123e54;
+}
 .sheet-rolltemplate-default div.sheet-header {
     background: #595959;
     color: whitesmoke;
@@ -46,6 +50,11 @@
 .sheet-rolltemplate-default div.sheet-header.sheet-damage,
 .sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-header.sheet-damage {
     background: #811818;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-effect,
+.sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-header.sheet-effect {
+    background: #123e54;
     color: whitesmoke;
 }
 

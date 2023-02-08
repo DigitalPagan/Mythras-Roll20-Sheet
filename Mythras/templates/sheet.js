@@ -189,10 +189,20 @@ function versioning(type, version) {
  * Sets a number of attributes containing translations for prompts which normally can't use the i18n systems
  * @returns {} an object of translation attributes
  */
+const i18nVars = ['ablation', 'area', 'casting_time', 'combine', 'condition', 'conditions', 'days', 'dose', 'doses', 'duration', 'effects', 'enhance', "focus", 'fortune', 'hours', 'intensity', 'magnitude', 'months', 'none', 'precision', 'radius', 'range', 'rolls', 'rounds', 'service', 'services', 'shelf_life', 'spells', 'step', 'steps', 'swiftness', 'target', 'targets', 'term', 'terms', 'touch', 'turns', 'weeks', 'wonder', 'wonders', 'years'];
 function setTranslationAttrs() {
-    setAttrs(
-        {}
-    );
+    let i18nAttrs = {};
+    i18nVars.forEach(i18nVar => {
+        i18nAttrs[`${i18nVar}_i18n`] = getTranslationByKey(i18nVar);
+    });
+    /* ones that don't match the key pattern */
+    i18nAttrs['point_a_i18n'] = getTranslationByKey('point-a');
+    i18nAttrs['points_a_i18n'] = getTranslationByKey('points-a');
+    i18nAttrs['pow_u_i18n'] = getTranslationByKey('pow-u');
+    i18nAttrs['minutes_a_i18n'] = getTranslationByKey('minutes-a');
+    i18nAttrs['meters_a_i18n'] = getTranslationByKey('meters-a');
+    i18nAttrs['kilometers_a_i18n'] = getTranslationByKey('kilometers-a');
+    setAttrs(i18nAttrs);
 }
 
 /* On Open Triggers */

@@ -1574,7 +1574,42 @@ on(`change:repeating_dependency:total remove:repeating_dependency`, function(eve
     });
 });
 
+/* Traditions */
+on(`change:repeating_tradition:skill1_id change:repeating_tradition:skill2_id`, function(event) {
+    const traditionId = event.sourceAttribute.split('_')[2];
+    const traditionSkill = event.sourceAttribute.split('_')[3];
+    const skillId = event.newValue;
 
+    let newAttrs = {};
+    if (!event.newValue) { /* If unset */
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_name`] = '';
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_total`] = '0';
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_notes`] = '';
+    } else if (skillId.startsWith("repeating_")) { /* Repeating skills */
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_name`] = `@{${skillId}_name}`;
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_total`] = `@{${skillId}_total}`;
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_notes`] = `@{${skillId}_notes}`;
+    } else { /* Standard Skills */
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_name`] = getTranslationByKey(skillId);
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_total`] = `@{${skillId}}`;
+        newAttrs[`repeating_tradition_${traditionId}_${traditionSkill}_notes`] = `@{${skillId}_notes}`;
+    }
+
+    setAttrs(newAttrs);
+});
+
+/* Abilities */
+on('change:repeating_ability:tradition_id', function(event) {
+    const abilityId = event.sourceAttribute.split('_')[2];
+    const traditionId = event.newValue;
+
+    setAttrs({
+        [`repeating_ability_${abilityId}_skill1_name`]: `@{${traditionId}_skill1_name}`,
+        [`repeating_ability_${abilityId}_skill1_total`]: `@{${traditionId}_skill1_total}`,
+        [`repeating_ability_${abilityId}_skill2_name`]: `@{${traditionId}_skill2_name}`,
+        [`repeating_ability_${abilityId}_skill2_total`]: `@{${traditionId}_skill2_total}`,
+    });
+});
 
 
 /* Encumbrance */
@@ -1740,7 +1775,7 @@ on("change:location1_armor_enc change:location1_armor_equipped change:location2_
 });
 
 /* Repeating IDs */
-on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_ability change:repeating_superpowerlimit", function(event) {
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_superpowerlimit", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];

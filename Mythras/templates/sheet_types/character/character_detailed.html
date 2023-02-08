@@ -186,9 +186,9 @@
                     <input type="hidden" name="attr_int_temp" value="0">
                 </div>
 
-                <!-- POW -->
+                <!-- @{pow_u_i18n} -->
                 <div class="sheet-tr">
-                    <div class="sheet-td sheet-char-label"><label class="sheet-left" data-i18n="pow-u">POW</label></div>
+                    <div class="sheet-td sheet-char-label"><label class="sheet-left" data-i18n="pow-u">@{pow_u_i18n}</label></div>
                     <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{pow_base}" name="attr_pow_base" value="11"></div>
                     <div class="sheet-td sheet-anti-toggle"><input type="number" class="sheet-impval sheet-number-width" title="@{pow}" name="attr_pow" value="11"></div>
                     <div class="sheet-td sheet-toggle">
@@ -443,7 +443,7 @@
                         <span data-i18n="use">Use</span>:
                         <select class="sheet-auto-width sheet-text-center" name="attr_damage_mod_calc">
                             <option data-i18n="str+siz" value="0" selected>STR+SIZ</option>
-                            <option data-i18n="str+siz+pow" value="1">STR+SIZ+POW</option>
+                            <option data-i18n="str+siz+pow" value="1">STR+SIZ+@{pow_u_i18n}</option>
                             <option data-i18n="str+siz+con" value="2">STR+SIZ+CON</option>
                         </select>
                     </div>
@@ -478,7 +478,7 @@
                         <span data-i18n="use">Use</span>:
                         <select class="sheet-auto-width sheet-text-center" name="attr_healing_rate_calc">
                             <option data-i18n="con-u" value="0" selected>CON</option>
-                            <option data-i18n="con+1/2_pow" value="1">CON + 1/2 POW</option>
+                            <option data-i18n="con+1/2_pow" value="1">CON + 1/2 @{pow_u_i18n}</option>
                         </select>
                     </div>
                     <div class="sheet-details-toggle sheet-lmargin-x3">
@@ -524,8 +524,8 @@
                     <div class="sheet-details-toggle sheet-lmargin-x3">
                         <span data-i18n="use">Use</span>:
                         <select class="sheet-auto-width sheet-text-center" name="attr_luck_points_calc">
-                            <option data-i18n="pow-u" value="0" selected>POW</option>
-                            <option data-i18n="cha+1/2_pow" value="1">CHA + 1/2 POW</option>
+                            <option data-i18n="pow-u" value="0" selected>@{pow_u_i18n}</option>
+                            <option data-i18n="cha+1/2_pow" value="1">CHA + 1/2 @{pow_u_i18n}</option>
                         </select>
                     </div>
                 </div>
@@ -667,7 +667,7 @@
                     <label class="sheet-left" data-i18n="calculate_with">Calculate With</label>
                     <select class="sheet-auto-width sheet-text-center" name="attr_hp_calc">
                         <option data-i18n="con+siz" value="0" selected>CON+SIZ</option>
-                        <option data-i18n="con+siz+pow" value="1">CON+SIZ+POW</option>
+                        <option data-i18n="con+siz+pow" value="1">CON+SIZ+@{pow_u_i18n}</option>
                         <option data-i18n="con+siz+str" value="2">CON+SIZ+STR</option>
                     </select>
                 </div>
@@ -1010,9 +1010,6 @@
             <div><input type='checkbox' data-i18n-title="show_details" name='attr_skill_details' value="1" checked><span class="sheet-checkico">E</span></div>
         </div>
 
-        <!-- Tagged Skill Buttons -->
-        <input type="hidden" name="attr_tagged_skill_buttons" value="{}">
-
         <input type="hidden" class="sheet-details-toggle" name="attr_skill_details" value="1">
         <div class="sheet-flex sheet-gap">
             <!-- Column 1 -->
@@ -1183,8 +1180,8 @@
                                 </div>
                                 <div class="sheet-td"><input type="checkbox" title="@{willpower_fumbled}" name="attr_willpower_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{willpower_trained}" name="attr_willpower_trained" value="1"><span class="sheet-checkico">3</span></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{willpower_other}" name="attr_willpower_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{willpower}" name="attr_willpower" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{willpower_details}" name="attr_willpower_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1421,7 +1418,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{conceal_fumbled}" name="attr_conceal_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{conceal_trained}" name="attr_conceal_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="dex-u">DEX</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{conceal_other}" name="attr_conceal_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{conceal}" name="attr_conceal" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{conceal_details}" name="attr_conceal_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1597,7 +1594,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{drive_fumbled}" name="attr_drive_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{drive_trained}" name="attr_drive_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="dex-u">DEX</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{drive_other}" name="attr_drive_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{drive}" name="attr_drive" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{drive_details}" name="attr_drive_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1773,7 +1770,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{gaming_fumbled}" name="attr_gaming_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{gaming_trained}" name="attr_gaming_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{gaming_other}" name="attr_gaming_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{gaming}" name="attr_gaming" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{gaming_details}" name="attr_gaming_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1905,7 +1902,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{insight_fumbled}" name="attr_insight_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{insight_trained}" name="attr_insight_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{insight_other}" name="attr_insight_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{insight}" name="attr_insight" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{insight_details}" name="attr_insight_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2037,7 +2034,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{perception_fumbled}" name="attr_perception_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{perception_trained}" name="attr_perception_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{perception_other}" name="attr_perception_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{perception}" name="attr_perception" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{perception_details}" name="attr_perception_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2080,7 +2077,7 @@
                                 </div>
                                 <div class="sheet-td"><input type="checkbox" title="@{purity_fumbled}" name="attr_purity_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{purity_trained}" name="attr_purity_trained" value="1"><span class="sheet-checkico">3</span></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="cha-u">CHA</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{purity_other}" name="attr_purity_other" value="40" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{purity}" name="attr_purity" value="64" step="1"  min="0"></div>
@@ -2125,7 +2122,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{ride_fumbled}" name="attr_ride_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{ride_trained}" name="attr_ride_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="dex-u">DEX</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{ride_other}" name="attr_ride_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{ride}" name="attr_ride" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{ride_details}" name="attr_ride_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2169,7 +2166,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{research_fumbled}" name="attr_research_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{research_trained}" name="attr_research_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{research_other}" name="attr_research_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{research}" name="attr_research" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{research_details}" name="attr_research_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2212,7 +2209,7 @@
                                 </div>
                                 <div class="sheet-td"><input type="checkbox" title="@{sing_fumbled}" name="attr_sing_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{sing_trained}" name="attr_sing_trained" value="1"><span class="sheet-checkico">3</span></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="cha-u">CHA</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{sing_other}" name="attr_sing_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{sing}" name="attr_sing" value="22" step="1"  min="0"></div>
@@ -2389,7 +2386,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{superstition_fumbled}" name="attr_superstition_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{superstition_trained}" name="attr_superstition_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="21-int-u">21-INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{superstition_other}" name="attr_superstition_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{superstition}" name="attr_superstition" value="19" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{superstition_details}" name="attr_superstition_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2543,7 +2540,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u">DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2555,7 +2552,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u" selected>DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2677,7 +2674,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u">DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2689,7 +2686,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u">DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
+                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2844,7 +2841,7 @@
         </div>
     </div>
 
-    <!-- Abilities -->
+    <!-- Magic -->
     <div id="abilities" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-space-between sheet-gap">
             <h2 data-i18n="abilities">Abilities</h2>
@@ -2875,65 +2872,178 @@
                             <div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{tenacity}" name="attr_tenacity" value="11">/<input type="number" class="sheet-rval" title="@{tenacity|max}" name="attr_tenacity_max" value="11"></div>
                         </div>
                     </div>
-                    <fieldset class="repeating_devotion sheet-inline-display">
-                        <div class="sheet-inline-flex">
-                            <label class="sheet-left sheet-rmargin"><span name="attr_name"></span></label>
-                            <div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{$ID_devotional_pool}" name="attr_devotional_pool" value="0">/<input type="number" class="sheet-rval" title="@{$ID_devotional_pool|max}" name="attr_devotional_pool_max" value="@{rank_devotion_pool_limit}" disabled></div>
-                        </div>
-                        <div hidden>
-                            <input type="text" name="attr_name" value="">
-                            <input type="text" name="attr_rank_devotion_pool_limit" value="0">
-                        </div>
-                    </fieldset>
                 </div>
                 <div class="sheet-ability-option sheet-core sheet-core-plus"><input type='checkbox' name='attr_abilities_config' value="1"><span class="sheet-checkico">y</span></div>
             </div>
         </div>
 
-        <!-- Ability Configs -->
-        <input type='hidden' class='sheet-toggle sheet-hidden' name='attr_abilities_config' value="0"/>
-        <div class="sheet-toggle">
-            <div class="sheet-flex sheet-gap sheet-bmargin">
-                <div style="width: 200px" class="sheet-ability-option sheet-core sheet-core-plus">
-                    <div class="sheet-flex">
-                        <div class="sheet-devotion-name sheet-th" data-i18n="devotional_pool">Devotional Pool</div>
-                        <div class="sheet-devotion-limit sheet-th" data-i18n="limit">Limit</div>
-                    </div>
-                    <fieldset style="width: 200px" class="repeating_devotion">
-                        <div class="sheet-flex">
-                            <div class="sheet-devotion-name sheet-td">
-                                <input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
-                            </div>
-                            <div class="sheet-devotion-limit sheet-td">
-                                <select class="sheet-full-width sheet-usrinput sheet-text-center" name="attr_rank_devotion_pool_limit">
-                                    <option value="0" selected>0</option>
-                                    <option value="ceil(@{pow}*.25)" data-i18n="1/4_pow-u">1/4 POW</option>
-                                    <option value="ceil(@{pow}*.5)" data-i18n="1/2_pow-u">1/2 POW</option>
-                                    <option value="ceil(@{pow}*.75)" data-i18n="3/4_pow-u">3/4 POW</option>
-                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
-                                </select>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
+        <!-- Pre-defined advanced traits -->
+        <div hidden>
+            <!-- Dynamic Intensity -->
+            <input type="text" name="attr_dynamic_intensity" value="{{'?{@{intensity_i18n}|1}'}}" disabled>
+
+            <!-- Ablation -->
+            <button type="roll" name="roll_shaped_ablation" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{ablation}=?{@{ablation_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - -1 @{magnitude_i18n}, -1 @{magnitude_i18n} (1@{point_a_i18n})|2 - -2 @{magnitude_i18n}, -2 @{magnitude_i18n} (2@{points_a_i18n})|3 - -3 @{magnitude_i18n}, -3 @{magnitude_i18n} (3@{points_a_i18n})|4 - -4 @{magnitude_i18n}, -4 @{magnitude_i18n} (4@{points_a_i18n})|5 - -5 @{magnitude_i18n}, -5 @{magnitude_i18n} (5@{points_a_i18n})|6 - -6 @{magnitude_i18n}, -6 @{magnitude_i18n} (6@{points_a_i18n})|7 - -7 @{magnitude_i18n}, -7 @{magnitude_i18n} (7@{points_a_i18n})|8 - -8 @{magnitude_i18n}, -8 @{magnitude_i18n} (8@{points_a_i18n})|9 - -1 @{magnitude_i18n}, -9 @{magnitude_i18n} (9@{points_a_i18n})|10 - -10 @{magnitude_i18n}, -10 @{magnitude_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_ablation" value="{{'[0](~@{character_id}|shaped_ablation)'}}" disabled>
+
+            <!-- Area -->
+            <button type="roll" name="roll_sandestin_area" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{area}=?{Area|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 2@{meters_a_i18n} @{radius_i18n}, 2@{meters_a_i18n} @{radius_i18n} (1@{point_a_i18n})|3 - 5@{meters_a_i18n} @{radius_i18n}, 5@{meters_a_i18n} @{radius_i18n} (2@{points_a_i18n})|3 - 10@{meters_a_i18n} @{radius_i18n}, 10@{meters_a_i18n} @{radius_i18n} (3@{points_a_i18n})|4 - 25@{meters_a_i18n} @{radius_i18n}, 25@{meters_a_i18n} @{radius_i18n} (4@{points_a_i18n})|5 - 50@{meters_a_i18n} @{radius_i18n}, 50@{meters_a_i18n} @{radius_i18n} (5@{points_a_i18n})|6 - 100@{meters_a_i18n} @{radius_i18n}, 100@{meters_a_i18n} @{radius_i18n} (6@{points_a_i18n})|7 - 250@{meters_a_i18n} @{radius_i18n}, 250@{meters_a_i18n} @{radius_i18n} (7@{points_a_i18n})|8 - 500@{meters_a_i18n} @{radius_i18n}, 500@{meters_a_i18n} @{radius_i18n} (8@{points_a_i18n})|9 - 1@{kilometers_a_i18n} @{radius_i18n}, 1@{kilometers_a_i18n} @{radius_i18n} (9@{points_a_i18n})|10 - 2@{kilometers_a_i18n} @{radius_i18n}, 2@{kilometers_a_i18n} @{radius_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_sandestin_area" value="{{'[@{none_i18n}](~@{character_id}|sandestin_area)'}}" disabled>
+            
+            <!-- Combine -->
+            <button type="roll" name="roll_shaped_combine" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{combine}=?{@{combine_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 2 @{spells_i18n}, 2 @{spells_i18n} (1@{point_a_i18n})|2 - 3 @{spells_i18n}, 3 @{spells_i18n} (2@{points_a_i18n})|3 - 4 @{spells_i18n}, 4 @{spells_i18n} (3@{points_a_i18n})|4 - 5 @{spells_i18n}, 5 @{spells_i18n} (4@{points_a_i18n})|5 - 6 @{spells_i18n}, 6 @{spells_i18n} (5@{points_a_i18n})|6 - 7 @{spells_i18n}, 7 @{spells_i18n} (6@{points_a_i18n})|7 - 8 @{spells_i18n}, 8 @{spells_i18n} (7@{points_a_i18n})|8 - 9 @{spells_i18n}, 9 @{spells_i18n} (8@{points_a_i18n})|9 - 10 @{spells_i18n}, 10 @{spells_i18n} (9@{points_a_i18n})|10 - 11 @{spells_i18n}, 11 @{spells_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <button type="roll" name="roll_sandestin_combine" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{combine}=?{@{combine_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 2 @{effects_i18n}, 2 @{effects_i18n} (1@{points_a_i18n})|3 - 3 @{effects_i18n}, 3 @{effects_i18n} (3@{points_a_i18n})|5 - 4 @{effects_i18n}, 4 @{effects_i18n} (5@{points_a_i18n})|7 - 5 @{effects_i18n}, 5 @{effects_i18n} (7@{points_a_i18n})|9 - 6 @{effects_i18n}, 6 @{effects_i18n} (9@{points_a_i18n})|11 - 7 @{effects_i18n}, 7 @{effects_i18n} (11@{points_a_i18n})|13 - 8 @{effects_i18n}, 8 @{effects_i18n} (13@{points_a_i18n})|15 - 9 @{effects_i18n}, 9 @{effects_i18n} (15@{points_a_i18n})|17 - 10 @{effects_i18n}, 10 @{effects_i18n} (17@{points_a_i18n})|19 - 11 @{effects_i18n}, 11 @{effects_i18n} (19@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_combine" value="{{'[@{none_i18n}](~@{character_id}|shaped_combine)'}}" disabled>
+            <input type="text" name="attr_sandestin_combine" value="{{'[@{none_i18n}](~@{character_id}|sandestin_combine)'}}" disabled>
+
+            <!-- Conditions -->
+            <button type="roll" name="roll_shaped_conditions" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{conditions}=?{@{conditions_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 1 @{condition_i18n} , 1 @{condition_i18n} (@{point_a_i18n})|2 - 2 @{conditions_i18n} , 2 @{conditions_i18n} (2@{points_a_i18n})|3 - 3 @{conditions_i18n} , 3 @{conditions_i18n} (3@{points_a_i18n})|4 - 4 @{conditions_i18n} , 4 @{conditions_i18n} (4@{points_a_i18n})|5 - 5 @{conditions_i18n} , 5 @{conditions_i18n} (5@{points_a_i18n})|6 - 6 @{conditions_i18n} , 6 @{conditions_i18n} (6@{points_a_i18n})|7 - 7 @{conditions_i18n} , 7 @{conditions_i18n} (7@{points_a_i18n})|8 - 8 @{conditions_i18n} , 8 @{conditions_i18n} (8@{points_a_i18n})|9 - 9 @{conditions_i18n} , 9 @{conditions_i18n} (9@{points_a_i18n})|10 - 10 @{conditions_i18n} , 10 @{conditions_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_conditions" value="{{'[@{none_i18n}](~@{character_id}|shaped_conditions)'}}" disabled>
+
+            <!-- Doses -->
+            <button type="roll" name="roll_shaped_doses" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{doses}=?{@{doses_i18n}|0 - 1 @{dose_i18n} , 1 @{dose_i18n} (0@{points_a_i18n})|1 - 2 @{doses_i18n} , 2 @{doses_i18n} (1@{point_a_i18n})|2 - 3 @{doses_i18n} , 3 @{doses_i18n} (2@{points_a_i18n})|3 - 4 @{doses_i18n} , 4 @{doses_i18n} (3@{points_a_i18n})|4 - 5 @{doses_i18n} , 5 @{doses_i18n} (4@{points_a_i18n})|5 - 6 @{doses_i18n} , 6 @{doses_i18n} (5@{points_a_i18n})|6 - 7 @{doses_i18n} , 7 @{doses_i18n} (6@{points_a_i18n})|7 - 8 @{doses_i18n} , 8 @{doses_i18n} (7@{points_a_i18n})|8 - 9 @{doses_i18n} , 9 @{doses_i18n} (8@{points_a_i18n})|9 - 10 @{doses_i18n} , 10 @{doses_i18n} (9@{points_a_i18n})|10 - 11 @{doses_i18n} , 11 @{doses_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_doses" value="{{'[@{none_i18n}](~@{character_id}|shaped_doses)'}}" disabled>
+
+            <!-- Duration -->
+            <button type="roll" name="roll_shaped_duration" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{duration}=?{@{duration_i18n}|0 - @{pow_u_i18n} @{minutes_a_i18n}, [[@{pow}]]@{minutes_a_i18n} (0@{points_a_i18n})| 1 - 2&times;@{pow_u_i18n} @{minutes_a_i18n}, [[2*@{pow}]]@{minutes_a_i18n} (1@{point_a_i18n})|2 - 3&times;@{pow_u_i18n} @{minutes_a_i18n}, 2 - [[3*@{pow}]]@{minutes_a_i18n} (2@{points_a_i18n})|3 - 4&times;@{pow_u_i18n} @{minutes_a_i18n}, [[4*@{pow}]]@{minutes_a_i18n} (3@{points_a_i18n})|4 - 5&times;@{pow_u_i18n} @{minutes_a_i18n},  [[5*@{pow}]]@{minutes_a_i18n} (4@{points_a_i18n})|5 - 6&times;@{pow_u_i18n} @{minutes_a_i18n},  [[6*@{pow}]]@{minutes_a_i18n} (5@{points_a_i18n})|6 - 7&times;@{pow_u_i18n} @{minutes_a_i18n},  [[7*@{pow}]]@{minutes_a_i18n} (6@{points_a_i18n})|7 - 8&times;@{pow_u_i18n} @{minutes_a_i18n},  [[8*@{pow}]]@{minutes_a_i18n} (7@{points_a_i18n})|8 - 9&times;@{pow_u_i18n} @{minutes_a_i18n},  [[9*@{pow}]]@{minutes_a_i18n} (8@{points_a_i18n})|9 - 10&times;@{pow_u_i18n} @{minutes_a_i18n},  [[10*@{pow}]]@{minutes_a_i18n} (9@{points_a_i18n})|10 - 11&times;@{pow_u_i18n} @{minutes_a_i18n},  [[11*@{pow}]]@{minutes_a_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <button type="roll" name="roll_extended_duration" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{duration}=?{@{duration_i18n}|0 - @{pow_u_i18n} @{turns_i18n}, [[@{pow}*1]] @{turns_i18n} (0@{points_a_i18n})|1 - @{pow_u_i18n} @{rounds_i18n}, [[@{pow}*1]] @{rounds_i18n} (1@{point_a_i18n})|2 - @{pow_u_i18n} @{minutes_a_i18n}, *1]] @{minutes_a_i18n} (2@{points_a_i18n})|3 - @{pow_u_i18n} &times; 5 @{minutes_a_i18n}, [[@{pow}*5]] @{minutes_a_i18n} (3@{points_a_i18n})|4 - @{pow_u_i18n} &times; 15 @{minutes_a_i18n}, [[@{pow}*15]] @{minutes_a_i18n} (4@{points_a_i18n})|5 - @{pow_u_i18n} @{hours_i18n}, [[@{pow}*1]] @{hours_i18n} (5@{points_a_i18n})|6 - @{pow_u_i18n} &times; 6 @{hours_i18n}, [[@{pow}*6]] @{hours_i18n} (6@{points_a_i18n})|7 - @{pow_u_i18n} @{days_i18n}, [[@{pow}*1]] @{days_i18n} (7@{points_a_i18n})|8 - @{pow_u_i18n} @{weeks_i18n}, [[@{pow}*1]] @{weeks_i18n} (8@{points_a_i18n})|9 - @{pow_u_i18n} @{months_i18n}, [[@{pow}*1]] @{months_i18n} (9@{points_a_i18n})|10 - @{pow_u_i18n} @{years_i18n}, [[@{pow}*1]] @{years_i18n} (10@{points_a_i18n})} }}'}}"></button>
+            <input type="text" name="attr_shaped_duration" value="{{'[@{pow} @{minutes_a_i18n}](~@{character_id}|shaped_duration)'}}" disabled>
+            <input type="text" name="attr_extended_duration" value="{{'[@{pow} @{turns_i18n}](~@{character_id}|extended_duration)'}}" disabled>
+
+            <!-- Focus -->
+            <button type="roll" name="roll_shaped_focus" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{focus}=?{@{focus_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 1 @{step_i18n}, 1 @{step_i18n} (1@{point_a_i18n})|2 - 2 @{steps_i18n}, 2 @{steps_i18n} (2@{points_a_i18n})|3 - 3 @{steps_i18n}, 3 @{steps_i18n} (3@{points_a_i18n})|4 - 4 @{steps_i18n}, 4 @{steps_i18n} (4@{points_a_i18n})|5 - 5 @{steps_i18n}, 5 @{steps_i18n} (5@{points_a_i18n})|6 - 6 @{steps_i18n}, 6 @{steps_i18n} (6@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_focus" value="{{'[@{none_i18n}](~@{character_id}|shaped_focus)'}}" disabled>
+
+            <!-- Fortune -->
+            <button type="roll" name="roll_shaped_fortune" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{fortune}=?{@{fortune_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 2 @{rolls_i18n}, 2 @{rolls_i18n} (1@{point_a_i18n})|2 - 3 @{rolls_i18n}, 3 @{rolls_i18n} (2@{points_a_i18n})|3 - 4 @{rolls_i18n}, 4 @{rolls_i18n} (3@{points_a_i18n})|4 - 5 @{rolls_i18n}, 5 @{rolls_i18n} (4@{points_a_i18n})|5 - 6 @{rolls_i18n}, 6 @{rolls_i18n} (5@{points_a_i18n})|6 - 7 @{rolls_i18n}, 7 @{rolls_i18n} (6@{points_a_i18n})|7 - 8 @{rolls_i18n}, 8 @{rolls_i18n} (7@{points_a_i18n})|8 - 9 @{rolls_i18n}, 9 @{rolls_i18n} (8@{points_a_i18n})|9 - 10 @{rolls_i18n}, 10 @{rolls_i18n} (9@{points_a_i18n})|10 - 11 @{rolls_i18n}, 11 @{rolls_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <button type="roll" name="roll_sandestin_fortune" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{fortune}=?{@{fortune_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 2 @{rolls_i18n}, 2 @{rolls_i18n} (1@{point_a_i18n})|3 - 3 @{rolls_i18n}, 3 @{rolls_i18n} (3@{points_a_i18n})|6 - 4 @{rolls_i18n}, 4 @{rolls_i18n} (6@{points_a_i18n})|10 - 5 @{rolls_i18n}, 5 @{rolls_i18n} (10@{points_a_i18n})|15 - 6 @{rolls_i18n}, 6 @{rolls_i18n} (15@{points_a_i18n})|21 - 7 @{rolls_i18n}, 7 @{rolls_i18n} (21@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_fortune" value="{{'[@{none_i18n}](~@{character_id}|shaped_fortune)'}}" disabled>
+            <input type="text" name="attr_sandestin_fortune" value="{{'[@{none_i18n}](~@{character_id}|sandestin_fortune)'}}" disabled>
+
+            <!-- Range -->
+            <button type="roll" name="roll_shaped_range" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{range}=?{@{range_i18n}|0 - @{touch_i18n}, @{touch_i18n} (0@{points_a_i18n})|1 - 1@{meters_a_i18n}&times;@{pow_u_i18n},  [[@{pow}]]@{meters_a_i18n} (1pt)|2 - 5@{meters_a_i18n}&times;@{pow_u_i18n},  [[5*@{pow}]]@{meters_a_i18n} (2@{points_a_i18n})|3 - 10@{meters_a_i18n}&times;@{pow_u_i18n},  [[10*@{pow}]]@{meters_a_i18n} (3@{points_a_i18n})|4 - 50@{meters_a_i18n}&times;@{pow_u_i18n},  [[50*@{pow}]]@{meters_a_i18n} (4@{points_a_i18n})|5 - 100m&times;@{pow_u_i18n},  [[100*@{pow}]]@{meters_a_i18n} (5@{points_a_i18n})|6 - 500@{meters_a_i18n}&times;@{pow_u_i18n},  [[500*@{pow}]]@{meters_a_i18n} (6@{points_a_i18n})|7 - 1@{kilometers_a_i18n}&times;@{pow_u_i18n},  [[1*@{pow}]]@{kilometers_a_i18n} (7@{points_a_i18n})|8 - 5@{kilometers_a_i18n}&times;@{pow_u_i18n},  [[5*@{pow}]]@{kilometers_a_i18n} (8@{points_a_i18n})|9 - 10@{kilometers_a_i18n}&times;@{pow_u_i18n},  [[10*@{pow}]]@{kilometers_a_i18n} (9@{points_a_i18n})|10 - 15@{kilometers_a_i18n}&times;@{pow_u_i18n},  [[15*@{pow}]]@{kilometers_a_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <button type="roll" name="roll_sympathetic_range" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{range}=?{@{range_i18n}|0 - @{touch_i18n}, @{touch_i18n} (0@{points_a_i18n})|1 - 2+ fragments of the target, 2+ fragments of the target (1@{point_a_i18n})|2 - A fragments of the target, A fragments of the target (2@{points_a_i18n})|3 - Any personal object that the target has worn or carried continuously for a year, Any personal object that the target has worn or carried continuously for a year (3@{points_a_i18n})|4 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year (4@{points_a_i18n})|5 - Any personal object that the target has used several times within the last year, Any personal object that the target has used several times within the last year (5@{points_a_i18n})|6 - Any object the target has created or consumed, Any object the target has created or consumed (6@{points_a_i18n})|7 - A live video of the target, A live video of the target (7@{points_a_i18n})|8 - A recorded video of the target made within the last year, A recorded video of the target made within the last year (8@{points_a_i18n})|9 - A clear photograph of the target made within the last year, A clear photograph of the target made within the last year (9@{points_a_i18n})|10 - The caster has ever spent over an hour interacting with the target, The caster has ever spent over an hour interacting with the target (10@{points_a_i18n})} }}'}}"></button>
+            <input type="text" name="attr_shaped_range" value="{{'[@{touch_i18n}](~@{character_id}|shaped_range)'}}" disabled>
+            <input type="text" name="attr_sympathetic_range" value="{{'[@{touch_i18n}](~@{character_id}|sympathetic_range)'}}" disabled>
+
+            <!-- Magnitude -->
+            <button type="roll" name="roll_shaped_magnitude" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{magnitude}=?{@{magnitude_i18n}|0 - @{magnitude_i18n} 1, 1 (0@{points_a_i18n})|1 - @{magnitude_i18n} 2, 2 (1@{point_a_i18n})|2 - @{magnitude_i18n} 3, 3 (2@{points_a_i18n})|3 - @{magnitude_i18n} 4, 4 (3@{points_a_i18n})|4 - @{magnitude_i18n} 5, 5 (4@{points_a_i18n})|5 - @{magnitude_i18n} 6, 6 (5@{points_a_i18n})|6 - @{magnitude_i18n} 7, 7 (6@{points_a_i18n})|7 - @{magnitude_i18n} 8, 8 (7@{points_a_i18n})|8 - @{magnitude_i18n} 9, 9 (8@{points_a_i18n})|9 - @{magnitude_i18n} 10, 10 (9@{points_a_i18n})|10 - @{magnitude_i18n} 11, 11 (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_magnitude" value="{{'[1](~@{character_id}|shaped_magnitude)'}}" disabled>
+
+            <!-- Precision -->
+            <button type="roll" name="roll_shaped_precision" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{precision}=?{@{precision_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - &plusmn;1, &plusmn;1 (1@{point_a_i18n})|2 - &plusmn;2, &plusmn;2 (2@{points_a_i18n})|3 - &plusmn;3, &plusmn;3 (3@{points_a_i18n})|4 - &plusmn;4, &plusmn;4 (4@{points_a_i18n})|5 - &plusmn;5, &plusmn;5 (5@{points_a_i18n})|6 - &plusmn;6, &plusmn;6 (6@{points_a_i18n})|7 - &plusmn;7, &plusmn;7 (7@{points_a_i18n})|8 - &plusmn;8, &plusmn;8 (8@{points_a_i18n})|9 - &plusmn;9, &plusmn;9 (9@{points_a_i18n})|10 - &plusmn;10, &plusmn;10 (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_precision" value="{{'[@{none_i18n}](~@{character_id}|shaped_precision)'}}" disabled>
+
+            <!-- Services -->
+            <button type="roll" name="roll_sandestin_services" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{services}=?{@{services_i18n}|0 - 1 @{service_i18n}, 1 (0@{points_a_i18n})|3 - 2 @{services_i18n}, 2 (3@{points_a_i18n})|7 - 3 @{services_i18n}, 3 (7@{points_a_i18n})|12 - 4 @{services_i18n}, 4 (12@{points_a_i18n})|18 - 5 @{services_i18n}, 5 (18@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_sandestin_services" value="{{'[1](~@{character_id}|sandestin_services)'}}" disabled>
+
+            <!-- Shelf Life -->
+            <button type="roll" name="roll_shaped_shelf_life" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{shelf_life}=?{@{shelf_life_i18n}|0 - @{pow_u_i18n} @{hours_i18n}, [[@{pow}]] @{hours_i18n} (0@{points_a_i18n})| 1 - 3&times;@{pow_u_i18n} @{hours_i18n}, [[3*@{pow}]] @{hours_i18n} (1pt)|2 - @{pow_u_i18n} @{days_i18n}, 2 - [[@{pow}]] @{days_i18n} (2@{points_a_i18n})|3 - 3&times;@{pow_u_i18n} @{days_i18n}, [[3*@{pow}]] @{days_i18n} (3@{points_a_i18n})|4 - @{pow_u_i18n} @{weeks_i18n},  [[@{pow}]] @{weeks_i18n} (4@{points_a_i18n})|5 - 3&times;@{pow_u_i18n} @{weeks_i18n},  [[3*@{pow}]] @{weeks_i18n} (5@{points_a_i18n})|6 - @{pow_u_i18n} @{months_i18n},  [[@{pow}]] @{months_i18n} (6@{points_a_i18n})|7 - 3&times;@{pow_u_i18n} @{months_i18n},  [[3*@{pow}]] @{months_i18n} (7@{points_a_i18n})|8 - @{pow_u_i18n} @{years_i18n},  [[@{pow}]] @{years_i18n} (8@{points_a_i18n})|9 - 3&times;@{pow_u_i18n} @{years_i18n},  [[3*@{pow}]] @{years_i18n} (9@{points_a_i18n})|10 - 10&times;@{pow_u_i18n} @{years_i18n},  [[10*@{pow}]] @{years_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_shelf_life" value="{{'[@{pow} @{hours_i18n}](~@{character_id}|shaped_shelf_life)'}}" disabled>
+
+            <!-- Swiftness -->
+            <button type="roll" name="roll_shaped_swiftness" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{swiftness}=?{@{swiftness_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - -1 @{casting_time_i18n} , -1 @{casting_time_i18n} (1@{point_a_i18n})|2 - -2 @{casting_time_i18n} , -2 @{casting_time_i18n} (2@{points_a_i18n})|3 - -3 @{casting_time_i18n} , -3 @{casting_time_i18n} (3@{points_a_i18n})|4 - -4 @{casting_time_i18n} , -4 @{casting_time_i18n} (4@{points_a_i18n})|5 - -5 @{casting_time_i18n} , -5 @{casting_time_i18n} (5@{points_a_i18n})|6 - -6 @{casting_time_i18n} , -6 @{casting_time_i18n} (6@{points_a_i18n})|7 - -7 @{casting_time_i18n} , -7 @{casting_time_i18n} (7@{points_a_i18n})|8 - -8 @{casting_time_i18n} , -8 @{casting_time_i18n} (8@{points_a_i18n})|9 - -9 @{casting_time_i18n} , -9 @{casting_time_i18n} (9@{points_a_i18n})|10 - -10 @{casting_time_i18n} , -10 @{casting_time_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <button type="roll" name="roll_sandestin_swiftness" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{swiftness}=?{@{swiftness_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - -2 @{casting_time_i18n} , -2 @{casting_time_i18n}  (1@{point_a_i18n})|2 - -4 @{casting_time_i18n} , -4 @{casting_time_i18n} (2@{points_a_i18n})|3 - -6 @{casting_time_i18n} , -6 @{casting_time_i18n} (3@{points_a_i18n})|4 - -8 @{casting_time_i18n} , -8 @{casting_time_i18n} (4@{points_a_i18n})|5 - -10 @{casting_time_i18n} , -10 @{casting_time_i18n} (5@{points_a_i18n})|6 - -12 @{casting_time_i18n} , -12 @{casting_time_i18n} (6@{points_a_i18n})|7 - -14 @{casting_time_i18n} , -14 @{casting_time_i18n} (7@{points_a_i18n})|8 - -16 @{casting_time_i18n} , -16 @{casting_time_i18n} (8@{points_a_i18n})|9 - -18 @{casting_time_i18n} , -18 @{casting_time_i18n} (9@{points_a_i18n})|10 - -20 @{casting_time_i18n} , -20 @{casting_time_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_swiftness" value="{{'[@{none_i18n}](~@{character_id}|shaped_swiftness)'}}" disabled>
+            <input type="text" name="attr_sandestin_swiftness" value="{{'[@{none_i18n}](~@{character_id}|sandestin_swiftness)'}}" disabled>
+
+            <!-- Targets -->
+            <button type="roll" name="roll_shaped_targets" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{targets}=?{@{targets_i18n}|0 - 1 @{target_i18n}, 1 (0@{points_a_i18n})|1 - 2 @{targets_i18n}, 2 (1@{point_a_i18n})|2 - 3 @{targets_i18n}, 3 (2@{points_a_i18n})|3 - 4 @{targets_i18n}, 4 (3@{points_a_i18n})|4 - 5 @{targets_i18n}, 5 (4@{points_a_i18n})|5 - 6 @{targets_i18n}, 6 (5@{points_a_i18n})|6 - 7 @{targets_i18n}, 7 (6@{points_a_i18n})|7 - 8 @{targets_i18n}, 8 (7@{points_a_i18n})|8 - 9 @{targets_i18n}, 9 (8@{points_a_i18n})|9 - 10 @{targets_i18n}, 10 (9@{points_a_i18n})|10 - 11 @{targets_i18n}, 11 (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_targets" value="{{'[1](~@{character_id}|shaped_targets)'}}" disabled>
+
+            <!-- Terms -->
+            <button type="roll" name="roll_sandestin_terms" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{terms}=?{@{terms_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 1 @{term_i18n} , 1 @{term_i18n} (1@{point_a_i18n})|2 - 2 @{terms_i18n} , 2 @{terms_i18n} (2@{points_a_i18n})|3 - 3 @{terms_i18n} , 3 @{terms_i18n} (3@{points_a_i18n})|4 - 4 @{terms_i18n} , 4 @{terms_i18n} (4@{points_a_i18n})|5 - 5 @{terms_i18n} , 5 @{terms_i18n} (5@{points_a_i18n})|6 - 6 @{terms_i18n} , 6 @{terms_i18n} (6@{points_a_i18n})|7 - 7 @{terms_i18n} , 7 @{terms_i18n} (7@{points_a_i18n})|8 - 8 @{terms_i18n} , 8 @{terms_i18n} (8@{points_a_i18n})|9 - 9 @{terms_i18n} , 9 @{terms_i18n} (9@{points_a_i18n})|10 - 10 @{terms_i18n} , 10 @{terms_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_sandestin_terms" value="{{'[@{none_i18n}](~@{character_id}|sandestin_terms)'}}" disabled>
+
+            <!-- @{wonders_i18n} -->
+            <button type="roll" name="roll_shaped_wonders" value="{{'@{roll_display}&{template:default} {{effectstyle=1}} {{^{wonders}=?{@{wonders_i18n}|0 - @{none_i18n}, @{none_i18n} (0@{points_a_i18n})|1 - 1 @{wonder_i18n} , 1 @{wonder_i18n} (1@{point_a_i18n})|2 - 2 @{wonders_i18n} , 2 @{wonders_i18n} (2@{points_a_i18n})|3 - 3 @{wonders_i18n} , 3 @{wonders_i18n} (3@{points_a_i18n})|4 - 4 @{wonders_i18n} , 4 @{wonders_i18n} (4@{points_a_i18n})|5 - 5 @{wonders_i18n} , 5 @{wonders_i18n} (5@{points_a_i18n})|6 - 6 @{wonders_i18n} , 6 @{wonders_i18n} (6@{points_a_i18n})|7 - 7 @{wonders_i18n} , 7 @{wonders_i18n} (7@{points_a_i18n})|8 - 8 @{wonders_i18n} , 8 @{wonders_i18n} (8@{points_a_i18n})|9 - 9 @{wonders_i18n} , 9 @{wonders_i18n} (9@{points_a_i18n})|10 - 10 @{wonders_i18n} , 10 @{wonders_i18n} (10@{points_a_i18n})}}}'}}"></button>
+            <input type="text" name="attr_shaped_wonders" value="{{'[@{none_i18n}](~@{character_id}|shaped_wonders)'}}" disabled>
         </div>
 
-        <!-- Pre-defined advanced traits -->
-        <!-- TODO predefined advanced traits -->
 
-        <!-- Ability Filter -->
-        <!-- TODO ability filter -->
-
-        <!-- Ability Table -->
-        <!-- TODO ability autocalc -->
+        <!-- Tradition Table -->
         <div class="sheet-flex">
-            <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="when_compact_only_starred_abilities_are_shown">S</div></div>
+            <div class="sheet-th"><div class="sheet-tradition-name"><span data-i18n="tradition">Tradition></span> / <span data-i18n="system">System</span></div></div>
+            <div class="sheet-th"><div class="sheet-number-width" data-i18n="rank">Rank</div></div>
+            <div class="sheet-th sheet-grow" data-i18n="skills">Skills</div>
+            <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="devotional_pool" data-i18n="pool">Pool</div></div>
+            <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos" data-i18n-title="details-tooltip">y</div></div>
+        </div>
+        <div class="sheet-bmargin">
+            <fieldset class="repeating_tradition">
+                <div class="sheet-flex">
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-tradition-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this tradition" readonly>
+                    </div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width" title="@{$ID_rank}" name="attr_tradition_rank" value="1" min="0"></div>
+                    <div class="sheet-td sheet-grow sheet-flex">
+                        <div class="sheet-full-width sheet-flex sheet-gap">
+                            <div class="sheet-half-width sheet-flex sheet-gap">
+                                <input type="text" class="sheet-grow sheet-number-width" title="@{$ID_skill1_name}" name="attr_skill1_name_display" value="@{skill1_name}" disabled>
+                                <input type="number" class="sheet-number-width-sm sheet-impval" title="@{$ID_skill1_total}" name="attr_skill1_total_display" value="@{skill1_total}" disabled>
+                                <button type="roll" class="sheet-button-width sheet-die sheet-d10" title="%{$ID_skill1}" name="roll_skill1" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{skill1_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{skill1_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{skill1_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{skill1_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{skill1_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{skill1_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{skill1_total}*1.5)+@{penalty})]]}} {{standard=[[@{skill1_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{skill1_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{skill1_total}+@{penalty})]]}} {{hard=[[ceil((@{skill1_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{skill1_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{skill1_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{skill1_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{skill1_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{skill1_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{skill1_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{skill1_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{skill1_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{skill1_notes}}}'}}">t</button>
+                            </div>
+                            <div class="sheet-half-width sheet-flex sheet-gap">
+                                <input type="text" class="sheet-grow sheet-number-width" title="@{$ID_skill2_name}" name="attr_skill2_name_display" value="@{skill2_name}" disabled>
+                                <input type="number" class="sheet-number-width-sm sheet-impval" title="@{$ID_skill2_total}" name="attr_skill2_total_display" value="@{skill2_total}" disabled>
+                                <button type="roll" class="sheet-button-width sheet-die sheet-d10" title="%{$ID_skill2}" name="roll_skill2" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{skill2_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{skill2_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{skill2_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{skill2_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{skill2_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{skill2_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{skill2_total}*1.5)+@{penalty})]]}} {{standard=[[@{skill2_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{skill2_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{skill2_total}+@{penalty})]]}} {{hard=[[ceil((@{skill2_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{skill2_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{skill2_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{skill2_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{skill2_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{skill2_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{skill2_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{skill2_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{skill2_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{skill2_notes}}}'}}">t</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sheet-td">
+                        <input type="hidden" class="sheet-pool-toggle" name="attr_pool_limit" value="0">
+                        <div class="sheet-pool-toggle-none sheet-number-width">-</div>
+                        <div class="sheet-pool-toggle-exist sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{$ID_pool}" name="attr_pool" value="0">/<input type="number" class="sheet-rval" title="@{$ID_pool|max}" name="attr_pool_max" value="@{pool_limit}" disabled></div>
+                    </div>
+                    <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1" checked><span class="sheet-checkico">y</span></div>
+                </div>
+                <!-- Tradition Details -->
+                <input type="hidden" class="sheet-wide-toggle" name="attr_details" value="1">
+                <span class="sheet-anti-toggle sheet-lmargin-x3" name="attr_notes"></span>
+                <div class="sheet-toggle sheet-lmargin-x3">
+                    <div class="sheet-flex sheet-gap">
+                        <div class="sheet-flex sheet-grow sheet-gap">
+                            <div><label class="sheet-left" data-i18n="skill_1_id">Skill 1 ID</label></div>
+                            <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_skill1_id"></div>
+                            <input type="hidden" name="attr_skill1_name" value="" readonly>
+                            <input type="hidden" name="attr_skill1_total" value="0" readonly>
+                            <input type="hidden" name="attr_skill1_notes" value="" readonly>
+                        </div>
+                        <div class="sheet-flex sheet-grow sheet-gap">
+                            <div><label class="sheet-left" data-i18n="skill_2_id">Skill 2 ID</label></div>
+                            <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_skill2_id"></div>
+                            <input type="hidden" name="attr_skill2_name" value="" readonly>
+                            <input type="hidden" name="attr_skill2_total" value="0" readonly>
+                            <input type="hidden" name="attr_skill2_notes" value="" readonly>
+                        </div>
+                        <div>
+                            <label class="sheet-left sheet-rmargin" data-i18n="devotional_pool">Devotional Pool</label>
+                            <select class="sheet-auto-width sheet-text-center" name="attr_pool_limit">
+                                <option value="0" selected>-</option>
+                                <option value="ceil(@{pow}*.25)" data-i18n="1/4_pow-u">1/4 @{pow_u_i18n}</option>
+                                <option value="ceil(@{pow}*.5)" data-i18n="1/2_pow-u">1/2 @{pow_u_i18n}</option>
+                                <option value="ceil(@{pow}*.75)" data-i18n="3/4_pow-u">3/4 @{pow_u_i18n}</option>
+                                <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div><label class="sheet-left" data-i18n="notes">Notes</label></div>
+                    <textarea class="sheet-full-width sheet-tradition-notes" name="attr_notes"></textarea>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Abilities Table -->
+        <div class="sheet-flex">
+            <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="memorized">S</div></div>
             <div class="sheet-th"><div class="sheet-ability-name" data-i18="ability">Ability</div></div>
             <div class="sheet-th"><div class="sheet-button-width"></div></div>
             <div class="sheet-th"><div class="sheet-ability-type" data-i18="type">Type</div></div>
             <div class="sheet-th sheet-setting-option sheet-cf"><div class="sheet-number-width" data-i18="rank">Rank</div></div>
-            <div class="sheet-th sheet-grow" data-i18n="summary"></div>
+            <div class="sheet-th sheet-grow" data-i18n="traits">Traits</div>
             <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="show_details">E</div></div>
         </div>
         <fieldset class="repeating_ability">
@@ -2947,7 +3057,7 @@
                         <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
                     </div>
                     <div class="sheet-td">
-                        <button type="roll" class="sheet-die sheet-pictos" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{skill_buttons=@{skill_buttons}}} {{description=@{description}}}'}}">e</button>
+                        <button type="roll" class="sheet-die sheet-pictos" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}} {{skill1_name=@{skill1_name}}} {{skill1_total=@{skill1_total}}} {{skill2_name=@{skill2_name}}} {{skill2_total=@{skill2_total}}} {{tradition_id=@{tradition_id}}}'}}">e</button>
                     </div>
                     <div class="sheet-td">
                         <select class="sheet-ability-type sheet-text-center" data-i18n-list="ability_type-order" title="@{$ID_type}" name="attr_type">
@@ -2983,11 +3093,7 @@
                 </div>
                 <input type="hidden" class="sheet-toggle" name="attr_details" value="1">
                 <div class="sheet-toggle">
-                    <div>
-                        <label class="sheet-left sheet-rmargin" data-i18n="tags">Tags</label>
-                        <input type="text" title="@{$ID_tags}" name="attr_tags" value="">
-                    </div>
-                    <div class="sheet-flex sheet-gap">
+                    <div class="sheet-lmargin-x3 sheet-flex sheet-gap">
                         <div class="sheet-third-width">
                             <label class="sheet-left"><span data-i18n="traits">Traits</span>/<span data-i18n="summary">Summary</span></label>
                             <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
@@ -3001,19 +3107,33 @@
                             <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
                         </div>
                     </div>
-                </div>
-                <div hidden>
-                    <input type="text" name="attr_skill_buttons" value="" readonly>
+                    <div class="sheet-lmargin-x3">
+                        <label class="sheet-left sheet-rmargin" data-i18n="tradition_id">Tradition ID</label>
+                        <input type="text" name="attr_tradition_id" value="">
+                    </div>
                 </div>
             </div>
+            <div hidden>
+                <input type="text" name="attr_skill1_name" value="" readonly>
+                <input type="text" name="attr_skill1_total" value="" readonly>
+                <input type="text" name="attr_skill2_name" value="" readonly>
+                <input type="text" name="attr_skill2_total" value="" readonly>
+            </div>
         </fieldset>
+
+        <!-- Abilities Configs -->
+        <input type='hidden' class='sheet-toggle sheet-hidden' name='attr_abilities_config' value="0"/>
+        <div class="sheet-toggle">
+            <div class="sheet-flex sheet-gap sheet-bmargin">
+
+            </div>
+        </div>
     </div>
 
     <!-- Weapons -->
     <div id="weapons" class="sheet-section sheet-anchor-adjust-x2 sheet-creature">
         <h2 data-i18n="weapons">Weapons</h2>
 
-        <!-- TODO replace with tagging -->
         <input type="hidden" name="attr_weapon_buttons" value="">
 
         <!-- Melee Weapons -->

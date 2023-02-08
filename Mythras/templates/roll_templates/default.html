@@ -1,17 +1,17 @@
 <!-- Default Roll Template -->
 <!-- {{'@{roll_display}&{template:default} {{name=@{name}}} {{roll=[[1d8]]}}'}} -->
 <rolltemplate class="sheet-rolltemplate-default">
-    <div class="sheet-border {{'{{#improvestyle}}improve{{/improvestyle}}{{#initstyle}}initiative{{/initstyle}}{{#dmgstyle}}damage{{/dmgstyle}}'}}">
-        <div class="sheet-header {{'{{#improvestyle}}improve{{/improvestyle}}{{#initstyle}}initiative{{/initstyle}}{{#dmgstyle}}damage{{/dmgstyle}}'}}">
+    <div class="sheet-border {{'{{#improvestyle}}improve{{/improvestyle}}{{#initstyle}}initiative{{/initstyle}}{{#dmgstyle}}damage{{/dmgstyle}}{{#effectstyle}}effect{{/effectstyle}}'}}">
+        <div class="sheet-header {{'{{#improvestyle}}improve{{/improvestyle}}{{#initstyle}}initiative{{/initstyle}}{{#dmgstyle}}damage{{/dmgstyle}}{{#effectstyle}}effect{{/effectstyle}}'}}">
             <div class="sheet-character">{{'{{character}}'}}</div>
             <div class="sheet-name">{{'{{name}}'}}</div>
         </div>
-        {{'{{#allprops() character name notes improvestyle initstyle dmgstyle}}'}}
+        {{'{{#allprops() character name notes improvestyle initstyle dmgstyle effectstyle}}'}}
         <div class="sheet-listitem">
             <div class="sheet-key">{{'{{key}}'}}</div>
             <div class="sheet-value">{{'{{value}}'}}</div>
         </div>
-        {{'{{/allprops() character name notes improvestyle initstyle dmgstyle}}'}}
+        {{'{{/allprops() character name notes improvestyle initstyle dmgstyle effectstyle}}'}}
         {{'{{#notes}}'}}
         <div class="sheet-listitem">{{'{{notes}}'}}</div>
         {{'{{/notes}}'}}

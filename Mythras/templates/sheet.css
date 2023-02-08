@@ -130,6 +130,9 @@ div.sheet-space-around {
 .sheet-grow {
     flex-grow: 1;
 }
+.sheet-shrink {
+    flex-shrink: 1;
+}
 .sheet-bpad {
     padding-bottom: 5px;
 }
@@ -371,14 +374,14 @@ input.sheet-wide-toggle:not([value="1"]) ~ .sheet-toggle,
 input[type="checkbox"].sheet-wide-toggle:not(:checked) ~ .sheet-toggle,
 input.sheet-wide-toggle[value="1"] ~ .sheet-anti-toggle,
 input[type="checkbox"].sheet-wide-toggle:checked ~ .sheet-anti-toggle {
-    display: none;
+    display: none !important;
 }
 
 input.sheet-deep-toggle:not([value="1"]) ~ div .sheet-toggle,
 input[type="checkbox"].sheet-deep-toggle:not(:checked) ~ div .sheet-toggle,
 input.sheet-deep-toggle[value="1"] ~ div .sheet-anti-toggle,
 input[type="checkbox"].sheet-deep-toggle:checked ~ div .sheet-anti-toggle {
-    display: none;
+    display: none !important;
 }
 
 input.sheet-details-toggle:not([value="1"]) ~ div .sheet-details-toggle,
