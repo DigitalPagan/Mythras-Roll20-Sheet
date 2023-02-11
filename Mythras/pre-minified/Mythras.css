@@ -53,6 +53,12 @@ body.sheet-darkmode .charsheet {
     color: whitesmoke;
     border-color: whitesmoke;
 }
+ul, ol {
+    margin: 0 0 0 25px;
+}
+li {
+    text-align: left;
+}
 h1 {
     font-size: 20px;
     font-family: "Sorts Mill Goudy", serif;
@@ -199,6 +205,7 @@ div.sheet-th {
     vertical-align: middle;
     font-weight: normal;
     white-space: nowrap;
+    vertical-align: top;
 }
 div.sheet-td {
     display: table-cell;
@@ -206,6 +213,7 @@ div.sheet-td {
     vertical-align: middle;
     padding: 1px 2px;
     white-space: nowrap;
+    vertical-align: top;
 }
 
 
@@ -296,6 +304,9 @@ div.sheet-impval {
 }
 .sheet-third-width {
     width: 33.33% !important;
+}
+.sheet-two-thirds-width {
+    width: 66.66% !important;
 }
 .sheet-auto-width {
     width: auto; /* check important */
@@ -839,7 +850,7 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-setting-control[value="mythic_britain"] ~ div.sheet-wrapper .sheet-mb,
 .sheet-setting-control[value="mythic_constantinople"] ~ div.sheet-wrapper .sheet-mc,
 .sheet-setting-control[value="mythic_rome"] ~ div.sheet-wrapper .sheet-mr,
-.sheet-setting-control[value="mythras_imperative"] ~ div.sheet-wrapper .sheet-mi,
+.sheet-setting-control[value="mythras_imperative"] ~ div.sheet-wrapper .sheet-imperative,
 .sheet-setting-control[value="odd_soot"] ~ div.sheet-wrapper .sheet-os,
 .sheet-setting-control[value="perceforest"] ~ div.sheet-wrapper .sheet-perceforest,
 .sheet-setting-control[value="thennla"] ~ div.sheet-wrapper .sheet-thennla,
@@ -976,7 +987,33 @@ button[type=roll].sheet-improve {
     top: 0;
 }
 
-/* Magic */
+/* Abilities */
+.sheet-ability-option {
+    display: none;
+}
+input.sheet-abilities-control[value="core"] + div .sheet-ability-option.sheet-core,
+input.sheet-abilities-control[value="core-plus"] + div .sheet-ability-option.sheet-core-plus,
+input.sheet-abilities-control[value="after_the_vampire_wars"] + div .sheet-ability-option.sheet-atvw,
+input.sheet-abilities-control[value="classic_fantasy"] + div .sheet-ability-option.sheet-cf,
+input.sheet-abilities-control[value="destined"] + div .sheet-ability-option.sheet-destined,
+input.sheet-abilities-control[value="luther_arkwright"] + div .sheet-ability-option.sheet-la,
+input.sheet-abilities-control[value="lyonesse"] + div .sheet-ability-option.sheet-lyonesse,
+input.sheet-abilities-control[value="m-space"] + div .sheet-ability-option.sheet-ms,
+input.sheet-abilities-control[value="mythic_babylon"] + div .sheet-ability-option.sheet-mba,
+input.sheet-abilities-control[value="mythic_britain"] + div .sheet-ability-option.sheet-mb,
+input.sheet-abilities-control[value="mythic_rome"] + div .sheet-ability-option.sheet-mr,
+input.sheet-abilities-control[value="mythras_imperative"] + div .sheet-ability-option.sheet-imperative,
+input.sheet-abilities-control[value="odd_soot"] + div .sheet-ability-option.sheet-os,
+input.sheet-abilities-control[value="thennla"] + div .sheet-ability-option.sheet-thennla,
+input.sheet-abilities-control[value="worlds_united"] + div .sheet-ability-option.sheet-wu {
+    display: initial !important;
+}
+
+.sheet-components-options {
+    overflow: auto;
+    height: 90px;
+}
+
 .sheet-tradition-name {
     width: 200px;
 }
@@ -988,13 +1025,6 @@ textarea.sheet-tradition-notes {
     height: 36px;
 }
 
-/* Abilities */
-div.sheet-devotion-name {
-    width: 150px;
-}
-div.sheet-devotion-limit {
-    width: 50px;
-}
 .sheet-ability-name {
     width: 150px;
 }
@@ -1546,15 +1576,13 @@ textarea.sheet-character-notes {
     width: 100%;
     max-height: 200px;
     overflow: auto;
+    background: repeating-linear-gradient(to bottom, gainsboro, gainsboro 20px, transparent 20px, transparent 40px);
+}
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode div.sheet-table {
+    background: repeating-linear-gradient(to bottom, #333333, #333333 20px, transparent 20px, transparent 40px);
 }
 .sheet-rolltemplate-se-menu div.sheet-tr {
     display: table-row;
-}
-.sheet-rolltemplate-se-menu div.sheet-tr:hover {
-    background: #fcf8e3;
-}
-.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode div.sheet-tr:hover {
-    background: darkgoldenrod;
 }
 .sheet-rolltemplate-se-menu div.sheet-th {
     display: table-cell;

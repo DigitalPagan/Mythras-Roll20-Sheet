@@ -1599,16 +1599,64 @@ on(`change:repeating_tradition:skill1_id change:repeating_tradition:skill2_id`, 
 });
 
 /* Abilities */
+on('change:repeating_ability:type', function(event) {
+    const abilityId = event.sourceAttribute.split('_')[2];
+
+    getAttrs(['shaping_traits', 'type'], function(v) {
+        let newAttrs = {}
+        /* Advanced Traits */
+        if (event.newValue === 'mysticism' || event.newValue === 'arcane_magic' || event.newValue === 'divine_magic') {
+            newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{intensity}: @{dynamic_intensity}';
+        } else if (event.newValue === 'sorcery') {
+            newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = v['shaping_traits'];
+        } else if (event.newValue === 'sandestin_magic') {
+            newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{area}: @{sandestin_area}\n^{combine}: @{sandestin_combine}\n^{fortune}: @{sandestin_fortune}\n^{services}: @{sandestin_services}\n^{swiftness}: @{sandestin_swiftness}\n^{terms}: @{sandestin_terms}';
+        } else if (event.newValue === 'assabian_alchemy') {
+            newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{combine}: @{shaped_combine}\n^{conditions}: @{shaped_conditions}\n^{doses}: @{shaped_doses}\n^{magnitude}: @{shaped_magnitude}\n^{shelf_life}: @{shaped_shelf_life}';
+        } else if (event.newValue === 'ability' && v['type'] === 'spirit') {
+            newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{spirit_intensity}: @{spirit_intensity}';
+        } else {
+            newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '';
+        }
+
+        /* Traited */
+        if (event.newValue === 'ability' || event.newValue === 'gift' || event.newValue === 'limitation' || event.newValue === 'other' || event.newValue === 'super_power' || event.newValue === 'trait') {
+            newAttrs[`repeating_ability_${abilityId}_traited`] = 0;
+        } else {
+            newAttrs[`repeating_ability_${abilityId}_traited`] = 1;
+        }
+
+        setAttrs(newAttrs);
+    });
+});
+on('change:repeating_ability:traits', function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    if (event.newValue === undefined) {
+        setAttrs({[`repeating_ability_${id}_summary`]: "-"});
+    } else {
+        setAttrs({[`repeating_ability_${id}_summary`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+    }
+});
 on('change:repeating_ability:tradition_id', function(event) {
     const abilityId = event.sourceAttribute.split('_')[2];
     const traditionId = event.newValue;
 
-    setAttrs({
-        [`repeating_ability_${abilityId}_skill1_name`]: `@{${traditionId}_skill1_name}`,
-        [`repeating_ability_${abilityId}_skill1_total`]: `@{${traditionId}_skill1_total}`,
-        [`repeating_ability_${abilityId}_skill2_name`]: `@{${traditionId}_skill2_name}`,
-        [`repeating_ability_${abilityId}_skill2_total`]: `@{${traditionId}_skill2_total}`,
-    });
+    if (event.newValue === undefined || event.newValue === '') {
+        setAttrs({
+            [`repeating_ability_${abilityId}_skill1_name`]: '',
+            [`repeating_ability_${abilityId}_skill1_total`]: '',
+            [`repeating_ability_${abilityId}_skill2_name`]: '',
+            [`repeating_ability_${abilityId}_skill2_total`]: '',
+        });
+    } else {
+        setAttrs({
+            [`repeating_ability_${abilityId}_skill1_name`]: `@{${traditionId}_skill1_name}`,
+            [`repeating_ability_${abilityId}_skill1_total`]: `@{${traditionId}_skill1_total}`,
+            [`repeating_ability_${abilityId}_skill2_name`]: `@{${traditionId}_skill2_name}`,
+            [`repeating_ability_${abilityId}_skill2_total`]: `@{${traditionId}_skill2_total}`,
+        });
+    }
+
 });
 
 
@@ -1775,7 +1823,7 @@ on("change:location1_armor_enc change:location1_armor_equipped change:location2_
 });
 
 /* Repeating IDs */
-on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_superpowerlimit", function(event) {
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_power change:repeating_feature", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];

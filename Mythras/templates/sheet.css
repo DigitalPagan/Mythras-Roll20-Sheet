@@ -53,6 +53,12 @@ body.sheet-darkmode .charsheet {
     color: whitesmoke;
     border-color: whitesmoke;
 }
+ul, ol {
+    margin: 0 0 0 25px;
+}
+li {
+    text-align: left;
+}
 h1 {
     font-size: 20px;
     font-family: "Sorts Mill Goudy", serif;
@@ -199,6 +205,7 @@ div.sheet-th {
     vertical-align: middle;
     font-weight: normal;
     white-space: nowrap;
+    vertical-align: top;
 }
 div.sheet-td {
     display: table-cell;
@@ -206,6 +213,7 @@ div.sheet-td {
     vertical-align: middle;
     padding: 1px 2px;
     white-space: nowrap;
+    vertical-align: top;
 }
 
 
@@ -296,6 +304,9 @@ div.sheet-impval {
 }
 .sheet-third-width {
     width: 33.33% !important;
+}
+.sheet-two-thirds-width {
+    width: 66.66% !important;
 }
 .sheet-auto-width {
     width: auto; /* check important */
@@ -839,7 +850,7 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-setting-control[value="mythic_britain"] ~ div.sheet-wrapper .sheet-mb,
 .sheet-setting-control[value="mythic_constantinople"] ~ div.sheet-wrapper .sheet-mc,
 .sheet-setting-control[value="mythic_rome"] ~ div.sheet-wrapper .sheet-mr,
-.sheet-setting-control[value="mythras_imperative"] ~ div.sheet-wrapper .sheet-mi,
+.sheet-setting-control[value="mythras_imperative"] ~ div.sheet-wrapper .sheet-imperative,
 .sheet-setting-control[value="odd_soot"] ~ div.sheet-wrapper .sheet-os,
 .sheet-setting-control[value="perceforest"] ~ div.sheet-wrapper .sheet-perceforest,
 .sheet-setting-control[value="thennla"] ~ div.sheet-wrapper .sheet-thennla,

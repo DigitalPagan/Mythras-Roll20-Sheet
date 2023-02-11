@@ -83,7 +83,33 @@ button[type=roll].sheet-improve {
     top: 0;
 }
 
-/* Magic */
+/* Abilities */
+.sheet-ability-option {
+    display: none;
+}
+input.sheet-abilities-control[value="core"] + div .sheet-ability-option.sheet-core,
+input.sheet-abilities-control[value="core-plus"] + div .sheet-ability-option.sheet-core-plus,
+input.sheet-abilities-control[value="after_the_vampire_wars"] + div .sheet-ability-option.sheet-atvw,
+input.sheet-abilities-control[value="classic_fantasy"] + div .sheet-ability-option.sheet-cf,
+input.sheet-abilities-control[value="destined"] + div .sheet-ability-option.sheet-destined,
+input.sheet-abilities-control[value="luther_arkwright"] + div .sheet-ability-option.sheet-la,
+input.sheet-abilities-control[value="lyonesse"] + div .sheet-ability-option.sheet-lyonesse,
+input.sheet-abilities-control[value="m-space"] + div .sheet-ability-option.sheet-ms,
+input.sheet-abilities-control[value="mythic_babylon"] + div .sheet-ability-option.sheet-mba,
+input.sheet-abilities-control[value="mythic_britain"] + div .sheet-ability-option.sheet-mb,
+input.sheet-abilities-control[value="mythic_rome"] + div .sheet-ability-option.sheet-mr,
+input.sheet-abilities-control[value="mythras_imperative"] + div .sheet-ability-option.sheet-imperative,
+input.sheet-abilities-control[value="odd_soot"] + div .sheet-ability-option.sheet-os,
+input.sheet-abilities-control[value="thennla"] + div .sheet-ability-option.sheet-thennla,
+input.sheet-abilities-control[value="worlds_united"] + div .sheet-ability-option.sheet-wu {
+    display: initial !important;
+}
+
+.sheet-components-options {
+    overflow: auto;
+    height: 90px;
+}
+
 .sheet-tradition-name {
     width: 200px;
 }
@@ -95,13 +121,6 @@ textarea.sheet-tradition-notes {
     height: 36px;
 }
 
-/* Abilities */
-div.sheet-devotion-name {
-    width: 150px;
-}
-div.sheet-devotion-limit {
-    width: 50px;
-}
 .sheet-ability-name {
     width: 150px;
 }

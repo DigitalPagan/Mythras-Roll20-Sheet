@@ -39,15 +39,13 @@
     width: 100%;
     max-height: 200px;
     overflow: auto;
+    background: repeating-linear-gradient(to bottom, gainsboro, gainsboro 20px, transparent 20px, transparent 40px);
+}
+.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode div.sheet-table {
+    background: repeating-linear-gradient(to bottom, #333333, #333333 20px, transparent 20px, transparent 40px);
 }
 .sheet-rolltemplate-se-menu div.sheet-tr {
     display: table-row;
-}
-.sheet-rolltemplate-se-menu div.sheet-tr:hover {
-    background: #fcf8e3;
-}
-.sheet-rolltemplate-se-menu.sheet-rolltemplate-darkmode div.sheet-tr:hover {
-    background: darkgoldenrod;
 }
 .sheet-rolltemplate-se-menu div.sheet-th {
     display: table-cell;

@@ -4,9 +4,10 @@ const debug=1
 /* TODO changing sheet type sets standard skills display */
 
 /* Campaign Options */
-const campaignSettings = ["action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
+const campaignSettings = ["ability_system", "action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
+        "ability_system": "core",
         "action_points_calc": "calculate",
         "dependencies_enabled": 0,
         "extended_conflict_enabled": 0,
@@ -14,35 +15,43 @@ const campaginSettingDefaults = {
         "luck_points_rank": 0,
         "reach_enabled": 1,
         "simplified_combat_enabled": 0,
+        "shaping_traits": "^{combine}: @{shaped_combine}\n^{duration}: @{shaped_duration}\n^{magnitude}: @{shaped_magnitude}\n^{range}: @{shaped_range}\n^{targets}: @{shaped_targets}",
         "spirits_enabled": 1,
         "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
         "social_conflict_enabled": 1,
         "special_effects": "core",
-        "tenacity_enabled": 0
+        "tenacity_enabled": 0,
+        "traditions_enabled": 1
     },
-    "after_the_vampire_wars": {},
+    "after_the_vampire_wars": {
+        "ability_system": "after_the_vampire_wars",
+        "shaping_traits": "^{combine}: @{shaped_combine}\n^{duration}: @{shaped_duration} | ^{extended}: @{extended_duration}\n^{magnitude}: @{shaped_magnitude}\n^{range}: @{shaped_range} | ^{sympathetic}: @{sympathetic_range}\n^{targets}: @{shaped_targets}",
+    },
     "classic_fantasy": {
+        "ability_system": "classic_fantasy",
         "luck_points_rank": 1
     },
     "destined": {
+        "ability_system": "destined",
         "spirits_enabled": 0,
         "special_effects": "destined",
         "standard_skills": ['athletics','brawn','conceal','deceit','drive','endurance','evade','first_aid','influence','insight','perception','research','stealth','streetwise','unarmed','willpower']
     },
     "fioracitta": {},
     "luther_arkwright": {
+        "ability_system": "luther_arkwright",
         "dependencies_enabled": 1,
-        "magic_points_enabled": 0,
-        "prana_points_enabled": 1,
         "spirits_enabled": 0,
         "standard_skills": ['athletics','brawn','conceal','customs','dance','deceit','endurance','evade','first_aid','home_parallel','influence','insight','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
-        "tenacity_enabled": 1,
+        "tenacity_enabled": 1
     },
     "lyonesse": {
+        "ability_system": "lyonesse",
         "special_effects": "lyonesse",
         "standard_skills": ['athletics','boating','brawn','common_tongue','conceal','customs','dance','deceit','drive','eloquence','endurance','evade','first_aid','folk_lore','influence','insight','perception','ride','sing','stealth','swim','unarmed','willpower']
     },
     "m-space": {
+        "ability_system": "m-space",
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
@@ -52,13 +61,17 @@ const campaginSettingDefaults = {
     },
     "monster_island": {},
     "mythic_babylon": {
+        "ability_system": "mythic_babylon",
+        "shaping_traits": " ",
         "standard_skills": ['athletics','boating','brawn','commerce','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','gaming','influence','insight','locale','native_tongue','perception','purity','ride','sing','stealth','swim','unarmed','willpower']
     },
     "mythic_britain": {
+        "ability_system": "mythic_britain",
         "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','superstition','swim','unarmed','willpower']
     },
     "mythic_constantinople": {},
     "mythras_imperative": {
+        "ability_system": "mythra_imperative",
         "action_points_calc": "set_2",
         "herculean_mod": ".2",
         "reach_enabled": 0,
@@ -66,10 +79,12 @@ const campaginSettingDefaults = {
         "spirits_enabled": 0
     },
     "mythic_rome": {
+        "ability_system": "mythic_rome",
         "spirits_enabled": 0,
         "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','status','sing','stealth','swim','unarmed','willpower']
     },
     "odd_soot": {
+        "ability_system": "odd_soot",
         "action_points_calc": "set_2",
         "extended_conflict_enabled": 1,
         "herculean_mod": ".2",
@@ -77,9 +92,14 @@ const campaginSettingDefaults = {
         "special_effects": "imperative",
         "spirits_enabled": 0
     },
-    "perceforest": {},
-    "thennla": {},
+    "perceforest": {
+        "shaping_traits": "^{combine}: @{shaped_combine}\n^{duration}: @{shaped_duration}\n^{magnitude}: @{shaped_magnitude}\n^{range}: @{shaped_range}\n^{targets}: @{shaped_targets}\n^{wonders}: @{shaped_wonders}"
+    },
+    "thennla": {
+        "ability_system": "thennla",
+    },
     "worlds_united": {
+        "ability_system": "worlds_united",
         "tenacity_enabled": 1,
         "spirits_enabled": 0
     }
@@ -115,6 +135,12 @@ on(`change:setting`, function(event) {
                 ...calcCampaignSetting(campaignSetting, v[`${campaignSetting}_option`], event.newValue)
             }
         });
+        /* Set the default shaping traits per setting */
+        if (event.newValue in campaginSettingDefaults && 'shaping_traits' in campaginSettingDefaults[event.newValue]) {
+            newAttrs['shaping_traits'] = campaginSettingDefaults[event.newValue]['shaping_traits'];
+        } else {
+            newAttrs['shaping_traits'] = campaginSettingDefaults['default']['shaping_traits'];
+        }
         setAttrs(newAttrs);
     });
 });
