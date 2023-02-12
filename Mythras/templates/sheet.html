@@ -1,10 +1,24 @@
 <!-- Sheet type at very top to influence the rest -->
-<input class="sheet-typetoggle" type="hidden" name="attr_type" value="pc">
+<input class="sheet-typetoggle" type="hidden" name="attr_sheet_type" value="pc">
 <input class="sheet-setting-control" type="hidden" name="attr_setting" value="default">
 <input class="sheet-compact-control" type="hidden" name="attr_compact" value="0">
 <div class="sheet-wrapper">
     <!-- Floating Option Bar -->
     {% include 'common/options_bar.html' %}
+
+    <!-- Shared Hit Location Buttons -->
+    <div hidden>
+        <button type="roll" name="roll_hit_location" value="{{'@{hit_location_roll}'}}"></button>
+        <button type="roll" name="roll_hit_location_low" value="{{'@{hit_location_low_roll}'}}"></button>
+        <button type="roll" name="roll_hit_location_high" value="{{'@{hit_location_high_roll}'}}"></button>
+
+        <input type="text" name="attr_hit_location_roll" value="@{creature_hit_location_roll}" readonly>
+        <input type="text" name="attr_hit_location_low_roll" value="@{creature_hit_location_low_roll}" readonly>
+        <input type="text" name="attr_hit_location_high_roll" value="@{creature_hit_location_high_roll}" readonly>
+
+        <!-- Hit location roll value used when the sheet_type has no hit locations -->
+        <input type="text" name="attr_none_hit_location_roll" value="{{'@{roll_display}&{template:default} {{hitstyle=[[1]]}} {{name=^{hit_location} (^{none})}} {{character=@{character_name}}}'}}" disabled>
+    </div>
 
     <!-- Sheet Types -->
     {% include 'sheet_types/battle_unit/battle_unit.html' %}

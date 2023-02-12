@@ -1210,25 +1210,33 @@ const stdSkillChars = {
     'athletics': ['str', 'dex'],
     'brawn': ['str', 'siz'],
     'boating': ['str', 'con'],
+    'commerce': ['int', 'cha'],
+    'common_tongue': ['int', 'cha'],
     'conceal': ['dex', 'pow'],
     'customs': ['int', 'int'],
     'dance': ['dex', 'cha'],
     'deceit': ['int', 'cha'],
     'drive': ['dex', 'pow'],
+    'eloquence': ['cha', 'cha'],
     'endurance': ['con', 'con'],
     'evade': ['dex', 'dex'],
     'first_aid': ['dex', 'int'],
+    'folk_lore': ['int', 'int'],
+    'gaming': ['int', 'pow'],
     'home_parallel': ['int', 'int'],
     'influence': ['cha', 'cha'],
     'insight': ['int', 'pow'],
     'locale': ['int', 'int'],
     'native_tongue': ['int', 'cha'],
     'perception': ['int', 'pow'],
+    'purity': ['pow', 'cha'],
     'ride': ['dex', 'pow'],
+    'research': ['int', 'pow'],
     'sing': ['pow', 'cha'],
     'spectral_combat': ['pow', 'cha'],
     'status': [0, 0],
     'stealth': ['dex', 'int'],
+    'streetwise': ['pow', 'cha'],
     'superstition': ['21-int', 'pow'],
     'swim': ['str', 'con'],
     'unarmed': ['str', 'dex'],
@@ -1599,10 +1607,34 @@ on(`change:repeating_tradition:skill1_id change:repeating_tradition:skill2_id`, 
 });
 
 /* Abilities */
+on('change:ability_filter_favored change:ability_filter_type change:ability_filter_rank', function(event) {
+    getSectionIDs("repeating_ability", function(abilityIds) {
+        let abilityGetAttrs = [];
+        abilityIds.forEach(id => {
+            abilityGetAttrs.push(`repeating_ability_${id}_favored`, `repeating_ability_${id}_type`, `repeating_ability_${id}_rank`);
+        });
+
+        getAttrs(['ability_filter_favored', 'ability_filter_type', 'ability_filter_rank'].concat(abilityGetAttrs), function(v) {
+            let newAttrs = {}
+            abilityIds.forEach(id => {
+                if ((v['ability_filter_favored'] === v[`repeating_ability_${id}_favored`] || v['ability_filter_favored'] === '0')
+                    && (v['ability_filter_type'] === v[`repeating_ability_${id}_type`] || v['ability_filter_type'] === 'all')
+                    && (v['ability_filter_rank'] === v[`repeating_ability_${id}_rank`] || v['ability_filter_rank'] === 'all')
+                ) {
+                    newAttrs[`repeating_ability_${id}_show`] = 1;
+                } else {
+                    newAttrs[`repeating_ability_${id}_show`] = 0;
+                }
+            });
+
+            setAttrs(newAttrs);
+        });
+    });
+});
 on('change:repeating_ability:type', function(event) {
     const abilityId = event.sourceAttribute.split('_')[2];
 
-    getAttrs(['shaping_traits', 'type'], function(v) {
+    getAttrs(['shaping_traits', 'sheet_type', 'ability_filter_favored', 'ability_filter_type', 'ability_filter_rank', `repeating_ability_${abilityId}_favored`, `repeating_ability_${abilityId}_type`,`repeating_ability_${abilityId}_rank`], function(v) {
         let newAttrs = {}
         /* Advanced Traits */
         if (event.newValue === 'mysticism' || event.newValue === 'arcane_magic' || event.newValue === 'divine_magic') {
@@ -1613,7 +1645,7 @@ on('change:repeating_ability:type', function(event) {
             newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{area}: @{sandestin_area}\n^{combine}: @{sandestin_combine}\n^{fortune}: @{sandestin_fortune}\n^{services}: @{sandestin_services}\n^{swiftness}: @{sandestin_swiftness}\n^{terms}: @{sandestin_terms}';
         } else if (event.newValue === 'assabian_alchemy') {
             newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{combine}: @{shaped_combine}\n^{conditions}: @{shaped_conditions}\n^{doses}: @{shaped_doses}\n^{magnitude}: @{shaped_magnitude}\n^{shelf_life}: @{shaped_shelf_life}';
-        } else if (event.newValue === 'ability' && v['type'] === 'spirit') {
+        } else if (event.newValue === 'ability' && v['sheet_type'] === 'spirit') {
             newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '^{spirit_intensity}: @{spirit_intensity}';
         } else {
             newAttrs[`repeating_ability_${abilityId}_advanced_traits`] = '';
@@ -1622,11 +1654,41 @@ on('change:repeating_ability:type', function(event) {
         /* Traited */
         if (event.newValue === 'ability' || event.newValue === 'gift' || event.newValue === 'limitation' || event.newValue === 'other' || event.newValue === 'super_power' || event.newValue === 'trait') {
             newAttrs[`repeating_ability_${abilityId}_traited`] = 0;
+            newAttrs[`repeating_ability_${abilityId}_traits`] = '';
+            newAttrs[`repeating_ability_${abilityId}_tradition_id`] = '';
+            newAttrs[`repeating_ability_${abilityId}_skill1_name`] = '';
+            newAttrs[`repeating_ability_${abilityId}_skill1_total`] = '';
+            newAttrs[`repeating_ability_${abilityId}_skill2_name`] = '';
+            newAttrs[`repeating_ability_${abilityId}_skill2_total`] = '';
         } else {
             newAttrs[`repeating_ability_${abilityId}_traited`] = 1;
         }
 
+        /* Filter */
+        if ((v['ability_filter_favored'] === v[`repeating_ability_${abilityId}_favored`] || v['ability_filter_favored'] === '0')
+            && (v['ability_filter_type'] === v[`repeating_ability_${abilityId}_type`] || v['ability_filter_type'] === 'all')
+            && (v['ability_filter_rank'] === v[`repeating_ability_${abilityId}_rank`] || v['ability_filter_rank'] === 'all')
+        ) {
+            newAttrs[`repeating_ability_${abilityId}_show`] = 1;
+        } else {
+            newAttrs[`repeating_ability_${abilityId}_show`] = 0;
+        }
+
         setAttrs(newAttrs);
+    });
+});
+on('change:repeating_ability:favored change:repeating_ability:rank', function(event) {
+    const abilityId = event.sourceAttribute.split('_')[2];
+    getAttrs(['ability_filter_favored', 'ability_filter_type', 'ability_filter_rank', `repeating_ability_${abilityId}_favored`, `repeating_ability_${abilityId}_type`,`repeating_ability_${abilityId}_rank`], function(v) {
+        /* Filter */
+        if ((v['ability_filter_favored'] === v[`repeating_ability_${abilityId}_favored`] || v['ability_filter_favored'] === '0')
+            && (v['ability_filter_type'] === v[`repeating_ability_${abilityId}_type`] || v['ability_filter_type'] === 'all')
+            && (v['ability_filter_rank'] === v[`repeating_ability_${abilityId}_rank`] || v['ability_filter_rank'] === 'all')
+        ) {
+            setAttrs({[`repeating_ability_${abilityId}_show`]: 1});
+        } else {
+            setAttrs({[`repeating_ability_${abilityId}_show`]: 0});
+        }
     });
 });
 on('change:repeating_ability:traits', function(event) {
@@ -1646,14 +1708,14 @@ on('change:repeating_ability:tradition_id', function(event) {
             [`repeating_ability_${abilityId}_skill1_name`]: '',
             [`repeating_ability_${abilityId}_skill1_total`]: '',
             [`repeating_ability_${abilityId}_skill2_name`]: '',
-            [`repeating_ability_${abilityId}_skill2_total`]: '',
+            [`repeating_ability_${abilityId}_skill2_total`]: ''
         });
     } else {
         setAttrs({
             [`repeating_ability_${abilityId}_skill1_name`]: `@{${traditionId}_skill1_name}`,
             [`repeating_ability_${abilityId}_skill1_total`]: `@{${traditionId}_skill1_total}`,
             [`repeating_ability_${abilityId}_skill2_name`]: `@{${traditionId}_skill2_name}`,
-            [`repeating_ability_${abilityId}_skill2_total`]: `@{${traditionId}_skill2_total}`,
+            [`repeating_ability_${abilityId}_skill2_total`]: `@{${traditionId}_skill2_total}`
         });
     }
 
@@ -1823,7 +1885,7 @@ on("change:location1_armor_enc change:location1_armor_equipped change:location2_
 });
 
 /* Repeating IDs */
-on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_power change:repeating_feature", function(event) {
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_feature", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
@@ -2056,11 +2118,12 @@ function upgradeCharacter3Dot0() {
     getAttrs(charGetAttrs.concat(hpGetAttrs,
         ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day", "income_month", "income_season", "income_year"]), function(v) {
         let newAttrs = {'version': '3.0'};
+        /* TODO change type to sheet_type */
 
         /* If a spirit set the attribute mode to spiritual and sheet type to spirit */
         if (v['spirit'] === '1') {
             newAttrs['attribute_mode'] = 'spiritual'; /* init and ap will already be spirit calc so no need to force it */
-            newAttrs['type'] ='spirit';
+            newAttrs['sheet_type'] ='spirit';
         }
 
         /* Convert Characteristics base values */
@@ -2098,7 +2161,7 @@ function upgradeCharacter3Dot0() {
 
         /* TODO merge languages into professional skill */
 
-        /* TODO merge magic skills into professional skills with tags */
+        /* TODO merge magic skills into professional skills and setup traditions */
 
         /* Convert income */
         let newIncome = "";

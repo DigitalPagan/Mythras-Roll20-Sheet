@@ -1,8 +1,5 @@
 const debug=1
 
-/* TODO changing sheet type sets hit table rolls */
-/* TODO changing sheet type sets standard skills display */
-
 /* Campaign Options */
 const campaignSettings = ["ability_system", "action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
@@ -153,6 +150,78 @@ campaignSettings.forEach(campaignSetting => {
     });
 });
 
+/* Sheet Type Triggers */
+on("change:sheet_type", function(event) {
+    if (event.sourceAttribute === 'sheet_type') {
+        getAttrs(['pow', 'cha'].concat(spiritDamageGetAttrs), function(v) {
+            let newAttrs = {};
+
+            /* Set hit table rolls */
+            /* TODO changing sheet type sets hit table rolls */
+            if (event.newValue === 'pc' || event.newValue === 'creature') {
+                newAttrs['hit_location_roll'] = '@{creature_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{creature_hit_location_roll}';
+                newAttrs['hit_location_high_roll'] = '@{creature_hit_location_roll}';
+            } else {
+                newAttrs['hit_location_roll'] = '@{none_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{none_hit_location_roll}';
+                newAttrs['hit_location_high_roll'] = '@{none_hit_location_roll}';
+            }
+
+            /* Set standard skills posessed to sheet_type defaults and set default attribute_mode */
+            if (event.newValue === "pc") {
+                newAttrs['attribute_mode'] = 'physical';
+                stdSkillIds.forEach(skillId => {
+                    newAttrs[`${skillId}_possessed`] = 1;
+                });
+            } else if (event.newValue === "creature" || event.newValue === "spirit") {
+                stdSkillIds.forEach(skillId => {
+                    newAttrs[`${skillId}_possessed`] = 0;
+                });
+                if (event.newValue === "creature") {
+                    newAttrs['attribute_mode'] = 'physical';
+                    newAttrs['athletics_possessed'] = 1;
+                    newAttrs['brawn_possessed'] = 1;
+                    newAttrs['endurance_possessed'] = 1;
+                    newAttrs['evade_possessed'] = 1;
+                    newAttrs['perception_possessed'] = 1;
+                    newAttrs['willpower_possessed'] = 1;
+                } else {
+                    newAttrs['attribute_mode'] = 'spiritual';
+                    newAttrs['spectral_combat_possessed'] = 1;
+                    newAttrs['willpower_possessed'] = 1;
+                }
+            }
+
+            /* Set default spirit combat skill */
+            const pow = parseInt(v['pow']) || 0;
+            if (event.newValue === "pc" || event.newValue === "creature") {
+                newAttrs['willpower'] = pow * 2;
+                newAttrs['willpower_other'] = 0;
+                newAttrs['willpower_notes'] = '';
+                newAttrs['spirit_combat_skill_id'] = 'willpower';
+                newAttrs['spirit_combat_skill_name'] = getTranslationByKey('willpower');
+                newAttrs['spirit_combat_skill_total'] = pow * 2;
+                newAttrs['spirit_combat_skill_notes'] = '';
+            } else if (event.newValue === "spirit") {
+                const cha = parseInt(v['cha']) || 0;
+                newAttrs['willpower'] = pow * 2 + 50;
+                newAttrs['willpower_other'] = 50;
+                newAttrs['willpower_notes'] = '';
+                newAttrs['spirit_combat_skill_id'] = 'spectral_combat';
+                newAttrs['spirit_combat_skill_name'] = getTranslationByKey('spectral_combat');
+                newAttrs['spirit_combat_skill_total'] = pow + cha + 50;
+                newAttrs['spirit_combat_skill_notes'] = '';
+            }
+
+            setAttrs({
+                ...newAttrs,
+                ...calcSpiritDamage({...v, ...newAttrs})
+            });
+        });
+    }
+});
+
 /* Option Bar Action Buttons */
 on('clicked:reset-augmentation', function(event) {
     setAttrs({set_augmentation: 0});
@@ -194,10 +263,10 @@ function damageTableReverse(value) {
 /* Versioning */
 /**
  * Compares current sheet version to latest and performs necessary changes to bring the sheet up to date
- * @param type the sheet type attribute
+ * @param sheet_type the sheet sheet_type attribute
  * @param version the sheet version already parse to a float or 0 if not a valid float
  */
-function versioning(type, version) {
+function versioning(sheet_type, version) {
     const latestVersion = '3.0';
     if (debug) {console.log(`Current sheet version = ${version}`);}
     version = parseFloat(version) || 0;
@@ -206,8 +275,8 @@ function versioning(type, version) {
         if (debug) {console.log(`Current version invalid, setting to ${latestVersion}`);}
         setAttrs({['version']: latestVersion});
     } else if (version < 3.0) {
-        if (type === 'pc') {upgradeCharacter3Dot0();}
-        versioning(type, '3.0');
+        if (sheet_type === 'pc') {upgradeCharacter3Dot0();}
+        versioning(sheet_type, '3.0');
     }
 }
 
@@ -233,6 +302,7 @@ function setTranslationAttrs() {
 
 /* On Open Triggers */
 on("sheet:opened", function() {
+    /* TODO replace with sheet_type after v4 release */
     getAttrs(['type', 'version'], function(v) {
         versioning(v['type'], v['version']);
     });

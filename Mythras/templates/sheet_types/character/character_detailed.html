@@ -1,4 +1,5 @@
 <div class="sheet-detailed">
+    <!-- TODO inline compact mode -->
     <input class="sheet-conflict-toggle" type="hidden" name="attr_conflict_mode" value="combat">
     <!-- Character Header -->
     <div id="core" class="sheet-flex sheet-gap sheet-anchor-adjust-x2">
@@ -186,9 +187,9 @@
                     <input type="hidden" name="attr_int_temp" value="0">
                 </div>
 
-                <!-- @{pow_u_i18n} -->
+                <!-- POW -->
                 <div class="sheet-tr">
-                    <div class="sheet-td sheet-char-label"><label class="sheet-left" data-i18n="pow-u">@{pow_u_i18n}</label></div>
+                    <div class="sheet-td sheet-char-label"><label class="sheet-left" data-i18n="pow-u">POW</label></div>
                     <div class="sheet-td"><input type="number" class="sheet-dullval sheet-number-width" title="@{pow_base}" name="attr_pow_base" value="11"></div>
                     <div class="sheet-td sheet-anti-toggle"><input type="number" class="sheet-impval sheet-number-width" title="@{pow}" name="attr_pow" value="11"></div>
                     <div class="sheet-td sheet-toggle">
@@ -229,6 +230,7 @@
         </div>
 
         <!-- Attributes -->
+        <!-- TODO return to temp style attributes -->
         <input type="hidden" class="sheet-attr-toggle" name="attr_attribute_mode" value="physical">
         <div class="sheet-section">
             <input type="hidden" class="sheet-social-conflict-toggle" name="attr_social_conflict_enabled" value="0">
@@ -443,7 +445,7 @@
                         <span data-i18n="use">Use</span>:
                         <select class="sheet-auto-width sheet-text-center" name="attr_damage_mod_calc">
                             <option data-i18n="str+siz" value="0" selected>STR+SIZ</option>
-                            <option data-i18n="str+siz+pow" value="1">STR+SIZ+@{pow_u_i18n}</option>
+                            <option data-i18n="str+siz+pow" value="1">STR+SIZ+POW</option>
                             <option data-i18n="str+siz+con" value="2">STR+SIZ+CON</option>
                         </select>
                     </div>
@@ -478,7 +480,7 @@
                         <span data-i18n="use">Use</span>:
                         <select class="sheet-auto-width sheet-text-center" name="attr_healing_rate_calc">
                             <option data-i18n="con-u" value="0" selected>CON</option>
-                            <option data-i18n="con+1/2_pow" value="1">CON + 1/2 @{pow_u_i18n}</option>
+                            <option data-i18n="con+1/2_pow" value="1">CON + 1/2 POW</option>
                         </select>
                     </div>
                     <div class="sheet-details-toggle sheet-lmargin-x3">
@@ -524,8 +526,8 @@
                     <div class="sheet-details-toggle sheet-lmargin-x3">
                         <span data-i18n="use">Use</span>:
                         <select class="sheet-auto-width sheet-text-center" name="attr_luck_points_calc">
-                            <option data-i18n="pow-u" value="0" selected>@{pow_u_i18n}</option>
-                            <option data-i18n="cha+1/2_pow" value="1">CHA + 1/2 @{pow_u_i18n}</option>
+                            <option data-i18n="pow-u" value="0" selected>POW</option>
+                            <option data-i18n="cha+1/2_pow" value="1">CHA + 1/2 POW</option>
                         </select>
                     </div>
                 </div>
@@ -620,7 +622,7 @@
 
         <!-- Hit Locations -->
         <div class="sheet-not-social sheet-bpad">
-            <input type="hidden" class="sheet-hit-locations-spirit" name="attr_type" value="pc">
+            <input type="hidden" class="sheet-hit-locations-spirit" name="attr_sheet_type" value="pc">
             <div class="sheet-section sheet-hit-locations-toggle sheet-full-height">
                 <div class="sheet-space-between sheet-gap">
                     <h2 data-i18n="hit_locations">Hit Locations</h2>
@@ -667,19 +669,20 @@
                     <label class="sheet-left" data-i18n="calculate_with">Calculate With</label>
                     <select class="sheet-auto-width sheet-text-center" name="attr_hp_calc">
                         <option data-i18n="con+siz" value="0" selected>CON+SIZ</option>
-                        <option data-i18n="con+siz+pow" value="1">CON+SIZ+@{pow_u_i18n}</option>
+                        <option data-i18n="con+siz+pow" value="1">CON+SIZ+POW</option>
                         <option data-i18n="con+siz+str" value="2">CON+SIZ+STR</option>
                     </select>
                 </div>
 
                 <div class="sheet-table">
                     <div class="sheet-tr">
-                        <!-- TODO setup the hit location button with sheet type switching -->
-                        <div class="sheet-th"><button type="roll" class="sheet-link" title="%{hit_location}" name="roll_hit_location" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit_location} (d20)}} {{character=@{character_name}}} {{roll=[[1d20]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}">d20</button></div>
+                        <div class="sheet-th"><button type="roll" class="sheet-link" title="%{hit_location}" name="roll_hit_location" value="{{'@{hit_location_roll}'}}">d20</button></div>
                         <div class="sheet-th" data-i18n="hit_location">Hit Location</div>
+                        <!-- Creature hit location roll values -->
                         <div hidden>
-                            <button type="roll" name="roll_hit_location_low" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit_location} (d10)}} {{character=@{character_name}}} {{roll=[[1d10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}"></button>
-                            <button type="roll" name="roll_hit_location_high" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit_location} (d10+10)}} {{character=@{character_name}}} {{roll=[[1d10+10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}"></button>
+                            <input type="text" name="attr_creature_hit_location_roll" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit_location} (d20)}} {{character=@{character_name}}} {{roll=[[1d20]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}" disabled>
+                            <input type="text" name="attr_creature_hit_location_low_roll" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit_location} (d10)}} {{character=@{character_name}}} {{roll=[[1d10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}" disabled>
+                            <input type="text" name="attr_creature_hit_location_high_roll" value="{{'@{roll_display}&{template:hit-location} {{name=^{hit_location} (d10+10)}} {{character=@{character_name}}} {{roll=[[1d10+10]]}} {{loc1_name=@{location1_name}}} {{loc1_start=[[@{location1_table_start}]]}} {{loc1_end=[[@{location1_table_end}]]}} {{loc1_block=@{location1_block}}} {{loc1_ap=@{location1_ap}}} {{loc1_hp=@{location1_hp}}} {{loc1_hp_max=@{location1_hp|max}}} {{loc2_name=@{location2_name}}} {{loc2_start=[[@{location2_table_start}]]}} {{loc2_end=[[@{location2_table_end}]]}} {{loc2_block=@{location2_block}}} {{loc2_ap=@{location2_ap}}} {{loc2_hp=@{location2_hp}}} {{loc2_hp_max=@{location2_hp|max}}} {{loc3_name=@{location3_name}}} {{loc3_start=[[@{location3_table_start}]]}} {{loc3_end=[[@{location3_table_end}]]}} {{loc3_block=@{location3_block}}} {{loc3_ap=@{location3_ap}}} {{loc3_hp=@{location3_hp}}} {{loc3_hp_max=@{location3_hp|max}}} {{loc4_name=@{location4_name}}} {{loc4_start=[[@{location4_table_start}]]}} {{loc4_end=[[@{location4_table_end}]]}} {{loc4_block=@{location4_block}}} {{loc4_ap=@{location4_ap}}} {{loc4_hp=@{location4_hp}}} {{loc4_hp_max=@{location4_hp|max}}} {{loc5_name=@{location5_name}}} {{loc5_start=[[@{location5_table_start}]]}} {{loc5_end=[[@{location5_table_end}]]}} {{loc5_block=@{location5_block}}} {{loc5_ap=@{location5_ap}}} {{loc5_hp=@{location5_hp}}} {{loc5_hp_max=@{location5_hp|max}}} {{loc6_name=@{location6_name}}} {{loc6_start=[[@{location6_table_start}]]}} {{loc6_end=[[@{location6_table_end}]]}} {{loc6_block=@{location6_block}}} {{loc6_ap=@{location6_ap}}} {{loc6_hp=@{location6_hp}}} {{loc6_hp_max=@{location6_hp|max}}} {{loc7_name=@{location7_name}}} {{loc7_start=[[@{location7_table_start}]]}} {{loc7_end=[[@{location7_table_end}]]}} {{loc7_block=@{location7_block}}} {{loc7_ap=@{location7_ap}}} {{loc7_hp=@{location7_hp}}} {{loc7_hp_max=@{location7_hp|max}}} {{loc8_name=@{location8_name}}} {{loc8_start=[[@{location8_table_start}]]}} {{loc8_end=[[@{location8_table_end}]]}} {{loc8_block=@{location8_block}}} {{loc8_ap=@{location8_ap}}} {{loc8_hp=@{location8_hp}}} {{loc8_hp_max=@{location8_hp|max}}} {{loc9_name=@{location9_name}}} {{loc9_start=[[@{location9_table_start}]]}} {{loc9_end=[[@{location9_table_end}]]}} {{loc9_block=@{location9_block}}} {{loc9_ap=@{location9_ap}}} {{loc9_hp=@{location9_hp}}} {{loc9_hp_max=@{location9_hp|max}}} {{loc10_name=@{location10_name}}} {{loc10_start=[[@{location10_table_start}]]}} {{loc10_end=[[@{location10_table_end}]]}} {{loc10_block=@{location10_block}}} {{loc10_ap=@{location10_ap}}} {{loc10_hp=@{location10_hp}}} {{loc10_hp_max=@{location10_hp|max}}} {{loc11_name=@{location11_name}}} {{loc11_start=[[@{location11_table_start}]]}} {{loc11_end=[[@{location11_table_end}]]}} {{loc11_block=@{location11_block}}} {{loc11_ap=@{location11_ap}}} {{loc11_hp=@{location11_hp}}} {{loc11_hp_max=@{location11_hp|max}}} {{loc12_name=@{location12_name}}} {{loc12_start=[[@{location12_table_start}]]}} {{loc12_end=[[@{location12_table_end}]]}} {{loc12_block=@{location12_block}}} {{loc12_ap=@{location12_ap}}} {{loc12_hp=@{location12_hp}}} {{loc12_hp_max=@{location12_hp|max}}}'}}" disabled>
                         </div>
                         <div class="sheet-th sheet-help sheet-pictos-three" data-i18n-title="passive_block_size">b</div>
                         <div class="sheet-th sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-a">AP</div>
@@ -1168,8 +1171,8 @@
                                 </div>
                                 <div class="sheet-td"><input type="checkbox" title="@{willpower_fumbled}" name="attr_willpower_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{willpower_trained}" name="attr_willpower_trained" value="1"><span class="sheet-checkico">3</span></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{willpower_other}" name="attr_willpower_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{willpower}" name="attr_willpower" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{willpower_details}" name="attr_willpower_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1386,7 +1389,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{conceal_fumbled}" name="attr_conceal_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{conceal_trained}" name="attr_conceal_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="dex-u">DEX</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{conceal_other}" name="attr_conceal_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{conceal}" name="attr_conceal" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{conceal_details}" name="attr_conceal_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1546,7 +1549,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{drive_fumbled}" name="attr_drive_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{drive_trained}" name="attr_drive_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="dex-u">DEX</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{drive_other}" name="attr_drive_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{drive}" name="attr_drive" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{drive_details}" name="attr_drive_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1706,7 +1709,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{gaming_fumbled}" name="attr_gaming_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{gaming_trained}" name="attr_gaming_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{gaming_other}" name="attr_gaming_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{gaming}" name="attr_gaming" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{gaming_details}" name="attr_gaming_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1826,7 +1829,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{insight_fumbled}" name="attr_insight_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{insight_trained}" name="attr_insight_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{insight_other}" name="attr_insight_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{insight}" name="attr_insight" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{insight_details}" name="attr_insight_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1946,7 +1949,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{perception_fumbled}" name="attr_perception_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{perception_trained}" name="attr_perception_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{perception_other}" name="attr_perception_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{perception}" name="attr_perception" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{perception_details}" name="attr_perception_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -1985,7 +1988,7 @@
                                 </div>
                                 <div class="sheet-td"><input type="checkbox" title="@{purity_fumbled}" name="attr_purity_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{purity_trained}" name="attr_purity_trained" value="1"><span class="sheet-checkico">3</span></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="cha-u">CHA</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{purity_other}" name="attr_purity_other" value="40" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{purity}" name="attr_purity" value="64" step="1"  min="0"></div>
@@ -2026,7 +2029,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{ride_fumbled}" name="attr_ride_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{ride_trained}" name="attr_ride_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="dex-u">DEX</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{ride_other}" name="attr_ride_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{ride}" name="attr_ride" value="22" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{ride_details}" name="attr_ride_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2066,7 +2069,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{research_fumbled}" name="attr_research_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{research_trained}" name="attr_research_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="int-u">INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{research_other}" name="attr_research_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{research}" name="attr_research" value="24" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{research_details}" name="attr_research_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2105,7 +2108,7 @@
                                 </div>
                                 <div class="sheet-td"><input type="checkbox" title="@{sing_fumbled}" name="attr_sing_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{sing_trained}" name="attr_sing_trained" value="1"><span class="sheet-checkico">3</span></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="cha-u">CHA</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{sing_other}" name="attr_sing_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{sing}" name="attr_sing" value="22" step="1"  min="0"></div>
@@ -2123,6 +2126,46 @@
                                     <button type="action" class="sheet-spirits" name="act_sing-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
                                 <textarea class="sheet-skill-notes" title="@{sing_notes}" name="attr_sing_notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Spectral Combat -->
+                    <div data-i18n-list-item="spectral_combat" class="sheet-spirit">
+                        <input type="hidden" class="sheet-opaque-toggle" name="attr_spectral_combat_possessed" value="1">
+                        <div class="sheet-opaque">
+                            <div class="sheet-hl sheet-flex">
+                                <div class="sheet-td sheet-minor"><input type="checkbox" title="@{spectral_combat_possessed}" name="attr_spectral_combat_possessed" value="1" checked><span class="sheet-checkico">S</span></div>
+                                <div class="sheet-td sheet-grow">
+                                    <div class="sheet-full-width sheet-hover-btn">
+                                        <label class="sheet-skill" data-i18n="spectral_combat">Spectral Combat</label>
+                                        <button type="roll" class="sheet-hover sheet-id" title="%{spectral_combat_id}" name="roll_spectral_combat_id" value="/w gm {{'&{template:default} {{name=@{spectral_combat_name}}} {{^{id}=spectral_combat}}'}}">i</button>
+                                        <input type="hidden" name="attr_spectral_combat_name" value="^{spectral_combat}">
+                                    </div>
+                                </div>
+                                <div class="sheet-td"><button type="action" class="sheet-pictos" name="act_spectral_combat-augment">&</button></div>
+                                <div class="sheet-td">
+                                    <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{spectral_combat}" name="roll_spectral_combat" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=^{spectral_combat}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{spectral_combat}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{spectral_combat}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{spectral_combat}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{spectral_combat}*2)+@{penalty})]]}} {{easy=[[ceil((@{spectral_combat}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{spectral_combat}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{spectral_combat}*1.5)+@{penalty})]]}} {{standard=[[@{spectral_combat}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{spectral_combat}+@{penalty})/10)]]}} {{standard_fumble=[[(@{spectral_combat}+@{penalty})]]}} {{hard=[[ceil((@{spectral_combat}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{spectral_combat}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{spectral_combat}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{spectral_combat}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{spectral_combat}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{spectral_combat}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{spectral_combat}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{spectral_combat}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{spectral_combat}*@{herculean_mod})+@{penalty})]]}} {{notes=@{spectral_combat_notes}}}'}}">t</button>
+                                </div>
+                                <div class="sheet-td"><input type="checkbox" title="@{spectral_combat_fumbled}" name="attr_spectral_combat_fumbled" value="1"><span class="sheet-checkico">!</span></div>
+                                <div class="sheet-td"><input type="checkbox" title="@{spectral_combat_trained}" name="attr_spectral_combat_trained" value="1"><span class="sheet-checkico">3</span></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="cha-u">CHA</div></div>
+                                <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{spectral_combat_other}" name="attr_spectral_combat_other" value="50" readonly></div>
+                                <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{spectral_combat}" name="attr_spectral_combat" value="72" step="1" min="0"></div>
+                                <div class="sheet-td"><input type="checkbox" title="@{spectral_combat_details}" name="attr_spectral_combat_details" value="1"><span class="sheet-checkico">y</span></div>
+                            </div>
+                            <input type="hidden" class="sheet-wide-toggle" name="attr_spectral_combat_details" value="0">
+                            <div class="sheet-anti-toggle">
+                                <span class="sheet-details-toggle" name="attr_spectral_combat_notes"></span>
+                            </div>
+                            <div class="sheet-toggle">
+                                <div class="sheet-flex sheet-flex-wrap sheet-gap">
+                                    <button type="roll" title="%{spectral_combat_improve}" name="roll_spectral_combat_improve" value="{{'@{roll_display}&{template:improvement} {{name=^{spectral_combat}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{spectral_combat}]]}}'}}" data-i18n="improve">Improve</button>
+                                    <button type="action" class="sheet-social-conflict" name="act_spectral_combat-set-social-offense" data-i18n="set_social_offense">Set Social Offense</button>
+                                    <button type="action" class="sheet-social-conflict" name="act_spectral_combat-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
+                                    <button type="action" class="sheet-spirits" name="act_spectral_combat-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
+                                </div>
+                                <textarea class="sheet-skill-notes" title="@{spectral_combat_notes}" name="attr_spectral_combat_notes"></textarea>
                             </div>
                         </div>
                     </div>
@@ -2266,7 +2309,7 @@
                                 <div class="sheet-td"><input type="checkbox" title="@{superstition_fumbled}" name="attr_superstition_fumbled" value="1"><span class="sheet-checkico">!</span></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{superstition_trained}" name="attr_superstition_trained" value="1"><span class="sheet-checkico">3</span></div>
                                 <div class="sheet-td"><div class="sheet-number-width" data-i18n="21-int-u">21-INT</div></div>
-                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">@{pow_u_i18n}</div></div>
+                                <div class="sheet-td"><div class="sheet-number-width" data-i18n="pow-u">POW</div></div>
                                 <div class="sheet-td sheet-details-toggle"><input type="number" class="sheet-number-width sheet-dullval" title="@{superstition_other}" name="attr_superstition_other" value="0" readonly></div>
                                 <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{superstition}" name="attr_superstition" value="19" step="1"  min="0"></div>
                                 <div class="sheet-td"><input type="checkbox" title="@{superstition_details}" name="attr_superstition_details" value="1"><span class="sheet-checkico">y</span></div>
@@ -2408,7 +2451,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u">DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2420,7 +2463,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u" selected>DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2538,7 +2581,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u">DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -2550,7 +2593,7 @@
                                     <option value="@{siz}" data-i18n="siz-u">SIZ</option>
                                     <option value="@{dex}" data-i18n="dex-u">DEX</option>
                                     <option value="@{int}" data-i18n="int-u">INT</option>
-                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
                                     <option value="@{cha}" data-i18n="cha-u">CHA</option>
                                 </select>
                             </div>
@@ -3006,12 +3049,12 @@
                                 <div class="sheet-half-width sheet-flex sheet-gap">
                                     <input type="text" class="sheet-grow sheet-number-width" title="@{$ID_skill1_name}" name="attr_skill1_name_display" value="@{skill1_name}" disabled>
                                     <input type="number" class="sheet-number-width-sm sheet-impval" title="@{$ID_skill1_total}" name="attr_skill1_total_display" value="@{skill1_total}" disabled>
-                                    <button type="roll" class="sheet-button-width sheet-die sheet-d10" title="%{$ID_skill1}" name="roll_skill1" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{skill1_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{skill1_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{skill1_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{skill1_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{skill1_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{skill1_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{skill1_total}*1.5)+@{penalty})]]}} {{standard=[[@{skill1_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{skill1_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{skill1_total}+@{penalty})]]}} {{hard=[[ceil((@{skill1_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{skill1_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{skill1_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{skill1_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{skill1_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{skill1_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{skill1_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{skill1_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{skill1_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{skill1_notes}}}'}}">t</button>
+                                    <button type="roll" class="sheet-button-width sheet-die sheet-d10" title="%{$ID_skill1}" name="roll_skill1" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{skill1_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{skill1_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{skill1_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{skill1_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{skill1_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{skill1_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{skill1_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{skill1_total}*1.5)+@{penalty})]]}} {{standard=[[@{skill1_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{skill1_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{skill1_total}+@{penalty})]]}} {{hard=[[ceil((@{skill1_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{skill1_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{skill1_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{skill1_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{skill1_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{skill1_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{skill1_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{skill1_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{skill1_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{skill1_notes}}}'}}">t</button>
                                 </div>
                                 <div class="sheet-half-width sheet-flex sheet-gap">
                                     <input type="text" class="sheet-grow sheet-number-width" title="@{$ID_skill2_name}" name="attr_skill2_name_display" value="@{skill2_name}" disabled>
                                     <input type="number" class="sheet-number-width-sm sheet-impval" title="@{$ID_skill2_total}" name="attr_skill2_total_display" value="@{skill2_total}" disabled>
-                                    <button type="roll" class="sheet-button-width sheet-die sheet-d10" title="%{$ID_skill2}" name="roll_skill2" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{skill2_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{skill2_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{skill2_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{skill2_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{skill2_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{skill2_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{skill2_total}*1.5)+@{penalty})]]}} {{standard=[[@{skill2_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{skill2_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{skill2_total}+@{penalty})]]}} {{hard=[[ceil((@{skill2_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{skill2_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{skill2_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{skill2_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{skill2_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{skill2_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{skill2_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{skill2_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{skill2_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{skill2_notes}}}'}}">t</button>
+                                    <button type="roll" class="sheet-button-width sheet-die sheet-d10" title="%{$ID_skill2}" name="roll_skill2" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{skill2_name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{skill2_total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{skill2_total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{skill2_total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{skill2_total}*2)+@{penalty})]]}} {{easy=[[ceil((@{skill2_total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{skill2_total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{skill2_total}*1.5)+@{penalty})]]}} {{standard=[[@{skill2_total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{skill2_total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{skill2_total}+@{penalty})]]}} {{hard=[[ceil((@{skill2_total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{skill2_total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{skill2_total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{skill2_total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{skill2_total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{skill2_total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{skill2_total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{skill2_total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{skill2_total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{skill2_notes}}}'}}">t</button>
                                 </div>
                             </div>
                         </div>
@@ -3045,10 +3088,10 @@
                                 <label class="sheet-left sheet-rmargin" data-i18n="devotional_pool">Devotional Pool</label>
                                 <select class="sheet-auto-width sheet-text-center" name="attr_pool_limit">
                                     <option value="0" selected>-</option>
-                                    <option value="ceil(@{pow}*.25)" data-i18n="1/4_pow-u">1/4 @{pow_u_i18n}</option>
-                                    <option value="ceil(@{pow}*.5)" data-i18n="1/2_pow-u">1/2 @{pow_u_i18n}</option>
-                                    <option value="ceil(@{pow}*.75)" data-i18n="3/4_pow-u">3/4 @{pow_u_i18n}</option>
-                                    <option value="@{pow}" data-i18n="pow-u">@{pow_u_i18n}</option>
+                                    <option value="ceil(@{pow}*.25)" data-i18n="1/4_pow-u">1/4 POW</option>
+                                    <option value="ceil(@{pow}*.5)" data-i18n="1/2_pow-u">1/2 POW</option>
+                                    <option value="ceil(@{pow}*.75)" data-i18n="3/4_pow-u">3/4 POW</option>
+                                    <option value="@{pow}" data-i18n="pow-u">POW</option>
                                 </select>
                             </div>
                         </div>
@@ -3060,8 +3103,54 @@
 
         <!-- Abilities Table -->
         <div class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu">
+            <!-- Abilities Filter -->
+            <label class="sheet-left sheet-rmargin" data-i18n="filter">Filter</label>
+            <span class="sheet-rmargin" data-i18n="favored">Favored</span>
+            <span class="sheet-rmargin"><input type="checkbox" title="@{ability_filter_favored}" name="attr_ability_filter_favored" value="1"><span class="sheet-checkico">S</span></span>
+            <span class="sheet-rmargin" data-i18n="type">Type</span>
+            <select class="sheet-auto-width sheet-rmargin sheet-text-center" title="@{ability_filter_type}" name="attr_ability_filter_type" data-i18n-list="ability_type-order">
+                <option value="all" data-i18n="all">All</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
+                <option class="sheet-ability-option sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
+                <option value="other" data-i18n="other">Other</option>
+                <option class="sheet-ability-option sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
+                <option class="sheet-ability-option sheet-la" value="trait" data-i18n="trait">Trait</option>
+                <option value="-" disabled>-</option>
+                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
+                <option class="sheet-ability-option sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
+                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
+                <option class="sheet-ability-option sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
+                <option class="sheet-ability-option sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
+                <option class="sheet-ability-option sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
+                <option class="sheet-ability-option sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
+                <option class="sheet-ability-option sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
+                <option class="sheet-ability-option sheet-imperative" value="magic" data-i18n="magic">Magic</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
+                <option class="sheet-ability-option sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
+                <option class="sheet-ability-option sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
+                <option class="sheet-ability-option sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
+                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
+                <option class="sheet-ability-option sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
+            </select>
+            <div class="sheet-setting-option sheet-cf">
+                <span class="sheet-rmargin" data-i18n="rank">Rank</span>
+                <select class="sheet-auto-width sheet-text-center" title="@{ability_filter_rank}" name="attr_ability_filter_rank">
+                    <option value="all" data-i18n="all" selected>All</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
             <div class="sheet-flex">
-                <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="memorized">S</div></div>
+                <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="favored">S</div></div>
                 <div class="sheet-th"><div class="sheet-ability-name" data-i18="ability">Ability</div></div>
                 <div class="sheet-th"><div class="sheet-button-width"></div></div>
                 <div class="sheet-th"><div class="sheet-ability-type" data-i18="type">Type</div></div>
@@ -3070,80 +3159,83 @@
                 <div class="sheet-th"><div class="sheet-checkbox-width sheet-pictos sheet-help" data-i18n-title="show_details">E</div></div>
             </div>
             <fieldset class="repeating_ability">
-                <div class="sheet-flex">
-                    <div class="sheet-td"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
-                    <div class="sheet-td sheet-hover-btn">
-                        <input type="text" class="sheet-ability-name sheet-text-left" title="@{$ID_name}" name="attr_name">
-                        <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
-                        <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
-                    </div>
-                    <div class="sheet-td">
-                        <button type="roll" class="sheet-die sheet-pictos" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{tradition_id=@{tradition_id}}} {{skill1_name=@{skill1_name}}} {{skill1_total=@{skill1_total}}} {{skill2_name=@{skill2_name}}} {{skill2_total=@{skill2_total}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}}'}}">e</button>
-                    </div>
-                    <div class="sheet-td sheet-text-center">
-                        <select class="sheet-ability-type" title="@{$ID_type}" name="attr_type" data-i18n-list="ability_type-order">
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
-                            <option class="sheet-ability-option sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
-                            <option value="other" data-i18n="other" selected>Other</option>
-                            <option class="sheet-ability-option sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
-                            <option class="sheet-ability-option sheet-la" value="trait" data-i18n="trait">Trait</option>
-                            <option value="-" disabled>-</option>
-                            <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
-                            <option class="sheet-ability-option sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
-                            <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
-                            <option class="sheet-ability-option sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
-                            <option class="sheet-ability-option sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
-                            <option class="sheet-ability-option sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
-                            <option class="sheet-ability-option sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
-                            <option class="sheet-ability-option sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
-                            <option class="sheet-ability-option sheet-imperative" value="magic" data-i18n="magic">Magic</option>
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
-                            <option class="sheet-ability-option sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
-                            <option class="sheet-ability-option sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
-                            <option class="sheet-ability-option sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
-                            <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
-                            <option class="sheet-ability-option sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
-                        </select>
-                    </div>
-                    <div class="sheet-td sheet-setting-option sheet-cf">
-                        <select class="sheet-number-width sheet-text-center" title="@{$ID_rank}" name="attr_rank">
-                            <option value="" selected>-</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_summary}" name="attr_summary" value=""></div>
-                    <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span></div>
-                </div>
-                <input type="hidden" class="sheet-toggle" name="attr_details" value="1">
+                <input type="hidden" class="sheet-toggle" name="attr_show" value="1">
                 <div class="sheet-toggle">
-                    <div class="sheet-lmargin-x3 sheet-flex sheet-gap">
-                        <input type="hidden" class="sheet-toggle" name="attr_traited" value="0">
-                        <div class="sheet-third-width sheet-toggle">
-                            <label class="sheet-left" data-i18n="traits">Traits</label>
-                            <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
+                    <div class="sheet-flex">
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
+                        <div class="sheet-td sheet-hover-btn">
+                            <input type="text" class="sheet-ability-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                            <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                            <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
                         </div>
-                        <div class="sheet-third-width">
-                            <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
-                            <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
+                        <div class="sheet-td">
+                            <button type="roll" class="sheet-die sheet-pictos" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{tradition_id=@{tradition_id}}} {{skill1_name=@{skill1_name}}} {{skill1_total=@{skill1_total}}} {{skill2_name=@{skill2_name}}} {{skill2_total=@{skill2_total}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}}'}}">e</button>
                         </div>
-                        <div class="sheet-third-width">
-                            <label class="sheet-left" data-i18n="description">Description</label>
-                            <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
+                        <div class="sheet-td sheet-text-center">
+                            <select class="sheet-ability-type" title="@{$ID_type}" name="attr_type" data-i18n-list="ability_type-order">
+                                <option value="other" data-i18n="other" selected>Other</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
+                                <option class="sheet-ability-option sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
+                                <option class="sheet-ability-option sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
+                                <option class="sheet-ability-option sheet-la" value="trait" data-i18n="trait">Trait</option>
+                                <option value="-" disabled>-</option>
+                                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
+                                <option class="sheet-ability-option sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
+                                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
+                                <option class="sheet-ability-option sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
+                                <option class="sheet-ability-option sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
+                                <option class="sheet-ability-option sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
+                                <option class="sheet-ability-option sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
+                                <option class="sheet-ability-option sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
+                                <option class="sheet-ability-option sheet-imperative" value="magic" data-i18n="magic">Magic</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
+                                <option class="sheet-ability-option sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
+                                <option class="sheet-ability-option sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
+                                <option class="sheet-ability-option sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
+                                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
+                                <option class="sheet-ability-option sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
+                            </select>
                         </div>
+                        <div class="sheet-td sheet-setting-option sheet-cf">
+                            <select class="sheet-number-width sheet-text-center" title="@{$ID_rank}" name="attr_rank">
+                                <option value="" selected>-</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_summary}" name="attr_summary" value=""></div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">E</span></div>
                     </div>
-                    <input type="hidden" class="sheet-toggle" name="attr_traited" value="0">
-                    <div class="sheet-lmargin-x3 sheet-toggle sheet-flex sheet-gap">
-                        <div><label class="sheet-left"><span data-i18n="tradition_id">Tradition ID</span> (<span data-i18n="optional">Optional</span>)</label></div>
-                        <input type="text" class="sheet-grow" name="attr_tradition_id" value="">
+                    <input type="hidden" class="sheet-toggle" name="attr_details" value="1">
+                    <div class="sheet-toggle">
+                        <div class="sheet-lmargin-x3 sheet-flex sheet-gap">
+                            <input type="hidden" class="sheet-toggle" name="attr_traited" value="0">
+                            <div class="sheet-third-width sheet-toggle">
+                                <label class="sheet-left" data-i18n="traits">Traits</label>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
+                            </div>
+                            <div class="sheet-third-width">
+                                <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
+                            </div>
+                            <div class="sheet-third-width">
+                                <label class="sheet-left" data-i18n="description">Description</label>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" class="sheet-toggle" name="attr_traited" value="0">
+                        <div class="sheet-lmargin-x3 sheet-toggle sheet-flex sheet-gap">
+                            <div><label class="sheet-left"><span data-i18n="tradition_id">Tradition ID</span> (<span data-i18n="optional">Optional</span>)</label></div>
+                            <input type="text" class="sheet-grow" name="attr_tradition_id" value="">
+                        </div>
                     </div>
                 </div>
                 <div hidden>
