@@ -183,8 +183,7 @@ div.sheet-table {
     display: table;
     width: 100%;
 }
-div.sheet-tr, /* TODO: cleanup tepitem stuff? */
-div.sheet-table .repitem {
+div.sheet-tr {
     display: table-row;
 }
 div.sheet-tr:hover {
@@ -826,7 +825,7 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-typetoggle:not([value="spirit"]) ~ div.sheet-wrapper .sheet-spirit,
 .sheet-typetoggle:not([value="pc"], [value="creature"]) ~ div.sheet-wrapper .sheet-creature,
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-wrapper div.sheet-ship,
-.sheet-typetoggle:not([value="star_system"]) ~ div.sheet-wrapper div.sheet-star-system, /* TODO remove star_system */
+.sheet-typetoggle:not([value="star_system"]) ~ div.sheet-wrapper div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-wrapper div.sheet-vehicle,
 .sheet-typetoggle:not([value="vehicle_frostbyte"]) ~ div.sheet-wrapper div.sheet-vehicle-frostbyte {
     display: none;
@@ -1098,6 +1097,11 @@ textarea.sheet-character-notes {
     line-height: 18px;
     border-radius: 5px;
 }
+
+.sheet-rolltemplate-default div.sheet-border.sheet-hit-location,
+.sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-border.sheet-hit-location {
+    border: 2px solid #992600;
+}
 .sheet-rolltemplate-default div.sheet-border.sheet-improve,
 .sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-border.sheet-improve {
     border: 2px solid #572d6c;
@@ -1116,6 +1120,11 @@ textarea.sheet-character-notes {
 }
 .sheet-rolltemplate-default div.sheet-header {
     background: #595959;
+    color: whitesmoke;
+}
+.sheet-rolltemplate-default div.sheet-header.sheet-hit-location,
+.sheet-rolltemplate-default.sheet-rolltemplate-darkmode div.sheet-header.sheet-hit-location {
+    background: #992600;
     color: whitesmoke;
 }
 .sheet-rolltemplate-default div.sheet-header.sheet-improve,
