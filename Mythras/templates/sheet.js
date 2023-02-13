@@ -157,7 +157,6 @@ on("change:sheet_type", function(event) {
             let newAttrs = {};
 
             /* Set hit table rolls */
-            /* TODO changing sheet type sets hit table rolls */
             if (event.newValue === 'pc' || event.newValue === 'creature') {
                 newAttrs['hit_location_roll'] = '@{creature_hit_location_roll}';
                 newAttrs['hit_location_low_roll'] = '@{creature_hit_location_roll}';
@@ -231,28 +230,60 @@ on('clicked:reset-penalty', function(event) {
 });
 
 /* Utility Functions */
-const damageSteps = ['1d2','1d4','1d6','1d8','1d10','2d6','1d8+1d6','2d8','1d10+1d8','2d10','2d10+1d2','2d10+1d4',
-    '2d10+1d6','2d10+1d8','3d10','3d10+1d2','3d10+1d4']
-function damageTable(step) {
-    if (step < 0) {
-        return damageSteps[0];
-    } else if (step > 16) {
-        return damageSteps[16];
+function damageModTable(step) {
+    const stepAbs = Math.abs(step);
+    const die_steps = [0, '1d2','1d4','1d6','1d8'];
+    const d10s = Math.floor(stepAbs/5);
+    const damageModd10s = Math.floor((stepAbs-1)/5);
+    const notd10s = stepAbs % 5; // % calculates remainder after division.
+    const notDamageModd10s = (stepAbs-1) % 5; // % calculates remainder after division.
+    let mod;
+    if (stepAbs <= 5) {
+        mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+    } else if (stepAbs === 6) {
+        mod = '1d12';
+    } else if (stepAbs === 7) {
+        mod = '2d6';
+    } else if (stepAbs === 8) {
+        mod = '1d8+1d6';
+    } else if (stepAbs === 9) {
+        mod = '2d8';
+    } else if (stepAbs === 10) {
+        mod = '1d10+1d8';
     } else {
-        return damageSteps[step];
+        mod = (damageModd10s ? `${damageModd10s}d10` : '') + (damageModd10s && notDamageModd10s ? '+' : '') + (notDamageModd10s ? die_steps[notDamageModd10s] : (damageModd10s ? '' : 0));
+    }
+
+    if (step >= 0) {
+        return mod;
+    } else {
+        return '-' + mod;
     }
 }
-const damageStepsReverse = {'1d2': 0, '1d4': 1, '1d6': 2, '1d8': 3, '1d10': 4, '2d6': 5, '1d8+1d6': 6, '2d8': 7,
-    '1d10+1d8': 8, '2d10': 9, '2d10+1d2': 10, '2d10+1d4': 11, '2d10+1d6': 12, '2d10+1d8': 13, '3d10': 14,
-    '3d10+1d2': 15, '3d10+1d4': 16
-}
-function damageTableReverse(value) {
-    if (!(value in damageStepsReverse) && value.startsWith('-')) {
-        return 0;
-    } else if (!(value in damageStepsReverse) && !value.startsWith('-')) {
-        return 22;
+
+/* The damage table differs slightly from the damageModTable because damage mod has an extra step of 1d12. */
+function damageTable(step) {
+    const stepAbs = Math.abs(step);
+    const die_steps = [0, '1d2','1d4','1d6','1d8'];
+    const d10s = Math.floor(stepAbs/5);
+    const notd10s = stepAbs % 5; // % calculates remainder after division.
+    let mod;
+    if (stepAbs === 6) {
+        mod = '2d6';
+    } else if (stepAbs === 7) {
+        mod = '1d8+1d6';
+    } else if (stepAbs === 8) {
+        mod = '2d8';
+    } else if (stepAbs === 9) {
+        mod = '1d10+1d8';
     } else {
-        return damageStepsReverse[value];
+        mod = (d10s ? `${d10s}d10` : '') + (d10s && notd10s ? '+' : '') + (notd10s ? die_steps[notd10s] : (d10s ? '' : 0));
+    }
+
+    if (step >= 0) {
+        return mod;
+    } else {
+        return '-' + mod;
     }
 }
 

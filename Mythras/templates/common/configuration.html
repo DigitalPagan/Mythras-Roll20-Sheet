@@ -28,14 +28,17 @@
                 </select>
             </div>
 
+            <!-- Movement -->
             <div class="sheet-minor">
                 <label class="sheet-left sheet-rmargin" data-18n="movement">Movement</label>
                 <select class="sheet-auto-width sheet-rmargin" name="attr_custom_movement_enabled">
                     <option data-i18n="standard" value="0" selected>Standard</option>
                     <option data-i18n="custom" value="1">Custom</option>
                 </select>
-                <input type="hidden" class="sheet-toggle" name="attr_custom_movement_enabled" value="0">
+                <input type="hidden" class="sheet-wide-toggle" name="attr_custom_movement_enabled" value="0">
                 <input type="text" class="sheet-toggle sheet-text-left" title="@{custom_movement}" name="attr_custom_movement">
+                <span class="sheet-anti-toggle" data-i18n="species">Species</span>:
+                <input type="number" class="sheet-anti-toggle sheet-number-width-sm" title="@{movement_rate_species}" name="attr_movement_rate_species" value="6">
             </div>
         </div>
 

@@ -106,6 +106,9 @@ div.sheet-wrapper { /* Sets default size of the sheet */
     min-width: 430px;
     max-width: 860px;
 }
+div.sheet-inline {
+    display: inline-block;
+}
 div.sheet-flex {
     display: flex;
 }
@@ -463,20 +466,6 @@ body.sheet-darkmode a.repcontrol_move {
     color: whitesmoke;
 }
 
-/* Fieldsets */
-/* Make repeating section inline for display modes */
-fieldset.sheet-inline-display ~ .repcontainer {
-    display: inline-flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-fieldset.sheet-inline-display ~ .repcontainer > .repitem {
-    display: inline-block;
-}
-fieldset.sheet-inline-display ~ .repcontrol {
-    display: none;
-}
-
 /* Inputs */
 .ui-dialog .charsheet input {
     -moz-appearance: none;
@@ -735,6 +724,9 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
 .ui-dialog .charsheet button.sheet-label-left:after {
     content: ':'
 }
+.ui-dialog .charsheet button.sheet-compact-btn {
+    margin: 0 3px 3px 0;
+}
 .ui-dialog .charsheet button.sheet-die {
     margin: 0;
     width: 27px;
@@ -864,7 +856,24 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
     display: none;
 }
 .sheet-compact-control[value="0"] + div.sheet-wrapper {
-    min-width: 860px;
+    min-width: 850px;
+}
+/* Disabled fieldset controls in compact mode */
+.sheet-compact-control[value="1"] + div.sheet-wrapper fieldset ~ .repcontrol {
+    display: none;
+}
+/* Styling to collapse repeating items and compactable divs in compact mode */
+.sheet-compact-control[value="1"] + div.sheet-wrapper fieldset.sheet-compactable ~ .repcontainer,
+.sheet-compact-control[value="1"] + div.sheet-wrapper div.sheet-compactable {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+.sheet-compact-control[value="1"] + div.sheet-wrapper fieldset.sheet-compactable ~ .repcontainer > .repitem {
+    display: inline-block;
+}
+div.sheet-compactable-fieldset-control {
+    display: none;
 }
 @media screen and (max-width: 700px) {
     .ui-dialog .charsheet .sheet-large-screen {
