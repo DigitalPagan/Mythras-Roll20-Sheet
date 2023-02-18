@@ -542,7 +542,7 @@
     "impale_size": "Impale Size",
     "impale_size-a": "IS",
     "import": "Import",
-    "import_as_player_character": "Import as Player Character",
+    "import_as_major_character": "Import as Major Character",
     "import_as_minor_character": "Import as Minor Character",
     "import_data": "Import Data",
     "import_from_encounter_generator": "Import from Encounter Generator",
@@ -1409,5 +1409,12 @@
     "super_power": "Super Power",
     "advantage": "Advantage",
     "disadvantage": "Disadvantage",
-    "optional": "Optional"
+    "optional": "Optional",
+    "communities": "Communities",
+    "forums": "Forums",
+    "changelog": "Changelog",
+    "sheet_documentation": "Sheet Documentation",
+    "help-paragraph": "Throughout the sheet you will find <span class=\"sheet-pictos\">?</span> icons, like the one you clicked to open this pop-up.  These will provide direct links to documentation covering that section of the sheet.  In addition, the resources below may prove to be useful sources of information about the Mythras Roll20 sheet and/or Mythras in general.",
+    "psionic_powers": "Psionic Powers",
+    "psionic_power": "Psicnic Power"
 }

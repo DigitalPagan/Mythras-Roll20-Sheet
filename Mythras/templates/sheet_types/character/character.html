@@ -782,13 +782,17 @@
 
         <!-- Conditions -->
         <div class="sheet-section sheet-flex-column sheet-grow">
-            <h2 data-i18n="conditions">Conditions</h2>
+            <div class="sheet-space-between sheet-gap">
+                <h2 data-i18n="conditions">Conditions</h2>
+                <div class="sheet-creature"><label class="sheet-checkbox sheet-help" data-i18n-title="pack_equipped"><input type='checkbox' name='attr_pack_equipped' value="1" checked><span>3</span><span data-i18n="pack"></span></label></div>
+            </div>
+
 
             <div class="sheet-bmargin sheet-creature">
                 <div class="sheet-flex sheet-gap sheet-hl">
                     <div><a class="sheet-label-left" data-i18n-title="show_fatigue_popup" data-i18n="fatigue" href="#fatigue-details">Fatigue</a></div>
-                    <div class="sheet-grow">
-                        <select class="sheet-full-width sheet-text-right" title="@{fatigue}" name="attr_fatigue">
+                    <div class="sheet-grow sheet-text-right">
+                        <select class="sheet-auto-width sheet-text-right" title="@{fatigue}" name="attr_fatigue">
                             <option value="9" data-i18n="fresh" selected>Fresh</option>
                             <option value="8" data-i18n="winded">Winded</option>
                             <option value="7" data-i18n="tired">Tired</option>
@@ -805,7 +809,6 @@
 
                 <div class="sheet-flex sheet-gap sheet-hl">
                     <div><label class="sheet-left" data-i18n="load">Load</label></div>
-                    <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
                     <div class="sheet-grow">
                         <select class="sheet-full-width sheet-text-right sheet-no-border sheet-readonly" title="@{encumbrance_load}" name="attr_encumbrance_load">
                             <option value="0" data-i18n="normal" selected>Normal</option>
@@ -2747,8 +2750,7 @@
     <input type="hidden" class="sheet-abilities-control" name="attr_ability_system" value="core">
     <div id="abilities" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-space-between sheet-gap">
-            <h2 class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" data-i18n="abilities">Abilities</h2>
-            <h2 class="sheet-ability-option sheet-ms sheet-os" data-i18n="features">Features</h2>
+            <h2 data-i18n="abilities">Abilities</h2>
             <div class="sheet-flex sheet-gap">
                 <div class="sheet-flex sheet-gap" data-i18n-list="ability_attribute-order">
                     <div class="sheet-setting-option sheet-default sheet-atvw sheet-cf sheet-fioracitta sheet-imperative sheet-lyonesse sheet-mi sheet-mba sheet-mb sheet-mc sheet-mr sheet-os sheet-perceforest sheet-thennla" data-i18n-list-item="magic_points">
@@ -2795,6 +2797,7 @@
 ^{targets}: @{shaped_targets}
                     </textarea>
                 </div>
+                <!-- TODO move component section into markdown docs and add link to Abilities section-->
                 <div class="sheet-two-thirds-width">
                     <div class="sheet-components-options">
                         <div class="sheet-table" data-i18n-list="shaping_components-order">
@@ -3105,7 +3108,7 @@
         </div>
 
         <!-- Abilities Table -->
-        <div class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu">
+        <div class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu">
             <!-- Abilities Filter -->
             <label class="sheet-left sheet-rmargin" data-i18n="filter">Filter</label>
             <span class="sheet-rmargin" data-i18n="favored">Favored</span>
@@ -3113,31 +3116,31 @@
             <span class="sheet-rmargin" data-i18n="type">Type</span>
             <select class="sheet-auto-width sheet-rmargin sheet-text-center" title="@{ability_filter_type}" name="attr_ability_filter_type" data-i18n-list="ability_type-order">
                 <option value="all" data-i18n="all">All</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
-                <option class="sheet-ability-option sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
+                <option class="sheet-ability-option sheet-all sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
                 <option value="other" data-i18n="other">Other</option>
-                <option class="sheet-ability-option sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
-                <option class="sheet-ability-option sheet-la" value="trait" data-i18n="trait">Trait</option>
+                <option class="sheet-ability-option sheet-all sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
+                <option class="sheet-ability-option sheet-all sheet-la" value="trait" data-i18n="trait">Trait</option>
                 <option value="-" disabled>-</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
-                <option class="sheet-ability-option sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
-                <option class="sheet-ability-option sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
-                <option class="sheet-ability-option sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
-                <option class="sheet-ability-option sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
-                <option class="sheet-ability-option sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
-                <option class="sheet-ability-option sheet-imperative" value="magic" data-i18n="magic">Magic</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
-                <option class="sheet-ability-option sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
-                <option class="sheet-ability-option sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
-                <option class="sheet-ability-option sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
+                <option class="sheet-ability-option sheet-all sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
+                <option class="sheet-ability-option sheet-all sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
+                <option class="sheet-ability-option sheet-all sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
+                <option class="sheet-ability-option sheet-all sheet-imperative" value="magic" data-i18n="magic">Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
+                <option class="sheet-ability-option sheet-all sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
+                <option class="sheet-ability-option sheet-all sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
+                <option class="sheet-ability-option sheet-all sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
             </select>
             <div class="sheet-setting-option sheet-cf">
                 <span class="sheet-rmargin" data-i18n="rank">Rank</span>
@@ -3233,7 +3236,7 @@
                                 <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
                                 <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
                             </div>
-                            <div class="sheet-third-width">
+                            <div class="sheet-grow">
                                 <label class="sheet-left" data-i18n="description">Description</label>
                                 <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
                             </div>
@@ -3255,6 +3258,99 @@
                     <input type="text" name="attr_skill2_total" value="" readonly>
                 </div>
             </fieldset>
+        </div>
+
+        <!-- Skilled Abilities Table -->
+        <div class="sheet-ability-option sheet-os sheet-ms">
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-th sheet-ability-option sheet-ms"><div class="sheet-ability-name" data-i18n="psionic_power">Psionic Power</div></div>
+                <div class="sheet-th sheet-ability-option sheet-os"><div class="sheet-ability-name" data-i18n="spell">Spell</div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
+                <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="trained">3</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                <div class="sheet-th sheet-grow" data-i18n="summary">Summary</div>
+                <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
+            </div>
+            <div class="sheet-flex sheet-compact">
+                <div class="sheet-th sheet-grow sheet-ability-option sheet-os"><div class="sheet-full-width" data-i18n="spells">Spells</div></div>
+                <div class="sheet-th sheet-grow sheet-ability-option sheet-ms"><div class="sheet-full-width" data-i18n="psionic_powers">Psionic Powers</div></div>
+            </div>
+            <div class="sheet-bmargin">
+                <fieldset class="repeating_skilledability sheet-compactable">
+                    <div class="sheet-flex sheet-detailed">
+                        <div class="sheet-td">
+                            <div class="sheet-ability-name sheet-hover-btn">
+                                <input type="text" class="sheet-ability-name sheet-text-left" name="attr_name">
+                                <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset">
+                            </div>
+                        </div>
+                        <div class="sheet-td">
+                            <button type="roll" class="sheet-die sheet-pictos sheet-button-width" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name} (@{total}%)}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}}'}}">e</button>
+                        </div>
+                        <div class="sheet-td">
+                            <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{$ID_skill}" name="roll_skill" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}}'}}">t</button>
+                        </div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_fumbled}" name="attr_fumbled" value="1"><span class="sheet-checkico">!</span></div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span></div>
+                        <div class="sheet-td">
+                            <select class="sheet-number-width sheet-text-center" title="@{$ID_char1}" name="attr_char1">
+                                <option value="0">-</option>
+                                <option value="@{str}" data-i18n="str-u">STR</option>
+                                <option value="@{con}" data-i18n="con-u">CON</option>
+                                <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                <option value="@{int}" data-i18n="int-u">INT</option>
+                                <option value="@{pow}" data-i18n="pow-u" selected>POW</option>
+                                <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td">
+                            <select class="sheet-number-width sheet-text-center" title="@{$ID_char2}" name="attr_char2">
+                                <option value="0">-</option>
+                                <option value="@{str}" data-i18n="str-u">STR</option>
+                                <option value="@{con}" data-i18n="con-u">CON</option>
+                                <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                <option value="@{int}" data-i18n="int-u">INT</option>
+                                <option value="@{pow}" data-i18n="pow-u" selected>POW</option>
+                                <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{$ID_total}" name="attr_total" value="0" step="1"  min="0"></div>
+                        <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_summary}" name="attr_summary" value=""></div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <input type="hidden" class="sheet-toggle" name="attr_details" value="0">
+                    <div class="sheet-toggle sheet-detailed">
+                        <div class="sheet-lmargin-x3 sheet-flex sheet-gap">
+                            <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
+                            <div>
+                                <label class="sheet-left" data-i18n="traits">Traits</label>
+                                <textarea class="sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
+                            </div>
+                            <div>
+                                <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
+                                <textarea class="sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
+                            </div>
+                            <div class="sheet-grow">
+                                <label class="sheet-left" data-i18n="description">Description</label>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div hidden>
+                        <input type="number" name="attr_other" value="0" readonly>
+                    </div>
+                    <div class="sheet-compact">
+                        <button type="roll" title="%{$ID_effect}" name="roll_effect" value="{{'@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}}'}}"><span class="sheet-bold" name="attr_name"></span> <span name="attr_total"></span>%</button>
+                    </div>
+                </fieldset>
+            </div>
         </div>
 
         <!-- Features -->
@@ -3800,12 +3896,14 @@
 
             <!-- ENC -->
             <div class="sheet-section sheet-full-width sheet-creature">
-                <div class="sheet-space-between sheet-gap">
-                    <div><h2 data-i18n="encumbrance">Encumbrance</h2></div>
-                    <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
-                    <div class="sheet-grow sheet-text-right">
-                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
-                        <input type="number" class="sheet-number-width-sm sheet-text-center" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                <div class="sheet-flex sheet-gap">
+                    <div class="sheet-grow"><h2 data-i18n="encumbrance">Encumbrance</h2></div>
+                    <div class="sheet-flex sheet-gap">
+                        <div>
+                            <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
+                            <input type="number" class="sheet-number-width-sm sheet-text-center" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                        </div>
+                        <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
                     </div>
                 </div>
 

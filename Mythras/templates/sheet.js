@@ -328,14 +328,20 @@ function setTranslationAttrs() {
     i18nAttrs['minutes_a_i18n'] = getTranslationByKey('minutes-a');
     i18nAttrs['meters_a_i18n'] = getTranslationByKey('meters-a');
     i18nAttrs['kilometers_a_i18n'] = getTranslationByKey('kilometers-a');
-    setAttrs(i18nAttrs);
+    return i18nAttrs;
 }
 
 /* On Open Triggers */
 on("sheet:opened", function() {
     /* TODO replace with sheet_type after v4 release */
-    getAttrs(['type', 'version'], function(v) {
+    getAttrs(['type', 'version', 'character_id'], function(v) {
         versioning(v['type'], v['version']);
+        let newAttrs = setTranslationAttrs();
+        /* Was seeing errors in the console about not being able to eval @{character_id} for some formula, but it did seem to actually work.
+        Adding this to specifically set the value in the sheet to avoid those errors just to be safe.
+         */
+        newAttrs['character_id'] = v['character_id'];
+        setAttrs(newAttrs);
     });
-    setTranslationAttrs();
+
 });

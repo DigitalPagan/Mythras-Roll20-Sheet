@@ -15,81 +15,94 @@ characteristicAttrs.forEach(char => {
                         repeatingIds['currencyIds'] = currencyIds;
                         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
                             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-                                let combatStyleGetAttrs = [];
-                                combatStyleIds.forEach(id => {
-                                    combatStyleGetAttrs.push(`repeating_combatstyle_${id}_total`,
-                                        `repeating_combatstyle_${id}_other`, `repeating_combatstyle_${id}_notes`,
-                                        `repeating_combatstyle_${id}_name`, `repeating_combatstyle_${id}_char1`,
-                                        `repeating_combatstyle_${id}_char2`);
-                                });
-
-                                let proSkillGetAttrs = [];
-                                proSkillIds.forEach(id => {
-                                    proSkillGetAttrs.push(`repeating_professionalskill_${id}_total`,
-                                        `repeating_professionalskill_${id}_other`, `repeating_professionalskill_${id}_notes`,
-                                        `repeating_professionalskill_${id}_name`, `repeating_professionalskill_${id}_char1`,
-                                        `repeating_professionalskill_${id}_char2`);
-                                });
-
-                                let stdSkillGetAttrs = [];
-                                stdSkillIds.forEach(id => {
-                                    stdSkillGetAttrs.push(`${id}`, `${id}_other`, `${id}_notes`);
-                                });
-
-                                getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, 'social_defense_id'].concat(characteristicAttrs,
-                                    encGetAttrs(repeatingIds), actionPointGetAttrs, confidenceGetAttrs, damageModGetAttrs, expModGetAttrs,
-                                    healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs, tenacityGetAttrs, hpGetAttrs,
-                                    moveRateGetAttrs, spiritIntensityGetAttrs, composureGetAttrs, integrityGetAttrs, resolveGetAttrs,
-                                    spiritDamageGetAttrs, socialDamageGetAttrs, stdSkillGetAttrs, combatStyleGetAttrs, proSkillGetAttrs
-                                ), function(v) {
-                                    let newAttrs = {};
-                                    const baseCharVal = parseInt(v[`${char}_base`]) || 0;
-                                    const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
-                                    const currCharVal = parseInt(v[`${char}`]) || 0;
-                                    const currPoolVal = parseInt(v[`${char}_pool`]) || 0;
-
-                                    if (event.sourceAttribute === `${char}`) {
-                                        newAttrs[`${char}_temp`] = currCharVal - baseCharVal;
-                                        const diffVal = newAttrs[`${char}_temp`] - tempCharVal;
-                                        newAttrs[`${char}_pool`] = currPoolVal + diffVal;
-                                    } else if (event.sourceAttribute === `${char}_base`) {
-                                        newAttrs[`${char}`] = baseCharVal + tempCharVal;
-                                        const diffVal = newAttrs[`${char}`] - currCharVal;
-                                        newAttrs[`${char}_pool`] = currPoolVal + diffVal;
-                                        v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
-                                    }
-
-                                    stdSkillIds.forEach(skillId => {
-                                        newAttrs = {...newAttrs, ...calcStdSkill(skillId, v, event.sourceAttribute)};
-                                    });
+                                getSectionIDs("repeating_foobar", function(skilledAbilityIds) {
+                                    let combatStyleGetAttrs = [];
                                     combatStyleIds.forEach(id => {
-                                        newAttrs = {...newAttrs, ...calcProSkill(`repeating_combatstyle_${id}`, v, event.sourceAttribute)};
-                                    });
-                                    proSkillIds.forEach(id => {
-                                        newAttrs = {...newAttrs, ...calcProSkill(`repeating_professionalskill_${id}`, v, event.sourceAttribute)};
+                                        combatStyleGetAttrs.push(`repeating_combatstyle_${id}_total`,
+                                            `repeating_combatstyle_${id}_other`, `repeating_combatstyle_${id}_notes`,
+                                            `repeating_combatstyle_${id}_name`, `repeating_combatstyle_${id}_char1`,
+                                            `repeating_combatstyle_${id}_char2`);
                                     });
 
-                                    newAttrs = {...newAttrs, ...calcEncAndArmorPenalty(repeatingIds, v)};
-                                    /* Update v with new values need for attribute calculations */
-                                    v = {...v, ...newAttrs};
-                                    setAttrs({
-                                        ...newAttrs,
-                                        ...calcActionPoints(v),
-                                        ...calcConfidence(v),
-                                        ...calcDamageMod(v),
-                                        ...calcExpMod(v),
-                                        ...calcHealingRate(v),
-                                        ...calcInitiativeBonus(v),
-                                        ...calcLuckPoints(v),
-                                        ...calcMagicPoints(v),
-                                        ...calcMoveRate(v),
-                                        ...calcSpiritIntensity(v),
-                                        ...calcTenacity(v),
-                                        ...calcAllHP(v),
-                                        ...calcComposure(v),
-                                        ...calcIntegrity(v),
-                                        ...calcResolve(v)
-                                        /* No need for teh social and spirit damage here since it would have been done via skills */
+                                    let proSkillGetAttrs = [];
+                                    proSkillIds.forEach(id => {
+                                        proSkillGetAttrs.push(`repeating_professionalskill_${id}_total`,
+                                            `repeating_professionalskill_${id}_other`, `repeating_professionalskill_${id}_notes`,
+                                            `repeating_professionalskill_${id}_name`, `repeating_professionalskill_${id}_char1`,
+                                            `repeating_professionalskill_${id}_char2`);
+                                    });
+
+                                    let skilledAbilityGetAttrs = [];
+                                    skilledAbilityIds.forEach(id => {
+                                        skilledAbilityGetAttrs.push(`repeating_skilledability_${id}_total`,
+                                            `repeating_skilledability_${id}_other`, `repeating_skilledability_${id}_name`,
+                                            `repeating_skilledability_${id}_char1`, `repeating_skilledability_${id}_char2`);
+                                    });
+
+                                    let stdSkillGetAttrs = [];
+                                    stdSkillIds.forEach(id => {
+                                        stdSkillGetAttrs.push(`${id}`, `${id}_other`, `${id}_notes`);
+                                    });
+
+                                    getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, 'social_defense_id'].concat(characteristicAttrs,
+                                        encGetAttrs(repeatingIds), actionPointGetAttrs, confidenceGetAttrs, damageModGetAttrs, expModGetAttrs,
+                                        healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs, tenacityGetAttrs, hpGetAttrs,
+                                        moveRateGetAttrs, spiritIntensityGetAttrs, composureGetAttrs, integrityGetAttrs, resolveGetAttrs,
+                                        spiritDamageGetAttrs, socialDamageGetAttrs, stdSkillGetAttrs, combatStyleGetAttrs, proSkillGetAttrs,
+                                        skilledAbilityGetAttrs
+                                    ), function(v) {
+                                        let newAttrs = {};
+                                        const baseCharVal = parseInt(v[`${char}_base`]) || 0;
+                                        const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
+                                        const currCharVal = parseInt(v[`${char}`]) || 0;
+                                        const currPoolVal = parseInt(v[`${char}_pool`]) || 0;
+
+                                        if (event.sourceAttribute === `${char}`) {
+                                            newAttrs[`${char}_temp`] = currCharVal - baseCharVal;
+                                            const diffVal = newAttrs[`${char}_temp`] - tempCharVal;
+                                            newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+                                        } else if (event.sourceAttribute === `${char}_base`) {
+                                            newAttrs[`${char}`] = baseCharVal + tempCharVal;
+                                            const diffVal = newAttrs[`${char}`] - currCharVal;
+                                            newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+                                            v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
+                                        }
+
+                                        stdSkillIds.forEach(skillId => {
+                                            newAttrs = {...newAttrs, ...calcStdSkill(skillId, v, event.sourceAttribute)};
+                                        });
+                                        combatStyleIds.forEach(id => {
+                                            newAttrs = {...newAttrs, ...calcProSkill(`repeating_combatstyle_${id}`, v, event.sourceAttribute)};
+                                        });
+                                        proSkillIds.forEach(id => {
+                                            newAttrs = {...newAttrs, ...calcProSkill(`repeating_professionalskill_${id}`, v, event.sourceAttribute)};
+                                        });
+                                        skilledAbilityIds.forEach(id => {
+                                            newAttrs = {...newAttrs, ...calcSkilledAbility(`repeating_skilledability_${id}`, v, event.sourceAttribute)};
+                                        });
+
+                                        newAttrs = {...newAttrs, ...calcEncAndArmorPenalty(repeatingIds, v)};
+                                        /* Update v with new values need for attribute calculations */
+                                        v = {...v, ...newAttrs};
+                                        setAttrs({
+                                            ...newAttrs,
+                                            ...calcActionPoints(v),
+                                            ...calcConfidence(v),
+                                            ...calcDamageMod(v),
+                                            ...calcExpMod(v),
+                                            ...calcHealingRate(v),
+                                            ...calcInitiativeBonus(v),
+                                            ...calcLuckPoints(v),
+                                            ...calcMagicPoints(v),
+                                            ...calcMoveRate(v),
+                                            ...calcSpiritIntensity(v),
+                                            ...calcTenacity(v),
+                                            ...calcAllHP(v),
+                                            ...calcComposure(v),
+                                            ...calcIntegrity(v),
+                                            ...calcResolve(v)
+                                            /* No need for the social and spirit damage here since it would have been done via skills */
+                                        });
                                     });
                                 });
                             });
@@ -1641,6 +1654,43 @@ on('change:repeating_ability:tradition_id', function(event) {
 
 });
 
+/* SKilled Abilities */
+function calcSkilledAbility(skillId, v, sourceAttribute) {
+    let newAttrs = {};
+    const char1 = parseBaseChar(v[`${skillId}_char1`], v);
+    const char2 = parseBaseChar(v[`${skillId}_char2`], v);
+    if (sourceAttribute === `${skillId}_total`) {
+        const skill = parseInt(v[`${skillId}_total`]) || 0;
+        newAttrs[`${skillId}_other`] = skill - char1 - char2;
+    } else {
+        const skillOther = parseInt(v[`${skillId}_other`]) || 0;
+        newAttrs[`${skillId}_total`] = char1 + char2 + skillOther;
+        /* for spirit and social skills we set the new value in v so those calcs may use the new value */
+        v[`${skillId}_total`] = newAttrs[`${skillId}_total`];
+    }
+
+    return {
+        ...newAttrs
+    }
+}
+on('change:repeating_skilledability:total change:repeating_skilledability:name change:repeating_skilledability:char1 change:repeating_skilledability:char2', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_${type}_${id}_total`, `repeating_${type}_${id}_other`, `repeating_${type}_${id}_name`,
+        `repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`].concat(characteristicAttrs), function(v) {
+        setAttrs(calcSkilledAbility(`repeating_${type}_${id}`, v, event.sourceAttribute));
+    });
+});
+on('change:repeating_skilledability:traits', function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    if (event.newValue === undefined || event.newValue === '') {
+        setAttrs({[`repeating_skilledability_${id}_summary`]: ""});
+    } else {
+        setAttrs({[`repeating_skilledability_${id}_summary`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+    }
+});
+
 
 /* Encumbrance */
 const loadTable = {
@@ -1805,7 +1855,7 @@ on("change:location1_armor_enc change:location1_armor_equipped change:location2_
 });
 
 /* Repeating IDs */
-on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_feature", function(event) {
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_skilledability change:repeating_feature", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];

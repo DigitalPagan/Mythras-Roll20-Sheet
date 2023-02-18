@@ -711,6 +711,10 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
     margin: 0;
     color: inherit;
 }
+.ui-dialog .charsheet button.sheet-link.sheet-link-ico {
+    font-family: 'Pictos';
+    text-decoration: none;
+}
 .ui-dialog .charsheet button.sheet-no-underline {
     text-decoration: none !important;
 }

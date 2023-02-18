@@ -68,10 +68,7 @@
     <a href="#core">Core</a>
     <a href="#skills"><span data-i18n="skills">SKills</span>/<span data-i18n="passions">Passions</span></a>
     <input type="hidden" class="sheet-abilities-control" name="attr_ability_system" value="core">
-    <div>
-        <a class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" href="#abilities" data-i18n="abilities">Abilities</a>
-        <a class="sheet-ability-option sheet-ms sheet-os" href="#abilities" data-i18n="features">Features</a>
-    </div>
+    <a href="#abilities" data-i18n="abilities">Abilities</a>
     <a class="sheet-creature" href="#weapons" data-i18n="weapons">Weapons</a>
     <a class="sheet-creature" href="#armor" data-i18n="armor">Armor</a>
     <a class="sheet-creature" href="#gear"><span data-i18n="gear">Gear</span>/<span data-i18n="wealth">Wealth</span></a>
@@ -79,6 +76,9 @@
     <a href="#notes" data-i18n="notes">Notes</a>
 </div>
 </div>
+
+    <!-- Character ID holder -->
+    <input type="hidden" name="attr_character_id">
 
     <!-- Shared Hit Location Buttons -->
     <div hidden>
@@ -880,13 +880,17 @@
 
         <!-- Conditions -->
         <div class="sheet-section sheet-flex-column sheet-grow">
-            <h2 data-i18n="conditions">Conditions</h2>
+            <div class="sheet-space-between sheet-gap">
+                <h2 data-i18n="conditions">Conditions</h2>
+                <div class="sheet-creature"><label class="sheet-checkbox sheet-help" data-i18n-title="pack_equipped"><input type='checkbox' name='attr_pack_equipped' value="1" checked><span>3</span><span data-i18n="pack"></span></label></div>
+            </div>
+
 
             <div class="sheet-bmargin sheet-creature">
                 <div class="sheet-flex sheet-gap sheet-hl">
                     <div><a class="sheet-label-left" data-i18n-title="show_fatigue_popup" data-i18n="fatigue" href="#fatigue-details">Fatigue</a></div>
-                    <div class="sheet-grow">
-                        <select class="sheet-full-width sheet-text-right" title="@{fatigue}" name="attr_fatigue">
+                    <div class="sheet-grow sheet-text-right">
+                        <select class="sheet-auto-width sheet-text-right" title="@{fatigue}" name="attr_fatigue">
                             <option value="9" data-i18n="fresh" selected>Fresh</option>
                             <option value="8" data-i18n="winded">Winded</option>
                             <option value="7" data-i18n="tired">Tired</option>
@@ -903,7 +907,6 @@
 
                 <div class="sheet-flex sheet-gap sheet-hl">
                     <div><label class="sheet-left" data-i18n="load">Load</label></div>
-                    <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
                     <div class="sheet-grow">
                         <select class="sheet-full-width sheet-text-right sheet-no-border sheet-readonly" title="@{encumbrance_load}" name="attr_encumbrance_load">
                             <option value="0" data-i18n="normal" selected>Normal</option>
@@ -2845,8 +2848,7 @@
     <input type="hidden" class="sheet-abilities-control" name="attr_ability_system" value="core">
     <div id="abilities" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-space-between sheet-gap">
-            <h2 class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" data-i18n="abilities">Abilities</h2>
-            <h2 class="sheet-ability-option sheet-ms sheet-os" data-i18n="features">Features</h2>
+            <h2 data-i18n="abilities">Abilities</h2>
             <div class="sheet-flex sheet-gap">
                 <div class="sheet-flex sheet-gap" data-i18n-list="ability_attribute-order">
                     <div class="sheet-setting-option sheet-default sheet-atvw sheet-cf sheet-fioracitta sheet-imperative sheet-lyonesse sheet-mi sheet-mba sheet-mb sheet-mc sheet-mr sheet-os sheet-perceforest sheet-thennla" data-i18n-list-item="magic_points">
@@ -2893,6 +2895,7 @@
 ^{targets}: @{shaped_targets}
                     </textarea>
                 </div>
+                <!-- TODO move component section into markdown docs and add link to Abilities section-->
                 <div class="sheet-two-thirds-width">
                     <div class="sheet-components-options">
                         <div class="sheet-table" data-i18n-list="shaping_components-order">
@@ -3203,7 +3206,7 @@
         </div>
 
         <!-- Abilities Table -->
-        <div class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu">
+        <div class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-destined sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu">
             <!-- Abilities Filter -->
             <label class="sheet-left sheet-rmargin" data-i18n="filter">Filter</label>
             <span class="sheet-rmargin" data-i18n="favored">Favored</span>
@@ -3211,31 +3214,31 @@
             <span class="sheet-rmargin" data-i18n="type">Type</span>
             <select class="sheet-auto-width sheet-rmargin sheet-text-center" title="@{ability_filter_type}" name="attr_ability_filter_type" data-i18n-list="ability_type-order">
                 <option value="all" data-i18n="all">All</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
-                <option class="sheet-ability-option sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
+                <option class="sheet-ability-option sheet-all sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
                 <option value="other" data-i18n="other">Other</option>
-                <option class="sheet-ability-option sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
-                <option class="sheet-ability-option sheet-la" value="trait" data-i18n="trait">Trait</option>
+                <option class="sheet-ability-option sheet-all sheet-destined sheet-imperative" value="super_power" data-i18n="super_power">Super Power</option>
+                <option class="sheet-ability-option sheet-all sheet-la" value="trait" data-i18n="trait">Trait</option>
                 <option value="-" disabled>-</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
-                <option class="sheet-ability-option sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
-                <option class="sheet-ability-option sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
-                <option class="sheet-ability-option sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
-                <option class="sheet-ability-option sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
-                <option class="sheet-ability-option sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
-                <option class="sheet-ability-option sheet-imperative" value="magic" data-i18n="magic">Magic</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
-                <option class="sheet-ability-option sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
-                <option class="sheet-ability-option sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
-                <option class="sheet-ability-option sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
-                <option class="sheet-ability-option sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
-                <option class="sheet-ability-option sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-thennla" value="alchemy" data-i18n="alchemy">Alchemy</option>
+                <option class="sheet-ability-option sheet-all sheet-thennla" value="assabian_alchemy" data-i18n="alchemy_(assabian)">Alchemy (Assasbian)</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-thennla" value="artifice" data-i18n="artifice">Artifice</option>
+                <option class="sheet-ability-option sheet-all sheet-cf" value="arcane_magic" data-i18n="arcane_magic">Arcane Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-cf" value="divine_magic" data-i18n="divine_magic">Divine Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-atvw" value="fae_power" data-i18n="fae_power">Fae Power</option>
+                <option class="sheet-ability-option sheet-all sheet-lyonesse" value="fairy_magic" data-i18n="fairy_magic">Fairy Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="folk_magic" data-i18n="folk_magic">Folk Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-mba" value="incantations" data-i18n="incantations">Incantations</option>
+                <option class="sheet-ability-option sheet-all sheet-imperative" value="magic" data-i18n="magic">Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-perceforest sheet-thennla sheet-wu" value="mysticism" data-i18n="mysticism">Mysticism</option>
+                <option class="sheet-ability-option sheet-all sheet-cf sheet-la" value="psionics" data-i18n="psionics">Psionics</option>
+                <option class="sheet-ability-option sheet-all sheet-core-plus sheet-atvw sheet-wu" value="psychic_power" data-i18n="psychic_power">Psychic Power</option>
+                <option class="sheet-ability-option sheet-all sheet-lyonesse" value="sandestin_magic" data-i18n="sandestin_magic">Sandestin Magic</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-thennla" value="sorcery" data-i18n="sorcery">Sorcery</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-mb sheet-thennla" value="spirit" data-i18n="spirit">Spirit</option>
+                <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-thennla" value="theism" data-i18n="theism">Theism</option>
+                <option class="sheet-ability-option sheet-all sheet-thennla" value="work_song" data-i18n="work_song">Work Song</option>
             </select>
             <div class="sheet-setting-option sheet-cf">
                 <span class="sheet-rmargin" data-i18n="rank">Rank</span>
@@ -3331,7 +3334,7 @@
                                 <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
                                 <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
                             </div>
-                            <div class="sheet-third-width">
+                            <div class="sheet-grow">
                                 <label class="sheet-left" data-i18n="description">Description</label>
                                 <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
                             </div>
@@ -3353,6 +3356,99 @@
                     <input type="text" name="attr_skill2_total" value="" readonly>
                 </div>
             </fieldset>
+        </div>
+
+        <!-- Skilled Abilities Table -->
+        <div class="sheet-ability-option sheet-os sheet-ms">
+            <div class="sheet-flex sheet-detailed">
+                <div class="sheet-th sheet-ability-option sheet-ms"><div class="sheet-ability-name" data-i18n="psionic_power">Psionic Power</div></div>
+                <div class="sheet-th sheet-ability-option sheet-os"><div class="sheet-ability-name" data-i18n="spell">Spell</div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="fumbled">!</div></div>
+                <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="trained">3</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="base">Base</div></div>
+                <div class="sheet-th"><div class="sheet-number-width">%</div></div>
+                <div class="sheet-th sheet-grow" data-i18n="summary">Summary</div>
+                <div class="sheet-th"><div class="sheet-help sheet-pictos sheet-checkbox-width" data-i18n-title="configuration">y</div></div>
+            </div>
+            <div class="sheet-flex sheet-compact">
+                <div class="sheet-th sheet-grow sheet-ability-option sheet-os"><div class="sheet-full-width" data-i18n="spells">Spells</div></div>
+                <div class="sheet-th sheet-grow sheet-ability-option sheet-ms"><div class="sheet-full-width" data-i18n="psionic_powers">Psionic Powers</div></div>
+            </div>
+            <div class="sheet-bmargin">
+                <fieldset class="repeating_skilledability sheet-compactable">
+                    <div class="sheet-flex sheet-detailed">
+                        <div class="sheet-td">
+                            <div class="sheet-ability-name sheet-hover-btn">
+                                <input type="text" class="sheet-ability-name sheet-text-left" name="attr_name">
+                                <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset">
+                            </div>
+                        </div>
+                        <div class="sheet-td">
+                            <button type="roll" class="sheet-die sheet-pictos sheet-button-width" title="%{$ID_effect}" name="roll_effect" value="@{roll_display}&{template:effect} {{name=@{name} (@{total}%)}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}}">e</button>
+                        </div>
+                        <div class="sheet-td">
+                            <button type="roll" class="sheet-die sheet-d10 sheet-button-width" title="%{$ID_skill}" name="roll_skill" value="@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}}">t</button>
+                        </div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_fumbled}" name="attr_fumbled" value="1"><span class="sheet-checkico">!</span></div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_trained}" name="attr_trained" value="1"><span class="sheet-checkico">3</span></div>
+                        <div class="sheet-td">
+                            <select class="sheet-number-width sheet-text-center" title="@{$ID_char1}" name="attr_char1">
+                                <option value="0">-</option>
+                                <option value="@{str}" data-i18n="str-u">STR</option>
+                                <option value="@{con}" data-i18n="con-u">CON</option>
+                                <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                <option value="@{int}" data-i18n="int-u">INT</option>
+                                <option value="@{pow}" data-i18n="pow-u" selected>POW</option>
+                                <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td">
+                            <select class="sheet-number-width sheet-text-center" title="@{$ID_char2}" name="attr_char2">
+                                <option value="0">-</option>
+                                <option value="@{str}" data-i18n="str-u">STR</option>
+                                <option value="@{con}" data-i18n="con-u">CON</option>
+                                <option value="@{siz}" data-i18n="siz-u">SIZ</option>
+                                <option value="@{dex}" data-i18n="dex-u">DEX</option>
+                                <option value="@{int}" data-i18n="int-u">INT</option>
+                                <option value="@{pow}" data-i18n="pow-u" selected>POW</option>
+                                <option value="@{cha}" data-i18n="cha-u">CHA</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{$ID_total}" name="attr_total" value="0" step="1"  min="0"></div>
+                        <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_summary}" name="attr_summary" value=""></div>
+                        <div class="sheet-td"><input type="checkbox" title="@{$ID_details}" name="attr_details" value="1"><span class="sheet-checkico">y</span></div>
+                    </div>
+                    <input type="hidden" class="sheet-toggle" name="attr_details" value="0">
+                    <div class="sheet-toggle sheet-detailed">
+                        <div class="sheet-lmargin-x3 sheet-flex sheet-gap">
+                            <button type="roll" title="%{$ID_improve}" name="roll_improve" value="@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}" data-i18n="improve">Improve</button>
+                            <div>
+                                <label class="sheet-left" data-i18n="traits">Traits</label>
+                                <textarea class="sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
+                            </div>
+                            <div>
+                                <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
+                                <textarea class="sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
+                            </div>
+                            <div class="sheet-grow">
+                                <label class="sheet-left" data-i18n="description">Description</label>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div hidden>
+                        <input type="number" name="attr_other" value="0" readonly>
+                    </div>
+                    <div class="sheet-compact">
+                        <button type="roll" title="%{$ID_effect}" name="roll_effect" value="@{roll_display}&{template:effect} {{name=@{name}}} {{character=@{character_name}}} {{character_id=@{character_id}}} {{traits=@{traits}}} {{advanced_traits=@{advanced_traits}}} {{description=@{description}}}"><span class="sheet-bold" name="attr_name"></span> <span name="attr_total"></span>%</button>
+                    </div>
+                </fieldset>
+            </div>
         </div>
 
         <!-- Features -->
@@ -3898,12 +3994,14 @@
 
             <!-- ENC -->
             <div class="sheet-section sheet-full-width sheet-creature">
-                <div class="sheet-space-between sheet-gap">
-                    <div><h2 data-i18n="encumbrance">Encumbrance</h2></div>
-                    <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
-                    <div class="sheet-grow sheet-text-right">
-                        <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
-                        <input type="number" class="sheet-number-width-sm sheet-text-center" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                <div class="sheet-flex sheet-gap">
+                    <div class="sheet-grow"><h2 data-i18n="encumbrance">Encumbrance</h2></div>
+                    <div class="sheet-flex sheet-gap">
+                        <div>
+                            <label class="sheet-left shet-rmargin" data-i18n="average_species_siz">Average Species SIZ</label>
+                            <input type="number" class="sheet-number-width-sm sheet-text-center" data-i18n-title="@{avg_species_siz}" name="attr_avg_species_siz" value="13">
+                        </div>
+                        <div><input type='checkbox' data-i18n-title="pack_equipped" name='attr_pack_equipped' value="1" checked><span class="sheet-checkico">O</span></div>
                     </div>
                 </div>
 
@@ -4052,36 +4150,40 @@
     <div id="help" class="sheet-overlay">
     <div class="sheet-popup">
         <a class="close" href="#">×</a>
-        <h1 data-i18n="help">Help</h1>
-        <!-- TODO: Fill out help page -->
-        <input type="text" name="attr_version" value="3.0">
+        <h1><span class=sheet-rmargin" data-i18n="help">Help</span> (<span name="attr_version"></span>)</h1>
+        <input type="hidden" name="attr_version" value="3.0">
+        <p data-i18n="help-paragraph">
+            Throughout the sheet you will find <span class="sheet-pictos">?</span> icons, like the one you clicked to open this pop-up.  These will provide direct links to documentation covering that section of the sheet.  In addition, the resources below may prove to be useful sources of information about the Mythras Roll20 sheet and/or Mythras in general.
+        </p>
+        <div class="sheet-flex sheet-gap">
+            <div class="sheet-grow">
+                <label class="sheet-left" data-i18n="links"></label>
+                <ul>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/blob/master/Mythras/docs/README.md" data-i18n="sheet_documentation">Sheet Documentation</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/blob/master/Mythras/CHANGELOG.md" data-i18n="changelog">Changelog</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues" data-i18n="report_a_bug">Report a Bug</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://app.roll20.net/users/103705" data-i18n="contact_sheet_author">Contact Sheet Author</button></li>
+                </ul>
+            </div>
+            <div class="sheet-grow">
+                <label class="sheet-left" data-i18n="communities"></label>
+                <ul>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://discord.com/servers/mythras-469341944888164352">Discord</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://www.tapatalk.com/groups/designmechanism/index.php" data-i18n="forums">Forums</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://www.reddit.com/r/Mythras/">Reddit</button></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
     <div id="import" class="sheet-overlay">
     <div class="sheet-popup">
         <a class="close" href="#">×</a>
-        <h1 data-i18n="import">Import</h1>
+        <h1><span data-i18n="import">Import</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/blob/master/Mythras/docs/import.md">?</button></h1>
 
-        <div><label class="sheet-left" data-i18n="import_data">Import Data</label></div>
+        <div><label class="sheet-left sheet-rmargin" data-i18n="import_data">Import Data</label><span>#</span><input type="number" class="sheet-number-width-sm" title="@{import_character}" name="attr_import_character" value="1" min="1"></div>
         <div><textarea class="sheet-full-width" name="attr_import_json_data"></textarea></div>
-        <div class="sheet-flex sheet-gap">
-            <div>
-                <label class="sheet-left sheet-help" title="Character to import from data">#</label>
-                <input type="number" class="sheet-number-width-sm" title="@{import_character}" name="attr_import_character" value="1" min="1">
-            </div>
-            <div>
-                <label class="sheet-checkbox">
-                    <input type='checkbox' name='attr_import_type' value="major"><span>3</span>
-                    <span data-i18n="import_as_player_character">Import as Player Character</span>
-                </label>
-            </div>
-        </div>
-
         <button type="action" name="act_import" class="sheet-full-width sheet-btn-style" data-i18n="import">Import</button>
-
-        <fieldset class="repeating_systemspecies">
-            <input type="text" name="attr_test">
-        </fieldset>
 
         <span style="color: red" name="attr_import_errors"></span>
     </div>
@@ -4274,7 +4376,7 @@
                     <option value="mythras_imperative" data-i18n="mythras_imperative">Mythras Imperative</option>
                     <option value="mythic_rome" data-i18n="mythic_rome">Mythic Rome</option>
                     <option value="m-space" data-i18n="m-space">M-Space</option>
-                    <option value="odd_soot" data-i18n="Odd Soot">Odd Soot</option>
+                    <option value="odd_soot" data-i18n="odd_soot">Odd Soot</option>
                     <option value="thennla" data-i18n="thennla">Thennla</option>
                     <option value="worlds_unites" data-i18n="worlds_united">Worlds Unites</option>
                 </select>
@@ -6296,7 +6398,6 @@ on("change:sheet_type", function(event) {
             let newAttrs = {};
 
             /* Set hit table rolls */
-            /* TODO changing sheet type sets hit table rolls */
             if (event.newValue === 'pc' || event.newValue === 'creature') {
                 newAttrs['hit_location_roll'] = '@{creature_hit_location_roll}';
                 newAttrs['hit_location_low_roll'] = '@{creature_hit_location_roll}';
@@ -6445,81 +6546,94 @@ characteristicAttrs.forEach(char => {
                         repeatingIds['currencyIds'] = currencyIds;
                         getSectionIDs("repeating_combatstyle", function(combatStyleIds) {
                             getSectionIDs("repeating_professionalskill", function(proSkillIds) {
-                                let combatStyleGetAttrs = [];
-                                combatStyleIds.forEach(id => {
-                                    combatStyleGetAttrs.push(`repeating_combatstyle_${id}_total`,
-                                        `repeating_combatstyle_${id}_other`, `repeating_combatstyle_${id}_notes`,
-                                        `repeating_combatstyle_${id}_name`, `repeating_combatstyle_${id}_char1`,
-                                        `repeating_combatstyle_${id}_char2`);
-                                });
-
-                                let proSkillGetAttrs = [];
-                                proSkillIds.forEach(id => {
-                                    proSkillGetAttrs.push(`repeating_professionalskill_${id}_total`,
-                                        `repeating_professionalskill_${id}_other`, `repeating_professionalskill_${id}_notes`,
-                                        `repeating_professionalskill_${id}_name`, `repeating_professionalskill_${id}_char1`,
-                                        `repeating_professionalskill_${id}_char2`);
-                                });
-
-                                let stdSkillGetAttrs = [];
-                                stdSkillIds.forEach(id => {
-                                    stdSkillGetAttrs.push(`${id}`, `${id}_other`, `${id}_notes`);
-                                });
-
-                                getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, 'social_defense_id'].concat(characteristicAttrs,
-                                    encGetAttrs(repeatingIds), actionPointGetAttrs, confidenceGetAttrs, damageModGetAttrs, expModGetAttrs,
-                                    healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs, tenacityGetAttrs, hpGetAttrs,
-                                    moveRateGetAttrs, spiritIntensityGetAttrs, composureGetAttrs, integrityGetAttrs, resolveGetAttrs,
-                                    spiritDamageGetAttrs, socialDamageGetAttrs, stdSkillGetAttrs, combatStyleGetAttrs, proSkillGetAttrs
-                                ), function(v) {
-                                    let newAttrs = {};
-                                    const baseCharVal = parseInt(v[`${char}_base`]) || 0;
-                                    const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
-                                    const currCharVal = parseInt(v[`${char}`]) || 0;
-                                    const currPoolVal = parseInt(v[`${char}_pool`]) || 0;
-
-                                    if (event.sourceAttribute === `${char}`) {
-                                        newAttrs[`${char}_temp`] = currCharVal - baseCharVal;
-                                        const diffVal = newAttrs[`${char}_temp`] - tempCharVal;
-                                        newAttrs[`${char}_pool`] = currPoolVal + diffVal;
-                                    } else if (event.sourceAttribute === `${char}_base`) {
-                                        newAttrs[`${char}`] = baseCharVal + tempCharVal;
-                                        const diffVal = newAttrs[`${char}`] - currCharVal;
-                                        newAttrs[`${char}_pool`] = currPoolVal + diffVal;
-                                        v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
-                                    }
-
-                                    stdSkillIds.forEach(skillId => {
-                                        newAttrs = {...newAttrs, ...calcStdSkill(skillId, v, event.sourceAttribute)};
-                                    });
+                                getSectionIDs("repeating_foobar", function(skilledAbilityIds) {
+                                    let combatStyleGetAttrs = [];
                                     combatStyleIds.forEach(id => {
-                                        newAttrs = {...newAttrs, ...calcProSkill(`repeating_combatstyle_${id}`, v, event.sourceAttribute)};
-                                    });
-                                    proSkillIds.forEach(id => {
-                                        newAttrs = {...newAttrs, ...calcProSkill(`repeating_professionalskill_${id}`, v, event.sourceAttribute)};
+                                        combatStyleGetAttrs.push(`repeating_combatstyle_${id}_total`,
+                                            `repeating_combatstyle_${id}_other`, `repeating_combatstyle_${id}_notes`,
+                                            `repeating_combatstyle_${id}_name`, `repeating_combatstyle_${id}_char1`,
+                                            `repeating_combatstyle_${id}_char2`);
                                     });
 
-                                    newAttrs = {...newAttrs, ...calcEncAndArmorPenalty(repeatingIds, v)};
-                                    /* Update v with new values need for attribute calculations */
-                                    v = {...v, ...newAttrs};
-                                    setAttrs({
-                                        ...newAttrs,
-                                        ...calcActionPoints(v),
-                                        ...calcConfidence(v),
-                                        ...calcDamageMod(v),
-                                        ...calcExpMod(v),
-                                        ...calcHealingRate(v),
-                                        ...calcInitiativeBonus(v),
-                                        ...calcLuckPoints(v),
-                                        ...calcMagicPoints(v),
-                                        ...calcMoveRate(v),
-                                        ...calcSpiritIntensity(v),
-                                        ...calcTenacity(v),
-                                        ...calcAllHP(v),
-                                        ...calcComposure(v),
-                                        ...calcIntegrity(v),
-                                        ...calcResolve(v)
-                                        /* No need for teh social and spirit damage here since it would have been done via skills */
+                                    let proSkillGetAttrs = [];
+                                    proSkillIds.forEach(id => {
+                                        proSkillGetAttrs.push(`repeating_professionalskill_${id}_total`,
+                                            `repeating_professionalskill_${id}_other`, `repeating_professionalskill_${id}_notes`,
+                                            `repeating_professionalskill_${id}_name`, `repeating_professionalskill_${id}_char1`,
+                                            `repeating_professionalskill_${id}_char2`);
+                                    });
+
+                                    let skilledAbilityGetAttrs = [];
+                                    skilledAbilityIds.forEach(id => {
+                                        skilledAbilityGetAttrs.push(`repeating_skilledability_${id}_total`,
+                                            `repeating_skilledability_${id}_other`, `repeating_skilledability_${id}_name`,
+                                            `repeating_skilledability_${id}_char1`, `repeating_skilledability_${id}_char2`);
+                                    });
+
+                                    let stdSkillGetAttrs = [];
+                                    stdSkillIds.forEach(id => {
+                                        stdSkillGetAttrs.push(`${id}`, `${id}_other`, `${id}_notes`);
+                                    });
+
+                                    getAttrs([`${char}_base`, `${char}_temp`, `${char}_pool`, 'social_defense_id'].concat(characteristicAttrs,
+                                        encGetAttrs(repeatingIds), actionPointGetAttrs, confidenceGetAttrs, damageModGetAttrs, expModGetAttrs,
+                                        healingRateGetAttrs, initGetAttrs, luckPointsGetAttrs, magicPointsGetAttrs, tenacityGetAttrs, hpGetAttrs,
+                                        moveRateGetAttrs, spiritIntensityGetAttrs, composureGetAttrs, integrityGetAttrs, resolveGetAttrs,
+                                        spiritDamageGetAttrs, socialDamageGetAttrs, stdSkillGetAttrs, combatStyleGetAttrs, proSkillGetAttrs,
+                                        skilledAbilityGetAttrs
+                                    ), function(v) {
+                                        let newAttrs = {};
+                                        const baseCharVal = parseInt(v[`${char}_base`]) || 0;
+                                        const tempCharVal = parseInt(v[`${char}_temp`]) || 0;
+                                        const currCharVal = parseInt(v[`${char}`]) || 0;
+                                        const currPoolVal = parseInt(v[`${char}_pool`]) || 0;
+
+                                        if (event.sourceAttribute === `${char}`) {
+                                            newAttrs[`${char}_temp`] = currCharVal - baseCharVal;
+                                            const diffVal = newAttrs[`${char}_temp`] - tempCharVal;
+                                            newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+                                        } else if (event.sourceAttribute === `${char}_base`) {
+                                            newAttrs[`${char}`] = baseCharVal + tempCharVal;
+                                            const diffVal = newAttrs[`${char}`] - currCharVal;
+                                            newAttrs[`${char}_pool`] = currPoolVal + diffVal;
+                                            v[`${char}`] = baseCharVal + tempCharVal; /* override the old value from getAttr, so we can base other calculations on the new value */
+                                        }
+
+                                        stdSkillIds.forEach(skillId => {
+                                            newAttrs = {...newAttrs, ...calcStdSkill(skillId, v, event.sourceAttribute)};
+                                        });
+                                        combatStyleIds.forEach(id => {
+                                            newAttrs = {...newAttrs, ...calcProSkill(`repeating_combatstyle_${id}`, v, event.sourceAttribute)};
+                                        });
+                                        proSkillIds.forEach(id => {
+                                            newAttrs = {...newAttrs, ...calcProSkill(`repeating_professionalskill_${id}`, v, event.sourceAttribute)};
+                                        });
+                                        skilledAbilityIds.forEach(id => {
+                                            newAttrs = {...newAttrs, ...calcSkilledAbility(`repeating_skilledability_${id}`, v, event.sourceAttribute)};
+                                        });
+
+                                        newAttrs = {...newAttrs, ...calcEncAndArmorPenalty(repeatingIds, v)};
+                                        /* Update v with new values need for attribute calculations */
+                                        v = {...v, ...newAttrs};
+                                        setAttrs({
+                                            ...newAttrs,
+                                            ...calcActionPoints(v),
+                                            ...calcConfidence(v),
+                                            ...calcDamageMod(v),
+                                            ...calcExpMod(v),
+                                            ...calcHealingRate(v),
+                                            ...calcInitiativeBonus(v),
+                                            ...calcLuckPoints(v),
+                                            ...calcMagicPoints(v),
+                                            ...calcMoveRate(v),
+                                            ...calcSpiritIntensity(v),
+                                            ...calcTenacity(v),
+                                            ...calcAllHP(v),
+                                            ...calcComposure(v),
+                                            ...calcIntegrity(v),
+                                            ...calcResolve(v)
+                                            /* No need for the social and spirit damage here since it would have been done via skills */
+                                        });
                                     });
                                 });
                             });
@@ -8071,6 +8185,43 @@ on('change:repeating_ability:tradition_id', function(event) {
 
 });
 
+/* SKilled Abilities */
+function calcSkilledAbility(skillId, v, sourceAttribute) {
+    let newAttrs = {};
+    const char1 = parseBaseChar(v[`${skillId}_char1`], v);
+    const char2 = parseBaseChar(v[`${skillId}_char2`], v);
+    if (sourceAttribute === `${skillId}_total`) {
+        const skill = parseInt(v[`${skillId}_total`]) || 0;
+        newAttrs[`${skillId}_other`] = skill - char1 - char2;
+    } else {
+        const skillOther = parseInt(v[`${skillId}_other`]) || 0;
+        newAttrs[`${skillId}_total`] = char1 + char2 + skillOther;
+        /* for spirit and social skills we set the new value in v so those calcs may use the new value */
+        v[`${skillId}_total`] = newAttrs[`${skillId}_total`];
+    }
+
+    return {
+        ...newAttrs
+    }
+}
+on('change:repeating_skilledability:total change:repeating_skilledability:name change:repeating_skilledability:char1 change:repeating_skilledability:char2', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+    const type = event.sourceAttribute.split('_')[1];
+    const id = event.sourceAttribute.split('_')[2];
+    getAttrs([`repeating_${type}_${id}_total`, `repeating_${type}_${id}_other`, `repeating_${type}_${id}_name`,
+        `repeating_${type}_${id}_char1`, `repeating_${type}_${id}_char2`].concat(characteristicAttrs), function(v) {
+        setAttrs(calcSkilledAbility(`repeating_${type}_${id}`, v, event.sourceAttribute));
+    });
+});
+on('change:repeating_skilledability:traits', function(event) {
+    const id = event.sourceAttribute.split('_')[2];
+    if (event.newValue === undefined || event.newValue === '') {
+        setAttrs({[`repeating_skilledability_${id}_summary`]: ""});
+    } else {
+        setAttrs({[`repeating_skilledability_${id}_summary`]: event.newValue.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, ",\xa0")});
+    }
+});
+
 
 /* Encumbrance */
 const loadTable = {
@@ -8235,7 +8386,7 @@ on("change:location1_armor_enc change:location1_armor_equipped change:location2_
 });
 
 /* Repeating IDs */
-on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_feature", function(event) {
+on("change:repeating_combatstyle change:repeating_professionalskill change:repeating_passion change:repeating_dependency change:repeating_peculiarity change:repeating_meleeweapon change:repeating_rangedweapon change:repeating_equipment change:repeating_currency change:repeating_tradition change:repeating_ability change:repeating_skilledability change:repeating_feature", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     const type = event.sourceAttribute.split('_')[1];
     const id = event.sourceAttribute.split('_')[2];
@@ -8576,15 +8727,21 @@ function setTranslationAttrs() {
     i18nAttrs['minutes_a_i18n'] = getTranslationByKey('minutes-a');
     i18nAttrs['meters_a_i18n'] = getTranslationByKey('meters-a');
     i18nAttrs['kilometers_a_i18n'] = getTranslationByKey('kilometers-a');
-    setAttrs(i18nAttrs);
+    return i18nAttrs;
 }
 
 /* On Open Triggers */
 on("sheet:opened", function() {
     /* TODO replace with sheet_type after v4 release */
-    getAttrs(['type', 'version'], function(v) {
+    getAttrs(['type', 'version', 'character_id'], function(v) {
         versioning(v['type'], v['version']);
+        let newAttrs = setTranslationAttrs();
+        /* Was seeing errors in the console about not being able to eval @{character_id} for some formula, but it did seem to actually work.
+        Adding this to specifically set the value in the sheet to avoid those errors just to be safe.
+         */
+        newAttrs['character_id'] = v['character_id'];
+        setAttrs(newAttrs);
     });
-    setTranslationAttrs();
+
 });
 </script>

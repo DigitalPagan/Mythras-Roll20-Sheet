@@ -711,6 +711,10 @@ body.sheet-darkmode .ui-dialog .charsheet button.repcontrol_del {
     margin: 0;
     color: inherit;
 }
+.ui-dialog .charsheet button.sheet-link.sheet-link-ico {
+    font-family: 'Pictos';
+    text-decoration: none;
+}
 .ui-dialog .charsheet button.sheet-no-underline {
     text-decoration: none !important;
 }
@@ -1001,10 +1005,10 @@ button[type=roll].sheet-improve {
 
 /* Abilities */
 .sheet-ability-option {
-    display: none;
+    display: none !important;
 }
+input.sheet-abilities-control[value="all"] + div .sheet-ability-option.sheet-all,
 input.sheet-abilities-control[value="core"] + div .sheet-ability-option.sheet-core,
-input.sheet-abilities-control[value="core-plus"] + div .sheet-ability-option.sheet-core-plus,
 input.sheet-abilities-control[value="after_the_vampire_wars"] + div .sheet-ability-option.sheet-atvw,
 input.sheet-abilities-control[value="classic_fantasy"] + div .sheet-ability-option.sheet-cf,
 input.sheet-abilities-control[value="destined"] + div .sheet-ability-option.sheet-destined,
@@ -1282,7 +1286,7 @@ textarea.sheet-character-notes {
     overflow: auto;
 }
 
-.sheet-rolltemplate-effect .sheet-skills a {
+.sheet-rolltemplate-effect a {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 12px !important;
@@ -1294,7 +1298,7 @@ textarea.sheet-character-notes {
     text-shadow: none !important;
     box-shadow: none !important;
 }
-.sheet-rolltemplate-effect .sheet-skills a:hover {
+.sheet-rolltemplate-effect a:hover {
     border: solid 1px black !important;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke !important;

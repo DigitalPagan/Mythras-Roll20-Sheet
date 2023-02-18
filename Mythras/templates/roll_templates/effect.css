@@ -52,7 +52,7 @@
     overflow: auto;
 }
 
-.sheet-rolltemplate-effect .sheet-skills a {
+.sheet-rolltemplate-effect a {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 12px !important;
@@ -64,7 +64,7 @@
     text-shadow: none !important;
     box-shadow: none !important;
 }
-.sheet-rolltemplate-effect .sheet-skills a:hover {
+.sheet-rolltemplate-effect a:hover {
     border: solid 1px black !important;
     background: linear-gradient(to bottom, gray 16%, dimgray 79%);
     color: whitesmoke !important;
