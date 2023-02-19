@@ -14,7 +14,7 @@ const campaginSettingDefaults = {
         "simplified_combat_enabled": 0,
         "shaping_traits": "^{combine}: @{shaped_combine}\n^{duration}: @{shaped_duration}\n^{magnitude}: @{shaped_magnitude}\n^{range}: @{shaped_range}\n^{targets}: @{shaped_targets}",
         "spirits_enabled": 1,
-        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
+        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','spectral_combat','stealth','swim','unarmed','willpower'],
         "social_conflict_enabled": 1,
         "special_effects": "core",
         "tenacity_enabled": 0,
@@ -32,20 +32,20 @@ const campaginSettingDefaults = {
         "ability_system": "destined",
         "spirits_enabled": 0,
         "special_effects": "destined",
-        "standard_skills": ['athletics','brawn','conceal','deceit','drive','endurance','evade','first_aid','influence','insight','perception','research','stealth','streetwise','unarmed','willpower']
+        "standard_skills": ['athletics','brawn','conceal','deceit','drive','endurance','evade','first_aid','influence','insight','perception','research','spectral_combat','stealth','streetwise','unarmed','willpower']
     },
     "fioracitta": {},
     "luther_arkwright": {
         "ability_system": "luther_arkwright",
         "dependencies_enabled": 1,
         "spirits_enabled": 0,
-        "standard_skills": ['athletics','brawn','conceal','customs','dance','deceit','endurance','evade','first_aid','home_parallel','influence','insight','native_tongue','perception','ride','sing','stealth','swim','unarmed','willpower'],
+        "standard_skills": ['athletics','brawn','conceal','customs','dance','deceit','endurance','evade','first_aid','home_parallel','influence','insight','native_tongue','perception','ride','sing','spectral_combat','stealth','swim','unarmed','willpower'],
         "tenacity_enabled": 1
     },
     "lyonesse": {
         "ability_system": "lyonesse",
         "special_effects": "lyonesse",
-        "standard_skills": ['athletics','boating','brawn','common_tongue','conceal','customs','dance','deceit','drive','eloquence','endurance','evade','first_aid','folk_lore','influence','insight','perception','ride','sing','stealth','swim','unarmed','willpower']
+        "standard_skills": ['athletics','boating','brawn','common_tongue','conceal','customs','dance','deceit','drive','eloquence','endurance','evade','first_aid','folk_lore','influence','insight','perception','ride','sing','spectral_combat','stealth','swim','unarmed','willpower']
     },
     "m-space": {
         "ability_system": "m-space",
@@ -60,11 +60,11 @@ const campaginSettingDefaults = {
     "mythic_babylon": {
         "ability_system": "mythic_babylon",
         "shaping_traits": " ",
-        "standard_skills": ['athletics','boating','brawn','commerce','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','gaming','influence','insight','locale','native_tongue','perception','purity','ride','sing','stealth','swim','unarmed','willpower']
+        "standard_skills": ['athletics','boating','brawn','commerce','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','gaming','influence','insight','locale','native_tongue','perception','purity','ride','sing','spectral_combat','stealth','swim','unarmed','willpower']
     },
     "mythic_britain": {
         "ability_system": "mythic_britain",
-        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','stealth','superstition','swim','unarmed','willpower']
+        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','spectral_combat','stealth','superstition','swim','unarmed','willpower']
     },
     "mythic_constantinople": {},
     "mythras_imperative": {
@@ -78,7 +78,7 @@ const campaginSettingDefaults = {
     "mythic_rome": {
         "ability_system": "mythic_rome",
         "spirits_enabled": 0,
-        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','status','sing','stealth','swim','unarmed','willpower']
+        "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','status','sing','spectral_combat','stealth','swim','unarmed','willpower']
     },
     "odd_soot": {
         "ability_system": "odd_soot",
@@ -152,6 +152,7 @@ campaignSettings.forEach(campaignSetting => {
 
 /* Sheet Type Triggers */
 on("change:sheet_type", function(event) {
+    if (event.sourceType === "sheetworker") {return;}
     if (event.sourceAttribute === 'sheet_type') {
         getAttrs(['pow', 'cha'].concat(spiritDamageGetAttrs), function(v) {
             let newAttrs = {};
