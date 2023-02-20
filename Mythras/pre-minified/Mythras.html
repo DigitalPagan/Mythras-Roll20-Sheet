@@ -3171,7 +3171,7 @@
                     </div>
                     <!-- Tradition Details -->
                     <input type="hidden" class="sheet-wide-toggle" name="attr_details" value="1">
-                    <span class="sheet-anti-toggle sheet-lmargin-x3" name="attr_notes"></span>
+                    <span class="sheet-anti-toggle" name="attr_notes"></span>
                     <div class="sheet-toggle sheet-lmargin-x3">
                         <div class="sheet-flex sheet-gap">
                             <div class="sheet-flex sheet-grow sheet-gap">
@@ -8125,6 +8125,7 @@ on(`change:repeating_dependency:total remove:repeating_dependency`, function(eve
 
 /* Traditions */
 on(`change:repeating_tradition:skill1_id change:repeating_tradition:skill2_id`, function(event) {
+    if (event.sourceType === "sheetworker") {return {};}
     const traditionId = event.sourceAttribute.split('_')[2];
     const traditionSkill = event.sourceAttribute.split('_')[3];
     const skillId = event.newValue;
@@ -8173,6 +8174,7 @@ on('change:ability_filter_favored change:ability_filter_type change:ability_filt
     });
 });
 on('change:repeating_ability:type', function(event) {
+    if (event.sourceType === "sheetworker") {return {};}
     const abilityId = event.sourceAttribute.split('_')[2];
 
     getAttrs(['shaping_traits', 'sheet_type', 'ability_filter_favored', 'ability_filter_type', 'ability_filter_rank', `repeating_ability_${abilityId}_favored`, `repeating_ability_${abilityId}_type`,`repeating_ability_${abilityId}_rank`], function(v) {
@@ -8497,7 +8499,7 @@ const megMagicSkillIds = ['binding', 'devotion', 'exhort', 'folk_magic', 'invoca
  * Imports JSON data from the Mythras Encounter Generator or other sources which use the same data format
  */
 on("clicked:import", function() {
-    getAttrs(['import_json_data', 'import_character', 'setting', 'simplified_combat_enabled', 'action_points_calc'], function(v) {
+    getAttrs(['import_json_data', 'import_character', 'setting', 'simplified_combat_enabled', 'action_points_calc', 'shaping_traits'], function(v) {
         try {
             const jsonData = JSON.parse(v['import_json_data']);
             const import_character = parseInt(v['import_character']);
@@ -8672,6 +8674,7 @@ on("clicked:import", function() {
                 characterData["combat_styles"].forEach(combat_style => {
                     const combatstyleid = generateRowID();
                     const base_combatstyle = newAttrs['str'] + newAttrs['dex'];
+                    newAttrs["repeating_combatstyle_" + combatstyleid + "_id"] = `repeating_combatstyle_${combatstyleid}`;
                     newAttrs["repeating_combatstyle_" + combatstyleid + "_name"] = combat_style["name"];
                     newAttrs["repeating_combatstyle_" + combatstyleid + "_other"] = combat_style["value"] - base_combatstyle;
                     newAttrs["repeating_combatstyle_" + combatstyleid + "_total"] = combat_style["value"]
@@ -8681,6 +8684,7 @@ on("clicked:import", function() {
                         const weaponid = generateRowID();
 
                         if (weapon["type"] === "ranged") {
+                            newAttrs["repeating_rangedweapon_" + weaponid + "_id"] = `repeating_rangedweapon_${weaponid}`;
                             newAttrs["repeating_rangedweapon_" + weaponid + "_name"] = weapon["name"];
                             newAttrs["repeating_rangedweapon_" + weaponid + "_force"] = weapon["size"];
                             newAttrs["repeating_rangedweapon_" + weaponid + "_impale_size"] = weapon["size"];
@@ -8702,6 +8706,7 @@ on("clicked:import", function() {
                             }
                             weaponButtons = weaponButtons + ` [${weapon["name"]}](~@{character_id}|repeating_rangedweapon_${weaponid}_damage)`;
                         } else {
+                            newAttrs["repeating_meleeweapon_" + weaponid + "_id"] = `repeating_meleeweapon_${weaponid}`;
                             newAttrs["repeating_meleeweapon_" + weaponid + "_name"] = weapon["name"];
                             newAttrs["repeating_meleeweapon_" + weaponid + "_size"] = weapon["size"];
                             newAttrs["repeating_meleeweapon_" + weaponid + "_reach"] = weapon["reach"];
@@ -8773,23 +8778,27 @@ on("clicked:import", function() {
                             };
                         }
 
+                        newAttrs[`repeating_professionalskill_${skillid}_id`] = `repeating_professionalskill_${skillid}`;
                         newAttrs[`repeating_professionalskill_${skillid}_name`] = skillKey;
                         newAttrs[`repeating_professionalskill_${skillid}_char1`] = `@{${char1name}}`;
                         newAttrs[`repeating_professionalskill_${skillid}_char2`] = `@{${char2name}}`;
                         newAttrs[`repeating_professionalskill_${skillid}_other`] = skillValue - char1 - char2;
                         newAttrs[`repeating_professionalskill_${skillid}_total`] = skillValue;
                     } else if (skillSearchableKey.startsWith('passion')) {
+                        const skillid = generateRowID();
+                        newAttrs[`repeating_passion_${skillid}_id`] =`repeating_passion_${skillid}`;
                         newAttrs[`repeating_passion_${skillid}_name`] = skillKey;
-                        newAttrs[`repeating_passion_${skillid}_type`] = 'passion';
                         newAttrs[`repeating_passion_${skillid}_total`] = skillValue;
                     } else if (skillSearchableKey.startsWith('dependency')) {
-                        newAttrs[`repeating_passion_${skillid}_name`] = skillKey;
-                        newAttrs[`repeating_passion_${skillid}_type`] = 'dependency';
-                        newAttrs[`repeating_passion_${skillid}_total`] = skillValue;
+                        const skillid = generateRowID();
+                        newAttrs[`repeating_dependency_${skillid}_id`] = `repeating_dependency_${skillid}`;
+                        newAttrs[`repeating_dependency_${skillid}_name`] = skillKey;
+                        newAttrs[`repeating_dependency_${skillid}_total`] = skillValue;
                     } else if (skillSearchableKey.startsWith('peculiarity')) {
-                        newAttrs[`repeating_passion_${skillid}_name`] = skillKey;
-                        newAttrs[`repeating_passion_${skillid}_type`] = 'peculiarity';
-                        newAttrs[`repeating_passion_${skillid}_total`] = skillValue;
+                        const skillid = generateRowID();
+                        newAttrs[`repeating_peculiarity_${skillid}_id`] = `repeating_peculiarity_${skillid}`;
+                        newAttrs[`repeating_peculiarity_${skillid}_name`] = skillKey;
+                        newAttrs[`repeating_peculiarity_${skillid}_total`] = skillValue;
                     } else {
                         const skillid = generateRowID();
 
@@ -8810,6 +8819,7 @@ on("clicked:import", function() {
                                     };
                                 }
 
+                                newAttrs[`repeating_professionalskill_${skillid}_id`] = `repeating_professionalskill_${skillid}`;
                                 newAttrs[`repeating_professionalskill_${skillid}_name`] = skillKey;
                                 newAttrs[`repeating_professionalskill_${skillid}_char1`] = `@{${char1name}}`;
                                 newAttrs[`repeating_professionalskill_${skillid}_char2`] = `@{${char2name}}`;
@@ -8823,8 +8833,8 @@ on("clicked:import", function() {
                         });
 
                         if(!knownSpecialtySkill) {
+                            newAttrs[`repeating_passion_${skillid}_id`] = `repeating_passion_${skillid}`;
                             newAttrs[`repeating_passion_${skillid}_name`] = skillKey;
-                            newAttrs[`repeating_passion_${skillid}_other`] = skillValue;
                             newAttrs[`repeating_passion_${skillid}_total`] = skillValue;
                         }
                     }
@@ -8852,6 +8862,12 @@ on("clicked:import", function() {
 
             /* Set default spirit combat skill */
             if (newAttrs['sheet_type'] === 'spirit') {
+                /* Make sure a willpower value exists for confidence calculations */
+                if (!newAttrs['willpower']) {
+                    newAttrs['willpower'] = newAttrs['pow'] + newAttrs['pow'] + 50;
+                    newAttrs['willpower_other'] = 50;
+                    newAttrs['willpower_possessed'] = "1";
+                }
                 /* Make sure a spectral_combat value exists */
                 if (!newAttrs['spectral_combat']) {
                     newAttrs['spectral_combat'] = newAttrs['pow'] + newAttrs['cha'] + 50;
@@ -8888,8 +8904,181 @@ on("clicked:import", function() {
                 newAttrs['spirit_combat_skill_notes'] = '';
             }
 
+            console.log("Importing Folk Magic");
+            /* Import Folk Magic */
+            const folkMagicTraditionId = 'repeating_tradition_' + generateRowID();
+            if (magicSkillIds.hasOwnProperty('folk_magic')) {
+                newAttrs[`${folkMagicTraditionId}_name`] = getTranslationByKey('folk_magic');
+                if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                    newAttrs[`${folkMagicTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+                }
+                newAttrs[`${folkMagicTraditionId}_id`] = folkMagicTraditionId;
+                newAttrs[`${folkMagicTraditionId}_skill1_id`] = magicSkillIds['folk_magic']['id'];
+                newAttrs[`${folkMagicTraditionId}_skill1_name`] = `@{${magicSkillIds['folk_magic']['id']}_name}`;
+                newAttrs[`${folkMagicTraditionId}_skill1_total`] = `@{${magicSkillIds['folk_magic']['id']}_total}`;
+                newAttrs[`${folkMagicTraditionId}_skill1_notes`] = `@{${magicSkillIds['folk_magic']['id']}_notes}`;
+                newAttrs[`${folkMagicTraditionId}_details`] = 0;
+            }
 
-            /* TODO Import Magic */
+            if (typeof characterData["folk_spells"] !== 'undefined') {
+                characterData["folk_spells"].forEach(spellName => {
+                    const spellId = 'repeating_ability_' + generateRowID();
+                    newAttrs[`${spellId}_id`] = spellId;
+                    newAttrs[`${spellId}_name`] = spellName;
+                    newAttrs[`${spellId}_type`] = 'folk_magic';
+                    newAttrs[`${spellId}_tradition_id`] = folkMagicTraditionId;
+                    newAttrs[`${spellId}_details`] = 0;
+                });
+            }
+
+            console.log("Importing Animism");
+            /* Import Animism */
+            const animismTraditionId = 'repeating_tradition_' + generateRowID();
+            if (magicSkillIds.hasOwnProperty('binding') && magicSkillIds.hasOwnProperty('trance')) {
+                newAttrs[`${animismTraditionId}_name`] = getTranslationByKey('animism');
+                if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                    newAttrs[`${animismTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+                }
+                newAttrs[`${animismTraditionId}_id`] = animismTraditionId;
+
+                newAttrs[`${animismTraditionId}_skill1_id`] = magicSkillIds['binding']['id'];
+                newAttrs[`${animismTraditionId}_skill1_name`] = `@{${magicSkillIds['binding']['id']}_name}`;
+                newAttrs[`${animismTraditionId}_skill1_total`] = `@{${magicSkillIds['binding']['id']}_total}`;
+                newAttrs[`${animismTraditionId}_skill1_notes`] = `@{${magicSkillIds['binding']['id']}_notes}`;
+
+                newAttrs[`${animismTraditionId}_skill2_id`] = magicSkillIds['trance']['id'];
+                newAttrs[`${animismTraditionId}_skill2_name`] = `@{${magicSkillIds['trance']['id']}_name}`;
+                newAttrs[`${animismTraditionId}_skill2_total`] =`@{${magicSkillIds['trance']['id']}_total}`;
+                newAttrs[`${animismTraditionId}_skill2_notes`] = `@{${magicSkillIds['trance']['id']}_notes}`;
+                newAttrs[`${animismTraditionId}_details`] = 0;
+
+            }
+
+            /* Import Spirits */
+            if (characterData["spirits"]) {
+                characterData["spirits"].forEach(spirit => {
+                    const spiritId = generateRowID();
+                    /* TODO import spirits */
+                });
+            }
+
+            console.log("Importing Mysticism");
+            /* Import Mysticism */
+            const mysticismTraditionId = 'repeating_tradition_' + generateRowID();
+            if (magicSkillIds.hasOwnProperty('meditation') && magicSkillIds.hasOwnProperty('path')) {
+                newAttrs[`${mysticismTraditionId}_name`] = getTranslationByKey('mysticism');
+                if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                    newAttrs[`${mysticismTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+                }
+                newAttrs[`${mysticismTraditionId}_id`] = mysticismTraditionId;
+                newAttrs[`${mysticismTraditionId}_skill1_id`] = magicSkillIds['path']['id'];
+                newAttrs[`${mysticismTraditionId}_skill1_name`] = `@{${magicSkillIds['path']['id']}_name}`;
+                newAttrs[`${mysticismTraditionId}_skill1_total`] = `@{${magicSkillIds['path']['id']}_total}`;
+                newAttrs[`${mysticismTraditionId}_skill1_notes`] = `@{${magicSkillIds['path']['id']}_notes}`;
+
+                newAttrs[`${mysticismTraditionId}_skill2_id`] = magicSkillIds['meditation']['id'];
+                newAttrs[`${mysticismTraditionId}_skill2_name`] = `@{${magicSkillIds['meditation']['id']}_name}`;
+                newAttrs[`${mysticismTraditionId}_skill2_total`] =`@{${magicSkillIds['meditation']['id']}_total}`;
+                newAttrs[`${mysticismTraditionId}_skill2_notes`] = `@{${magicSkillIds['meditation']['id']}_notes}`;
+
+                newAttrs[`${mysticismTraditionId}_details`] = 0;
+            }
+
+
+            if (typeof characterData["mysticism_spells"] !== 'undefined') {
+                characterData["mysticism_spells"].forEach(talentName => {
+                    const talentId = 'repeating_ability_' + generateRowID();
+                    newAttrs[`${talentId}_id`] = talentId;
+                    newAttrs[`${talentId}_name`] = talentName;
+                    newAttrs[`${talentId}_type`] = 'mysticism';
+                    newAttrs[`${talentId}_tradition_id`] = mysticismTraditionId;
+                    newAttrs[`${talentId}_details`] = 0;
+                    newAttrs[`${talentId}_advanced_traits`] = '^{intensity}: @{dynamic_intensity}';
+                });
+            }
+
+            console.log("Importing Sorcery");
+            /* Import Sorcery */
+            const sorceryTraditionId = 'repeating_tradition_' + generateRowID();
+            if (magicSkillIds.hasOwnProperty('invocation') && magicSkillIds.hasOwnProperty('shaping')) {
+                newAttrs[`${sorceryTraditionId}_name`] = getTranslationByKey('sorcery');
+                newAttrs[`${sorceryTraditionId}_type`] = "sorcery";
+                if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                    newAttrs[`${sorceryTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+                }
+                newAttrs[`${sorceryTraditionId}_id`] = sorceryTraditionId;
+
+                newAttrs[`${sorceryTraditionId}_skill1_id`] = magicSkillIds['invocation']['id'];
+                newAttrs[`${sorceryTraditionId}_skill1_name`] = `@{${magicSkillIds['invocation']['id']}_name}`;
+                newAttrs[`${sorceryTraditionId}_skill1_total`] = `@{${magicSkillIds['invocation']['id']}_total}`;
+                newAttrs[`${sorceryTraditionId}_skill1_notes`] = `@{${magicSkillIds['invocation']['id']}_notes}`;
+
+                newAttrs[`${sorceryTraditionId}_skill2_id`] = magicSkillIds['shaping']['id'];
+                newAttrs[`${sorceryTraditionId}_skill2_name`] = `@{${magicSkillIds['shaping']['id']}_name}`;
+                newAttrs[`${sorceryTraditionId}_skill2_total`] =`@{${magicSkillIds['shaping']['id']}_total}`;
+                newAttrs[`${sorceryTraditionId}_skill2_notes`] = `@{${magicSkillIds['shaping']['id']}_notes}`;
+
+                newAttrs[`${sorceryTraditionId}_details`] = 0;
+            }
+
+            if (typeof characterData["sorcery_spells"] !== 'undefined') {
+                characterData["sorcery_spells"].forEach(spellName => {
+                    const spellId = 'repeating_ability_' + generateRowID();
+                    newAttrs[`${spellId}_id`] = spellId;
+                    newAttrs[`${spellId}_name`] = spellName;
+                    newAttrs[`${spellId}_type`] = 'sorcery';
+                    newAttrs[`${spellId}_tradition_id`] = sorceryTraditionId;
+                    newAttrs[`${spellId}_advanced_traits`] = v['shaping_traits'];
+                    newAttrs[`${spellId}_details`] = 0;
+                });
+            }
+
+            console.log("Importing Theism");
+            /* Import Theism */
+            const theismTraditionId = 'repeating_tradition_' + generateRowID();
+            if (magicSkillIds.hasOwnProperty('exhort') && magicSkillIds.hasOwnProperty('devotion')) {
+                newAttrs[`${theismTraditionId}_name`] = getTranslationByKey('theism');
+                newAttrs[`${theismTraditionId}_type`] = "theism";
+                if (characterData["cult_rank"].toLowerCase() in cultRankMap) {
+                    newAttrs[`${theismTraditionId}_tradition_rank`] = cultRankMap[characterData["cult_rank"].toLowerCase()];
+                }
+                if (characterData['attributes']['devotional_pool']) {
+                    newAttrs[`${theismTraditionId}_pool`] = characterData['attributes']['devotional_pool'];
+                    if (characterData['attributes']['devotional_pool'] >= newAttrs['pow']) {
+                        newAttrs[`${theismTraditionId}_pool_limit`] = '@{pow}';
+                    } else if (characterData['attributes']['devotional_pool'] >= Math.ceil(newAttrs['pow']*.75)) {
+                        newAttrs[`${theismTraditionId}_pool_limit`] = 'ceil(@{pow}*.75)';
+                    } else if (characterData['attributes']['devotional_pool'] >= Math.ceil(newAttrs['pow']*.5)) {
+                        newAttrs[`${theismTraditionId}_pool_limit`] = 'ceil(@{pow}*.5))';
+                    } else if (characterData['attributes']['devotional_pool'] >= Math.ceil(newAttrs['pow']*.25)) {
+                        newAttrs[`${theismTraditionId}_pool_limit`] = 'ceil(@{pow}*.25)';
+                    }
+                }
+                newAttrs[`${theismTraditionId}_id`] = theismTraditionId;
+
+                newAttrs[`${theismTraditionId}_skill1_id`] = magicSkillIds['exhort']['id'];
+                newAttrs[`${theismTraditionId}_skill1_name`] = `@{${magicSkillIds['exhort']['id']}_name}`;
+                newAttrs[`${theismTraditionId}_skill1_total`] = `@{${magicSkillIds['exhort']['id']}_total}`;
+                newAttrs[`${theismTraditionId}_skill1_notes`] = `@{${magicSkillIds['exhort']['id']}_notes}`;
+
+                newAttrs[`${theismTraditionId}_skill2_id`] = magicSkillIds['devotion']['id'];
+                newAttrs[`${theismTraditionId}_skill2_name`] = `@{${magicSkillIds['devotion']['id']}_name}`;
+                newAttrs[`${theismTraditionId}_skill2_total`] =`@{${magicSkillIds['devotion']['id']}_total}`;
+                newAttrs[`${theismTraditionId}_skill2_notes`] = `@{${magicSkillIds['devotion']['id']}_notes}`;
+
+                newAttrs[`${theismTraditionId}_details`] = 0;
+            }
+
+            if (typeof characterData["theism_spells"] !== 'undefined') {
+                characterData["theism_spells"].forEach(miracleName => {
+                    const miracleId = 'repeating_ability_' + generateRowID();
+                    newAttrs[`${miracleId}_id`] = miracleId;
+                    newAttrs[`${miracleId}_name`] = miracleName;
+                    newAttrs[`${miracleId}_type`] = 'theism';
+                    newAttrs[`${miracleId}_tradition_id`] = theismTraditionId;
+                    newAttrs[`${miracleId}_details`] = 0;
+                });
+            }
 
             /* Import Notes TODO import misc features as notes*/
 
@@ -8898,8 +9087,7 @@ on("clicked:import", function() {
             newAttrs['import_json_data'] = '';
             newAttrs['import_errors'] = '';
 
-            console.log(newAttrs);
-            /*  TODO include spirit and social damage here or was it done in the skills import */
+            if (debug) {console.log(newAttrs);}
             setAttrs({
                 ...newAttrs,
                 ...calcActionPoints(newAttrs),
