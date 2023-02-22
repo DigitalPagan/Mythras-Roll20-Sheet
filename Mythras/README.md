@@ -6,9 +6,9 @@ It is currently in beta testing and only the base character sheet is currently s
 * Fill in other details as desired and click `Creat Game`
 * In the game details page click `Settings -> Game Settings`
 * Ensure `Legacy Sanitization` is NOT checked
-* Copy and paste the contents of [Mythras.min.html](https://raw.githubusercontent.com/DigitalPagan/Mythras-Roll20-Sheet/v3-beta/Mythras/Mythras.min.html) into `HTML Layout`
-* Copy and paste the contents of [Mythras.min.css](https://raw.githubusercontent.com/DigitalPagan/Mythras-Roll20-Sheet/v3-beta/Mythras/Mythras.min.css) into `CSS Styling`
-* Copy and paste the contents of [translation.json](https://raw.githubusercontent.com/DigitalPagan/Mythras-Roll20-Sheet/v3-beta/Mythras/translation.json) into `Translation`
+* Copy and paste the contents of [Mythras.min.html](https://raw.githubusercontent.com/DigitalPagan/Mythras-Roll20-Sheet/v4/Mythras/Mythras.min.html) into `HTML Layout`
+* Copy and paste the contents of [Mythras.min.css](https://raw.githubusercontent.com/DigitalPagan/Mythras-Roll20-Sheet/v4/Mythras/Mythras.min.css) into `CSS Styling`
+* Copy and paste the contents of [translation.json](https://raw.githubusercontent.com/DigitalPagan/Mythras-Roll20-Sheet/v4/Mythras/translation.json) into `Translation`
 * Click `Save Changes`
 * Launch the game and enjoy the sheet
 
