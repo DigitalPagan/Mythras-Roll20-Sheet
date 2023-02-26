@@ -145,6 +145,9 @@ div.sheet-space-around {
 .sheet-bpad {
     padding-bottom: 5px;
 }
+.sheet-tmargin {
+    margin-top: 5px;
+}
 .sheet-bmargin {
     margin-bottom: 5px;
 }
@@ -530,6 +533,9 @@ body.sheet-darkmode a.repcontrol_move {
 }
 span.sheet-input-unit{
     margin-left: -25px;
+}
+span.sheet-multi-line {
+    white-space: pre-wrap;
 }
 input.sheet-dullval {
     opacity: 60%;

@@ -135,6 +135,10 @@ textarea.sheet-ability-notes {
     height: 90px;
 }
 
+input.sheet-tenacity-toggle:not([value="1"]) ~ div .sheet-tenacity {
+    display: none !important;
+}
+
 /* Equipment */
 .sheet-weapon-name {
     width: 140px;

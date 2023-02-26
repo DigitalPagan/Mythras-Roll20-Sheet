@@ -1,11 +1,12 @@
 const debug=1
 
 /* Campaign Options */
-const campaignSettings = ["ability_system", "action_points_calc", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
+const campaignSettings = ["ability_system", "action_points_calc", "affiliations_enabled", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
 const campaginSettingDefaults = {
     "default": {
         "ability_system": "core",
         "action_points_calc": "calculate",
+        "affiliations_enabled": 0,
         "dependencies_enabled": 0,
         "extended_conflict_enabled": 0,
         "herculean_mod": ".1",
@@ -66,7 +67,9 @@ const campaginSettingDefaults = {
         "ability_system": "mythic_britain",
         "standard_skills": ['athletics','boating','brawn','conceal','customs','dance','deceit','drive','endurance','evade','first_aid','influence','insight','locale','native_tongue','perception','ride','sing','spectral_combat','stealth','superstition','swim','unarmed','willpower']
     },
-    "mythic_constantinople": {},
+    "mythic_constantinople": {
+        "affiliations_enabled": 1
+    },
     "mythras_imperative": {
         "ability_system": "mythra_imperative",
         "action_points_calc": "set_2",
@@ -290,6 +293,8 @@ function damageTable(step) {
 
 /* Type Specific Scripts */
 {% include 'sheet_types/character/character.js' %}
+{% include 'sheet_types/character/character_import.js' %}
+{% include 'sheet_types/character/character_versioning.js' %}
 
 
 /* Versioning */
