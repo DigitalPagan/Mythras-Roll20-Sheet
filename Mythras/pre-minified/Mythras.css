@@ -145,6 +145,9 @@ div.sheet-space-around {
 .sheet-bpad {
     padding-bottom: 5px;
 }
+.sheet-tmargin {
+    margin-top: 5px;
+}
 .sheet-bmargin {
     margin-bottom: 5px;
 }
@@ -530,6 +533,9 @@ body.sheet-darkmode a.repcontrol_move {
 }
 span.sheet-input-unit{
     margin-left: -25px;
+}
+span.sheet-multi-line {
+    white-space: pre-wrap;
 }
 input.sheet-dullval {
     opacity: 60%;
@@ -1049,6 +1055,10 @@ textarea.sheet-tradition-notes {
 }
 textarea.sheet-ability-notes {
     height: 90px;
+}
+
+input.sheet-tenacity-toggle:not([value="1"]) ~ div .sheet-tenacity {
+    display: none !important;
 }
 
 /* Equipment */
