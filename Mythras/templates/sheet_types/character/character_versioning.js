@@ -19,6 +19,7 @@ function upgradeCharacter3Dot0() {
     getSectionIDs("repeating_folkspell", function(folkSpellIds) {
     getSectionIDs("repeating_practicedtalent", function(practicedTalentIds) {
     getSectionIDs("repeating_sorceryspell", function(sorcerySpellIds) {
+    getSectionIDs("repeating_miracle", function(miracleIds) {
     
         let combatStyleGetAttrs = [];
         combatStyleIds.forEach(combatStyleId => {
@@ -97,7 +98,11 @@ function upgradeCharacter3Dot0() {
 
         let devotionGetAttrs = [];
         devotionIds.forEach(id => {
-            devotionGetAttrs.push(`repeating_devotion_${id}_name`, `repeating_devotion_${id}_fumbled`, `repeating_devotion_${id}_trained`, `repeating_devotion_${id}_temp`, `repeating_devotion_${id}_penalty`, `repeating_devotion_${id}_experience`, `repeating_devotion_${id}_other`, `repeating_devotion_${id}_total`, `repeating_devotion_${id}_notes`);
+            devotionGetAttrs.push(`repeating_devotion_${id}_name`, `repeating_devotion_${id}_fumbled`, `repeating_devotion_${id}_trained`, `repeating_devotion_${id}_temp`, `repeating_devotion_${id}_penalty`, `repeating_devotion_${id}_experience`, `repeating_devotion_${id}_other`, `repeating_devotion_${id}_total`, `repeating_devotion_${id}_notes`, `repeating_devotion_${id}_rank_devotion_pool_limit`, `repeating_devotion_${id}_devotional_pool`);
+        });
+        let miracleGetAttrs = [];
+        miracleIds.forEach(id => {
+            miracleGetAttrs.push(`repeating_miracle_${id}_name`, `repeating_miracle_${id}_description`, `repeating_miracle_${id}_miracle_rank`, `repeating_miracle_${id}_damage`, `repeating_miracle_${id}_resist`, `repeating_miracle_${id}_area`, `repeating_miracle_${id}_duration`, `repeating_miracle_${id}_range`);
         });
 
         let charGetAttrs = [];
@@ -107,7 +112,7 @@ function upgradeCharacter3Dot0() {
         getAttrs(charGetAttrs.concat(hpGetAttrs, combatStyleGetAttrs, languageGetAttrs, staticSkillGetAttrs, affiliationGetAttrs,
             professionalSkillGetAttrs, passionGetAttrs, dependencyGetAttrs, peculiarityGetAttrs, staticMagicSkillGetAttrs,
             pathGetAttrs, invocationGetAttrs, devotionGetAttrs, practicedTalentGetAttrs, sorcerySpellGetAttrs, v2ShapingComponents,
-            folkSpellGetAttrs,
+            folkSpellGetAttrs, miracleGetAttrs,
             ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day",
                 "income_month", "income_season", "income_year", "type", "prana_points_temp", "prana_points", "prana_points_max",
                 "prana_points_other", "power_points_temp", "power_points", "power_points_max", "power_points_other", "linguistics_enabled"
@@ -313,7 +318,6 @@ function upgradeCharacter3Dot0() {
                 newAttrs[`${traditionId}_skill1_notes`] = `@{${skillId}_notes}`;
             }
             folkSpellIds.forEach(id => {
-                console.log("folk spell");
                 const abilityId = "repeating_ability_" + generateRowID();
                 newAttrs[`${abilityId}_name`] = !v[`repeating_folkspell_${id}_name`] ? '' : v[`repeating_folkspell_${id}_name`];
                 newAttrs[`${abilityId}_id`] = abilityId;
@@ -573,6 +577,137 @@ function upgradeCharacter3Dot0() {
                 newAttrs[`${abilityId}_description`] = !v[`repeating_sorceryspell_${id}_description`] ? '' : v[`repeating_sorceryspell_${id}_description`];
             });
 
+            /* Theism */
+            const exhortId = 'repeating_professionalskill_' + generateRowID();
+            if (v['exhort'] && v['exhort'] !== '0') {
+                const skillId = exhortId;
+                const total = parseInt(v[`exhort`]) || 0;
+                const aug = parseInt(v[`exhort_temp`]) || 0;
+                const penalty = parseInt(v[`exhort_penalty`]) || 0;
+                const xp = parseInt(v[`exhort_experience`]) || 0;
+                const other = parseInt(v[`exhort_other`]) || 0;
+                newAttrs[`${skillId}_name`] = getTranslationByKey("exhort");
+                newAttrs[`${skillId}_id`] = skillId;
+                newAttrs[`${skillId}_fumbled`] = !v[`exhort_fumbled`] ? "0" : v[`exhort_fumbled`];
+                newAttrs[`${skillId}_trained`] = !v[`exhort_trained`] ? "0" : v[`exhort_trained`];
+                newAttrs[`${skillId}_notes`] = !v[`exhort_notes`] ? '' : v[`exhort_notes`];
+                newAttrs[`${skillId}_char1`] = '@{int}';
+                newAttrs[`${skillId}_char2`] = '@{cha}';
+                newAttrs[`${skillId}_other`] = xp + other;
+                newAttrs[`${skillId}_total`] = total - penalty - aug;
+            }
+            devotionIds.forEach(id => {
+                const skillId = 'repeating_professionalskill_' + generateRowID();
+                const total = parseInt(v[`repeating_devotion_${id}_total`]) || 0;
+                const aug = parseInt(v[`repeating_devotion_${id}_temp`]) || 0;
+                const penalty = parseInt(v[`repeating_devotion_${id}_penalty`]) || 0;
+                const xp = parseInt(v[`repeating_devotion_${id}_experience`]) || 0;
+                const other = parseInt(v[`repeating_devotion_${id}_other`]) || 0;
+                newAttrs[`${skillId}_name`] = !v[`repeating_devotion_${id}_name`] ? "0" : v[`repeating_devotion_${id}_name`];
+                newAttrs[`${skillId}_id`] = skillId;
+                newAttrs[`${skillId}_fumbled`] = !v[`repeating_devotion_${id}_fumbled`] ? "0" : v[`repeating_devotion_${id}_fumbled`];
+                newAttrs[`${skillId}_trained`] = !v[`repeating_devotion_${id}_trained`] ? "0" : v[`repeating_devotion_${id}_trained`];
+                newAttrs[`${skillId}_notes`] = !v[`repeating_devotion_${id}_notes`] ? '' : v[`repeating_devotion_${id}_notes`];
+                newAttrs[`${skillId}_char1`] = '@{pow}';
+                newAttrs[`${skillId}_char2`] = '@{cha}';
+                newAttrs[`${skillId}_other`] = xp + other;
+                newAttrs[`${skillId}_total`] = total - penalty - aug;
+
+                const traditionId = "repeating_tradition_" + generateRowID();
+                newAttrs[`${traditionId}_name`] = !v[`repeating_devotion_${id}_name`] ? "0" : v[`repeating_devotion_${id}_name`];
+                newAttrs[`${traditionId}_id`] = traditionId;
+                newAttrs[`${traditionId}_details`] = "0";
+                newAttrs[`${traditionId}_skill1_id`] = exhortId;
+                newAttrs[`${traditionId}_skill1_name`] = `@{${exhortId}_name}`;
+                newAttrs[`${traditionId}_skill1_total`] = `@{${exhortId}_total}`;
+                newAttrs[`${traditionId}_skill1_notes`] = `@{${exhortId}_notes}`;
+                newAttrs[`${traditionId}_skill2_id`] = skillId;
+                newAttrs[`${traditionId}_skill2_name`] = `@{${skillId}_name}`;
+                newAttrs[`${traditionId}_skill2_total`] = `@{${skillId}_total}`;
+                newAttrs[`${traditionId}_skill2_notes`] = `@{${skillId}_notes}`;
+                newAttrs[`${traditionId}_pool_limit`] = !v[`repeating_devotion_${id}_rank_devotion_pool_limit`] ? "0" : v[`repeating_devotion_${id}_rank_devotion_pool_limit`];
+                newAttrs[`${traditionId}_pool`] = !v[`repeating_devotion_${id}_devotional_pool`] ? "0" : v[`repeating_devotion_${id}_devotional_pool`];
+                if (v[`repeating_devotion_${id}_rank_devotion_pool_limit`] === 'ceil(@{pow}*.25)') {
+                    newAttrs[`${traditionId}_tradition_rank`] = 2;
+                } else if (v[`repeating_devotion_${id}_rank_devotion_pool_limit`] === 'ceil(@{pow}*.5)') {
+                    newAttrs[`${traditionId}_tradition_rank`] = 3;
+                } else if (v[`repeating_devotion_${id}_rank_devotion_pool_limit`] === 'ceil(@{pow}*.75)') {
+                    newAttrs[`${traditionId}_tradition_rank`] = 4;
+                } else if (v[`repeating_devotion_${id}_rank_devotion_pool_limit`] === '@{pow}') {
+                    newAttrs[`${traditionId}_tradition_rank`] = 5;
+                }
+            });
+            miracleIds.forEach(id => {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = !v[`repeating_miracle_${id}_name`] ? '' : v[`repeating_miracle_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'theism';
+                newAttrs[`${abilityId}_traited`] = '1';
+                newAttrs[`${abilityId}_details`] = '0';
+
+                let traits = [];
+                if (!v[`repeating_miracle_${id}_miracle_rank`] || v[`repeating_miracle_${id}_miracle_rank`] === "1") {
+                    traits.push(getTranslationByKey('rank') + '(' + getTranslationByKey('initiate') + ')');
+                } else if (v[`repeating_miracle_${id}_miracle_rank`] === "2") {
+                    traits.push(getTranslationByKey('rank') + '(' + getTranslationByKey('acolyte') + ')');
+                } else if (v[`repeating_miracle_${id}_miracle_rank`] === "3") {
+                    traits.push(getTranslationByKey('rank') + '(' + getTranslationByKey('priest') + ')');
+                }
+
+                if (v[`repeating_miracle_${id}_resist`] === '^{brawn-u}') {
+                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')');
+                } else if (v[`repeating_miracle_${id}_resist`] === '^{endurance-u}') {
+                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')');
+                } else if (v[`repeating_miracle_${id}_resist`] === '^{evade-u}') {
+                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')');
+                } else if (v[`repeating_miracle_${id}_resist`] === '^{willpower-u}') {
+                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')');
+                } else if (v[`repeating_miracle_${id}_resist`] === '^{special-u}') {
+                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')');
+                }
+
+                if (v[`repeating_miracle_${id}_damage`] && v[`repeating_miracle_${id}_damage`] !== "0") {
+                    newAttrs[`${abilityId}_advanced_traits`] = '^{damage}: [' + v[`repeating_miracle_${id}_damage`] + '](`/r ' + v[`repeating_miracle_${id}_damage`] + ')';
+                }
+
+                if (v[`repeating_miracle_${id}_area`] === "[[@{intensity_magnitude}]] ^{metres-u}") {
+                    traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('meters') + ')');
+                } else if (v[`repeating_miracle_${id}_area`] === "[[@{intensity_magnitude}]] ^{decametres-u}") {
+                    traits.push(getTranslationByKey('area') + '(10 X ' + getTranslationByKey('meters') + ')');
+                } else if (v[`repeating_miracle_${id}_area`] === "[[@{intensity_magnitude}]] ^{kilometres-u}") {
+                    traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('kilometers') + ')');
+                } else if (v[`repeating_miracle_${id}_area`] === "^{special-u}") {
+                    traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('special') + ')');
+                }
+
+                if (v[`repeating_miracle_${id}_duration`] === "^{instant-u}") {
+                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('instant') + ')');
+                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{minutes-u}") {
+                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('minutes') + ')');
+                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{hours-u}") {
+                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('hours') + ')');
+                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{days-u}") {
+                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('days') + ')');
+                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{months-u}") {
+                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('months') + ')');
+                } else if (v[`repeating_miracle_${id}_duration`] === "^{special-u}") {
+                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('special') + ')');
+                }
+
+                if (v[`repeating_miracle_${id}_range`] === "^{touch-u}") {
+                    traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('touch') + ')');
+                } else if (v[`repeating_miracle_${id}_range`] === "[[@{intensity_magnitude}]] ^{metres-u}") {
+                    traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('meters') + ')');
+                } else if (v[`repeating_miracle_${id}_range`] === "[[@{intensity_magnitude}]] ^{decametres-u}") {
+                    traits.push(getTranslationByKey('range') + '(10 X ' + getTranslationByKey('meters') + ')');
+                } else if (v[`repeating_miracle_${id}_range`] === "^{special-u}") {
+                    traits.push(getTranslationByKey('range') + '(10 X ' + getTranslationByKey('special') + ')');
+                }
+
+                newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
+                newAttrs[`${abilityId}_description`] = !v[`repeating_miracle_${id}_description`] ? '' : v[`repeating_miracle_${id}_description`];
+            });
+
             /* TODO Magic powers conversion */
             /* TODO traits conversion */
 
@@ -610,6 +745,7 @@ function upgradeCharacter3Dot0() {
             });
         });
     /* Get IDs end */
+    });
     });
     });
     });
