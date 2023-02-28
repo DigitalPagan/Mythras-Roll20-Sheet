@@ -20,6 +20,18 @@ function upgradeCharacter3Dot0() {
     getSectionIDs("repeating_practicedtalent", function(practicedTalentIds) {
     getSectionIDs("repeating_sorceryspell", function(sorcerySpellIds) {
     getSectionIDs("repeating_miracle", function(miracleIds) {
+    getSectionIDs("repeating_magicspell", function(magicSpellIds) {
+    getSectionIDs("repeating_psionicpower", function(psionicPowerIds) {
+
+        let psionicPowerGetAttrs = [];
+        psionicPowerIds.forEach(id => {
+            psionicPowerGetAttrs.push(`repeating_psionicpower_${id}_name`, `repeating_psionicpower_${id}_fumbled`, `repeating_psionicpower_${id}_trained`, `repeating_psionicpower_${id}_temp`, `repeating_psionicpower_${id}_penalty`, `repeating_psionicpower_${id}_other`, `repeating_psionicpower_${id}_experience`, `repeating_psionicpower_${id}_total`, `repeating_psionicpower_${id}_description`);
+        });
+
+        let magicSpellGetAttrs = [];
+        magicSpellIds.forEach(id => {
+            magicSpellGetAttrs.push(`repeating_magicspell_${id}_name`, `repeating_magicspell_${id}_fumbled`, `repeating_magicspell_${id}_trained`, `repeating_magicspell_${id}_temp`, `repeating_magicspell_${id}_penalty`, `repeating_magicspell_${id}_other`, `repeating_magicspell_${id}_experience`, `repeating_magicspell_${id}_total`, `repeating_magicspell_${id}_description`, `repeating_magicspell_${id}_cost`, `repeating_magicspell_${id}_range`, `repeating_magicspell_${id}_duration`);
+        });
     
         let combatStyleGetAttrs = [];
         combatStyleIds.forEach(combatStyleId => {
@@ -66,7 +78,6 @@ function upgradeCharacter3Dot0() {
         staticSkillGetAttrs.push(`linguistics_fumbled`, `linguistics_trained`, `linguistics_temp`, `linguistics_penalty`, `linguistics_experience`, `linguistics_other`, `linguistics`, `linguistics_notes`, "known_languages");
 
         /* Magic skill fetch attrs */
-        /* TODO fetch static magic skills */
         const v2StaticMagicSkillIds = ['folk_magic', 'trance', 'binding', 'meditation', 'shaping', 'exhort'];
         let staticMagicSkillGetAttrs = [];
         v2StaticMagicSkillIds.forEach(id => {
@@ -77,7 +88,6 @@ function upgradeCharacter3Dot0() {
             folkSpellGetAttrs.push(`repeating_folkspell_${id}_name`, `repeating_folkspell_${id}_description`, `repeating_folkspell_${id}_concentration`, `repeating_folkspell_${id}_resist`, `repeating_folkspell_${id}_duration`, `repeating_folkspell_${id}_range`);
         });
 
-        /* TODO fetch dynamic magic skills */
         let pathGetAttrs = [];
         pathIds.forEach(id => {
             pathGetAttrs.push(`repeating_path_${id}_name`, `repeating_path_${id}_fumbled`, `repeating_path_${id}_trained`, `repeating_path_${id}_temp`, `repeating_path_${id}_penalty`, `repeating_path_${id}_experience`, `repeating_path_${id}_other`, `repeating_path_${id}_total`, `repeating_path_${id}_notes`);
@@ -112,12 +122,14 @@ function upgradeCharacter3Dot0() {
         getAttrs(charGetAttrs.concat(hpGetAttrs, combatStyleGetAttrs, languageGetAttrs, staticSkillGetAttrs, affiliationGetAttrs,
             professionalSkillGetAttrs, passionGetAttrs, dependencyGetAttrs, peculiarityGetAttrs, staticMagicSkillGetAttrs,
             pathGetAttrs, invocationGetAttrs, devotionGetAttrs, practicedTalentGetAttrs, sorcerySpellGetAttrs, v2ShapingComponents,
-            folkSpellGetAttrs, miracleGetAttrs,
+            folkSpellGetAttrs, miracleGetAttrs, magicSpellGetAttrs, psionicPowerGetAttrs,
             ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day",
                 "income_month", "income_season", "income_year", "type", "prana_points_temp", "prana_points", "prana_points_max",
                 "prana_points_other", "power_points_temp", "power_points", "power_points_max", "power_points_other", "linguistics_enabled"
             ]), function (v) {
             let newAttrs = {'version': '3.0'};
+            
+            /* TODO ensure setting carries over */
 
             /* If a spirit set the attribute mode to spiritual and sheet type to spirit */
             if (v['spirit'] === '1') {
@@ -708,8 +720,62 @@ function upgradeCharacter3Dot0() {
                 newAttrs[`${abilityId}_description`] = !v[`repeating_miracle_${id}_description`] ? '' : v[`repeating_miracle_${id}_description`];
             });
 
+            /* M-Space psionics conversion */
+            psionicPowerIds.forEach(id => {
+                const abilityId = 'repeating_skilledability_' + generateRowID();
+                const total = parseInt(v[`repeating_psionicpower_${id}_total`]) || 0;
+                const temp = parseInt(v[`repeating_psionicpower_${id}_temp`]) || 0;
+                const penalty = parseInt(v[`repeating_psionicpower_${id}_temp`]) || 0;
+                const xp = parseInt(v[`repeating_psionicpower_${id}_experience`]) || 0;
+                const other = parseInt(v[`repeating_psionicpower_${id}_other`]) || 0;
+                newAttrs[`${abilityId}_name`] = !v[`repeating_psionicpower_${id}_name`] ? '' : v[`repeating_psionicpower_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_details`] = '0';
+                newAttrs[`${abilityId}_description`] = !v[`repeating_psionicpower_${id}_description`] ? '' : v[`repeating_psionicpower_${id}_description`];
+                newAttrs[`${abilityId}_summary`] = !v[`repeating_psionicpower_${id}_description`] ? '' : v[`repeating_psionicpower_${id}_description`];
+                newAttrs[`${abilityId}_fumbled`] = !v[`repeating_psionicpower_${id}_fumbled`] ? "0" : v[`repeating_psionicpower_${id}_fumbled`];
+                newAttrs[`${abilityId}_trained`] = !v[`repeating_psionicpower_${id}_trained`] ? "0" : v[`repeating_psionicpower_${id}_trained`];
+                newAttrs[`${abilityId}_char1`] = '@{pow}';
+                newAttrs[`${abilityId}_char2`] = '@{pow}';
+                newAttrs[`${abilityId}_other`] = xp + other;
+                newAttrs[`${abilityId}_total`] = total - penalty - temp;
+            });
+
+            /* Odd Soot Magic Conversion */
+            magicSpellIds.forEach(id => {
+                const abilityId = 'repeating_skilledability_' + generateRowID();
+                const total = parseInt(v[`repeating_magicspell_${id}_total`]) || 0;
+                const temp = parseInt(v[`repeating_magicspell_${id}_temp`]) || 0;
+                const penalty = parseInt(v[`repeating_magicspell_${id}_temp`]) || 0;
+                const xp = parseInt(v[`repeating_magicspell_${id}_experience`]) || 0;
+                const other = parseInt(v[`repeating_magicspell_${id}_other`]) || 0;
+                newAttrs[`${abilityId}_name`] = !v[`repeating_magicspell_${id}_name`] ? '' : v[`repeating_magicspell_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_details`] = '0';
+                newAttrs[`${abilityId}_description`] = !v[`repeating_magicspell_${id}_description`] ? '' : v[`repeating_magicspell_${id}_description`];
+                newAttrs[`${abilityId}_summary`] = !v[`repeating_magicspell_${id}_description`] ? '' : v[`repeating_magicspell_${id}_description`];
+                newAttrs[`${abilityId}_fumbled`] = !v[`repeating_magicspell_${id}_fumbled`] ? "0" : v[`repeating_magicspell_${id}_fumbled`];
+                newAttrs[`${abilityId}_trained`] = !v[`repeating_magicspell_${id}_trained`] ? "0" : v[`repeating_magicspell_${id}_trained`];
+                newAttrs[`${abilityId}_char1`] = '@{pow}';
+                newAttrs[`${abilityId}_char2`] = '@{pow}';
+                newAttrs[`${abilityId}_other`] = xp + other;
+                newAttrs[`${abilityId}_total`] = total - penalty - temp;
+                let traits = [];
+                if (v[`repeating_magicspell_${id}_cost`]) {
+                    traits.push(getTranslationByKey("cost") + ": " + v[`repeating_magicspell_${id}_cost`]);
+                }
+                if (v[`repeating_magicspell_${id}_duration`]) {
+                    traits.push(getTranslationByKey("duration") + ": " + v[`repeating_magicspell_${id}_duration`]);
+                }
+                if (v[`repeating_magicspell_${id}_range`]) {
+                    traits.push(getTranslationByKey("range") + ": " + v[`repeating_magicspell_${id}_range`]);
+                }
+                newAttrs[`${abilityId}_traits`] = traits.join("\r\n");
+            });
+
             /* TODO Magic powers conversion */
             /* TODO traits conversion */
+            /* TODO Import skill based abilities */
 
             /* Convert income */
             let newIncome = "";
@@ -745,6 +811,8 @@ function upgradeCharacter3Dot0() {
             });
         });
     /* Get IDs end */
+    });
+    });
     });
     });
     });
