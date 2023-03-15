@@ -658,7 +658,7 @@
     "magic_points_description": "List Magic Points as an attribute.",
     "magic_skills": "Magic Skills",
     "magic_systems": "Magic Systems",
-    "ability_type-order": "other,ability,limitation,super_power,alchemy,alchemy_(assabian),arcane_magic,artifice,divine_magic,fae_power,fairy_magic,folk_magic,incantation,magic,mysticism,psionics,psychic_power,sandestin_magic,sorcery,theism,work_song",
+    "ability_type-order": "other,ability,limitation,alchemy,alchemy_(assabian),arcane_magic,artifice,divine_magic,fae_power,fairy_magic,folk_magic,incantation,magic,mysticism,psionics,psychic_power,sandestin_magic,sorcery,super_power,theism,work_song",
     "magic-user": "Magic-User",
     "magical": "Magical",
     "magnitude": "Magnitude",
@@ -1424,6 +1424,8 @@
     "damage-a": "Dmg",
     "tenacity-a": "Ten",
     "enter_initiative_manually": "Enter Initiative Manually",
-    "special_duration": "Special Duration",
-    "minutes": "Minutes"
+    "minutes": "Minutes",
+    "cantrip": "Cantrip",
+    "action": "Action",
+    "activation_cost": "Activation Cost"
 }

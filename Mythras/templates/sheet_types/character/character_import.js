@@ -21,7 +21,7 @@ const megMagicSkillIds = ['binding', 'devotion', 'exhort', 'folk_magic', 'invoca
  * Imports JSON data from the Mythras Encounter Generator or other sources which use the same data format
  */
 on("clicked:import", function() {
-    getAttrs(['import_json_data', 'import_character', 'setting', 'simplified_combat_enabled', 'action_points_calc', 'shaping_traits'], function(v) {
+    getAttrs(['import_json_data', 'import_character', 'setting_option', 'simplified_combat_enabled', 'action_points_calc', 'shaping_traits'], function(v) {
         try {
             const jsonData = JSON.parse(v['import_json_data']);
             const import_character = parseInt(v['import_character']);
@@ -259,8 +259,8 @@ on("clicked:import", function() {
 
             /* Collect standard skills list for the setting */
             let settingStdSkills;
-            if (campaginSettingDefaults[v['setting']] && campaginSettingDefaults[v['setting']]['standard_skills']) {
-                settingStdSkills = campaginSettingDefaults[v['setting']]['standard_skills'];
+            if (campaginSettingDefaults[v['setting_option']] && campaginSettingDefaults[v['setting_option']]['standard_skills']) {
+                settingStdSkills = campaginSettingDefaults[v['setting_option']]['standard_skills'];
             } else {
                 settingStdSkills = campaginSettingDefaults['default']['standard_skills'];
             }

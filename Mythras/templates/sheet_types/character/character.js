@@ -1667,7 +1667,7 @@ on('change:repeating_ability:type', function(event) {
         }
 
         /* Traited */
-        if (event.newValue === 'ability' || event.newValue === 'gift' || event.newValue === 'limitation' || event.newValue === 'other' || event.newValue === 'super_power' || event.newValue === 'trait') {
+        if (event.newValue === 'ability' || event.newValue === 'gift' || event.newValue === 'limitation' || event.newValue === 'other' || event.newValue === 'trait') {
             newAttrs[`repeating_ability_${abilityId}_traited`] = 0;
             newAttrs[`repeating_ability_${abilityId}_traits`] = '';
             newAttrs[`repeating_ability_${abilityId}_tradition_id`] = '';

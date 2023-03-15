@@ -1,4 +1,105 @@
 /* Character Versioning */
+
+/* Helper Functions */
+function convertSkillToV3(id, v) {
+    let newAttrs = {};
+    let total;
+    if (id.startsWith('repeating_')) {
+        total = parseInt(v[`${id}_total`]) || 0;
+    } else {
+        total = parseInt(v[`${id}`]) || 0;
+    }
+    const aug = parseInt(v[`${id}_temp`]) || 0;
+    const penalty = parseInt(v[`${id}_penalty`]) || 0;
+    const xp = parseInt(v[`${id}_experience`]) || 0;
+    const other = parseInt(v[`${id}_other`]) || 0;
+    newAttrs[`${id}_other`] = xp + other;
+    if (id.startsWith('repeating_')) {
+        newAttrs[`${id}_total`] = total - penalty - aug;
+    } else {
+        newAttrs[`${id}`] = total - penalty - aug;
+    }
+    newAttrs[`${id}_id`] = id;
+
+    return newAttrs;
+}
+
+function convertPassionToV3(id, v) {
+    let newAttrs = {};
+    const total = parseInt(v[`${id}_total`]) || 0;
+    const aug = parseInt(v[`${id}_temp`]) || 0;
+    const penalty = parseInt(v[`${id}_penalty`]) || 0;
+    newAttrs[`${id}_total`] = total - penalty - aug;
+    newAttrs[`${id}_id`] = id;
+
+    return newAttrs;
+}
+
+function convertSkillToProSkill(oldSkillId, char1, char2, proSkillId, v) {
+    let newAttrs = {};
+
+    if (oldSkillId.startsWith('repeating_') || (v[oldSkillId] && v[oldSkillId] !== '0')) {
+        let total;
+        if (oldSkillId.startsWith('repeating_')) {
+            total = parseInt(v[`${oldSkillId}_total`]) || 0;
+        } else {
+            total = parseInt(v[oldSkillId]) || 0;
+        }
+        const aug = parseInt(v[`${oldSkillId}_temp`]) || 0;
+        const penalty = parseInt(v[`${oldSkillId}_penalty`]) || 0;
+        const xp = parseInt(v[`${oldSkillId}_experience`]) || 0;
+        const other = parseInt(v[`${oldSkillId}_other`]) || 0;
+        if (oldSkillId.startsWith('repeating_')) {
+            newAttrs[`${proSkillId}_name`] = !v[`${oldSkillId}_name`] ? "?" : v[`${oldSkillId}_name`];
+        } else {
+            newAttrs[`${proSkillId}_name`] = getTranslationByKey(oldSkillId);
+        }
+        newAttrs[`${proSkillId}_id`] = proSkillId;
+        newAttrs[`${proSkillId}_fumbled`] = !v[`${oldSkillId}_fumbled`] ? "0" : v[`${oldSkillId}_fumbled`];
+        newAttrs[`${proSkillId}_trained`] = !v[`${oldSkillId}_trained`] ? "0" : v[`${oldSkillId}_trained`];
+        if (char1 === '@{str}' || char1 === '@{dex}' || char2 === '@{str}' || char2 === '@{dex}') {
+            newAttrs[`${proSkillId}_encumbered`] = 1;
+        }
+        newAttrs[`${proSkillId}_notes`] = !v[`${oldSkillId}_notes`] ? '' : v[`${oldSkillId}_notes`];
+        newAttrs[`${proSkillId}_char1`] = char1;
+        newAttrs[`${proSkillId}_char2`] = char2;
+        newAttrs[`${proSkillId}_other`] = xp + other;
+        newAttrs[`${proSkillId}_total`] = total - penalty - aug;
+    }
+
+    return newAttrs;
+}
+
+function createNewTradition(traditionName, skill1Id, skill2Id) {
+    const traditionId = 'repeating_tradition_' + generateRowID();
+    let newAttrs = {};
+
+    newAttrs[`${traditionId}_name`] = traditionName;
+    newAttrs[`${traditionId}_id`] = traditionId;
+    newAttrs[`${traditionId}_details`] = "0";
+    newAttrs[`${traditionId}_skill1_id`] = skill1Id;
+    newAttrs[`${traditionId}_skill1_name`] = `@{${skill1Id}_name}`;
+    newAttrs[`${traditionId}_skill1_total`] = `@{${skill1Id}_total}`;
+    newAttrs[`${traditionId}_skill1_notes`] = `@{${skill1Id}_notes}`;
+
+    if (skill2Id !== null) {
+        newAttrs[`${traditionId}_skill2_id`] = skill2Id;
+        newAttrs[`${traditionId}_skill2_name`] = `@{${skill2Id}_name}`;
+        newAttrs[`${traditionId}_skill2_total`] = `@{${skill2Id}_total}`;
+        newAttrs[`${traditionId}_skill2_notes`] = `@{${skill2Id}_notes}`;
+    }
+
+    return newAttrs;
+}
+
+const v3TraitTranslations = {
+    "^{brawn-u}": getTranslationByKey('brawn'),
+    "^{endurance-u}": getTranslationByKey('endurance'),
+    "^{evade-u}": getTranslationByKey('evade'),
+    "^{special-u}": getTranslationByKey('special'),
+    "^{willpower-u}": getTranslationByKey('willpower'),
+}
+
 /**
  * Make the changes needs to get a character sheet updated from 2.7 to 3.0
  */
@@ -22,6 +123,85 @@ function upgradeCharacter3Dot0() {
     getSectionIDs("repeating_miracle", function(miracleIds) {
     getSectionIDs("repeating_magicspell", function(magicSpellIds) {
     getSectionIDs("repeating_psionicpower", function(psionicPowerIds) {
+    getSectionIDs("repeating_arcanemagicrank0spell", function(arcanemagicrank0spellIds) {
+    getSectionIDs("repeating_arcanemagicrank1spell", function(arcanemagicrank1spellIds) {
+    getSectionIDs("repeating_arcanemagicrank2spell", function(arcanemagicrank2spellIds) {
+    getSectionIDs("repeating_arcanemagicrank3spell", function(arcanemagicrank3spellIds) {
+    getSectionIDs("repeating_arcanemagicrank4spell", function(arcanemagicrank4spellIds) {
+    getSectionIDs("repeating_arcanemagicrank5spell", function(arcanemagicrank5spellIds) {
+    getSectionIDs("repeating_divinemagicrank1spell", function(divinemagicrank1spellIds) {
+    getSectionIDs("repeating_divinemagicrank2spell", function(divinemagicrank2spellIds) {
+    getSectionIDs("repeating_divinemagicrank3spell", function(divinemagicrank3spellIds) {
+    getSectionIDs("repeating_divinemagicrank4spell", function(divinemagicrank4spellIds) {
+    getSectionIDs("repeating_divinemagicrank5spell", function(divinemagicrank5spellIds) {
+    getSectionIDs("repeating_superpower", function(superpowerIds) {
+    getSectionIDs("repeating_superpowerboost", function(superpowerboostIds) {
+    getSectionIDs("repeating_superpowerlimit", function(superpowerlimitIds) {
+    getSectionIDs("repeating_faepower", function(faepowerIds) {
+        let faepowerGetAttrs = [];
+        faepowerIds.forEach(id => {
+            faepowerGetAttrs.push(`repeating_faepower_${id}_name`, `repeating_faepower_${id}_duration`, `repeating_faepower_${id}_range`, `repeating_faepower_${id}_resist`, `repeating_faepower_${id}_cost`, `repeating_faepower_${id}_description`);
+        });
+
+        let superpowerGetAttrs = [];
+        superpowerIds.forEach(id => {
+            superpowerGetAttrs.push(`repeating_superpower_${id}_name`, `repeating_superpower_${id}_activation`, `repeating_superpower_${id}_description`);
+        });
+
+        let superpowerboostGetAttrs = [];
+        superpowerboostIds.forEach(id => {
+            superpowerboostGetAttrs.push(`repeating_superpowerboost_${id}_name`, `repeating_superpowerboost_${id}_cost`, `repeating_superpowerboost_${id}_description`);
+        });
+
+        let superpowerlimitGetAttrs = [];
+        superpowerlimitIds.forEach(id => {
+            superpowerlimitGetAttrs.push(`repeating_superpowerlimit_${id}_description`, );
+        });
+
+        let divinemagicrank1spellGetAttrs = [];
+        divinemagicrank1spellIds.forEach(id => {
+            divinemagicrank1spellGetAttrs.push(`repeating_divinemagicrank1spell_${id}_name`, `repeating_divinemagicrank1spell_${id}_description`, `repeating_divinemagicrank1spell_${id}_reversible`, `repeating_divinemagicrank1spell_${id}_mp_cost`, `repeating_divinemagicrank1spell_${id}_xp_cost`, `repeating_divinemagicrank1spell_${id}_area`, `repeating_divinemagicrank1spell_${id}_time`, `repeating_divinemagicrank1spell_${id}_time_unit`, `repeating_divinemagicrank1spell_${id}_duration`, `repeating_divinemagicrank1spell_${id}_range`, `repeating_divinemagicrank1spell_${id}_resist`, `repeating_divinemagicrank1spell_${id}_school`, `repeating_divinemagicrank1spell_${id}_memorized`);
+        });
+        let divinemagicrank2spellGetAttrs = [];
+        divinemagicrank2spellIds.forEach(id => {
+            divinemagicrank2spellGetAttrs.push(`repeating_divinemagicrank2spell_${id}_name`, `repeating_divinemagicrank2spell_${id}_description`, `repeating_divinemagicrank2spell_${id}_reversible`, `repeating_divinemagicrank2spell_${id}_mp_cost`, `repeating_divinemagicrank2spell_${id}_xp_cost`, `repeating_divinemagicrank2spell_${id}_area`, `repeating_divinemagicrank2spell_${id}_time`, `repeating_divinemagicrank2spell_${id}_time_unit`, `repeating_divinemagicrank2spell_${id}_duration`, `repeating_divinemagicrank2spell_${id}_range`, `repeating_divinemagicrank2spell_${id}_resist`, `repeating_divinemagicrank2spell_${id}_school`, `repeating_divinemagicrank2spell_${id}_memorized`);
+        });
+        let divinemagicrank3spellGetAttrs = [];
+        divinemagicrank3spellIds.forEach(id => {
+            divinemagicrank3spellGetAttrs.push(`repeating_divinemagicrank3spell_${id}_name`, `repeating_divinemagicrank3spell_${id}_description`, `repeating_divinemagicrank3spell_${id}_reversible`, `repeating_divinemagicrank3spell_${id}_mp_cost`, `repeating_divinemagicrank3spell_${id}_xp_cost`, `repeating_divinemagicrank3spell_${id}_area`, `repeating_divinemagicrank3spell_${id}_time`, `repeating_divinemagicrank3spell_${id}_time_unit`, `repeating_divinemagicrank3spell_${id}_duration`, `repeating_divinemagicrank3spell_${id}_range`, `repeating_divinemagicrank3spell_${id}_resist`, `repeating_divinemagicrank3spell_${id}_school`, `repeating_divinemagicrank3spell_${id}_memorized`);
+        });
+        let divinemagicrank4spellGetAttrs = [];
+        divinemagicrank4spellIds.forEach(id => {
+            divinemagicrank4spellGetAttrs.push(`repeating_divinemagicrank4spell_${id}_name`, `repeating_divinemagicrank4spell_${id}_description`, `repeating_divinemagicrank4spell_${id}_reversible`, `repeating_divinemagicrank4spell_${id}_mp_cost`, `repeating_divinemagicrank4spell_${id}_xp_cost`, `repeating_divinemagicrank4spell_${id}_area`, `repeating_divinemagicrank4spell_${id}_time`, `repeating_divinemagicrank4spell_${id}_time_unit`, `repeating_divinemagicrank4spell_${id}_duration`, `repeating_divinemagicrank4spell_${id}_range`, `repeating_divinemagicrank4spell_${id}_resist`, `repeating_divinemagicrank4spell_${id}_school`, `repeating_divinemagicrank4spell_${id}_memorized`);
+        });
+        let divinemagicrank5spellGetAttrs = [];
+        divinemagicrank5spellIds.forEach(id => {
+            divinemagicrank5spellGetAttrs.push(`repeating_divinemagicrank5spell_${id}_name`, `repeating_divinemagicrank5spell_${id}_description`, `repeating_divinemagicrank5spell_${id}_reversible`, `repeating_divinemagicrank5spell_${id}_mp_cost`, `repeating_divinemagicrank5spell_${id}_xp_cost`, `repeating_divinemagicrank5spell_${id}_area`, `repeating_divinemagicrank5spell_${id}_time`, `repeating_divinemagicrank5spell_${id}_time_unit`, `repeating_divinemagicrank5spell_${id}_duration`, `repeating_divinemagicrank5spell_${id}_range`, `repeating_divinemagicrank5spell_${id}_resist`, `repeating_divinemagicrank5spell_${id}_school`, `repeating_divinemagicrank5spell_${id}_memorized`);
+        });
+        let arcanemagicrank0spellGetAttrs = [];
+        arcanemagicrank0spellIds.forEach(id => {
+            arcanemagicrank0spellGetAttrs.push(`repeating_arcanemagicrank0spell_${id}_name`, `repeating_arcanemagicrank0spell_${id}_description`, `repeating_arcanemagicrank0spell_${id}_reversible`, `repeating_arcanemagicrank0spell_${id}_cost`, `repeating_arcanemagicrank0spell_${id}_area`, `repeating_arcanemagicrank0spell_${id}_time`, `repeating_arcanemagicrank0spell_${id}_duration`, `repeating_arcanemagicrank0spell_${id}_range`, `repeating_arcanemagicrank0spell_${id}_resist`);
+        });
+        let arcanemagicrank1spellGetAttrs = [];
+        arcanemagicrank1spellIds.forEach(id => {
+            arcanemagicrank1spellGetAttrs.push(`repeating_arcanemagicrank1spell_${id}_name`, `repeating_arcanemagicrank1spell_${id}_description`, `repeating_arcanemagicrank1spell_${id}_reversible`, `repeating_arcanemagicrank1spell_${id}_mp_cost`, `repeating_arcanemagicrank1spell_${id}_xp_cost`, `repeating_arcanemagicrank1spell_${id}_area`, `repeating_arcanemagicrank1spell_${id}_time`, `repeating_arcanemagicrank1spell_${id}_time_unit`, `repeating_arcanemagicrank1spell_${id}_duration`, `repeating_arcanemagicrank1spell_${id}_range`, `repeating_arcanemagicrank1spell_${id}_resist`, `repeating_arcanemagicrank1spell_${id}_school`, `repeating_arcanemagicrank1spell_${id}_memorized`);
+        });
+        let arcanemagicrank2spellGetAttrs = [];
+        arcanemagicrank2spellIds.forEach(id => {
+            arcanemagicrank2spellGetAttrs.push(`repeating_arcanemagicrank2spell_${id}_name`, `repeating_arcanemagicrank2spell_${id}_description`, `repeating_arcanemagicrank2spell_${id}_reversible`, `repeating_arcanemagicrank2spell_${id}_mp_cost`, `repeating_arcanemagicrank2spell_${id}_xp_cost`, `repeating_arcanemagicrank2spell_${id}_area`, `repeating_arcanemagicrank2spell_${id}_time`, `repeating_arcanemagicrank2spell_${id}_time_unit`, `repeating_arcanemagicrank2spell_${id}_duration`, `repeating_arcanemagicrank2spell_${id}_range`, `repeating_arcanemagicrank2spell_${id}_resist`, `repeating_arcanemagicrank2spell_${id}_school`, `repeating_arcanemagicrank2spell_${id}_memorized`);
+        });
+        let arcanemagicrank3spellGetAttrs = [];
+        arcanemagicrank3spellIds.forEach(id => {
+            arcanemagicrank3spellGetAttrs.push(`repeating_arcanemagicrank3spell_${id}_name`, `repeating_arcanemagicrank3spell_${id}_description`, `repeating_arcanemagicrank3spell_${id}_reversible`, `repeating_arcanemagicrank3spell_${id}_mp_cost`, `repeating_arcanemagicrank3spell_${id}_xp_cost`, `repeating_arcanemagicrank3spell_${id}_area`, `repeating_arcanemagicrank3spell_${id}_time`, `repeating_arcanemagicrank3spell_${id}_time_unit`, `repeating_arcanemagicrank3spell_${id}_duration`, `repeating_arcanemagicrank3spell_${id}_range`, `repeating_arcanemagicrank3spell_${id}_resist`, `repeating_arcanemagicrank3spell_${id}_school`, `repeating_arcanemagicrank3spell_${id}_memorized`);
+        });
+        let arcanemagicrank4spellGetAttrs = [];
+        arcanemagicrank4spellIds.forEach(id => {
+            arcanemagicrank4spellGetAttrs.push(`repeating_arcanemagicrank4spell_${id}_name`, `repeating_arcanemagicrank4spell_${id}_description`, `repeating_arcanemagicrank4spell_${id}_reversible`, `repeating_arcanemagicrank4spell_${id}_mp_cost`, `repeating_arcanemagicrank4spell_${id}_xp_cost`, `repeating_arcanemagicrank4spell_${id}_area`, `repeating_arcanemagicrank4spell_${id}_time`, `repeating_arcanemagicrank4spell_${id}_time_unit`, `repeating_arcanemagicrank4spell_${id}_duration`, `repeating_arcanemagicrank4spell_${id}_range`, `repeating_arcanemagicrank4spell_${id}_resist`, `repeating_arcanemagicrank4spell_${id}_school`, `repeating_arcanemagicrank4spell_${id}_memorized`);
+        });
+        let arcanemagicrank5spellGetAttrs = [];
+        arcanemagicrank5spellIds.forEach(id => {
+            arcanemagicrank5spellGetAttrs.push(`repeating_arcanemagicrank5spell_${id}_name`, `repeating_arcanemagicrank5spell_${id}_description`, `repeating_arcanemagicrank5spell_${id}_reversible`, `repeating_arcanemagicrank5spell_${id}_mp_cost`, `repeating_arcanemagicrank5spell_${id}_xp_cost`, `repeating_arcanemagicrank5spell_${id}_area`, `repeating_arcanemagicrank5spell_${id}_time`, `repeating_arcanemagicrank5spell_${id}_time_unit`, `repeating_arcanemagicrank5spell_${id}_duration`, `repeating_arcanemagicrank5spell_${id}_range`, `repeating_arcanemagicrank5spell_${id}_resist`, `repeating_arcanemagicrank5spell_${id}_school`, `repeating_arcanemagicrank5spell_${id}_memorized`);
+        });
 
         let psionicPowerGetAttrs = [];
         psionicPowerIds.forEach(id => {
@@ -78,7 +258,7 @@ function upgradeCharacter3Dot0() {
         staticSkillGetAttrs.push(`linguistics_fumbled`, `linguistics_trained`, `linguistics_temp`, `linguistics_penalty`, `linguistics_experience`, `linguistics_other`, `linguistics`, `linguistics_notes`, "known_languages");
 
         /* Magic skill fetch attrs */
-        const v2StaticMagicSkillIds = ['folk_magic', 'trance', 'binding', 'meditation', 'shaping', 'exhort'];
+        const v2StaticMagicSkillIds = ['folk_magic', 'trance', 'binding', 'meditation', 'shaping', 'exhort', 'cursing', 'divination', 'necromancy', 'pharmacy', 'shape_shifting', 'theology', 'arcane_knowledge', 'arcane_casting', 'channel', 'piety', 'fata'];
         let staticMagicSkillGetAttrs = [];
         v2StaticMagicSkillIds.forEach(id => {
             staticMagicSkillGetAttrs.push(`${id}_fumbled`, `${id}_trained`, `${id}_temp`, `${id}_penalty`, `${id}_experience`, `${id}_other`, `${id}`, `${id}_notes`);
@@ -119,17 +299,27 @@ function upgradeCharacter3Dot0() {
         characteristicAttrs.forEach(char => {
             charGetAttrs.push(`${char}`, `${char}_temp`);
         });
+
+        /* Fetch attrs */
         getAttrs(charGetAttrs.concat(hpGetAttrs, combatStyleGetAttrs, languageGetAttrs, staticSkillGetAttrs, affiliationGetAttrs,
             professionalSkillGetAttrs, passionGetAttrs, dependencyGetAttrs, peculiarityGetAttrs, staticMagicSkillGetAttrs,
             pathGetAttrs, invocationGetAttrs, devotionGetAttrs, practicedTalentGetAttrs, sorcerySpellGetAttrs, v2ShapingComponents,
-            folkSpellGetAttrs, miracleGetAttrs, magicSpellGetAttrs, psionicPowerGetAttrs,
-            ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day",
+            folkSpellGetAttrs, miracleGetAttrs, magicSpellGetAttrs, psionicPowerGetAttrs, arcanemagicrank0spellGetAttrs,
+            arcanemagicrank1spellGetAttrs, arcanemagicrank2spellGetAttrs, arcanemagicrank3spellGetAttrs, arcanemagicrank4spellGetAttrs, arcanemagicrank5spellGetAttrs,
+            divinemagicrank1spellGetAttrs, divinemagicrank2spellGetAttrs, divinemagicrank3spellGetAttrs, divinemagicrank4spellGetAttrs, divinemagicrank5spellGetAttrs,
+            superpowerGetAttrs, superpowerboostGetAttrs, superpowerlimitGetAttrs, faepowerGetAttrs,
+            ['spirit', 'action_points_other', 'action_points_add_one', 'notes', "location2_display", "income_day", "setting_option",
                 "income_month", "income_season", "income_year", "type", "prana_points_temp", "prana_points", "prana_points_max",
                 "prana_points_other", "power_points_temp", "power_points", "power_points_max", "power_points_other", "linguistics_enabled"
             ]), function (v) {
             let newAttrs = {'version': '3.0'};
             
-            /* TODO ensure setting carries over */
+            /* Set the ability system */
+            if ((v['setting_option'] in campaginSettingDefaults) && ('ability_system' in campaginSettingDefaults[v['setting_option']])) {
+                newAttrs['ability_system'] = campaginSettingDefaults[v['setting_option']]['ability_system'];
+            } else {
+                newAttrs['ability_system'] = campaginSettingDefaults['default']['ability_system'];
+            }
 
             /* If a spirit set the attribute mode to spiritual and sheet type to spirit */
             if (v['spirit'] === '1') {
@@ -153,13 +343,13 @@ function upgradeCharacter3Dot0() {
                 newAttrs['action_points_other'] = actionPointsOther + 1;
             }
 
-            /* Convert relabel magic points to magic points */
-            if (v['setting'] === 'luther_arkwright') {
+            /* Relabel magic points to magic points */
+            if (v['setting_option'] === 'luther_arkwright') {
                 newAttrs['magic_points_other'] = v['prana_points_other'];
                 newAttrs['magic_points_temp'] = v['prana_points_temp'];
                 newAttrs['magic_points'] = v['prana_points'];
                 newAttrs['magic_points_max'] = v['prana_points_max'];
-            } else if (v['setting'] === 'm-space' || v['setting'] === 'agony_and_ecstasy') {
+            } else if (v['setting_option'] === 'm-space' || v['setting_option'] === 'agony_and_ecstasy') {
                 newAttrs['magic_points_other'] = v['power_points_other'];
                 newAttrs['magic_points_temp'] = v['power_points_temp'];
                 newAttrs['magic_points'] = v['power_points'];
@@ -201,134 +391,68 @@ function upgradeCharacter3Dot0() {
             });
 
             /* Move languages to professional skills */
-            if (v['linguistics_enabled'] === "1" && v[`linguistics_total`] !== "0") {
+            if (debug) {console.log("Converting languages");}
+            if (v['linguistics_enabled'] === "1" && v['linguistics'] !== "0") {
                 const skillId = 'repeating_professionalskill_' + generateRowID();
-                const total = parseInt(v[`linguistics`]) || 0;
-                const xp = parseInt(v[`linguistics_experience`]) || 0;
-                const other = parseInt(v[`linguistics_other`]) || 0;
-                const aug = parseInt(v[`linguistics_temp`]) || 0;
-                const penalty = parseInt(v[`linguistics_penalty`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("linguistics");
-                newAttrs[`${skillId}_fumbled`] = !v[`linguistics_fumbled`] ? "0" : v[`linguistics_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`linguistics_trained`] ? "0" : v[`linguistics_trained`];
+                newAttrs = {...newAttrs, ...convertSkillToProSkill('linguistics', '@{int}', '@{cha}', skillId, v)};
                 newAttrs[`${skillId}_notes`] = !v['known_languages'] ? '' : v['known_languages'];
-                newAttrs[`${skillId}_char1`] = '@{int}';
-                newAttrs[`${skillId}_char2`] = '@{cha}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-                newAttrs[`${skillId}_id`] = skillId;
             } else {
                 languageIds.forEach(languageId => {
                     const skillId = 'repeating_professionalskill_' + generateRowID();
-                    const total = parseInt(v[`repeating_language_${languageId}_total`]) || 0;
-                    const aug = parseInt(v[`repeating_language_${languageId}_temp`]) || 0;
-                    const penalty = parseInt(v[`repeating_language_${languageId}_penalty`]) || 0;
-                    const xp = parseInt(v[`repeating_language_${languageId}_experience`]) || 0;
-                    const other = parseInt(v[`repeating_language_${languageId}_other`]) || 0;
-                    newAttrs[`${skillId}_name`] = !v[`repeating_language_${languageId}_name`] ? '' : v[`repeating_language_${languageId}_name`];
-                    newAttrs[`${skillId}_fumbled`] = !v[`repeating_language_${languageId}_fumbled`] ? "0" : v[`repeating_language_${languageId}_fumbled`];
-                    newAttrs[`${skillId}_trained`] = !v[`repeating_language_${languageId}_trained`] ? "0" : v[`repeating_language_${languageId}_trained`];
-                    newAttrs[`${skillId}_notes`] = !v[`repeating_language_${languageId}_notes`] ? '' : v[`repeating_language_${languageId}_notes`];
-                    newAttrs[`${skillId}_char1`] = '@{int}';
-                    newAttrs[`${skillId}_char2`] = '@{cha}';
-                    newAttrs[`${skillId}_other`] = xp + other;
-                    newAttrs[`${skillId}_total`] = total - penalty - aug;
-                    newAttrs[`${skillId}_id`] = skillId;
+                    newAttrs = {...newAttrs, ...convertSkillToProSkill(`repeating_language_${languageId}`, '@{int}', '@{cha}', skillId, v)};
                 });
             }
 
             /* Migration affiliations */
+            if (debug) {console.log("Converting Affiliations");}
             affiliationIds.forEach(affiliationId => {
-                const total = parseInt(v[`repeating_affiliation_${affiliationId}_total`]) || 0;
-                const aug = parseInt(v[`repeating_affiliation_${affiliationId}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_affiliation_${affiliationId}_penalty`]) || 0;
-                const xp = parseInt(v[`repeating_affiliation_${affiliationId}_experience`]) || 0;
-                const other = parseInt(v[`repeating_affiliation_${affiliationId}_other`]) || 0;
-                newAttrs[`repeating_affiliation_${affiliationId}_other`] = xp + other;
-                newAttrs[`repeating_affiliation_${affiliationId}_total`] = total - penalty - aug;
-                newAttrs[`repeating_affiliation_${affiliationId}_id`] = `repeating_affiliation_${affiliationId}`;
+                newAttrs = {...newAttrs, ...convertSkillToV3(`repeating_affiliation_${affiliationId}`, v)};
             });
 
             /* Migration proSkills */
+            if (debug) {console.log("Converting Professional Skills");}
             professionalSkillIds.forEach(id => {
-                const total = parseInt(v[`repeating_professionalskill_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_professionalskill_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_professionalskill_${id}_penalty`]) || 0;
-                const xp = parseInt(v[`repeating_professionalskill_${id}_experience`]) || 0;
-                const other = parseInt(v[`repeating_professionalskill_${id}_other`]) || 0;
-                newAttrs[`repeating_professionalskill_${id}_other`] = xp + other;
-                newAttrs[`repeating_professionalskill_${id}_total`] = total - penalty - aug;
-                newAttrs[`repeating_professionalskill_${id}_id`] = `repeating_professionalskill_${id}`;
+                newAttrs = {...newAttrs, ...convertSkillToV3(`repeating_professionalskill_${id}`, v)};
             });
 
             /* Migration passions */
+            if (debug) {console.log("Converting passions");}
             passionIds.forEach(id => {
-                const total = parseInt(v[`repeating_passion_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_passion_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_passion_${id}_penalty`]) || 0;
-                newAttrs[`repeating_passion_${id}_total`] = total - penalty - aug;
-                newAttrs[`repeating_passion_${id}_id`] = `repeating_passion_${id}`;
+                newAttrs = {...newAttrs, ...convertPassionToV3(`repeating_passion_${id}`, v)};
             });
 
             /* Migration dependencies */
+            if (debug) {console.log("Converting dependencies");}
             dependencyIds.forEach(id => {
-                const total = parseInt(v[`repeating_dependency_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_dependency_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_dependency_${id}_penalty`]) || 0;
-                newAttrs[`repeating_dependency_${id}_total`] = total - penalty - aug;
-                newAttrs[`repeating_dependency_${id}_id`] = `repeating_dependency_${id}`;
+                newAttrs = {...newAttrs, ...convertPassionToV3(`repeating_dependency_${id}`, v)};
             });
 
             /* Migration peculiarity */
+            if (debug) {console.log("Converting peculiatities");}
             peculiarityIds.forEach(id => {
-                const total = parseInt(v[`repeating_peculiarity_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_peculiarity_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_peculiarity_${id}_penalty`]) || 0;
-                newAttrs[`repeating_peculiarity_${id}_total`] = total - penalty - aug;
-                newAttrs[`repeating_peculiarity_${id}_id`] = `repeating_peculiarity_${id}`;
+                newAttrs = {...newAttrs, ...convertPassionToV3(`repeating_peculiarity_${id}`, v)};
             });
 
             /* Convert standard skill values */
+            if (debug) {console.log("Converting standard skills");}
             v2StandardSkillIds.forEach(id => {
-                const total = parseInt(v[`${id}`]) || 0;
-                const aug = parseInt(v[`${id}_temp`]) || 0;
-                const penalty = parseInt(v[`${id}_penalty`]) || 0;
-                const xp = parseInt(v[`${id}_experience`]) || 0;
-                const other = parseInt(v[`${id}_other`]) || 0;
-                newAttrs[`${id}_other`] = xp + other;
-                newAttrs[`${id}`] = total - penalty - aug;
-                newAttrs[`${id}_id`] = id;
+                newAttrs = {...newAttrs, ...convertSkillToV3(id, v)};
             });
+
+            /* TODO Convert custom standard skills */
 
             /* Magic skills conversion */
             /* TODO merge magic skills into professional skills and setup traditions */
             /* Folk Magic */
+            if (debug) {console.log("Converting Folk Magic");}
+            if (debug) {console.log("Converting Folk Magic Skill");}
+            const folkMagicId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('folk_magic', '@{pow}', '@{cha}', folkMagicId, v)}
+            if (debug) {console.log("Converting Folk Magic Tradition");}
             if (v['folk_magic'] && v['folk_magic'] !== '0') {
-                const skillId = 'repeating_professionalskill_' + generateRowID();
-                const traditionId = 'repeating_tradition_' + generateRowID();
-                const total = parseInt(v[`folk_magic`]) || 0;
-                const aug = parseInt(v[`folk_magic_temp`]) || 0;
-                const penalty = parseInt(v[`folk_magic_penalty`]) || 0;
-                const xp = parseInt(v[`folk_magic_experience`]) || 0;
-                const other = parseInt(v[`folk_magic_other`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("folk_magic");
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`folk_magic_fumbled`] ? "0" : v[`folk_magic_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`folk_magic_trained`] ? "0" : v[`folk_magic_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`folk_magic_notes`] ? '' : v[`folk_magic_notes`];
-                newAttrs[`${skillId}_char1`] = '@{pow}';
-                newAttrs[`${skillId}_char2`] = '@{cha}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-
-                newAttrs[`${traditionId}_name`] = getTranslationByKey('folk_magic');
-                newAttrs[`${traditionId}_id`] = traditionId;
-                newAttrs[`${traditionId}_details`] = "0";
-                newAttrs[`${traditionId}_skill1_id`] = skillId;
-                newAttrs[`${traditionId}_skill1_name`] = `@{${skillId}_name}`;
-                newAttrs[`${traditionId}_skill1_total`] = `@{${skillId}_total}`;
-                newAttrs[`${traditionId}_skill1_notes`] = `@{${skillId}_notes}`;
+                newAttrs = {...newAttrs, ...createNewTradition(getTranslationByKey('folk_magic'), folkMagicId, null)}
             }
+            if (debug) {console.log("Converting Folk Magic Spells");}
             folkSpellIds.forEach(id => {
                 const abilityId = "repeating_ability_" + generateRowID();
                 newAttrs[`${abilityId}_name`] = !v[`repeating_folkspell_${id}_name`] ? '' : v[`repeating_folkspell_${id}_name`];
@@ -340,131 +464,48 @@ function upgradeCharacter3Dot0() {
                 if (v[`repeating_folkspell_${id}_concentration`] === "1") {
                     traits.push(getTranslationByKey('concentration'));
                 }
-                if (v[`repeating_folkspell_${id}_resist`] === '^{brawn-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')');
-                } else if (v[`repeating_folkspell_${id}_resist`] === '^{endurance-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')');
-                } else if (v[`repeating_folkspell_${id}_resist`] === '^{evade-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')');
-                } else if (v[`repeating_folkspell_${id}_resist`] === '^{willpower-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')');
-                } else if (v[`repeating_folkspell_${id}_resist`] === '^{special-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')');
+                switch(v[`repeating_folkspell_${id}_resist`]) {
+                    case "^{brawn-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')'); break;
+                    case "^{endurance-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')'); break;
+                    case "^{evade-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')'); break;
+                    case "^{willpower-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')'); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')'); break;
                 }
-                if (v[`repeating_folkspell_${id}_duration`] === '^{instant-u}') {
-                    traits.push(getTranslationByKey('instant'));
-                } else if (v[`repeating_folkspell_${id}_duration`] === '^{special-u}') {
-                    traits.push(getTranslationByKey('special_duration'));
+                switch(v[`repeating_folkspell_${id}_duration`]) {
+                    case "^{instant-u}": traits.push(getTranslationByKey('instant')); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('special') + ')'); break;
                 }
-                if (v[`repeating_folkspell_${id}_range`] === '^{touch-u}') {
-                    traits.push(getTranslationByKey('touch'));
-                } else {
-                    traits.push(getTranslationByKey('ranged'));
+                switch(v[`repeating_folkspell_${id}_range`]) {
+                    case "^{touch-u}": traits.push(getTranslationByKey('touch')); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('special') + ')'); break;
+                    default: traits.push(getTranslationByKey('ranged'));
                 }
                 newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
                 newAttrs[`${abilityId}_description`] = !v[`repeating_folkspell_${id}_description`] ? '' : v[`repeating_folkspell_${id}_description`];
             });
             
             /* Animism */
+            if (debug) {console.log("Converting Animism");}
             const tranceId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('trance', '@{con}', '@{pow}', tranceId, v)}
             const bindingId = 'repeating_professionalskill_' + generateRowID();
-            if (v['trance'] && v['trance'] !== '0') {
-                const skillId = tranceId;
-                const total = parseInt(v[`trance`]) || 0;
-                const aug = parseInt(v[`trance_temp`]) || 0;
-                const penalty = parseInt(v[`trance_penalty`]) || 0;
-                const xp = parseInt(v[`trance_experience`]) || 0;
-                const other = parseInt(v[`trance_other`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("trance");
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`trance_fumbled`] ? "0" : v[`trance_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`trance_trained`] ? "0" : v[`trance_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`trance_notes`] ? '' : v[`trance_notes`];
-                newAttrs[`${skillId}_char1`] = '@{con}';
-                newAttrs[`${skillId}_char2`] = '@{pow}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-            }
-            if (v['binding'] && v['binding'] !== '0') {
-                const skillId = bindingId;
-                const total = parseInt(v[`binding`]) || 0;
-                const aug = parseInt(v[`binding_temp`]) || 0;
-                const penalty = parseInt(v[`binding_penalty`]) || 0;
-                const xp = parseInt(v[`binding_experience`]) || 0;
-                const other = parseInt(v[`binding_other`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("binding");
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`binding_fumbled`] ? "0" : v[`binding_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`binding_trained`] ? "0" : v[`binding_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`binding_notes`] ? '' : v[`binding_notes`];
-                newAttrs[`${skillId}_char1`] = '@{pow}';
-                newAttrs[`${skillId}_char2`] = '@{cha}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-            }
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('binding', '@{pow}', '@{cha}', bindingId, v)}
+
             if ((v['trance'] && v['trance'] !== '0') && (v['binding'] && v['binding'] !== '0')) {
-                const traditionId = "repeating_tradition_" + generateRowID();
-                newAttrs[`${traditionId}_name`] = getTranslationByKey('animism');
-                newAttrs[`${traditionId}_id`] = traditionId;
-                newAttrs[`${traditionId}_details`] = "0";
-                newAttrs[`${traditionId}_skill1_id`] = bindingId;
-                newAttrs[`${traditionId}_skill1_name`] = `@{${bindingId}_name}`;
-                newAttrs[`${traditionId}_skill1_total`] = `@{${bindingId}_total}`;
-                newAttrs[`${traditionId}_skill1_notes`] = `@{${bindingId}_notes}`;
-                newAttrs[`${traditionId}_skill2_id`] = tranceId;
-                newAttrs[`${traditionId}_skill2_name`] = `@{${tranceId}_name}`;
-                newAttrs[`${traditionId}_skill2_total`] = `@{${tranceId}_total}`;
-                newAttrs[`${traditionId}_skill2_notes`] = `@{${tranceId}_notes}`;
+                newAttrs = {...newAttrs, ...createNewTradition(getTranslationByKey('animism'), tranceId, bindingId)}
             }
 
             /* Mysticism */
+            if (debug) {console.log("Converting Mysticism");}
             const meditationId = 'repeating_professionalskill_' + generateRowID();
-            if (v['meditation'] && v['meditation'] !== '0') {
-                const skillId = meditationId;
-                const total = parseInt(v[`meditation`]) || 0;
-                const aug = parseInt(v[`meditation_temp`]) || 0;
-                const penalty = parseInt(v[`meditation_penalty`]) || 0;
-                const xp = parseInt(v[`meditation_experience`]) || 0;
-                const other = parseInt(v[`meditation_other`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("meditation");
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`meditation_fumbled`] ? "0" : v[`meditation_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`meditation_trained`] ? "0" : v[`meditation_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`meditation_notes`] ? '' : v[`meditation_notes`];
-                newAttrs[`${skillId}_char1`] = '@{int}';
-                newAttrs[`${skillId}_char2`] = '@{con}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-            }
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('meditation', '@{int}', '@{con}', meditationId, v)}
+
             pathIds.forEach(id => {
                 const skillId = 'repeating_professionalskill_' + generateRowID();
-                const total = parseInt(v[`repeating_path_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_path_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_path_${id}_penalty`]) || 0;
-                const xp = parseInt(v[`repeating_path_${id}_experience`]) || 0;
-                const other = parseInt(v[`repeating_path_${id}_other`]) || 0;
-                newAttrs[`${skillId}_name`] = !v[`repeating_path_${id}_name`] ? "0" : v[`repeating_path_${id}_name`];
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`repeating_path_${id}_fumbled`] ? "0" : v[`repeating_path_${id}_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`repeating_path_${id}_trained`] ? "0" : v[`repeating_path_${id}_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`repeating_path_${id}_notes`] ? '' : v[`repeating_path_${id}_notes`];
-                newAttrs[`${skillId}_char1`] = '@{pow}';
-                newAttrs[`${skillId}_char2`] = '@{con}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
+                newAttrs = {...newAttrs, ...convertSkillToProSkill(`repeating_path_${id}`, '@{pow}', '@{con}', skillId, v)}
 
-                const traditionId = "repeating_tradition_" + generateRowID();
-                newAttrs[`${traditionId}_name`] = !v[`repeating_path_${id}_name`] ? "0" : v[`repeating_path_${id}_name`];
-                newAttrs[`${traditionId}_id`] = traditionId;
-                newAttrs[`${traditionId}_details`] = "0";
-                newAttrs[`${traditionId}_skill1_id`] = meditationId;
-                newAttrs[`${traditionId}_skill1_name`] = `@{${meditationId}_name}`;
-                newAttrs[`${traditionId}_skill1_total`] = `@{${meditationId}_total}`;
-                newAttrs[`${traditionId}_skill1_notes`] = `@{${meditationId}_notes}`;
-                newAttrs[`${traditionId}_skill2_id`] = skillId;
-                newAttrs[`${traditionId}_skill2_name`] = `@{${skillId}_name}`;
-                newAttrs[`${traditionId}_skill2_total`] = `@{${skillId}_total}`;
-                newAttrs[`${traditionId}_skill2_notes`] = `@{${skillId}_notes}`;
+                const pathName = !v[`repeating_path_${id}_name`] ? "0" : v[`repeating_path_${id}_name`];
+                newAttrs = {...newAttrs, ...createNewTradition(pathName, meditationId, skillId)}
             });
             practicedTalentIds.forEach(id => {
                 const talentId = "repeating_ability_" + generateRowID();
@@ -478,53 +519,15 @@ function upgradeCharacter3Dot0() {
             });
 
             /* Sorcery */
+            if (debug) {console.log("Converting Sorcery");}
             const shapingId = 'repeating_professionalskill_' + generateRowID();
-            if (v['shaping'] && v['shaping'] !== '0') {
-                const skillId = shapingId;
-                const total = parseInt(v[`shaping`]) || 0;
-                const aug = parseInt(v[`shaping_temp`]) || 0;
-                const penalty = parseInt(v[`shaping_penalty`]) || 0;
-                const xp = parseInt(v[`shaping_experience`]) || 0;
-                const other = parseInt(v[`shaping_other`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("shaping");
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`shaping_fumbled`] ? "0" : v[`shaping_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`shaping_trained`] ? "0" : v[`shaping_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`shaping_notes`] ? '' : v[`shaping_notes`];
-                newAttrs[`${skillId}_char1`] = '@{int}';
-                newAttrs[`${skillId}_char2`] = '@{pow}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-            }
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('shaping', '@{int}', '@{pow}', shapingId, v)}
             invocationIds.forEach(id => {
                 const skillId = 'repeating_professionalskill_' + generateRowID();
-                const total = parseInt(v[`repeating_invocation_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_invocation_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_invocation_${id}_penalty`]) || 0;
-                const xp = parseInt(v[`repeating_invocation_${id}_experience`]) || 0;
-                const other = parseInt(v[`repeating_invocation_${id}_other`]) || 0;
-                newAttrs[`${skillId}_name`] = !v[`repeating_invocation_${id}_name`] ? "0" : v[`repeating_invocation_${id}_name`];
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`repeating_invocation_${id}_fumbled`] ? "0" : v[`repeating_invocation_${id}_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`repeating_invocation_${id}_trained`] ? "0" : v[`repeating_invocation_${id}_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`repeating_invocation_${id}_notes`] ? '' : v[`repeating_invocation_${id}_notes`];
-                newAttrs[`${skillId}_char1`] = '@{int}';
-                newAttrs[`${skillId}_char2`] = '@{int}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
+                newAttrs = {...newAttrs, ...convertSkillToProSkill(`repeating_invocation_${id}`, '@{int}', '@{int}', skillId, v)}
 
-                const traditionId = "repeating_tradition_" + generateRowID();
-                newAttrs[`${traditionId}_name`] = !v[`repeating_invocation_${id}_name`] ? "0" : v[`repeating_invocation_${id}_name`];
-                newAttrs[`${traditionId}_id`] = traditionId;
-                newAttrs[`${traditionId}_details`] = "0";
-                newAttrs[`${traditionId}_skill1_id`] = shapingId;
-                newAttrs[`${traditionId}_skill1_name`] = `@{${shapingId}_name}`;
-                newAttrs[`${traditionId}_skill1_total`] = `@{${shapingId}_total}`;
-                newAttrs[`${traditionId}_skill1_notes`] = `@{${shapingId}_notes}`;
-                newAttrs[`${traditionId}_skill2_id`] = skillId;
-                newAttrs[`${traditionId}_skill2_name`] = `@{${skillId}_name}`;
-                newAttrs[`${traditionId}_skill2_total`] = `@{${skillId}_total}`;
-                newAttrs[`${traditionId}_skill2_notes`] = `@{${skillId}_notes}`;
+                const traditionName = !v[`repeating_invocation_${id}_name`] ? "0" : v[`repeating_invocation_${id}_name`];
+                newAttrs = {...newAttrs, ...createNewTradition(traditionName, shapingId, skillId)}
             });
 
             let shaping_traits = ['^{combine}: @{shaped_combine}'];
@@ -564,25 +567,19 @@ function upgradeCharacter3Dot0() {
                 newAttrs[`${abilityId}_type`] = 'sorcery';
                 newAttrs[`${abilityId}_traited`] = '1';
                 newAttrs[`${abilityId}_details`] = '0';
-                if (v[`repeating_sorceryspell_${id}_memorized`] === "1") {
-                    newAttrs[`${abilityId}_favored`] = "1";
-                } else {
+                if (v[`repeating_sorceryspell_${id}_memorized`] !== "1") {
                     newAttrs[`${abilityId}_favored`] = "0";
                 }
                 let traits = [];
                 if (v[`repeating_sorceryspell_${id}_concentration`] === "1") {
                     traits.push(getTranslationByKey('concentration'));
                 }
-                if (v[`repeating_sorceryspell_${id}_resist`] === '^{brawn-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')');
-                } else if (v[`repeating_sorceryspell_${id}_resist`] === '^{endurance-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')');
-                } else if (v[`repeating_sorceryspell_${id}_resist`] === '^{evade-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')');
-                } else if (v[`repeating_sorceryspell_${id}_resist`] === '^{willpower-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')');
-                } else if (v[`repeating_sorceryspell_${id}_resist`] === '^{special-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')');
+                switch(v[`repeating_sorceryspell_${id}_resist`]) {
+                    case "^{brawn-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')'); break;
+                    case "^{endurance-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')'); break;
+                    case "^{evade-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')'); break;
+                    case "^{willpower-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')'); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')'); break;
                 }
                 newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
                 newAttrs[`${abilityId}_advanced_traits`] = '@{shaping_traits}';
@@ -590,41 +587,14 @@ function upgradeCharacter3Dot0() {
             });
 
             /* Theism */
+            if (debug) {console.log("Converting Theism");}
             const exhortId = 'repeating_professionalskill_' + generateRowID();
-            if (v['exhort'] && v['exhort'] !== '0') {
-                const skillId = exhortId;
-                const total = parseInt(v[`exhort`]) || 0;
-                const aug = parseInt(v[`exhort_temp`]) || 0;
-                const penalty = parseInt(v[`exhort_penalty`]) || 0;
-                const xp = parseInt(v[`exhort_experience`]) || 0;
-                const other = parseInt(v[`exhort_other`]) || 0;
-                newAttrs[`${skillId}_name`] = getTranslationByKey("exhort");
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`exhort_fumbled`] ? "0" : v[`exhort_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`exhort_trained`] ? "0" : v[`exhort_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`exhort_notes`] ? '' : v[`exhort_notes`];
-                newAttrs[`${skillId}_char1`] = '@{int}';
-                newAttrs[`${skillId}_char2`] = '@{cha}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
-            }
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('exhort', '@{int}', '@{cha}', exhortId, v)}
             devotionIds.forEach(id => {
                 const skillId = 'repeating_professionalskill_' + generateRowID();
-                const total = parseInt(v[`repeating_devotion_${id}_total`]) || 0;
-                const aug = parseInt(v[`repeating_devotion_${id}_temp`]) || 0;
-                const penalty = parseInt(v[`repeating_devotion_${id}_penalty`]) || 0;
-                const xp = parseInt(v[`repeating_devotion_${id}_experience`]) || 0;
-                const other = parseInt(v[`repeating_devotion_${id}_other`]) || 0;
-                newAttrs[`${skillId}_name`] = !v[`repeating_devotion_${id}_name`] ? "0" : v[`repeating_devotion_${id}_name`];
-                newAttrs[`${skillId}_id`] = skillId;
-                newAttrs[`${skillId}_fumbled`] = !v[`repeating_devotion_${id}_fumbled`] ? "0" : v[`repeating_devotion_${id}_fumbled`];
-                newAttrs[`${skillId}_trained`] = !v[`repeating_devotion_${id}_trained`] ? "0" : v[`repeating_devotion_${id}_trained`];
-                newAttrs[`${skillId}_notes`] = !v[`repeating_devotion_${id}_notes`] ? '' : v[`repeating_devotion_${id}_notes`];
-                newAttrs[`${skillId}_char1`] = '@{pow}';
-                newAttrs[`${skillId}_char2`] = '@{cha}';
-                newAttrs[`${skillId}_other`] = xp + other;
-                newAttrs[`${skillId}_total`] = total - penalty - aug;
+                newAttrs = {...newAttrs, ...convertSkillToProSkill(`repeating_devotion_${id}`, '@{pow}', '@{cha}', skillId, v)}
 
+                /* We don't use the creteNewTradition func here because of the devotion poolextras */
                 const traditionId = "repeating_tradition_" + generateRowID();
                 newAttrs[`${traditionId}_name`] = !v[`repeating_devotion_${id}_name`] ? "0" : v[`repeating_devotion_${id}_name`];
                 newAttrs[`${traditionId}_id`] = traditionId;
@@ -665,62 +635,42 @@ function upgradeCharacter3Dot0() {
                 } else if (v[`repeating_miracle_${id}_miracle_rank`] === "3") {
                     traits.push(getTranslationByKey('rank') + '(' + getTranslationByKey('priest') + ')');
                 }
-
-                if (v[`repeating_miracle_${id}_resist`] === '^{brawn-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')');
-                } else if (v[`repeating_miracle_${id}_resist`] === '^{endurance-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')');
-                } else if (v[`repeating_miracle_${id}_resist`] === '^{evade-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')');
-                } else if (v[`repeating_miracle_${id}_resist`] === '^{willpower-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')');
-                } else if (v[`repeating_miracle_${id}_resist`] === '^{special-u}') {
-                    traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')');
+                switch(v[`repeating_miracle_${id}_resist`]) {
+                    case "^{brawn-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('brawn') + ')'); break;
+                    case "^{endurance-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('endurance') + ')'); break;
+                    case "^{evade-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('evade') + ')'); break;
+                    case "^{willpower-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('willpower') + ')'); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('resist') + '(' + getTranslationByKey('special') + ')'); break;
                 }
-
                 if (v[`repeating_miracle_${id}_damage`] && v[`repeating_miracle_${id}_damage`] !== "0") {
                     newAttrs[`${abilityId}_advanced_traits`] = '^{damage}: [' + v[`repeating_miracle_${id}_damage`] + '](`/r ' + v[`repeating_miracle_${id}_damage`] + ')';
                 }
-
-                if (v[`repeating_miracle_${id}_area`] === "[[@{intensity_magnitude}]] ^{metres-u}") {
-                    traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('meters') + ')');
-                } else if (v[`repeating_miracle_${id}_area`] === "[[@{intensity_magnitude}]] ^{decametres-u}") {
-                    traits.push(getTranslationByKey('area') + '(10 X ' + getTranslationByKey('meters') + ')');
-                } else if (v[`repeating_miracle_${id}_area`] === "[[@{intensity_magnitude}]] ^{kilometres-u}") {
-                    traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('kilometers') + ')');
-                } else if (v[`repeating_miracle_${id}_area`] === "^{special-u}") {
-                    traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('special') + ')');
+                switch(v[`repeating_miracle_${id}_area`]) {
+                    case "[[@{intensity_magnitude}]] ^{metres-u}": traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('meters') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{decametres-u}": traits.push(getTranslationByKey('area') + '(10 X ' + getTranslationByKey('meters') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{kilometres-u}": traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('kilometers') + ')'); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('area') + '(' + getTranslationByKey('special') + ')'); break;
                 }
-
-                if (v[`repeating_miracle_${id}_duration`] === "^{instant-u}") {
-                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('instant') + ')');
-                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{minutes-u}") {
-                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('minutes') + ')');
-                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{hours-u}") {
-                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('hours') + ')');
-                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{days-u}") {
-                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('days') + ')');
-                } else if (v[`repeating_miracle_${id}_duration`] === "[[@{intensity_magnitude}]] ^{months-u}") {
-                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('months') + ')');
-                } else if (v[`repeating_miracle_${id}_duration`] === "^{special-u}") {
-                    traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('special') + ')');
+                switch(v[`repeating_miracle_${id}_duration`]) {
+                    case "^{instant-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('instant') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{minutes-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('minutes') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{hours-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('hours') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{days-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('days') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{months-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('months') + ')'); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('duration') + '(' + getTranslationByKey('special') + ')'); break;
                 }
-
-                if (v[`repeating_miracle_${id}_range`] === "^{touch-u}") {
-                    traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('touch') + ')');
-                } else if (v[`repeating_miracle_${id}_range`] === "[[@{intensity_magnitude}]] ^{metres-u}") {
-                    traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('meters') + ')');
-                } else if (v[`repeating_miracle_${id}_range`] === "[[@{intensity_magnitude}]] ^{decametres-u}") {
-                    traits.push(getTranslationByKey('range') + '(10 X ' + getTranslationByKey('meters') + ')');
-                } else if (v[`repeating_miracle_${id}_range`] === "^{special-u}") {
-                    traits.push(getTranslationByKey('range') + '(10 X ' + getTranslationByKey('special') + ')');
+                switch(v[`repeating_miracle_${id}_range`]) {
+                    case "^{touch-u}": traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('touch') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{metres-u}": traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('meters') + ')'); break;
+                    case "[[@{intensity_magnitude}]] ^{decametres-u}": traits.push(getTranslationByKey('range') + '(10 X ' + getTranslationByKey('meters') + ')'); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('range') + '(' + getTranslationByKey('special') + ')'); break;
                 }
-
                 newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
                 newAttrs[`${abilityId}_description`] = !v[`repeating_miracle_${id}_description`] ? '' : v[`repeating_miracle_${id}_description`];
             });
 
             /* M-Space psionics conversion */
+            if (debug) {console.log("Converting M-Space Psionics");}
             psionicPowerIds.forEach(id => {
                 const abilityId = 'repeating_skilledability_' + generateRowID();
                 const total = parseInt(v[`repeating_psionicpower_${id}_total`]) || 0;
@@ -742,6 +692,7 @@ function upgradeCharacter3Dot0() {
             });
 
             /* Odd Soot Magic Conversion */
+            if (debug) {console.log("Converting Odd Soot Magic");}
             magicSpellIds.forEach(id => {
                 const abilityId = 'repeating_skilledability_' + generateRowID();
                 const total = parseInt(v[`repeating_magicspell_${id}_total`]) || 0;
@@ -773,9 +724,232 @@ function upgradeCharacter3Dot0() {
                 newAttrs[`${abilityId}_traits`] = traits.join("\r\n");
             });
 
-            /* TODO Magic powers conversion */
+            /* Roman Magic skills */
+            if (debug) {console.log("Converting Roman Magic");}
+            const cursingId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('cursing', '@{pow}', '@{cha}', cursingId, v)};
+            const divinationId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('divination', '@{pow}', '@{int}', divinationId, v)};
+            const necromancyId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('necromancy', '@{int}', '@{cha}', necromancyId, v)};
+            const pharmacyId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('pharmacy', '@{int}', '@{int}', pharmacyId, v)};
+            const shiftingId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('shifting', '@{con}', '@{pow}', shiftingId, v)};
+            const theologyId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('theology', '@{pow}', '@{pow}', theologyId, v)};
+
+            /* Classic Fantasy Helper Functions */
+            function convertClassicFantasyAbility(id, abilityRank, abilityType, v) {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = !v[`${id}_name`] ? '' : v[`${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'arcane_magic';
+                newAttrs[`${abilityId}_rank`] = abilityRank;
+                newAttrs[`${abilityId}_traited`] = '1';
+                newAttrs[`${abilityId}_details`] = '0';
+                if (v[`${id}_memorized`] === "1") {
+                    newAttrs[`${abilityId}_favored`] = '1';
+                }
+
+                let traits = [];
+                if (v[`${id}_school`]) {
+                    traits.push('(' + v[`${id}_school`] + ')');
+                }
+                if (v[`${id}_reversible`]) {
+                    traits.push(getTranslationByKey('reversible'));
+                }
+                let cost = '';
+                switch(v[`${id}_mp_cost`]) {
+                    case `[[1+@{${abilityType}_rank_${abilityRank}_cost_reduction}]]`: cost = '1 ' + getTranslationByKey('magic_points-a'); break;
+                    case `[[(1*?{Intensity|1})+@{${abilityType}_rank_${abilityRank}_cost_reduction}]]`: cost = '1/+1 ' + getTranslationByKey('magic_points-a'); break;
+                    case `[[3+@{${abilityType}_rank_${abilityRank}_cost_reduction}]]`: cost = '3 ' + getTranslationByKey('magic_points-a'); break;
+                    case `[[(3+(?{Intensity|1}-1))+@{${abilityType}_rank_${abilityRank}_cost_reduction}]]`: cost = '3/+1 ' + getTranslationByKey('magic_points-a'); break;
+                    case `[[(3*?{Intensity|1})+@{${abilityType}_rank_${abilityRank}_cost_reduction}]]`: cost = '3/+3 ' + getTranslationByKey('magic_points-a'); break;
+                    default: cost = '1';
+                }
+                const xpCost = parseInt(v[`${id}_xp_cost`]) || 0;
+                if (xpCost !== 0) {cost = cost + ` + ${xpCost} ` + getTranslationByKey('experience-a');}
+                traits.push(getTranslationByKey('cost') + ': ' + cost);
+                if (v[`${id}_area`]) {
+                    traits.push(getTranslationByKey('area') + ': ' + v[`${id}_area`]);
+                }
+                const time = parseInt(v[`${id}_time`]) || 1;
+                if (v[`${id}_time_unit`]) {
+                    traits.push(getTranslationByKey('casting_time') + ': ' + time + ' ' + v[`${id}_time_unit`]);
+                } else {
+                    traits.push(getTranslationByKey('casting_time') + ': ' + time + ' ' + getTranslationByKey('actions'));
+                }
+                if (v[`${id}_duration`]) {
+                    traits.push(getTranslationByKey('duration') + ': ' + v[`${id}_duration`]);
+                }
+                if (v[`${id}_range`]) {
+                    traits.push(getTranslationByKey('range') + ': ' + v[`${id}_range`]);
+                }
+                if (v[`${id}_resist`]) {
+                    traits.push(getTranslationByKey('resist') + ': ' + v[`${id}_resist`]);
+                }
+                newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
+                newAttrs[`${abilityId}_advanced_traits`] = '^{intensity}: @{dynamic_intensity}';
+                newAttrs[`${abilityId}_description`] = !v[`${id}_description`] ? '' : v[`${id}_description`];
+            }
+
+            /* Arcane magic Conversion */
+            if (debug) {console.log("Converting Arcane Magic");}
+            const arcaneCastingId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('arcane_casting', '@{int}', '@{pow}', arcaneCastingId, v)};
+            const arcaneKnowledgeId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('arcane_knowledge', '@{int}', '@{int}', arcaneKnowledgeId, v)};
+            if ((v['arcane_casting'] && v['arcane_casting'] !== '0') && (v['arcane_knowledge'] && v['arcane_knowledge'] !== '0')) {
+                newAttrs = {...newAttrs, ...createNewTradition(getTranslationByKey('arcane_magic'), arcaneCastingId, arcaneKnowledgeId)};
+            }
+            arcanemagicrank0spellIds.forEach(id => {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = !v[`repeating_arcanemagicrank0spell_${id}_name`] ? '' : v[`repeating_arcanemagicrank0spell_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'arcane_magic';
+                newAttrs[`${abilityId}_rank`] = '0';
+                newAttrs[`${abilityId}_traited`] = '1';
+                newAttrs[`${abilityId}_details`] = '0';
+
+                let traits = ['(' + getTranslationByKey('cantrip') + ')'];
+                if (v[`repeating_arcanemagicrank0spell_${id}_reversible`]) {
+                    traits.push(getTranslationByKey('reversible'));
+                }
+                traits.push(getTranslationByKey('cost') + ': 1');
+                if (v[`repeating_arcanemagicrank0spell_${id}_area`]) {
+                    traits.push(getTranslationByKey('area') + ': ' + v[`repeating_arcanemagicrank0spell_${id}_area`]);
+                }
+                traits.push(getTranslationByKey('casting_time') + ': 1 ' + getTranslationByKey('action'));
+                if (v[`repeating_arcanemagicrank0spell_${id}_duration`]) {
+                    traits.push(getTranslationByKey('duration') + ': ' + v[`repeating_arcanemagicrank0spell_${id}_duration`]);
+                }
+                if (v[`repeating_arcanemagicrank0spell_${id}_range`] === '^{touch-u}') {
+                    traits.push(getTranslationByKey('range') + ': ' + getTranslationByKey('touch'));
+                } else if (v[`repeating_arcanemagicrank0spell_${id}_range`] === '[[@{pow}*1.5]] ^{metres-u}') {
+                    traits.push(getTranslationByKey('range') + ': ' + getTranslationByKey('pow-u') + ' X 1.5 ' + getTranslationByKey('meters'));
+                }
+                if (v[`repeating_arcanemagicrank0spell_${id}_resist`]) {
+                    traits.push(getTranslationByKey('resist') + ': ' + v[`repeating_arcanemagicrank0spell_${id}_resist`]);
+                }
+
+                newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
+                newAttrs[`${abilityId}_description`] = !v[`repeating_arcanemagicrank0spell_${id}_description`] ? '' : v[`repeating_arcanemagicrank0spell_${id}_description`];
+            });
+            arcanemagicrank1spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_arcanemagicrank1spell_${id}`, '1', 'arcane', v); });
+            arcanemagicrank2spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_arcanemagicrank2spell_${id}`, '2', 'arcane', v); });
+            arcanemagicrank3spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_arcanemagicrank3spell_${id}`, '3', 'arcane', v); });
+            arcanemagicrank4spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_arcanemagicrank4spell_${id}`, '4', 'arcane', v); });
+            arcanemagicrank5spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_arcanemagicrank5spell_${id}`, '5', 'arcane', v); });
+
+            /* Divine magic Conversion */
+            if (debug) {console.log("Converting Arcane Magic");}
+            const channelId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('channel', '@{int}', '@{cha}', channelId, v)};
+            const pietyId = 'repeating_professionalskill_' + generateRowID();
+            newAttrs = {...newAttrs, ...convertSkillToProSkill('piety', '@{cha}', '@{pow}', pietyId, v)};
+            if ((v['channel'] && v['channel'] !== '0') && (v['piety'] && v['piety'] !== '0')) {
+                newAttrs = {...newAttrs, ...createNewTradition(getTranslationByKey('divine_magic'), channelId, pietyId)};
+            }
+            divinemagicrank1spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_divinemagicrank1spell_${id}`, '1', 'divine', v); });
+            divinemagicrank2spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_divinemagicrank2spell_${id}`, '2', 'divine', v); });
+            divinemagicrank3spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_divinemagicrank3spell_${id}`, '3', 'divine', v); });
+            divinemagicrank4spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_divinemagicrank4spell_${id}`, '4', 'divine', v); });
+            divinemagicrank5spellIds.forEach(id => { convertClassicFantasyAbility(`repeating_divinemagicrank5spell_${id}`, '5', 'divine', v); });
+
+            /* Superpower conversions */
+            superpowerIds.forEach(id => {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = !v[`repeating_superpower_${id}_name`] ? '?' : v[`repeating_superpower_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'superpower';
+                newAttrs[`${abilityId}_traited`] = '1';
+                newAttrs[`${abilityId}_details`] = '0';
+
+                if (v[`repeating_superpower_${id}_activation`]) {
+                    newAttrs[`${abilityId}_traits`] = getTranslationByKey('activation_cost') + ': ' + v[`repeating_superpower_${id}_activation`];
+                    newAttrs[`${abilityId}_summary`] = getTranslationByKey('activation_cost') + ': ' + v[`repeating_superpower_${id}_activation`];
+                }
+                newAttrs[`${abilityId}_description`] = !v[`repeating_superpower_${id}_description`] ? '' : v[`repeating_superpower_${id}_description`];
+            });
+
+            superpowerboostIds.forEach(id => {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = !v[`repeating_superpowerboost_${id}_name`] ? '?' : v[`repeating_superpowerboost_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'superpower';
+                newAttrs[`${abilityId}_traited`] = '1';
+                newAttrs[`${abilityId}_details`] = '0';
+
+                if (v[`repeating_superpowerboost_${id}_cost`]) {
+                    newAttrs[`${abilityId}_traits`] = getTranslationByKey('cost') + ': ' + v[`repeating_superpowerboost_${id}_cost`];
+                    newAttrs[`${abilityId}_summary`] = getTranslationByKey('cost') + ': ' + v[`repeating_superpowerboost_${id}_cost`];
+                }
+                newAttrs[`${abilityId}_description`] = !v[`repeating_superpowerboost_${id}_description`] ? '' : v[`repeating_superpowerboost_${id}_description`];
+            });
+
+            superpowerlimitIds.forEach(id => {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = '?';
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'limitation';
+                newAttrs[`${abilityId}_traited`] = '0';
+                newAttrs[`${abilityId}_details`] = '0';
+                newAttrs[`${abilityId}_summary`] = !v[`repeating_superpowerlimit_${id}_description`] ? '' : v[`repeating_superpowerlimit_${id}_description`];
+                newAttrs[`${abilityId}_description`] = !v[`repeating_superpowerlimit_${id}_description`] ? '' : v[`repeating_superpowerlimit_${id}_description`];
+            });
+
+            /* Fae Powers Conversion */
+            if (debug) {console.log("Converting Fae Powers");}
+            const fataId = 'repeating_professionalskill_' + generateRowID();
+            convertSkillToProSkill('fata', '@{pow}', '@{cha}', fataId, v);
+            if (v['fata'] && v['fata'] !== '0') {
+                createNewTradition(getTranslationByKey('fae_powers'), fataId, null);
+            }
+            faepowerIds.forEach(id => {
+                const abilityId = "repeating_ability_" + generateRowID();
+                newAttrs[`${abilityId}_name`] = !v[`repeating_faepower_${id}_name`] ? '?' : v[`repeating_faepower_${id}_name`];
+                newAttrs[`${abilityId}_id`] = abilityId;
+                newAttrs[`${abilityId}_type`] = 'fae_power';
+                newAttrs[`${abilityId}_traited`] = '1';
+                newAttrs[`${abilityId}_details`] = '0';
+
+                let traits = [];
+                switch(v[`repeating_faepower_${id}_range`]) {
+                    case "^{touch-u}": traits.push(getTranslationByKey('range') + ': ' + getTranslationByKey('touch')); break;
+                    case "[[@{pow}]] ^{metres-u}": traits.push(getTranslationByKey('range') + ': ' + getTranslationByKey('pow-u') + ' ' + getTranslationByKey('meters')); break;
+                    case "[[(@{pow}*10)]] ^{metres-u}": traits.push(getTranslationByKey('range') + ': ' + getTranslationByKey('pow-u') + ' x 10 ' + getTranslationByKey('meters')); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('range') + ': ' + getTranslationByKey('special')); break;
+                }
+                switch(v[`repeating_faepower_${id}_duration`]) {
+                    case "^{one-minute-u}": traits.push(getTranslationByKey('duration') + ': 1 ' + getTranslationByKey('minute')); break;
+                    case "[[@{fata_intensity}]] ^{minutes-u}": traits.push(getTranslationByKey('duration') + ': ' + getTranslationByKey('intensity') + ' x ' + getTranslationByKey('minutes')); break;
+                    case "[[@{fata_intensity}*5]] ^{minutes-u}": traits.push(getTranslationByKey('duration') + ': ' + getTranslationByKey('intensity') + ' x 5 ' + getTranslationByKey('minutes')); break;
+                    case "[[@{fata_intensity}*10]] ^{minutes-u}": traits.push(getTranslationByKey('duration') + ': ' + getTranslationByKey('intensity') + ' x 10 ' + getTranslationByKey('minutes')); break;
+                    case "[[@{fata_intensity}]] ^{hours-u}": traits.push(getTranslationByKey('duration') + ': ' + getTranslationByKey('intensity') + ' x ' + getTranslationByKey('hours')); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('duration') + ': ' + getTranslationByKey('special')); break;
+                }
+                if (v[`repeating_faepower_${id}_cost`]) {
+                    traits.push(getTranslationByKey('cost') + ': ' + v[`repeating_miracle_${id}_cost`]);
+                } else {
+                    traits.push(getTranslationByKey('cost') + ': 1 ' + getTranslationByKey('magic_point'));
+                }
+                switch(v[`repeating_faepower_${id}_resist`]) {
+                    case "^{brawn-u}": traits.push(getTranslationByKey('resist') + ': ' + getTranslationByKey('brawn')); break;
+                    case "^{endurance-u}": traits.push(getTranslationByKey('resist') + ': ' + getTranslationByKey('endurance')); break;
+                    case "^{evade-u}": traits.push(getTranslationByKey('resist') + ': ' + getTranslationByKey('evade')); break;
+                    case "^{willpower-u}": traits.push(getTranslationByKey('resist') + ': ' + getTranslationByKey('willpower')); break;
+                    case "^{special-u}": traits.push(getTranslationByKey('resist') + ': ' + getTranslationByKey('special')); break;
+                    default: traits.push(getTranslationByKey('resist') + ': ' + getTranslationByKey('none'));
+                }
+                newAttrs[`${abilityId}_traits`] = traits.join('\r\n');
+                newAttrs[`${abilityId}_description`] = !v[`repeating_faepower_${id}_description`] ? '' : v[`repeating_faepower_${id}_description`];
+            });
+
+            /* TODO alchemy conversion */
+            /* TODO Artifice conversion */
+            /* TODO Psychic Powers/psionics conversion */
             /* TODO traits conversion */
-            /* TODO Import skill based abilities */
 
             /* Convert income */
             let newIncome = "";
@@ -811,6 +985,21 @@ function upgradeCharacter3Dot0() {
             });
         });
     /* Get IDs end */
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
+    });
     });
     });
     });

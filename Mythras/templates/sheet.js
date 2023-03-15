@@ -24,6 +24,7 @@ const campaginSettingDefaults = {
     "after_the_vampire_wars": {
         "ability_system": "after_the_vampire_wars",
         "shaping_traits": "^{combine}: @{shaped_combine}\n^{duration}: @{shaped_duration} | ^{extended}: @{extended_duration}\n^{magnitude}: @{shaped_magnitude}\n^{range}: @{shaped_range} | ^{sympathetic}: @{sympathetic_range}\n^{targets}: @{shaped_targets}",
+        "tenacity_enabled": 1
     },
     "classic_fantasy": {
         "ability_system": "classic_fantasy",
@@ -123,7 +124,7 @@ function calcCampaignSetting(campaignSetting, campaignSettingOption, setting) {
     }
 }
 /* Trigger setting change */
-on(`change:setting`, function(event) {
+on(`change:setting_option`, function(event) {
     /* Get an array of option values to get */
     const campaignSettingOptions = campaignSettings.map(function(campaignSetting){
         return `${campaignSetting}_option`;
@@ -147,8 +148,8 @@ on(`change:setting`, function(event) {
 /* Trigger for all the individual campaign setting option values */
 campaignSettings.forEach(campaignSetting => {
     on(`change:${campaignSetting}_option`, function(event) {
-        getAttrs(['setting'], function(v) {
-            setAttrs(calcCampaignSetting(`${campaignSetting}`, event.newValue, v['setting']));
+        getAttrs(['setting_option'], function(v) {
+            setAttrs(calcCampaignSetting(`${campaignSetting}`, event.newValue, v['setting_option']));
         });
     });
 });
