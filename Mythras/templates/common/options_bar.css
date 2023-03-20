@@ -14,6 +14,16 @@ body.sheet-darkmode div.sheet-option-bar {
     background: lightgray;
     color: black;
 }
+.sheet-set-toggle-reset {
+    color: whitesmoke !important;
+}
+body.sheet-darkmode .sheet-set-toggle-reset {
+    color: black !important;
+}
+.sheet-set-toggle-reset:hover,
+body.sheet-darkmode .sheet-set-toggle-reset:hover {
+    color: royalblue !important;
+}
 
 .sheet-set-toggle-control:not([value^="@{set_"]) ~ .sheet-set-toggle {
     display: none;

@@ -296,6 +296,7 @@ function damageTable(step) {
 {% include 'sheet_types/character/character.js' %}
 {% include 'sheet_types/character/character_import.js' %}
 {% include 'sheet_types/character/character_versioning.js' %}
+{% include 'sheet_types/star_system/star_system.js' %}
 
 
 /* Versioning */
@@ -314,6 +315,7 @@ function versioning(sheet_type, version) {
         setAttrs({['version']: latestVersion});
     } else if (version < 3.0) {
         if (sheet_type === 'pc') {upgradeCharacter3Dot0();}
+        if (sheet_type === 'solar_system') {upgradeStarSystem3Dot0();}
         versioning(sheet_type, '3.0');
     }
 }

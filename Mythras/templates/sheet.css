@@ -44,6 +44,7 @@ button.recontrol_edit { /* Prevent done button from overflowing */
 }
 .ui-dialog .charsheet textarea {
     margin: 0;
+    color: inherit;
     background: transparent;
 }
 body.sheet-darkmode option,
@@ -635,21 +636,21 @@ body.sheet-darkmode .ui-dialog .charsheet input[type="checkbox"] + span {
 /* Override stylized span to be a checkico or radioico */
 .ui-dialog .charsheet input[type="checkbox"] + span.sheet-checkico {
     border: none;
-    opacity: 0.6;
+    opacity: 40% !important;
     color: inherit;
 }
 .ui-dialog .charsheet input[type="checkbox"]:checked + span.sheet-checkico {
-    opacity: 1;
+    opacity: 100% !important;
     background-image: none;
     color: inherit;
 }
 .ui-dialog .charsheet input[type="checkbox"] + span.sheet-checkico-reverse {
     border: none;
-    opacity: 0.6;
+    opacity: 40% !important;
     color: inherit;
 }
 .ui-dialog .charsheet input[type="checkbox"]:not(:checked) + span.sheet-checkico-reverse {
-    opacity: 1;
+    opacity: 100% !important;
     background-image: none;
     color: inherit;
 }
@@ -820,14 +821,14 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 
 
 /* Sheet Type Display Toggles */
-.sheet-typetoggle:not([value="battle_unit"]) ~ div.wrapper div.sheet-battle-unit,
+.sheet-typetoggle:not([value="battle_unit"]) ~ div.sheet-wrapper div.sheet-battle-unit,
 .sheet-typetoggle:not([value="pc"], [value="creature"], [value="spirit"]) ~ div.sheet-wrapper div.sheet-character,
 .sheet-typetoggle:not([value="pc"]) ~ div.sheet-wrapper .sheet-major,
 .sheet-typetoggle:not([value="creature"], [value="spirit"]) ~ div.sheet-wrapper .sheet-minor,
 .sheet-typetoggle:not([value="spirit"]) ~ div.sheet-wrapper .sheet-spirit,
 .sheet-typetoggle:not([value="pc"], [value="creature"]) ~ div.sheet-wrapper .sheet-creature,
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-wrapper div.sheet-ship,
-.sheet-typetoggle:not([value="star_system"]) ~ div.sheet-wrapper div.sheet-star-system,
+.sheet-typetoggle:not([value="solar_system"]) ~ div.sheet-wrapper div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-wrapper div.sheet-vehicle,
 .sheet-typetoggle:not([value="vehicle_frostbyte"]) ~ div.sheet-wrapper div.sheet-vehicle-frostbyte {
     display: none;
@@ -905,6 +906,7 @@ div.sheet-compactable-fieldset-control {
 {% include 'sheet_types/ship/ship.css' %}
 {% include 'sheet_types/vehicle/vehicle.css' %}
 {% include 'sheet_types/vehicle_frostbyte/vehicle_frostbyte.css' %}
+{% include 'sheet_types/star_system/star_system.css' %}
 
 /* Roll Templates */
 {% include 'roll_templates/default.css' %}
