@@ -104,7 +104,7 @@ summary {
 
 /* Layout */
 div.sheet-wrapper { /* Sets default size of the sheet */
-    min-width: 430px;
+    min-width: 660px;
     max-width: 860px;
 }
 div.sheet-inline {
@@ -865,9 +865,6 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-compact-control[value="1"] + div.sheet-wrapper .sheet-detailed,
 .sheet-compact-control[value="0"] + div.sheet-wrapper .sheet-compact {
     display: none;
-}
-.sheet-compact-control[value="0"] + div.sheet-wrapper {
-    min-width: 850px;
 }
 /* Disabled fieldset controls in compact mode */
 .sheet-compact-control[value="1"] + div.sheet-wrapper fieldset ~ .repcontrol {

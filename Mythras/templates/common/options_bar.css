@@ -4,6 +4,8 @@ div.sheet-option-bar {
     top: 0;
     z-index: 100;
     width: 100%;
+    max-width: 860px;
+    min-width: 560px;
     height: fit-content;
     background: #1f1f1f;
     color: whitesmoke;

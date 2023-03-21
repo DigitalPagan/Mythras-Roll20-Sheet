@@ -1,4 +1,4 @@
-function upgradeCharacter3Dot0() {
+function upgradeStarSystem3Dot0() {
     getAttrs(['system_notes'], function (v) {
         let newAttrs = {'version': '3.0'};
 

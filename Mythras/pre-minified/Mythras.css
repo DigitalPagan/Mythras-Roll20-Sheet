@@ -104,7 +104,7 @@ summary {
 
 /* Layout */
 div.sheet-wrapper { /* Sets default size of the sheet */
-    min-width: 430px;
+    min-width: 660px;
     max-width: 860px;
 }
 div.sheet-inline {
@@ -866,9 +866,6 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-compact-control[value="0"] + div.sheet-wrapper .sheet-compact {
     display: none;
 }
-.sheet-compact-control[value="0"] + div.sheet-wrapper {
-    min-width: 850px;
-}
 /* Disabled fieldset controls in compact mode */
 .sheet-compact-control[value="1"] + div.sheet-wrapper fieldset ~ .repcontrol {
     display: none;
@@ -904,6 +901,8 @@ div.sheet-option-bar {
     top: 0;
     z-index: 100;
     width: 100%;
+    max-width: 860px;
+    min-width: 560px;
     height: fit-content;
     background: #1f1f1f;
     color: whitesmoke;
@@ -930,7 +929,9 @@ body.sheet-darkmode .sheet-set-toggle-reset:hover {
 }
 
 /* Sheet Type Specific CSS */
-
+div.sheet-unit-label {
+    width: 80px;
+}
 /* Attribute Toggles */
 input.sheet-attr-toggle:not([value="physical"]) ~ div .sheet-physical,
 input.sheet-attr-toggle:not([value="physical"]) ~ div.sheet-physical,
