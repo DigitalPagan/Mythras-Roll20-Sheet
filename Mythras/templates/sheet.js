@@ -297,6 +297,7 @@ function damageTable(step) {
 {% include 'sheet_types/character/character.js' %}
 {% include 'sheet_types/character/character_import.js' %}
 {% include 'sheet_types/character/character_versioning.js' %}
+{% include 'sheet_types/ship/ship.js' %}
 {% include 'sheet_types/star_system/star_system.js' %}
 
 
@@ -317,6 +318,7 @@ function versioning(sheet_type, version) {
     } else if (version < 3.0) {
         if (sheet_type === 'pc') {upgradeCharacter3Dot0();}
         else if (sheet_type === 'battle_unit') {upgradeBattleUnit3Dot0();}
+        else if (sheet_type === 'ship') {upgradeShip3Dot0();}
         else if (sheet_type === 'solar_system') {upgradeStarSystem3Dot0();}
         versioning(sheet_type, '3.0');
     }

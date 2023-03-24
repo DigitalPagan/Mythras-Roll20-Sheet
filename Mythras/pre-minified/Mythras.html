@@ -96,7 +96,7 @@
 
     <!-- Sheet Types -->
     <!-- TODO add Battle Actions (SEs) for Battle Units -->
-<div class="sheet-battle-unit">
+<div style="width: 660px" class="sheet-battle-unit">
     <div class="sheet-flex sheet-gap">
         <div class="sheet-flex sheet-gap sheet-half-width">
             <div class="sheet-unit-label"><label class="sheet-left" data-i18n="unit_name">Unit Name</label></div>
@@ -136,7 +136,7 @@
     <div class="sheet-flex sheet-gap">
         <div class="sheet-flex sheet-gap sheet-half-width">
             <div class="sheet-unit-label">
-                <button type="roll" class="sheet-label-left" title="%{unit_command}" name="roll_unit_command" value="@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=^{command}}} {{roll=[[1d100]]}} {{original=@{unit_command}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{unit_command}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{unit_command}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{unit_command}*2)+@{penalty})]]}} {{easy=[[ceil((@{unit_command}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{unit_command}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{unit_command}*1.5)+@{penalty})]]}} {{standard=[[@{unit_command}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{unit_command}+@{penalty})/10)]]}} {{standard_fumble=[[(@{unit_command}+@{penalty})]]}} {{hard=[[ceil((@{unit_command}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{unit_command}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{unit_command}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{unit_command}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{unit_command}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{unit_command}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{unit_command}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{unit_command}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{unit_command}*@{herculean_mod})+@{penalty})]]}} {{notes=@{athletics_notes}}}" data-i18n="command">Command</button>
+                <button type="roll" class="sheet-label-left" title="%{unit_command}" name="roll_unit_command" value="@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=^{command}}} {{roll=[[1d100]]}} {{original=@{unit_command}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{unit_command}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{unit_command}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{unit_command}*2)+@{penalty})]]}} {{easy=[[ceil((@{unit_command}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{unit_command}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{unit_command}*1.5)+@{penalty})]]}} {{standard=[[@{unit_command}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{unit_command}+@{penalty})/10)]]}} {{standard_fumble=[[(@{unit_command}+@{penalty})]]}} {{hard=[[ceil((@{unit_command}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{unit_command}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{unit_command}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{unit_command}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{unit_command}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{unit_command}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{unit_command}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{unit_command}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{unit_command}*@{herculean_mod})+@{penalty})]]}}" data-i18n="command">Command</button>
             </div>
             <input type="number" class="sheet-grow" title="@{unit_command}" name="attr_unit_command" value="0">
             %
@@ -4390,7 +4390,160 @@
     </div>
 </div>
 </div>
-    
+    <div style="width: 660px" class="sheet-ship">
+    <!-- Stat Table -->
+    <div class="sheet-table">
+        <div class="sheet-tr">
+            <div class="sheet-th sheet-text-left"><label class="sheet-left" data-i18n="name">Name</label></div>
+            <div class="sheet-th sheet-full-width"><input type="text" class="sheet-full-width" title="@{character_name}" name="attr_character_name"></div>
+            <div class="sheet-th sheet-text-left"><label class="sheet-left" data-i18n="condition">Condition</label></div>
+            <div class="sheet-th">
+                <select class="sheet-auto-width sheet-text-center sheet-inverted" title="@{ship_condition}" name="attr_ship_condition">
+                    <option value="ship_shape" selected data-i18n="ship_shape">Ship Shape</option>
+                    <option value="seaworthy" data-i18n="seaworthy">Seaworthy</option>
+                    <option value="battered" data-i18n="battered">Battered</option>
+                    <option value="swamped" data-i18n="swamped">Swamped</option>
+                    <option value="sinking" data-i18n="sinking">Sinking</option>
+                </select>
+            </div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="movement">Movement</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center" title="@{ship_movement}" name="attr_ship_movement" value=""></div>
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="speed">Speed</label></div>
+            <div class="sheet-td"><input type="text" class="sheet-full-width" title="@{ship_speed}" name="attr_ship_speed" value="-" readonly></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="crew">Crew</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center" title="@{ship_crew}" name="attr_ship_crew" value=""></div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="dimensions">Dimensions</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center" title="@{ship_dimensions}" name="attr_ship_dimensions" value=""></div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="capacity">Capacity</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width"><input type="text" class="sheet-full-width sheet-text-center" title="@{ship_capacity}" name="attr_ship_capacity" value=""></div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="size">Size</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width">
+                <select class="sheet-full-width sheet-text-center" title="@{ship_size}" name="attr_ship_size">
+                    <option value="personal" selected data-i18n="personal">Personal</option>
+                    <option value="small" data-i18n="small">Small</option>
+                    <option value="medium" data-i18n="medium">Medium</option>
+                    <option value="large" data-i18n="large">Large</option>
+                    <option value="huge" data-i18n="huge">Huge</option>
+                    <option value="enormous" data-i18n="enormous">Enormous</option>
+                    <option value="colossal" data-i18n="colossal">Colossal</option>
+                    <option value="beyond_colossal" data-i18n="beyond_colossal">Beyond Colossal</option>
+                </select>
+            </div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="hull_type">Hull TYpe</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width">
+                <select class="sheet-full-width sheet-text-center" title="@{ship_hull}" name="attr_ship_hull" data-i18n-list="ship_hull-order">
+                    <option value="utility" data-i18n-list-item="utility" selected data-i18n="utility">Utility</option>
+                    <option value="galley" data-i18n-list-item="galley" data-i18n="galley">Galley</option>
+                    <option value="transport" data-i18n-list-item="transport" data-i18n="transport">Transport</option>
+                </select>
+            </div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="armor">Armor</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width"><input type="number" class="sheet-full-width sheet-text-center" title="@{ship_ap}" name="attr_ship_ap" value="0" min="0"></div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="hit_points">Hit Points</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width">
+                <div class="sheet-flex sheet-gap">
+                    <input type="number" class="sheet-grow sheet-text-center" title="@{ship_hp}" name="attr_ship_hp" value="0"> / <input type="number" class="sheet-grow sheet-bold sheet-text-center" title="@{ship_hp|max}" name="attr_ship_hp_max" value="0">
+                </div>
+            </div>
+            <div class="sheet-td"><label class="sheet-left sheet-help" data-i18n-title="repair_modifier" data-i18n="repair_modifier-a">Repair Mod</label></div>
+            <div class="sheet-td"><input type="text" class="sheet-full-width sheet-text-center" title="@{ship_repair_mod}" name="attr_ship_repair_mod" value="-" readonly></div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><button type="roll" class="sheet-label-left" title="%{unit_command}" name="roll_ship_seaworthiness" value="@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=^{seaworthiness}}} {{ship_condition_skills=[[@{ship_condition_skills}]]}} {{roll=[[1d100]]}} {{original=@{ship_seaworthiness}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{ship_seaworthiness}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{ship_seaworthiness}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{ship_seaworthiness}*2)+@{penalty})]]}} {{easy=[[ceil((@{ship_seaworthiness}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{ship_seaworthiness}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{ship_seaworthiness}*1.5)+@{penalty})]]}} {{standard=[[@{ship_seaworthiness}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{ship_seaworthiness}+@{penalty})/10)]]}} {{standard_fumble=[[(@{ship_seaworthiness}+@{penalty})]]}} {{hard=[[ceil((@{ship_seaworthiness}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{ship_seaworthiness}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{ship_seaworthiness}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{ship_seaworthiness}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{ship_seaworthiness}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{ship_seaworthiness}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{ship_seaworthiness}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{ship_seaworthiness}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{ship_seaworthiness}*@{herculean_mod})+@{penalty})]]}}" data-i18n="seaworthiness">Seaworthiness</button></div>
+            <div class="sheet-td sheet-text-left sheet-full-width">
+                <div class="sheet-flex sheet-gap">
+                    <input type="number" class="sheet-grow sheet-text-center" title="@{ship_seaworthiness}" name="attr_ship_seaworthiness" value="0" min="0">%
+                </div>
+            </div>
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="difficulty">Difficulty</label></div>
+            <div class="sheet-td">
+                <select class="sheet-auto-width sheet-text-center sheet-readonly" name="attr_ship_condition_skills">
+                    <option value="1" selected data-i18n="standard">Standard</option>
+                    <option value="2" data-i18n="hard">Hard</option>
+                    <option value="3" data-i18n="formidable">Formidable</option>
+                    <option value="4" data-i18n="herculean">Herculean</option>
+                </select>
+            </div>
+        </div>
+        <div class="sheet-tr">
+            <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="range">Range</label></div>
+            <div class="sheet-td sheet-text-left sheet-full-width"><input type="number" class="sheet-full-width sheet-text-center" title="@{ship_range}" name="attr_ship_range" value="0" readonly></div>
+            <div class="sheet-td"></div>
+            <div class="sheet-td"></div>
+        </div>
+    </div>
+
+    <!-- Armaments -->
+    <div class="sheet-bmargin">
+        <div class="sheet-flex sheet-tmargin">
+            <div class="sheet-th"><div class="sheet-weapon-name" data-i18n="armament">Armament</div></div>
+            <div class="sheet-th"><div class="sheet-button-width"></div></div>
+            <div class="sheet-th"><div class="sheet-weapon-damage" data-i18n="damage">Damage</div></div>
+            <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
+            <div class="sheet-th"><div class="sheet-number-width" data-i18n="load">Load</div></div>
+            <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
+            <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-a">AP</div></div>
+            <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-a">HP</div></div>
+        </div>
+        <fieldset class="repeating_rangedweapon">
+            <div class="sheet-flex">
+                <div class="sheet-td sheet-hover-btn">
+                    <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                    <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                    <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
+                </div>
+                <div class="sheet-td"><button type="roll" class="sheet-die sheet-d8" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{range=@{range}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}">h</button></div>
+                <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
+                <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
+                <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load"></div>
+                <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_ap}" name="attr_ap" step="1" min="0" value="0"></div>
+                <div class="sheet-td">
+                    <div class="sheet-number-width sheet-text-center">
+                        <input type="number" class="sheet-number-width-xs" title="@{$ID_hp}" name="attr_hp" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_hp|max}" name="attr_hp_max" step="1" min="0" value="0">
+                    </div>
+                </div>
+                <div hidden>
+                    <input type="text" name="attr_force" value="">
+                    <input type="text" name="attr_impale_size" value="">
+                    <input type="text" name="attr_damage_mod_toggle" value="0">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <!-- Notes -->
+    <textarea class="sheet-full-width" title="@{sheet_notes}" name="attr_sheet_notes"></textarea>
+</div>
     
     
     <div class="sheet-star-system">
@@ -6558,6 +6711,10 @@
                 {{/impale_size}}
             </div>
         </div>
+
+        {{#notes}}
+        <div>{{notes}}</div>
+        {{/notes}}
     </div>
 </rolltemplate><script type="text/worker">
 const debug=1
@@ -6879,7 +7036,7 @@ on('change:unit_frontage change:unit_type_multiplier', function(event) {
 });
 
 function upgradeBattleUnit3Dot0() {
-    getAttrs(['unit_notes', 'unit_strength', 'unit_frontage', 'unit_type_multiplier'], function (v) {
+    getAttrs(['unit_notes', 'unit_strength', 'unit_frontage', 'unit_type_multiplier', "unit_command_penalty", "unit_command", "unit_morale_penalty", "unit_morale", "unit_competency", "unit_competency_penalty"], function (v) {
         let newAttrs = {'version': '3.0'};
 
         const strength = parseInt(v['unit_strength']) || 0;
@@ -6888,6 +7045,16 @@ function upgradeBattleUnit3Dot0() {
         const newDamageStep = Math.ceil((frontage * multiplier) / 15);
         newAttrs["unit_depth"] = Math.floor(strength / frontage);
         newAttrs["unit_damage"] = damageModTable(newDamageStep);
+        
+        const command = parseInt(v['unit_command']) || 0;
+        const command_penalty = parseInt(v['unit_command_penalty']) || 0;
+        newAttrs["unit_command"] = command - command_penalty;
+        const competency = parseInt(v['unit_competency']) || 0;
+        const competency_penalty = parseInt(v['unit_competency_penalty']) || 0;
+        newAttrs["unit_competency"] = competency - competency_penalty;
+        const morale = parseInt(v['unit_morale']) || 0;
+        const morale_penalty = parseInt(v['unit_morale_penalty']) || 0;
+        newAttrs["unit_morale"] = morale - morale_penalty;
 
         /* Convert Notes */
         if (v['unit_notes']) {
@@ -10891,6 +11058,89 @@ function upgradeCharacter3Dot0() {
     });
     });
 }
+const shipConditionTable = {
+    "ship_shape": {
+        "speed": "-",
+        "skills": "1",
+        "repair": "-",
+        "range": 1
+    },
+    "seaworthy": {
+        "speed": "-",
+        "skills": "1",
+        "repair": "x1",
+        "range": .75
+    },
+    "battered": {
+        "speed": "-25%",
+        "skills": "2",
+        "repair": "x2",
+        "range": .5
+    },
+    "swamped": {
+        "speed": "-50%",
+        "skills": "3",
+        "repair": "x3",
+        "range": .25
+    },
+    "sinking": {
+        "speed": "-100%",
+        "skills": "4",
+        "repair": "x4",
+        "range": 0
+    }
+}
+
+on('change:ship_seaworthiness', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+
+    getAttrs(['ship_condition', 'ship_seaworthiness'], function (v) {
+        const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
+        let range = Math.ceil((seaworthiness/10) * shipConditionTable[v['ship_condition']]['range']);
+        range = range < 0 ? 0 : range;
+
+        setAttrs({
+            "ship_range": range
+        });
+    });
+});
+
+on('change:ship_condition', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+
+    getAttrs(['ship_condition', 'ship_seaworthiness'], function (v) {
+        const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
+        let range = Math.ceil((seaworthiness/10) * shipConditionTable[v['ship_condition']]['range']);
+        range = range < 0 ? 0 : range;
+
+        setAttrs({
+            "ship_speed": shipConditionTable[v['ship_condition']]['speed'],
+            "ship_condition_skills": shipConditionTable[v['ship_condition']]['skills'],
+            "ship_repair_mod": shipConditionTable[v['ship_condition']]['repair'],
+            "ship_range": range
+        });
+    });
+});
+
+function upgradeShip3Dot0() {
+    getAttrs(['ship_notes', "ship_seaworthiness_penalty", "ship_seaworthiness", "ship_condition"], function (v) {
+        let newAttrs = {'version': '3.0'};
+
+        const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
+        const seaworthiness_penalty = parseInt(v['ship_seaworthiness_penalty']) || 0;
+        newAttrs["ship_seaworthiness"] = seaworthiness - seaworthiness_penalty;
+
+        let range = Math.ceil((newAttrs["ship_seaworthiness"]/10) * shipConditionTable[v['ship_condition']]['range']);
+        newAttrs["ship_range"] = range < 0 ? 0 : range;
+
+        /* Convert Notes */
+        if (v['ship_notes']) {
+            newAttrs['sheet_notes'] = v['ship_notes'];
+        }
+
+        setAttrs(newAttrs);
+    });
+}
 function upgradeStarSystem3Dot0() {
     getAttrs(['system_notes'], function (v) {
         let newAttrs = {'version': '3.0'};
@@ -10922,6 +11172,7 @@ function versioning(sheet_type, version) {
     } else if (version < 3.0) {
         if (sheet_type === 'pc') {upgradeCharacter3Dot0();}
         else if (sheet_type === 'battle_unit') {upgradeBattleUnit3Dot0();}
+        else if (sheet_type === 'ship') {upgradeShip3Dot0();}
         else if (sheet_type === 'solar_system') {upgradeStarSystem3Dot0();}
         versioning(sheet_type, '3.0');
     }

@@ -1,0 +1,83 @@
+const shipConditionTable = {
+    "ship_shape": {
+        "speed": "-",
+        "skills": "1",
+        "repair": "-",
+        "range": 1
+    },
+    "seaworthy": {
+        "speed": "-",
+        "skills": "1",
+        "repair": "x1",
+        "range": .75
+    },
+    "battered": {
+        "speed": "-25%",
+        "skills": "2",
+        "repair": "x2",
+        "range": .5
+    },
+    "swamped": {
+        "speed": "-50%",
+        "skills": "3",
+        "repair": "x3",
+        "range": .25
+    },
+    "sinking": {
+        "speed": "-100%",
+        "skills": "4",
+        "repair": "x4",
+        "range": 0
+    }
+}
+
+on('change:ship_seaworthiness', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+
+    getAttrs(['ship_condition', 'ship_seaworthiness'], function (v) {
+        const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
+        let range = Math.ceil((seaworthiness/10) * shipConditionTable[v['ship_condition']]['range']);
+        range = range < 0 ? 0 : range;
+
+        setAttrs({
+            "ship_range": range
+        });
+    });
+});
+
+on('change:ship_condition', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+
+    getAttrs(['ship_condition', 'ship_seaworthiness'], function (v) {
+        const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
+        let range = Math.ceil((seaworthiness/10) * shipConditionTable[v['ship_condition']]['range']);
+        range = range < 0 ? 0 : range;
+
+        setAttrs({
+            "ship_speed": shipConditionTable[v['ship_condition']]['speed'],
+            "ship_condition_skills": shipConditionTable[v['ship_condition']]['skills'],
+            "ship_repair_mod": shipConditionTable[v['ship_condition']]['repair'],
+            "ship_range": range
+        });
+    });
+});
+
+function upgradeShip3Dot0() {
+    getAttrs(['ship_notes', "ship_seaworthiness_penalty", "ship_seaworthiness", "ship_condition"], function (v) {
+        let newAttrs = {'version': '3.0'};
+
+        const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
+        const seaworthiness_penalty = parseInt(v['ship_seaworthiness_penalty']) || 0;
+        newAttrs["ship_seaworthiness"] = seaworthiness - seaworthiness_penalty;
+
+        let range = Math.ceil((newAttrs["ship_seaworthiness"]/10) * shipConditionTable[v['ship_condition']]['range']);
+        newAttrs["ship_range"] = range < 0 ? 0 : range;
+
+        /* Convert Notes */
+        if (v['ship_notes']) {
+            newAttrs['sheet_notes'] = v['ship_notes'];
+        }
+
+        setAttrs(newAttrs);
+    });
+}
