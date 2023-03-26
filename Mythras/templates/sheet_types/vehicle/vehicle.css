@@ -1,0 +1,8 @@
+input.sheet-vehicle-type-control:not([value="mythras"]) ~ .sheet-vehicle-mythras,
+input.sheet-vehicle-type-control:not([value="mspace"]) ~ .sheet-vehicle-frostbyte {
+    display: none;
+}
+
+.sheet-vehicle-label {
+    width: 80px;
+}

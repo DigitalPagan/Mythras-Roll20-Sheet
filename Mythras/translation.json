@@ -1252,6 +1252,8 @@
     "vampire_powers": "Vampire Powers",
     "variable": "Variable",
     "vehicle": "Vehicle",
+    "vehicles": "Vehicles",
+    "frostbyte": "Frostbyte",
     "vehicle_frostbyte": "Vehicle (Frostbyte)",
     "vehicle_location": "Vehicle Location",
     "vehicle_type_option_description": "Type of vehicle mechanics to use.",
@@ -1428,5 +1430,7 @@
     "minutes": "Minutes",
     "cantrip": "Cantrip",
     "action": "Action",
-    "activation_cost": "Activation Cost"
+    "activation_cost": "Activation Cost",
+    "starship": "Starship",
+    "pilot": "Pilot"
 }

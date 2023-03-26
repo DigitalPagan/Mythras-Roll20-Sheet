@@ -1,0 +1,197 @@
+<div class="sheet-vehicle">
+    <input type="hidden" class="sheet-vehicle-type-control" name="attr_vehicle_type" value="disabled">
+    <div style="width: 660px;" class="sheet-vehicle-mythras">
+        <div class="sheet-flex sheet-gap sheet-bmargin">
+            <!--Vehicle Stats -->
+            <div class="sheet-flex-column sheet-grow">
+                <div class="sheet-flex">
+                    <div class="sheet-th"><label class="sheet-left" data-i18n="name">Name</label></div>
+                    <div class="sheet-grow sheet-th"><input type="text" class="sheet-full-width" title="@{character_name}" name="attr_character_name" value=""></div>
+                    <div class="sheet-th"><label class="sheet-left" data-i18n="type">Type</label></div>
+                    <div class="sheet-th">
+                        <select class="sheet-auto-width sheet-inverted" name="attr_mythras_vehicle_type">
+                            <option value="terrestrial" data-i18n="terrestrial" selected>Terrestrial</option>
+                            <option value="spaceship" data-i18n="starship">Starship</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sheet-flex sheet-gap">
+                    <div class="sheet-flex sheet-grow">
+                        <div class="sheet-td"><label class="sheet-left" data-i18n="size">Size</label></div>
+                        <div class="sheet-td sheet-grow">
+                            <select class="sheet-full-width sheet-text-center" title="@{vehicle_size}" name="attr_vehicle_size">
+                                <option value="1" data-i18n="small" selected >Small</option>
+                                <option value="2" data-i18n="medium">Medium</option>
+                                <option value="3" data-i18n="large">Large</option>
+                                <option value="4" data-i18n="huge">Huge</option>
+                                <option value="5" data-i18n="enormous">Enormous</option>
+                                <option value="6" data-i18n="colossal">Colossal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sheet-flex sheet-grow">
+                        <div class="sheet-td"><label class="sheet-left" data-i18n="speed">Speed</label></div>
+                        <div class="sheet-td sheet-grow">
+                            <select class="sheet-full-width sheet-text-center" title="@{vehicle_speed}" name="attr_vehicle_speed">
+                                <option value="ponderous" data-i18n="ponderous" selected>Ponderous</option>
+                                <option value="sluggish" data-i18n="sluggish">Sluggish</option>
+                                <option value="slow" data-i18n="slow">Slow</option>
+                                <option value="mediocre" data-i18n="mediocre">Mediocre</option>
+                                <option value="gentle" data-i18n="gentle">Gentle</option>
+                                <option value="moderate" data-i18n="moderate">Moderate</option>
+                                <option value="rapid" data-i18n="rapid">Rapid</option>
+                                <option value="fast" data-i18n="fast">Fast</option>
+                                <option value="fleet" data-i18n="fleet">Fleet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="sheet-flex">
+                    <div class="sheet-td"><label class="sheet-left" data-i18n="traits">Traits</label></div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{vehicle_traits}" name="attr_vehicle_traits" value=""></div>
+                </div>
+                <div class="sheet-space-between">
+                    <div class="sheet-flex">
+                        <div class="sheet-td"><label class="sheet-left" data-i18n="hull">Hull</label></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width sheet-impval" title="@{vehicle_hull}" name="attr_vehicle_hull" value="0"></div>
+                    </div>
+                    <div class="sheet-flex">
+                        <div class="sheet-td"><label class="sheet-left" data-i18n="structure">Structure</label></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_structure}" name="attr_vehicle_structure" value="0">/<input type="number" class="sheet-rval" title="@{vehicle_structure|max}" name="attr_vehicle_structure_max" value="0"></div></div>
+                    </div>
+                    <div class="sheet-flex">
+                        <div class="sheet-td"><label class="sheet-left" data-i18n="shields">Shields</label></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_shields}" name="attr_vehicle_shields" value="0">/<input type="number" class="sheet-rval" title="@{vehicle_shields|max}" name="attr_vehicle_shields_max" value="0"></div></div>
+                    </div>
+                </div>
+                <div class="sheet-grow">
+                    <textarea class="sheet-full-width sheet-full-height" title="@{sheet_notes}" name="attr_sheet_notes" value=""></textarea>
+                </div>
+            </div>
+
+            <!-- Systems -->
+            <div>
+                <div class="sheet-table">
+                    <div class="sheet-tr">
+                        <div class="sheet-th"><button type="roll" class="sheet-link" title="%{hit_location}" name="roll_hit_location" value="{{'@{hit_location_roll}'}}" data-i18n="roll">Roll</button></div>
+                        <div class="sheet-th" data-i18n="system">System</div>
+                        <!-- Vehicle system roll values -->
+                        <div hidden>
+                            <input type="text" name="attr_vehicle_system_die" value="1d8">
+                            <input type="text" name="attr_vehicle_system_roll" value="{{'@{roll_display}&{template:system} {{name=^{system} (@{vehicle_system_die})}} {{character=@{character_name}}} {{roll=[[@{vehicle_system_die}]]}} {{hull=@{vehicle_hull}}} {{structure=@{vehicle_structure}}} {{structure_max=@{vehicle_structure|max}}} {{shields=@{vehicle_shields}}} {{shields_max=@{vehicle_shields|max}}} {{system1_name=@{vehicle_system1_name}}} {{system1_hits=@{vehicle_system1_hits}}} {{system1_hits_max=@{vehicle_system1_hits|max}}} {{system2_name=@{vehicle_system2_name}}} {{system2_hits=@{vehicle_system2_hits}}} {{system2_hits_max=@{vehicle_system2_hits|max}}} {{system3_name=@{vehicle_system3_name}}} {{system3_hits=@{vehicle_system3_hits}}} {{system3_hits_max=@{vehicle_system3_hits|max}}} {{system4_name=@{vehicle_system4_name}}} {{system4_hits=@{vehicle_system4_hits}}} {{system4_hits_max=@{vehicle_system4_hits|max}}} {{system5_name=@{vehicle_system5_name}}} {{system5_hits=@{vehicle_system5_hits}}} {{system5_hits_max=@{vehicle_system5_hits|max}}} {{system6_name=@{vehicle_system6_name}}} {{system6_hits=@{vehicle_system6_hits}}} {{system6_hits_max=@{vehicle_system6_hits|max}}} {{system7_name=@{vehicle_system7_name}}} {{system7_hits=@{vehicle_system7_hits}}} {{system7_hits_max=@{vehicle_system7_hits|max}}} {{system8_name=@{vehicle_system8_name}}} {{system8_hits=@{vehicle_system8_hits}}} {{system8_hits_max=@{vehicle_system8_hits|max}}} {{system9_name=@{vehicle_system9_name}}} {{system9_hits=@{vehicle_system9_hits}}} {{system9_hits_max=@{vehicle_system9_hits|max}}} {{system10_name=@{vehicle_system10_name}}} {{system10_hits=@{vehicle_system10_hits}}} {{system10_hits_max=@{vehicle_system10_hits|max}}}'}}" disabled>
+                        </div>
+                        <div class="sheet-th sheet-help" data-i18n-title="modifier" data-i18n="modifier-a">Mod</div>
+                        <div class="sheet-th" data-i18n="hits">Hits</div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">1</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system1_name}" name="attr_vehicle_system1_name" value="Cargo Compartment"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system1_hits_mod}" name="attr_vehicle_system1_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system1_hits}" name="attr_vehicle_system1_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system1_hits|max}" name="attr_vehicle_system1_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">2</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system2_name}" name="attr_vehicle_system2_name" value="Communications"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system2_hits_mod}" name="attr_vehicle_system2_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system2_hits}" name="attr_vehicle_system2_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system2_hits|max}" name="attr_vehicle_system2_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">3</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system3_name}" name="attr_vehicle_system3_name" value="Controls"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system3_hits_mod}" name="attr_vehicle_system3_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system3_hits}" name="attr_vehicle_system3_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system3_hits|max}" name="attr_vehicle_system3_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">4</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system4_name}" name="attr_vehicle_system4_name" value="Drive/Repulsorlift"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system4_hits_mod}" name="attr_vehicle_system4_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system4_hits}" name="attr_vehicle_system4_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system4_hits|max}" name="attr_vehicle_system4_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">5</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system5_name}" name="attr_vehicle_system5_name" value="Pilot/Passengers"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system5_hits_mod}" name="attr_vehicle_system5_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system5_hits}" name="attr_vehicle_system5_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system5_hits|max}" name="attr_vehicle_system5_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">6</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system6_name}" name="attr_vehicle_system6_name" value="Power Core"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system6_hits_mod}" name="attr_vehicle_system6_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system6_hits}" name="attr_vehicle_system6_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system6_hits|max}" name="attr_vehicle_system6_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">7</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system7_name}" name="attr_vehicle_system7_name" value="Sensors"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system7_hits_mod}" name="attr_vehicle_system7_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system7_hits}" name="attr_vehicle_system7_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system7_hits|max}" name="attr_vehicle_system7_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr">
+                        <div class="sheet-td">8</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system8_name}" name="attr_vehicle_system8_name" value="Weapons"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system8_hits_mod}" name="attr_vehicle_system8_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system8_hits}" name="attr_vehicle_system8_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system8_hits|max}" name="attr_vehicle_system8_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <input type="hidden" class="sheet-wide-toggle" name="attr_vehicle_starship_system_display" value="0">
+                    <div class="sheet-tr sheet-toggle">
+                        <div class="sheet-td">9</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system9_name}" name="attr_vehicle_system9_name" value="Sublight Drive"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system9_hits_mod}" name="attr_vehicle_system9_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system9_hits}" name="attr_vehicle_system9_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system9_hits|max}" name="attr_vehicle_system9_hits_max" value="1" readonly></div></div>
+                    </div>
+                    <div class="sheet-tr sheet-toggle">
+                        <div class="sheet-td">10</div>
+                        <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{vehicle_system10_name}" name="attr_vehicle_system10_name" value="Weapons"></div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width-sm sheet-dullval" title="@{vehicle_system10_hits_mod}" name="attr_vehicle_system10_hits_mod" value="0"></div>
+                        <div class="sheet-td"><div class="sheet-impval sheet-number-width sheet-flex"><input type="number" class="sheet-lval" title="@{vehicle_system10_hits}" name="attr_vehicle_system10_hits" value="1">/<input type="number" class="sheet-rval" title="@{vehicle_system10_hits|max}" name="attr_vehicle_system10_hits_max" value="1" readonly></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weapons -->
+        <div class="sheet-bmargin">
+            <div class="sheet-flex">
+                <div class="sheet-th"><div class="sheet-weapon-name" data-i18n="weapon">Weapon</div></div>
+                <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                <div class="sheet-th"><div class="sheet-weapon-damage" data-i18n="damage">Damage</div></div>
+                <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
+                <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="ammunition" data-i18n="ammunition-a">Ammo</div></div>
+                <div class="sheet-th"><div class="sheet-number-width" data-i18n="load">Load</div></div>
+                <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
+            </div>
+            <fieldset class="repeating_rangedweapon">
+                <div class="sheet-opaque sheet-flex">
+                    <div class="sheet-td sheet-hover-btn">
+                        <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
+                        <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
+                        <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
+                    </div>
+                    <div class="sheet-td"><button type="roll" class="sheet-die sheet-d8" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{range=@{range}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}'}}">h</button></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range" value=""></div>
+                    <div class="sheet-td">
+                        <div class="sheet-number-width sheet-text-center">
+                            <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load"></div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
+                </div>
+            </fieldset>
+            <div hidden>
+                <input type="checkbox" name="attr_favored" value="1">
+                <input type="text" name="attr_force" value="">
+                <input type="text" name="attr_impale_size" value="">
+                <input type="checkbox" name="attr_damage_mod_toggle" value="@{damage_mod}">
+                <input type="number" name="attr_ap" value="0">
+                <input type="number" name="attr_hp" value="0">
+                <input type="number" name="attr_hp_max" value="0">
+                <input type="number" name="attr_enc" value="0">
+                <input type="text" name="attr_system" value="loadout">
+            </div>
+        </div>
+    </div>
+    <div class="sheet-vehicle-frostbyte">
+        Frostbyte Vehicle
+    </div>
+</div>

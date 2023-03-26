@@ -1,7 +1,7 @@
 const debug=1
 
 /* Campaign Options */
-const campaignSettings = ["ability_system", "action_points_calc", "affiliations_enabled", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled"];
+const campaignSettings = ["ability_system", "action_points_calc", "affiliations_enabled", "dependencies_enabled", "extended_conflict_enabled", "herculean_mod", "luck_points_rank", "reach_enabled", "simplified_combat_enabled", "social_conflict_enabled", "special_effects", "spirits_enabled", "tenacity_enabled", "vehicle_type"];
 const campaginSettingDefaults = {
     "default": {
         "ability_system": "core",
@@ -19,7 +19,8 @@ const campaginSettingDefaults = {
         "social_conflict_enabled": 1,
         "special_effects": "core",
         "tenacity_enabled": 0,
-        "traditions_enabled": 1
+        "traditions_enabled": 1,
+        "vehicle_type": "mythras"
     },
     "after_the_vampire_wars": {
         "ability_system": "after_the_vampire_wars",
@@ -56,7 +57,8 @@ const campaginSettingDefaults = {
         "herculean_mod": ".2",
         "reach_enabled": 0,
         "special_effects": "imperative",
-        "spirits_enabled": 0
+        "spirits_enabled": 0,
+        "vehicle_type": "mspace"
     },
     "monster_island": {},
     "mythic_babylon": {
@@ -91,7 +93,8 @@ const campaginSettingDefaults = {
         "herculean_mod": ".2",
         "reach_enabled": 0,
         "special_effects": "imperative",
-        "spirits_enabled": 0
+        "spirits_enabled": 0,
+        "vehicle_type": "mspace"
     },
     "perceforest": {
         "shaping_traits": "^{combine}: @{shaped_combine}\n^{duration}: @{shaped_duration}\n^{magnitude}: @{shaped_magnitude}\n^{range}: @{shaped_range}\n^{targets}: @{shaped_targets}\n^{wonders}: @{shaped_wonders}"
@@ -155,17 +158,21 @@ campaignSettings.forEach(campaignSetting => {
 });
 
 /* Sheet Type Triggers */
-on("change:sheet_type", function(event) {
+on("change:sheet_type change:vehicle_type", function(event) {
     if (event.sourceType === "sheetworker") {return;}
     if (event.sourceAttribute === 'sheet_type') {
-        getAttrs(['pow', 'cha'].concat(spiritDamageGetAttrs), function(v) {
+        getAttrs(['pow', 'cha', 'sheet_type', 'vehicle_type'].concat(spiritDamageGetAttrs), function(v) {
             let newAttrs = {};
 
             /* Set hit table rolls */
-            if (event.newValue === 'pc' || event.newValue === 'creature') {
+            if (v['sheet_type'] === 'pc' || v['sheet_type'] === 'creature') {
                 newAttrs['hit_location_roll'] = '@{creature_hit_location_roll}';
-                newAttrs['hit_location_low_roll'] = '@{creature_hit_location_roll}';
-                newAttrs['hit_location_high_roll'] = '@{creature_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{creature_hit_location_low_roll}';
+                newAttrs['hit_location_high_roll'] = '@{creature_hit_location_high_roll}';
+            } else if (v['sheet_type'] === 'vehicle' && v['vehicle_type'] === 'mythras') {
+                newAttrs['hit_location_roll'] = '@{vehicle_system_roll}';
+                newAttrs['hit_location_low_roll'] = '@{vehicle_system_roll}';
+                newAttrs['hit_location_high_roll'] = '@{vehicle_system_roll}';
             } else {
                 newAttrs['hit_location_roll'] = '@{none_hit_location_roll}';
                 newAttrs['hit_location_low_roll'] = '@{none_hit_location_roll}';
@@ -298,6 +305,7 @@ function damageTable(step) {
 {% include 'sheet_types/character/character_import.js' %}
 {% include 'sheet_types/character/character_versioning.js' %}
 {% include 'sheet_types/ship/ship.js' %}
+{% include 'sheet_types/vehicle/vehicle.js' %}
 {% include 'sheet_types/star_system/star_system.js' %}
 
 
@@ -320,6 +328,7 @@ function versioning(sheet_type, version) {
         else if (sheet_type === 'battle_unit') {upgradeBattleUnit3Dot0();}
         else if (sheet_type === 'ship') {upgradeShip3Dot0();}
         else if (sheet_type === 'solar_system') {upgradeStarSystem3Dot0();}
+        else if (sheet_type === 'vehicle') {upgradeVehicle3Dot0();}
         versioning(sheet_type, '3.0');
     }
 }

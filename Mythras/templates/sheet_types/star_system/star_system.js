@@ -1,6 +1,11 @@
 function upgradeStarSystem3Dot0() {
     getAttrs(['system_notes'], function (v) {
-        let newAttrs = {'version': '3.0'};
+        let newAttrs = {
+            'version': '3.0',
+            'hit_location_roll': '@{none_hit_location_roll}',
+            'hit_location_low_roll': '@{none_hit_location_roll}',
+            'hit_location_high_roll': '@{none_hit_location_roll}'
+        };
 
         /* Convert Notes */
         if (v['system_notes']) {

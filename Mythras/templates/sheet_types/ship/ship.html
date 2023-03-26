@@ -117,6 +117,7 @@
             <div class="sheet-th"><div class="sheet-button-width"></div></div>
             <div class="sheet-th"><div class="sheet-weapon-damage" data-i18n="damage">Damage</div></div>
             <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
+            <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="ammunition" data-i18n="ammunition-a">Ammo</div></div>
             <div class="sheet-th"><div class="sheet-number-width" data-i18n="load">Load</div></div>
             <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
             <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="armor_points" data-i18n="armor_points-a">AP</div></div>
@@ -132,6 +133,7 @@
                 <div class="sheet-td"><button type="roll" class="sheet-die sheet-d8" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{range=@{range}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}'}}">h</button></div>
                 <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
                 <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
+                <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
                 <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load"></div>
                 <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_ap}" name="attr_ap" step="1" min="0" value="0"></div>
@@ -141,9 +143,12 @@
                     </div>
                 </div>
                 <div hidden>
+                    <input type="checkbox" name="attr_favored" value="1">
                     <input type="text" name="attr_force" value="">
                     <input type="text" name="attr_impale_size" value="">
-                    <input type="text" name="attr_damage_mod_toggle" value="0">
+                    <input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}">
+                    <input type="number" name="attr_enc" value="0">
+                    <input type="text" name="attr_location" value="loadout">
                 </div>
             </div>
         </fieldset>

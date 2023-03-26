@@ -23,7 +23,12 @@ on('change:unit_frontage change:unit_type_multiplier', function(event) {
 
 function upgradeBattleUnit3Dot0() {
     getAttrs(['unit_notes', 'unit_strength', 'unit_frontage', 'unit_type_multiplier', "unit_command_penalty", "unit_command", "unit_morale_penalty", "unit_morale", "unit_competency", "unit_competency_penalty"], function (v) {
-        let newAttrs = {'version': '3.0'};
+        let newAttrs = {
+            'version': '3.0',
+            'hit_location_roll': '@{none_hit_location_roll}',
+            'hit_location_low_roll': '@{none_hit_location_roll}',
+            'hit_location_high_roll': '@{none_hit_location_roll}'
+        };
 
         const strength = parseInt(v['unit_strength']) || 0;
         const frontage = parseInt(v['unit_frontage']) || 0;

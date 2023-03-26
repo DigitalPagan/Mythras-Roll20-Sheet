@@ -69,7 +69,12 @@ function upgradeShip3Dot0() {
             shiparmamentGetAttrs.push(`repeating_shiparmament_${id}_name`, `repeating_shiparmament_${id}_range`, `repeating_shiparmament_${id}_damage`, `repeating_shiparmament_${id}_load`, `repeating_shiparmament_${id}_notes`, `repeating_shiparmament_${id}_ap`, `repeating_shiparmament_${id}_hp`);
         });
         getAttrs(shiparmamentGetAttrs.concat(['ship_notes', "ship_seaworthiness_penalty", "ship_seaworthiness", "ship_condition"]), function (v) {
-            let newAttrs = {'version': '3.0'};
+            let newAttrs = {
+                'version': '3.0',
+                'hit_location_roll': '@{none_hit_location_roll}',
+                'hit_location_low_roll': '@{none_hit_location_roll}',
+                'hit_location_high_roll': '@{none_hit_location_roll}'
+            };
 
             const seaworthiness = parseInt(v['ship_seaworthiness']) || 0;
             const seaworthiness_penalty = parseInt(v['ship_seaworthiness_penalty']) || 0;
