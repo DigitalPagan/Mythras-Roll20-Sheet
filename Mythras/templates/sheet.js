@@ -173,6 +173,10 @@ on("change:sheet_type change:vehicle_type", function(event) {
                 newAttrs['hit_location_roll'] = '@{vehicle_system_roll}';
                 newAttrs['hit_location_low_roll'] = '@{vehicle_system_roll}';
                 newAttrs['hit_location_high_roll'] = '@{vehicle_system_roll}';
+            } else if (v['sheet_type'] === 'vehicle' && v['vehicle_type'] === 'mspace') {
+                newAttrs['hit_location_roll'] = '@{d100_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{d100_hit_location_low_roll}';
+                newAttrs['hit_location_high_roll'] = '@{d100_hit_location_hight_roll';
             } else {
                 newAttrs['hit_location_roll'] = '@{none_hit_location_roll}';
                 newAttrs['hit_location_low_roll'] = '@{none_hit_location_roll}';
@@ -242,6 +246,17 @@ on('clicked:reset-penalty', function(event) {
 });
 
 /* Utility Functions */
+function getSectionIDsOrdered(sectionName, callback) {
+    'use strict';
+    getAttrs([`_reporder_${sectionName}`], function (v) {
+        getSectionIDs(sectionName, function (idArray) {
+            let reporderArray = v[`_reporder_${sectionName}`] ? v[`_reporder_${sectionName}`].toLowerCase().split(',') : [],
+                ids = [...new Set(reporderArray.filter(x => idArray.includes(x)).concat(idArray))];
+            callback(ids);
+        });
+    });
+}
+
 function damageModTable(step) {
     const stepAbs = Math.abs(step);
     const die_steps = [0, '1d2','1d4','1d6','1d8'];

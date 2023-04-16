@@ -12,8 +12,7 @@ on('change:unit_frontage change:unit_type_multiplier', function(event) {
     getAttrs(['unit_strength', 'unit_frontage', 'unit_type_multiplier'], function (v) {
         const strength = parseInt(v['unit_strength']) || 0;
         const frontage = parseInt(v['unit_frontage']) || 0;
-        const multiplier = parseInt(v['unit_type_multiplier']) || 0;
-        const newDamageStep = Math.ceil((frontage * multiplier) / 15);
+        const newDamageStep = Math.ceil((frontage) / 15);
         setAttrs({
             "unit_depth": Math.floor(strength / frontage),
             "unit_damage": damageModTable(newDamageStep)
@@ -25,6 +24,7 @@ function upgradeBattleUnit3Dot0() {
     getAttrs(['unit_notes', 'unit_strength', 'unit_frontage', 'unit_type_multiplier', "unit_command_penalty", "unit_command", "unit_morale_penalty", "unit_morale", "unit_competency", "unit_competency_penalty"], function (v) {
         let newAttrs = {
             'version': '3.0',
+            'sheet_type': 'battle_unit',
             'hit_location_roll': '@{none_hit_location_roll}',
             'hit_location_low_roll': '@{none_hit_location_roll}',
             'hit_location_high_roll': '@{none_hit_location_roll}'
@@ -32,8 +32,7 @@ function upgradeBattleUnit3Dot0() {
 
         const strength = parseInt(v['unit_strength']) || 0;
         const frontage = parseInt(v['unit_frontage']) || 0;
-        const multiplier = parseInt(v['unit_type_multiplier']) || 0;
-        const newDamageStep = Math.ceil((frontage * multiplier) / 15);
+        const newDamageStep = Math.ceil((frontage) / 15);
         newAttrs["unit_depth"] = Math.floor(strength / frontage);
         newAttrs["unit_damage"] = damageModTable(newDamageStep);
         

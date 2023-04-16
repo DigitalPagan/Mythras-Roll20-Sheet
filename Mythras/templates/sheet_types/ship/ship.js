@@ -71,6 +71,7 @@ function upgradeShip3Dot0() {
         getAttrs(shiparmamentGetAttrs.concat(['ship_notes', "ship_seaworthiness_penalty", "ship_seaworthiness", "ship_condition"]), function (v) {
             let newAttrs = {
                 'version': '3.0',
+                'sheet_type': 'ship',
                 'hit_location_roll': '@{none_hit_location_roll}',
                 'hit_location_low_roll': '@{none_hit_location_roll}',
                 'hit_location_high_roll': '@{none_hit_location_roll}'

@@ -828,7 +828,7 @@ input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
 .sheet-typetoggle:not([value="spirit"]) ~ div.sheet-wrapper .sheet-spirit,
 .sheet-typetoggle:not([value="pc"], [value="creature"]) ~ div.sheet-wrapper .sheet-creature,
 .sheet-typetoggle:not([value="ship"]) ~ div.sheet-wrapper div.sheet-ship,
-.sheet-typetoggle:not([value="solar_system"]) ~ div.sheet-wrapper div.sheet-star-system,
+.sheet-typetoggle:not([value="star_system"]) ~ div.sheet-wrapper div.sheet-star-system,
 .sheet-typetoggle:not([value="vehicle"]) ~ div.sheet-wrapper div.sheet-vehicle {
     display: none;
 }

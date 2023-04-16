@@ -97,8 +97,7 @@
     </div>
 
     <!-- Sheet Types -->
-    <!-- TODO add Battle Actions (SEs) for Battle Units -->
-<div style="width: 660px" class="sheet-battle-unit">
+    <div style="width: 660px" class="sheet-battle-unit">
     <div class="sheet-flex sheet-gap">
         <div class="sheet-flex sheet-gap sheet-half-width">
             <div class="sheet-unit-label"><label class="sheet-left" data-i18n="unit_name">Unit Name</label></div>
@@ -175,7 +174,7 @@
         </div>
         <div class="sheet-flex sheet-gap sheet-half-width">
             <div class="sheet-unit-label">
-                <button type="roll" class="sheet-label-left" title="%{unit_damage}" name="roll_unit_damage" value="@{roll_display}&{template:default} {{dmgstyle=1}} {{character=@{character_name}}} {{name=^{damage} (@{unit_damage})}} {{^{damage}=[[@{unit_damage}]]}}" data-i18n="damage">Damage</button>
+                <button type="roll" class="sheet-label-left" title="%{unit_damage}" name="roll_unit_damage" value="@{roll_display}&{template:default} {{dmgstyle=1}} {{character=@{character_name}}} {{name=^{damage} (@{unit_damage})}} {{^{damage}=[[@{unit_damage} * @{unit_type_multiplier}]]}}" data-i18n="damage">Damage</button>
             </div>
             <input type="text" class="sheet-grow" title="@{unit_damage}" name="attr_unit_damage" value="1d2" readonly>
         </div>
@@ -4558,11 +4557,10 @@
             <!--Vehicle Stats -->
             <div class="sheet-flex-column sheet-grow">
                 <div class="sheet-flex">
-                    <div class="sheet-th"><label class="sheet-left" data-i18n="name">Name</label></div>
                     <div class="sheet-grow sheet-th"><input type="text" class="sheet-full-width" title="@{character_name}" name="attr_character_name" value=""></div>
                     <div class="sheet-th"><label class="sheet-left" data-i18n="type">Type</label></div>
                     <div class="sheet-th">
-                        <select class="sheet-auto-width sheet-inverted" name="attr_mythras_vehicle_type">
+                        <select class="sheet-auto-width sheet-inverted sheet-text-center" name="attr_mythras_vehicle_type">
                             <option value="terrestrial" data-i18n="terrestrial" selected>Terrestrial</option>
                             <option value="spaceship" data-i18n="starship">Starship</option>
                         </select>
@@ -4740,12 +4738,278 @@
                 <input type="number" name="attr_hp" value="0">
                 <input type="number" name="attr_hp_max" value="0">
                 <input type="number" name="attr_enc" value="0">
-                <input type="text" name="attr_system" value="loadout">
+                <input type="text" name="attr_location" value="loadout">
             </div>
         </div>
     </div>
-    <div class="sheet-vehicle-frostbyte">
-        Frostbyte Vehicle
+
+    <!-- Frostbyte Style Vehicles -->
+    <div style="width: 860px" class="sheet-vehicle-frostbyte">
+        <input type="hidden" class="sheet-starship-toggle" name="attr_msvehicle_spaceship_toggle" value="0">
+        <div class="sheet-flex sheet-gap">
+            <div class="sheet-half-width">
+                <!-- Vehicle Info -->
+                <div class="sheet-bmargin">
+                    <!-- Name, Type & Size Rating -->
+                    <div class="sheet-flex">
+                        <div class="sheet-grow sheet-th"><input type="text" class="sheet-full-width sheet-text-left" title="@{character_name}" name="attr_character_name" value=""></div>
+                        <div class="sheet-th"><label class="sheet-left" data-i18n="type">Type</label></div>
+                        <div class="sheet-th">
+                            <select class="sheet-auto-width sheet-text-center sheet-inverted" name="attr_msvehicle_type">
+                                <!-- Ground Options -->
+                                <option class="sheet-bold sheet-text-left" value="-" data-i18n="ground" disabled>Ground</option>
+                                <option value="regular" data-i18n="regular" selected>Regular</option>
+                                <option value="terrain" data-i18n="terrain">Terrain</option>
+                                <option value="walker" data-i18n="walker">Walker</option>
+                                <option value="burrower" data-i18n="burrower">Burrower</option>
+                                <!-- Liquid Options -->
+                                <option class="sheet-bold sheet-text-left" value="-" data-i18n="liquid" disabled>Liquid</option>
+                                <option value="motor" data-i18n="surface_motor">Surface, Motor</option>
+                                <option value="sail" data-i18n="surface_sail">Surface, Sail</option>
+                                <option value="sub" data-i18n="sub">Sub</option>
+                                <!-- Flight Options -->
+                                <option class="sheet-bold sheet-text-left" value="-" data-i18n="flight" disabled>Flight</option>
+                                <option value="wings" data-i18n="wings">Wings</option>
+                                <option value="anti-grav" data-i18n="anti-grav">Anti-grav</option>
+                                <option value="rotor_blades" data-i18n="rotor_blades">Rotor Blades</option>
+                                <option value="hover_craft" data-i18n="hover_craft">Hover Craft</option>
+                                <option value="gas_bag" data-i18n="gas_bag">Gas Bag</option>
+                                <!-- Space Options -->
+                                <option class="sheet-bold sheet-text-left" value="-" data-i18n="space" disabled>Space</option>
+                                <option value="spaceship" data-i18n="starship">Starship</option>
+                            </select>
+                        </div>
+                        <div class="sheet-th">
+                            <label class="sheet-checkbox">
+                                <input type="checkbox" name="attr_fbvehicle_npc" value="1"><span style="border-color: whitesmoke">3</span>
+                                <span data-i18n="non-player_character-a">NPC</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="sheet-space-between sheet-gap">
+                        <!-- Column 1 -->
+                        <div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="speed">Speed</label></div>
+                                <input type="number" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_speed}" name="attr_msvehicle_speed" value="0">
+                            </div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="handling">Handling</label></div>
+                                <input type="number" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_handling}" name="attr_msvehicle_handling" value="0">
+                            </div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow">
+                                    <label class="sheet-left">
+                                        <span data-i18n="size">Size</span>
+                                        <span class="sheet-starship">(<span class="sheet-help" data-i18n-title="size_rating" name="attr_msvehicle_size_rating"></span>)</span>
+                                    </label>
+                                    <input type="hidden" name="attr_msvehicle_size_rating" value="0">
+                                </div>
+                                <input type="number" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_size}" name="attr_msvehicle_size" value="0">
+                            </div>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="armor">Armor</label></div>
+                                <input type="number" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_armor}" name="attr_msvehicle_armor" value="0">
+                            </div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="shields">Shields</label></div>
+                                <div class="sheet-impval sheet-number-width sheet-flex sheet-text-center"><input type="number" class="sheet-lval" title="@{msvehicle_shields}" name="attr_msvehicle_shields" value="0">/<input type="number" class="sheet-rval" title="@{msvehicle_shields|max}" name="attr_msvehicle_shields_max" value="0"></div>
+                            </div>
+                            <div class="sheet-space-between sheet-gap sheet-starship">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="hyperdrive">Hyperdrive</label></div>
+                                <input type="number" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_hyperspace}" name="attr_msvehicle_hyperspace" value="0">
+                            </div>
+                        </div>
+
+                        <!-- Column 3 -->
+                        <div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="hit_points">Hit Points</label></div>
+                                <div class="sheet-impval sheet-number-width sheet-flex sheet-text-center"><input type="number" class="sheet-lval" title="@{msvehicle_hp}" name="attr_msvehicle_hp" value="0">/<input type="number" class="sheet-rval" title="@{msvehicle_hp|max}" name="attr_msvehicle_hp_max" value="0"></div>
+                            </div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="recovery">Recovery</label></div>
+                                <input type="number" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_recovery}" name="attr_msvehicle_recovery" value="0">
+                            </div>
+                            <div class="sheet-space-between sheet-gap">
+                                <div class="sheet-grow"><label class="sheet-left" data-i18n="condition">Condition</label></div>
+                                <input type="text" class="sheet-number-width sheet-impval sheet-text-center" title="@{msvehicle_condition}" name="attr_msvehicle_condition" value="-0%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" class="sheet-toggle" name="attr_fbvehicle_npc" value="0">
+                <div class="sheet-bmargin sheet-toggle">
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-grow sheet-text-left" data-i18n="non-player_character-a">NPC</div>
+                    </div>
+                    <div class="sheet-space-between sheet-gap">
+                        <div class="sheet-space-between sheet-gap">
+                            <div class="sheet-grow">
+                                <button type="roll" class="sheet-label-left" title="%{fbvehicle_gunnery}" name="roll_fbvehicle_gunnery" value="@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=^{pilot}}} {{roll=[[1d100]]}} {{original=@{fbvehicle_gunnery}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{fbvehicle_gunnery}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{fbvehicle_gunnery}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{fbvehicle_gunnery}*2)+@{penalty})]]}} {{easy=[[ceil((@{fbvehicle_gunnery}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{fbvehicle_gunnery}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{fbvehicle_gunnery}*1.5)+@{penalty})]]}} {{standard=[[@{fbvehicle_gunnery}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{fbvehicle_gunnery}+@{penalty})/10)]]}} {{standard_fumble=[[(@{fbvehicle_gunnery}+@{penalty})]]}} {{hard=[[ceil((@{fbvehicle_gunnery}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{fbvehicle_gunnery}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{fbvehicle_gunnery}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{fbvehicle_gunnery}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{fbvehicle_gunnery}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{fbvehicle_gunnery}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{fbvehicle_gunnery}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{fbvehicle_gunnery}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{fbvehicle_gunnery}*@{herculean_mod})+@{penalty})]]}}" data-i18n="gunnery">Gunnery</button>
+                            </div>
+                            <input type="number" class="sheet-impval sheet-number-width" title="@{fbvehicle_gunnery}" name="attr_fbvehicle_gunnery" value="0">%
+                        </div>
+                        <div class="sheet-space-between sheet-gap">
+                            <div class="sheet-grow">
+                                <button type="roll" class="sheet-label-left" title="%{fbvehicle_pilot}" name="roll_fbvehicle_pilot" value="@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=^{pilot}}} {{roll=[[1d100]]}} {{original=@{fbvehicle_pilot}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{fbvehicle_pilot}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{fbvehicle_pilot}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{fbvehicle_pilot}*2)+@{penalty})]]}} {{easy=[[ceil((@{fbvehicle_pilot}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{fbvehicle_pilot}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{fbvehicle_pilot}*1.5)+@{penalty})]]}} {{standard=[[@{fbvehicle_pilot}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{fbvehicle_pilot}+@{penalty})/10)]]}} {{standard_fumble=[[(@{fbvehicle_pilot}+@{penalty})]]}} {{hard=[[ceil((@{fbvehicle_pilot}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{fbvehicle_pilot}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{fbvehicle_pilot}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{fbvehicle_pilot}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{fbvehicle_pilot}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{fbvehicle_pilot}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{fbvehicle_pilot}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{fbvehicle_pilot}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{fbvehicle_pilot}*@{herculean_mod})+@{penalty})]]}}" data-i18n="pilot">Pilot</button>
+                            </div>
+                            <input type="number" class="sheet-impval sheet-number-width" title="@{fbvehicle_pilot}" name="attr_fbvehicle_pilot" value="0">%
+                        </div>
+
+                        <div class="sheet-space-between sheet-gap">
+                            <div class="sheet-grow"><label class="sheet-left" data-i18n="pilot_hit_points">Pilot Hit Points</label></div>
+                            <div class="sheet-impval sheet-number-width sheet-flex sheet-text-center"><input type="number" class="sheet-lval" title="@{fbvehicle_pilot_hp}" name="attr_fbvehicle_pilot_hp" value="0">/<input type="number" class="sheet-rval" title="@{fbvehicle_pilot_hp|max}" name="attr_fbvehicle_pilot_hp_max" value="0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weapons -->
+                <div class="sheet-bmargin">
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-grow"><div data-i18n="weapon">Weapon</div></div>
+                        <div class="sheet-th"><div class="sheet-button-width"></div></div>
+                        <div class="sheet-th"><div class="sheet-weapon-damage" data-i18n="damage">Damage</div></div>
+                        <div class="sheet-th"><div class="sheet-weapon-reach" data-i18n="range">Range</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width sheet-help" data-i18n-title="ammunition" data-i18n="ammunition-a">Ammo</div></div>
+                    </div>
+                    <fieldset class="repeating_rangedweapon">
+                        <div class="sheet-opaque sheet-flex">
+                            <div class="sheet-td sheet-grow sheet-hover-btn">
+                                <input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
+                                <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                                <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
+                            </div>
+                            <div class="sheet-td"><button type="roll" class="sheet-die sheet-d8" title="%{$ID_damage}" name="roll_damage" value="@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{range=@{range}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}">h</button></div>
+                            <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
+                            <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range" value=""></div>
+                            <div class="sheet-td">
+                                <div class="sheet-number-width sheet-text-center">
+                                    <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div hidden>
+                        <input type="checkbox" name="attr_favored" value="1">
+                        <input type="text" name="attr_force" value="">
+                        <input type="text" name="attr_impale_size" value="">
+                        <input type="checkbox" name="attr_damage_mod_toggle" value="@{damage_mod}">
+                        <input type="number" name="attr_load" value="0">
+                        <input type="number" name="attr_ap" value="0">
+                        <input type="number" name="attr_hp" value="0">
+                        <input type="number" name="attr_hp_max" value="0">
+                        <input type="number" name="attr_enc" value="0">
+                        <input type="text" name="attr_location" value="loadout">
+                        <input type="text" name="attr_notes" value="">
+                    </div>
+                </div>
+
+                <!-- Apps -->
+                <div class="sheet-bmargin">
+                    <div class="sheet-flex">
+                        <div class="sheet-th sheet-grow"><div data-i18n="application">Application</div></div>
+                        <div class="sheet-th"><div class="sheet-number-width"></div></div>
+                    </div>
+                    <fieldset class="repeating_msvehicleapp">
+                        <div class="sheet-flex">
+                            <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name" value=""></div>
+                            <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_points}" name="attr_points" value="+10%"></div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="sheet-flex">
+                    <div class="sheet-th sheet-grow" data-i18n="notes">Notes</div>
+                </div>
+                <textarea class="sheet-full-width" name="attr_sheet_notes" value=""></textarea>
+            </div>
+
+            <!-- Modules & Attributes -->
+            <div class="sheet-half-width">
+                <div class="sheet-flex">
+                    <div class="sheet-th sheet-grow sheet-text-left" data-i18n="attributes">Attributes</div>
+                </div>
+                <div class="sheet-bmargin">
+                    <div class="sheet-starship sheet-space-between sheet-gap sheet-hl">
+                        <label class="sheet-left" data-i18n="streamlined">Streamlined</label>
+                        <div><input type="checkbox" title="@{msvehicle_streamlining}" name="attr_msvehicle_streamlining" value="1"><span>3</span></div>
+                    </div>
+                    <div class="sheet-space-between sheet-gap sheet-hl">
+                        <label class="sheet-left" data-i18n="stealth">Stealth</label>
+                        <input type="text" class="sheet-impval sheet-number-width" title="@{msvehicle_stealth}" name="attr_msvehicle_stealth" value="-0%">
+                    </div>
+                </div>
+
+                <div class="sheet-flex">
+                    <div class="sheet-th sheet-starship sheet-text-center"><button type="roll" class="sheet-link sheet-number-width" title="%{hit_location}" name="roll_hit_location" value="@{hit_location_roll}">d100</button></div>
+                    <div class="sheet-th sheet-grow"><div data-i18n="module">Module</div></div>
+                    <div class="sheet-th"><div class="sheet-fb-module-type" data-i18n="type">Type</div></div>
+                    <div class="sheet-th"><div class="sheet-number-width-sm sheet-help" data-i18n-title="thrust_rating" data-i18n="thrust_rating-a">TR</div></div>
+                    <div class="sheet-th sheet-starship"><div class="sheet-number-width sheet-help" data-i18n-title="hit_points" data-i18n="hit_points-a">HP</div></div>
+                    <div class="sheet-th"><div class="sheet-number-width">#</div></div>
+                </div>
+                <!-- Frostbyte Vehicle hit location rolls -->
+                <div hidden>
+                    <input type="text" name="attr_d100_hit_location_roll" value="@{roll_display}&{template:default} {{hitstyle=1}} {{name=^{hit_location} (d100)}} {{character=@{character_name}}} {{^{roll}=[[d100]]}}" disabled>
+                    <input type="text" name="attr_d100_hit_location_low_roll" value="@{roll_display}&{template:default} {{hitstyle=1}} {{name=^{hit_location} (d50)}} {{character=@{character_name}}} {{^{roll}=[[d50]]}}" disabled>
+                    <input type="text" name="attr_d100_hit_location_high_roll" value="@{roll_display}&{template:default} {{hitstyle=1}} {{name=^{hit_location} (d50+50)}} {{character=@{character_name}}} {{^{roll}=[[d50+50]]}}" disabled>
+                </div>
+                <div class="sheet-flex sheet-non-starship">
+                    <div class="sheet-td sheet-grow">
+                        <div class="sheet-full-width" data-i18n="movement_class">Movement Class</div>
+                    </div>
+                    <div class="sheet-td">
+                        <div class="sheet-fb-module-type" data-i18n="other">Other</div>
+                    </div>
+                    <div class="sheet-td">
+                        <div class="sheet-number-width-sm"></div>
+                    </div>
+                    <div class="sheet-td"><input type="number" class="sheet-number-width" name="attr_fbvehicle_movement_class_count" value="0" readonly></div>
+                </div>
+                <fieldset class="repeating_fbvehiclemodule">
+                    <div class="sheet-flex">
+                        <div class="sheet-td sheet-starship">
+                            <input type="text" class="sheet-number-width" title="$ID_hitroll" name="attr_hitroll" value="">
+                        </div>
+                        <div class="sheet-td sheet-grow sheet-hover-btn">
+                            <input type="text" class="sheet-full-width" title="@{$ID_name}" name="attr_name" value="">
+                            <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm &{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}">i</button>
+                            <input type="hidden" name="attr_id" value="unset, please change any value in this module" readonly>
+                        </div>
+                        <div class="sheet-td">
+                            <select class="sheet-fb-module-type sheet-text-center" title="@{$ID_moduletype}" name="attr_moduletype" data-i18n-list="frostbyte_module_type-order">
+                                <option value="other" data-i18n="other" selected>Other</option>
+                                <option value="engine" data-i18n="engine" data-i18n-list-item="engine">Engine</option>
+                                <option class="sheet-starship" value="hyperdrive" data-i18n="hyperdrive" data-i18n-list-item="hyperdrive">Hyperdrive</option>
+                                <option value="maneuvering" data-i18n="maneuvering" data-i18n-list-item="maneuvering">Maneuvering</option>
+                            </select>
+                        </div>
+                        <div class="sheet-td">
+                            <div class="sheet-number-width-sm">
+                                <input type="hidden" class="sheet-tr-type-control" name="attr_moduletype" value="other">
+                                <input type="number" class="sheet-number-width-sm sheet-tr-type-show" title="@{$ID_rating}" name="attr_rating" value="0">
+                            </div>
+                        </div>
+                        <div class="sheet-td sheet-starship">
+                            <input type="number" class="sheet-impval sheet-number-width" title="@{$ID_hp}" name="attr_hp" value="0">
+                        </div>
+                        <div class="sheet-td"><input type="number" class="sheet-number-width" name="attr_count" value="0" step="any"></div>
+                    </div>
+                </fieldset>
+                <div class="sheet-space-between sheet-gap">
+                    <div class="sheet-grow"><label class="sheet-left" data-i18n="total">Total</label></div>
+                    <input type="number" class="sheet-number-width" title="@{msvehicle_total_modules}" name="attr_msvehicle_total_modules" value="0" step="any" readonly>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
     
@@ -4871,7 +5135,7 @@
                     <option value="creature" data-i18n-list-item="creature" data-i18n="creature">Creature</option>
                     <option value="pc" data-i18n-list-item="major_character" data-i18n="major_character" selected></option>
                     <option value="ship" data-i18n-list-item="ship" data-i18n="ship">Ship</option>
-                    <option value="solar_system" data-i18n-list-item="star_system" data-i18n="star_system">Star System</option>
+                    <option value="star_system" data-i18n-list-item="star_system" data-i18n="star_system">Star System</option>
                     <option value="spirit" class="sheet-spirits" data-i18n-list-item="spirit" data-i18n="spirit">Spirit</option>
                     <option value="vehicle" data-i18n-list-item="vehicle" data-i18n="vehicle">Vehicle></option>
                 </select>
@@ -7174,6 +7438,10 @@ on("change:sheet_type change:vehicle_type", function(event) {
                 newAttrs['hit_location_roll'] = '@{vehicle_system_roll}';
                 newAttrs['hit_location_low_roll'] = '@{vehicle_system_roll}';
                 newAttrs['hit_location_high_roll'] = '@{vehicle_system_roll}';
+            } else if (v['sheet_type'] === 'vehicle' && v['vehicle_type'] === 'mspace') {
+                newAttrs['hit_location_roll'] = '@{d100_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{d100_hit_location_low_roll}';
+                newAttrs['hit_location_high_roll'] = '@{d100_hit_location_hight_roll';
             } else {
                 newAttrs['hit_location_roll'] = '@{none_hit_location_roll}';
                 newAttrs['hit_location_low_roll'] = '@{none_hit_location_roll}';
@@ -7243,6 +7511,17 @@ on('clicked:reset-penalty', function(event) {
 });
 
 /* Utility Functions */
+function getSectionIDsOrdered(sectionName, callback) {
+    'use strict';
+    getAttrs([`_reporder_${sectionName}`], function (v) {
+        getSectionIDs(sectionName, function (idArray) {
+            let reporderArray = v[`_reporder_${sectionName}`] ? v[`_reporder_${sectionName}`].toLowerCase().split(',') : [],
+                ids = [...new Set(reporderArray.filter(x => idArray.includes(x)).concat(idArray))];
+            callback(ids);
+        });
+    });
+}
+
 function damageModTable(step) {
     const stepAbs = Math.abs(step);
     const die_steps = [0, '1d2','1d4','1d6','1d8'];
@@ -7315,8 +7594,7 @@ on('change:unit_frontage change:unit_type_multiplier', function(event) {
     getAttrs(['unit_strength', 'unit_frontage', 'unit_type_multiplier'], function (v) {
         const strength = parseInt(v['unit_strength']) || 0;
         const frontage = parseInt(v['unit_frontage']) || 0;
-        const multiplier = parseInt(v['unit_type_multiplier']) || 0;
-        const newDamageStep = Math.ceil((frontage * multiplier) / 15);
+        const newDamageStep = Math.ceil((frontage) / 15);
         setAttrs({
             "unit_depth": Math.floor(strength / frontage),
             "unit_damage": damageModTable(newDamageStep)
@@ -7328,6 +7606,7 @@ function upgradeBattleUnit3Dot0() {
     getAttrs(['unit_notes', 'unit_strength', 'unit_frontage', 'unit_type_multiplier', "unit_command_penalty", "unit_command", "unit_morale_penalty", "unit_morale", "unit_competency", "unit_competency_penalty"], function (v) {
         let newAttrs = {
             'version': '3.0',
+            'sheet_type': 'battle_unit',
             'hit_location_roll': '@{none_hit_location_roll}',
             'hit_location_low_roll': '@{none_hit_location_roll}',
             'hit_location_high_roll': '@{none_hit_location_roll}'
@@ -7335,8 +7614,7 @@ function upgradeBattleUnit3Dot0() {
 
         const strength = parseInt(v['unit_strength']) || 0;
         const frontage = parseInt(v['unit_frontage']) || 0;
-        const multiplier = parseInt(v['unit_type_multiplier']) || 0;
-        const newDamageStep = Math.ceil((frontage * multiplier) / 15);
+        const newDamageStep = Math.ceil((frontage) / 15);
         newAttrs["unit_depth"] = Math.floor(strength / frontage);
         newAttrs["unit_damage"] = damageModTable(newDamageStep);
         
@@ -8472,12 +8750,12 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored c
         getSectionIDs("repeating_rangedweapon", function(rangedIds) {
             let meleeGetAttrs = [];
             meleeIds.forEach(id => {
-                meleeGetAttrs.push(`repeating_meleeweapon_${id}_name`, `repeating_meleeweapon_${id}_favored`)
+                meleeGetAttrs.push(`repeating_meleeweapon_${id}_name`, `repeating_meleeweapon_${id}_favored`);
             });
 
             let rangedGetAttrs = [];
             rangedIds.forEach(id => {
-                rangedGetAttrs.push(`repeating_rangedweapon_${id}_name`, `repeating_rangedweapon_${id}_favored`)
+                rangedGetAttrs.push(`repeating_rangedweapon_${id}_name`, `repeating_rangedweapon_${id}_favored`);
             });
 
             getAttrs(meleeGetAttrs.concat(rangedGetAttrs), function(v) {
@@ -11425,6 +11703,7 @@ function upgradeShip3Dot0() {
         getAttrs(shiparmamentGetAttrs.concat(['ship_notes', "ship_seaworthiness_penalty", "ship_seaworthiness", "ship_condition"]), function (v) {
             let newAttrs = {
                 'version': '3.0',
+                'sheet_type': 'ship',
                 'hit_location_roll': '@{none_hit_location_roll}',
                 'hit_location_low_roll': '@{none_hit_location_roll}',
                 'hit_location_high_roll': '@{none_hit_location_roll}'
@@ -11537,7 +11816,6 @@ on('change:vehicle_size', function(event) {
     });
 });
 
-
 on(`change:mythras_vehicle_type`, function(event) {
     if (event.sourceType === "sheetworker") {return;}
 
@@ -11556,18 +11834,365 @@ on(`change:mythras_vehicle_type`, function(event) {
     setAttrs(newAttrs);
 });
 
+/* Frostbyte Vehicle Scripts */
+const movementClassTable = {
+    "regular": {
+        "moduleMod": .1
+    },
+    "terrain": {
+        "moduleMod": .2
+    },
+    "walker": {
+        "moduleMod": 2
+    },
+    "burrower": {
+        "moduleMod": 3,
+        "speedMod": .1
+    },
+    "motor": {
+        "moduleMod": 2,
+        "speedMod": .5
+    },
+    "sail": {
+        "moduleMod": 2,
+        "speedMod": .5
+    },
+    "sub": {
+        "moduleMod": 3,
+        "speedMod": .5
+    },
+    "wings": {
+        "moduleMod": 3
+    },
+    "anti-grav": {
+        "moduleMod": .1
+    },
+    "rotor_blades": {
+        "moduleMod": 2
+    },
+    "hover_craft": {
+        "moduleMod": 2
+    },
+    "gas_bag": {
+        "moduleMod": 100
+    },
+    "spaceship": {
+        "moduleMod": 0
+    }
+};
+
+on(`change:msvehicle_type`, function(event) {
+    let newAttrs = {};
+    newAttrs['msvehicle_spaceship_toggle'] = event.newValue === 'spaceship' ? '1' : '0';
+    setAttrs(newAttrs);
+});
+
+on('change:repeating_fbvehiclemodule:moduletype change:repeating_fbvehiclemodule:rating change:repeating_fbvehiclemodule:count change:msvehicle_type remove:repeating_fbvehiclemodule', function(event) {
+    if (event.sourceType === "sheetworker") {return;}
+
+    getSectionIDsOrdered("repeating_fbvehiclemodule", function(moduleIds) {
+        let moduleGetAttrs = [];
+
+        moduleIds.forEach(id => {
+            moduleGetAttrs.push(`repeating_fbvehiclemodule_${id}_moduletype`, `repeating_fbvehiclemodule_${id}_rating`, `repeating_fbvehiclemodule_${id}_count`);
+        });
+
+        getAttrs(moduleGetAttrs.concat(['fbvehicle_movement_class_count', 'msvehicle_type']), function(v) {
+            const moduleMod = movementClassTable[v['msvehicle_type']]['moduleMod'];
+            let newAttrs = {};
+            let totalEngineRating = 0;
+            let totalManeuveringRating = 0;
+            let totalHyperdriveCount = 0;
+            let totalRepeatingModuleCount = 0;
+            let totalModules = 0;
+
+            moduleIds.forEach(id => {
+                const moduleCount = parseFloat(v[`repeating_fbvehiclemodule_${id}_count`]) || 0;
+                totalRepeatingModuleCount = totalRepeatingModuleCount + moduleCount;
+
+                if (v[`repeating_fbvehiclemodule_${id}_moduletype`] === 'engine') {
+                    const moduleRating = parseInt(v[`repeating_fbvehiclemodule_${id}_rating`]);
+                    totalEngineRating = totalEngineRating + (moduleCount * moduleRating);
+                } else if (v[`repeating_fbvehiclemodule_${id}_moduletype`] === 'maneuvering') {
+                    const moduleRating = parseInt(v[`repeating_fbvehiclemodule_${id}_rating`]);
+                    totalManeuveringRating = totalManeuveringRating + (moduleCount * moduleRating);
+                } else if (v[`repeating_fbvehiclemodule_${id}_moduletype`] === 'hyperdrive') {
+                    totalHyperdriveCount = totalHyperdriveCount + moduleCount;
+                }
+
+                newAttrs['msvehicle_hyperspace'] = Math.ceil(totalHyperdriveCount);
+
+                /* Set the movement class module adjustment */
+                let movementClassModules = totalRepeatingModuleCount * moduleMod;
+                if (v['msvehicle_type'] === "spaceship") {
+                    movementClassModules = 0;
+                } else if (v['msvehicle_type'] === "terrain" && movementClassModules < 2) {
+                    movementClassModules = 2;
+                } else if (movementClassModules < 1){
+                    movementClassModules = 1;
+                }
+                totalModules = movementClassModules + totalRepeatingModuleCount;
+                newAttrs['msvehicle_total_modules'] = parseFloat(totalModules.toFixed(2));
+                newAttrs['fbvehicle_movement_class_count'] = parseFloat(movementClassModules.toFixed(2));
+
+                /* Set Size and Size Rating */
+                if (v['msvehicle_type'] === "spaceship") {
+                    newAttrs['msvehicle_size'] = Math.ceil(totalModules);
+                    newAttrs['msvehicle_size_rating'] = Math.floor(Math.log2(newAttrs['msvehicle_size'])) + 1;
+                } else {
+                    newAttrs['msvehicle_size'] = Math.ceil(totalModules * 10);
+                }
+
+                /* Speed & Handling */
+                let speedMod = 1;
+                if ('speedMod' in movementClassTable[v['msvehicle_type']]) {
+                    speedMod = movementClassTable[v['msvehicle_type']]['speedMod'];
+                }
+                newAttrs['msvehicle_speed'] = Math.ceil((totalEngineRating / totalModules) * speedMod);
+                newAttrs['msvehicle_handling'] = Math.ceil((totalManeuveringRating / totalModules) * speedMod);
+            });
+
+            /* Hit Location */
+            if (v['msvehicle_type'] === 'spaceship') {
+                let hitTableArray = [];
+                let totalRatio = 0;
+                let moduleOrder = 0;
+                moduleIds.forEach(id => {
+                    let moduleObj = {};
+                    const moduleCount = parseFloat(v[`repeating_fbvehiclemodule_${id}_count`]) || 0;
+                    const ratioRaw = (moduleCount / totalModules) * 100;
+                    moduleObj['id'] = id;
+                    moduleObj['order'] = moduleOrder;
+                    moduleObj['roundedness'] = Math.abs((ratioRaw % 1) - .5);
+                    moduleObj['ratio'] = Math.round(ratioRaw);
+                    if (moduleObj['ratio'] > 0 && moduleObj['ratio'] < 1) {
+                        moduleObj['ratio'] = 1;
+                    }
+                    totalRatio = totalRatio + moduleObj['ratio'];
+                    hitTableArray.push(moduleObj);
+                    moduleOrder = moduleOrder + 1;
+                });
+
+                let ratioLastValue = 0;
+                let ratioDiff = 0;
+
+
+                if (totalRatio !== 100) {
+                    /* We want to modify the modules which where most rounded so we sort by inverse roundedness */
+                    hitTableArray.sort((a, b) => {
+                        return b['roundedness'] - a['roundedness'];
+                    });
+                    if (totalRatio > 100) {
+                        ratioDiff = totalRatio - 100;
+                        console.log("table over by " + ratioDiff);
+                        hitTableArray.forEach(module => {
+                            if (ratioDiff > 0 && module['ratio'] !== 1) {
+                                module['ratio'] = module['ratio'] - 1;
+                                ratioDiff = ratioDiff - 1;
+                            }
+                        });
+                    } else {
+                        ratioDiff = 100 - totalRatio;
+                        console.log("table under by " + ratioDiff);
+                        hitTableArray.forEach(module => {
+                            if (ratioDiff > 0) {
+                                module['ratio'] = module['ratio'] + 1;
+                                ratioDiff = ratioDiff - 1;
+                            }
+                        });
+                    }
+                    /* Re-sort back into order */
+                    hitTableArray.sort((a, b) => {
+                        return a['order'] - b['order'];
+                    });
+                }
+                hitTableArray.forEach(module => {
+                    const hitRollStart = (ratioLastValue + 1) === 100 ? '00' : ratioLastValue + 1;
+                    const hitRollEnd = (ratioLastValue + module['ratio']) === 100 ? '00' : ratioLastValue + module['ratio'];
+                    ratioLastValue = hitRollEnd;
+                    if (hitRollStart === hitRollEnd) {
+                        newAttrs[`repeating_fbvehiclemodule_${module['id']}_hitroll`] = hitRollEnd === 100 ? '00' : hitRollEnd;
+                    } else {
+
+                        newAttrs[`repeating_fbvehiclemodule_${module['id']}_hitroll`] = hitRollStart + '-' + hitRollEnd;
+                    }
+                });
+            }
+
+            setAttrs(newAttrs);
+        });
+    });
+});
+
+/* Mythras Vehicle Upgrades */
+function upgradeMythrasVehicle3Dot0() {
+    getSectionIDs("repeating_vehicleweapon", function(vehicleweaponIds) {
+        let vehicleweaponGetAttrs = [];
+        vehicleweaponIds.forEach(id => {
+            vehicleweaponGetAttrs.push(`repeating_vehicleweapon_${id}_name`, `repeating_vehicleweapon_${id}_range`, `repeating_vehicleweapon_${id}_damage`, `repeating_vehicleweapon_${id}_load`, `repeating_vehicleweapon_${id}_ammo`, `repeating_vehicleweapon_${id}_traits`);
+        });
+        getAttrs(vehicleweaponGetAttrs.concat(['vehicle_size', 'mythras_vehicle_type']), function (v) {
+            let newAttrs = {
+                'version': '3.0',
+                'sheet_type': 'vehicle',
+                'hit_location_roll': '@{vehicle_system_roll}',
+                'hit_location_low_roll': '@{vehicle_system_roll}',
+                'hit_location_high_roll': '@{vehicle_system_roll}'
+            };
+            if (v['mythras_vehicle_type'] === "spaceship") {
+                newAttrs['vehicle_starship_system_display'] = 1;
+            }
+            for (let num = 1; num < 11; num++) {
+                newAttrs[`vehicle_system${num}_hits_max`] = v['vehicle_size'];
+            }
+            vehicleweaponIds.forEach(id => {
+                const weaponId = 'repeating_rangedweapon_' + generateRowID();
+                newAttrs[`${weaponId}_name`] = v[`repeating_vehicleweapon_${id}_name`] ? v[`repeating_vehicleweapon_${id}_name`] : "?";
+                newAttrs[`${weaponId}_damage`] = v[`repeating_vehicleweapon_${id}_damage`] ? v[`repeating_vehicleweapon_${id}_damage`] : "";
+                newAttrs[`${weaponId}_range`] = v[`repeating_vehicleweapon_${id}_range`] ? v[`repeating_vehicleweapon_${id}_range`] : "";
+                newAttrs[`${weaponId}_load`] = v[`repeating_vehicleweapon_${id}_load`] ? v[`repeating_vehicleweapon_${id}_load`] : "";
+                newAttrs[`${weaponId}_notes`] = v[`repeating_vehicleweapon_${id}_traits`] ? v[`repeating_vehicleweapon_${id}_traits`] : "";
+                newAttrs[`${weaponId}_ammo`] = v[`repeating_vehicleweapon_${id}_ammo`] ? v[`repeating_vehicleweapon_${id}_ammo`] : "0";
+                newAttrs[`${weaponId}_ammo_max`] = v[`repeating_vehicleweapon_${id}_ammo`] ? v[`repeating_vehicleweapon_${id}_ammo`] : "0";
+            });
+
+            console.log(newAttrs);
+            setAttrs(newAttrs);
+        });
+    });
+}
+
+/* Frostbyte Vehicle Upgrades */
+function upgradeFrostbyteVehicle3Dot0() {
+    getSectionIDs("repeating_msvehicleweapon", function(msvehicleweaponIds) {
+        const oldModules = ['airlock', 'cargo', 'cockpit', 'crew', 'engines', 'escape_pod', 'extra_sensors', 'environment', 'hanger', 'hyperspace', 'lab', 'maneuvering', 'open_space', 'passengers', 'rescue_utilities', 'robot_arm', 'self_repair', 'sensors', 'sickbay', 'storage', 'weapons'];
+        let oldModuleGetAttrs = [];
+        oldModules.forEach(oldModule => {
+            oldModuleGetAttrs.push(`msvehicle_${oldModule}`, `msvehicle_${oldModule}_hp`, `msvehicle_${oldModule}_table_start`, `msvehicle_${oldModule}_table_end`);
+        });
+        let msvehicleweaponGetAttrs = [];
+        msvehicleweaponIds.forEach(id => {
+            msvehicleweaponGetAttrs.push(`repeating_msvehicleweapon_${id}_name`, `repeating_msvehicleweapon_${id}_range`, `repeating_msvehicleweapon_${id}_damage`, `repeating_msvehicleweapon_${id}_ammo`);
+        });
+        getAttrs(msvehicleweaponGetAttrs.concat(oldModuleGetAttrs, ['type', 'msvehicle_type', 'msvehicle_notes', 'msvehicle_size', 'msvehicle_engines_hphp', 'msvehicle_hyperdrive_table_start', 'msvehicle_hyperdrive_table_end', 'msvehicle_engines_tr', 'msvehicle_maneuvering_tr']), function (v) {
+            let newAttrs = {
+                'version': '3.0',
+                'sheet_type': 'vehicle'
+            };
+            if (v['msvehicle_type'] === 'spaceship') {
+                newAttrs['hit_location_roll'] = '@{d100_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{d100_hit_location_low_roll}';
+                newAttrs['hit_location_high_roll'] = '@{d100_hit_location_high_roll}';
+            } else {
+                newAttrs['hit_location_roll'] = '@{none_hit_location_roll}';
+                newAttrs['hit_location_low_roll'] = '@{none_hit_location_roll}';
+                newAttrs['hit_location_high_roll'] = '@{none_hit_location_roll}';
+            }
+            msvehicleweaponIds.forEach(id => {
+                const weaponId = 'repeating_rangedweapon_' + generateRowID();
+                newAttrs[`${weaponId}_name`] = v[`repeating_msvehicleweapon_${id}_name`] ? v[`repeating_msvehicleweapon_${id}_name`] : "?";
+                newAttrs[`${weaponId}_damage`] = v[`repeating_msvehicleweapon_${id}_damage`] ? v[`repeating_msvehicleweapon_${id}_damage`] : "";
+                newAttrs[`${weaponId}_range`] = v[`repeating_msvehicleweapon_${id}_range`] ? v[`repeating_msvehicleweapon_${id}_range`] : "";
+                newAttrs[`${weaponId}_ammo`] = v[`repeating_msvehicleweapon_${id}_ammo`] ? v[`repeating_msvehicleweapon_${id}_ammo`] : "0";
+                newAttrs[`${weaponId}_ammo_max`] = v[`repeating_msvehicleweapon_${id}_ammo`] ? v[`repeating_msvehicleweapon_${id}_ammo`] : "0";
+            });
+
+            let total_modules = 0;
+            oldModules.forEach(oldModule => {
+                const moduleCount = parseFloat(v[`msvehicle_${oldModule}`]) || 0;
+                if (moduleCount > 0) {
+                    const moduleId = 'repeating_fbvehiclemodule_' + generateRowID();
+                    total_modules = total_modules + moduleCount;
+                    if (oldModule === 'engines') {
+                        newAttrs[`${moduleId}_moduletype`] = 'engine';
+                        newAttrs[`${moduleId}_rating`] = v['msvehicle_engines_tr'];
+                    } else if (oldModule === 'maneuvering') {
+                        newAttrs[`${moduleId}_moduletype`] = 'maneuvering';
+                        newAttrs[`${moduleId}_rating`] = v['msvehicle_maneuvering_tr'];
+                    } else if (oldModule === 'hyperspace') {
+                        newAttrs[`${moduleId}_moduletype`] = 'hyperdrive';
+                    }
+
+                    if (oldModule === 'cargo') {
+                        newAttrs[`${moduleId}_name`] = getTranslationByKey('cargo_hold');
+                    } else if (oldModule === 'hanger') {
+                        newAttrs[`${moduleId}_name`] = getTranslationByKey('hanger_bay');
+                    } else {
+                        newAttrs[`${moduleId}_name`] = getTranslationByKey(oldModule);
+                    }
+
+                    // Hyperspace module had a difference base var name for table values in v2
+                    if (oldModule === 'hyperspace') {
+                        if (v[`msvehicle_hyperdrive_table_start`] === v[`msvehicle_hyperdrive_table_end`]) {
+                            newAttrs[`${moduleId}_hitroll`] = v[`msvehicle_hyperdrive_table_end`];
+                        } else {
+                            newAttrs[`${moduleId}_hitroll`] = v[`msvehicle_hyperdrive_table_start`] + '-' + v[`msvehicle_hyperdrive_table_end`];
+                        }
+                    } else {
+                        if (v[`msvehicle_${oldModule}_table_start`] && v[`msvehicle_${oldModule}_table_end`]) {
+                            if (v[`msvehicle_${oldModule}_table_start`] === v[`msvehicle_${oldModule}_table_end`]) {
+                                newAttrs[`${moduleId}_hitroll`] = v[`msvehicle_${oldModule}_table_end`];
+                            } else {
+                                newAttrs[`${moduleId}_hitroll`] = v[`msvehicle_${oldModule}_table_start`] + '-' + v[`msvehicle_${oldModule}_table_end`];
+                            }
+                        }
+                    }
+
+                    // There was a type in v2 in the engine hp variable name
+                    if (oldModule === 'engines') {
+                        newAttrs[`${moduleId}_hp`] = v[`msvehicle_${oldModule}_hphp`] ? v[`msvehicle_${oldModule}_hphp`] : 0;
+                    } else {
+                        newAttrs[`${moduleId}_hp`] = v[`msvehicle_${oldModule}_hp`] ? v[`msvehicle_${oldModule}_hp`] : 0;
+                    }
+
+                    newAttrs[`${moduleId}_count`] = moduleCount;
+                }
+            });
+
+            /* Set the movement class module adjustment */
+            const moduleMod = movementClassTable[v['msvehicle_type']]['moduleMod'];
+            let movementClassModules = total_modules * moduleMod;
+            if (v['msvehicle_type'] === "spaceship") {
+                movementClassModules = 0;
+            } else if (v['msvehicle_type'] === "terrain" && movementClassModules < 2) {
+                movementClassModules = 2;
+            } else if (movementClassModules < 1){
+                movementClassModules = 1;
+            }
+            newAttrs['fbvehicle_movement_class_count'] = parseFloat(movementClassModules).toFixed(2);
+            total_modules = total_modules + movementClassModules;
+            newAttrs['msvehicle_total_modules'] = parseFloat(total_modules).toFixed(2);
+
+            if (v['msvehicle_type'] === "spaceship") {
+                newAttrs['msvehicle_size'] = Math.ceil(total_modules);
+                newAttrs['msvehicle_size_rating'] = Math.floor(Math.log2(newAttrs['msvehicle_size'])) + 1;
+            } else {
+                newAttrs['msvehicle_size'] = Math.ceil(total_modules * 10);
+            }
+
+            /* Convert notes */
+            newAttrs[`sheet_notes`] = v['msvehicle_notes'] ? v['msvehicle_notes'] : "";
+
+            setAttrs(newAttrs);
+        });
+    });
+}
+
+/* General Upgrades */
 function upgradeVehicle3Dot0() {
-    setAtrs({
-        'version': '3.0',
-        'hit_location_roll': '@{vehicle_system_roll}',
-        'hit_location_low_roll': '@{vehicle_system_roll}',
-        'hit_location_high_roll': '@{vehicle_system_roll}'
+    getAttrs(['vehicle_type'], function(v) {
+        if (v['vehicle_type'] === 'mythras') {
+            upgradeMythrasVehicle3Dot0()
+        } else if (v['vehicle_type'] === 'mspace') {
+            upgradeFrostbyteVehicle3Dot0()
+        }
     });
 }
 function upgradeStarSystem3Dot0() {
     getAttrs(['system_notes'], function (v) {
         let newAttrs = {
             'version': '3.0',
+            'sheet_type': 'star_system',
             'hit_location_roll': '@{none_hit_location_roll}',
             'hit_location_low_roll': '@{none_hit_location_roll}',
             'hit_location_high_roll': '@{none_hit_location_roll}'

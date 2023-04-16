@@ -1112,12 +1112,12 @@ on("change:repeating_meleeweapon:favored change:repeating_rangedweapon:favored c
         getSectionIDs("repeating_rangedweapon", function(rangedIds) {
             let meleeGetAttrs = [];
             meleeIds.forEach(id => {
-                meleeGetAttrs.push(`repeating_meleeweapon_${id}_name`, `repeating_meleeweapon_${id}_favored`)
+                meleeGetAttrs.push(`repeating_meleeweapon_${id}_name`, `repeating_meleeweapon_${id}_favored`);
             });
 
             let rangedGetAttrs = [];
             rangedIds.forEach(id => {
-                rangedGetAttrs.push(`repeating_rangedweapon_${id}_name`, `repeating_rangedweapon_${id}_favored`)
+                rangedGetAttrs.push(`repeating_rangedweapon_${id}_name`, `repeating_rangedweapon_${id}_favored`);
             });
 
             getAttrs(meleeGetAttrs.concat(rangedGetAttrs), function(v) {
