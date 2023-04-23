@@ -13,22 +13,22 @@
                 <div class="sheet-grow">
                     <div class="sheet-setting-option sheet-ms sheet-os">
                         <div class="sheet-flex">
-                            <input type="text" class="sheet-grow" title="@{species}" name="attr_species">/<input type="number" class="sheet-number-width-sm" value="0">
+                            <input type="text" class="sheet-grow" title="@{species}" name="attr_species" value="">/<input type="number" class="sheet-number-width-sm" value="0">
                         </div>
                     </div>
                     <div class="sheet-setting-option sheet-default sheet-atvw sheet-cf sheet-destined sheet-fioracitta sheet-la sheet-lyonesse sheet-mi sheet-mba sheet-mb sheet-mc sheet-mr sheet-imperative sheet-perceforest sheet-thennla sheet-wu">
-                        <input type="text" class="sheet-full-width" title="@{species}" name="attr_species">
+                        <input type="text" class="sheet-full-width" title="@{species}" name="attr_species" value="">
                     </div>
                     <div class="sheet-text-center">
                         <span class="sheet-bold" data-i18n="species">Species</span><span class="sheet-setting-option sheet-ms sheet-os">/<span class="sheet-bold" data-i18n="strangeness">Strangeness</span></span>
                     </div>
                 </div>
                 <div class="sheet-grow">
-                    <input type="text" class="sheet-full-width" title="@{culture}" name="attr_culture">
+                    <input type="text" class="sheet-full-width" title="@{culture}" name="attr_culture" value="">
                     <label data-i18n="culture">Culture</label>
                 </div>
                 <div class="sheet-grow">
-                    <input type="text" class="sheet-full-width" title="@{career}" name="attr_career">
+                    <input type="text" class="sheet-full-width" title="@{career}" name="attr_career" value="">
                     <span class="sheet-setting-option sheet-not-cf"><label data-i18n="career">Career</label></span>
                     <span class="sheet-setting-option sheet-cf"><label data-i18n="class">Class</label></span>
                 </div>
@@ -40,11 +40,11 @@
             <!-- Info 2nd Row -->
             <div class="sheet-flex sheet-gap sheet-major">
                 <div class="sheet-grow">
-                    <input type="text" class="sheet-full-width" title="@{homeland}" name="attr_homeland">
+                    <input type="text" class="sheet-full-width" title="@{homeland}" name="attr_homeland" value="">
                     <label data-i18n="homeland">Homeland</label>
                 </div>
                 <div class="sheet-grow">
-                    <input type="text" class="sheet-full-width" title="@{social_class}" name="attr_social_class">
+                    <input type="text" class="sheet-full-width" title="@{social_class}" name="attr_social_class" value="">
                     <label data-i18n="social_class">Name</label>
                 </div>
                 <div class="sheet-info-age">
@@ -52,11 +52,11 @@
                     <label data-i18n="age">Age</label>
                 </div>
                 <div class="sheet-info-gender">
-                    <input type="text" class="sheet-full-width" title="@{gender}" name="attr_gender">
+                    <input type="text" class="sheet-full-width" title="@{gender}" name="attr_gender" value="">
                     <label data-i18n="gender">Gender</label>
                 </div>
                 <div class="sheet-info-frame">
-                    <input type="text" class="sheet-full-width" title="@{frame}" name="attr_frame">
+                    <input type="text" class="sheet-full-width" title="@{frame}" name="attr_frame" value="">
                     <label data-i18n="frame">Gender</label>
                 </div>
                 <div class="sheet-info-height">
@@ -418,7 +418,7 @@
                     <!-- Custom Movement Alternative -->
                     <div class="sheet-space-between sheet-toggle">
                         <div class="sheet-td sheet-text-left"><label class="sheet-left" data-i18n="movement">Movement</label></div>
-                        <div class="sheet-td sheet-custom-movement"><input type="text" class="sheet-full-width sheet-text-right" title="@{custom_movement}" name="attr_custom_movement"></div>
+                        <div class="sheet-td sheet-custom-movement"><input type="text" class="sheet-full-width sheet-text-right" title="@{custom_movement}" name="attr_custom_movement" value=""></div>
                     </div>
                     <div class="sheet-details-toggle sheet-lmargin-x3">
                         <select class="sheet-text-center sheet-auto-width sheet-rmargin" name="attr_custom_movement_enabled">
@@ -676,7 +676,7 @@
                 <!-- Wounds -->
                 <div class="sheet-flex sheet-gap">
                     <div><label class="sheet-left" data-i18n="wounds">Wounds</label></div>
-                    <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_wounds"></div>
+                    <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_wounds" value=""></div>
                 </div>
             </div>
         </div>
@@ -838,7 +838,7 @@
             </div>
 
             <div class="sheet-grow">
-                <textarea style="height: 100%" name="attr_conditions"></textarea>
+                <textarea style="height: 100%" name="attr_conditions" value=""></textarea>
             </div>
         </div>
     </div>
@@ -938,7 +938,7 @@
                                         <button type="action" class="sheet-social-conflict" name="act_brawn-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                         <button type="action" class="sheet-spirits" name="act_brawn-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                     </div>
-                                    <textarea class="sheet-skill-notes" title="@{brawn_notes}" name="attr_brawn_notes"></textarea>
+                                    <textarea class="sheet-skill-notes" title="@{brawn_notes}" name="attr_brawn_notes" value=""></textarea>
                                 </div>
                             </div>
                             <div class="sheet-compact sheet-opaque">
@@ -981,7 +981,7 @@
                                         <button type="action" class="sheet-social-conflict" name="act_endurance-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                         <button type="action" class="sheet-spirits" name="act_endurance-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                     </div>
-                                    <textarea class="sheet-skill-notes" title="@{endurance_notes}" name="attr_endurance_notes"></textarea>
+                                    <textarea class="sheet-skill-notes" title="@{endurance_notes}" name="attr_endurance_notes" value=""></textarea>
                                 </div>
                             </div>
                             <div class="sheet-compact sheet-opaque">
@@ -1024,7 +1024,7 @@
                                         <button type="action" class="sheet-social-conflict" name="act_evade-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                         <button type="action" class="sheet-spirits" name="act_evade-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                     </div>
-                                    <textarea class="sheet-skill-notes" title="@{evade_notes}" name="attr_evade_notes"></textarea>
+                                    <textarea class="sheet-skill-notes" title="@{evade_notes}" name="attr_evade_notes" value=""></textarea>
                                 </div>
                             </div>
                             <div class="sheet-compact sheet-opaque">
@@ -1067,7 +1067,7 @@
                                         <button type="action" class="sheet-social-conflict" name="act_willpower-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                         <button type="action" class="sheet-spirits" name="act_willpower-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                     </div>
-                                    <textarea class="sheet-skill-notes" title="@{willpower_notes}" name="attr_willpower_notes"></textarea>
+                                    <textarea class="sheet-skill-notes" title="@{willpower_notes}" name="attr_willpower_notes" value=""></textarea>
                                 </div>
                             </div>
                             <div class="sheet-compact sheet-opaque">
@@ -1131,7 +1131,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_athletics-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_athletics-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{athletics_notes}" name="attr_athletics_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{athletics_notes}" name="attr_athletics_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1174,7 +1174,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_boating-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_boating-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{boating_notes}" name="attr_boating_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{boating_notes}" name="attr_boating_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1217,7 +1217,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_commerce-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_commerce-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{commerce_notes}" name="attr_commerce_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{commerce_notes}" name="attr_commerce_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1260,7 +1260,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_common_tongue-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_common_tongue-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{common_tongue_notes}" name="attr_common_tongue_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{common_tongue_notes}" name="attr_common_tongue_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1303,7 +1303,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_conceal-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_conceal-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{conceal_notes}" name="attr_conceal_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{conceal_notes}" name="attr_conceal_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1346,7 +1346,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_customs-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_customs-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{customs_notes}" name="attr_customs_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{customs_notes}" name="attr_customs_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1389,7 +1389,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_dance-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_dance-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{dance_notes}" name="attr_dance_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{dance_notes}" name="attr_dance_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1432,7 +1432,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_deceit-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_deceit-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{deceit_notes}" name="attr_deceit_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{deceit_notes}" name="attr_deceit_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1475,7 +1475,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_drive-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_drive-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{drive_notes}" name="attr_drive_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{drive_notes}" name="attr_drive_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1518,7 +1518,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_eloquence-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_eloquence-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{eloquence_notes}" name="attr_eloquence_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{eloquence_notes}" name="attr_eloquence_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1561,7 +1561,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_first_aid-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_first_aid-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{first_aid_notes}" name="attr_first_aid_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{first_aid_notes}" name="attr_first_aid_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1604,7 +1604,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_folk_lore-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_folk_lore-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{folk_lore_notes}" name="attr_folk_lore_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{folk_lore_notes}" name="attr_folk_lore_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1647,7 +1647,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_gaming-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_gaming-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{gaming_notes}" name="attr_gaming_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{gaming_notes}" name="attr_gaming_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1690,7 +1690,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_home_parallel-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_home_parallel-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{home_parallel_notes}" name="attr_home_parallel_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{home_parallel_notes}" name="attr_home_parallel_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1733,7 +1733,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_influence-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_influence-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{influence_notes}" name="attr_influence_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{influence_notes}" name="attr_influence_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1776,7 +1776,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_insight-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_insight-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{insight_notes}" name="attr_insight_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{insight_notes}" name="attr_insight_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1819,7 +1819,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_locale-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_locale-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{locale_notes}" name="attr_locale_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{locale_notes}" name="attr_locale_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1862,7 +1862,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_native_tongue-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_native_tongue-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{native_tongue_notes}" name="attr_native_tongue_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{native_tongue_notes}" name="attr_native_tongue_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1905,7 +1905,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_perception-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_perception-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{perception_notes}" name="attr_perception_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{perception_notes}" name="attr_perception_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1948,7 +1948,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_purity-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_purity-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{purity_notes}" name="attr_purity_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{purity_notes}" name="attr_purity_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -1991,7 +1991,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_ride-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_ride-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{ride_notes}" name="attr_ride_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{ride_notes}" name="attr_ride_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2034,7 +2034,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_research-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_research-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{research_notes}" name="attr_research_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{research_notes}" name="attr_research_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2077,7 +2077,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_sing-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_sing-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{sing_notes}" name="attr_sing_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{sing_notes}" name="attr_sing_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2120,7 +2120,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_spectral_combat-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_spectral_combat-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{spectral_combat_notes}" name="attr_spectral_combat_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{spectral_combat_notes}" name="attr_spectral_combat_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2163,7 +2163,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_status-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_status-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{status_notes}" name="attr_status_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{status_notes}" name="attr_status_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2206,7 +2206,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_stealth-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_stealth-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{stealth_notes}" name="attr_stealth_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{stealth_notes}" name="attr_stealth_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2249,7 +2249,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_streetwise-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_streetwise-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{streetwise_notes}" name="attr_streetwise_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{streetwise_notes}" name="attr_streetwise_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2292,7 +2292,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_superstition-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_superstition-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{superstition_notes}" name="attr_superstition_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{superstition_notes}" name="attr_superstition_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2335,7 +2335,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_swim-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_swim-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{swim_notes}" name="attr_swim_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{swim_notes}" name="attr_swim_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2378,7 +2378,7 @@
                                     <button type="action" class="sheet-social-conflict" name="act_unarmed-set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                     <button type="action" class="sheet-spirits" name="act_unarmed-set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                                 </div>
-                                <textarea class="sheet-skill-notes" title="@{unarmed_notes}" name="attr_unarmed_notes"></textarea>
+                                <textarea class="sheet-skill-notes" title="@{unarmed_notes}" name="attr_unarmed_notes" value=""></textarea>
                             </div>
                         </div>
                         <div class="sheet-compact sheet-opaque">
@@ -2411,7 +2411,7 @@
                         <div class="sheet-flex sheet-detailed">
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
-                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name" value="">
                                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                     <input type="hidden" name="attr_id" value="unset">
                                 </div>
@@ -2458,7 +2458,7 @@
                             <div class="sheet-flex sheet-flex-wrap sheet-gap">
                                 <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
                             </div>
-                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes" value=""></textarea>
                             <input type="hidden" name="attr_encumbered" value="0">
                         </div>
                         <div class="sheet-compact">
@@ -2547,7 +2547,7 @@
                         <div class="sheet-flex sheet-detailed">
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
-                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name" value="">
                                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                     <input type="hidden" name="attr_id" value="unset">
                                 </div>
@@ -2597,7 +2597,7 @@
                                 <button type="action" class="sheet-social-conflict" name="act_set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                 <button type="action" class="sheet-spirits" name="act_set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                             </div>
-                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes" value=""></textarea>
                             <input type="hidden" name="attr_encumbered" value="0">
                         </div>
                         <div class="sheet-compact">
@@ -2623,7 +2623,7 @@
                         <div class="sheet-flex sheet-detailed">
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
-                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name" value="">
                                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                     <input type="hidden" name="attr_id" value="unset">
                                 </div>
@@ -2643,7 +2643,7 @@
                             <div class="sheet-flex sheet-flex-wrap sheet-gap">
                                 <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
                             </div>
-                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes" value=""></textarea>
                         </div>
                         <div class="sheet-compact">
                             <button type="roll" title="%{$ID_affiliation}" name="roll_affiliation" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"><span class="sheet-bold" name="attr_name"></span> <span name="attr_total"></span>%</button>
@@ -2667,7 +2667,7 @@
                         <div class="sheet-flex sheet-detailed">
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
-                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name" value="">
                                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                     <input type="hidden" name="attr_id" value="unset">
                                 </div>
@@ -2691,7 +2691,7 @@
                                 <button type="action" class="sheet-social-conflict" name="act_set-social-defense" data-i18n="set_social_defense">Set Social Defense</button>
                                 <button type="action" class="sheet-spirits" name="act_set-spirit-combat" data-i18n="set_spirit_combat">Set Spirit Combat</button>
                             </div>
-                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes" value=""></textarea>
                         </div>
                         <div class="sheet-compact">
                             <button type="roll" title="%{$ID_passion}" name="roll_passion" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"><span class="sheet-bold" name="attr_name"></span> <span name="attr_total"></span>%</button>
@@ -2717,7 +2717,7 @@
                         <div class="sheet-flex sheet-detailed">
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
-                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name" value="">
                                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                     <input type="hidden" name="attr_id" value="unset">
                                 </div>
@@ -2738,7 +2738,7 @@
                             <div class="sheet-flex sheet-flex-wrap sheet-gap">
                                 <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
                             </div>
-                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes" value=""></textarea>
                         </div>
                         <div class="sheet-compact">
                             <button type="roll" title="%{$ID_passion}" name="roll_dependency" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"><span class="sheet-bold" name="attr_name"></span> <span name="attr_total"></span>%</button>
@@ -2763,7 +2763,7 @@
                         <div class="sheet-flex sheet-detailed">
                             <div class="sheet-td sheet-grow">
                                 <div class="sheet-full-width sheet-hover-btn">
-                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name">
+                                    <input type="text" class="sheet-full-width sheet-text-left" name="attr_name" value="">
                                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                     <input type="hidden" name="attr_id" value="unset">
                                 </div>
@@ -2780,7 +2780,7 @@
                             <span class="sheet-details-toggle sheet-multi-line" name="attr_notes"></span>
                         </div>
                         <div class="sheet-toggle sheet-detailed">
-                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes"></textarea>
+                            <textarea class="sheet-skill-notes" title="@{$ID_notes}" name="attr_notes" value=""></textarea>
                         </div>
                         <div class="sheet-compact">
                             <button type="roll" title="%{$ID_passion}" name="roll_peculiarity" value="{{'@{roll_display}&{template:skill} {{character=@{character_name}}} {{name=@{name}}} {{roll=[[1d100]]}} {{fatigue_skills=[[0]]}} {{encumbered=[[0]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augmentation})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{very_easy_fumble=[[((@{total}*2)+@{penalty})]]}} {{easy=[[ceil((@{total}+@{augmentation})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{easy_fumble=[[ceil((@{total}*1.5)+@{penalty})]]}} {{standard=[[@{total}+@{augmentation}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{standard_fumble=[[(@{total}+@{penalty})]]}} {{hard=[[ceil((@{total}+@{augmentation})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{hard_fumble=[[ceil((@{total}*.67)+@{penalty})]]}} {{formidable=[[ceil((@{total}+@{augmentation})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{formidable_fumble=[[ceil((@{total}*.5)+@{penalty})]]}} {{herculean=[[ceil((@{total}+@{augmentation})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{herculean_fumble=[[ceil((@{total}*@{herculean_mod})+@{penalty})]]}} {{notes=@{notes}}}'}}"><span class="sheet-bold" name="attr_name"></span> <span name="attr_total"></span>%</button>
@@ -3090,7 +3090,7 @@
                 <fieldset class="repeating_tradition">
                     <div class="sheet-flex">
                         <div class="sheet-td sheet-hover-btn">
-                            <input type="text" class="sheet-tradition-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                            <input type="text" class="sheet-tradition-name sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                             <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                             <input type="hidden" name="attr_id" value="unset, please change any value in this tradition" readonly>
                         </div>
@@ -3123,14 +3123,14 @@
                         <div class="sheet-flex sheet-gap">
                             <div class="sheet-flex sheet-grow sheet-gap">
                                 <div><label class="sheet-left" data-i18n="skill_1_id">Skill 1 ID</label></div>
-                                <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_skill1_id"></div>
+                                <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_skill1_id" value=""></div>
                                 <input type="hidden" name="attr_skill1_name" value="" readonly>
                                 <input type="hidden" name="attr_skill1_total" value="0" readonly>
                                 <input type="hidden" name="attr_skill1_notes" value="" readonly>
                             </div>
                             <div class="sheet-flex sheet-grow sheet-gap">
                                 <div><label class="sheet-left" data-i18n="skill_2_id">Skill 2 ID</label></div>
-                                <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_skill2_id"></div>
+                                <div class="sheet-grow"><input type="text" class="sheet-full-width" name="attr_skill2_id" value=""></div>
                                 <input type="hidden" name="attr_skill2_name" value="" readonly>
                                 <input type="hidden" name="attr_skill2_total" value="0" readonly>
                                 <input type="hidden" name="attr_skill2_notes" value="" readonly>
@@ -3146,7 +3146,7 @@
                                 </select>
                             </div>
                         </div>
-                        <textarea class="sheet-full-width sheet-tradition-notes" name="attr_notes"></textarea>
+                        <textarea class="sheet-full-width sheet-tradition-notes" name="attr_notes" value=""></textarea>
                     </div>
                 </fieldset>
             </div>
@@ -3160,7 +3160,7 @@
             <span class="sheet-rmargin"><input type="checkbox" title="@{ability_filter_favored}" name="attr_ability_filter_favored" value="1"><span class="sheet-checkico">S</span></span>
             <span class="sheet-rmargin" data-i18n="type">Type</span>
             <select class="sheet-auto-width sheet-rmargin sheet-text-center" title="@{ability_filter_type}" name="attr_ability_filter_type" data-i18n-list="ability_type-order">
-                <option value="all" data-i18n="all">All</option>
+                <option value="all" data-i18n="all" selected>All</option>
                 <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-cf sheet-la sheet-lyonesse sheet-mb sheet-mba sheet-mr sheet-imperative sheet-thennla sheet-wu" value="ability" data-i18n="ability">Ability</option>
                 <option class="sheet-ability-option sheet-all sheet-core sheet-core-plus sheet-atvw sheet-mb sheet-mba sheet-mr sheet-thennla sheet-wu" value="gift" data-i18n="gift">Gift</option>
                 <option class="sheet-ability-option sheet-all sheet-destined sheet-imperative" value="limitation" data-i18n="limitation">Limitation</option>
@@ -3218,7 +3218,7 @@
                     <div class="sheet-opaque sheet-flex sheet-detailed">
                         <div class="sheet-td"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1" checked><span class="sheet-checkico">S</span></div>
                         <div class="sheet-td sheet-hover-btn">
-                            <input type="text" class="sheet-ability-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                            <input type="text" class="sheet-ability-name sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                             <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                             <input type="hidden" name="attr_id" value="unset, please change any value in this ability" readonly>
                         </div>
@@ -3273,15 +3273,15 @@
                             <input type="hidden" class="sheet-toggle" name="attr_traited" value="0">
                             <div class="sheet-third-width sheet-toggle">
                                 <label class="sheet-left" data-i18n="traits">Traits</label>
-                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_traits}" name="attr_traits" value=""></textarea>
                             </div>
                             <div class="sheet-third-width">
                                 <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
-                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits" value=""></textarea>
                             </div>
                             <div class="sheet-grow">
                                 <label class="sheet-left" data-i18n="description">Description</label>
-                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description" value=""></textarea>
                             </div>
                         </div>
                         <input type="hidden" class="sheet-toggle" name="attr_traited" value="0">
@@ -3319,11 +3319,11 @@
             <fieldset class="repeating_fetish">
                 <div class="sheet-flex">
                     <div class="sheet-td sheet-hover-btn">
-                        <input type="text" class="sheet-ability-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <input type="text" class="sheet-ability-name sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                         <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                         <input type="hidden" name="attr_id" value="unset, please change any value in this spirit" readonly>
                     </div>
-                    <div class="sheet-td sheet-text-center"><input type="text" class="sheet-ability-type" title="@{$ID_type}" name="attr_type"></div>
+                    <div class="sheet-td sheet-text-center"><input type="text" class="sheet-ability-type" title="@{$ID_type}" name="attr_type" value=""></div>
                     <div class="sheet-td"><input type="number" class="sheet-impval sheet-number-width" title="@{$ID_fetish_int}" name="attr_fetish_int" value="13"></div>
                     <div class="sheet-td"><input type="number" class="sheet-impval sheet-number-width" title="@{$ID_fetish_pow}" name="attr_fetish_pow" value="11"></div>
                     <div class="sheet-td"><input type="number" class="sheet-impval sheet-number-width" title="@{$ID_fetish_cha}" name="attr_fetish_cha" value="11"></div>
@@ -3407,17 +3407,17 @@
                             </div>
                             <div class="sheet-grow">
                                 <label class="sheet-left" data-i18n="magic">Magic</label>
-                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_fetish_powers}" name="attr_fetish_powers"></textarea>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_fetish_powers}" name="attr_fetish_powers" value=""></textarea>
                             </div>
                             <div class="sheet-half-width">
                                 <label class="sheet-left" data-i18n="spirit_abilities">Spirit Abilities</label>
-                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_fetish_spirit_abilities}" name="attr_fetish_spirit_abilities"></textarea>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_fetish_spirit_abilities}" name="attr_fetish_spirit_abilities" value=""></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="sheet-lmargin-x3 sheet-flex">
                         <div><label class="sheet-left sheet-rmargin" data-i18n="other_skills">Other Skills</label></div>
-                        <input type="text" class="sheet-grow sheet-text-left" title="${ID_fetish_other_skills}" name="attr_fetish_other_skills">
+                        <input type="text" class="sheet-grow sheet-text-left" title="${ID_fetish_other_skills}" name="attr_fetish_other_skills" value="">
                     </div>
                 </div>
             </fieldset>
@@ -3447,7 +3447,7 @@
                     <div class="sheet-flex sheet-detailed">
                         <div class="sheet-td">
                             <div class="sheet-ability-name sheet-hover-btn">
-                                <input type="text" class="sheet-ability-name sheet-text-left" name="attr_name">
+                                <input type="text" class="sheet-ability-name sheet-text-left" name="attr_name" value="">
                                 <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                 <input type="hidden" name="attr_id" value="unset">
                             </div>
@@ -3494,15 +3494,15 @@
                             <button type="roll" title="%{$ID_improve}" name="roll_improve" value="{{'@{roll_display}&{template:improvement} {{name=@{name}}} {{character=@{character_name}}} {{roll=[[1d100+@{int}]]}} {{improvement=[[1d4+1]]}} {{skill=[[@{total}]]}}'}}" data-i18n="improve">Improve</button>
                             <div>
                                 <label class="sheet-left" data-i18n="traits">Traits</label>
-                                <textarea class="sheet-ability-notes" title="@{$ID_traits}" name="attr_traits"></textarea>
+                                <textarea class="sheet-ability-notes" title="@{$ID_traits}" name="attr_traits" value=""></textarea>
                             </div>
                             <div>
                                 <label class="sheet-left" data-i18n="advanced_traits">Advanced Traits</label>
-                                <textarea class="sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits"></textarea>
+                                <textarea class="sheet-ability-notes" title="@{$ID_advanced_traits}" name="attr_advanced_traits" value=""></textarea>
                             </div>
                             <div class="sheet-grow">
                                 <label class="sheet-left" data-i18n="description">Description</label>
-                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description"></textarea>
+                                <textarea class="sheet-full-width sheet-ability-notes" title="@{$ID_description}" name="attr_description" value=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -3532,7 +3532,7 @@
                     </div>
                     <div class="sheet-td sheet-text-center">
                         <select class="sheet-ability-type" title="@{$ID_type}" name="attr_type">
-                            <option value="advantage" data-i18n="advantage">Advantage</option>
+                            <option value="advantage" data-i18n="advantage" selected>Advantage</option>
                             <option value="advantage" data-i18n="disadvantage">Disadvantage</option>
                         </select>
                     </div>
@@ -3625,23 +3625,23 @@
                 <div class="sheet-opaque sheet-flex">
                     <div class="sheet-td"><input type="checkbox" title="@{$ID_favored}" name="attr_favored" value="1"><span class="sheet-checkico">S</span></div>
                     <div class="sheet-td sheet-hover-btn">
-                        <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                         <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                         <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
                     </div>
                     <div class="sheet-td"><button type="roll" class="sheet-die sheet-d8" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{range=@{range}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}'}}">h</button></div>
-                    <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage" value=""></div>
                     <div class="sheet-td"><input type="checkbox" name="attr_damage_mod_toggle" title="@{$ID_damage_mod_toggle}" value="@{damage_mod}"><span class="sheet-checkico">+</span></div>
-                    <div class="sheet-td"><input type="text" class="sheet-weapon-size" title="@{$ID_force}" name="attr_force"></div>
-                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
-                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{$ID_impale_size}" name="attr_impale_size"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-size" title="@{$ID_force}" name="attr_force" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range" value=""></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width-xs" title="@{$ID_impale_size}" name="attr_impale_size" value=""></div>
                     <div class="sheet-td">
                         <div class="sheet-number-width sheet-text-center">
                             <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
                         </div>
                     </div>
-                    <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load"></div>
-                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
+                    <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load" value=""></div>
+                    <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes" value=""></div>
                     <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_ap}" name="attr_ap" step="1" min="0" value="0"></div>
                     <div class="sheet-td">
                         <div class="sheet-number-width sheet-text-center">
@@ -3697,7 +3697,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location1_armor_enc}" step="any" name="attr_location1_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location1_armor_notes}" name="attr_location1_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location1_armor_notes}" name="attr_location1_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location1_armor_equipped}" name="attr_location1_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3719,7 +3719,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location2_armor_equipped}" name="attr_location2_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3741,7 +3741,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location3_armor_enc}" step="any" name="attr_location3_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location3_armor_notes}" name="attr_location3_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location3_armor_notes}" name="attr_location3_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location3_armor_equipped}" name="attr_location3_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3763,7 +3763,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location4_armor_enc}" step="any" name="attr_location4_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location4_armor_notes}" name="attr_location4_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location4_armor_notes}" name="attr_location4_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location4_armor_equipped}" name="attr_location4_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3785,7 +3785,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location5_armor_enc}" step="any" name="attr_location5_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location5_armor_notes}" name="attr_location5_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location5_armor_notes}" name="attr_location5_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location5_armor_equipped}" name="attr_location5_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3807,7 +3807,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location6_armor_enc}" step="any" name="attr_location6_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location6_armor_notes}" name="attr_location6_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location6_armor_notes}" name="attr_location6_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location6_armor_equipped}" name="attr_location6_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3829,7 +3829,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location7_armor_enc}" step="any" name="attr_location7_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location7_armor_notes}" name="attr_location7_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location7_armor_notes}" name="attr_location7_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location7_armor_equipped}" name="attr_location7_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3843,17 +3843,17 @@
             </div>
             <input type="hidden" class="sheet-toggle" name="attr_location8_display" value="0">
             <div class="sheet-tr sheet-toggle">
-                <div class="sheet-td sheet-text-center"><span name="attr_location2_name"></span></div>
-                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location2_armor_type}" name="attr_location2_armor_type" value=""></div>
+                <div class="sheet-td sheet-text-center"><span name="attr_location8_name"></span></div>
+                <div class="sheet-td"><input type="text" class="sheet-text-center" title="@{location8_armor_type}" name="attr_location8_armor_type" value=""></div>
                 <div class="sheet-td">
                     <div class="sheet-impval sheet-number-width sheet-flex">
-                        <input type="number" class="sheet-lval" title="@{location2_ap}" name="attr_location2_ap" value="0">/<input type="number" class="sheet-rval" title="@{location2_ap|max}" name="attr_location2_ap_max" value="0">
+                        <input type="number" class="sheet-lval" title="@{location8_ap}" name="attr_location8_ap" value="0">/<input type="number" class="sheet-rval" title="@{location8_ap|max}" name="attr_location8_ap_max" value="0">
                     </div>
                 </div>
-                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location2_armor_enc}" step="any" name="attr_location2_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location2_armor_notes}" name="attr_location2_armor_notes"></div>
+                <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location8_armor_enc}" step="any" name="attr_location8_armor_enc" min="0" value="0"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location8_armor_notes}" name="attr_location8_armor_notes" value=""></div>
                 <div class="sheet-td">
-                    <select class="sheet-text-center sheet-auto-width" title="@{location2_armor_equipped}" name="attr_location2_armor_equipped">
+                    <select class="sheet-text-center sheet-auto-width" title="@{location8_armor_equipped}" name="attr_location8_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
                         <option value="0" data-i18n="pack">Pack</option>
                         <option value="mount" data-i18n="transport">Transport</option>
@@ -3873,7 +3873,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location9_armor_enc}" step="any" name="attr_location9_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location9_armor_notes}" name="attr_location9_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location9_armor_notes}" name="attr_location9_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location9_armor_equipped}" name="attr_location9_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3895,7 +3895,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location10_armor_enc}" step="any" name="attr_location10_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location10_armor_notes}" name="attr_location10_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location10_armor_notes}" name="attr_location10_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location10_armor_equipped}" name="attr_location10_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3917,7 +3917,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location11_armor_enc}" step="any" name="attr_location11_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location11_armor_notes}" name="attr_location11_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location11_armor_notes}" name="attr_location11_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location11_armor_equipped}" name="attr_location11_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3939,7 +3939,7 @@
                     </div>
                 </div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{location12_armor_enc}" step="any" name="attr_location12_armor_enc" min="0" value="0"></div>
-                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location12_armor_notes}" name="attr_location12_armor_notes"></div>
+                <div class="sheet-td sheet-full-width"><input type="text" class="sheet-text-center sheet-full-width" title="@{location12_armor_notes}" name="attr_location12_armor_notes" value=""></div>
                 <div class="sheet-td">
                     <select class="sheet-text-center sheet-auto-width" title="@{location12_armor_equipped}" name="attr_location12_armor_equipped">
                         <option value="1" data-i18n="worn" selected>Worn</option>
@@ -3971,7 +3971,7 @@
             <fieldset class="repeating_equipment">
                 <div class="sheet-flex">
                     <div class="sheet-td sheet-grow sheet-hover-btn">
-                        <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name">
+                        <input type="text" class="sheet-full-width sheet-usrinput sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                         <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                         <input type="hidden" name="attr_id" value="unset, please change any value in this item" readonly>
                     </div>
@@ -3994,11 +3994,11 @@
                 <div class="sheet-toggle sheet-flex sheet-gap">
                     <div>
                         <div><label class="sheet-left" data-i18n="traits">Traits</label></div>
-                        <textarea class="sheet-gear-note" name="attr_traits"></textarea>
+                        <textarea class="sheet-gear-note" name="attr_traits" value=""></textarea>
                     </div>
                     <div class="sheet-grow">
                         <div><label class="sheet-left" data-i18n="description">Description</label></div>
-                        <textarea class="sheet-gear-note" name="attr_description"></textarea>
+                        <textarea class="sheet-gear-note" name="attr_description" value=""></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -4021,7 +4021,7 @@
                     <fieldset class="repeating_currency">
                         <div class="sheet-flex">
                             <div class="sheet-td sheet-grow sheet-hover-btn">
-                                <input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name">
+                                <input type="text" class="sheet-full-width sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                                 <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                                 <input type="hidden" name="attr_id" value="unset, please change any value in this currency" readonly>
                             </div>
@@ -4054,7 +4054,7 @@
                 </div>
 
                 <label class="sheet-left" data-i18n="other">Other</label>
-                <textarea class="sheet-wealth-notes" name="attr_wealth_other"></textarea>
+                <textarea class="sheet-wealth-notes" name="attr_wealth_other" value=""></textarea>
             </div>
 
             <!-- ENC -->
@@ -4099,7 +4099,7 @@
                         </div>
                         <div class="sheet-td">
                             <select class="sheet-full-width sheet-readonly sheet-text-center" title="@{movement_rate_enc}" name="attr_movement_rate_enc">
-                                <option value="+0" data-i18n="normal">Normal</option>
+                                <option value="+0" data-i18n="normal" selected>Normal</option>
                                 <option value="-2">-2</option>
                                 <option value="*.5" data-i18n="halved">Halved</option>
                                 <option value="*0" data-i18n="impossible">Impossible</option>
@@ -4119,33 +4119,33 @@
         <div class="sheet-flex sheet-gap sheet-bmargin">
             <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="organizations">Organizations</label>
-                <textarea class="sheet-background-notes" title="@{cults_notes}" name="attr_cults_notes"></textarea>
+                <textarea class="sheet-background-notes" title="@{cults_notes}" name="attr_cults_notes" value=""></textarea>
             </div>
             <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="contacts">Contacts</label>
-                <textarea class="sheet-background-notes" title="@{contacts_notes}" name="attr_contacts_notes"></textarea>
+                <textarea class="sheet-background-notes" title="@{contacts_notes}" name="attr_contacts_notes" value=""></textarea>
             </div>
         </div>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
             <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="community">Community</label>
-                <textarea class="sheet-background-notes" title="@{community_notes}" name="attr_community_notes"></textarea>
+                <textarea class="sheet-background-notes" title="@{community_notes}" name="attr_community_notes" value=""></textarea>
             </div>
             <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="allies">Allies</label>
-                <textarea class="sheet-background-notes" title="@{allies_notes}" name="attr_allies_notes"></textarea>
+                <textarea class="sheet-background-notes" title="@{allies_notes}" name="attr_allies_notes" value=""></textarea>
             </div>
         </div>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
             <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="family">Family</label>
-                <textarea class="sheet-background-notes" title="@{family_notes}" name="attr_family_notes"></textarea>
+                <textarea class="sheet-background-notes" title="@{family_notes}" name="attr_family_notes" value=""></textarea>
             </div>
             <div class="sheet-half-width">
                 <label class="sheet-left" data-i18n="enemies">Enemies</label>
-                <textarea class="sheet-background-notes" title="@{enemies_notes}" name="attr_enemies_notes"></textarea>
+                <textarea class="sheet-background-notes" title="@{enemies_notes}" name="attr_enemies_notes" value=""></textarea>
             </div>
         </div>
     </div>
@@ -4154,7 +4154,7 @@
     <div id="notes" class="sheet-section sheet-anchor-adjust-x2">
         <h2 data-i18n="notes">Notes</h2>
 
-        <textarea class="sheet-character-notes" title="@{sheet_notes}" name="attr_sheet_notes"></textarea>
+        <textarea class="sheet-character-notes" title="@{sheet_notes}" name="attr_sheet_notes" value=""></textarea>
     </div>
 
     {% include 'sheet_types/character/character_popups.html' %}

@@ -1,3 +1,0 @@
-input.sheet-starship-toggle:not([value='1']) ~ div .sheet-starship {
-    display: none;
-}

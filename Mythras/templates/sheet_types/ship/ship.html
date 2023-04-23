@@ -126,16 +126,16 @@
         <fieldset class="repeating_rangedweapon">
             <div class="sheet-flex">
                 <div class="sheet-td sheet-hover-btn">
-                    <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name">
+                    <input type="text" class="sheet-weapon-name sheet-text-left" title="@{$ID_name}" name="attr_name" value="">
                     <button type="roll" class="sheet-hover sheet-id" title="%{$ID_id}" name="roll_id" value="/w gm {{'&{template:default} {{character=@{character_name}}} {{name=@{name}}} {{^{id}=@{id}}}'}}">i</button>
                     <input type="hidden" name="attr_id" value="unset, please change any value in this weapon" readonly>
                 </div>
                 <div class="sheet-td"><button type="roll" class="sheet-die sheet-d8" title="%{$ID_damage}" name="roll_damage" value="{{'@{roll_display}&{template:weapon} {{name=@{name}}} {{character=@{character_name}}} {{damage=[[@{damage}+@{damage_mod_toggle}]]}} {{force=@{force}}} {{range=@{range}}} {{impale_size=@{impale_size}}} {{notes=@{notes}}}'}}">h</button></div>
-                <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage"></div>
-                <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range"></div>
+                <div class="sheet-td"><input type="text" class="sheet-weapon-damage" title="@{$ID_damage}" name="attr_damage" value=""></div>
+                <div class="sheet-td"><input type="text" class="sheet-weapon-reach" title="@{$ID_range}" name="attr_range" value=""></div>
                 <input type="number" class="sheet-number-width-xs" title="@{$ID_ammo}" name="attr_ammo" step="1" min="0" value="0">/<input type="number" class="sheet-number-width-xs" title="@{$ID_ammo|max}" name="attr_ammo_max" step="1" min="0" value="0">
-                <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load"></div>
-                <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes"></div>
+                <div class="sheet-td"><input type="text" class="sheet-number-width" title="@{$ID_load}" name="attr_load" value=""></div>
+                <div class="sheet-td sheet-grow"><input type="text" class="sheet-full-width" title="@{$ID_notes}" name="attr_notes" value=""></div>
                 <div class="sheet-td"><input type="number" class="sheet-number-width-sm" title="@{$ID_ap}" name="attr_ap" step="1" min="0" value="0"></div>
                 <div class="sheet-td">
                     <div class="sheet-number-width sheet-text-center">
@@ -155,5 +155,5 @@
     </div>
 
     <!-- Notes -->
-    <textarea class="sheet-full-width" title="@{sheet_notes}" name="attr_sheet_notes"></textarea>
+    <textarea class="sheet-full-width" title="@{sheet_notes}" name="attr_sheet_notes" value=""></textarea>
 </div>
