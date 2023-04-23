@@ -383,7 +383,7 @@
       "type": "select",
       "options": [
         "Setting Default|default",
-        "Sore|core",
+        "Core|core",
         "Destined|destined",
         "Mythras Imperative|imperative",
         "Lyonesse|lyonesse"
