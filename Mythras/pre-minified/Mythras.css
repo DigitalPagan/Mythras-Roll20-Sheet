@@ -1139,9 +1139,6 @@ input.sheet-tr-type-show {
 .sheet-fb-module-type {
     width: 100px;
 }
-input.sheet-starship-toggle:not([value='1']) ~ div .sheet-starship {
-    display: none;
-}
 textarea.sheet-system-desc {
     width: 100%;
     height: 54px;

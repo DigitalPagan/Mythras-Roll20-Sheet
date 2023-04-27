@@ -377,7 +377,7 @@ function upgradeFrostbyteVehicle3Dot0() {
                     if (oldModule === 'cargo') {
                         newAttrs[`${moduleId}_name`] = getTranslationByKey('cargo_hold');
                     } else if (oldModule === 'hanger') {
-                        newAttrs[`${moduleId}_name`] = getTranslationByKey('hanger_bay');
+                        newAttrs[`${moduleId}_name`] = getTranslationByKey('hangar_bay');
                     } else {
                         newAttrs[`${moduleId}_name`] = getTranslationByKey(oldModule);
                     }

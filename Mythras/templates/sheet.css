@@ -901,7 +901,6 @@ div.sheet-compactable-fieldset-control {
 {% include 'sheet_types/character/character.css' %}
 {% include 'sheet_types/ship/ship.css' %}
 {% include 'sheet_types/vehicle/vehicle.css' %}
-{% include 'sheet_types/vehicle_frostbyte/vehicle_frostbyte.css' %}
 {% include 'sheet_types/star_system/star_system.css' %}
 
 /* Roll Templates */
