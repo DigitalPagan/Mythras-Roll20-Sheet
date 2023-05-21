@@ -4,7 +4,7 @@
   "authors": "Matthew Carpenter",
   "roll20userid": "103705",
   "preview": "preview.png",
-  "instructions": "Character sheet for the Mythras and Mythras Imperative based systems.  Supports the Default, After the Vampire Wars, Classic Fantasy, Destined, Fioracitta, Luther Arkwright, Lyonesse, M-Space, Monster Island, Mythic Babylon, Mythic Britain, Mythic Constantinople, Mythic Rome, Mythras Imperative, Odd Soot, Perceforest, Thennla and Worlds United settings.",
+  "instructions": "Character sheet for Mythras and Mythras Imperative based systems.  Allows for mixing and matching of various components for homebrew games and/or reconfiguration to match a particular setting.  See https://wiki.roll20.net/Mythras_Sheet for sheet documentation",
   "useroptions": [
     {
       "attribute": "sheet_type",

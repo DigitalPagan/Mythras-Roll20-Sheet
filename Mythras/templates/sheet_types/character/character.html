@@ -102,10 +102,10 @@
         <!-- Characteristics -->
         <div class="sheet-section">
             <input type="hidden" class="sheet-wide-toggle sheet-deep-toggle" name="attr_extended_conflict_enabled" value="0">
-            <h2 class="sheet-anti-toggle" data-i18n="characteristics">Characteristics</h2>
+            <h2 class="sheet-anti-toggle"><span data-i18n="characteristics">Characteristics</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Characteristics">?</button></h2>
             <div class="sheet-toggle sheet-space-between sheet-gap">
-                <h2 class="sheet-toggle sheet-help" data-i18n-title="characteristics" data-i18n="characteristics-a">Chars</h2>
-                <button type="roll" class="sheet-die sheet-d6" title="%{extended_conflict_damage}" name="roll_extended_conflict_damage" value="{{'@{roll_display}&{template:default} {{dmgstyle=1}} {{name=^{extended_conflict_damage}}} {{character=@{character_name}}} {{^{damage}=[[1d6]]}}'}}">f</button>
+                <div><h2 class="sheet-toggle sheet-help"><span data-i18n-title="characteristics" data-i18n="characteristics-a">Chars</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Characteristics">?</button></h2></div>
+                <div><button type="roll" class="sheet-die sheet-d6" title="%{extended_conflict_damage}" name="roll_extended_conflict_damage" value="{{'@{roll_display}&{template:default} {{dmgstyle=1}} {{name=^{extended_conflict_damage}}} {{character=@{character_name}}} {{^{damage}=[[1d6]]}}'}}">f</button></div>
             </div>
 
 
@@ -235,12 +235,12 @@
             <input type="hidden" class="sheet-spirits-toggle" name="attr_spirits_enabled" value="1">
             <div class="sheet-space-between">
                 <h2>
-                    <span data-i18n="attributes">Attributes</span>
+                    <span data-i18n="attributes">Attributes</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Attributes">?</button>
                     (<select class="sheet-auto-width sheet-text-center" name="attr_attribute_mode">
-                    <option value="physical" class="sheet-creature" data-i18n="physical" selected>Physical</option>
-                    <option value="social" class="sheet-social-conflict" data-i18n="social">Social</option>
-                    <option value="spiritual" class="sheet-spirits" data-i18n="spiritual">Spiritual</option>
-                </select>)
+                        <option value="physical" class="sheet-creature" data-i18n="physical" selected>Physical</option>
+                        <option value="social" class="sheet-social-conflict" data-i18n="social">Social</option>
+                        <option value="spiritual" class="sheet-spirits" data-i18n="spiritual">Spiritual</option>
+                    </select>)
                 </h2>
                 <div>
                     <input type='checkbox' name='attr_attribute_configs' value="1"><span class="sheet-checkico">y</span>
@@ -757,24 +757,34 @@
 
             <div hidden>
                 <!-- Social SE Buttons -->
+                <!--
                 <button type="roll" name="roll_offensive_social_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{socialconflict=1}} {{offense=[[1]]}}'}}"></button>
                 <button type="roll" name="roll_defensive_social_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{socialconflict=1}} {{offense=[[0]]}}'}}"></button>
                 <button type="roll" name="roll_accidental_humiliation_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{accidental_humiliation}}}'}}"></button>
                 <button type="roll" name="roll_choose_resolution_pool_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{choose_resolution_pool}}}'}}"></button>
+                -->
                 <!-- Circumvent Defense in combat SEs -->
+                <!--
                 <button type="roll" name="roll_compel_capitulation_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_capitulation}}} {{^{conditions}=^{critical}}}'}}"></button>
                 <button type="roll" name="roll_disarm_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{disarm_opponent}}}'}}"></button>
                 <button type="roll" name="roll_emotional_impale_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{emotional_impale}}}'}}"></button>
                 <button type="roll" name="roll_entangling_argument_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{entangling_argument}}}'}}"></button>
                 <button type="roll" name="roll_expose_flaws_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{expose_flaws}}}'}}"></button>
+                -->
                 <!-- Force Failure in combat SEs -->
+                <!--
                 <button type="roll" name="roll_ignore_confidence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{ignore_confidence}}} {{^{conditions}=^{critical}}}'}}"></button>
+                -->
                 <!-- Maximise Damage in combat SEs -->
+                <!--
                 <button type="roll" name="roll_obfuscate_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{obfuscate_opponent}}}'}}"></button>
+                -->
                 <!-- Prepare COunter in combat SEs -->
+                <!--
                 <button type="roll" name="roll_shake_confidence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{shake_confidence}}}'}}"></button>
                 <button type="roll" name="roll_sow_doubt_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sow_doubt}}} {{^{conditions}=^{critical}}}'}}"></button>
                 <button type="roll" name="roll_stun_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{stun}}}'}}"></button>
+                -->
                 <!-- Trip Opponent in combat SEs-->
                 <!-- Withdraw in combat SEs-->
             </div>
@@ -783,7 +793,7 @@
         <!-- Conditions -->
         <div class="sheet-section sheet-flex-column sheet-grow">
             <div class="sheet-space-between sheet-gap">
-                <h2 data-i18n="conditions">Conditions</h2>
+                <h2><span data-i18n="conditions">Conditions</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Conditions">?</button></h2>
                 <div class="sheet-creature"><label class="sheet-checkbox sheet-help" data-i18n-title="pack_equipped"><input type='checkbox' name='attr_pack_equipped' value="1" checked><span>3</span><span data-i18n="pack"></span></label></div>
             </div>
 
@@ -848,7 +858,7 @@
         <input type="hidden" class="sheet-social-conflict-toggle" name="attr_social_conflict_enabled" value="0">
         <input type="hidden" class="sheet-spirits-toggle" name="attr_spirits_enabled" value="1">
         <div class="sheet-flex sheet-gap">
-            <div class="sheet-grow"><h2><span data-i18n="skills">Skills</span> / <span data-i18n="passions">Passions</span></h2></div>
+            <div class="sheet-grow"><h2><span data-i18n="skills">Skills</span> & <span data-i18n="passions">Passions</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Skills_.26_Passions">?</button></h2></div>
             <!-- Spirit Combat -->
             <div class="sheet-spirits">
                 <label class="sheet-left sheet-rmargin" data-i18n="spirit_combat_skill">Spirit Combat Skill</label>
@@ -859,6 +869,7 @@
                 <input type="hidden" name="attr_spirit_combat_skill_notes" value="" readonly>
                 <div hidden>
                     <!-- Spirit SE Buttons -->
+                    <!--
                     <button type="roll" name="roll_offensive_spirit_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{spiritcombat=1}} {{offense=[[1]]}}'}}"></button>
                     <button type="roll" name="roll_defensive_spirit_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{spiritcombat=1}} {{offense=[[0]]}}'}}"></button>
                     <button type="roll" name="roll_bleed_essence_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bleed_essence}}} {{^{conditions}=^{critical}}}'}}"></button>
@@ -873,6 +884,7 @@
                     <button type="roll" name="roll_sunder_binding_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sunder_binding}}} {{^{conditions}=^{fumble}}}'}}"></button>
                     <button type="roll" name="roll_supress_ability_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{supress_ability}}} {{^{conditions}=^{mortal}}}'}}"></button>
                     <button type="roll" name="roll_turn_back_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{turn_back}}}'}}"></button>
+                    -->
                     <!-- Withdraw in combat SEs-->
                 </div>
             </div>
@@ -2468,6 +2480,7 @@
                     <div hidden>
                         <input type="hidden" name="attr_combat_se_list" value="default">
                         <!-- Combat SE buttons-->
+                        <!--
                         <button type="roll" name="roll_offensive_combat_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{combat=1}} {{offense=[[1]]}} {{special_effects=@{special_effects}}} {{simplified_combat_enabled=[[@{simplified_combat_enabled}]]}} {{reach_enabled=[[@{reach_enabled}]]}}'}}"></button>
                         <button type="roll" name="roll_defensive_combat_se_menu" value="{{'/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{combat=1}} {{offense=[[0]]}} {{special_effects=@{special_effects}}} {{simplified_combat_enabled=[[@{simplified_combat_enabled}]]}} {{reach_enabled=[[@{reach_enabled}]]}}'}}"></button>
 
@@ -2523,6 +2536,7 @@
                         <button type="roll" name="roll_trip_opponent_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}'}}"></button>
                         <button type="roll" name="roll_weapon_malfunction_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{weapon_malfunction}}} {{^{conditions}=^{ranged}, ^{fumble}}}'}}"></button>
                         <button type="roll" name="roll_withdraw_se" value="{{'@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{withdraw}}}'}}"></button>
+                        -->
                     </div>
                 </div>
 
@@ -2795,7 +2809,7 @@
     <input type="hidden" class="sheet-abilities-control" name="attr_ability_system" value="core">
     <div id="abilities" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-space-between sheet-gap">
-            <h2 data-i18n="abilities">Abilities</h2>
+            <h2><span data-i18n="abilities">Abilities</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Abilities">?</button></h2>
             <div class="sheet-flex sheet-gap">
                 <div class="sheet-flex sheet-gap" data-i18n-list="ability_attribute-order">
                     <div class="sheet-setting-option sheet-default sheet-atvw sheet-cf sheet-fioracitta sheet-imperative sheet-lyonesse sheet-mi sheet-mba sheet-mb sheet-mc sheet-mr sheet-os sheet-perceforest sheet-thennla" data-i18n-list-item="magic_points">
@@ -3544,7 +3558,7 @@
 
     <!-- Weapons -->
     <div id="weapons" class="sheet-section sheet-anchor-adjust-x2 sheet-creature">
-        <h2 data-i18n="weapons">Weapons</h2>
+        <h2><span data-i18n="weapons">Weapons</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Weapons">?</button></h2>
 
         <input type="hidden" name="attr_weapon_buttons" value="">
 
@@ -3667,7 +3681,7 @@
     <!-- Armor -->
     <div id="armor" class="sheet-section sheet-anchor-adjust-x2 sheet-creature">
         <div class="sheet-flex">
-            <div class="sheet-grow"><h2 data-i18n="armor">Armor</h2></div>
+            <div class="sheet-grow"><h2><span data-i18n="armor">Armor</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Armor">?</button></h2></div>
             <div>
                 <label class="sheet-left sheet-rmargin" data-i18n="worn_armor_enc">Worn Armor ENC</label>
                 <select class="sheet-auto-width sheet-rmargin" name="attr_half_effective_armor_enc">
@@ -3958,7 +3972,7 @@
     <div id="gear" class="sheet-flex sheet-gap sheet-anchor-adjust-x2 sheet-creature">
         <!-- Gear -->
         <div class="sheet-section sheet-half-width">
-            <h2 data-i18n="gear">Gear</h2>
+            <h2><span data-i18n="gear">Gear</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Gear">?</button></h2>
 
             <div class="sheet-flex">
                 <div class="sheet-th sheet-grow"><span data-i18n="item">Item</span></div>
@@ -4008,7 +4022,7 @@
         <div class="sheet-half-width">
             <!-- Wealth -->
             <div class="sheet-section sheet-full-width sheet-creature">
-                <h2 data-i18n="wealth">Wealth</h2>
+                <h2><span data-i18n="wealth">Wealth</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Wealth">?</button></h2>
 
                 <div class="sheet-bmargin">
                     <div class="sheet-flex sheet-full-width">
@@ -4114,7 +4128,7 @@
 
     <!-- Background -->
     <div id="character-background" class="sheet-section sheet-anchor-adjust-x2 sheet-major">
-        <h2 data-i18n="background">Background</h2>
+        <h2><span data-i18n="background">Background</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Background">?</button></h2>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
             <div class="sheet-half-width">
@@ -4152,7 +4166,7 @@
 
     <!-- Notes -->
     <div id="notes" class="sheet-section sheet-anchor-adjust-x2">
-        <h2 data-i18n="notes">Notes</h2>
+        <h2><span data-i18n="notes">Notes</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Notes">?</button></h2>
 
         <textarea class="sheet-character-notes" title="@{sheet_notes}" name="attr_sheet_notes" value=""></textarea>
     </div>

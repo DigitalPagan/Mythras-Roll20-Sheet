@@ -800,24 +800,6 @@ button[type=action].sheet-penalty {
     text-shadow: none;
 }*/
 
-/*.ui-dialog .charsheet button.sheet-checkbtn {
-    border: solid 1px gray;
-    border-radius: 5px;
-    height: 18px;
-    overflow: hidden;
-    line-height: 0;
-    vertical-align: middle;
-    background: linear-gradient(to bottom, whitesmoke 16%, gainsboro 79%);
-    color: black;
-    padding: 0 2px 0;
-    text-decoration: none;
-}
-input.sheet-checkbtn[value="1"] + button.sheet-checkbtn {
-    background: linear-gradient(to bottom, gray 16%, dimgray 79%);
-    color: whitesmoke;
-    border: solid 1px black;
-}*/
-
 
 
 /* Sheet Type Display Toggles */
@@ -909,7 +891,6 @@ div.sheet-compactable-fieldset-control {
 {% include 'roll_templates/hit-location.css' %}
 {% include 'roll_templates/improvement.css' %}
 {% include 'roll_templates/resolution_pool.css' %}
-{% include 'roll_templates/se-menu.css' %}
 {% include 'roll_templates/skill.css' %}
 {% include 'roll_templates/system.css' %}
 {% include 'roll_templates/weapon.css' %}

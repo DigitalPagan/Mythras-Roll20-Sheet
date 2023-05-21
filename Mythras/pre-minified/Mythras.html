@@ -285,10 +285,10 @@
         <!-- Characteristics -->
         <div class="sheet-section">
             <input type="hidden" class="sheet-wide-toggle sheet-deep-toggle" name="attr_extended_conflict_enabled" value="0">
-            <h2 class="sheet-anti-toggle" data-i18n="characteristics">Characteristics</h2>
+            <h2 class="sheet-anti-toggle"><span data-i18n="characteristics">Characteristics</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Characteristics">?</button></h2>
             <div class="sheet-toggle sheet-space-between sheet-gap">
-                <h2 class="sheet-toggle sheet-help" data-i18n-title="characteristics" data-i18n="characteristics-a">Chars</h2>
-                <button type="roll" class="sheet-die sheet-d6" title="%{extended_conflict_damage}" name="roll_extended_conflict_damage" value="@{roll_display}&{template:default} {{dmgstyle=1}} {{name=^{extended_conflict_damage}}} {{character=@{character_name}}} {{^{damage}=[[1d6]]}}">f</button>
+                <div><h2 class="sheet-toggle sheet-help"><span data-i18n-title="characteristics" data-i18n="characteristics-a">Chars</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Characteristics">?</button></h2></div>
+                <div><button type="roll" class="sheet-die sheet-d6" title="%{extended_conflict_damage}" name="roll_extended_conflict_damage" value="@{roll_display}&{template:default} {{dmgstyle=1}} {{name=^{extended_conflict_damage}}} {{character=@{character_name}}} {{^{damage}=[[1d6]]}}">f</button></div>
             </div>
 
 
@@ -418,12 +418,12 @@
             <input type="hidden" class="sheet-spirits-toggle" name="attr_spirits_enabled" value="1">
             <div class="sheet-space-between">
                 <h2>
-                    <span data-i18n="attributes">Attributes</span>
+                    <span data-i18n="attributes">Attributes</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Attributes">?</button>
                     (<select class="sheet-auto-width sheet-text-center" name="attr_attribute_mode">
-                    <option value="physical" class="sheet-creature" data-i18n="physical" selected>Physical</option>
-                    <option value="social" class="sheet-social-conflict" data-i18n="social">Social</option>
-                    <option value="spiritual" class="sheet-spirits" data-i18n="spiritual">Spiritual</option>
-                </select>)
+                        <option value="physical" class="sheet-creature" data-i18n="physical" selected>Physical</option>
+                        <option value="social" class="sheet-social-conflict" data-i18n="social">Social</option>
+                        <option value="spiritual" class="sheet-spirits" data-i18n="spiritual">Spiritual</option>
+                    </select>)
                 </h2>
                 <div>
                     <input type='checkbox' name='attr_attribute_configs' value="1"><span class="sheet-checkico">y</span>
@@ -940,24 +940,34 @@
 
             <div hidden>
                 <!-- Social SE Buttons -->
+                <!--
                 <button type="roll" name="roll_offensive_social_se_menu" value="/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{socialconflict=1}} {{offense=[[1]]}}"></button>
                 <button type="roll" name="roll_defensive_social_se_menu" value="/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{socialconflict=1}} {{offense=[[0]]}}"></button>
                 <button type="roll" name="roll_accidental_humiliation_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{accidental_humiliation}}}"></button>
                 <button type="roll" name="roll_choose_resolution_pool_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{choose_resolution_pool}}}"></button>
+                -->
                 <!-- Circumvent Defense in combat SEs -->
+                <!--
                 <button type="roll" name="roll_compel_capitulation_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{compel_capitulation}}} {{^{conditions}=^{critical}}}"></button>
                 <button type="roll" name="roll_disarm_opponent_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{disarm_opponent}}}"></button>
                 <button type="roll" name="roll_emotional_impale_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{emotional_impale}}}"></button>
                 <button type="roll" name="roll_entangling_argument_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{entangling_argument}}}"></button>
                 <button type="roll" name="roll_expose_flaws_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{expose_flaws}}}"></button>
+                -->
                 <!-- Force Failure in combat SEs -->
+                <!--
                 <button type="roll" name="roll_ignore_confidence_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{ignore_confidence}}} {{^{conditions}=^{critical}}}"></button>
+                -->
                 <!-- Maximise Damage in combat SEs -->
+                <!--
                 <button type="roll" name="roll_obfuscate_opponent_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{obfuscate_opponent}}}"></button>
+                -->
                 <!-- Prepare COunter in combat SEs -->
+                <!--
                 <button type="roll" name="roll_shake_confidence_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{shake_confidence}}}"></button>
                 <button type="roll" name="roll_sow_doubt_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sow_doubt}}} {{^{conditions}=^{critical}}}"></button>
                 <button type="roll" name="roll_stun_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{stun}}}"></button>
+                -->
                 <!-- Trip Opponent in combat SEs-->
                 <!-- Withdraw in combat SEs-->
             </div>
@@ -966,7 +976,7 @@
         <!-- Conditions -->
         <div class="sheet-section sheet-flex-column sheet-grow">
             <div class="sheet-space-between sheet-gap">
-                <h2 data-i18n="conditions">Conditions</h2>
+                <h2><span data-i18n="conditions">Conditions</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Conditions">?</button></h2>
                 <div class="sheet-creature"><label class="sheet-checkbox sheet-help" data-i18n-title="pack_equipped"><input type='checkbox' name='attr_pack_equipped' value="1" checked><span>3</span><span data-i18n="pack"></span></label></div>
             </div>
 
@@ -1031,7 +1041,7 @@
         <input type="hidden" class="sheet-social-conflict-toggle" name="attr_social_conflict_enabled" value="0">
         <input type="hidden" class="sheet-spirits-toggle" name="attr_spirits_enabled" value="1">
         <div class="sheet-flex sheet-gap">
-            <div class="sheet-grow"><h2><span data-i18n="skills">Skills</span> / <span data-i18n="passions">Passions</span></h2></div>
+            <div class="sheet-grow"><h2><span data-i18n="skills">Skills</span> & <span data-i18n="passions">Passions</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Skills_.26_Passions">?</button></h2></div>
             <!-- Spirit Combat -->
             <div class="sheet-spirits">
                 <label class="sheet-left sheet-rmargin" data-i18n="spirit_combat_skill">Spirit Combat Skill</label>
@@ -1042,6 +1052,7 @@
                 <input type="hidden" name="attr_spirit_combat_skill_notes" value="" readonly>
                 <div hidden>
                     <!-- Spirit SE Buttons -->
+                    <!--
                     <button type="roll" name="roll_offensive_spirit_se_menu" value="/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{spiritcombat=1}} {{offense=[[1]]}}"></button>
                     <button type="roll" name="roll_defensive_spirit_se_menu" value="/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{spiritcombat=1}} {{offense=[[0]]}}"></button>
                     <button type="roll" name="roll_bleed_essence_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{bleed_essence}}} {{^{conditions}=^{critical}}}"></button>
@@ -1056,6 +1067,7 @@
                     <button type="roll" name="roll_sunder_binding_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{sunder_binding}}} {{^{conditions}=^{fumble}}}"></button>
                     <button type="roll" name="roll_supress_ability_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{supress_ability}}} {{^{conditions}=^{mortal}}}"></button>
                     <button type="roll" name="roll_turn_back_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{turn_back}}}"></button>
+                    -->
                     <!-- Withdraw in combat SEs-->
                 </div>
             </div>
@@ -2651,6 +2663,7 @@
                     <div hidden>
                         <input type="hidden" name="attr_combat_se_list" value="default">
                         <!-- Combat SE buttons-->
+                        <!--
                         <button type="roll" name="roll_offensive_combat_se_menu" value="/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{offensive_special_effects}}} {{combat=1}} {{offense=[[1]]}} {{special_effects=@{special_effects}}} {{simplified_combat_enabled=[[@{simplified_combat_enabled}]]}} {{reach_enabled=[[@{reach_enabled}]]}}"></button>
                         <button type="roll" name="roll_defensive_combat_se_menu" value="/w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=^{defensive_special_effects}}} {{combat=1}} {{offense=[[0]]}} {{special_effects=@{special_effects}}} {{simplified_combat_enabled=[[@{simplified_combat_enabled}]]}} {{reach_enabled=[[@{reach_enabled}]]}}"></button>
 
@@ -2706,6 +2719,7 @@
                         <button type="roll" name="roll_trip_opponent_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{trip_opponent}}}"></button>
                         <button type="roll" name="roll_weapon_malfunction_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{weapon_malfunction}}} {{^{conditions}=^{ranged}, ^{fumble}}}"></button>
                         <button type="roll" name="roll_withdraw_se" value="@{roll_display}&{template:default} {{character=@{character_name}}} {{name=^{withdraw}}}"></button>
+                        -->
                     </div>
                 </div>
 
@@ -2978,7 +2992,7 @@
     <input type="hidden" class="sheet-abilities-control" name="attr_ability_system" value="core">
     <div id="abilities" class="sheet-section sheet-anchor-adjust-x2">
         <div class="sheet-space-between sheet-gap">
-            <h2 data-i18n="abilities">Abilities</h2>
+            <h2><span data-i18n="abilities">Abilities</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Abilities">?</button></h2>
             <div class="sheet-flex sheet-gap">
                 <div class="sheet-flex sheet-gap" data-i18n-list="ability_attribute-order">
                     <div class="sheet-setting-option sheet-default sheet-atvw sheet-cf sheet-fioracitta sheet-imperative sheet-lyonesse sheet-mi sheet-mba sheet-mb sheet-mc sheet-mr sheet-os sheet-perceforest sheet-thennla" data-i18n-list-item="magic_points">
@@ -3727,7 +3741,7 @@
 
     <!-- Weapons -->
     <div id="weapons" class="sheet-section sheet-anchor-adjust-x2 sheet-creature">
-        <h2 data-i18n="weapons">Weapons</h2>
+        <h2><span data-i18n="weapons">Weapons</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Weapons">?</button></h2>
 
         <input type="hidden" name="attr_weapon_buttons" value="">
 
@@ -3850,7 +3864,7 @@
     <!-- Armor -->
     <div id="armor" class="sheet-section sheet-anchor-adjust-x2 sheet-creature">
         <div class="sheet-flex">
-            <div class="sheet-grow"><h2 data-i18n="armor">Armor</h2></div>
+            <div class="sheet-grow"><h2><span data-i18n="armor">Armor</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Armor">?</button></h2></div>
             <div>
                 <label class="sheet-left sheet-rmargin" data-i18n="worn_armor_enc">Worn Armor ENC</label>
                 <select class="sheet-auto-width sheet-rmargin" name="attr_half_effective_armor_enc">
@@ -4141,7 +4155,7 @@
     <div id="gear" class="sheet-flex sheet-gap sheet-anchor-adjust-x2 sheet-creature">
         <!-- Gear -->
         <div class="sheet-section sheet-half-width">
-            <h2 data-i18n="gear">Gear</h2>
+            <h2><span data-i18n="gear">Gear</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Gear">?</button></h2>
 
             <div class="sheet-flex">
                 <div class="sheet-th sheet-grow"><span data-i18n="item">Item</span></div>
@@ -4191,7 +4205,7 @@
         <div class="sheet-half-width">
             <!-- Wealth -->
             <div class="sheet-section sheet-full-width sheet-creature">
-                <h2 data-i18n="wealth">Wealth</h2>
+                <h2><span data-i18n="wealth">Wealth</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Wealth">?</button></h2>
 
                 <div class="sheet-bmargin">
                     <div class="sheet-flex sheet-full-width">
@@ -4297,7 +4311,7 @@
 
     <!-- Background -->
     <div id="character-background" class="sheet-section sheet-anchor-adjust-x2 sheet-major">
-        <h2 data-i18n="background">Background</h2>
+        <h2><span data-i18n="background">Background</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Background">?</button></h2>
 
         <div class="sheet-flex sheet-gap sheet-bmargin">
             <div class="sheet-half-width">
@@ -4335,7 +4349,7 @@
 
     <!-- Notes -->
     <div id="notes" class="sheet-section sheet-anchor-adjust-x2">
-        <h2 data-i18n="notes">Notes</h2>
+        <h2><span data-i18n="notes">Notes</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Notes">?</button></h2>
 
         <textarea class="sheet-character-notes" title="@{sheet_notes}" name="attr_sheet_notes" value=""></textarea>
     </div>
@@ -5080,7 +5094,7 @@
     <div id="help" class="sheet-overlay">
     <div class="sheet-popup">
         <a class="close" href="#">×</a>
-        <h1><span class=sheet-rmargin" data-i18n="help">Help</span> (<span name="attr_version"></span>)</h1>
+        <h1><span class=sheet-rmargin" data-i18n="help">Help</span> (v<span name="attr_version"></span>)</h1>
         <input type="hidden" name="attr_version" value="3.0">
         <p data-i18n="help-paragraph">
             Throughout the sheet you will find <span class="sheet-pictos">?</span> icons, like the one you clicked to open this pop-up.  These will provide direct links to documentation covering that section of the sheet.  In addition, the resources below may prove to be useful sources of information about the Mythras Roll20 sheet and/or Mythras in general.
@@ -5089,8 +5103,9 @@
             <div class="sheet-grow">
                 <label class="sheet-left" data-i18n="links"></label>
                 <ul>
-                    <li><button type="roll" class="sheet-link" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/blob/master/Mythras/docs/README.md" data-i18n="sheet_documentation">Sheet Documentation</button></li>
-                    <li><button type="roll" class="sheet-link" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/blob/master/Mythras/CHANGELOG.md" data-i18n="changelog">Changelog</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://wiki.roll20.net/Mythras_Sheet" data-i18n="sheet_documentation">Sheet Documentation</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://wiki.roll20.net/Mythras" data-i18n="Mythras_Roll20_wiki_page">Mythras' Roll20 wiki page</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://github.com/Roll20/roll20-character-sheets/blob/master/Mythras/CHANGELOG.md" data-i18n="changelog">Changelog</button></li>
                     <li><button type="roll" class="sheet-link" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/issues" data-i18n="report_a_bug">Report a Bug</button></li>
                     <li><button type="roll" class="sheet-link" value="/w gm https://app.roll20.net/users/103705" data-i18n="contact_sheet_author">Contact Sheet Author</button></li>
                 </ul>
@@ -5098,7 +5113,7 @@
             <div class="sheet-grow">
                 <label class="sheet-left" data-i18n="communities"></label>
                 <ul>
-                    <li><button type="roll" class="sheet-link" value="/w gm https://discord.com/servers/mythras-469341944888164352">Discord</button></li>
+                    <li><button type="roll" class="sheet-link" value="/w gm https://discord.gg/mythras-469341944888164352">Discord</button></li>
                     <li><button type="roll" class="sheet-link" value="/w gm https://www.tapatalk.com/groups/designmechanism/index.php" data-i18n="forums">Forums</button></li>
                     <li><button type="roll" class="sheet-link" value="/w gm https://www.reddit.com/r/Mythras/">Reddit</button></li>
                 </ul>
@@ -5109,7 +5124,7 @@
     <div id="import" class="sheet-overlay">
     <div class="sheet-popup">
         <a class="close" href="#">×</a>
-        <h1><span data-i18n="import">Import</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://github.com/DigitalPagan/Mythras-Roll20-Sheet/blob/master/Mythras/docs/import.md">?</button></h1>
+        <h1><span data-i18n="import">Import</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Import">?</button></h1>
 
         <div><label class="sheet-left sheet-rmargin" data-i18n="import_data">Import Data</label><span>#</span><input type="number" class="sheet-number-width-sm" title="@{import_character}" name="attr_import_character" value="1" min="1"></div>
         <div><textarea class="sheet-full-width" name="attr_import_json_data" value=""></textarea></div>
@@ -5121,7 +5136,7 @@
     <div id="configuration" class="sheet-overlay">
     <div class="sheet-popup">
         <a class="close" href="#">×</a>
-        <h1 data-i18n="configuration">Configuration</h1>
+        <h1><span data-i18n="configuration">Configuration</span> <button type="roll" class="sheet-link sheet-link-ico" value="/w gm https://wiki.roll20.net/Mythras_Sheet#Configuration">?</button></h1>
 
         <div class="sheet-bmargin">
             <!-- Sheet Type -->
@@ -5230,7 +5245,7 @@
                 </select>
                 <br>
                 <!-- Special Effect List -->
-                <label class="sheet-left sheet-rmargin" data-i18n="special_effects">Special Effects</label>
+                <!--<label class="sheet-left sheet-rmargin" data-i18n="special_effects">Special Effects</label>
                 <select name="attr_special_effects_option">
                     <option value="default" data-i18n="setting_default" selected>Setting Default</option>
                     <option value="core" data-i18n="core">Core</option>
@@ -5238,7 +5253,7 @@
                     <option value="imperative" data-i18n="mythras_imperative">Mythras Imperative</option>
                     <option value="lyonesse" data-i18n="lyonesse">Lyonesse</option>
                 </select>
-                <br>
+                <br> -->
                 <input type="hidden" name="attr_special_effects" value="core">
                 <!-- Spirits Enabled Option -->
                 <label class="sheet-left sheet-rmargin" data-i18n="spirits">Spirits</label>
@@ -5522,615 +5537,6 @@
         </div>
     </div>
 </rolltemplate>
-
-<!-- SE Menu Roll Template -->
-<!-- /w gm &{template:se-menu} {{character=@{character_name}}} {{character_id=@{character_id}}} {{name=@{name}}} {{combat=1}} {{spiritcombat=1}} {{socialconflict=1}} {{offense=[[1]]}} -->
-<rolltemplate class="sheet-rolltemplate-se-menu">
-    <div class="sheet-border">
-        <div class="sheet-header">
-            <div class="sheet-character">{{character}}</div>
-            <div class="sheet-name">{{name}}</div>
-        </div>
-        <div class="sheet-se-option-control-{{special_effects}}" hidden></div>
-        {{#combat}}
-        <div style="max-height: 200px; overflow: auto;">
-            <div class="sheet-table" data-i18n-list="combat_se-order">
-                <div class="sheet-tr">
-                    <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
-                    <div class="sheet-th" data-i18n="conditions">Conditions</div>
-                </div>
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="accidental_injury">
-                    <div class="sheet-td">[<span data-i18n="accidental_injury">Accidental Injury</span>](~{{character_id}}|accidental_injury_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr" data-i18n-list-itme="arise">
-                    <div class="sheet-td">[<span data-i18n="arise">Arise</span>](~{{character_id}}|arise_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="bash">
-                    <div class="sheet-td">[<span data-i18n="bash">Bash</span>](~{{character_id}}|bash_se)</div>
-                    <div class="sheet-td" data-i18n="bludgeoning">Bludgeoning</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="bleed">
-                    <div class="sheet-td">[<span data-i18n="bleed">Bleed</span>](~{{character_id}}|bleed_se)</div>
-                    <div class="sheet-td" data-i18n="cutting">Cutting</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="blind_opponent">
-                    <div class="sheet-td">[<span data-i18n="blind_opponent">Blind Opponent</span>](~{{character_id}}|blind_opponent_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="bypass_armor">
-                    <div class="sheet-td">[<span data-i18n="bypass_armor">Bypass Armor</span>](~{{character_id}}|bypass_armor_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="choose_location">
-                    <div class="sheet-td">[<span data-i18n="choose_location">Choose Location</span>](~{{character_id}}|choose_location_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-mba" data-i18n-list-itme="circumvent_cover">
-                    <div class="sheet-td">[<span data-i18n="circumvent_cover">Circumvent Cover</span>](~{{character_id}}|circumvent_cover_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="circumvent_defense">
-                    <div class="sheet-td">[<span data-i18n="circumvent_defense">Circumvent Defense</span>](~{{character_id}}|circumvent_defense_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="circumvent_parry">
-                    <div class="sheet-td">[<span data-i18n="circumvent_parry">Circumvent Parry</span>](~{{character_id}}|circumvent_parry_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() reach_enabled 1}}
-                <div class="sheet-tr" data-i18n-list-itme="close_range">
-                    <div class="sheet-td">[<span data-i18n="close_range">Close Range</span>](~{{character_id}}|close_range_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() reach_enabled 1}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="compel_retreat">
-                    <div class="sheet-td">[<span data-i18n="compel_retreat">Compel Retreat</span>](~{{character_id}}|compel_retreat_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-lyonesse sheet-mba" data-i18n-list-itme="compel_surrender">
-                    <div class="sheet-td">[<span data-i18n="compel_surrender">Compel Surrender</span>](~{{character_id}}|compel_surrender_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="damage_item">
-                    <div class="sheet-td">[<span data-i18n="damage_item">Damage Item</span>](~{{character_id}}|damage_item_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="damage_weapon">
-                    <div class="sheet-td">[<span data-i18n="damage_weapon">Damage Weapon</span>](~{{character_id}}|damage_weapon_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                <div class="sheet-tr" data-i18n-list-itme="disarm">
-                    <div class="sheet-td">[<span data-i18n="disarm">Disarm</span>](~{{character_id}}|disarm_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="distract">
-                    <div class="sheet-td">[<span data-i18n="distract">Distract</span>](~{{character_id}}|distract_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative" data-i18n-list-itme="drop_foe">
-                    <div class="sheet-td">[<span data-i18n="drop_foe">Drop Foe</span>](~{{character_id}}|drop_foe_se)</div>
-                    <div class="sheet-td"><span data-i18n="siege_weapons">Siege Weapons</span>, <span data-i18n="firearms">Firearms</span></div>
-                </div>
-                {{/rollTotal() offense 1}}
-
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-mba" data-i18n-list-itme="duck_back">
-                    <div class="sheet-td">[<span data-i18n="duck_back">Duck Back</span>](~{{character_id}}|duck_back_se)</div>
-                    <div class="sheet-td" data-i18n="ranged">Ranged</div>
-                </div>
-                {{/rollTotal() offense 1}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="enhance_defense">
-                    <div class="sheet-td">[<span data-i18n="enhance_defense">Enhance Defense</span>](~{{character_id}}|enhance_defense_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="enhance_parry">
-                    <div class="sheet-td">[<span data-i18n="enhance_parry">Enhance Parry</span>](~{{character_id}}|enhance_parry_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-destined sheet-mba" data-i18n-list-itme="entangle">
-                    <div class="sheet-td">[<span data-i18n="entangle">Entangle</span>](~{{character_id}}|entangle_se)</div>
-                    <div class="sheet-td" data-i18n="entangling">Entangling</div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="flurry">
-                    <div class="sheet-td">[<span data-i18n="flurry">Flurry</span>](~{{character_id}}|flurry_se)</div>
-                    <div class="sheet-td" data-i18n="unarmed">Unarmed</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="force_failure">
-                    <div class="sheet-td">[<span data-i18n="force_failure">Force Failure</span>](~{{character_id}}|force_failure_se)</div>
-                    <div class="sheet-td" data-i18n="fumble">Fumble</div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="grip">
-                    <div class="sheet-td">[<span data-i18n="grip">Grip</span>](~{{character_id}}|grip_se)</div>
-                    <div class="sheet-td" data-i18n="unarmed">Unarmed</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="impact">
-                    <div class="sheet-td">[<span data-i18n="impact">Impact</span>](~{{character_id}}|impact_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 1}}
-
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="impale">
-                    <div class="sheet-td">[<span data-i18n="impale">Impale</span>](~{{character_id}}|impale_se)</div>
-                    <div class="sheet-td" data-i18n="impaling">Impaling</div>
-                </div>
-                {{/rollTotal() offense 1}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="kill_silently">
-                    <div class="sheet-td">[<span data-i18n="kill_silently">Kill Silently</span>](~{{character_id}}|kill_silently_se)</div>
-                    <div class="sheet-td" data-i18n="small_weapons">Small Weapons</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="marksman">
-                    <div class="sheet-td">[<span data-i18n="marksman">Marksmen</span>](~{{character_id}}|marksman_se)</div>
-                    <div class="sheet-td" data-i18n="ranged">Ranged</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr" data-i18n-list-itme="maximise_damage">
-                    <div class="sheet-td">[<span data-i18n="maximise_damage">Maximise Damage</span>](~{{character_id}}|maximise_damage_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 1}}
-
-                {{#rollTotal() reach_enabled 1}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr" data-i18n-list-itme="open_range">
-                    <div class="sheet-td">[<span data-i18n="open_range">Open Range</span>](~{{character_id}}|open_range_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() reach_enabled 1}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-lyonesse sheet-mba" data-i18n-list-itme="overextend_opponent">
-                    <div class="sheet-td">[<span data-i18n="overextend_opponent">Overextend Opponent</span>](~{{character_id}}|overextend_opponent_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-mba" data-i18n-list-itme="overpenetration">
-                    <div class="sheet-td">[<span data-i18n="overpenetration">Overpenetration</span>](~{{character_id}}|overpenetration_se)</div>
-                    <div class="sheet-td"><span data-i18n="ranged">Ranged</span>, <span data-i18n="critical">Critical</span></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-destined sheet-imperative sheet-destined sheet-mba" data-i18n-list-itme="pin_down">
-                    <div class="sheet-td">[<span data-i18n="pin_down">Pin Down</span>](~{{character_id}}|pin_down_se)</div>
-                    <div class="sheet-td" data-i18n="ranged">Ranged</div>
-                </div>
-                {{/rollTotal() offense 1}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-lyonesse sheet-mba" data-i18n-list-itme="pin_weapon">
-                    <div class="sheet-td">[<span data-i18n="pin_weapon">Pin Weapon</span>](~{{character_id}}|pin_weapon_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="prepare_counter">
-                    <div class="sheet-td">[<span data-i18n="prepare_counter">Prepare Counter</span>](~{{character_id}}|prepare_counter_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="press_advantage">
-                    <div class="sheet-td">[<span data-i18n="press_advantage">Press Advantage</span>](~{{character_id}}|press_advantage_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="rapid_reload">
-                    <div class="sheet-td">[<span data-i18n="rapid_reload">Rapid Reload</span>](~{{character_id}}|rapid_reload_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="scar_foe">
-                    <div class="sheet-td">[<span data-i18n="scar_foe">Scar Foe</span>](~{{character_id}}|scar_foe_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="select_target">
-                    <div class="sheet-td">[<span data-i18n="select_target">Select Target</span>](~{{character_id}}|select_target_se)</div>
-                    <div class="sheet-td" data-i18n="fumble">Fumble</div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-destined" data-i18n-list-itme="silent_takedown">
-                    <div class="sheet-td">[<span data-i18n="silent_takedown">Silent Takedown</span>](~{{character_id}}|silent_takedown_se)</div>
-                    <div class="sheet-td" data-i18n="surprise">Surprise</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="slip_free">
-                    <div class="sheet-td">[<span data-i18n="slip_free">Slip Free</span>](~{{character_id}}|slip_free_se)</div>
-                    <div class="sheet-td" data-i18n="critical">Critical</div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-mba" data-i18n-list-itme="spoil_spell">
-                    <div class="sheet-td">[<span data-i18n="spoil_spell">Spoil Spell</span>](~{{character_id}}|spoil_spell_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="stand_fast">
-                    <div class="sheet-td">[<span data-i18n="stand_fast">Stand Fast</span>](~{{character_id}}|stand_fast_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-destined sheet-lyonesse sheet-mba" data-i18n-list-itme="stun_location">
-                    <div class="sheet-td">[<span data-i18n="stun_location">Stun Location</span>](~{{character_id}}|stun_location_se)</div>
-                    <div class="sheet-td" data-i18n="bludgeoning">Bludgeoning</div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                {{#rollTotal() offense 1}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse sheet-mba" data-i18n-list-itme="sunder">
-                    <div class="sheet-td">[<span data-i18n="sunder">Sunder</span>](~{{character_id}}|sunder_se)</div>
-                    <div class="sheet-td"><span data-i18n="axes">Axes</span>, <span data-i18n="two_handed">Two Handed</span></div>
-                </div>
-                {{/rollTotal() offense 1}}
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                {{#rollTotal() simplified_combat_enabled 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-lyonesse sheet-mba" data-i18n-list-itme="take_weapon">
-                    <div class="sheet-td">[<span data-i18n="take_weapon">Take Weapon</span>](~{{character_id}}|take_weapon_se)</div>
-                    <div class="sheet-td" data-i18n="unarmed">Unarmed</div>
-                </div>
-                {{/rollTotal() simplified_combat_enabled 0}}
-
-                <div class="sheet-tr" data-i18n-list-itme="trip_opponent">
-                    <div class="sheet-td">[<span data-i18n="trip_opponent">Trip Opponent</span>](~{{character_id}}|trip_opponent_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-mba" data-i18n-list-itme="weapon_malfunction">
-                    <div class="sheet-td">[<span data-i18n="weapon_malfunction">Weapon Malfunction</span>](~{{character_id}}|weapon_malfunction_se)</div>
-                    <div class="sheet-td"><span data-i18n="ranged">Ranged</span>, <span data-i18n="fumble">Fumble</span></div>
-                </div>
-                {{/rollTotal() offense 0}}
-
-                {{#rollTotal() offense 0}}
-                <div class="sheet-tr" data-i18n-list-itme="withdraw">
-                    <div class="sheet-td">[<span data-i18n="withdraw">Withdraw</span>](~{{character_id}}|withdraw_se)</div>
-                    <div class="sheet-td"></div>
-                </div>
-                {{/rollTotal() offense 0}}
-            </div>
-        </div>
-        {{/combat}}
-
-        {{#spiritcombat}}
-        <div class="sheet-table" data-i18n-list="spirit_se-order">
-            <div class="sheet-tr">
-                <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
-                <div class="sheet-th" data-i18n="conditions">Conditions</div>
-            </div>
-            <div class="sheet-tr" data-i18n-list-itme="bleed_essence">
-                <div class="sheet-td">[<span data-i18n="bleed_essence">Bleed Essence</span>](~{{character_id}}|bleed_essence_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse" data-i18n-list-itme="compel_bargain">
-                <div class="sheet-td">[<span data-i18n="compel_bargain">Compel Bargain</span>](~{{character_id}}|compel_bargain_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="drive_off">
-                <div class="sheet-td">[<span data-i18n="drive_off">Drive Off</span>](~{{character_id}}|drive_off_se)</div>
-                <div class="sheet-td" data-i18n="mortal">Mortal</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="leech_strength">
-                <div class="sheet-td">[<span data-i18n="leech_strength">Leech Strength</span>](~{{character_id}}|leech_strength_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse" data-i18n-list-itme="obscure">
-                <div class="sheet-td">[<span data-i18n="obscure">Obscure</span>](~{{character_id}}|obscure_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 0}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="possess">
-                <div class="sheet-td">[<span data-i18n="possess">Possess</span>](~{{character_id}}|possess_se)</div>
-                <div class="sheet-td" data-i18n="spirit">Spirit</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="psychic_stun">
-                <div class="sheet-td">[<span data-i18n="psychic_stun">Psychic Stun</span>](~{{character_id}}|psychic_stun_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            <div class="sheet-tr" data-i18n-list-itme="restrain">
-                <div class="sheet-td">[<span data-i18n="restrain">Restrain</span>](~{{character_id}}|restrain_se)</div>
-                <div class="sheet-td" data-i18n="mortal">Mortal</div>
-            </div>
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="spirit_lance">
-                <div class="sheet-td">[<span data-i18n="spirit_lance">Spirit Lance</span>](~{{character_id}}|spirit_lance_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 1}}
-            <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse" data-i18n-list-itme="sunder_binding">
-                <div class="sheet-td">[<span data-i18n="sunder_binding">Sunder Binding</span>](~{{character_id}}|sunder_binding_se)</div>
-                <div class="sheet-td" data-i18n="fumble">Fumble</div>
-            </div>
-            <div class="sheet-tr" data-i18n-list-itme="supress_ability">
-                <div class="sheet-td">[<span data-i18n="supress_ability">Supress Ability</span>](~{{character_id}}|supress_ability_se)</div>
-                <div class="sheet-td" data-i18n="mortal">Mortal</div>
-            </div>
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="turn_back">
-                <div class="sheet-td">[<span data-i18n="turn_back">Turn Back</span>](~{{character_id}}|turn_back_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 0}}
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr sheet-se-option sheet-core sheet-imperative sheet-lyonesse" data-i18n-list-itme="withdraw">
-                <div class="sheet-td">[<span data-i18n="withdraw">Withdraw</span>](~{{character_id}}|withdraw_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 0}}
-        </div>
-        {{/spiritcombat}}
-
-        {{#socialconflict}}
-        <div class="sheet-table" data-i18n-list="social_se-order">
-            <div class="sheet-tr">
-                <div class="sheet-th" data-i18n="special_effect">Special Effect</div>
-                <div class="sheet-th" data-i18n="conditions">Conditions</div>
-            </div>
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="accidental_humiliation">
-                <div class="sheet-td">[<span data-i18n="accidental_humiliation">Accidental Humiliation</span>](~{{character_id}}|accidental_humiliation_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 0}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="choose_resolution_pool">
-                <div class="sheet-td">[<span data-i18n="choose_resolution_pool">Choose Resolution Pool</span>](~{{character_id}}|choose_resolution_pool_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="circumvent_defense">
-                <div class="sheet-td">[<span data-i18n="circumvent_defense">Circumvent Defense</span>](~{{character_id}}|circumvent_defense_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="compel_capitulation">
-                <div class="sheet-td">[<span data-i18n="compel_capitulation">Compel Capitulation</span>](~{{character_id}}|compel_capitulation_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="disarm_opponent">
-                <div class="sheet-td">[<span data-i18n="disarm_opponent">Disarm Opponent</span>](~{{character_id}}|disarm_opponent_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="emotional_impale">
-                <div class="sheet-td">[<span data-i18n="emotional_impale">Emotional Impale</span>](~{{character_id}}|emotional_impale_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="entangling_argument">
-                <div class="sheet-td">[<span data-i18n="entangling_argument">Entangling Argument</span>](~{{character_id}}|entangling_argument_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="expose_flaws">
-                <div class="sheet-td">[<span data-i18n="expose_flaws">Expose Flaws</span>](~{{character_id}}|expose_flaws_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="force_failure">
-                <div class="sheet-td">[<span data-i18n="force_failure">Force Failure</span>](~{{character_id}}|force_failure_se)</div>
-                <div class="sheet-td" data-i18n="fumble">Fumble</div>
-            </div>
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="ignore_confidence">
-                <div class="sheet-td">[<span data-i18n="ignore_confidence">Ignore Confidence</span>](~{{character_id}}|ignore_confidence_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="maximise_damage">
-                <div class="sheet-td">[<span data-i18n="maximise_damage">Maximise Damage</span>](~{{character_id}}|maximise_damage_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 1}}
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="obfuscate_opponent">
-                <div class="sheet-td">[<span data-i18n="obfuscate_opponent">Obfuscate Opponent</span>](~{{character_id}}|obfuscate_opponent_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 0}}
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="prepare_counter">
-                <div class="sheet-td">[<span data-i18n="prepare_counter">Prepare Counter</span>](~{{character_id}}|prepare_counter_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="shake_confidence">
-                <div class="sheet-td">[<span data-i18n="shake_confidence">Shake Confidence</span>](~{{character_id}}|shake_confidence_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="sow_doubt">
-                <div class="sheet-td">[<span data-i18n="sow_doubt">Sow Doubt</span>](~{{character_id}}|sow_doubt_se)</div>
-                <div class="sheet-td" data-i18n="critical">Critical</div>
-            </div>
-            {{/rollTotal() offense 0}}
-            {{#rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="stun">
-                <div class="sheet-td">[<span data-i18n="stun">Stun</span>](~{{character_id}}|stun_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 1}}
-            <div class="sheet-tr" data-i18n-list-itme="trip_opponent">
-                <div class="sheet-td">[<span data-i18n="trip_opponent">Trip Opponent</span>](~{{character_id}}|trip_opponent_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{#rollTotal() offense 0}}
-            <div class="sheet-tr" data-i18n-list-itme="withdraw">
-                <div class="sheet-td">[<span data-i18n="withdraw">Withdraw</span>](~{{character_id}}|withdraw_se)</div>
-                <div class="sheet-td"></div>
-            </div>
-            {{/rollTotal() offense 0}}
-        </div>
-        {{/socialconflict}}
-    </div>
-</rolltemplate>
-
 
 <!-- Skill Roll Template -->
 <!-- @{roll_display}&{template:skill} {{name=@{name}}} @{name_display} {{roll=[[1d100]]}} {{fatigue_skills=[[@{fatigue_skills}]]}} {{encumbered=[[@{encumbered}]]}} {{encumbrance_skills=[[@{encumbrance_skills}]]}} {{original=@{total}}} {{difficulty=[[@{difficulty}]]}} {{augmentation=[[@{augmentation}]]}} {{penalty=[[@{penalty}]]}} {{very_easy=[[((@{total}+@{augment})*2)+@{penalty}]]}} {{very_easy_crit=[[ceil(((@{total}*2)+@{penalty})/10)]]}} {{easy=[[ceil((@{total}+@{augment})*1.5)+@{penalty}]]}} {{easy_crit=[[ceil(((@{total}*1.5)+@{penalty})/10)]]}} {{standard=[[@{total}+@{augment}+@{penalty}]]}} {{standard_crit=[[ceil((@{total}+@{penalty})/10)]]}} {{hard=[[ceil((@{total}+@{augment})*.67)+@{penalty}]]}} {{hard_crit=[[ceil(((@{total}*.67)+@{penalty})/10)]]}} {{formidable=[[ceil((@{total}+@{augment})*.5)+@{penalty}]]}} {{formidable_crit=[[ceil(((@{total}*.5)+@{penalty})/10)]]}} {{herculean=[[ceil((@{total}+@{augment})*@{herculean_mod})+@{penalty}]]}} {{herculean_crit=[[ceil(((@{total}*@{herculean_mod})+@{penalty})/10)]]}} {{notes=@{notes}}} -->
@@ -7076,13 +6482,13 @@
 
         {{#combatstyle}}
         <div class="sheet-special-header" data-i18n="combat">Combat</div>
-        <div class="sheet-space-between">
+        <!--<div class="sheet-space-between">
             <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
             <div>
                 [<span data-i18n="offensive">Offensive</span>](~{{character_id}}|offensive_combat_se_menu)
                 [<span data-i18n="defensive">Defensive</span>](~{{character_id}}|defensive_combat_se_menu)
             </div>
-        </div>
+        </div>-->
         <div class="sheet-space-between">
             <div class="sheet-bold"><span data-i18n="hit_location">Hit Location</span>:</div>
             <div>
@@ -7101,13 +6507,13 @@
 
         {{#spiritcombat}}
         <div class="sheet-special-header" data-i18n="spirit_combat">Spirit Combat</div>
-        <div class="sheet-space-between">
+        <!--<div class="sheet-space-between">
             <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
             <div>
                 [<span data-i18n="offensive">Offensive</span>](~{{character_id}}|offensive_spirit_se_menu)
                 [<span data-i18n="defensive">Defensive</span>](~{{character_id}}|defensive_spirit_se_menu)
             </div>
-        </div>
+        </div>-->
         <div class="sheet-space-between">
             <div class="sheet-bold"><span data-i18n="damage">Damage</span>:</div>
             <div>[<span data-i18n="spirit_damage">Spirit Damage</span>](~{{character_id}}|spirit_damage)</div>
@@ -7116,10 +6522,10 @@
 
         {{#socialoffense}}
         <div class="sheet-special-header" data-i18n="social_conflict">Social Conflict</div>
-        <div class="sheet-space-between">
+        <!--<div class="sheet-space-between">
             <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
             <div>[<span data-i18n="offensive">Offensive</span>](~{{character_id}}|offensive_social_se_menu)</div>
-        </div>
+        </div>-->
         <div class="sheet-space-between">
             [<span data-i18n="resolution_pool">Resolution Pool</span>](~{{character_id}}|resolution_pool)
             [<span data-i18n="social_damage">Social Damage</span>](~{{character_id}}|social_damage)
@@ -7127,11 +6533,11 @@
         {{/socialoffense}}
 
         {{#socialdefense}}
-        <div class="sheet-special-header" data-i18n="social_conflict">Social Conflict</div>
+        <!--<div class="sheet-special-header" data-i18n="social_conflict">Social Conflict</div>
         <div class="sheet-space-between">
             <div class="sheet-bold"><span data-i18n="special_effects">Special Effects</span>:</div>
             <div>[<span data-i18n="defensive">Defensive</span>](~{{character_id}}|defensive_social_se_menu)</div>
-        </div>
+        </div>-->
         {{/socialdefense}}
     </div>
 </rolltemplate>
@@ -12114,7 +11520,7 @@ function upgradeFrostbyteVehicle3Dot0() {
                     if (oldModule === 'cargo') {
                         newAttrs[`${moduleId}_name`] = getTranslationByKey('cargo_hold');
                     } else if (oldModule === 'hanger') {
-                        newAttrs[`${moduleId}_name`] = getTranslationByKey('hanger_bay');
+                        newAttrs[`${moduleId}_name`] = getTranslationByKey('hangar_bay');
                     } else {
                         newAttrs[`${moduleId}_name`] = getTranslationByKey(oldModule);
                     }

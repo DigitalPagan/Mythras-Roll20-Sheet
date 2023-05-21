@@ -1,4 +1,5 @@
 {
+    "101+_penalty": "101+ Penalty",
     "1/2_pow-u": "1/2 POW",
     "1/4_pow-u": "1/4 POW",
     "1_grade_harder": "1 grade harder",
@@ -434,6 +435,7 @@
     "mythic_rome": "Mythic Rome",
     "mythras": "Mythras",
     "mythras_imperative": "Mythras Imperative",
+    "Mythras_Roll20_wiki_page": "Mythras' Roll20 wiki page",
     "name": "Name",
     "native_tongue": "Native Tongue",
     "no_action_allowed": "No Action Allowed",
@@ -522,6 +524,7 @@
     "report_a_bug": "Report a Bug",
     "repulsorlift": "Repulsorlift",
     "research": "Research",
+    "reset_101+_penalty": "Reset 101+ Penalty",
     "reset_augmentation": "Reset Augmentation",
     "resist": "Resist",
     "resistance_skill": "Resistance Skill",
