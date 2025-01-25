@@ -399,7 +399,7 @@ function versioning(sheet_type, version) {
         }
         versioning(sheet_type, '3.8');
     } else {
-        setattr({"version": 3.8})
+        setAttrs({"version": 3.8})
     }
 }
 
