@@ -7622,8 +7622,8 @@ function calcMoveRate(v) {
     const moveRateOther = parseInt(v['movement_rate_other']) || 0;
     const moveRateTemp = parseInt(v['movement_rate_temp']) || 0;
     const core_value = moveRateSpecies + moveRateOther + moveRateTemp;
-    const moveAfterFatigue = applyMovementMod(core_value, fatigueTable[v['fatigue']]['movement']);
-    newAttrs['movement_rate'] = applyMovementMod(moveAfterFatigue, loadTable[v['encumbrance_load']]['movement']);
+    const moveAfterFatigue = applyMovementMod(core_value, fatigueTable[v['fatigue']]['movement'] || "+0");
+    newAttrs['movement_rate'] = applyMovementMod(moveAfterFatigue, loadTable[v['encumbrance_load']]['movement'] || "+0");
 
     return newAttrs;
 }
@@ -8996,6 +8996,7 @@ on('change:repeating_skilledability:traits', function(event) {
 });
 /* Encumbrance */
 const loadTable = {
+    /* Old Default */ 'Normal': {"skills": '0', "movement": '+0'},
     /* Normal */ '0': {"skills": '0', "movement": '+0'},
     /* Burdened */ '1': {"skills": '1', "movement": '-2'},
     /* Overloaded */ '2': {"skills": '2', "movement": '*.5'},

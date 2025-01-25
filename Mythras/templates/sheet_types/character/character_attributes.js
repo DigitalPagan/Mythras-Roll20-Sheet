@@ -362,8 +362,8 @@ function calcMoveRate(v) {
     const moveRateOther = parseInt(v['movement_rate_other']) || 0;
     const moveRateTemp = parseInt(v['movement_rate_temp']) || 0;
     const core_value = moveRateSpecies + moveRateOther + moveRateTemp;
-    const moveAfterFatigue = applyMovementMod(core_value, fatigueTable[v['fatigue']]['movement']);
-    newAttrs['movement_rate'] = applyMovementMod(moveAfterFatigue, loadTable[v['encumbrance_load']]['movement']);
+    const moveAfterFatigue = applyMovementMod(core_value, fatigueTable[v['fatigue']]['movement'] || "+0");
+    newAttrs['movement_rate'] = applyMovementMod(moveAfterFatigue, loadTable[v['encumbrance_load']]['movement'] || "+0");
 
     return newAttrs;
 }
